@@ -93,3 +93,8 @@
   * `StreamTest15` count测试
   * `StreamTest16` collect测试
   * `StreamTest17` Collector（收集器）测试
+* SystemTest - java.lang.System
+  * `SystemTest01` 标准流
+  * `SystemTest02` 属性
+  * `SystemTest03` 日志
+  * `SystemTest04` 环境变量
