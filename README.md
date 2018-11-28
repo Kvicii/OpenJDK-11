@@ -98,3 +98,6 @@
   * `SystemTest02` 属性
   * `SystemTest03` 日志
   * `SystemTest04` 环境变量
+* ObjectTest - java.lang.Object
+  * `ObjectTest01` 测试wait释放锁的行为
+  * `ObjectTest02` 测试wait和notify的配套使用
