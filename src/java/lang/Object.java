@@ -361,7 +361,9 @@ public class Object {
     /*▼ 线程 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /*
-     * wait方法应当配合synchronized一起使用，且让当前线程作为锁的持有者。
+     * wait使得调用wait方法的线程放弃锁的持有权，并进入WAITING或TIMED_WAITING状态
+     *
+     * wait方法应当配合synchronized一起使用：
      *
      * 示例一：
      * synchronized void fun(){
@@ -388,6 +390,10 @@ public class Object {
      * 1. 超时
      * 2. 被notify()或notifyAll()唤醒
      * 3. 在其他线程中调用该线程的interrupt()方法
+     *
+     * 注：
+     * wait方法持有的锁是当前wait所处的上下文的对象（某个栈帧中的对象）
+     * 如果wait持有的锁与当前上下文中的锁不一致，或者wait和notify用的锁不一致，会触发InterruptedException
      */
     
     /**
@@ -583,7 +589,7 @@ public class Object {
      * @see java.lang.Object#notifyAll()
      * @see java.lang.Object#wait()
      */
-    // 随机唤醒某个具有相同锁的进入wait状态的对象
+    // 随机唤醒某个具有相同锁的对象从wait状态进入争锁状态
     @HotSpotIntrinsicCandidate
     public final native void notify();
     
@@ -609,7 +615,7 @@ public class Object {
      * @see java.lang.Object#notify()
      * @see java.lang.Object#wait()
      */
-    // 唤醒所有具有相同锁的进入wait状态的对象
+    // 唤醒所有具有相同锁的对象从wait状态进入争锁状态
     @HotSpotIntrinsicCandidate
     public final native void notifyAll();
     
