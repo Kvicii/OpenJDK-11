@@ -119,3 +119,8 @@ Commit信息中的emoji取自[gitmoji](https://gitmoji.carloscuesta.me/)。
 * ObjectTest - java.lang.Object
   * `ObjectTest01` 测试wait释放锁的行为
   * `ObjectTest02` 测试wait和notify的配套使用
+* ThreadTest - 线程核心操作
+  * `ThreadTest01` 测试守护线程的行为
+  * `ThreadTest02` 中断非阻塞线程
+  * `ThreadTest03` 中断阻塞线程
+  * `ThreadTest04` 死锁线程无法被中断唤醒
