@@ -1000,7 +1000,7 @@ public class Thread implements Runnable {
      *                                  cleared when this exception is thrown.
      */
     /*
-     * 让线程一直执行，直到它死亡之后，再去执行该线程后续启动的线程
+     * 让调用join的线程对象一直执行，直到它死亡之后，再去执行该线程对象后续启动的线程
      *
      * 原理分析，示例如下：
      *
@@ -1023,7 +1023,7 @@ public class Thread implements Runnable {
      * 06
      * 07     // main线程也持有t1对象锁
      * 08     synchronized(t1){
-     * 09         while(t1.isAlive()) {
+     * 09         while(t1.isAlive()) { // 只要线程t1存活就可以进入循环
      * 10             t1.wait(0);
      * 11         }
      * 12     }
@@ -1041,11 +1041,10 @@ public class Thread implements Runnable {
      * 2.1.2.2 使main线程和t1线程重新抢占CPU时间片（执行权），此时，又分为两种情形：
      * 2.1.2.2.1 如果接下来是t1抢到了执行权，那么t1继续输出，当然此时main线程也没有放弃抢锁的努力，在运行效果上等同于回到了步骤1
      * 2.1.2.2.2 如果接下来是main线程抢到了执行权，在执行效果上相当于又回到了步骤2.1
-     * 3 所以，只要t1线程不死，main线程就掉在循环陷阱里，即使抢到了执行权，也待在循环中出不来，这使得线程t2一直没法被调用（一直执行不到第14行）
+     * 2.2 如果在第8行main线程没有抢到锁，那么t1继续执行，main线程继续努力抢锁，在执行效果上相当于回到了步骤2
+     * 3 综上，只要t1线程存活，main线程就掉在循环陷阱里，即使抢到了执行权，也待在循环中出不来，这使得线程t2一直没法被调用（一直执行不到第14行）
      * 4 直到t1执行完，即t1死亡，main线程跳出循环陷阱，此时开始执行线程t2
      *
-     *
-     * 那么，只要thread仍然存活，就使thread所处的父线程放弃自己的锁
      */
     public final synchronized void join(long millis) throws InterruptedException {
         long base = System.currentTimeMillis();
