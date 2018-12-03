@@ -33,6 +33,7 @@ import jdk.internal.vm.annotation.ForceInline;
 import sun.nio.ch.DirectBuffer;
 
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 
 /**
  * A collection of methods for performing low-level, unsafe operations.
@@ -60,12 +61,13 @@ import java.lang.reflect.Field;
  * 该类支持在任意内存地址位置处读写数据，对于普通用户来说，使用起来还是比较危险的。
  *
  * 常用的场景：
- * --> 创建对象（不经过构造方法）
- * --> 获取字段地址，获取字段地址处的值，为某地址处的字段赋值（可支持Volatile语义）
+ * --> 创建某个类的对象（不经过构造方法）
+ * --> 本地内存操作：分配/释放内存，向内存存值，从内存中取值
+ * --> 获取对象中某字段的地址，获取该字段存储的值（通过地址），为某地址处的字段赋值（可支持Volatile语义）
  * --> 对JVM内存中某对象的数组字段/变量直接操作
- * --> 本地内存操作：分配/释放内，向内存赋值，从内存中取值
- * --> 原子操作(CAS)
+ * --> 原子操作(CAS)，设置/更新/增减值
  * --> 线程操作
+ * --> 内存屏障
  */
 public final class Unsafe {
     
@@ -75,12 +77,15 @@ public final class Unsafe {
     // 另一个内部同名Unsafe类。此类中的方法实际上是委托给内部的theInternalUnsafe实例去完成的
     private static final jdk.internal.misc.Unsafe theInternalUnsafe = jdk.internal.misc.Unsafe.getUnsafe();
     
-    
     /**
      * This constant differs from all results that will ever be returned from {@link #staticFieldOffset}, {@link #objectFieldOffset}, or {@link #arrayBaseOffset}.
      */
     // 无效的JVM内存偏移量标记
     public static final int INVALID_FIELD_OFFSET = jdk.internal.misc.Unsafe.INVALID_FIELD_OFFSET;
+    
+    /** The value of {@code addressSize()} */
+    // 本地指针尺寸，4字节或8字节
+    public static final int ADDRESS_SIZE = theInternalUnsafe.addressSize();
     
     
     /* 用于 #arrayBaseOffset 的值*/
@@ -127,9 +132,12 @@ public final class Unsafe {
     public static final int ARRAY_OBJECT_INDEX_SCALE = jdk.internal.misc.Unsafe.ARRAY_OBJECT_INDEX_SCALE;
     
     
+    
     static {
         Reflection.registerMethodsToFilter(Unsafe.class, "getUnsafe");
     }
+    
+    
     
     private Unsafe() {
     }
@@ -164,20 +172,58 @@ public final class Unsafe {
      *          class is not in the system domain in which all permissions
      *          are granted.
      */
-    // 返回单例对象，只能从引导类加载器（bootstrap class loader）加载，被定义类直接调用会抛出异常
+    // 返回单例对象，只能从引导类加载器（bootstrap class loader）加载，被自定义类直接调用会抛出异常
     @CallerSensitive
     public static Unsafe getUnsafe() {
         // 得到调用该方法的Class对象
         Class<?> caller = Reflection.getCallerClass();
         // 校验ClassLoader，从自己编写的类中调用此方法会抛出异常
-        if (!VM.isSystemDomainLoader(caller.getClassLoader()))
+        if (!VM.isSystemDomainLoader(caller.getClassLoader())) {
             throw new SecurityException("Unsafe");
+        }
         return theUnsafe;
     }
     
     
     
-    /*▼ 获取字段在所属类中的JVM地址偏移量 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 构造Unsafe对象 ████████████████████████████████████████████████████████████████████████████████┓ */
+    
+    /**
+     * Allocates an instance but does not run any constructor.
+     * Initializes the class if it has not yet been.
+     */
+    // 不调用构造方法就生成对象，但是该对象的字段会被赋为对应类型的"零值"，为该对象赋过的默认值也无效
+    @ForceInline
+    public Object allocateInstance(Class<?> cls) throws InstantiationException {
+        return theInternalUnsafe.allocateInstance(cls);
+    }
+    
+    /**
+     * Defines a class but does not make it known to the class loader or system dictionary.
+     * <p>
+     * For each CP entry, the corresponding CP patch must either be null or have
+     * the a format that matches its tag:
+     * <ul>
+     * <li>Integer, Long, Float, Double: the corresponding wrapper object type from java.lang
+     * <li>Utf8: a string (must have suitable syntax if used as signature or name)
+     * <li>Class: any java.lang.Class object
+     * <li>String: any object (not just a java.lang.String)
+     * <li>InterfaceMethodRef: (NYI) a method handle to invoke on that call site's arguments
+     * </ul>
+     * @param hostClass context for linkage, access control, protection domain, and class loader
+     * @param data      bytes of a class file
+     * @param cpPatches where non-null entries exist, they replace corresponding CP entries in data
+     */
+    @ForceInline
+    public Class<?> defineAnonymousClass(Class<?> hostClass, byte[] data, Object[] cpPatches) {
+        return theInternalUnsafe.defineAnonymousClass(hostClass, data, cpPatches);
+    }
+    
+    /*▲ 构造Unsafe对象 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
+    
+    
+    /*▼ 杂项 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Reports the location of a given field in the storage allocation of its
@@ -238,289 +284,43 @@ public final class Unsafe {
         return theInternalUnsafe.staticFieldOffset(f);
     }
     
-    /*▲ 获取字段在所属类中的JVM地址偏移量 ████████████████████████████████████████████████████████████████████████████████┛ */
-    
-    
-    
-    /*▼ getXXX 获取字段值，需要知道该字段在所属类中的JVM地址偏移量（基于JVM内存） ████████████████████████████████████████████████████████████████████████████████┓ */
+    /**
+     * Reports the location of a given static field, in conjunction with {@link
+     * #staticFieldOffset}.
+     * <p>Fetch the base "Object", if any, with which static fields of the
+     * given class can be accessed via methods like {@link #getInt(Object,
+     * long)}.  This value may be null.  This value may refer to an object
+     * which is a "cookie", not guaranteed to be a real Object, and it should
+     * not be used in any way except as argument to the get and put routines in
+     * this class.
+     */
+    // 获取静态字段所属的类对象
+    @ForceInline
+    public Object staticFieldBase(Field f) {
+        return theInternalUnsafe.staticFieldBase(f);
+    }
     
     /**
-     * Fetches a value from a given Java variable.
-     * More specifically, fetches a field or array element within the given
-     * object {@code o} at the given offset, or (if {@code o} is null)
-     * from the memory address whose numerical value is the given offset.
-     * <p>
-     * The results are undefined unless one of the following cases is true:
-     * <ul>
-     * <li>The offset was obtained from {@link #objectFieldOffset} on
-     * the {@link java.lang.reflect.Field} of some Java field and the object
-     * referred to by {@code o} is of a class compatible with that
-     * field's class.
+     * Detects if the given class may need to be initialized.
+     * This is often needed in conjunction with obtaining the static field base of a class.
      *
-     * <li>The offset and object reference {@code o} (either null or
-     * non-null) were both obtained via {@link #staticFieldOffset}
-     * and {@link #staticFieldBase} (respectively) from the
-     * reflective {@link Field} representation of some Java field.
-     *
-     * <li>The object referred to by {@code o} is an array, and the offset
-     * is an integer of the form {@code B+N*S}, where {@code N} is
-     * a valid index into the array, and {@code B} and {@code S} are
-     * the values obtained by {@link #arrayBaseOffset} and {@link
-     * #arrayIndexScale} (respectively) from the array's class.  The value
-     * referred to is the {@code N}<em>th</em> element of the array.
-     *
-     * </ul>
-     * <p>
-     * If one of the above cases is true, the call references a specific Java
-     * variable (field or array element).  However, the results are undefined
-     * if that variable is not in fact of the type returned by this method.
-     * <p>
-     * This method refers to a variable by means of two parameters, and so
-     * it provides (in effect) a <em>double-register</em> addressing mode
-     * for Java variables.  When the object reference is null, this method
-     * uses its offset as an absolute address.  This is similar in operation
-     * to methods such as {@link #getInt(long)}, which provide (in effect) a
-     * <em>single-register</em> addressing mode for non-Java variables.
-     * However, because Java variables may have a different layout in memory
-     * from non-Java variables, programmers should not assume that these
-     * two addressing modes are ever equivalent.  Also, programmers should
-     * remember that offsets from the double-register addressing mode cannot
-     * be portably confused with longs used in the single-register addressing
-     * mode.
-     *
-     * @param o      Java heap object in which the variable resides, if any, else
-     *               null
-     * @param offset indication of where the variable resides in a Java heap
-     *               object, if any, else a memory address locating the variable
-     *               statically
-     *
-     * @return the value fetched from the indicated Java variable
-     *
-     * @throws RuntimeException No defined exceptions are thrown, not even
-     *                          {@link NullPointerException}
-     */
-    /*
-     * 获取对象o中offset地址处对应的int型字段的值
-     * 对象o可以是数组
-     * offset的值由#objectFieldOffset或#staticFieldOffset获取
-     * 也可以由#arrayBaseOffset[B]和#arrayIndexScale[S]共同构成：B + N * S
+     * @return false only if a call to {@code ensureClassInitialized} would have no effect
      */
     @ForceInline
-    public int getInt(Object o, long offset) {
-        return theInternalUnsafe.getInt(o, offset);
+    public boolean shouldBeInitialized(Class<?> c) {
+        return theInternalUnsafe.shouldBeInitialized(c);
     }
     
     /**
-     * @see #getInt(Object, long)
+     * Ensures the given class has been initialized.
+     * This is often needed in conjunction with obtaining the static field base of a class.
      */
     @ForceInline
-    public byte getByte(Object o, long offset) {
-        return theInternalUnsafe.getByte(o, offset);
+    public void ensureClassInitialized(Class<?> c) {
+        theInternalUnsafe.ensureClassInitialized(c);
     }
     
-    /**
-     * @see #getInt(Object, long)
-     */
-    @ForceInline
-    public short getShort(Object o, long offset) {
-        return theInternalUnsafe.getShort(o, offset);
-    }
-    
-    /**
-     * @see #getInt(Object, long)
-     */
-    @ForceInline
-    public char getChar(Object o, long offset) {
-        return theInternalUnsafe.getChar(o, offset);
-    }
-    
-    /**
-     * @see #getInt(Object, long)
-     */
-    @ForceInline
-    public long getLong(Object o, long offset) {
-        return theInternalUnsafe.getLong(o, offset);
-    }
-    
-    /**
-     * @see #getInt(Object, long)
-     */
-    @ForceInline
-    public float getFloat(Object o, long offset) {
-        return theInternalUnsafe.getFloat(o, offset);
-    }
-    
-    /**
-     * @see #getInt(Object, long)
-     */
-    @ForceInline
-    public double getDouble(Object o, long offset) {
-        return theInternalUnsafe.getDouble(o, offset);
-    }
-    
-    /**
-     * @see #getInt(Object, long)
-     */
-    @ForceInline
-    public boolean getBoolean(Object o, long offset) {
-        return theInternalUnsafe.getBoolean(o, offset);
-    }
-    
-    /**
-     * Fetches a reference value from a given Java variable.
-     *
-     * @see #getInt(Object, long)
-     */
-    @ForceInline
-    public Object getObject(Object o, long offset) {
-        return theInternalUnsafe.getObject(o, offset);
-    }
-    
-    /*▲ getXXX 获取字段值，需要知道该字段在所属类中的JVM地址偏移量（基于JVM内存） ████████████████████████████████████████████████████████████████████████████████┛ */
-    
-    
-    
-    /*▼ putXXX 设置字段值（基于JVM内存） ████████████████████████████████████████████████████████████████████████████████┓ */
-    
-    /**
-     * Stores a value into a given Java variable.
-     * <p>
-     * The first two parameters are interpreted exactly as with
-     * {@link #getInt(Object, long)} to refer to a specific
-     * Java variable (field or array element).  The given value
-     * is stored into that variable.
-     * <p>
-     * The variable must be of the same type as the method
-     * parameter {@code x}.
-     *
-     * @param o      Java heap object in which the variable resides, if any, else
-     *               null
-     * @param offset indication of where the variable resides in a Java heap
-     *               object, if any, else a memory address locating the variable
-     *               statically
-     * @param x      the value to store into the indicated Java variable
-     *
-     * @throws RuntimeException No defined exceptions are thrown, not even
-     *                          {@link NullPointerException}
-     */
-    // 为对象o中offset地址处对应的int型字段赋新值：x
-    @ForceInline
-    public void putInt(Object o, long offset, int x) {
-        theInternalUnsafe.putInt(o, offset, x);
-    }
-    
-    /**
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putByte(Object o, long offset, byte x) {
-        theInternalUnsafe.putByte(o, offset, x);
-    }
-    
-    /**
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putShort(Object o, long offset, short x) {
-        theInternalUnsafe.putShort(o, offset, x);
-    }
-    
-    /**
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putChar(Object o, long offset, char x) {
-        theInternalUnsafe.putChar(o, offset, x);
-    }
-    
-    /**
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putLong(Object o, long offset, long x) {
-        theInternalUnsafe.putLong(o, offset, x);
-    }
-    
-    /**
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putFloat(Object o, long offset, float x) {
-        theInternalUnsafe.putFloat(o, offset, x);
-    }
-    
-    /**
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putDouble(Object o, long offset, double x) {
-        theInternalUnsafe.putDouble(o, offset, x);
-    }
-    
-    /**
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putBoolean(Object o, long offset, boolean x) {
-        theInternalUnsafe.putBoolean(o, offset, x);
-    }
-    
-    /**
-     * Stores a reference value into a given Java variable.
-     * <p>
-     * Unless the reference {@code x} being stored is either null
-     * or matches the field type, the results are undefined.
-     * If the reference {@code o} is non-null, card marks or
-     * other store barriers for that object (if the VM requires them)
-     * are updated.
-     *
-     * @see #putInt(Object, long, int)
-     */
-    @ForceInline
-    public void putObject(Object o, long offset, Object x) {
-        theInternalUnsafe.putObject(o, offset, x);
-    }
-    
-    /*▲ putXXX 设置字段值（基于JVM内存） ████████████████████████████████████████████████████████████████████████████████┛ */
-    
-    
-    
-    /*▼ 对JVM内存中某对象的数组字段/变量直接操作 ████████████████████████████████████████████████████████████████████████████████┓ */
-    
-    /**
-     * Reports the offset of the first element in the storage allocation of a
-     * given array class.  If {@link #arrayIndexScale} returns a non-zero value
-     * for the same class, you may use that scale factor, together with this
-     * base offset, to form new offsets to access elements of arrays of the
-     * given class.
-     *
-     * @see #getInt(Object, long)
-     * @see #putInt(Object, long, int)
-     */
-    // 寻找某类型数组中的元素时约定的起始偏移地址（更像是一个标记），与#arrayIndexScale配合使用
-    @ForceInline
-    public int arrayBaseOffset(Class<?> arrayClass) {
-        return theInternalUnsafe.arrayBaseOffset(arrayClass);
-    }
-    
-    /**
-     * Reports the scale factor for addressing elements in the storage
-     * allocation of a given array class.  However, arrays of "narrow" types
-     * will generally not work properly with accessors like {@link
-     * #getByte(Object, long)}, so the scale factor for such classes is reported
-     * as zero.
-     *
-     * @see #arrayBaseOffset
-     * @see #getInt(Object, long)
-     * @see #putInt(Object, long, int)
-     */
-    // 某类型数组每个元素所占字节数，与#arrayBaseOffset配合使用
-    @ForceInline
-    public int arrayIndexScale(Class<?> arrayClass) {
-        return theInternalUnsafe.arrayIndexScale(arrayClass);
-    }
-    
-    /*▲ 对JVM内存中某对象的数组字段/变量直接操作 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 杂项 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -628,6 +428,7 @@ public final class Unsafe {
      *
      * @since 1.7
      */
+    // 为对象o处的内存批量填充初值，通常用0填充
     @ForceInline
     public void setMemory(Object o, long offset, long bytes, byte value) {
         theInternalUnsafe.setMemory(o, offset, bytes, value);
@@ -673,6 +474,7 @@ public final class Unsafe {
      * @throws RuntimeException if any of the arguments is invalid
      * @since 1.7
      */
+    // 内存数据拷贝
     @ForceInline
     public void copyMemory(Object srcBase, long srcOffset, Object destBase, long destOffset, long bytes) {
         theInternalUnsafe.copyMemory(srcBase, srcOffset, destBase, destOffset, bytes);
@@ -702,131 +504,7 @@ public final class Unsafe {
         theInternalUnsafe.freeMemory(address);
     }
     
-    /*▲ 本地内存操作 ████████████████████████████████████████████████████████████████████████████████┛ */
     
-    
-    
-    /*▼ getXXX/putXXX，基于本地内存地址操作 ████████████████████████████████████████████████████████████████████████████████┓ */
-    
-    /**
-     * Fetches a value from a given memory address.  If the address is zero, or
-     * does not point into a block obtained from {@link #allocateMemory}, the
-     * results are undefined.
-     *
-     * @see #allocateMemory
-     */
-    @ForceInline
-    public byte getByte(long address) {
-        return theInternalUnsafe.getByte(address);
-    }
-    
-    /**
-     * Stores a value into a given memory address.  If the address is zero, or
-     * does not point into a block obtained from {@link #allocateMemory}, the
-     * results are undefined.
-     *
-     * @see #getByte(long)
-     */
-    @ForceInline
-    public void putByte(long address, byte x) {
-        theInternalUnsafe.putByte(address, x);
-    }
-    
-    /**
-     * @see #getByte(long)
-     */
-    @ForceInline
-    public short getShort(long address) {
-        return theInternalUnsafe.getShort(address);
-    }
-    
-    /**
-     * @see #putByte(long, byte)
-     */
-    @ForceInline
-    public void putShort(long address, short x) {
-        theInternalUnsafe.putShort(address, x);
-    }
-    
-    /**
-     * @see #getByte(long)
-     */
-    @ForceInline
-    public char getChar(long address) {
-        return theInternalUnsafe.getChar(address);
-    }
-    
-    /**
-     * @see #putByte(long, byte)
-     */
-    @ForceInline
-    public void putChar(long address, char x) {
-        theInternalUnsafe.putChar(address, x);
-    }
-    
-    /**
-     * @see #getByte(long)
-     */
-    @ForceInline
-    public int getInt(long address) {
-        return theInternalUnsafe.getInt(address);
-    }
-    
-    /**
-     * @see #putByte(long, byte)
-     */
-    @ForceInline
-    public void putInt(long address, int x) {
-        theInternalUnsafe.putInt(address, x);
-    }
-    
-    /**
-     * @see #getByte(long)
-     */
-    @ForceInline
-    public long getLong(long address) {
-        return theInternalUnsafe.getLong(address);
-    }
-    
-    /**
-     * @see #putByte(long, byte)
-     */
-    @ForceInline
-    public void putLong(long address, long x) {
-        theInternalUnsafe.putLong(address, x);
-    }
-    
-    /**
-     * @see #getByte(long)
-     */
-    @ForceInline
-    public float getFloat(long address) {
-        return theInternalUnsafe.getFloat(address);
-    }
-    
-    /**
-     * @see #putByte(long, byte)
-     */
-    @ForceInline
-    public void putFloat(long address, float x) {
-        theInternalUnsafe.putFloat(address, x);
-    }
-    
-    /**
-     * @see #getByte(long)
-     */
-    @ForceInline
-    public double getDouble(long address) {
-        return theInternalUnsafe.getDouble(address);
-    }
-    
-    /**
-     * @see #putByte(long, byte)
-     */
-    @ForceInline
-    public void putDouble(long address, double x) {
-        theInternalUnsafe.putDouble(address, x);
-    }
     
     /**
      * Fetches a native pointer from a given memory address.  If the address is
@@ -842,7 +520,7 @@ public final class Unsafe {
      *
      * @see #allocateMemory
      */
-    // 从本地内存地址address处获取一个本地指针值，可针对对象操作
+    // 从本地内存地址address处获取一个本地指针值
     @ForceInline
     public long getAddress(long address) {
         return theInternalUnsafe.getAddress(address);
@@ -858,7 +536,7 @@ public final class Unsafe {
      *
      * @see #getAddress(long)
      */
-    // 向本地内存地址address处存入一个本地指针值x，可针对对象操作
+    // 向本地内存地址address处存入一个本地指针值x
     @ForceInline
     public void putAddress(long address, long x) {
         theInternalUnsafe.putAddress(address, x);
@@ -876,171 +554,435 @@ public final class Unsafe {
         return theInternalUnsafe.addressSize();
     }
     
-    /** The value of {@code addressSize()} */
-    public static final int ADDRESS_SIZE = theInternalUnsafe.addressSize();
-    
-    /*▲ getXXX/putXXX，基于本地内存地址操作 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 本地内存操作 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ getXXXVolatile/putXXXVolatile，JVM内存操作，支持Volatile语义 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    /** Volatile version of {@link #getInt(Object, long)}  */
-    // 获取对象o中offset地址处对应的int型字段的值，支持volatile语义。
+    
+    
+    /* 获取/设置字段值 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+    
+    /*
+     * (1.1) 基于JVM内存地址，获取/设置字段值
+     * - getXXX(o, offset)
+     *    获取对象o中offset地址处对应的字段值
+     *    对象o可以是数组
+     *    offset的值由#objectFieldOffset或#staticFieldOffset获取
+     *    也可以由#arrayBaseOffset[B]和#arrayIndexScale[S]共同构成：B + N * S
+     *
+     * - putXXX(o, offset, x)
+     *     设置对象o中offset地址处对应的字段为新值x
+     *
+     * (1.2) 基于本地内存地址，获取/设置字段值
+     * - getXXX(address)
+     * - putXXX(address, x)
+     *
+     * (3) 基于JVM内存地址，获取/设置字段值，Ordered/Lazy版本
+     *     不保证值的改变被其他线程立即看到。
+     * - putOrderedXXX(o, offset, x)
+     *
+     * (4) 基于JVM内存地址，获取/设置字段值，Volatile版本
+     * - getXXXVolatile(o, offset)
+     * - putXXXVolatile(o, offset, x)
+     */
+    
+    /*▼ (1.1) getXXX/putXXX 获取/设置字段值（基于JVM内存地址） ████████████████████████████████████████████████████████████████████████████████┓ */
+    
+    /**
+     * @see #getInt(Object, long)
+     */
+    // 获取对象o中offset地址处对应的byte型字段的值
     @ForceInline
-    public int getIntVolatile(Object o, long offset) {
-        return theInternalUnsafe.getIntVolatile(o, offset);
-    }
-    
-    /** Volatile version of {@link #putInt(Object, long, int)}  */
-    // 为对象o中offset地址处对应的int型字段赋新值：x，支持volatile语义。
-    @ForceInline
-    public void putIntVolatile(Object o, long offset, int x) {
-        theInternalUnsafe.putIntVolatile(o, offset, x);
+    public byte getByte(Object o, long offset) {
+        return theInternalUnsafe.getByte(o, offset);
     }
     
     /**
-     * Volatile version of {@link #getByte(Object, long)}
+     * @see #getInt(Object, long)
      */
+    // 获取对象o中offset地址处对应的short型字段的值
     @ForceInline
-    public byte getByteVolatile(Object o, long offset) {
-        return theInternalUnsafe.getByteVolatile(o, offset);
+    public short getShort(Object o, long offset) {
+        return theInternalUnsafe.getShort(o, offset);
     }
     
     /**
-     * Volatile version of {@link #putByte(Object, long, byte)}
+     * Fetches a value from a given Java variable.
+     * More specifically, fetches a field or array element within the given
+     * object {@code o} at the given offset, or (if {@code o} is null)
+     * from the memory address whose numerical value is the given offset.
+     * <p>
+     * The results are undefined unless one of the following cases is true:
+     * <ul>
+     * <li>The offset was obtained from {@link #objectFieldOffset} on
+     * the {@link java.lang.reflect.Field} of some Java field and the object
+     * referred to by {@code o} is of a class compatible with that
+     * field's class.
+     *
+     * <li>The offset and object reference {@code o} (either null or
+     * non-null) were both obtained via {@link #staticFieldOffset}
+     * and {@link #staticFieldBase} (respectively) from the
+     * reflective {@link Field} representation of some Java field.
+     *
+     * <li>The object referred to by {@code o} is an array, and the offset
+     * is an integer of the form {@code B+N*S}, where {@code N} is
+     * a valid index into the array, and {@code B} and {@code S} are
+     * the values obtained by {@link #arrayBaseOffset} and {@link
+     * #arrayIndexScale} (respectively) from the array's class.  The value
+     * referred to is the {@code N}<em>th</em> element of the array.
+     *
+     * </ul>
+     * <p>
+     * If one of the above cases is true, the call references a specific Java
+     * variable (field or array element).  However, the results are undefined
+     * if that variable is not in fact of the type returned by this method.
+     * <p>
+     * This method refers to a variable by means of two parameters, and so
+     * it provides (in effect) a <em>double-register</em> addressing mode
+     * for Java variables.  When the object reference is null, this method
+     * uses its offset as an absolute address.  This is similar in operation
+     * to methods such as {@link #getInt(long)}, which provide (in effect) a
+     * <em>single-register</em> addressing mode for non-Java variables.
+     * However, because Java variables may have a different layout in memory
+     * from non-Java variables, programmers should not assume that these
+     * two addressing modes are ever equivalent.  Also, programmers should
+     * remember that offsets from the double-register addressing mode cannot
+     * be portably confused with longs used in the single-register addressing
+     * mode.
+     *
+     * @param o      Java heap object in which the variable resides, if any, else
+     *               null
+     * @param offset indication of where the variable resides in a Java heap
+     *               object, if any, else a memory address locating the variable
+     *               statically
+     *
+     * @return the value fetched from the indicated Java variable
+     *
+     * @throws RuntimeException No defined exceptions are thrown, not even
+     *                          {@link NullPointerException}
      */
+    // 获取对象o中offset地址处对应的int型字段的值
     @ForceInline
-    public void putByteVolatile(Object o, long offset, byte x) {
-        theInternalUnsafe.putByteVolatile(o, offset, x);
+    public int getInt(Object o, long offset) {
+        return theInternalUnsafe.getInt(o, offset);
     }
     
     /**
-     * Volatile version of {@link #getShort(Object, long)}
+     * @see #getInt(Object, long)
      */
+    // 获取对象o中offset地址处对应的long型字段的值
     @ForceInline
-    public short getShortVolatile(Object o, long offset) {
-        return theInternalUnsafe.getShortVolatile(o, offset);
+    public long getLong(Object o, long offset) {
+        return theInternalUnsafe.getLong(o, offset);
     }
     
     /**
-     * Volatile version of {@link #putShort(Object, long, short)}
+     * @see #getInt(Object, long)
      */
+    // 获取对象o中offset地址处对应的float型字段的值
     @ForceInline
-    public void putShortVolatile(Object o, long offset, short x) {
-        theInternalUnsafe.putShortVolatile(o, offset, x);
+    public float getFloat(Object o, long offset) {
+        return theInternalUnsafe.getFloat(o, offset);
     }
     
     /**
-     * Volatile version of {@link #getChar(Object, long)}
+     * @see #getInt(Object, long)
      */
+    // 获取对象o中offset地址处对应的double型字段的值
     @ForceInline
-    public char getCharVolatile(Object o, long offset) {
-        return theInternalUnsafe.getCharVolatile(o, offset);
+    public double getDouble(Object o, long offset) {
+        return theInternalUnsafe.getDouble(o, offset);
     }
     
     /**
-     * Volatile version of {@link #putChar(Object, long, char)}
+     * @see #getInt(Object, long)
      */
+    // 获取对象o中offset地址处对应的char型字段的值
     @ForceInline
-    public void putCharVolatile(Object o, long offset, char x) {
-        theInternalUnsafe.putCharVolatile(o, offset, x);
+    public char getChar(Object o, long offset) {
+        return theInternalUnsafe.getChar(o, offset);
     }
     
     /**
-     * Volatile version of {@link #getLong(Object, long)}
+     * @see #getInt(Object, long)
      */
+    // 获取对象o中offset地址处对应的boolean型字段的值
     @ForceInline
-    public long getLongVolatile(Object o, long offset) {
-        return theInternalUnsafe.getLongVolatile(o, offset);
+    public boolean getBoolean(Object o, long offset) {
+        return theInternalUnsafe.getBoolean(o, offset);
     }
     
     /**
-     * Volatile version of {@link #putLong(Object, long, long)}
+     * Fetches a reference value from a given Java variable.
+     *
+     * @see #getInt(Object, long)
      */
+    // 获取对象o中offset地址处对应的引用类型字段的值
     @ForceInline
-    public void putLongVolatile(Object o, long offset, long x) {
-        theInternalUnsafe.putLongVolatile(o, offset, x);
+    public Object getObject(Object o, long offset) {
+        return theInternalUnsafe.getObject(o, offset);
+    }
+    
+    
+    
+    /**
+     * @see #putInt(Object, long, int)
+     */
+    // 设置对象o中offset地址处对应的byte型字段为新值x
+    @ForceInline
+    public void putByte(Object o, long offset, byte x) {
+        theInternalUnsafe.putByte(o, offset, x);
     }
     
     /**
-     * Volatile version of {@link #getFloat(Object, long)}
+     * @see #putInt(Object, long, int)
      */
+    // 设置对象o中offset地址处对应的short型字段为新值x
     @ForceInline
-    public float getFloatVolatile(Object o, long offset) {
-        return theInternalUnsafe.getFloatVolatile(o, offset);
+    public void putShort(Object o, long offset, short x) {
+        theInternalUnsafe.putShort(o, offset, x);
     }
     
     /**
-     * Volatile version of {@link #putFloat(Object, long, float)}
+     * Stores a value into a given Java variable.
+     * <p>
+     * The first two parameters are interpreted exactly as with
+     * {@link #getInt(Object, long)} to refer to a specific
+     * Java variable (field or array element).  The given value
+     * is stored into that variable.
+     * <p>
+     * The variable must be of the same type as the method
+     * parameter {@code x}.
+     *
+     * @param o      Java heap object in which the variable resides, if any, else
+     *               null
+     * @param offset indication of where the variable resides in a Java heap
+     *               object, if any, else a memory address locating the variable
+     *               statically
+     * @param x      the value to store into the indicated Java variable
+     *
+     * @throws RuntimeException No defined exceptions are thrown, not even
+     *                          {@link NullPointerException}
      */
+    // 设置对象o中offset地址处对应的int型字段为新值x
     @ForceInline
-    public void putFloatVolatile(Object o, long offset, float x) {
-        theInternalUnsafe.putFloatVolatile(o, offset, x);
+    public void putInt(Object o, long offset, int x) {
+        theInternalUnsafe.putInt(o, offset, x);
     }
     
     /**
-     * Volatile version of {@link #getDouble(Object, long)}
+     * @see #putInt(Object, long, int)
      */
+    // 设置对象o中offset地址处对应的long型字段为新值x
     @ForceInline
-    public double getDoubleVolatile(Object o, long offset) {
-        return theInternalUnsafe.getDoubleVolatile(o, offset);
+    public void putLong(Object o, long offset, long x) {
+        theInternalUnsafe.putLong(o, offset, x);
     }
     
     /**
-     * Volatile version of {@link #putDouble(Object, long, double)}
+     * @see #putInt(Object, long, int)
      */
+    // 设置对象o中offset地址处对应的float型字段为新值x
     @ForceInline
-    public void putDoubleVolatile(Object o, long offset, double x) {
-        theInternalUnsafe.putDoubleVolatile(o, offset, x);
+    public void putFloat(Object o, long offset, float x) {
+        theInternalUnsafe.putFloat(o, offset, x);
     }
     
     /**
-     * Volatile version of {@link #getBoolean(Object, long)}
+     * @see #putInt(Object, long, int)
      */
+    // 设置对象o中offset地址处对应的double型字段为新值x
     @ForceInline
-    public boolean getBooleanVolatile(Object o, long offset) {
-        return theInternalUnsafe.getBooleanVolatile(o, offset);
+    public void putDouble(Object o, long offset, double x) {
+        theInternalUnsafe.putDouble(o, offset, x);
     }
     
     /**
-     * Volatile version of {@link #putBoolean(Object, long, boolean)}
+     * @see #putInt(Object, long, int)
      */
+    // 设置对象o中offset地址处对应的char型字段为新值x
     @ForceInline
-    public void putBooleanVolatile(Object o, long offset, boolean x) {
-        theInternalUnsafe.putBooleanVolatile(o, offset, x);
+    public void putChar(Object o, long offset, char x) {
+        theInternalUnsafe.putChar(o, offset, x);
     }
     
     /**
-     * Fetches a reference value from a given Java variable, with volatile
-     * load semantics. Otherwise identical to {@link #getObject(Object, long)}
+     * @see #putInt(Object, long, int)
      */
+    // 设置对象o中offset地址处对应的boolean型字段为新值x
     @ForceInline
-    public Object getObjectVolatile(Object o, long offset) {
-        return theInternalUnsafe.getObjectVolatile(o, offset);
+    public void putBoolean(Object o, long offset, boolean x) {
+        theInternalUnsafe.putBoolean(o, offset, x);
     }
     
     /**
-     * Stores a reference value into a given Java variable, with
-     * volatile store semantics. Otherwise identical to {@link #putObject(Object, long, Object)}
+     * Stores a reference value into a given Java variable.
+     * <p>
+     * Unless the reference {@code x} being stored is either null
+     * or matches the field type, the results are undefined.
+     * If the reference {@code o} is non-null, card marks or
+     * other store barriers for that object (if the VM requires them)
+     * are updated.
+     *
+     * @see #putInt(Object, long, int)
      */
+    // 设置对象o中offset地址处对应的引用类型字段为新值x
     @ForceInline
-    public void putObjectVolatile(Object o, long offset, Object x) {
-        theInternalUnsafe.putObjectVolatile(o, offset, x);
+    public void putObject(Object o, long offset, Object x) {
+        theInternalUnsafe.putObject(o, offset, x);
     }
     
-    /*▲ getXXXVolatile/putXXXVolatile，JVM内存操作，支持Volatile语义 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.1) getXXX/putXXX 获取/设置字段值（基于JVM内存地址） ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ putOrderedXXX，是putXXXVolatile的Ordered/Lazy版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.2) getXXX/putXXX 获取/设置字段值（基于本地内存地址） ████████████████████████████████████████████████████████████████████████████████┓ */
+    
+    /**
+     * Fetches a value from a given memory address.  If the address is zero, or
+     * does not point into a block obtained from {@link #allocateMemory}, the
+     * results are undefined.
+     *
+     * @see #allocateMemory
+     */
+    // 获取本地内存中address地址处对应的byte类型字段的值
+    @ForceInline
+    public byte getByte(long address) {
+        return theInternalUnsafe.getByte(address);
+    }
+    
+    /**
+     * @see #getByte(long)
+     */
+    // 获取本地内存中address地址处对应的short类型字段的值
+    @ForceInline
+    public short getShort(long address) {
+        return theInternalUnsafe.getShort(address);
+    }
+    
+    /**
+     * @see #getByte(long)
+     */
+    // 获取本地内存中address地址处对应的int类型字段的值
+    @ForceInline
+    public int getInt(long address) {
+        return theInternalUnsafe.getInt(address);
+    }
+    
+    /**
+     * @see #getByte(long)
+     */
+    // 获取本地内存中address地址处对应的long类型字段的值
+    @ForceInline
+    public long getLong(long address) {
+        return theInternalUnsafe.getLong(address);
+    }
+    
+    /**
+     * @see #getByte(long)
+     */
+    // 获取本地内存中address地址处对应的float类型字段的值
+    @ForceInline
+    public float getFloat(long address) {
+        return theInternalUnsafe.getFloat(address);
+    }
+    
+    /**
+     * @see #getByte(long)
+     */
+    // 获取本地内存中address地址处对应的double类型字段的值
+    @ForceInline
+    public double getDouble(long address) {
+        return theInternalUnsafe.getDouble(address);
+    }
+    
+    /**
+     * @see #getByte(long)
+     */
+    // 获取本地内存中address地址处对应的char类型字段的值
+    @ForceInline
+    public char getChar(long address) {
+        return theInternalUnsafe.getChar(address);
+    }
+    
+    
+    
+    /**
+     * Stores a value into a given memory address.  If the address is zero, or
+     * does not point into a block obtained from {@link #allocateMemory}, the
+     * results are undefined.
+     *
+     * @see #getByte(long)
+     */
+    // 设置本地内存中address地址处对应的byte型字段为新值x
+    @ForceInline
+    public void putByte(long address, byte x) {
+        theInternalUnsafe.putByte(address, x);
+    }
+    
+    /**
+     * @see #putByte(long, byte)
+     */
+    // 设置本地内存中address地址处对应的short型字段为新值x
+    @ForceInline
+    public void putShort(long address, short x) {
+        theInternalUnsafe.putShort(address, x);
+    }
+    
+    /**
+     * @see #putByte(long, byte)
+     */
+    // 设置本地内存中address地址处对应的int型字段为新值x
+    @ForceInline
+    public void putInt(long address, int x) {
+        theInternalUnsafe.putInt(address, x);
+    }
+    
+    /**
+     * @see #putByte(long, byte)
+     */
+    // 设置本地内存中address地址处对应的long型字段为新值x
+    @ForceInline
+    public void putLong(long address, long x) {
+        theInternalUnsafe.putLong(address, x);
+    }
+    
+    /**
+     * @see #putByte(long, byte)
+     */
+    // 设置本地内存中address地址处对应的float型字段为新值x
+    @ForceInline
+    public void putFloat(long address, float x) {
+        theInternalUnsafe.putFloat(address, x);
+    }
+    
+    /**
+     * @see #putByte(long, byte)
+     */
+    // 设置本地内存中address地址处对应的double型字段为新值x
+    @ForceInline
+    public void putDouble(long address, double x) {
+        theInternalUnsafe.putDouble(address, x);
+    }
+    
+    /**
+     * @see #putByte(long, byte)
+     */
+    // 设置本地内存中address地址处对应的char型字段为新值x
+    @ForceInline
+    public void putChar(long address, char x) {
+        theInternalUnsafe.putChar(address, x);
+    }
+    
+    /*▲ (1.2) getXXX/putXXX 获取/设置字段值（基于本地内存地址） ████████████████████████████████████████████████████████████████████████████████┛ */
+    
+    
+    
+    /*▼ (3) putOrderedXXX 获取/设置字段值（基于JVM内存地址），Ordered/Lazy版本 █████████████████████████████████████████████████████████████┓ */
     
     /** Ordered/Lazy version of {@link #putIntVolatile(Object, long, int)}  */
-    /*
-     * 为对象o中offset地址处对应的int型字段赋新值：x。
-     * 这是一个有序或者 有延迟的 putIntVolatile 方法，并且不保证值的改变被其他线程立即看到。
-     * 只有在field被 volatile 修饰并且可能被意外修改的时，使用才有用。
-     */
+    // 设置对象o中offset地址处对应的int型字段为新值x
     @ForceInline
     public void putOrderedInt(Object o, long offset, int x) {
         theInternalUnsafe.putIntRelease(o, offset, x);
@@ -1049,6 +991,7 @@ public final class Unsafe {
     /**
      * Ordered/Lazy version of {@link #putLongVolatile(Object, long, long)}
      */
+    // 设置对象o中offset地址处对应的long型字段为新值x
     @ForceInline
     public void putOrderedLong(Object o, long offset, long x) {
         theInternalUnsafe.putLongRelease(o, offset, x);
@@ -1063,113 +1006,253 @@ public final class Unsafe {
      *
      * Corresponds to C11 atomic_store_explicit(..., memory_order_release).
      */
+    // 设置对象o中offset地址处对应的引用类型字段为新值x
     @ForceInline
     public void putOrderedObject(Object o, long offset, Object x) {
         theInternalUnsafe.putObjectRelease(o, offset, x);
     }
     
-    /*▲ putOrderedXXX，是putXXXVolatile的Ordered/Lazy版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (3) putOrderedXXX 获取/设置字段值（基于JVM内存地址），Ordered/Lazy版本 █████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ 原子操作，compareAndSwapXXX ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值（基于JVM内存地址），Volatile版本 ███████████████████████████████████████████┓ */
     
     /**
-     * Atomically updates Java variable to {@code x} if it is currently holding {@code expected}.
-     *
-     * <p>This operation has memory semantics of a {@code volatile} read and write.  Corresponds to C11 atomic_compare_exchange_strong.
-     *
-     * @return {@code true} if successful
+     * Volatile version of {@link #getByte(Object, long)}
      */
+    // 获取对象o中offset地址处对应的byte型字段的值，支持volatile语义
+    @ForceInline
+    public byte getByteVolatile(Object o, long offset) {
+        return theInternalUnsafe.getByteVolatile(o, offset);
+    }
+    
+    /**
+     * Volatile version of {@link #getShort(Object, long)}
+     */
+    // 获取对象o中offset地址处对应的short型字段的值，支持volatile语义
+    @ForceInline
+    public short getShortVolatile(Object o, long offset) {
+        return theInternalUnsafe.getShortVolatile(o, offset);
+    }
+    
+    /** Volatile version of {@link #getInt(Object, long)}  */
+    // 获取对象o中offset地址处对应的int型字段的值，支持volatile语义
+    @ForceInline
+    public int getIntVolatile(Object o, long offset) {
+        return theInternalUnsafe.getIntVolatile(o, offset);
+    }
+    
+    /**
+     * Volatile version of {@link #getLong(Object, long)}
+     */
+    // 获取对象o中offset地址处对应的long型字段的值，支持volatile语义
+    @ForceInline
+    public long getLongVolatile(Object o, long offset) {
+        return theInternalUnsafe.getLongVolatile(o, offset);
+    }
+    
+    /**
+     * Volatile version of {@link #getFloat(Object, long)}
+     */
+    // 获取对象o中offset地址处对应的float型字段的值，支持volatile语义
+    @ForceInline
+    public float getFloatVolatile(Object o, long offset) {
+        return theInternalUnsafe.getFloatVolatile(o, offset);
+    }
+    
+    /**
+     * Volatile version of {@link #getDouble(Object, long)}
+     */
+    // 获取对象o中offset地址处对应的double型字段的值，支持volatile语义
+    @ForceInline
+    public double getDoubleVolatile(Object o, long offset) {
+        return theInternalUnsafe.getDoubleVolatile(o, offset);
+    }
+    
+    /**
+     * Volatile version of {@link #getChar(Object, long)}
+     */
+    // 获取对象o中offset地址处对应的char型字段的值，支持volatile语义
+    @ForceInline
+    public char getCharVolatile(Object o, long offset) {
+        return theInternalUnsafe.getCharVolatile(o, offset);
+    }
+    
+    /**
+     * Volatile version of {@link #getBoolean(Object, long)}
+     */
+    // 获取对象o中offset地址处对应的boolean型字段的值，支持volatile语义
+    @ForceInline
+    public boolean getBooleanVolatile(Object o, long offset) {
+        return theInternalUnsafe.getBooleanVolatile(o, offset);
+    }
+    
+    /**
+     * Fetches a reference value from a given Java variable, with volatile
+     * load semantics. Otherwise identical to {@link #getObject(Object, long)}
+     */
+    // 获取对象o中offset地址处对应的引用类型字段的值，支持volatile语义
+    @ForceInline
+    public Object getObjectVolatile(Object o, long offset) {
+        return theInternalUnsafe.getObjectVolatile(o, offset);
+    }
+    
+    
+    
+    /**
+     * Volatile version of {@link #putByte(Object, long, byte)}
+     */
+    // 设置对象o中offset地址处对应的byte型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putByteVolatile(Object o, long offset, byte x) {
+        theInternalUnsafe.putByteVolatile(o, offset, x);
+    }
+    
+    /**
+     * Volatile version of {@link #putShort(Object, long, short)}
+     */
+    // 设置对象o中offset地址处对应的short型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putShortVolatile(Object o, long offset, short x) {
+        theInternalUnsafe.putShortVolatile(o, offset, x);
+    }
+    
+    /** Volatile version of {@link #putInt(Object, long, int)}  */
+    // 设置对象o中offset地址处对应的int型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putIntVolatile(Object o, long offset, int x) {
+        theInternalUnsafe.putIntVolatile(o, offset, x);
+    }
+    
+    /**
+     * Volatile version of {@link #putLong(Object, long, long)}
+     */
+    // 设置对象o中offset地址处对应的long型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putLongVolatile(Object o, long offset, long x) {
+        theInternalUnsafe.putLongVolatile(o, offset, x);
+    }
+    
+    /**
+     * Volatile version of {@link #putFloat(Object, long, float)}
+     */
+    // 设置对象o中offset地址处对应的float型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putFloatVolatile(Object o, long offset, float x) {
+        theInternalUnsafe.putFloatVolatile(o, offset, x);
+    }
+    
+    /**
+     * Volatile version of {@link #putDouble(Object, long, double)}
+     */
+    // 设置对象o中offset地址处对应的double型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putDoubleVolatile(Object o, long offset, double x) {
+        theInternalUnsafe.putDoubleVolatile(o, offset, x);
+    }
+    
+    /**
+     * Volatile version of {@link #putChar(Object, long, char)}
+     */
+    // 设置对象o中offset地址处对应的char型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putCharVolatile(Object o, long offset, char x) {
+        theInternalUnsafe.putCharVolatile(o, offset, x);
+    }
+    
+    /**
+     * Volatile version of {@link #putBoolean(Object, long, boolean)}
+     */
+    // 设置对象o中offset地址处对应的boolean型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putBooleanVolatile(Object o, long offset, boolean x) {
+        theInternalUnsafe.putBooleanVolatile(o, offset, x);
+    }
+    
+    /**
+     * Stores a reference value into a given Java variable, with
+     * volatile store semantics. Otherwise identical to {@link #putObject(Object, long, Object)}
+     */
+    // 设置对象o中offset地址处对应的引用类型字段为新值x，支持volatile语义
+    @ForceInline
+    public void putObjectVolatile(Object o, long offset, Object x) {
+        theInternalUnsafe.putObjectVolatile(o, offset, x);
+    }
+    
+    /*▲ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值（基于JVM内存地址），Volatile版本 ███████████████████████████████████████████┛ */
+    
+    
+    
+    /*▼ 对数组字段/变量直接操作 ████████████████████████████████████████████████████████████████████████████████┓ */
+    
+    /**
+     * Reports the offset of the first element in the storage allocation of a
+     * given array class.  If {@link #arrayIndexScale} returns a non-zero value
+     * for the same class, you may use that scale factor, together with this
+     * base offset, to form new offsets to access elements of arrays of the
+     * given class.
+     *
+     * @see #getInt(Object, long)
+     * @see #putInt(Object, long, int)
+     */
+    // 寻找某类型数组中的元素时约定的起始偏移地址（更像是一个标记），与#arrayIndexScale配合使用
+    @ForceInline
+    public int arrayBaseOffset(Class<?> arrayClass) {
+        return theInternalUnsafe.arrayBaseOffset(arrayClass);
+    }
+    
+    /**
+     * Reports the scale factor for addressing elements in the storage
+     * allocation of a given array class.  However, arrays of "narrow" types
+     * will generally not work properly with accessors like {@link
+     * #getByte(Object, long)}, so the scale factor for such classes is reported
+     * as zero.
+     *
+     * @see #arrayBaseOffset
+     * @see #getInt(Object, long)
+     * @see #putInt(Object, long, int)
+     */
+    // 某类型数组每个元素所占字节数，与#arrayBaseOffset配合使用
+    @ForceInline
+    public int arrayIndexScale(Class<?> arrayClass) {
+        return theInternalUnsafe.arrayIndexScale(arrayClass);
+    }
+    
+    /*▲ 对数组字段/变量直接操作 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
+    /* 获取/设置字段值 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+    
+    
+    
+    
+    
+    
+    /* 原子操作，基于JVM内存操作 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+    
     /*
-     * 拿内存中的整型field值与预期值expected作比较（内存值可能被其他线程修改掉，所以需要比较）。
-     * 如果发现该值被修改，则返回false，否则，更新该值，且返回true。
+     * (1) 设置值，失败后会重试，属于自旋锁&乐观锁
+     * - getAndSetXXX(o, offset, newValue)
+     *   返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+     *   设置新值newValue的时候，要保证该字段修改过程中没有被其他线程修改，否则不断自旋，直到成功修改
      *
-     * @param o        包含整型field值的对象
-     * @param offset   该整型field值的JVM内存偏移量
-     * @param expected 期望field得到的值
-     * @param x        如果field的当前值与期望值expected相同，那么更新filed的值为这个新值x
+     * (2) 更新值，如果待更新字段与期望值expected相等，则原子地更新目标字段。返回值代表更新成功或失败。
+     * - compareAndSwapXXX(o, offset, expected, x)
+     *   拿对象o中offset地址的field值与预期值expected作比较（内存值可能被其他线程修改掉，所以需要比较）。
+     *   如果发现该值被修改，则返回false，否则，原子地更新该值为x，且返回true。
+     *   @param offset   JVM内存偏移地址，对象o中某字段field的地址
+     *   @param o        包含field值的对象
+     *   @param expected field当前的期望值
+     *   @param x        如果field的当前值与期望值expected相同，那么更新filed的值为这个新值x
+     *   @return         更新成功返回true，更新失败返回false
+     *
+     * (3) 增减值，如果更新失败就不断尝试，属于乐观锁&自旋锁
+     * - getAndAddXXX(o, offset, delta)
+     *   返回对象o的offset地址处的值，并将该值原子性地增加delta（delta可以为负数）
+     *
      */
-    @ForceInline
-    public final boolean compareAndSwapInt(Object o, long offset, int expected, int x) {
-        return theInternalUnsafe.compareAndSetInt(o, offset, expected, x);
-    }
     
-    /**
-     * Atomically updates Java variable to {@code x} if it is currently
-     * holding {@code expected}.
-     *
-     * <p>This operation has memory semantics of a {@code volatile} read
-     * and write.  Corresponds to C11 atomic_compare_exchange_strong.
-     *
-     * @return {@code true} if successful
-     */
-    @ForceInline
-    public final boolean compareAndSwapLong(Object o, long offset, long expected, long x) {
-        return theInternalUnsafe.compareAndSetLong(o, offset, expected, x);
-    }
-    
-    /**
-     * Atomically updates Java variable to {@code x} if it is currently holding {@code expected}.
-     *
-     * <p>This operation has memory semantics of a {@code volatile} read
-     * and write.  Corresponds to C11 atomic_compare_exchange_strong.
-     *
-     * @return {@code true} if successful
-     */
-    @ForceInline
-    public final boolean compareAndSwapObject(Object o, long offset, Object expected, Object x) {
-        return theInternalUnsafe.compareAndSetObject(o, offset, expected, x);
-    }
-    
-    
-    /*▲ 原子操作，compareAndSwapXXX ████████████████████████████████████████████████████████████████████████████████┛ */
-    
-    
-    
-    /* The following contain CAS-based Java implementations used on platforms not supporting native instructions */
-    
-    /*▼ 原子操作，getAndAddXXX ████████████████████████████████████████████████████████████████████████████████┓ */
-    
-    /**
-     * Atomically adds the given value to the current value of a field or array element within the given object {@code o} at the given {@code offset}.
-     *
-     * @param o      object/array to update the field/element in
-     * @param offset field/element offset
-     * @param delta  the value to add
-     *
-     * @return the previous value
-     *
-     * @since 1.8
-     */
-    @ForceInline
-    public final int getAndAddInt(Object o, long offset, int delta) {
-        return theInternalUnsafe.getAndAddInt(o, offset, delta);
-    }
-    
-    /**
-     * Atomically adds the given value to the current value of a field
-     * or array element within the given object {@code o}
-     * at the given {@code offset}.
-     *
-     * @param o      object/array to update the field/element in
-     * @param offset field/element offset
-     * @param delta  the value to add
-     *
-     * @return the previous value
-     *
-     * @since 1.8
-     */
-    @ForceInline
-    public final long getAndAddLong(Object o, long offset, long delta) {
-        return theInternalUnsafe.getAndAddLong(o, offset, delta);
-    }
-    
-    /*▲ 原子操作，getAndAddXXX ████████████████████████████████████████████████████████████████████████████████┛ */
-    
-    
-    
-    /*▼ 原子操作，getAndSetXXX ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1) 设置值，失败后会重试，属于自旋锁&乐观锁 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Atomically exchanges the given value with the current value of
@@ -1184,6 +1267,7 @@ public final class Unsafe {
      *
      * @since 1.8
      */
+    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
     @ForceInline
     public final int getAndSetInt(Object o, long offset, int newValue) {
         return theInternalUnsafe.getAndSetInt(o, offset, newValue);
@@ -1202,6 +1286,7 @@ public final class Unsafe {
      *
      * @since 1.8
      */
+    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
     @ForceInline
     public final long getAndSetLong(Object o, long offset, long newValue) {
         return theInternalUnsafe.getAndSetLong(o, offset, newValue);
@@ -1220,12 +1305,109 @@ public final class Unsafe {
      *
      * @since 1.8
      */
+    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
     @ForceInline
     public final Object getAndSetObject(Object o, long offset, Object newValue) {
         return theInternalUnsafe.getAndSetObject(o, offset, newValue);
     }
     
-    /*▲ 原子操作，getAndSetXXX ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1) 设置值，失败后会重试，属于自旋锁&乐观锁 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
+    
+    
+    /*▼ (2) 更新值，基于JVM内存操作 ████████████████████████████████████████████████████████████████████████████████┓ */
+    
+    /**
+     * Atomically updates Java variable to {@code x} if it is currently holding {@code expected}.
+     *
+     * This operation has memory semantics of a {@code volatile} read and write.
+     * Corresponds to C11 atomic_compare_exchange_strong.
+     *
+     * @return {@code true} if successful
+     */
+    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    @ForceInline
+    public final boolean compareAndSwapInt(Object o, long offset, int expected, int x) {
+        return theInternalUnsafe.compareAndSetInt(o, offset, expected, x);
+    }
+    
+    /**
+     * Atomically updates Java variable to {@code x} if it is currently
+     * holding {@code expected}.
+     *
+     * <p>This operation has memory semantics of a {@code volatile} read
+     * and write.  Corresponds to C11 atomic_compare_exchange_strong.
+     *
+     * @return {@code true} if successful
+     */
+    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    @ForceInline
+    public final boolean compareAndSwapLong(Object o, long offset, long expected, long x) {
+        return theInternalUnsafe.compareAndSetLong(o, offset, expected, x);
+    }
+    
+    /**
+     * Atomically updates Java variable to {@code x} if it is currently holding {@code expected}.
+     *
+     * <p>This operation has memory semantics of a {@code volatile} read
+     * and write.  Corresponds to C11 atomic_compare_exchange_strong.
+     *
+     * @return {@code true} if successful
+     */
+    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    @ForceInline
+    public final boolean compareAndSwapObject(Object o, long offset, Object expected, Object x) {
+        return theInternalUnsafe.compareAndSetObject(o, offset, expected, x);
+    }
+    
+    /*▲ (2) 更新值，基于JVM内存操作 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
+    
+    
+    /*▼ (3) 增减值，如果更新失败就不断尝试，属于乐观锁&自旋锁 ████████████████████████████████████████████████████████████████████████████████┓ */
+    
+    /**
+     * Atomically adds the given value to the current value of a field or array element within the given object {@code o} at the given {@code offset}.
+     *
+     * @param o      object/array to update the field/element in
+     * @param offset field/element offset
+     * @param delta  the value to add
+     *
+     * @return the previous value
+     *
+     * @since 1.8
+     */
+    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    @ForceInline
+    public final int getAndAddInt(Object o, long offset, int delta) {
+        return theInternalUnsafe.getAndAddInt(o, offset, delta);
+    }
+    
+    /**
+     * Atomically adds the given value to the current value of a field
+     * or array element within the given object {@code o}
+     * at the given {@code offset}.
+     *
+     * @param o      object/array to update the field/element in
+     * @param offset field/element offset
+     * @param delta  the value to add
+     *
+     * @return the previous value
+     *
+     * @since 1.8
+     */
+    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    @ForceInline
+    public final long getAndAddLong(Object o, long offset, long delta) {
+        return theInternalUnsafe.getAndAddLong(o, offset, delta);
+    }
+    
+    /*▲ (3) 增减值，如果更新失败就不断尝试，属于乐观锁&自旋锁 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
+    /* 原子操作，基于JVM内存操作 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+    
+    
+    
     
     
     
@@ -1244,13 +1426,13 @@ public final class Unsafe {
      * @param thread the thread to unpark.
      */
     /*
-     * 唤醒处于wait状态的线程（也可能只是做个计数标记来响应下次的park）
+     * unpark发给目标线程一个许可证，该许可证被park消费。
+     * 该许可证可以先发给线程使用，
+     * 也可以等线程陷入阻塞，等待许可证时再（由另一个线程）给它，进而唤醒线程。
      *
-     * 释放被 park 创建的在一个线程上的阻塞.
-     * 这个方法也可以被使用来终止一个先前调用 park 导致的阻塞.
-     * 这个操作是不安全的,因此线程必须保证是活动的.
-     * 这是java代码不是native代码。
-     * obj 必须为一个线程
+     * 连续重复发给线程的许可证只被视为一个许可证。
+     *
+     * 注：该方法形参必须为线程
      */
     @ForceInline
     public void unpark(Object thread) {
@@ -1269,15 +1451,15 @@ public final class Unsafe {
      * elsewhere.
      */
     /*
-     * 视情况使得Thread进入wait状态（不一定真的进入）
+     * 等待消费一个许可证，这会使线程陷入阻塞。
+     * 如果提前给过许可，则线程继续执行。
+     * 如果陷入阻塞后等待许可，则可由别的线程发给它许可。
+     * 使用线程中断也可以唤醒陷入阻塞的线程。
      *
-     * 阻塞一个线程直到 unpark 出现、线程被中断或者timeout时间到期。
-     * 如果一个 unpark 调用已经出现了，这里只计数。
-     * timeout为0表示永不过期.
-     * 这个方法执行时 也可能不合理地返回(没有具体原因)
-     *
-     * @param absolute true--绝对时间，时间点；false--相对时间，相对于当前的持续时间
-     * @param time     可以是一个要等待的纳秒数，或者是一个相对于新纪元之后的毫秒数直到到达这个时间点
+     * 参数absolute：true代表后面的time是一个绝对时间，是一个时间点；false代表后面的time是一个相对时间，相对于当前的时间间隔
+     * 参数time：可以是一个毫秒数时间点，该时间点是相对于1970年1月1日0时0分0秒开始的【绝对时间】，或者是一个纳秒数时间间隔【相对时间】
+     * 如果是相对时间，且time>0，代表阻塞在time时间后自动解除
+     * 如果是相对时间，且time==0，代表永远阻塞，除非被主动唤醒
      */
     @ForceInline
     public void park(boolean isAbsolute, long time) {
@@ -1288,73 +1470,7 @@ public final class Unsafe {
     
     
     
-    /**
-     * Allocates an instance but does not run any constructor.
-     * Initializes the class if it has not yet been.
-     */
-    // 不调用构造方法就生成对象，但是该对象的字段会被赋为对应类型的"零值"，在编写该类时为它赋过的默认值无效
-    @ForceInline
-    public Object allocateInstance(Class<?> cls) throws InstantiationException {
-        return theInternalUnsafe.allocateInstance(cls);
-    }
-    
-    /**
-     * Defines a class but does not make it known to the class loader or system dictionary.
-     * <p>
-     * For each CP entry, the corresponding CP patch must either be null or have
-     * the a format that matches its tag:
-     * <ul>
-     * <li>Integer, Long, Float, Double: the corresponding wrapper object type from java.lang
-     * <li>Utf8: a string (must have suitable syntax if used as signature or name)
-     * <li>Class: any java.lang.Class object
-     * <li>String: any object (not just a java.lang.String)
-     * <li>InterfaceMethodRef: (NYI) a method handle to invoke on that call site's arguments
-     * </ul>
-     * @param hostClass context for linkage, access control, protection domain, and class loader
-     * @param data      bytes of a class file
-     * @param cpPatches where non-null entries exist, they replace corresponding CP entries in data
-     */
-    @ForceInline
-    public Class<?> defineAnonymousClass(Class<?> hostClass, byte[] data, Object[] cpPatches) {
-        return theInternalUnsafe.defineAnonymousClass(hostClass, data, cpPatches);
-    }
-    
-    
-    /**
-     * Reports the location of a given static field, in conjunction with {@link
-     * #staticFieldOffset}.
-     * <p>Fetch the base "Object", if any, with which static fields of the
-     * given class can be accessed via methods like {@link #getInt(Object,
-     * long)}.  This value may be null.  This value may refer to an object
-     * which is a "cookie", not guaranteed to be a real Object, and it should
-     * not be used in any way except as argument to the get and put routines in
-     * this class.
-     */
-    @ForceInline
-    public Object staticFieldBase(Field f) {
-        return theInternalUnsafe.staticFieldBase(f);
-    }
-
-    /**
-     * Detects if the given class may need to be initialized.
-     * This is often needed in conjunction with obtaining the static field base of a class.
-     *
-     * @return false only if a call to {@code ensureClassInitialized} would have no effect
-     */
-    @ForceInline
-    public boolean shouldBeInitialized(Class<?> c) {
-        return theInternalUnsafe.shouldBeInitialized(c);
-    }
-
-    /**
-     * Ensures the given class has been initialized.
-     * This is often needed in conjunction with obtaining the static field base of a class.
-     */
-    @ForceInline
-    public void ensureClassInitialized(Class<?> c) {
-        theInternalUnsafe.ensureClassInitialized(c);
-    }
-    
+    /*▼ 内存屏障 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Ensures that loads before the fence will not be reordered with loads and
@@ -1372,7 +1488,7 @@ public final class Unsafe {
     public void loadFence() {
         theInternalUnsafe.loadFence();
     }
-
+    
     /**
      * Ensures that loads and stores before the fence will not be reordered with
      * stores after the fence; a "StoreStore plus LoadStore barrier".
@@ -1389,7 +1505,7 @@ public final class Unsafe {
     public void storeFence() {
         theInternalUnsafe.storeFence();
     }
-
+    
     /**
      * Ensures that loads and stores before the fence will not be reordered
      * with loads and stores after the fence.  Implies the effects of both
@@ -1403,6 +1519,9 @@ public final class Unsafe {
     public void fullFence() {
         theInternalUnsafe.fullFence();
     }
+    
+    /*▲ 内存屏障 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
     
     
     /**
@@ -1425,6 +1544,15 @@ public final class Unsafe {
         return theInternalUnsafe.getLoadAverage(loadavg, nelems);
     }
     
+    /**
+     * Reports the size in bytes of a native memory page (whatever that is).
+     * This value will always be a power of two.
+     */
+    // 返回内存分页大小
+    @ForceInline
+    public int pageSize() {
+        return theInternalUnsafe.pageSize();
+    }
     
     /**
      * Invokes the given direct byte buffer's cleaner, if any.
@@ -1436,14 +1564,19 @@ public final class Unsafe {
      * {@link java.nio.Buffer#duplicate duplicate}
      * @since 9
      */
-    public void invokeCleaner(java.nio.ByteBuffer directBuffer) {
-        if (!directBuffer.isDirect())
+    // 直接缓冲区清理器
+    public void invokeCleaner(ByteBuffer directBuffer) {
+        // 如果非直接缓冲区（堆内存），抛异常
+        if (!directBuffer.isDirect()) {
             throw new IllegalArgumentException("buffer is non-direct");
-
+        }
+        
         DirectBuffer db = (DirectBuffer)directBuffer;
-        if (db.attachment() != null)
+        if (db.attachment() != null) {
             throw new IllegalArgumentException("duplicate or slice");
-
+        }
+        
+        // 获取附着的清理器，清理缓冲区
         Cleaner cleaner = db.cleaner();
         if (cleaner != null) {
             cleaner.clean();
@@ -1451,18 +1584,15 @@ public final class Unsafe {
     }
     
     
-    /**
-     * Reports the size in bytes of a native memory page (whatever that is).
-     * This value will always be a power of two.
-     */
-    @ForceInline
-    public int pageSize() {
-        return theInternalUnsafe.pageSize();
-    }
+    
+    /*▼ 异常 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /** Throws the exception without telling the verifier. */
     @ForceInline
     public void throwException(Throwable ee) {
         theInternalUnsafe.throwException(ee);
     }
+    
+    /*▲ 异常 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
 }
