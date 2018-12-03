@@ -88,6 +88,7 @@ Commit信息中的emoji取自[gitmoji](https://gitmoji.carloscuesta.me/)。
   * `UnsafeTest03` 本地内存操作
   * `UnsafeTest04` 利用Unsafe#objectFieldOffse方法获取某个对象的近似大小
   * `UnsafeTest05` 线程的阻塞[park]与唤醒[unpark]
+  * `UnsafeTest06` 获取静态字段所属的类对象
 * ReferenceTest - 软引用、弱引用、虚引用测试
   * `ReferenceTest01` 软引用SoftReference回收测试
   * `ReferenceTest02` 弱引用WeakReference回收测试
