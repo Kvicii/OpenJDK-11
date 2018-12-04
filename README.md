@@ -128,3 +128,4 @@ Commit信息中的emoji取自[gitmoji](https://gitmoji.carloscuesta.me/)。
   * `ThreadTest04` 死锁线程无法被中断唤醒
 * SharedSecrets - 管理系统内部的一些“后门”接口
   * `SharedSecretsTest01` - 模拟SharedSecrets的实现机制
+  * `SharedSecretsTest02` - 测试SharedSecrets
