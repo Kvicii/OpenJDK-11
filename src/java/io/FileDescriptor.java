@@ -380,14 +380,16 @@ public final class FileDescriptor {
                         }
                     }
                 }
-            } catch(IOException ex) {
-                /*
-                 * If releaser close() throws IOException, add other exceptions as suppressed.
-                 */
-                if(ioe != null)
-                    ex.addSuppressed(ioe);
-                ioe = ex;
-            } finally {
+            }
+//            catch(IOException ex) {
+//                /*
+//                 * If releaser close() throws IOException, add other exceptions as suppressed.
+//                 */
+//                if(ioe != null)
+//                    ex.addSuppressed(ioe);
+//                ioe = ex;
+//            }
+            finally {
                 if(ioe != null)
                     throw ioe;
             }
