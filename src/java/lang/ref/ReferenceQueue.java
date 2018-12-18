@@ -60,9 +60,12 @@ public class ReferenceQueue<T> {
      *
      * @return A reference object, if one was immediately available, otherwise {@code null}
      */
+    // 从ReferenceQueue中删除一个Reference并将其返回
     public Reference<? extends T> poll() {
-        if(head == null)
+        if(head == null) {
             return null;
+        }
+        
         synchronized(lock) {
             return reallyPoll();
         }
