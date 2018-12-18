@@ -144,6 +144,12 @@ import jdk.internal.vm.annotation.ForceInline;
  * 弱引用	通过get()方法	 永远回收	    不可能
  * 虚引用	无法取得	         不回收/回收	    可能
  * 注：虚引用在JDK9之前不回收，JDK9之后回收
+ *
+ * 值得注意的是，GC只对追踪的referent对象做特殊处理
+ * 对于软/弱/虚引用本身，以及子类中的其他引用，按普通的垃圾回收机制处理
+ *
+ * 所以，如果自定义的引用继承了弱引用或虚引用，且自主增加了额外的引用变量，
+ * 那么如果没有及时释放这些引用，还是可能发生内存泄露的
  */
 public abstract class Reference<T> {
     private static final Object processPendingLock = new Object();
@@ -170,7 +176,10 @@ public abstract class Reference<T> {
     @SuppressWarnings("rawtypes")
     volatile Reference next;
     
-    // 指向被Reference包裹的自定义引用对象
+    /*
+     * 由Reference追踪的目标对象
+     * 只有该对象被GC特别对待，子类中的其他对象不会被追踪
+     */
     private T referent;         /* Treated specially by GC */
     
     /* Used by the garbage collector to accumulate Reference objects that need to be revisited in order to decide whether they should be notified.
@@ -185,7 +194,7 @@ public abstract class Reference<T> {
     private transient Reference<T> discovered;
     
     
-    // 在根线程组启动一个守护线程ReferenceHandler，处理被回收掉的引用
+    // 在根线程组启动一个名为Reference Handler的守护线程来处理被回收掉的引用
     static {
         // 获取当前线程所在的线程组
         ThreadGroup tg = Thread.currentThread().getThreadGroup();
@@ -241,6 +250,7 @@ public abstract class Reference<T> {
         
         public void run() {
             while(true) {
+                // 处理报废的引用
                 processPendingReferences();
             }
         }
@@ -280,7 +290,7 @@ public abstract class Reference<T> {
             pendingList = ref.discovered;
             ref.discovered = null;
             
-            // 如果是这个特殊的虚引用，需要单独执行清理操作
+            // 如果特殊的虚引用：Cleaner，则需要执行该清理器的清理方法
             if(ref instanceof Cleaner) {
                 ((Cleaner) ref).clean();
                 // Notify any waiters that progress has been made.
@@ -334,7 +344,7 @@ public abstract class Reference<T> {
      *
      * This method is invoked only by Java code; when the garbage collector clears references it does so directly, without invoking this method.
      */
-    // 清空包裹的引用
+    // 取消对目标对象的追踪
     public void clear() {
         this.referent = null;
     }
@@ -345,7 +355,7 @@ public abstract class Reference<T> {
      *
      * @return <code>true</code> if and only if this reference object has been enqueued
      */
-    // 判断该Reference是否在ReferenceQueue中
+    // 判断当前Reference是否在ReferenceQueue中
     public boolean isEnqueued() {
         return (this.queue == ReferenceQueue.ENQUEUED);
     }
@@ -358,7 +368,7 @@ public abstract class Reference<T> {
      * @return <code>true</code> if this reference object was successfully enqueued;
      *         <code>false</code> if it was already enqueued or if it was not registered with a queue when it was created
      */
-    // 将当前Reference入队，并清空包裹的引用
+    // 取消对目标对象的追踪，并将当前报废的Reference入队，在这个过程中，会回收目标对象
     public boolean enqueue() {
         this.referent = null;
         return this.queue.enqueue(this);
