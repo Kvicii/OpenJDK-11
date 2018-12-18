@@ -3,7 +3,6 @@ package com.kang;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
-import java.lang.reflect.Field;
 
 // 软引用SoftReference回收测试
 public class ReferenceTest01 {
@@ -16,7 +15,7 @@ public class ReferenceTest01 {
         SoftReference<User> s1 = new SoftReference<>(u1, rq);
         SoftReference<User> s2 = new SoftReference<>(u2, rq);
     
-        // 开始时，u1和u2对象均存在
+        System.out.println("开始时，u1和u2对象均存在");
         User.print(s1.get(), s2.get());
     
         // u1置为null后，u1对象只剩下s1这个软引用。
@@ -28,36 +27,27 @@ public class ReferenceTest01 {
         System.gc();
         Thread.sleep(1);    // 稍微暂停一下，等待GC完成
         
-        // 执行GC后，由于JVM堆内存充足，所以u1和u2这两个对象依然存在，s1和s2也没有被回收
+        System.out.println("执行GC后，由于JVM堆内存充足，所以u1和u2这两个对象依然存在，s1和s2也不会进入ReferenceQueue");
         User.print(s1.get(), s2.get());
     
         System.out.println("------------------------------");
     
-        // 去ReferenceQueue里验证u1的软引用是否被回收
+        System.out.println("验证软引用s1是否进入了ReferenceQueue");
+        // 不断循环，直到找出目标引用
         while(true) {
             Reference r = rq.poll();    // 获取Reference（没有用remove，因为remove会导致陷入阻塞）
+        
             if(r==s1){
-                System.out.print("s1被回收了，s1中包裹的对象：");
-                getUserFrom(r);
+                System.out.println("s1已进入ReferenceQueue，s1中包裹的对象：" + r.get());
+                break;
             } else if(r==s2){
-                System.out.print("s2被回收了，s2中包裹的对象：");
-                getUserFrom(r);
-            } else {
-                break;  // 既不是s1也不是s2，说明找完了
+                System.out.println("s2已进入ReferenceQueue，s2中包裹的对象：" + r.get());
+                break;
+            } else if (r==null) {
+                System.out.println("ReferenceQueue为空，查询结束...");
+                break;
             }
         }
         // 验证结果是堆内存足够时，两个对象依然存在
-    }
-    
-    // 从Reference中获取其包裹的对象，并打印
-    private static void getUserFrom(Reference r){
-        try {
-            Field rereferent = Reference.class.getDeclaredField("referent");
-            rereferent.setAccessible(true);
-            User u = (User)rereferent.get(r);
-            User.print(u);
-        } catch(NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 }

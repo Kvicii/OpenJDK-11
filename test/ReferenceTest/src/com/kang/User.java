@@ -7,14 +7,19 @@ public class User {
         this.name = name;
     }
     
-    public static void print(User ... args){
+    public static void print(User... args) {
         for(User arg : args) {
-            if(arg!=null) {
+            if(arg != null) {
                 System.out.print(arg.name + "  ");
             } else {
                 System.out.print("null" + "  ");
             }
         }
         System.out.println();
+    }
+    
+    @Override
+    public String toString() {
+        return "姓名：" + name + " ";
     }
 }
