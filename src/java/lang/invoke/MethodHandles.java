@@ -4872,7 +4872,7 @@ assertEquals("boojum", (String) catTrace.invokeExact("boo", "jum"));
         // Step 1C: determine loop return type.
         // Step 1D: check other types.
         final Class<?> loopReturnType = fini.stream().filter(Objects::nonNull).map(MethodHandle::type).
-                map(MethodType::returnType).findFirst().orElse(void.class);
+                map(MethodType::returnType).findFirst().orElse((Class)void.class);
         loopChecks1cd(pred, fini, loopReturnType);
 
         // Step 2: determine parameter lists.
