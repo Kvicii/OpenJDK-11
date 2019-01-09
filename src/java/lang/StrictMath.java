@@ -271,7 +271,7 @@ public final class StrictMath {
      * @see Math#multiplyHigh(long, long)
      * @since 9
      */
-    // 乘法
+    // 乘法，返回两个long乘积的高64位
     public static long multiplyHigh(long x, long y) {
         return Math.multiplyHigh(x, y);
     }
@@ -298,7 +298,7 @@ public final class StrictMath {
      * @see Math#floor(double)
      * @since 1.8
      */
-    // 除法
+    // 除法，如果两数符号不同，则向下取整
     public static int floorDiv(int x, int y) {
         return Math.floorDiv(x, y);
     }
@@ -325,7 +325,7 @@ public final class StrictMath {
      * @see Math#floor(double)
      * @since 9
      */
-    // 除法
+    // 除法，如果两数符号不同，则向下取整
     public static long floorDiv(long x, int y) {
         return Math.floorDiv(x, y);
     }
@@ -352,7 +352,7 @@ public final class StrictMath {
      * @see Math#floor(double)
      * @since 1.8
      */
-    // 除法
+    // 除法，如果两数符号不同，则向下取整
     public static long floorDiv(long x, long y) {
         return Math.floorDiv(x, y);
     }
@@ -382,7 +382,7 @@ public final class StrictMath {
      * @see StrictMath#floorDiv(int, int)
      * @since 1.8
      */
-    // 取余
+    // 取余，相当于(x % y + y) % y
     public static int floorMod(int x, int y) {
         return Math.floorMod(x, y);
     }
@@ -413,7 +413,7 @@ public final class StrictMath {
      * @see StrictMath#floorDiv(long, int)
      * @since 9
      */
-    // 取余
+    // 取余，相当于(x % y + y) % y
     public static int floorMod(long x, int y) {
         return Math.floorMod(x, y);
     }
@@ -443,7 +443,7 @@ public final class StrictMath {
      * @see StrictMath#floorDiv(long, long)
      * @since 1.8
      */
-    // 取余
+    // 取余，相当于(x % y + y) % y
     public static long floorMod(long x, long y) {
         return Math.floorMod(x, y);
     }
@@ -471,7 +471,7 @@ public final class StrictMath {
      * @return the remainder when {@code f1} is divided by
      * {@code f2}.
      */
-    // 取余
+    // 取余，返回精确的余数
     public static native double IEEEremainder(double f1, double f2);
     
     /**
