@@ -280,23 +280,6 @@ public final class Math {
     }
     
     /**
-     * Returns the product of the arguments, throwing an exception if the result
-     * overflows a {@code long}.
-     *
-     * @param x the first value
-     * @param y the second value
-     *
-     * @return the result
-     *
-     * @throws ArithmeticException if the result overflows a long
-     * @since 9
-     */
-    // 乘法
-    public static long multiplyExact(long x, int y) {
-        return multiplyExact(x, (long) y);
-    }
-    
-    /**
      * Returns the product of the arguments,
      * throwing an exception if the result overflows a {@code long}.
      *
@@ -326,6 +309,23 @@ public final class Math {
     }
     
     /**
+     * Returns the product of the arguments, throwing an exception if the result
+     * overflows a {@code long}.
+     *
+     * @param x the first value
+     * @param y the second value
+     *
+     * @return the result
+     *
+     * @throws ArithmeticException if the result overflows a long
+     * @since 9
+     */
+    // 乘法
+    public static long multiplyExact(long x, int y) {
+        return multiplyExact(x, (long) y);
+    }
+    
+    /**
      * Returns the exact mathematical product of the arguments.
      *
      * @param x the first value
@@ -350,7 +350,7 @@ public final class Math {
      *
      * @since 9
      */
-    // 乘法
+    // 乘法，返回两个long乘积的高64位
     @HotSpotIntrinsicCandidate
     public static long multiplyHigh(long x, long y) {
         if(x<0 || y<0) {
@@ -416,7 +416,7 @@ public final class Math {
      * @see #floor(double)
      * @since 1.8
      */
-    // 除法
+    // 除法，如果两数符号不同，则向下取整
     public static int floorDiv(int x, int y) {
         int r = x / y;
         // if the signs are different and modulo not zero, round down
@@ -453,7 +453,7 @@ public final class Math {
      * @see #floor(double)
      * @since 9
      */
-    // 除法
+    // 除法，如果两数符号不同，则向下取整
     public static long floorDiv(long x, int y) {
         return floorDiv(x, (long) y);
     }
@@ -485,7 +485,7 @@ public final class Math {
      * @see #floor(double)
      * @since 1.8
      */
-    // 除法
+    // 除法，如果两数符号不同，则向下取整
     public static long floorDiv(long x, long y) {
         long r = x / y;
         // if the signs are different and modulo not zero, round down
@@ -541,7 +541,7 @@ public final class Math {
      * @see #floorDiv(int, int)
      * @since 1.8
      */
-    // 取模
+    // 取模，相当于(x % y + y) % y
     public static int floorMod(int x, int y) {
         return x - floorDiv(x, y) * y;
     }
@@ -570,7 +570,7 @@ public final class Math {
      * @see #floorDiv(long, int)
      * @since 9
      */
-    // 取模
+    // 取模，相当于(x % y + y) % y
     public static int floorMod(long x, int y) {
         // Result cannot overflow the range of int.
         return (int) (x - floorDiv(x, y) * y);
@@ -600,7 +600,7 @@ public final class Math {
      * @see #floorDiv(long, long)
      * @since 1.8
      */
-    // 取模
+    // 取模，相当于(x % y + y) % y
     public static long floorMod(long x, long y) {
         return x - floorDiv(x, y) * y;
     }
@@ -630,6 +630,7 @@ public final class Math {
      */
     /*
      * 按照 IEEE 754 标准的规定，对两个参数进行余数运算。
+     *
      * 余数的算术值等于 f1 - f2 × n，其中 n 是最接近商 f1/f2 准确算术值的整数.
      * 如果两个整数都同样接近 f1/f2，那么 n 是其中的偶数。
      * 如果余数是 0，那么它的符号与第一个参数的符号相同。
