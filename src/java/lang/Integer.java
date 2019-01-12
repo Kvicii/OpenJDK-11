@@ -2031,7 +2031,11 @@ public final class Integer extends Number implements Comparable<Integer> {
      */
     /*
      * Integer缓存，默认缓存了-128~127之间的Integer对象
-     * 如果想改变缓存数字的上限，可以通过设置虚拟机属性：-XX:AutoBoxCacheMax=[size]来实现
+     * 如果想增加缓存数字的上限，比如将缓存范围改为[-128, 200]，
+     * 则可以设置运行参数：
+     * -XX:AutoBoxCacheMax=200
+     * 或
+     * -Djava.lang.Integer.IntegerCache.high=200
      */
     private static class IntegerCache {
         static final int low = -128;
@@ -2056,8 +2060,9 @@ public final class Integer extends Number implements Comparable<Integer> {
             
             cache = new Integer[(high - low) + 1];
             int j = low;
-            for(int k = 0; k<cache.length; k++)
+            for(int k = 0; k<cache.length; k++) {
                 cache[k] = new Integer(j++);
+            }
             
             // range [-128, 127] must be interned (JLS7 5.1.7)
             assert IntegerCache.high >= 127;
