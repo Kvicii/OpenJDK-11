@@ -361,7 +361,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param offset The index of the first byte to decode
      * @param length The number of bytes to decode
      *
-     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code length} is negative, or {@code offset} is greater than {@code bytes.length - length}
+     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code length} is negative,
+     * or {@code offset} is greater than {@code bytes.length - length}
      * @since 1.1
      */
     // ▶ 4 以JVM默认字符集格式解析byte[]，进而构造String
@@ -378,7 +379,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * The length of the new {@code String} is a function of the charset, and hence may not be equal to the length of the byte array.
      *
      * <p> The behavior of this constructor when the given bytes are not valid
-     * in the default charset is unspecified.  The {@link java.nio.charset.CharsetDecoder} class should be used when more control over the decoding process is required.
+     * in the default charset is unspecified.
+     * The {@link java.nio.charset.CharsetDecoder} class should be used when more control over the decoding process is required.
      *
      * @param bytes The bytes to be decoded into characters
      *
@@ -402,7 +404,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param charsetName The name of a supported {@linkplain Charset charset}
      *
      * @throws UnsupportedEncodingException If the named charset is not supported
-     * @throws IndexOutOfBoundsException    If {@code offset} is negative, {@code length} is negative, or {@code offset} is greater than {@code bytes.length - length}
+     * @throws IndexOutOfBoundsException    If {@code offset} is negative, {@code length} is negative,
+     * or {@code offset} is greater than {@code bytes.length - length}
      * @since 1.1
      */
     // ▶ 5 以charsetName格式解析byte[]，进而构造String
@@ -421,7 +424,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * The length of the new {@code String} is a function of the charset, and hence may not be equal to the length of the byte array.
      *
      * <p> The behavior of this constructor when the given bytes are not valid
-     * in the given charset is unspecified.  The {@link java.nio.charset.CharsetDecoder} class should be used when more control over the decoding process is required.
+     * in the given charset is unspecified.
+     * The {@link java.nio.charset.CharsetDecoder} class should be used when more control over the decoding process is required.
      *
      * @param bytes       The bytes to be decoded into characters
      * @param charsetName The name of a supported {@linkplain Charset charset}
@@ -447,7 +451,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param length  The number of bytes to decode
      * @param charset The {@linkplain Charset charset} to be used to decode the {@code bytes}
      *
-     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code length} is negative, or {@code offset} is greater than {@code bytes.length - length}
+     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code length} is negative,
+     * or {@code offset} is greater than {@code bytes.length - length}
      * @since 1.6
      */
     // ▶ 6 以charset格式解码byte[]，返回结果集
@@ -466,7 +471,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * The length of the new {@code String} is a function of the charset, and hence may not be equal to the length of the byte array.
      *
      * <p> This method always replaces malformed-input and unmappable-character
-     * sequences with this charset's default replacement string.  The {@link java.nio.charset.CharsetDecoder} class should be used when more control over the decoding process is required.
+     * sequences with this charset's default replacement string.
+     * The {@link java.nio.charset.CharsetDecoder} class should be used when more control over the decoding process is required.
      *
      * @param bytes   The bytes to be decoded into characters
      * @param charset The {@linkplain Charset charset} to be used to decode the {@code bytes}
@@ -530,7 +536,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param count      The length
      *
      * @throws IllegalArgumentException  If any invalid Unicode code point is found in {@code codePoints}
-     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code count} is negative, or {@code offset} is greater than {@code codePoints.length - count}
+     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code count} is negative,
+     * or {@code offset} is greater than {@code codePoints.length - count}
      * @since 1.5
      */
     // ▶ 8 将codePoints中的一组Unicode值批量转换为String内部的字节，再包装为String
@@ -572,7 +579,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param offset The initial offset
      * @param count  The length
      *
-     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code count} is negative, or {@code offset} is greater than {@code ascii.length - count}
+     * @throws IndexOutOfBoundsException If {@code offset} is negative, {@code count} is negative,
+     * or {@code offset} is greater than {@code ascii.length - count}
      * @see #String(byte[], int)
      * @see #String(byte[], int, int, String)
      * @see #String(byte[], int, int, Charset)
@@ -582,7 +590,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see #String(byte[])
      *
      * @deprecated This method does not properly convert bytes into characters.
-     * As of JDK&nbsp;1.1, the preferred way to do this is via the {@code String} constructors that take a {@link Charset}, charset name, or that use the platform's default charset.
+     * As of JDK&nbsp;1.1, the preferred way to do this is via the {@code String} constructors that take a {@link Charset},
+     * charset name, or that use the platform's default charset.
      */
     // ▶ 9 ※ 过时
     @Deprecated(since = "1.1")
@@ -629,7 +638,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see #String(byte[], Charset)
      * @see #String(byte[])
      * @deprecated This method does not properly convert bytes into characters.
-     * As of JDK&nbsp;1.1, the preferred way to do this is via the {@code String} constructors that take a {@link Charset}, charset name, or that use the platform's default charset.
+     * As of JDK&nbsp;1.1, the preferred way to do this is via the {@code String} constructors that take a {@link Charset},
+     * charset name, or that use the platform's default charset.
      */
     // ▶ 9-1 ※ 过时
     @Deprecated(since = "1.1")
@@ -646,8 +656,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Encodes this {@code String} into a sequence of bytes using the platform's default charset, storing the result into a new byte array.
      *
-     * <p> The behavior of this method when this string cannot be encoded in
-     * the default charset is unspecified.  The {@link java.nio.charset.CharsetEncoder} class should be used when more control over the encoding process is required.
+     * <p> The behavior of this method when this string cannot be encoded in the default charset is unspecified.
+     * The {@link java.nio.charset.CharsetEncoder} class should be used when more control over the encoding process is required.
      *
      * @return The resultant byte array
      *
@@ -662,8 +672,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Encodes this {@code String} into a sequence of bytes using the named charset, storing the result into a new byte array.
      *
-     * <p> The behavior of this method when this string cannot be encoded in
-     * the given charset is unspecified.  The {@link java.nio.charset.CharsetEncoder} class should be used when more control over the encoding process is required.
+     * <p> The behavior of this method when this string cannot be encoded in the given charset is unspecified.
+     * The {@link java.nio.charset.CharsetEncoder} class should be used when more control over the encoding process is required.
      *
      * @param charsetName The name of a supported {@linkplain Charset charset}
      *
@@ -683,8 +693,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Encodes this {@code String} into a sequence of bytes using the given {@linkplain Charset charset}, storing the result into a new byte array.
      *
-     * <p> This method always replaces malformed-input and unmappable-character
-     * sequences with this charset's default replacement byte array.  The {@link java.nio.charset.CharsetEncoder} class should be used when more control over the encoding process is required.
+     * <p> This method always replaces malformed-input and unmappable-character sequences with this charset's default replacement byte array.
+     * The {@link java.nio.charset.CharsetEncoder} class should be used when more control over the encoding process is required.
      *
      * @param charset The {@linkplain Charset} to be used to encode the {@code String}
      *
@@ -762,7 +772,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * Copy character bytes from this string into dst starting at dstBegin.
      * This method doesn't perform any range checking.
      *
-     * Invoker guarantees: dst is in UTF16 (inflate itself for asb), if two coders are different, and dst is big enough (range check)
+     * Invoker guarantees: dst is in UTF16 (inflate itself for asb),
+     * if two coders are different, and dst is big enough (range check)
      *
      * @param dstBegin the char index, not offset of byte[]
      * @param coder    the coder of dst[]
@@ -817,7 +828,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Copies characters from this string into the destination character array.
      * <p>
-     * The first character to be copied is at index {@code srcBegin}; the last character to be copied is at index {@code srcEnd-1} (thus the total number of characters to be copied is {@code srcEnd-srcBegin}). The characters are copied into the subarray of {@code dst} starting at index {@code dstBegin} and ending at index:
+     * The first character to be copied is at index {@code srcBegin}; the last character to be copied is at index {@code srcEnd-1}
+     * (thus the total number of characters to be copied is {@code srcEnd-srcBegin}).
+     * The characters are copied into the subarray of {@code dst} starting at index {@code dstBegin} and ending at index:
      * <blockquote><pre>
      *     dstBegin + (srcEnd-srcBegin) - 1
      * </pre></blockquote>
@@ -853,7 +866,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Converts this string to a new character array.
      *
-     * @return a newly allocated character array whose length is the length of this string and whose contents are initialized to contain the character sequence represented by this string.
+     * @return a newly allocated character array whose length is the length of this string
+     * and whose contents are initialized to contain the character sequence represented by this string.
      */
     // 将当前字符串的存储形式转换为char[]
     public char[] toCharArray() {
@@ -873,7 +887,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param obj an {@code Object}.
      *
-     * @return if the argument is {@code null}, then a string equal to {@code "null"}; otherwise, the value of {@code obj.toString()} is returned.
+     * @return if the argument is {@code null}, then a string equal to {@code "null"};
+     * otherwise, the value of {@code obj.toString()} is returned.
      *
      * @see Object#toString()
      */
@@ -882,7 +897,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Returns the string representation of the {@code char} array argument. The contents of the character array are copied; subsequent modification of the character array does not affect the returned string.
+     * Returns the string representation of the {@code char} array argument.
+     * The contents of the character array are copied;
+     * subsequent modification of the character array does not affect the returned string.
      *
      * @param data the character array.
      *
@@ -895,7 +912,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Returns the string representation of a specific subarray of the {@code char} array argument.
      * <p>
-     * The {@code offset} argument is the index of the first character of the subarray. The {@code count} argument specifies the length of the subarray. The contents of the subarray are copied; subsequent modification of the character array does not affect the returned string.
+     * The {@code offset} argument is the index of the first character of the subarray.
+     * The {@code count} argument specifies the length of the subarray.
+     * The contents of the subarray are copied; subsequent modification of the character array does not affect the returned string.
      *
      * @param data   the character array.
      * @param offset initial offset of the subarray.
@@ -903,7 +922,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return a {@code String} that contains the characters of the specified subarray of the character array.
      *
-     * @throws IndexOutOfBoundsException if {@code offset} is negative, or {@code count} is negative, or {@code offset+count} is larger than {@code data.length}.
+     * @throws IndexOutOfBoundsException if {@code offset} is negative,
+     * or {@code count} is negative, or {@code offset+count} is larger than {@code data.length}.
      */
     public static String valueOf(char data[], int offset, int count) {
         return new String(data, offset, count);
@@ -929,7 +949,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return a {@code String} that contains the characters of the specified subarray of the character array.
      *
-     * @throws IndexOutOfBoundsException if {@code offset} is negative, or {@code count} is negative, or {@code offset+count} is larger than {@code data.length}.
+     * @throws IndexOutOfBoundsException if {@code offset} is negative,
+     * or {@code count} is negative, or {@code offset+count} is larger than {@code data.length}.
      */
     public static String copyValueOf(char data[], int offset, int count) {
         return new String(data, offset, count);
@@ -940,7 +961,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param b a {@code boolean}.
      *
-     * @return if the argument is {@code true}, a string equal to {@code "true"} is returned; otherwise, a string equal to {@code "false"} is returned.
+     * @return if the argument is {@code true}, a string equal to {@code "true"} is returned;
+     * otherwise, a string equal to {@code "false"} is returned.
      */
     public static String valueOf(boolean b) {
         return b ? "true" : "false";
@@ -1057,7 +1079,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 查找Unicode符号下标 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Returns the index within this string of the first occurrence of the specified character. If a character with value {@code ch} occurs in the character sequence represented by this {@code String} object, then the index (in Unicode code units) of the first such occurrence is returned. For values of {@code ch} in the range from 0 to 0xFFFF (inclusive), this is the smallest value <i>k</i> such that:
+     * Returns the index within this string of the first occurrence of the specified character.
+     * If a character with value {@code ch} occurs in the character sequence represented by this {@code String} object,
+     * then the index (in Unicode code units) of the first such occurrence is returned.
+     * For values of {@code ch} in the range from 0 to 0xFFFF (inclusive), this is the smallest value <i>k</i> such that:
      * <blockquote><pre>
      * this.charAt(<i>k</i>) == ch
      * </pre></blockquote>
@@ -1069,7 +1094,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param ch a character (Unicode code point).
      *
-     * @return the index of the first occurrence of the character in the character sequence represented by this object, or {@code -1} if the character does not occur.
+     * @return the index of the first occurrence of the character in the character sequence represented by this object,
+     * or {@code -1} if the character does not occur.
      */
     // 返回ch在String的字节值value中第一次出现的下标
     public int indexOf(int ch) {
@@ -1079,7 +1105,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Returns the index within this string of the first occurrence of the specified character, starting the search at the specified index.
      * <p>
-     * If a character with value {@code ch} occurs in the character sequence represented by this {@code String} object at an index no smaller than {@code fromIndex}, then the index of the first such occurrence is returned. For values of {@code ch} in the range from 0 to 0xFFFF (inclusive), this is the smallest value <i>k</i> such that:
+     * If a character with value {@code ch} occurs in the character sequence
+     * represented by this {@code String} object at an index no smaller than {@code fromIndex}, then the index of the first such occurrence is returned.
+     * For values of {@code ch} in the range from 0 to 0xFFFF (inclusive), this is the smallest value <i>k</i> such that:
      * <blockquote><pre>
      * (this.charAt(<i>k</i>) == ch) {@code &&} (<i>k</i> &gt;= fromIndex)
      * </pre></blockquote>
@@ -1090,7 +1118,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * is true. In either case, if no such character occurs in this string at or after position {@code fromIndex}, then {@code -1} is returned.
      *
      * <p>
-     * There is no restriction on the value of {@code fromIndex}. If it is negative, it has the same effect as if it were zero: this entire string may be searched. If it is greater than the length of this string, it has the same effect as if it were equal to the length of this string: {@code -1} is returned.
+     * There is no restriction on the value of {@code fromIndex}.
+     * If it is negative, it has the same effect as if it were zero:
+     * this entire string may be searched. If it is greater than the length of this string,
+     * it has the same effect as if it were equal to the length of this string: {@code -1} is returned.
      *
      * <p>All indices are specified in {@code char} values
      * (Unicode code units).
@@ -1098,7 +1129,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param ch        a character (Unicode code point).
      * @param fromIndex the index to start the search from.
      *
-     * @return the index of the first occurrence of the character in the character sequence represented by this object that is greater than or equal to {@code fromIndex}, or {@code -1} if the character does not occur.
+     * @return the index of the first occurrence of the character in the character sequence represented by this object that is greater
+     * than or equal to {@code fromIndex}, or {@code -1} if the character does not occur.
      */
     // 返回ch在String的字节值value中第一次出现的下标（从某个索引开始搜索）
     public int indexOf(int ch, int fromIndex) {
@@ -1106,7 +1138,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Returns the index within this string of the last occurrence of the specified character. For values of {@code ch} in the range from 0 to 0xFFFF (inclusive), the index (in Unicode code units) returned is the largest value <i>k</i> such that:
+     * Returns the index within this string of the last occurrence of the specified character.
+     * For values of {@code ch} in the range from 0 to 0xFFFF (inclusive),
+     * the index (in Unicode code units) returned is the largest value <i>k</i> such that:
      * <blockquote><pre>
      * this.charAt(<i>k</i>) == ch
      * </pre></blockquote>
@@ -1114,11 +1148,13 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * <blockquote><pre>
      * this.codePointAt(<i>k</i>) == ch
      * </pre></blockquote>
-     * is true.  In either case, if no such character occurs in this string, then {@code -1} is returned.  The {@code String} is searched backwards starting at the last character.
+     * is true.  In either case, if no such character occurs in this string, then {@code -1} is returned.
+     * The {@code String} is searched backwards starting at the last character.
      *
      * @param ch a character (Unicode code point).
      *
-     * @return the index of the last occurrence of the character in the character sequence represented by this object, or {@code -1} if the character does not occur.
+     * @return the index of the last occurrence of the character in the character sequence represented by this object,
+     * or {@code -1} if the character does not occur.
      */
     // 返回ch在String的字节值value中最后一次出现的下标
     public int lastIndexOf(int ch) {
@@ -1126,7 +1162,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Returns the index within this string of the last occurrence of the specified character, searching backward starting at the specified index. For values of {@code ch} in the range from 0 to 0xFFFF (inclusive), the index returned is the largest value <i>k</i> such that:
+     * Returns the index within this string of the last occurrence of the specified character,
+     * searching backward starting at the specified index.
+     * For values of {@code ch} in the range from 0 to 0xFFFF (inclusive), the index returned is the largest value <i>k</i> such that:
      * <blockquote><pre>
      * (this.charAt(<i>k</i>) == ch) {@code &&} (<i>k</i> &lt;= fromIndex)
      * </pre></blockquote>
@@ -1140,13 +1178,20 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * (Unicode code units).
      *
      * @param ch        a character (Unicode code point).
-     * @param fromIndex the index to start the search from. There is no restriction on the value of {@code fromIndex}. If it is greater than or equal to the length of this string, it has the same effect as if it were equal to one less than the length of this string: this entire string may be searched. If it is negative, it has the same effect as if it were -1: -1 is returned.
+     * @param fromIndex the index to start the search from.
+     *                  There is no restriction on the value of {@code fromIndex}.
+     *                  If it is greater than or equal to the length of this string,
+     *                  it has the same effect as if it were equal to one less than the length of this string:
+     *                  this entire string may be searched. If it is negative, it has the same effect as if it were -1: -1 is returned.
      *
-     * @return the index of the last occurrence of the character in the character sequence represented by this object that is less than or equal to {@code fromIndex}, or {@code -1} if the character does not occur before that point.
+     * @return the index of the last occurrence of the character in the character sequence represented by this object
+     * that is less than or equal to {@code fromIndex}, or {@code -1} if the character does not occur before that point.
      */
     // 返回ch在String的字节值value中最后一次出现的下标
     public int lastIndexOf(int ch, int fromIndex) {
-        return isLatin1() ? StringLatin1.lastIndexOf(value, ch, fromIndex) : StringUTF16.lastIndexOf(value, ch, fromIndex);
+        return isLatin1()
+            ? StringLatin1.lastIndexOf(value, ch, fromIndex)
+            : StringUTF16.lastIndexOf(value, ch, fromIndex);
     }
     
     /*▲ 查找Unicode符号下标 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -1171,7 +1216,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     // 返回子串str在主串src中第一次出现的下标
     public int indexOf(String str) {
         if(coder() == str.coder()) {
-            return isLatin1() ? StringLatin1.indexOf(value, str.value) : StringUTF16.indexOf(value, str.value);
+            return isLatin1()
+                ? StringLatin1.indexOf(value, str.value)
+                : StringUTF16.indexOf(value, str.value);
         }
         if(coder() == LATIN1) {  // str.coder == UTF16
             return -1;
@@ -1192,7 +1239,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param str       the substring to search for.
      * @param fromIndex the index from which to start the search.
      *
-     * @return the index of the first occurrence of the specified substring, starting at the specified index, or {@code -1} if there is no such occurrence.
+     * @return the index of the first occurrence of the specified substring,
+     * starting at the specified index, or {@code -1} if there is no such occurrence.
      */
     // 返回子串str在当前主串String中第一次出现的下标（从主串fromIndex处向后搜索）
     public int indexOf(String str, int fromIndex) {
@@ -1200,7 +1248,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Code shared by String and AbstractStringBuilder to do searches. The source is the character array being searched, and the target is the string being searched for.
+     * Code shared by String and AbstractStringBuilder to do searches.
+     * The source is the character array being searched, and the target is the string being searched for.
      *
      * @param src       the characters being searched.
      * @param srcCoder  the coder of the source string.
@@ -1227,7 +1276,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             return -1;
         }
         if(srcCoder == tgtCoder) {
-            return srcCoder == LATIN1 ? StringLatin1.indexOf(src, srcCount, tgt, tgtCount, fromIndex) : StringUTF16.indexOf(src, srcCount, tgt, tgtCount, fromIndex);
+            return srcCoder == LATIN1
+                ? StringLatin1.indexOf(src, srcCount, tgt, tgtCount, fromIndex)
+                : StringUTF16.indexOf(src, srcCount, tgt, tgtCount, fromIndex);
         }
         if(srcCoder == LATIN1) {    //  && tgtCoder == UTF16
             return -1;
@@ -1237,7 +1288,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Returns the index within this string of the last occurrence of the specified substring.  The last occurrence of the empty string "" is considered to occur at the index value {@code this.length()}.
+     * Returns the index within this string of the last occurrence of the specified substring.
+     * The last occurrence of the empty string "" is considered to occur at the index value {@code this.length()}.
      *
      * <p>The returned index is the largest value {@code k} for which:
      * <pre>{@code
@@ -1267,7 +1319,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param str       the substring to search for.
      * @param fromIndex the index to start the search from.
      *
-     * @return the index of the last occurrence of the specified substring, searching backward from the specified index, or {@code -1} if there is no such occurrence.
+     * @return the index of the last occurrence of the specified substring,
+     * searching backward from the specified index, or {@code -1} if there is no such occurrence.
      */
     // 返回子串str在当前主串String中最后一次出现的下标（从主串fromIndex处向前搜索）
     public int lastIndexOf(String str, int fromIndex) {
@@ -1302,7 +1355,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             return fromIndex;
         }
         if(srcCoder == tgtCoder) {
-            return srcCoder == LATIN1 ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex) : StringUTF16.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex);
+            return srcCoder == LATIN1
+                ? StringLatin1.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex)
+                : StringUTF16.lastIndexOf(src, srcCount, tgt, tgtCount, fromIndex);
         }
         if(srcCoder == LATIN1) {    // && tgtCoder == UTF16
             return -1;
@@ -1334,7 +1389,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @return A formatted string
      *
      * @throws java.util.IllegalFormatException If a format string contains an illegal syntax,
-     * a format specifier that is incompatible with the given arguments, insufficient arguments given the format string, or other illegal conditions.
+     * a format specifier that is incompatible with the given arguments, insufficient arguments given the format string,
+     * or other illegal conditions.
      * For specification of all possible formatting errors,
      * see the <a href="../util/Formatter.html#detail">Details</a> section of the formatter class specification.
      * @see Formatter
@@ -1347,7 +1403,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Returns a formatted string using the specified locale, format string, and arguments.
      *
-     * @param l      The {@linkplain Locale locale} to apply during formatting.  If {@code l} is {@code null} then no localization is applied.
+     * @param l      The {@linkplain Locale locale} to apply during formatting.
+     *               If {@code l} is {@code null} then no localization is applied.
      * @param format A <a href="../util/Formatter.html#syntax">format string</a>
      * @param args   Arguments referenced by the format specifiers in the format string.
      *               If there are more arguments than format specifiers, the extra arguments are ignored.
@@ -1379,10 +1436,14 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 码点/码元 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Returns the character (Unicode code point) at the specified index. The index refers to {@code char} values (Unicode code units) and ranges from {@code 0} to {@link #length()}{@code  - 1}.
+     * Returns the character (Unicode code point) at the specified index.
+     * The index refers to {@code char} values (Unicode code units) and ranges from {@code 0} to {@link #length()}{@code  - 1}.
      *
      * <p> If the {@code char} value specified at the given index
-     * is in the high-surrogate range, the following index is less than the length of this {@code String}, and the {@code char} value at the following index is in the low-surrogate range, then the supplementary code point corresponding to this surrogate pair is returned. Otherwise, the {@code char} value at the given index is returned.
+     * is in the high-surrogate range, the following index is less than the length of this {@code String},
+     * and the {@code char} value at the following index is in the low-surrogate range,
+     * then the supplementary code point corresponding to this surrogate pair is returned.
+     * Otherwise, the {@code char} value at the given index is returned.
      *
      * @param index the index to the {@code char} values
      *
@@ -1543,7 +1604,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return the index within this {@code String}
      *
-     * @throws IndexOutOfBoundsException if {@code index} is negative or larger then the length of this {@code String}, or if {@code codePointOffset} is positive and the substring starting with {@code index} has fewer than {@code codePointOffset} code points, or if {@code codePointOffset} is negative and the substring before {@code index} has fewer than the absolute value of {@code codePointOffset} code points.
+     * @throws IndexOutOfBoundsException if {@code index} is negative or larger then the length of this {@code String},
+     * or if {@code codePointOffset} is positive and the substring starting with {@code index} has fewer than {@code codePointOffset} code points,
+     * or if {@code codePointOffset} is negative and the substring before {@code index} has fewer than the absolute value of {@code codePointOffset} code points.
      * @since 1.5
      *
      * 返回index偏移codePointOffset个Unicode符号后新的索引值
@@ -1624,7 +1687,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      */
     // 小写转换，需要指定语言环境
     public String toLowerCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toLowerCase(this, value, locale) : StringUTF16.toLowerCase(this, value, locale);
+        return isLatin1()
+            ? StringLatin1.toLowerCase(this, value, locale)
+            : StringUTF16.toLowerCase(this, value, locale);
     }
     
     /**
@@ -1633,7 +1698,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * <p>
      * <b>Note:</b> This method is locale sensitive, and may produce unexpected
      * results if used for strings that are intended to be interpreted locale independently.
-     * Examples are programming language identifiers, protocol keys, and HTML tags. For instance, {@code "TITLE".toLowerCase()} in a Turkish locale returns {@code "t\u005Cu0131tle"}, where '\u005Cu0131' is the LATIN SMALL LETTER DOTLESS I character.
+     * Examples are programming language identifiers, protocol keys, and HTML tags.
+     * For instance, {@code "TITLE".toLowerCase()} in a Turkish locale returns {@code "t\u005Cu0131tle"},
+     * where '\u005Cu0131' is the LATIN SMALL LETTER DOTLESS I character.
      * To obtain correct results for locale insensitive strings, use {@code toLowerCase(Locale.ROOT)}.
      *
      * @return the {@code String}, converted to lowercase.
@@ -1653,7 +1720,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * Examples of locale-sensitive and 1:M case mappings are in the following table.
      *
      * <table class="plain">
-     * <caption style="display:none">Examples of locale-sensitive and 1:M case mappings. Shows Language code of locale, lower case, upper case, and description.</caption>
+     * <caption style="display:none">Examples of locale-sensitive and 1:M case mappings.
+     * Shows Language code of locale, lower case, upper case, and description.</caption>
      * <thead>
      * <tr>
      * <th scope="col">Language Code of Locale</th>
@@ -1701,14 +1769,21 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      */
     // 大写转换，需要指定语言环境
     public String toUpperCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toUpperCase(this, value, locale) : StringUTF16.toUpperCase(this, value, locale);
+        return isLatin1()
+            ? StringLatin1.toUpperCase(this, value, locale)
+            : StringUTF16.toUpperCase(this, value, locale);
     }
     
     /**
-     * Converts all of the characters in this {@code String} to upper case using the rules of the default locale. This method is equivalent to {@code toUpperCase(Locale.getDefault())}.
+     * Converts all of the characters in this {@code String} to upper case using the rules of the default locale.
+     * This method is equivalent to {@code toUpperCase(Locale.getDefault())}.
      * <p>
      * <b>Note:</b> This method is locale sensitive, and may produce unexpected
-     * results if used for strings that are intended to be interpreted locale independently. Examples are programming language identifiers, protocol keys, and HTML tags. For instance, {@code "title".toUpperCase()} in a Turkish locale returns {@code "T\u005Cu0130TLE"}, where '\u005Cu0130' is the LATIN CAPITAL LETTER I WITH DOT ABOVE character. To obtain correct results for locale insensitive strings, use {@code toUpperCase(Locale.ROOT)}.
+     * results if used for strings that are intended to be interpreted locale independently.
+     * Examples are programming language identifiers, protocol keys, and HTML tags.
+     * For instance, {@code "title".toUpperCase()} in a Turkish locale returns {@code "T\u005Cu0130TLE"},
+     * where '\u005Cu0130' is the LATIN CAPITAL LETTER I WITH DOT ABOVE character.
+     * To obtain correct results for locale insensitive strings, use {@code toUpperCase(Locale.ROOT)}.
      *
      * @return the {@code String}, converted to uppercase.
      *
@@ -1726,7 +1801,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 求子串 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Returns a string that is a substring of this string. The substring begins with the character at the specified index and extends to the end of this string. <p> Examples:
+     * Returns a string that is a substring of this string.
+     * The substring begins with the character at the specified index and extends to the end of this string. <p> Examples:
      * <blockquote><pre>
      * "unhappy".substring(2) returns "happy"
      * "Harbison".substring(3) returns "bison"
@@ -1751,11 +1827,15 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         if(beginIndex == 0) {
             return this;
         }
-        return isLatin1() ? StringLatin1.newString(value, beginIndex, subLen) : StringUTF16.newString(value, beginIndex, subLen);
+        return isLatin1()
+            ? StringLatin1.newString(value, beginIndex, subLen)
+            : StringUTF16.newString(value, beginIndex, subLen);
     }
     
     /**
-     * Returns a string that is a substring of this string. The substring begins at the specified {@code beginIndex} and extends to the character at index {@code endIndex - 1}. Thus the length of the substring is {@code endIndex-beginIndex}.
+     * Returns a string that is a substring of this string.
+     * The substring begins at the specified {@code beginIndex} and extends to the character at index {@code endIndex - 1}.
+     * Thus the length of the substring is {@code endIndex-beginIndex}.
      * <p>
      * Examples:
      * <blockquote><pre>
@@ -1768,7 +1848,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return the specified substring.
      *
-     * @throws IndexOutOfBoundsException if the {@code beginIndex} is negative, or {@code endIndex} is larger than the length of this {@code String} object, or {@code beginIndex} is larger than {@code endIndex}.
+     * @throws IndexOutOfBoundsException if the {@code beginIndex} is negative,
+     * or {@code endIndex} is larger than the length of this {@code String} object,
+     * or {@code beginIndex} is larger than {@code endIndex}.
      */
     // 截取[beginIndex, endIndex)范围内的子串，按Unicode符号而非char截取
     public String substring(int beginIndex, int endIndex) {
@@ -1778,7 +1860,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         if(beginIndex == 0 && endIndex == length) {
             return this;
         }
-        return isLatin1() ? StringLatin1.newString(value, beginIndex, subLen) : StringUTF16.newString(value, beginIndex, subLen);
+        return isLatin1()
+            ? StringLatin1.newString(value, beginIndex, subLen)
+            : StringUTF16.newString(value, beginIndex, subLen);
     }
     
     /**
@@ -1799,7 +1883,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return the specified subsequence.
      *
-     * @throws IndexOutOfBoundsException if {@code beginIndex} or {@code endIndex} is negative, if {@code endIndex} is greater than {@code length()}, or if {@code beginIndex} is greater than {@code endIndex}
+     * @throws IndexOutOfBoundsException if {@code beginIndex} or {@code endIndex} is negative,
+     * if {@code endIndex} is greater than {@code length()}, or if {@code beginIndex} is greater than {@code endIndex}
      * @apiNote This method is defined so that the {@code String} class can implement the {@link CharSequence} interface.
      * @spec JSR-51
      * @since 1.4
@@ -1814,19 +1899,25 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * <a href="../util/regex/Pattern.html#sum">regular expression</a>.
      *
      * <p> The array returned by this method contains each substring of this
-     * string that is terminated by another substring that matches the given expression or is terminated by the end of the string.  The substrings in the array are in the order in which they occur in this string.  If the expression does not match any part of the input then the resulting array has just one element, namely this string.
+     * string that is terminated by another substring that matches the given expression or is terminated by the end of the string.
+     * The substrings in the array are in the order in which they occur in this string.
+     * If the expression does not match any part of the input then the resulting array has just one element, namely this string.
      *
      * <p> When there is a positive-width match at the beginning of this
-     * string then an empty leading substring is included at the beginning of the resulting array. A zero-width match at the beginning however never produces such empty leading substring.
+     * string then an empty leading substring is included at the beginning of the resulting array.
+     * A zero-width match at the beginning however never produces such empty leading substring.
      *
      * <p> The {@code limit} parameter controls the number of times the
      * pattern is applied and therefore affects the length of the resulting array.
      * <ul>
      * <li><p>
-     * If the <i>limit</i> is positive then the pattern will be applied at most <i>limit</i>&nbsp;-&nbsp;1 times, the array's length will be no greater than <i>limit</i>, and the array's last entry will contain all input beyond the last matched delimiter.</p></li>
+     * If the <i>limit</i> is positive then the pattern will be applied at most <i>limit</i>&nbsp;-&nbsp;1 times,
+     * the array's length will be no greater than <i>limit</i>,
+     * and the array's last entry will contain all input beyond the last matched delimiter.</p></li>
      *
      * <li><p>
-     * If the <i>limit</i> is zero then the pattern will be applied as many times as possible, the array can have any length, and trailing empty strings will be discarded.</p></li>
+     * If the <i>limit</i> is zero then the pattern will be applied as many times as possible,
+     * the array can have any length, and trailing empty strings will be discarded.</p></li>
      *
      * <li><p>
      * If the <i>limit</i> is negative then the pattern will be applied as many times as possible and the array can have any length.</p></li>
@@ -1895,40 +1986,50 @@ public final class String implements Serializable, Comparable<String>, CharSeque
          */
         char ch = 0;
         
-        if(((regex.length() == 1 && ".$|()[{^?*+\\".indexOf(ch = regex.charAt(0)) == -1) || (regex.length() == 2 && regex.charAt(0) == '\\' && (((ch = regex.charAt(1)) - '0') | ('9' - ch)) < 0 && ((ch - 'a') | ('z' - ch)) < 0 && ((ch - 'A') | ('Z' - ch)) < 0)) && (ch < Character.MIN_HIGH_SURROGATE || ch > Character.MAX_LOW_SURROGATE)) {
-            int off = 0;
-            int next = 0;
-            boolean limited = limit > 0;
-            ArrayList<String> list = new ArrayList<>();
-            while((next = indexOf(ch, off)) != -1) {
-                if(!limited || list.size() < limit - 1) {
-                    list.add(substring(off, next));
-                    off = next + 1;
-                } else {    // last one
-                    //assert (list.size() == limit - 1);
-                    int last = length();
-                    list.add(substring(off, last));
-                    off = last;
-                    break;
+        if((regex.length() == 1 && ".$|()[{^?*+\\".indexOf(ch = regex.charAt(0)) == -1)
+            || (regex.length() == 2
+                && regex.charAt(0) == '\\'
+                && (((ch = regex.charAt(1)) - '0') | ('9' - ch)) < 0
+                && ((ch - 'a') | ('z' - ch)) < 0
+                && ((ch - 'A') | ('Z' - ch)) < 0)
+        ) {
+            if(ch<Character.MIN_HIGH_SURROGATE || ch>Character.MAX_LOW_SURROGATE) {
+                int off = 0;
+                int next = 0;
+                boolean limited = limit>0;
+                ArrayList<String> list = new ArrayList<>();
+                while((next = indexOf(ch, off)) != -1) {
+                    if(!limited || list.size()<limit - 1) {
+                        list.add(substring(off, next));
+                        off = next + 1;
+                    } else {    // last one
+                        //assert (list.size() == limit - 1);
+                        int last = length();
+                        list.add(substring(off, last));
+                        off = last;
+                        break;
+                    }
                 }
-            }
-            // If no match was found, return this
-            if(off == 0)
-                return new String[]{this};
-            
-            // Add remaining segment
-            if(!limited || list.size() < limit)
-                list.add(substring(off, length()));
-            
-            // Construct result
-            int resultSize = list.size();
-            if(limit == 0) {
-                while(resultSize > 0 && list.get(resultSize - 1).length() == 0) {
-                    resultSize--;
+                // If no match was found, return this
+                if(off == 0)
+                    return new String[]{this};
+        
+                // Add remaining segment
+                if(!limited || list.size()<limit)
+                    list.add(substring(off, length()));
+        
+                // Construct result
+                int resultSize = list.size();
+                if(limit == 0) {
+                    while(resultSize>0 && list.get(resultSize - 1).length() == 0) {
+                        resultSize--;
+                    }
                 }
+                
+                String[] result = new String[resultSize];
+                
+                return list.subList(0, resultSize).toArray(result);
             }
-            String[] result = new String[resultSize];
-            return list.subList(0, resultSize).toArray(result);
         }
         
         return Pattern.compile(regex).split(this, limit);
@@ -1937,8 +2038,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Splits this string around matches of the given <a href="../util/regex/Pattern.html#sum">regular expression</a>.
      *
-     * <p> This method works as if by invoking the two-argument {@link
-     * #split(String, int) split} method with the given expression and a limit argument of zero.  Trailing empty strings are therefore not included in the resulting array.
+     * <p> This method works as if by invoking the two-argument {@link #split(String, int) split} method with the given expression and a limit argument of zero.
+     * Trailing empty strings are therefore not included in the resulting array.
      *
      * <p> The string {@code "boo:and:foo"}, for example, yields the following
      * results with these expressions:
@@ -1980,7 +2081,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 替换 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Replaces the first substring of this string that matches the given <a href="../util/regex/Pattern.html#sum">regular expression</a> with the given replacement.
+     * Replaces the first substring of this string that matches the given <a href="../util/regex/Pattern.html#sum">regular expression</a>
+     * with the given replacement.
      *
      * <p> An invocation of this method of the form
      * <i>str</i>{@code .replaceFirst(}<i>regex</i>{@code ,} <i>repl</i>{@code )}
@@ -1988,12 +2090,17 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * <blockquote>
      * <code>
-     * {@link Pattern}.{@link Pattern#compile compile}(<i>regex</i>).{@link Pattern#matcher(CharSequence) matcher}(<i>str</i>).{@link java.util.regex.Matcher#replaceFirst replaceFirst}(<i>repl</i>)
+     * {@link Pattern}.{@link Pattern#compile compile} (<i>regex</i>).
+     * {@link Pattern#matcher(CharSequence) matcher}(<i>str</i>).
+     * {@link java.util.regex.Matcher#replaceFirst replaceFirst}(<i>repl</i>)
      * </code>
      * </blockquote>
      *
      * <p>
-     * Note that backslashes ({@code \}) and dollar signs ({@code $}) in the replacement string may cause the results to be different than if it were being treated as a literal replacement string; see {@link java.util.regex.Matcher#replaceFirst}. Use {@link java.util.regex.Matcher#quoteReplacement} to suppress the special meaning of these characters, if desired.
+     * Note that backslashes ({@code \}) and dollar signs ({@code $}) in the replacement string may cause the results to be different
+     * than if it were being treated as a literal replacement string;
+     * see {@link java.util.regex.Matcher#replaceFirst}.
+     * Use {@link java.util.regex.Matcher#quoteReplacement} to suppress the special meaning of these characters, if desired.
      *
      * @param regex       the regular expression to which this string is to be matched
      * @param replacement the string to be substituted for the first match
@@ -2011,7 +2118,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Replaces each substring of this string that matches the given <a href="../util/regex/Pattern.html#sum">regular expression</a> with the given replacement.
+     * Replaces each substring of this string that matches the given <a href="../util/regex/Pattern.html#sum">regular expression</a>
+     * with the given replacement.
      *
      * <p> An invocation of this method of the form
      * <i>str</i>{@code .replaceAll(}<i>regex</i>{@code ,} <i>repl</i>{@code )}
@@ -2019,12 +2127,16 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * <blockquote>
      * <code>
-     * {@link Pattern}.{@link Pattern#compile compile}(<i>regex</i>).{@link Pattern#matcher(CharSequence) matcher}(<i>str</i>).{@link java.util.regex.Matcher#replaceAll replaceAll}(<i>repl</i>)
+     * {@link Pattern}.{@link Pattern#compile compile}(<i>regex</i>).{@link Pattern#matcher(CharSequence) matcher}(<i>str</i>).
+     * {@link java.util.regex.Matcher#replaceAll replaceAll}(<i>repl</i>)
      * </code>
      * </blockquote>
      *
      * <p>
-     * Note that backslashes ({@code \}) and dollar signs ({@code $}) in the replacement string may cause the results to be different than if it were being treated as a literal replacement string; see {@link java.util.regex.Matcher#replaceAll Matcher.replaceAll}. Use {@link java.util.regex.Matcher#quoteReplacement} to suppress the special meaning of these characters, if desired.
+     * Note that backslashes ({@code \}) and dollar signs ({@code $}) in the replacement string may cause the results to be different than
+     * if it were being treated as a literal replacement string;
+     * see {@link java.util.regex.Matcher#replaceAll Matcher.replaceAll}.
+     * Use {@link java.util.regex.Matcher#quoteReplacement} to suppress the special meaning of these characters, if desired.
      *
      * @param regex       the regular expression to which this string is to be matched
      * @param replacement the string to be substituted for each match
@@ -2042,7 +2154,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Replaces each substring of this string that matches the literal target sequence with the specified literal replacement sequence. The replacement proceeds from the beginning of the string to the end, for example, replacing "aa" with "b" in the string "aaa" will result in "ba" rather than "ab".
+     * Replaces each substring of this string that matches the literal target sequence with the specified literal replacement sequence.
+     * The replacement proceeds from the beginning of the string to the end, for example,
+     * replacing "aa" with "b" in the string "aaa" will result in "ba" rather than "ab".
      *
      * @param target      The sequence of char values to be replaced
      * @param replacement The replacement sequence of char values
@@ -2080,7 +2194,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Returns a string resulting from replacing all occurrences of {@code oldChar} in this string with {@code newChar}.
      * <p>
-     * If the character {@code oldChar} does not occur in the character sequence represented by this {@code String} object, then a reference to this {@code String} object is returned. Otherwise, a {@code String} object is returned that represents a character sequence identical to the character sequence represented by this {@code String} object, except that every occurrence of {@code oldChar} is replaced by an occurrence of {@code newChar}.
+     * If the character {@code oldChar} does not occur in the character sequence represented by this {@code String} object,
+     * then a reference to this {@code String} object is returned. Otherwise,
+     * a {@code String} object is returned that represents a character sequence identical to the character sequence represented by this {@code String} object,
+     * except that every occurrence of {@code oldChar} is replaced by an occurrence of {@code newChar}.
      * <p>
      * Examples:
      * <blockquote><pre>
@@ -2101,7 +2218,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     // 使用newChar替换String中的oldChar，并返回替换后的String
     public String replace(char oldChar, char newChar) {
         if(oldChar != newChar) {
-            String ret = isLatin1() ? StringLatin1.replace(value, oldChar, newChar) : StringUTF16.replace(value, oldChar, newChar);
+            String ret = isLatin1()
+                ? StringLatin1.replace(value, oldChar, newChar)
+                : StringUTF16.replace(value, oldChar, newChar);
             if(ret != null) {
                 return ret;
             }
@@ -2116,15 +2235,20 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 修剪 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Returns a string whose value is this string, with all leading and trailing space removed, where space is defined as any character whose codepoint is less than or equal to {@code 'U+0020'} (the space character).
+     * Returns a string whose value is this string, with all leading and trailing space removed,
+     * where space is defined as any character whose codepoint is less than or equal to {@code 'U+0020'} (the space character).
      * <p>
-     * If this {@code String} object represents an empty character sequence, or the first and last characters of character sequence represented by this {@code String} object both have codes that are not space (as defined above), then a reference to this {@code String} object is returned.
+     * If this {@code String} object represents an empty character sequence,
+     * or the first and last characters of character sequence represented by this {@code String} object both have codes that are not space (as defined above),
+     * then a reference to this {@code String} object is returned.
      * <p>
      * Otherwise, if all characters in this string are space (as defined above), then a  {@code String} object representing an empty string is returned.
      * <p>
      * Otherwise, let <i>k</i> be the index of the first character in the string whose code is not a space (as defined above) and let
      * <i>m</i> be the index of the last character in the string whose code
-     * is not a space (as defined above). A {@code String} object is returned, representing the substring of this string that begins with the character at index <i>k</i> and ends with the character at index <i>m</i>-that is, the result of {@code this.substring(k, m + 1)}.
+     * is not a space (as defined above). A {@code String} object is returned,
+     * representing the substring of this string that begins with the character at index <i>k</i> and ends with the character at index <i>m</i>-that is,
+     * the result of {@code this.substring(k, m + 1)}.
      * <p>
      * This method may be used to trim space (as defined above) from the beginning and end of a string.
      *
@@ -2139,9 +2263,13 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Returns a string whose value is this string, with all leading and trailing {@link Character#isWhitespace(int) white space} removed.
      * <p>
-     * If this {@code String} object represents an empty string, or if all code points in this string are {@link Character#isWhitespace(int) white space}, then an empty string is returned.
+     * If this {@code String} object represents an empty string,
+     * or if all code points in this string are {@link Character#isWhitespace(int) white space},
+     * then an empty string is returned.
      * <p>
-     * Otherwise, returns a substring of this string beginning with the first code point that is not a {@link Character#isWhitespace(int) white space} up to and including the last code point that is not a {@link Character#isWhitespace(int) white space}.
+     * Otherwise, returns a substring of this string beginning with the first code point
+     * that is not a {@link Character#isWhitespace(int) white space} up to and including the last code point
+     * that is not a {@link Character#isWhitespace(int) white space}.
      * <p>
      * This method may be used to strip {@link Character#isWhitespace(int) white space} from the beginning and end of a string.
      *
@@ -2152,16 +2280,21 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      */
     // 返回删掉首尾【空白符】的String
     public String strip() {
-        String ret = isLatin1() ? StringLatin1.strip(value) : StringUTF16.strip(value);
+        String ret = isLatin1()
+            ? StringLatin1.strip(value)
+            : StringUTF16.strip(value);
         return ret == null ? this : ret;
     }
     
     /**
      * Returns a string whose value is this string, with all leading {@link Character#isWhitespace(int) white space} removed.
      * <p>
-     * If this {@code String} object represents an empty string, or if all code points in this string are {@link Character#isWhitespace(int) white space}, then an empty string is returned.
+     * If this {@code String} object represents an empty string,
+     * or if all code points in this string are {@link Character#isWhitespace(int) white space},
+     * then an empty string is returned.
      * <p>
-     * Otherwise, returns a substring of this string beginning with the first code point that is not a {@link Character#isWhitespace(int) white space} up to to and including the last code point of this string.
+     * Otherwise, returns a substring of this string beginning with the first code point
+     * that is not a {@link Character#isWhitespace(int) white space} up to to and including the last code point of this string.
      * <p>
      * This method may be used to trim {@link Character#isWhitespace(int) white space} from the beginning of a string.
      *
@@ -2172,16 +2305,21 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      */
     // 返回去掉起始处连续空白符的String
     public String stripLeading() {
-        String ret = isLatin1() ? StringLatin1.stripLeading(value) : StringUTF16.stripLeading(value);
+        String ret = isLatin1()
+            ? StringLatin1.stripLeading(value)
+            : StringUTF16.stripLeading(value);
         return ret == null ? this : ret;
     }
     
     /**
      * Returns a string whose value is this string, with all trailing {@link Character#isWhitespace(int) white space} removed.
      * <p>
-     * If this {@code String} object represents an empty string, or if all characters in this string are {@link Character#isWhitespace(int) white space}, then an empty string is returned.
+     * If this {@code String} object represents an empty string,
+     * or if all characters in this string are {@link Character#isWhitespace(int) white space},
+     * then an empty string is returned.
      * <p>
-     * Otherwise, returns a substring of this string beginning with the first code point of this string up to and including the last code point that is not a {@link Character#isWhitespace(int) white space}.
+     * Otherwise, returns a substring of this string beginning with the first code point of this string up to
+     * and including the last code point that is not a {@link Character#isWhitespace(int) white space}.
      * <p>
      * This method may be used to trim {@link Character#isWhitespace(int) white space} from the end of a string.
      *
@@ -2192,7 +2330,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      */
     // 返回去掉结尾处连续空白符的String
     public String stripTrailing() {
-        String ret = isLatin1() ? StringLatin1.stripTrailing(value) : StringUTF16.stripTrailing(value);
+        String ret = isLatin1()
+            ? StringLatin1.stripTrailing(value)
+            : StringUTF16.stripTrailing(value);
         return ret == null ? this : ret;
     }
     
@@ -2213,7 +2353,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 拼接 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Returns a new String composed of copies of the {@code CharSequence elements} joined together with a copy of the specified {@code delimiter}.
+     * Returns a new String composed of copies of the {@code CharSequence elements} joined together
+     * with a copy of the specified {@code delimiter}.
      *
      * <blockquote>For example,
      * <pre>{@code
@@ -2245,7 +2386,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Returns a new {@code String} composed of copies of the {@code CharSequence elements} joined together with a copy of the specified {@code delimiter}.
+     * Returns a new {@code String} composed of copies of the {@code CharSequence elements} joined together
+     * with a copy of the specified {@code delimiter}.
      *
      * <blockquote>For example,
      * <pre>{@code
@@ -2285,7 +2427,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Concatenates the specified string to the end of this string.
      * <p>
-     * If the length of the argument string is {@code 0}, then this {@code String} object is returned. Otherwise, a {@code String} object is returned that represents a character sequence that is the concatenation of the character sequence represented by this {@code String} object and the character sequence represented by the argument string.<p> Examples:
+     * If the length of the argument string is {@code 0},
+     * then this {@code String} object is returned. Otherwise,
+     * a {@code String} object is returned that represents a character sequence
+     * that is the concatenation of the character sequence represented by this {@code String} object
+     * and the character sequence represented by the argument string.<p> Examples:
      * <blockquote><pre>
      * "cares".concat("s") returns "caress"
      * "to".concat("get").concat("her") returns "together"
@@ -2331,10 +2477,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param prefix  the prefix.
      * @param toffset where to begin looking in this string.
      *
-     * @return {@code true} if the character sequence represented by the argument is a prefix of the substring of this object starting at index {@code toffset}; {@code false} otherwise. The result is {@code false} if {@code toffset} is negative or greater than the length of this {@code String} object; otherwise the result is the same as the result of the expression
-     * <pre>
-     *          this.substring(toffset).startsWith(prefix)
-     *          </pre>
+     * @return {@code true} if the character sequence represented by the argument is a prefix of the substring of this object starting at index {@code toffset};
+     * {@code false} otherwise. The result is {@code false} if {@code toffset} is negative or greater than the length of this {@code String} object;
+     * otherwise the result is the same as the result of the expression
+     * <pre> this.substring(toffset).startsWith(prefix) </pre>
      */
     // 判断指定范围的字符串是否以prefix开头，从下标toffset处开始搜索
     public boolean startsWith(String prefix, int toffset) {
@@ -2373,7 +2519,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param prefix the prefix.
      *
-     * @return {@code true} if the character sequence represented by the argument is a prefix of the character sequence represented by this string; {@code false} otherwise. Note also that {@code true} will be returned if the argument is an empty string or is equal to this {@code String} object as determined by the {@link #equals(Object)} method.
+     * @return {@code true} if the character sequence represented by the argument is a prefix of the character sequence represented by this string;
+     * {@code false} otherwise.
+     * Note also that {@code true} will be returned if the argument is an empty string
+     * or is equal to this {@code String} object as determined by the {@link #equals(Object)} method.
      *
      * @since 1.0
      */
@@ -2387,7 +2536,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param suffix the suffix.
      *
-     * @return {@code true} if the character sequence represented by the argument is a suffix of the character sequence represented by this object; {@code false} otherwise. Note that the result will be {@code true} if the argument is the empty string or is equal to this {@code String} object as determined by the {@link #equals(Object)} method.
+     * @return {@code true} if the character sequence represented by the argument is a suffix of the character sequence represented by this object;
+     * {@code false} otherwise.
+     * Note that the result will be {@code true} if the argument is the empty string or is equal to this {@code String} object
+     * as determined by the {@link #equals(Object)} method.
      */
     // 判断字符串是否以suffix结尾
     public boolean endsWith(String suffix) {
@@ -2440,7 +2592,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 流 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Returns a stream of {@code int} zero-extending the {@code char} values from this sequence.  Any char which maps to a <a href="{@docRoot}/java.base/java/lang/Character.html#unicode">surrogate code point</a> is passed through uninterpreted.
+     * Returns a stream of {@code int} zero-extending the {@code char} values from this sequence.
+     * Any char which maps to a <a href="{@docRoot}/java.base/java/lang/Character.html#unicode">surrogate code point</a> is passed through uninterpreted.
      *
      * @return an IntStream of char values from this sequence
      *
@@ -2458,7 +2611,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Returns a stream of code point values from this sequence.  Any surrogate pairs encountered in the sequence are combined as if by {@linkplain Character#toCodePoint Character.toCodePoint} and the result is passed to the stream. Any other code units, including ordinary BMP characters, unpaired surrogates, and undefined code units, are zero-extended to {@code int} values which are then passed to the stream.
+     * Returns a stream of code point values from this sequence.
+     * Any surrogate pairs encountered in the sequence are combined as if by {@linkplain Character#toCodePoint Character.toCodePoint}
+     * and the result is passed to the stream. Any other code units, including ordinary BMP characters, unpaired surrogates,
+     * and undefined code units, are zero-extended to {@code int} values which are then passed to the stream.
      *
      * @return an IntStream of Unicode code points from this sequence
      *
@@ -2477,15 +2633,20 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Returns a stream of lines extracted from this string, separated by line terminators.
      * <p>
-     * A <i>line terminator</i> is one of the following: a line feed character {@code "\n"} (U+000A), a carriage return character {@code "\r"} (U+000D), or a carriage return followed immediately by a line feed {@code "\r\n"} (U+000D U+000A).
+     * A <i>line terminator</i> is one of the following:
+     * a line feed character {@code "\n"} (U+000A), a carriage return character {@code "\r"} (U+000D),
+     * or a carriage return followed immediately by a line feed {@code "\r\n"} (U+000D U+000A).
      * <p>
-     * A <i>line</i> is either a sequence of zero or more characters followed by a line terminator, or it is a sequence of one or more characters followed by the end of the string. A line does not include the line terminator.
+     * A <i>line</i> is either a sequence of zero or more characters followed by a line terminator,
+     * or it is a sequence of one or more characters followed by the end of the string.
+     * A line does not include the line terminator.
      * <p>
      * The stream returned by this method contains the lines from this string in the order in which they occur.
      *
      * @return the stream of lines extracted from this string
      *
-     * @apiNote This definition of <i>line</i> implies that an empty string has zero lines and that there is no empty line following a line terminator at the end of a string.
+     * @apiNote This definition of <i>line</i> implies that an empty string has zero lines
+     * and that there is no empty line following a line terminator at the end of a string.
      * @implNote This method provides better performance than split("\R") by supplying elements lazily and by faster search of new line terminators.
      * @since 11
      */
@@ -2501,13 +2662,26 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 比较 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Compares two strings lexicographically. The comparison is based on the Unicode value of each character in the strings. The character sequence represented by this {@code String} object is compared lexicographically to the character sequence represented by the argument string. The result is a negative integer if this {@code String} object lexicographically precedes the argument string. The result is a positive integer if this {@code String} object lexicographically follows the argument string. The result is zero if the strings are equal; {@code compareTo} returns {@code 0} exactly when the {@link #equals(Object)} method would return {@code true}.
+     * Compares two strings lexicographically.
+     * The comparison is based on the Unicode value of each character in the strings.
+     * The character sequence represented by this {@code String} object is compared lexicographically to the character sequence
+     * represented by the argument string.
+     * The result is a negative integer if this {@code String} object lexicographically precedes the argument string.
+     * The result is a positive integer if this {@code String} object lexicographically follows the argument string.
+     * The result is zero if the strings are equal; {@code compareTo} returns {@code 0} exactly when the {@link #equals(Object)} method would return {@code true}.
      * <p>
-     * This is the definition of lexicographic ordering. If two strings are different, then either they have different characters at some index that is a valid index for both strings, or their lengths are different, or both. If they have different characters at one or more index positions, let <i>k</i> be the smallest such index; then the string whose character at position <i>k</i> has the smaller value, as determined by using the {@code <} operator, lexicographically precedes the other string. In this case, {@code compareTo} returns the difference of the two character values at position {@code k} in the two string -- that is, the value:
+     * This is the definition of lexicographic ordering.
+     * If two strings are different, then either they have different characters at some index that is a valid index for both strings,
+     * or their lengths are different, or both.
+     * If they have different characters at one or more index positions, let <i>k</i> be the smallest such index;
+     * then the string whose character at position <i>k</i> has the smaller value, as determined by using the {@code <} operator,
+     * lexicographically precedes the other string.
+     * In this case, {@code compareTo} returns the difference of the two character values at position {@code k} in the two string -- that is, the value:
      * <blockquote><pre>
      * this.charAt(k)-anotherString.charAt(k)
      * </pre></blockquote>
-     * If there is no index position at which they differ, then the shorter string lexicographically precedes the longer string. In this case, {@code compareTo} returns the difference of the lengths of the strings -- that is, the value:
+     * If there is no index position at which they differ, then the shorter string lexicographically precedes the longer string.
+     * In this case, {@code compareTo} returns the difference of the lengths of the strings -- that is, the value:
      * <blockquote><pre>
      * this.length()-anotherString.length()
      * </pre></blockquote>
@@ -2517,7 +2691,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param anotherString the {@code String} to be compared.
      *
-     * @return the value {@code 0} if the argument string is equal to this string; a value less than {@code 0} if this string is lexicographically less than the string argument; and a value greater than {@code 0} if this string is lexicographically greater than the string argument.
+     * @return the value {@code 0} if the argument string is equal to this string;
+     * a value less than {@code 0} if this string is lexicographically less than the string argument;
+     * and a value greater than {@code 0} if this string is lexicographically greater than the string argument.
      */
     // 比较两个String
     public int compareTo(String anotherString) {
@@ -2534,13 +2710,19 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Compares two strings lexicographically, ignoring case differences. This method returns an integer whose sign is that of calling {@code compareTo} with normalized versions of the strings where case differences have been eliminated by calling {@code Character.toLowerCase(Character.toUpperCase(character))} on each character.
+     * Compares two strings lexicographically, ignoring case differences.
+     * This method returns an integer whose sign is that of calling {@code compareTo} with normalized versions
+     * of the strings where case differences have been eliminated by calling {@code Character.toLowerCase(Character.toUpperCase(character))}
+     * on each character.
      * <p>
-     * Note that this method does <em>not</em> take locale into account, and will result in an unsatisfactory ordering for certain locales. The {@link java.text.Collator} class provides locale-sensitive comparison.
+     * Note that this method does <em>not</em> take locale into account,
+     * and will result in an unsatisfactory ordering for certain locales.
+     * The {@link java.text.Collator} class provides locale-sensitive comparison.
      *
      * @param str the {@code String} to be compared.
      *
-     * @return a negative integer, zero, or a positive integer as the specified String is greater than, equal to, or less than this String, ignoring case considerations.
+     * @return a negative integer, zero, or a positive integer as the specified String is greater than,
+     * equal to, or less than this String, ignoring case considerations.
      *
      * @see java.text.Collator
      * @since 1.2
@@ -2553,7 +2735,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Tests if two string regions are equal.
      * <p>
-     * A substring of this {@code String} object is compared to a substring of the argument other. The result is true if these substrings represent identical character sequences. The substring of this {@code String} object to be compared begins at index {@code toffset} and has length {@code len}. The substring of other to be compared begins at index {@code ooffset} and has length {@code len}. The result is {@code false} if and only if at least one of the following is true:
+     * A substring of this {@code String} object is compared to a substring of the argument other.
+     * The result is true if these substrings represent identical character sequences.
+     * The substring of this {@code String} object to be compared begins at index {@code toffset} and has length {@code len}.
+     * The substring of other to be compared begins at index {@code ooffset} and has length {@code len}.
+     * The result is {@code false} if and only if at least one of the following is true:
      * <ul><li>{@code toffset} is negative.
      * <li>{@code ooffset} is negative.
      * <li>{@code toffset+len} is greater than the length of this
@@ -2573,7 +2759,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param ooffset the starting offset of the subregion in the string argument.
      * @param len     the number of characters to compare.
      *
-     * @return {@code true} if the specified subregion of this string exactly matches the specified subregion of the string argument; {@code false} otherwise.
+     * @return {@code true} if the specified subregion of this string exactly matches the specified subregion of the string argument;
+     * {@code false} otherwise.
      */
     // 比较两个String指定的区域
     public boolean regionMatches(int toffset, String other, int ooffset, int len) {
@@ -2617,7 +2804,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Tests if two string regions are equal.
      * <p>
-     * A substring of this {@code String} object is compared to a substring of the argument {@code other}. The result is {@code true} if these substrings represent character sequences that are the same, ignoring case if and only if {@code ignoreCase} is true. The substring of this {@code String} object to be compared begins at index {@code toffset} and has length {@code len}. The substring of {@code other} to be compared begins at index {@code ooffset} and has length {@code len}. The result is {@code false} if and only if at least one of the following is true:
+     * A substring of this {@code String} object is compared to a substring of the argument {@code other}.
+     * The result is {@code true} if these substrings represent character sequences that are the same,
+     * ignoring case if and only if {@code ignoreCase} is true.
+     * The substring of this {@code String} object to be compared begins at index {@code toffset} and has length {@code len}.
+     * The substring of {@code other} to be compared begins at index {@code ooffset} and has length {@code len}.
+     * The result is {@code false} if and only if at least one of the following is true:
      * <ul><li>{@code toffset} is negative.
      * <li>{@code ooffset} is negative.
      * <li>{@code toffset+len} is greater than the length of this
@@ -2638,7 +2830,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * </ul>
      *
      * <p>Note that this method does <em>not</em> take locale into account,
-     * and will result in unsatisfactory results for certain locales when {@code ignoreCase} is {@code true}.  The {@link java.text.Collator} class provides locale-sensitive comparison.
+     * and will result in unsatisfactory results for certain locales when {@code ignoreCase} is {@code true}.
+     * The {@link java.text.Collator} class provides locale-sensitive comparison.
      *
      * @param ignoreCase if {@code true}, ignore case when comparing characters.
      * @param toffset    the starting offset of the subregion in this string.
@@ -2646,7 +2839,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param ooffset    the starting offset of the subregion in the string argument.
      * @param len        the number of characters to compare.
      *
-     * @return {@code true} if the specified subregion of this string matches the specified subregion of the string argument; {@code false} otherwise. Whether the matching is exact or case insensitive depends on the {@code ignoreCase} argument.
+     * @return {@code true} if the specified subregion of this string matches the specified subregion of the string argument;
+     * {@code false} otherwise. Whether the matching is exact or case insensitive depends on the {@code ignoreCase} argument.
      */
     // 比较两个String指定的区域，是否忽略大小写由ignoreCase决定
     public boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len) {
@@ -2660,9 +2854,13 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         byte tv[] = value;
         byte ov[] = other.value;
         if(coder() == other.coder()) {
-            return isLatin1() ? StringLatin1.regionMatchesCI(tv, toffset, ov, ooffset, len) : StringUTF16.regionMatchesCI(tv, toffset, ov, ooffset, len);
+            return isLatin1()
+                ? StringLatin1.regionMatchesCI(tv, toffset, ov, ooffset, len)
+                : StringUTF16.regionMatchesCI(tv, toffset, ov, ooffset, len);
         }
-        return isLatin1() ? StringLatin1.regionMatchesCI_UTF16(tv, toffset, ov, ooffset, len) : StringUTF16.regionMatchesCI_Latin1(tv, toffset, ov, ooffset, len);
+        return isLatin1()
+            ? StringLatin1.regionMatchesCI_UTF16(tv, toffset, ov, ooffset, len)
+            : StringUTF16.regionMatchesCI_Latin1(tv, toffset, ov, ooffset, len);
     }
     
     /*▲ 比较 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -2672,7 +2870,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /*▼ 判等 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Compares this string to the specified object.  The result is {@code true} if and only if the argument is not {@code null} and is a {@code String} object that represents the same sequence of characters as this object.
+     * Compares this string to the specified object.
+     * The result is {@code true} if and only if the argument is not {@code null} and is a {@code String} object
+     * that represents the same sequence of characters as this object.
      *
      * <p>For finer-grained String comparison, refer to
      * {@link java.text.Collator}.
@@ -2692,14 +2892,18 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         if(anObject instanceof String) {
             String aString = (String) anObject;
             if(coder() == aString.coder()) {
-                return isLatin1() ? StringLatin1.equals(value, aString.value) : StringUTF16.equals(value, aString.value);
+                return isLatin1()
+                    ? StringLatin1.equals(value, aString.value)
+                    : StringUTF16.equals(value, aString.value);
             }
         }
         return false;
     }
     
     /**
-     * Compares this {@code String} to another {@code String}, ignoring case considerations.  Two strings are considered equal ignoring case if they are of the same length and corresponding characters in the two strings are equal ignoring case.
+     * Compares this {@code String} to another {@code String}, ignoring case considerations.
+     * Two strings are considered equal ignoring case if they are of the same length and corresponding characters
+     * in the two strings are equal ignoring case.
      *
      * <p> Two characters {@code c1} and {@code c2} are considered the same
      * ignoring case if at least one of the following is true:
@@ -2727,14 +2931,17 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     /**
-     * Compares this string to the specified {@code StringBuffer}.  The result is {@code true} if and only if this {@code String} represents the same sequence of characters as the specified {@code StringBuffer}. This method synchronizes on the {@code StringBuffer}.
+     * Compares this string to the specified {@code StringBuffer}.
+     * The result is {@code true} if and only if this {@code String} represents the same sequence of characters as the specified {@code StringBuffer}.
+     * This method synchronizes on the {@code StringBuffer}.
      *
      * <p>For finer-grained String comparison, refer to
      * {@link java.text.Collator}.
      *
      * @param sb The {@code StringBuffer} to compare this {@code String} against
      *
-     * @return {@code true} if this {@code String} represents the same sequence of characters as the specified {@code StringBuffer}, {@code false} otherwise
+     * @return {@code true} if this {@code String} represents the same sequence of characters as the specified {@code StringBuffer},
+     * {@code false} otherwise
      *
      * @since 1.4
      */
@@ -2871,9 +3078,13 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * <p>
      * A pool of strings, initially empty, is maintained privately by the class {@code String}.
      * <p>
-     * When the intern method is invoked, if the pool already contains a string equal to this {@code String} object as determined by the {@link #equals(Object)} method, then the string from the pool is returned. Otherwise, this {@code String} object is added to the pool and a reference to this {@code String} object is returned.
+     * When the intern method is invoked,
+     * if the pool already contains a string equal to this {@code String} object as determined by the {@link #equals(Object)} method,
+     * then the string from the pool is returned. Otherwise,
+     * this {@code String} object is added to the pool and a reference to this {@code String} object is returned.
      * <p>
-     * It follows that for any two strings {@code s} and {@code t}, {@code s.intern() == t.intern()} is {@code true} if and only if {@code s.equals(t)} is {@code true}.
+     * It follows that for any two strings {@code s} and {@code t}, {@code s.intern() == t.intern()}
+     * is {@code true} if and only if {@code s.equals(t)} is {@code true}.
      * <p>
      * All literal strings and string-valued constant expressions are interned. String literals are defined in section 3.10.5 of the
      * <cite>The Java&trade; Language Specification</cite>.
@@ -2991,7 +3202,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Check {@code offset}, {@code count} against {@code 0} and {@code length} bounds.
      *
-     * @throws StringIndexOutOfBoundsException If {@code offset} is negative, {@code count} is negative, or {@code offset} is greater than {@code length - count}
+     * @throws StringIndexOutOfBoundsException If {@code offset} is negative, {@code count} is negative,
+     * or {@code offset} is greater than {@code length - count}
      */
     static void checkBoundsOffCount(int offset, int count, int length) {
         if(offset < 0 || count < 0 || offset > length - count) {
@@ -3002,7 +3214,8 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     /**
      * Check {@code begin}, {@code end} against {@code 0} and {@code length} bounds.
      *
-     * @throws StringIndexOutOfBoundsException If {@code begin} is negative, {@code begin} is greater than {@code end}, or {@code end} is greater than {@code length}.
+     * @throws StringIndexOutOfBoundsException If {@code begin} is negative,
+     * {@code begin} is greater than {@code end}, or {@code end} is greater than {@code length}.
      */
     static void checkBoundsBeginEnd(int begin, int end, int length) {
         if(begin < 0 || begin > end || end > length) {
