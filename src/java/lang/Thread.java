@@ -25,13 +25,6 @@
 
 package java.lang;
 
-import jdk.internal.HotSpotIntrinsicCandidate;
-import jdk.internal.misc.TerminatingThreadLocal;
-import jdk.internal.reflect.CallerSensitive;
-import jdk.internal.reflect.Reflection;
-import sun.nio.ch.Interruptible;
-import sun.security.util.SecurityConstants;
-
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
@@ -43,6 +36,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.LockSupport;
+import jdk.internal.HotSpotIntrinsicCandidate;
+import jdk.internal.misc.TerminatingThreadLocal;
+import jdk.internal.misc.VM;
+import jdk.internal.reflect.CallerSensitive;
+import jdk.internal.reflect.Reflection;
+import sun.nio.ch.Interruptible;
+import sun.security.util.SecurityConstants;
 
 /**
  * A <i>thread</i> is a thread of execution in a program. The Java
@@ -213,13 +213,15 @@ public class Thread implements Runnable {
      */
     volatile Object parkBlocker;    // 此对象不为null时说明线程进入了park（阻塞）状态，参见LockSupport
     
-    private final Object blockerLock = new Object();    // 中断线程时临时使用的锁
-    
     /**
      * The object in which this thread is blocked in an interruptible I/O operation, if any.
      * The blocker's interrupt method should be invoked after setting this thread's interrupt status.
      */
-    private volatile Interruptible blocker; // 中断线程时会回调此接口对象的interrupt(Thread)方法
+    // 线程中断回调标记，设置此标记后，可在线程被中断时调用标记对象的回调方法
+    private volatile Interruptible blocker;
+    
+    // 临时使用的锁，在设置/获取线程中断回调标记时使用
+    private final Object blockerLock = new Object();    // 中断线程时
     
     // 除非显式设置，否则为空，用于处理未捕获的异常的接口对象
     private volatile UncaughtExceptionHandler uncaughtExceptionHandler;
@@ -238,6 +240,29 @@ public class Thread implements Runnable {
     // 从父线程继承而来的键值对组合<ThreadLocal, Object>，由InheritableThreadLocal维护
     ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;
     
+    
+    /*
+     * The following three initially uninitialized fields are exclusively managed by class java.util.concurrent.ThreadLocalRandom.
+     * These fields are used to build the high-performance PRNGs in the concurrent code, and we can not risk accidental false sharing.
+     * Hence, the fields are isolated with @Contended.
+     *
+     * 以下三个字段由java.util.concurrent.ThreadLocalRandom管理
+     * 这些字段用于在并发代码中构建高性能非重复随机值
+     */
+    
+    /** The current seed for a ThreadLocalRandom */
+    @jdk.internal.vm.annotation.Contended("tlr")
+    long threadLocalRandomSeed; // 随机数种子
+    /** Probe hash value; nonzero if threadLocalRandomSeed initialized */
+    @jdk.internal.vm.annotation.Contended("tlr")
+    int threadLocalRandomProbe; // 探测值（如果ThreadLocalRandom已经初始化，则该值不为空）
+    /** Secondary seed isolated from public ThreadLocalRandom sequence */
+    @jdk.internal.vm.annotation.Contended("tlr")
+    int threadLocalRandomSecondarySeed; // 辅助种子
+    
+    
+    /* 以下字段由虚拟机设置 */
+    
     /** Fields reserved for exclusive use by the JVM */
     private boolean stillborn = false;
     
@@ -245,23 +270,6 @@ public class Thread implements Runnable {
     private long nativeParkEventPointer;
     
     private long eetop;
-    
-    
-    /*
-     * The following three initially uninitialized fields are exclusively managed by class java.util.concurrent.ThreadLocalRandom.
-     * These fields are used to build the high-performance PRNGs in the concurrent code, and we can not risk accidental false sharing.
-     * Hence, the fields are isolated with @Contended.
-     */
-    
-    /** The current seed for a ThreadLocalRandom */
-    @jdk.internal.vm.annotation.Contended("tlr")
-    long threadLocalRandomSeed;
-    /** Probe hash value; nonzero if threadLocalRandomSeed initialized */
-    @jdk.internal.vm.annotation.Contended("tlr")
-    int threadLocalRandomProbe;
-    /** Secondary seed isolated from public ThreadLocalRandom sequence */
-    @jdk.internal.vm.annotation.Contended("tlr")
-    int threadLocalRandomSecondarySeed;
     
     
     
@@ -1044,7 +1052,6 @@ public class Thread implements Runnable {
      * 2.2 如果在第8行main线程没有抢到锁，那么t1继续执行，main线程继续努力抢锁，在执行效果上相当于回到了步骤2
      * 3 综上，只要t1线程存活，main线程就掉在循环陷阱里，即使抢到了执行权，也待在循环中出不来，这使得线程t2一直没法被调用（一直执行不到第14行）
      * 4 直到t1执行完，即t1死亡，main线程跳出循环陷阱，此时开始执行线程t2
-     *
      */
     public final synchronized void join(long millis) throws InterruptedException {
         long base = System.currentTimeMillis();
@@ -1186,14 +1193,16 @@ public class Thread implements Runnable {
      * @revised 6.0
      * @spec JSR-51
      */
-    // 中断线程
+    // 中断线程（只是给线程预设一个标记，不是立即让线程停下来）
     public void interrupt() {
+        // 如果由别的线程对当前线程发起中断
         if(this != Thread.currentThread()) {
             checkAccess();
             
             // thread may be blocked in an I/O operation
             synchronized(blockerLock) {
                 Interruptible b = blocker;
+                // 如果存在线程中断回调标记
                 if(b != null) {
                     interrupt0();  // set interrupt status
                     b.interrupt(this);
@@ -1204,6 +1213,17 @@ public class Thread implements Runnable {
         
         // set interrupt status
         interrupt0();
+    }
+    
+    /**
+     * Set the blocker field; invoked via jdk.internal.misc.SharedSecrets from java.nio code
+     */
+    // 为当前线程设置一个线程中断回调标记，以便在线程被中断时调用该标记的回调方法
+    static void blockedOn(Interruptible b) {
+        Thread me = Thread.currentThread();
+        synchronized(me.blockerLock) {
+            me.blocker = b;
+        }
     }
     
     /**
@@ -1220,7 +1240,7 @@ public class Thread implements Runnable {
      * @revised 6.0
      * @see #interrupted()
      */
-    // （非静态）测试线程是否已经中断。线程的中断状态不受影响。
+    // （非静态）测试线程是否已经中断，线程的中断状态不受影响
     public boolean isInterrupted() {
         return isInterrupted(false);
     }
@@ -1243,7 +1263,7 @@ public class Thread implements Runnable {
      * @revised 6.0
      * @see #isInterrupted()
      */
-    // （静态）测试当前线程是否已经中断。线程的中断状态会被清除。
+    // （静态）测试当前线程是否已经中断，线程的中断状态会被清除
     public static boolean interrupted() {
         return currentThread().isInterrupted(true);
     }
@@ -1269,7 +1289,7 @@ public class Thread implements Runnable {
     // 返回当前线程所处的状态
     public State getState() {
         // get current thread state
-        return jdk.internal.misc.VM.toThreadState(threadStatus);
+        return VM.toThreadState(threadStatus);
     }
     
     
@@ -1796,18 +1816,9 @@ public class Thread implements Runnable {
      * code patterns in a more beneficial way.
      * @since 9
      */
+    // 标记线程处于忙等待(busy-waiting)状态，减小线程上下文切换的开销，参见StampedLock
     @HotSpotIntrinsicCandidate
     public static void onSpinWait() {
-    }
-    
-    /**
-     * Set the blocker field; invoked via jdk.internal.misc.SharedSecrets from java.nio code
-     */
-    static void blockedOn(Interruptible b) {
-        Thread me = Thread.currentThread();
-        synchronized(me.blockerLock) {
-            me.blocker = b;
-        }
     }
     
     /**
@@ -1861,28 +1872,28 @@ public class Thread implements Runnable {
                 return Boolean.FALSE;
             }
         });
-        return result.booleanValue();
+        return result;
     }
     
     /**
-     * Verifies that this (possibly subclass) instance can be constructed
-     * without violating security constraints: the subclass must not override
-     * security-sensitive non-final methods, or else the
-     * "enableContextClassLoaderOverride" RuntimePermission is checked.
+     * Verifies that this (possibly subclass) instance can be constructed without violating security constraints:
+     * the subclass must not override security-sensitive non-final methods,
+     * or else the "enableContextClassLoaderOverride" RuntimePermission is checked.
      */
     private static boolean isCCLOverridden(Class<?> cl) {
-        if(cl == Thread.class)
+        if(cl == Thread.class) {
             return false;
+        }
         
         processQueue(Caches.subclassAuditsQueue, Caches.subclassAudits);
         WeakClassKey key = new WeakClassKey(cl, Caches.subclassAuditsQueue);
         Boolean result = Caches.subclassAudits.get(key);
         if(result == null) {
-            result = Boolean.valueOf(auditSubclass(cl));
+            result = auditSubclass(cl);
             Caches.subclassAudits.putIfAbsent(key, result);
         }
         
-        return result.booleanValue();
+        return result;
     }
     
     /**
