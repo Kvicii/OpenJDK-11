@@ -555,14 +555,14 @@ public final class Character implements java.io.Serializable, Comparable<Charact
      *
      * @since 1.5
      */
-    public static final char MIN_HIGH_SURROGATE = '\uD800'; // 高代理区[U+D800~U+DBFF]的下限
+    public static final char MIN_HIGH_SURROGATE = '\uD800'; // 高代理区[U+D800~U+DBFF]的左边界
     /**
      * The maximum value of a <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit"> Unicode high-surrogate code unit</a> in the UTF-16 encoding, constant {@code '\u005CuDBFF'}.
      * A high-surrogate is also known as a <i>leading-surrogate</i>.
      *
      * @since 1.5
      */
-    public static final char MAX_HIGH_SURROGATE = '\uDBFF'; // 高代理区[U+D800~U+DBFF]的上限
+    public static final char MAX_HIGH_SURROGATE = '\uDBFF'; // 高代理区[U+D800~U+DBFF]的右边界
     
     /**
      * The minimum value of a <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit"> Unicode low-surrogate code unit</a> in the UTF-16 encoding, constant {@code '\u005CuDC00'}.
@@ -570,14 +570,14 @@ public final class Character implements java.io.Serializable, Comparable<Charact
      *
      * @since 1.5
      */
-    public static final char MIN_LOW_SURROGATE  = '\uDC00'; // 低代理区[U+DC00~U+DFFF]的下限
+    public static final char MIN_LOW_SURROGATE  = '\uDC00'; // 低代理区[U+DC00~U+DFFF]的左边界
     /**
      * The maximum value of a <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit"> Unicode low-surrogate code unit</a> in the UTF-16 encoding, constant {@code '\u005CuDFFF'}.
      * A low-surrogate is also known as a <i>trailing-surrogate</i>.
      *
      * @since 1.5
      */
-    public static final char MAX_LOW_SURROGATE  = '\uDFFF'; // 低代理区[U+DC00~U+DFFF]的上限
+    public static final char MAX_LOW_SURROGATE  = '\uDFFF'; // 低代理区[U+DC00~U+DFFF]的右边界
     
     /**
      * The minimum value of a Unicode surrogate code unit in the UTF-16 encoding, constant {@code '\u005CuD800'}.
