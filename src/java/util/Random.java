@@ -77,7 +77,19 @@ import jdk.internal.misc.Unsafe;
  * @author  Frank Yellin
  * @since   1.0
  */
-// 伪随机数生成器
+/*
+ * 伪随机数生成器
+ *
+ * 线程安全
+ * 适用于大多数单线程场景
+ *
+ * 在多线程中，生成的随机数比较集中，且生成性能欠佳（存在线程争用）
+ * 所以，该类更适用于单线程环境，在多线程中应当使用ThreadLocalRandom
+ *
+ *   支持使用系统时间计算的原始种子
+ *   支持自定义原始种子
+ * 不支持使用安全种子
+ */
 public class Random implements Serializable {
     
     /** use serialVersionUID from JDK 1.1 for interoperability */
@@ -222,6 +234,11 @@ public class Random implements Serializable {
         }
     }
     
+    // 重置种子
+    private void resetSeed(long seedVal) {
+        unsafe.putObjectVolatile(this, seedOffset, new AtomicLong(seedVal));
+    }
+    
     /*▲ 种子 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
@@ -349,44 +366,6 @@ public class Random implements Serializable {
                 ;
         }
         return r;
-    }
-    
-    /**
-     * Generates the next pseudorandom number. Subclasses should
-     * override this, as this is used by all other methods.
-     *
-     * <p>The general contract of {@code next} is that it returns an
-     * {@code int} value and if the argument {@code bits} is between
-     * {@code 1} and {@code 32} (inclusive), then that many low-order
-     * bits of the returned value will be (approximately) independently
-     * chosen bit values, each of which is (approximately) equally
-     * likely to be {@code 0} or {@code 1}. The method {@code next} is
-     * implemented by class {@code Random} by atomically updating the seed to
-     * <pre>{@code (seed * 0x5DEECE66DL + 0xBL) & ((1L << 48) - 1)}</pre>
-     * and returning
-     * <pre>{@code (int)(seed >>> (48 - bits))}.</pre>
-     *
-     * This is a linear congruential pseudorandom number generator, as
-     * defined by D. H. Lehmer and described by Donald E. Knuth in
-     * <i>The Art of Computer Programming,</i> Volume 2:
-     * <i>Seminumerical Algorithms</i>, section 3.2.1.
-     *
-     * @param bits random bits
-     *
-     * @return the next pseudorandom value from this random number
-     * generator's sequence
-     *
-     * @since 1.1
-     */
-    // 随机均匀地生成一个int值，该值范围是[0, 2^bits -1)，正数
-    protected int next(int bits) {
-        long oldseed, nextseed;
-        AtomicLong seed = this.seed;
-        do {
-            oldseed = seed.get();
-            nextseed = (oldseed * multiplier + addend) & mask;
-        } while(!seed.compareAndSet(oldseed, nextseed));
-        return (int) (nextseed >>> (48 - bits));
     }
     
     /**
@@ -592,8 +571,48 @@ public class Random implements Serializable {
         return next(1) != 0;
     }
     
-    /*▲ 生成伪随机数 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /**
+     * Generates the next pseudorandom number. Subclasses should
+     * override this, as this is used by all other methods.
+     *
+     * <p>The general contract of {@code next} is that it returns an
+     * {@code int} value and if the argument {@code bits} is between
+     * {@code 1} and {@code 32} (inclusive), then that many low-order
+     * bits of the returned value will be (approximately) independently
+     * chosen bit values, each of which is (approximately) equally
+     * likely to be {@code 0} or {@code 1}. The method {@code next} is
+     * implemented by class {@code Random} by atomically updating the seed to
+     * <pre>{@code (seed * 0x5DEECE66DL + 0xBL) & ((1L << 48) - 1)}</pre>
+     * and returning
+     * <pre>{@code (int)(seed >>> (48 - bits))}.</pre>
+     *
+     * This is a linear congruential pseudorandom number generator, as
+     * defined by D. H. Lehmer and described by Donald E. Knuth in
+     * <i>The Art of Computer Programming,</i> Volume 2:
+     * <i>Seminumerical Algorithms</i>, section 3.2.1.
+     *
+     * @param bits random bits
+     *
+     * @return the next pseudorandom value from this random number
+     * generator's sequence
+     *
+     * @since 1.1
+     */
+    // 随机均匀地生成一个int值，该值范围是[0, 2^bits -1)，正数
+    protected int next(int bits) {
+        long oldseed, nextseed;
+        AtomicLong seed = this.seed;
+        
+        // 原子地生成随机数
+        do {
+            oldseed = seed.get();
+            nextseed = (oldseed * multiplier + addend) & mask;
+        } while(!seed.compareAndSet(oldseed, nextseed));
+        
+        return (int) (nextseed >>> (48 - bits));
+    }
     
+    /*▲ 生成伪随机数 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -612,9 +631,32 @@ public class Random implements Serializable {
      * ints(Long.MAX_VALUE)}.
      * @since 1.8
      */
-    // 该流可以生成Long.MAX_VALUE个随机int值
+    // 返回的流可以生成Long.MAX_VALUE个随机int值
     public IntStream ints() {
         return StreamSupport.intStream(new RandomIntsSpliterator(this, 0L, Long.MAX_VALUE, Integer.MAX_VALUE, 0), false);
+    }
+    
+    /**
+     * Returns a stream producing the given {@code streamSize} number of
+     * pseudorandom {@code int} values.
+     *
+     * <p>A pseudorandom {@code int} value is generated as if it's the result of
+     * calling the method {@link #nextInt()}.
+     *
+     * @param streamSize the number of values to generate
+     *
+     * @return a stream of pseudorandom {@code int} values
+     *
+     * @throws IllegalArgumentException if {@code streamSize} is
+     *                                  less than zero
+     * @since 1.8
+     */
+    // 返回的流可以生成streamSize个随机int值
+    public IntStream ints(long streamSize) {
+        if(streamSize<0L) {
+            throw new IllegalArgumentException(BadSize);
+        }
+        return StreamSupport.intStream(new RandomIntsSpliterator(this, 0L, streamSize, Integer.MAX_VALUE, 0), false);
     }
     
     /**
@@ -651,35 +693,12 @@ public class Random implements Serializable {
      * ints(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      * @since 1.8
      */
-    // 该流可以生成Long.MAX_VALUE个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
     public IntStream ints(int randomNumberOrigin, int randomNumberBound) {
         if(randomNumberOrigin >= randomNumberBound) {
             throw new IllegalArgumentException(BadRange);
         }
         return StreamSupport.intStream(new RandomIntsSpliterator(this, 0L, Long.MAX_VALUE, randomNumberOrigin, randomNumberBound), false);
-    }
-    
-    /**
-     * Returns a stream producing the given {@code streamSize} number of
-     * pseudorandom {@code int} values.
-     *
-     * <p>A pseudorandom {@code int} value is generated as if it's the result of
-     * calling the method {@link #nextInt()}.
-     *
-     * @param streamSize the number of values to generate
-     *
-     * @return a stream of pseudorandom {@code int} values
-     *
-     * @throws IllegalArgumentException if {@code streamSize} is
-     *                                  less than zero
-     * @since 1.8
-     */
-    // 该流可以生成streamSize个随机int值
-    public IntStream ints(long streamSize) {
-        if(streamSize<0L) {
-            throw new IllegalArgumentException(BadSize);
-        }
-        return StreamSupport.intStream(new RandomIntsSpliterator(this, 0L, streamSize, Integer.MAX_VALUE, 0), false);
     }
     
     /**
@@ -716,7 +735,7 @@ public class Random implements Serializable {
      *                                  is greater than or equal to {@code randomNumberBound}
      * @since 1.8
      */
-    // 该流可以生成streamSize个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
     public IntStream ints(long streamSize, int randomNumberOrigin, int randomNumberBound) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BadSize);
@@ -740,9 +759,32 @@ public class Random implements Serializable {
      * longs(Long.MAX_VALUE)}.
      * @since 1.8
      */
-    // 该流可以生成Long.MAX_VALUE个随机long值
+    // 返回的流可以生成Long.MAX_VALUE个随机long值
     public LongStream longs() {
         return StreamSupport.longStream(new RandomLongsSpliterator(this, 0L, Long.MAX_VALUE, Long.MAX_VALUE, 0L), false);
+    }
+    
+    /**
+     * Returns a stream producing the given {@code streamSize} number of
+     * pseudorandom {@code long} values.
+     *
+     * <p>A pseudorandom {@code long} value is generated as if it's the result
+     * of calling the method {@link #nextLong()}.
+     *
+     * @param streamSize the number of values to generate
+     *
+     * @return a stream of pseudorandom {@code long} values
+     *
+     * @throws IllegalArgumentException if {@code streamSize} is
+     *                                  less than zero
+     * @since 1.8
+     */
+    // 返回的流可以生成streamSize个随机long值
+    public LongStream longs(long streamSize) {
+        if(streamSize<0L) {
+            throw new IllegalArgumentException(BadSize);
+        }
+        return StreamSupport.longStream(new RandomLongsSpliterator(this, 0L, streamSize, Long.MAX_VALUE, 0L), false);
     }
     
     /**
@@ -784,33 +826,12 @@ public class Random implements Serializable {
      * longs(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      * @since 1.8
      */
-    // 该流可以生成Long.MAX_VALUE个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
     public LongStream longs(long randomNumberOrigin, long randomNumberBound) {
-        if(randomNumberOrigin >= randomNumberBound)
+        if(randomNumberOrigin >= randomNumberBound) {
             throw new IllegalArgumentException(BadRange);
+        }
         return StreamSupport.longStream(new RandomLongsSpliterator(this, 0L, Long.MAX_VALUE, randomNumberOrigin, randomNumberBound), false);
-    }
-    
-    /**
-     * Returns a stream producing the given {@code streamSize} number of
-     * pseudorandom {@code long} values.
-     *
-     * <p>A pseudorandom {@code long} value is generated as if it's the result
-     * of calling the method {@link #nextLong()}.
-     *
-     * @param streamSize the number of values to generate
-     *
-     * @return a stream of pseudorandom {@code long} values
-     *
-     * @throws IllegalArgumentException if {@code streamSize} is
-     *                                  less than zero
-     * @since 1.8
-     */
-    // 该流可以生成streamSize个随机long值
-    public LongStream longs(long streamSize) {
-        if(streamSize<0L)
-            throw new IllegalArgumentException(BadSize);
-        return StreamSupport.longStream(new RandomLongsSpliterator(this, 0L, streamSize, Long.MAX_VALUE, 0L), false);
     }
     
     /**
@@ -852,12 +873,14 @@ public class Random implements Serializable {
      *                                  is greater than or equal to {@code randomNumberBound}
      * @since 1.8
      */
-    // 该流可以生成streamSize个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
     public LongStream longs(long streamSize, long randomNumberOrigin, long randomNumberBound) {
-        if(streamSize<0L)
+        if(streamSize<0L) {
             throw new IllegalArgumentException(BadSize);
-        if(randomNumberOrigin >= randomNumberBound)
+        }
+        if(randomNumberOrigin >= randomNumberBound) {
             throw new IllegalArgumentException(BadRange);
+        }
         return StreamSupport.longStream(new RandomLongsSpliterator(this, 0L, streamSize, randomNumberOrigin, randomNumberBound), false);
     }
     
@@ -875,9 +898,33 @@ public class Random implements Serializable {
      * doubles(Long.MAX_VALUE)}.
      * @since 1.8
      */
-    // 该流可以生成Long.MAX_VALUE个随机double值，取值范围是[0, 1)
+    // 返回的流可以生成Long.MAX_VALUE个随机double值，取值范围是[0, 1)
     public DoubleStream doubles() {
         return StreamSupport.doubleStream(new RandomDoublesSpliterator(this, 0L, Long.MAX_VALUE, Double.MAX_VALUE, 0.0), false);
+    }
+    
+    /**
+     * Returns a stream producing the given {@code streamSize} number of
+     * pseudorandom {@code double} values, each between zero
+     * (inclusive) and one (exclusive).
+     *
+     * <p>A pseudorandom {@code double} value is generated as if it's the result
+     * of calling the method {@link #nextDouble()}.
+     *
+     * @param streamSize the number of values to generate
+     *
+     * @return a stream of {@code double} values
+     *
+     * @throws IllegalArgumentException if {@code streamSize} is
+     *                                  less than zero
+     * @since 1.8
+     */
+    // 返回的流可以生成streamSize个随机double值，取值范围是[0, 1)
+    public DoubleStream doubles(long streamSize) {
+        if(streamSize<0L) {
+            throw new IllegalArgumentException(BadSize);
+        }
+        return StreamSupport.doubleStream(new RandomDoublesSpliterator(this, 0L, streamSize, Double.MAX_VALUE, 0.0), false);
     }
     
     /**
@@ -908,34 +955,12 @@ public class Random implements Serializable {
      * doubles(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      * @since 1.8
      */
-    // 该流可以生成Long.MAX_VALUE个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
     public DoubleStream doubles(double randomNumberOrigin, double randomNumberBound) {
-        if(!(randomNumberOrigin<randomNumberBound))
+        if(!(randomNumberOrigin<randomNumberBound)) {
             throw new IllegalArgumentException(BadRange);
+        }
         return StreamSupport.doubleStream(new RandomDoublesSpliterator(this, 0L, Long.MAX_VALUE, randomNumberOrigin, randomNumberBound), false);
-    }
-    
-    /**
-     * Returns a stream producing the given {@code streamSize} number of
-     * pseudorandom {@code double} values, each between zero
-     * (inclusive) and one (exclusive).
-     *
-     * <p>A pseudorandom {@code double} value is generated as if it's the result
-     * of calling the method {@link #nextDouble()}.
-     *
-     * @param streamSize the number of values to generate
-     *
-     * @return a stream of {@code double} values
-     *
-     * @throws IllegalArgumentException if {@code streamSize} is
-     *                                  less than zero
-     * @since 1.8
-     */
-    // 该流可以生成streamSize个随机double值，取值范围是[0, 1)
-    public DoubleStream doubles(long streamSize) {
-        if(streamSize<0L)
-            throw new IllegalArgumentException(BadSize);
-        return StreamSupport.doubleStream(new RandomDoublesSpliterator(this, 0L, streamSize, Double.MAX_VALUE, 0.0), false);
     }
     
     /**
@@ -967,12 +992,14 @@ public class Random implements Serializable {
      *                                  is greater than or equal to {@code randomNumberBound}
      * @since 1.8
      */
-    // 该流可以生成streamSize个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
     public DoubleStream doubles(long streamSize, double randomNumberOrigin, double randomNumberBound) {
-        if(streamSize<0L)
+        if(streamSize<0L) {
             throw new IllegalArgumentException(BadSize);
-        if(!(randomNumberOrigin<randomNumberBound))
+        }
+        if(!(randomNumberOrigin<randomNumberBound)) {
             throw new IllegalArgumentException(BadRange);
+        }
         return StreamSupport.doubleStream(new RandomDoublesSpliterator(this, 0L, streamSize, randomNumberOrigin, randomNumberBound), false);
     }
     
@@ -1018,12 +1045,6 @@ public class Random implements Serializable {
     
     /*▲ 序列化 ████████████████████████████████████████████████████████████████████████████████┛ */
     
-    
-    
-    // 重置种子
-    private void resetSeed(long seedVal) {
-        unsafe.putObjectVolatile(this, seedOffset, new AtomicLong(seedVal));
-    }
     
     
     /**
