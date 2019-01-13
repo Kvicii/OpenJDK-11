@@ -1,0 +1,2137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":recycle: 【java.util.Random】 添加Random测试用例">
+      <change beforePath="$PROJECT_DIR$/src/java/io/Externalizable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/Externalizable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/Serializable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/Serializable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Class.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ClassLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Enum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ModuleLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ModuleLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/NamedPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/NamedPackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Package.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Package.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/Annotation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/Annotation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/Documented.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/Documented.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/ElementType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/ElementType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/Inherited.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/Inherited.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/Repeatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/Repeatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/Retention.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/Retention.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/RetentionPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/RetentionPolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/annotation/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/annotation/Target.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/module/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/module/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/module/ModuleDescriptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/module/ModuleDescriptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/module/ModuleReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/module/ModuleReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/module/ModuleReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/module/ModuleReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/module/ResolvedModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/module/ResolvedModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/AccessibleObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/AccessibleObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedArrayType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedArrayType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedParameterizedType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedParameterizedType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedTypeVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedTypeVariable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedWildcardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/AnnotatedWildcardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Array.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Constructor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Executable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Executable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/GenericArrayType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/GenericArrayType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/GenericDeclaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/GenericDeclaration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/InvocationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/InvocationHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Method.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Modifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Modifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Parameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Parameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/ParameterizedType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/ParameterizedType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Proxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/ProxyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/ProxyGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Type.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/TypeVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/TypeVariable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/WildcardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/WildcardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/security/SecureClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/security/SecureClassLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Calendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Date.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Enumeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Enumeration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Iterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Iterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/ListResourceBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/ListResourceBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Locale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Locale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Properties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Properties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/PropertyResourceBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/PropertyResourceBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/ResourceBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/ResourceBundle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/ServiceLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/ServiceLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/SplittableRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/SplittableRandom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/StringTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/StringTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/ConcurrentSkipListMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/ConcurrentSkipListMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/CountDownLatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/CountDownLatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/CyclicBarrier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/CyclicBarrier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/Semaphore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/Semaphore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/ThreadLocalRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/ThreadLocalRandom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/TimeUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/TimeUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicBoolean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicBoolean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicInteger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicInteger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicLong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicLong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractOwnableSynchronizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractOwnableSynchronizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractQueuedSynchronizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractQueuedSynchronizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/Lock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/Lock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/LockSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/LockSupport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/ReadWriteLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/ReadWriteLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/ReentrantLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/ReentrantLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/ReentrantReadWriteLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/ReentrantReadWriteLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/locks/StampedLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/locks/StampedLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/spi/AbstractResourceBundleProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/spi/AbstractResourceBundleProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/spi/ResourceBundleControlProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/spi/ResourceBundleControlProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/spi/ResourceBundleProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/spi/ResourceBundleProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/AbstractProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/AbstractProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/Filer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/Filer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/Messager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/Messager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/ProcessingEnvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/ProcessingEnvironment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/Processor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/Processor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/RoundEnvironment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/RoundEnvironment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/SupportedAnnotationTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/SupportedAnnotationTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/SupportedOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/SupportedOptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/annotation/processing/SupportedSourceVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/annotation/processing/SupportedSourceVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/AnnotatedConstruct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/AnnotatedConstruct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/SourceVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/SourceVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/AnnotationMirror.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/AnnotationMirror.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/AnnotationValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/AnnotationValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/AnnotationValueVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/AnnotationValueVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/ElementKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/ElementKind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/ElementVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/ElementVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/ExecutableElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/ExecutableElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/Modifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/Modifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/ModuleElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/ModuleElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/Name.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/Name.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/NestingKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/NestingKind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/PackageElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/PackageElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/Parameterizable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/Parameterizable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/QualifiedNameable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/QualifiedNameable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/TypeElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/TypeElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/TypeParameterElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/TypeParameterElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/element/VariableElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/element/VariableElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/ArrayType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/ArrayType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/DeclaredType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/DeclaredType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/ErrorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/ErrorType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/ExecutableType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/ExecutableType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/IntersectionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/IntersectionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/NoType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/NoType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/NullType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/NullType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/PrimitiveType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/PrimitiveType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/ReferenceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/ReferenceType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/TypeKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/TypeKind.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/TypeMirror.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/TypeMirror.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/TypeVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/TypeVariable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/TypeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/TypeVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/UnionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/UnionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/type/WildcardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/type/WildcardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractAnnotationValueVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractElementVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/Elements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/Elements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleAnnotationValueVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleElementVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/lang/model/util/Types.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/lang/model/util/Types.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/tools/FileObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/tools/FileObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/tools/JavaFileObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/tools/JavaFileObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/javax/tools/StandardLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/javax/tools/StandardLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/loader/AbstractClassLoaderValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/loader/AbstractClassLoaderValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/loader/BootLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/loader/BootLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/loader/BuiltinClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/loader/BuiltinClassLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/loader/ClassLoaderValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/loader/ClassLoaderValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/loader/ClassLoaders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/loader/ClassLoaders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/module/ModuleLoaderMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/module/ModuleLoaderMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/module/ServicesCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/module/ServicesCatalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/reflect/Reflection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/reflect/Reflection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/util/PropertyResourceBundleCharset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/util/PropertyResourceBundleCharset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/util/ResourceBundleEnumeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/util/ResourceBundleEnumeration.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="OpenJDK-11" />
+  </component>
+  <component name="FileColors">
+    <fileColor scope="OpenJDK-11" color="99ffcc" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>【callerModule】</find>
+      <find>搜索资源的入口</find>
+      <find>Control.INSTANCE</find>
+      <find>China</find>
+      <find>ResourceBundleControlProvider</find>
+      <find>getTypeParameters</find>
+      <find>getElementValuesWithDefaults</find>
+      <find>筛选出满足</find>
+      <find>compareAndSet</find>
+      <find>排他锁</find>
+      <find>tid</find>
+      <find>消费</find>
+      <find>[独占模式Node]</find>
+      <find>setHead(</find>
+      <find>许可证</find>
+      <find>// 判断是否超时</find>
+      <find>（不是头结点），并等待被唤醒</find>
+      <find>WeakReference</find>
+      <find>写锁</find>
+      <find>读锁</find>
+      <find>节点</find>
+      <find>没有排队的结点</find>
+      <find>threadLocalRandomSecondarySeed</find>
+      <find>parkBlocker</find>
+      <find>待分割的字符串</find>
+      <find>标点</find>
+      <find>获取一个</find>
+      <find>AutoBoxCacheMax</find>
+      <find>该流可以生成</find>
+      <find>ThreadLocal</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>子类</replace>
+      <replace>Float</replace>
+      <replace>Double</replace>
+      <replace>ASB</replace>
+      <replace>fromIndex, toIndex</replace>
+      <replace>StringBuffer</replace>
+      <replace>StringBuilder</replace>
+      <replace>期望值</replace>
+      <replace>服务实现者</replace>
+      <replace>类路径下（未命名模块）</replace>
+      <replace>资源加载类位于</replace>
+      <replace>验证资源是否有效</replace>
+      <replace>定义</replace>
+      <replace>className</replace>
+      <replace>moduleName</replace>
+      <replace>packageName</replace>
+      <replace>获取包名</replace>
+      <replace>申请加载资源的类</replace>
+      <replace>只能在未命名module中被调用</replace>
+      <replace>筛选出符合</replace>
+      <replace>独占锁</replace>
+      <replace>// 判断是否超时（因为可能是半道被唤醒的）</replace>
+      <replace>结点</replace>
+      <replace>（不是头结点），并准备去抢锁</replace>
+      <replace>&quot;读&quot;锁</replace>
+      <replace>点</replace>
+      <replace>待解析字符串</replace>
+      <replace>引号</replace>
+      <replace>生成一个</replace>
+      <replace>返回的流可以生成</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="adfdd6a9-f3fe-4e74-9ceb-b2aba128b28b" />
+  </component>
+  <component name="HierarchyBrowserManager">
+    <option name="SCOPE" value="All" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/Name.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/QualifiedNameable.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/Parameterizable.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/TypeParameterElement.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/NestingKind.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/ElementKind.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner7.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner8.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner9.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementScanner6.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor6.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor7.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor8.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor9.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/TypeElement.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/Element.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/VariableElement.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/element/ModuleElement.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/WildcardType.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/TypeMirror.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/TypeVisitor.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor6.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor7.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor8.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor9.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor6.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor7.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor8.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/SimpleTypeVisitor9.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor6.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor7.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor8.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/TypeKindVisitor9.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/TypeVariable.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/NullType.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/UnionType.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/IntersectionType.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/TypeKind.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/ErrorType.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/NoType.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/DeclaredType.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/type/ExecutableType.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/Class.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementFilter.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/Elements.java" />
+        <option value="$PROJECT_DIR$/src/javax/lang/model/util/Types.java" />
+        <option value="$PROJECT_DIR$/src/javax/tools/JavaFileObject.java" />
+        <option value="$PROJECT_DIR$/src/javax/tools/FileObject.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/AbstractStringBuilder.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/StringBuilder.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/StringBuffer.java" />
+        <option value="$PROJECT_DIR$/src/jdk/internal/reflect/Reflection.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/reflect/Proxy.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/Module.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/module/ModuleReader.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/module/ModuleDescriptor.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/module/ModuleReference.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/module/ResolvedModule.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/module/Configuration.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/ModuleLayer.java" />
+        <option value="$PROJECT_DIR$/src/jdk/internal/module/ModuleLoaderMap.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractOwnableSynchronizer.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/StringLatin1.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/StringUTF16.java" />
+        <option value="$PROJECT_DIR$/src/java/util/Date.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/Condition.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/ReadWriteLock.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/Lock.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/Semaphore.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/AbstractQueuedSynchronizer.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/ReentrantLock.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/Math.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/StrictMath.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/TimeUnit.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/CountDownLatch.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/CyclicBarrier.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/ConcurrentSkipListMap.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/ReentrantReadWriteLock.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/StringCoding.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/StampedLock.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/Character.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/String.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/LockSupport.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/Thread.java" />
+        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
+        <option value="$PROJECT_DIR$/src/sun/nio/ch/Interruptible.java" />
+        <option value="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest01.java" />
+        <option value="$PROJECT_DIR$/src/java/lang/Integer.java" />
+        <option value="$PROJECT_DIR$/src/jdk/internal/loader/ClassLoaders.java" />
+        <option value="$PROJECT_DIR$/src/jdk/internal/loader/BuiltinClassLoader.java" />
+        <option value="$PROJECT_DIR$/src/java/util/Random.java" />
+        <option value="$PROJECT_DIR$/src/TAG.java" />
+        <option value="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" />
+        <option value="$PROJECT_DIR$/src/java/util/StringTokenizer.java" />
+        <option value="$PROJECT_DIR$/src/java/util/SplittableRandom.java" />
+        <option value="$PROJECT_DIR$/src/java/util/concurrent/ThreadLocalRandom.java" />
+        <option value="$PROJECT_DIR$/已阅代码清单_按功能排序.md" />
+        <option value="$PROJECT_DIR$/测试文件清单.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/org/graalvm/compiler/api/test/Graal.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBowerSettings">
+    <node-interpreter value="project" />
+    <bower-package value="" />
+    <bower.json value="" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="OpenJDK-11" pattern="(file:src/java/lang/Void.java||file:src/java/lang/CharacterData.java||file:src/java/lang/CharacterDataLatin1.java||file:src/java/text/CharacterIterator.java||file:src/java/text/StringCharacterIterator.java||file:src/sun/text/CompactByteArray.java||file:src/sun/text/SupplementaryCharacterData.java||file:src/sun/text/RuleBasedBreakIterator.java||file:src/java/text/BreakIterator.java||file:src/java/lang/ConditionalSpecialCasing.java||file:src/sun/util/PreHashedMap.java||file:src/sun/nio/cs/StandardCharsets.java||file:src/sun/nio/cs/ext/ExtendedCharsets.java||file:src/sun/nio/cs/ext/AbstractCharsetProvider.java||file:src/java/nio/charset/spi/CharsetProvider.java||file:src/java/lang/Readable.java||file:src/java/nio/ByteOrder.java||file:src/jdk/internal/util/ArraysSupport.java||file:src/java/nio/BufferMismatch.java||file:src/sun/misc/Unsafe.java||file:src/jdk/internal/misc/Unsafe.java||file:src/java/lang/ref/Reference.java||file:src/java/lang/ref/ReferenceQueue.java||file:src/java/lang/ref/SoftReference.java||file:src/java/lang/ref/WeakReference.java||file:src/java/lang/ref/PhantomReference.java||file:src/java/lang/ref/FinalReference.java||file:src/java/lang/ref/Finalizer.java||file:src/jdk/internal/ref/Cleaner.java||file:src/jdk/internal/ref/CleanerFactory.java||file:src/jdk/internal/ref/CleanerImpl.java||file:src/jdk/internal/ref/PhantomCleanable.java||file:src/jdk/internal/ref/SoftCleanable.java||file:src/jdk/internal/ref/WeakCleanable.java||file:src/java/lang/ref/Cleaner.java||file:src/java/util/concurrent/ThreadFactory.java||file:src/jdk/internal/misc/InnocuousThread.java||file:src/java/io/FileCleanable.java||file:src/java/io/FileDescriptor.java||file:src/java/lang/Comparable.java||file:src/java/nio/Bits.java||file:src/java/lang/Runnable.java||file:src/java/util/Tripwire.java||file[OpenJDK-11]:src/java/util/function/*)&amp;&amp;!file:src/java/util/function/package-info.java||file:src/java/util/stream/Tripwire.java||file:src/java/util/StringJoiner.java||file:src/java/util/Objects.java||file:src/jdk/internal/util/Preconditions.java||file:src/java/util/Comparators.java||file:src/java/util/Comparator.java||file:src/java/nio/CharBuffer.java||file:src/java/nio/StringCharBuffer.java||file:src/java/nio/HeapCharBuffer.java||file:src/java/nio/HeapCharBufferR.java||file:src/java/nio/DirectCharBufferS.java||file:src/java/nio/DirectCharBufferRS.java||file:src/java/nio/DirectCharBufferU.java||file:src/java/nio/DirectCharBufferRU.java||file:src/java/nio/ByteBufferAsCharBufferB.java||file:src/java/nio/ByteBufferAsCharBufferRB.java||file:src/java/nio/ByteBufferAsCharBufferL.java||file:src/java/nio/ByteBufferAsCharBufferRL.java||file:src/java/nio/ShortBuffer.java||file:src/java/nio/HeapShortBuffer.java||file:src/java/nio/HeapShortBufferR.java||file:src/java/nio/DirectShortBufferS.java||file:src/java/nio/DirectShortBufferRS.java||file:src/java/nio/DirectShortBufferU.java||file:src/java/nio/DirectShortBufferRU.java||file:src/java/nio/ByteBufferAsShortBufferB.java||file:src/java/nio/ByteBufferAsShortBufferRB.java||file:src/java/nio/ByteBufferAsShortBufferL.java||file:src/java/nio/ByteBufferAsShortBufferRL.java||file:src/java/nio/IntBuffer.java||file:src/java/nio/HeapIntBuffer.java||file:src/java/nio/HeapIntBufferR.java||file:src/java/nio/DirectIntBufferS.java||file:src/java/nio/DirectIntBufferRS.java||file:src/java/nio/DirectIntBufferU.java||file:src/java/nio/DirectIntBufferRU.java||file:src/java/nio/ByteBufferAsIntBufferB.java||file:src/java/nio/ByteBufferAsIntBufferRB.java||file:src/java/nio/ByteBufferAsIntBufferL.java||file:src/java/nio/ByteBufferAsIntBufferRL.java||file:src/java/nio/LongBuffer.java||file:src/java/nio/HeapLongBuffer.java||file:src/java/nio/HeapLongBufferR.java||file:src/java/nio/DirectLongBufferS.java||file:src/java/nio/DirectLongBufferRS.java||file:src/java/nio/DirectLongBufferU.java||file:src/java/nio/DirectLongBufferRU.java||file:src/java/nio/ByteBufferAsLongBufferB.java||file:src/java/nio/ByteBufferAsLongBufferRB.java||file:src/java/nio/ByteBufferAsLongBufferL.java||file:src/java/nio/ByteBufferAsLongBufferRL.java||file:src/java/nio/FloatBuffer.java||file:src/java/nio/HeapFloatBuffer.java||file:src/java/nio/HeapFloatBufferR.java||file:src/java/nio/DirectFloatBufferS.java||file:src/java/nio/DirectFloatBufferRS.java||file:src/java/nio/DirectFloatBufferU.java||file:src/java/nio/DirectFloatBufferRU.java||file:src/java/nio/ByteBufferAsFloatBufferB.java||file:src/java/nio/ByteBufferAsFloatBufferRB.java||file:src/java/nio/ByteBufferAsFloatBufferL.java||file:src/java/nio/ByteBufferAsFloatBufferRL.java||file:src/java/nio/DoubleBuffer.java||file:src/java/nio/HeapDoubleBuffer.java||file:src/java/nio/HeapDoubleBufferR.java||file:src/java/nio/DirectDoubleBufferS.java||file:src/java/nio/DirectDoubleBufferRS.java||file:src/java/nio/DirectDoubleBufferU.java||file:src/java/nio/DirectDoubleBufferRU.java||file:src/java/nio/ByteBufferAsDoubleBufferB.java||file:src/java/nio/ByteBufferAsDoubleBufferRB.java||file:src/java/nio/ByteBufferAsDoubleBufferL.java||file:src/java/nio/ByteBufferAsDoubleBufferRL.java||file:src/java/nio/ByteBuffer.java||file:src/java/nio/MappedByteBuffer.java||file:src/java/nio/DirectByteBuffer.java||file:src/java/nio/DirectByteBufferR.java||file:src/java/nio/HeapByteBuffer.java||file:src/java/nio/HeapByteBufferR.java||file:src/java/nio/Buffer.java||file:src/sun/nio/ch/DirectBuffer.java||file:src/java/util/stream/BaseStream.java||file:src/java/util/stream/Stream.java||file:src/java/util/stream/PipelineHelper.java||file:src/java/util/stream/AbstractPipeline.java||file:src/java/util/stream/ReferencePipeline.java||file:src/java/util/stream/StreamShape.java||file:src/java/util/stream/StreamSupport.java||file:src/java/util/Spliterator.java||file:src/java/util/Spliterators.java||file:src/java/util/stream/Sink.java||file:src/java/util/stream/AbstractSpinedBuffer.java||file:src/java/util/stream/SpinedBuffer.java||file:src/java/util/stream/Node.java||file:src/java/util/stream/Nodes.java||file:src/java/util/Optional.java||file:src/java/util/stream/Collector.java||file:src/java/util/stream/Collectors.java||file:src/java/util/stream/IntStream.java||file:src/java/util/stream/LongStream.java||file:src/java/util/stream/DoubleStream.java||file:src/java/util/stream/IntPipeline.java||file:src/java/util/stream/LongPipeline.java||file:src/java/util/stream/DoublePipeline.java||file:src/java/util/stream/Streams.java||file:src/java/util/PrimitiveIterator.java||file:src/java/util/IntSummaryStatistics.java||file:src/java/util/LongSummaryStatistics.java||file:src/java/util/DoubleSummaryStatistics.java||file:src/java/util/OptionalInt.java||file:src/java/util/OptionalLong.java||file:src/java/util/OptionalDouble.java||file:src/java/nio/CharBufferSpliterator.java||file:src/java/lang/CharSequence.java||file:src/java/nio/charset/StandardCharsets.java||file:src/java/nio/charset/Charset.java||file:src/java/nio/charset/CharsetEncoder.java||file:src/java/nio/charset/CharsetDecoder.java||file:src/java/nio/charset/CoderResult.java||file:src/java/nio/charset/CodingErrorAction.java||file:src/sun/nio/cs/ThreadLocalCoders.java||file:src/java/lang/Appendable.java||file:src/java/util/Arrays.java||file:src/java/lang/System.java||file:src/java/lang/StringLatin1.java||file:src/java/lang/StringUTF16.java||file:src/java/lang/StringCoding.java||file:src/java/lang/StringBuilder.java||file:src/java/lang/StringBuffer.java||file:src/java/lang/String.java||file:src/java/lang/AbstractStringBuilder.java||file:src/java/lang/Character.java||file:src/java/lang/Object.java||file:src/java/lang/Thread.java||file:src/java/lang/ThreadGroup.java||file:src/java/lang/ThreadLocal.java||file:src/java/lang/InheritableThreadLocal.java||file:src/java/lang/StackTraceElement.java||file:src/jdk/internal/misc/TerminatingThreadLocal.java||file:src/jdk/internal/misc/SharedSecrets.java||file:src/java/lang/Byte.java||file:src/java/lang/Short.java||file:src/java/lang/Integer.java||file:src/java/lang/Long.java||file:src/java/lang/Float.java||file:src/java/lang/Double.java||file:src/java/lang/Boolean.java||file:src/java/lang/Number.java||file:src/java/lang/Enum.java||file:src/java/util/concurrent/atomic/AtomicBoolean.java||file:src/java/util/concurrent/atomic/AtomicInteger.java||file:src/java/util/concurrent/atomic/AtomicLong.java||file:src/java/util/Random.java||file:src/java/lang/Math.java||file:src/java/lang/StrictMath.java||file:src/jdk/internal/math/FloatConsts.java||file:src/jdk/internal/math/DoubleConsts.java||file:src/java/math/BigInteger.java||file:src/java/math/BigDecimal.java||file:src/java/io/Serializable.java||file:src/java/io/Externalizable.java||file:src/java/io/ObjectStreamField.java||file:src/jdk/internal/loader/AbstractClassLoaderValue.java||file:src/jdk/internal/loader/BootLoader.java||file:src/jdk/internal/loader/ClassLoaderValue.java||file:src/jdk/internal/loader/ClassLoaders.java||file:src/jdk/internal/loader/BuiltinClassLoader.java||file:src/java/lang/reflect/Array.java||file:src/java/lang/reflect/Constructor.java||file:src/java/lang/reflect/Executable.java||file:src/java/lang/reflect/Field.java||file:src/java/lang/reflect/GenericArrayType.java||file:src/java/lang/reflect/GenericDeclaration.java||file:src/java/lang/reflect/InvocationHandler.java||file:src/java/lang/reflect/Member.java||file:src/java/lang/reflect/Method.java||file:src/java/lang/reflect/Modifier.java||file:src/java/lang/reflect/Parameter.java||file:src/java/lang/reflect/ParameterizedType.java||file:src/java/lang/reflect/Proxy.java||file:src/java/lang/reflect/ProxyGenerator.java||file:src/java/lang/reflect/Type.java||file:src/java/lang/reflect/TypeVariable.java||file:src/java/lang/reflect/WildcardType.java||file:src/java/lang/annotation/Annotation.java||file:src/java/lang/annotation/Documented.java||file:src/java/lang/annotation/ElementType.java||file:src/java/lang/annotation/Inherited.java||file:src/java/lang/annotation/Repeatable.java||file:src/java/lang/annotation/Retention.java||file:src/java/lang/annotation/RetentionPolicy.java||file:src/java/lang/annotation/Target.java||file:src/java/lang/reflect/AccessibleObject.java||file:src/java/lang/reflect/AnnotatedElement.java||file:src/java/lang/reflect/AnnotatedType.java||file:src/java/lang/Class.java||file:src/java/lang/ClassLoader.java||file:src/java/lang/Module.java||file:src/java/lang/NamedPackage.java||file:src/java/lang/Package.java||file:src/java/util/Calendar.java||file:src/java/util/Date.java||file:src/java/util/Enumeration.java||file:src/java/util/spi/AbstractResourceBundleProvider.java||file:src/java/util/spi/ResourceBundleControlProvider.java||file:src/java/util/spi/ResourceBundleProvider.java||file:src/java/util/Iterator.java||file:src/java/util/ListResourceBundle.java||file:src/java/util/Locale.java||file:src/java/util/Properties.java||file:src/java/util/PropertyResourceBundle.java||file:src/java/util/ResourceBundle.java||file:src/java/util/ServiceLoader.java||file:src/sun/util/ResourceBundleEnumeration.java||file:src/sun/util/PropertyResourceBundleCharset.java||file:src/jdk/internal/reflect/Reflection.java||file:src/java/security/SecureClassLoader.java||file:src/jdk/internal/module/ServicesCatalog.java||file:src/java/lang/reflect/AnnotatedArrayType.java||file:src/java/lang/reflect/AnnotatedParameterizedType.java||file:src/java/lang/reflect/AnnotatedTypeVariable.java||file:src/java/lang/reflect/AnnotatedWildcardType.java||file:src/java/math/MathContext.java||file:src/java/math/RoundingMode.java||file:src/javax/annotation/processing/Messager.java||file:src/javax/annotation/processing/RoundEnvironment.java||file:src/javax/annotation/processing/ProcessingEnvironment.java||file:src/javax/annotation/processing/Filer.java||file:src/javax/annotation/processing/AbstractProcessor.java||file:src/javax/annotation/processing/SupportedSourceVersion.java||file:src/javax/annotation/processing/SupportedOptions.java||file:src/javax/annotation/processing/SupportedAnnotationTypes.java||file:src/javax/annotation/processing/Processor.java||file:src/javax/lang/model/element/Modifier.java||file:src/javax/lang/model/element/ElementKind.java||file:src/javax/lang/model/type/TypeKind.java||file:src/javax/lang/model/SourceVersion.java||file:src/javax/lang/model/element/AnnotationMirror.java||file:src/javax/lang/model/element/AnnotationValue.java||file:src/javax/lang/model/element/AnnotationValueVisitor.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor6.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor7.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor8.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor9.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor6.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor7.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor8.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor9.java||file:src/javax/lang/model/element/Element.java||file:src/javax/lang/model/element/ElementVisitor.java||file:src/javax/lang/model/util/AbstractElementVisitor6.java||file:src/javax/lang/model/util/AbstractElementVisitor7.java||file:src/javax/lang/model/util/AbstractElementVisitor8.java||file:src/javax/lang/model/util/AbstractElementVisitor9.java||file:src/javax/lang/model/util/SimpleElementVisitor6.java||file:src/javax/lang/model/util/SimpleElementVisitor7.java||file:src/javax/lang/model/util/SimpleElementVisitor8.java||file:src/javax/lang/model/util/SimpleElementVisitor9.java||file:src/javax/lang/model/element/PackageElement.java||file:src/javax/lang/model/element/Parameterizable.java||file:src/javax/lang/model/element/ExecutableElement.java||file:src/javax/lang/model/element/Name.java||file:src/javax/lang/model/element/QualifiedNameable.java||file:src/javax/lang/model/element/TypeParameterElement.java||file:src/javax/lang/model/element/NestingKind.java||file:src/javax/lang/model/util/ElementKindVisitor6.java||file:src/javax/lang/model/util/ElementKindVisitor7.java||file:src/javax/lang/model/util/ElementKindVisitor8.java||file:src/javax/lang/model/util/ElementKindVisitor9.java||file:src/javax/lang/model/util/ElementScanner6.java||file:src/javax/lang/model/util/ElementScanner7.java||file:src/javax/lang/model/util/ElementScanner8.java||file:src/javax/lang/model/util/ElementScanner9.java||file:src/javax/lang/model/element/ModuleElement.java||file:src/javax/lang/model/element/TypeElement.java||file:src/javax/lang/model/element/VariableElement.java||file:src/javax/lang/model/AnnotatedConstruct.java||file:src/javax/lang/model/util/AbstractTypeVisitor6.java||file:src/javax/lang/model/util/AbstractTypeVisitor7.java||file:src/javax/lang/model/util/AbstractTypeVisitor8.java||file:src/javax/lang/model/util/AbstractTypeVisitor9.java||file:src/javax/lang/model/util/SimpleTypeVisitor6.java||file:src/javax/lang/model/util/SimpleTypeVisitor7.java||file:src/javax/lang/model/util/SimpleTypeVisitor8.java||file:src/javax/lang/model/util/SimpleTypeVisitor9.java||file:src/javax/lang/model/util/TypeKindVisitor6.java||file:src/javax/lang/model/util/TypeKindVisitor7.java||file:src/javax/lang/model/util/TypeKindVisitor8.java||file:src/javax/lang/model/util/TypeKindVisitor9.java||file:src/javax/lang/model/type/TypeVisitor.java||file:src/javax/lang/model/type/TypeMirror.java||file:src/javax/lang/model/type/TypeVariable.java||file:src/javax/lang/model/type/WildcardType.java||file:src/javax/lang/model/type/ReferenceType.java||file:src/javax/lang/model/type/PrimitiveType.java||file:src/javax/lang/model/type/IntersectionType.java||file:src/javax/lang/model/type/UnionType.java||file:src/javax/lang/model/type/NoType.java||file:src/javax/lang/model/type/NullType.java||file:src/javax/lang/model/type/ErrorType.java||file:src/javax/lang/model/type/DeclaredType.java||file:src/javax/lang/model/type/ArrayType.java||file:src/javax/lang/model/type/ExecutableType.java||file:src/javax/lang/model/util/ElementFilter.java||file:src/javax/lang/model/util/Elements.java||file:src/javax/lang/model/util/Types.java||file:src/javax/tools/StandardLocation.java||file:src/javax/tools/JavaFileObject.java||file:src/javax/tools/FileObject.java||file:src/java/lang/module/Configuration.java||file:src/java/lang/module/ModuleReader.java||file:src/java/lang/module/ModuleDescriptor.java||file:src/java/lang/module/ModuleReference.java||file:src/java/lang/module/ResolvedModule.java||file:src/java/lang/ModuleLayer.java||file:src/jdk/internal/module/ModuleLoaderMap.java||file:src/java/util/concurrent/locks/AbstractOwnableSynchronizer.java||file:src/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java||file:src/java/util/concurrent/locks/AbstractQueuedSynchronizer.java||file:src/java/util/concurrent/locks/Condition.java||file:src/java/util/concurrent/locks/Lock.java||file:src/java/util/concurrent/locks/LockSupport.java||file:src/java/util/concurrent/locks/ReentrantLock.java||file:src/java/util/concurrent/Semaphore.java||file:src/java/util/concurrent/locks/ReadWriteLock.java||file:src/java/util/concurrent/locks/ReentrantReadWriteLock.java||file:src/java/util/concurrent/CountDownLatch.java||file:src/java/util/concurrent/CyclicBarrier.java||file:src/java/util/concurrent/locks/StampedLock.java||file:src/sun/nio/ch/Interruptible.java||file:src/java/io/StreamTokenizer.java||file:src/java/util/StringTokenizer.java||file:src/java/util/SplittableRandom.java||file:src/java/util/concurrent/ThreadLocalRandom.java" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="54" />
+    <option name="y" value="-8" />
+    <option name="width" value="1874" />
+    <option name="height" value="1096" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>Annotations verifyingGroovy</id>
+          </State>
+          <State>
+            <id>Assignment issuesGroovy</id>
+          </State>
+          <State>
+            <id>Declaration redundancyGroovy</id>
+          </State>
+          <State>
+            <id>DeclarationGroovy</id>
+          </State>
+          <State>
+            <id>Error handlingGroovy</id>
+          </State>
+          <State>
+            <id>GSPGrailsGroovy</id>
+          </State>
+          <State>
+            <id>GrailsGroovy</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>JSP</id>
+          </State>
+          <State>
+            <id>OtherGroovy</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsGroovy</id>
+          </State>
+          <State>
+            <id>Probable bugsGroovy</id>
+          </State>
+          <State>
+            <id>StyleGroovy</id>
+          </State>
+          <State>
+            <id>Threading issuesGroovy</id>
+          </State>
+          <State>
+            <id>Validity issuesGroovy</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <flattenPackages ProjectPane="false" />
+      <showMembers ProjectPane="false" />
+      <hideEmptyPackages ProjectPane="true" />
+      <autoscrollToSource ProjectPane="true" />
+      <autoscrollFromSource ProjectPane="true" />
+      <sortByType ProjectPane="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="module" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="Obje&#9;FILE&#9;file://D:/ProgrammingData/Code/SourceCode/OpenJDK-11/src/java/io/ObjectOutputStream.java&#10;System&#9;FILE&#9;file://D:/ProgrammingData/Code/SourceCode/OpenJDK-11/src/java/lang/System.java&#10;WildcardType&#9;PSI&#9;JAVA://java.lang.reflect.WildcardType&#10;Class&#9;PSI&#9;JAVA://java.lang.Class&#10;CharsetProvider&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/nio/charset/spi/CharsetProvider.java&#10;forName()&#9;PSI&#9;JAVA://java.lang.Character.UnicodeBlock#forName&#10;ByteBufferAsIntBufferB&#9;PSI&#9;JAVA://java.nio.ByteBufferAsIntBufferB&#10;DirectCharBufferRS&#9;PSI&#9;JAVA://java.nio.DirectCharBufferRS&#10;Comparable&#9;PSI&#9;JAVA://java.lang.Comparable&#10;Fun&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/FunctionalInterface.java&#10;CharBufferSpliterator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/nio/CharBufferSpliterator.java&#10;CharSequence&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/CharSequence.java&#10;StandardCharsets&#9;PSI&#9;JAVA://sun.nio.cs.StandardCharsets&#10;OfRef&#9;PSI&#9;JAVA://java.util.Spliterators.EmptySpliterator.OfRef&#10;Comp&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/Comparator.java&#10;CharsSpliterator&#9;PSI&#9;JAVA://java.lang.StringUTF16.CharsSpliterator&#10;String&#9;PSI&#9;JAVA://java.lang.String&#10;FileD&#9;PSI&#9;JAVA://jdk.nashorn.internal.runtime.Source.FileData&#10;FileCh&#9;PSI&#9;JAVA://java.nio.channels.FileChannel&#10;Supplier&#9;PSI&#9;JAVA://java.util.function.DoubleSupplier&#10;IntSupplier&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/IntSupplier.java&#10;ConditionalSpecialCasing&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/ConditionalSpecialCasing.java&#10;StringLatin1&#9;PSI&#9;JAVA://java.lang.StringLatin1&#10;StringCoding&#9;PSI&#9;JAVA://java.lang.StringCoding&#10;Charset&#9;PSI&#9;JAVA://java.nio.charset.Charset&#10;Character&#9;PSI&#9;JAVA://java.lang.Character&#10;Com&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/Comparable.java&#10;Arrays&#9;PSI&#9;JAVA://java.util.Arrays&#10;SpinedNodeBuilder&#9;PSI&#9;JAVA://java.util.stream.Nodes.SpinedNodeBuilder&#10;DoubleSpinedNodeBuilder&#9;PSI&#9;JAVA://java.util.stream.Nodes.DoubleSpinedNodeBuilder&#10;Stream&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/stream/Streams.java&#10;ForkJoinPool&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/concurrent/ForkJoinPool.java&#10;Thread&#9;PSI&#9;JAVA://java.lang.Thread&#10;BinaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/IntBinaryOperator.java&#10;UnaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/DoubleUnaryOperator.java&#10;BigDecimal&#9;PSI&#9;JAVA://java.math.BigDecimal&#10;Tripwire&#9;PSI&#9;JAVA://java.util.Tripwire&#10;IntStream&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/stream/IntStream.java&#10;DoubleBinaryOperator&#9;PSI&#9;JAVA://java.util.function.DoubleBinaryOperator&#10;LongBinaryOperator&#9;PSI&#9;JAVA://java.util.function.LongBinaryOperator&#10;IntBinaryOperator&#9;PSI&#9;JAVA://java.util.function.IntBinaryOperator&#10;DoubleUnaryOperator&#9;PSI&#9;JAVA://java.util.function.DoubleUnaryOperator&#10;LongUnaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/LongUnaryOperator.java&#10;IntUnaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/IntUnaryOperator.java&#10;ToDoubleBiFunction&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/ToDoubleBiFunction.java&#10;ToLongBiFunction&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/ToLongBiFunction.java&#10;ToIntBiFunction&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/ToIntBiFunction.java&#10;BiFunction&#9;PSI&#9;JAVA://java.util.function.BiFunction&#10;ToDoubleFunction&#9;PSI&#9;JAVA://java.util.function.ToDoubleFunction&#10;ToLongFunction&#9;PSI&#9;JAVA://java.util.function.ToLongFunction" />
+    <property name="TODO_SCOPE" value="All Places" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/src/TAG.java&#10;true" />
+    <property name="android.sdk.path" value="D:/SDK-IDEA" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547367567109" />
+    <property name="last.edited.regexp" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/com" />
+    <property name="last_opened_file_path" value="D:/Sourcetree/OpenJDK-11" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.34136933" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.graalvm.compiler.api.test" />
+      <recent name="com.kang.enumeration.test01" />
+      <recent name="com.kang.clazz.test06" />
+      <recent name="com.kang.clazz.test04" />
+      <recent name="com.kang" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ProgrammingData\Code\SourceCode\OpenJDK-11\src\javax\lang\model" />
+      <recent name="D:\ProgrammingData\Code\SourceCode\OpenJDK-11\test\ClassTest" />
+      <recent name="D:\ProgrammingData\Code\SourceCode\OpenJDK-11\test\ClassTest\src\com\kang\clazz" />
+      <recent name="D:\ProgrammingData\Code\SourceCode\OpenJDK-11" />
+      <recent name="D:\MyData\Code\ProjectSourceCode\OpenJDK-11\src\java\util\stream" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_PROPERTIES,VISIBILITY_SORTER" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment="" />
+      <created>1539620920043</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1539620920043</updated>
+      <workItem from="1539620922153" duration="9108000" />
+      <workItem from="1539633696490" duration="911000" />
+      <workItem from="1539672630564" duration="3910000" />
+      <workItem from="1539788158151" duration="11618000" />
+      <workItem from="1539830642602" duration="263287000" />
+      <workItem from="1540343086701" duration="353112000" />
+      <workItem from="1541136625193" duration="28420000" />
+      <workItem from="1541211057953" duration="1559000" />
+      <workItem from="1541222896701" duration="5114000" />
+      <workItem from="1541236383667" duration="180000" />
+      <workItem from="1541236696579" duration="929000" />
+      <workItem from="1542364403295" duration="749000" />
+      <workItem from="1542683608552" duration="2503000" />
+      <workItem from="1542765937051" duration="227000" />
+      <workItem from="1542766694620" duration="65488000" />
+      <workItem from="1542869965685" duration="421000" />
+      <workItem from="1542871591240" duration="18890000" />
+      <workItem from="1542966635890" duration="659000" />
+      <workItem from="1543421069969" duration="5889000" />
+      <workItem from="1543471784923" duration="635000" />
+      <workItem from="1543490270856" duration="1627000" />
+      <workItem from="1543493956631" duration="235248000" />
+      <workItem from="1544039312450" duration="48393000" />
+      <workItem from="1544158432654" duration="472000" />
+      <workItem from="1544159032482" duration="45000" />
+      <workItem from="1544159112177" duration="108000" />
+      <workItem from="1544159275701" duration="18289000" />
+      <workItem from="1544183744155" duration="16021000" />
+      <workItem from="1544235866131" duration="28990000" />
+      <workItem from="1544415705524" duration="2386000" />
+      <workItem from="1544467283486" duration="448000" />
+      <workItem from="1544506544302" duration="29017000" />
+      <workItem from="1544605825132" duration="25517000" />
+      <workItem from="1544637305314" duration="3884000" />
+      <workItem from="1544675177087" duration="878000" />
+      <workItem from="1544677831009" duration="735000" />
+      <workItem from="1544678827234" duration="429000" />
+      <workItem from="1544679335259" duration="36428000" />
+      <workItem from="1544760066550" duration="17406000" />
+      <workItem from="1544806499882" duration="12185000" />
+      <workItem from="1544861365827" duration="4718000" />
+      <workItem from="1544871399445" duration="28729000" />
+      <workItem from="1544935858458" duration="72871000" />
+      <workItem from="1545091898326" duration="108740000" />
+      <workItem from="1545297682189" duration="9244000" />
+      <workItem from="1545316897521" duration="23946000" />
+      <workItem from="1545367376566" duration="39176000" />
+      <workItem from="1545442737401" duration="33462000" />
+      <workItem from="1545566199294" duration="2456000" />
+      <workItem from="1545580609410" duration="55933000" />
+      <workItem from="1545783530428" duration="2319000" />
+      <workItem from="1545828891306" duration="2372000" />
+      <workItem from="1545843201573" duration="283000" />
+      <workItem from="1545927795566" duration="415000" />
+      <workItem from="1546014314771" duration="1136000" />
+      <workItem from="1546174106711" duration="2571000" />
+      <workItem from="1546248360207" duration="10861000" />
+      <workItem from="1546310207897" duration="35760000" />
+      <workItem from="1546393768299" duration="7370000" />
+      <workItem from="1546440671496" duration="40000" />
+      <workItem from="1546451875489" duration="253000" />
+      <workItem from="1546513671003" duration="366000" />
+      <workItem from="1546514190065" duration="617000" />
+      <workItem from="1546535471418" duration="504000" />
+      <workItem from="1546625421065" duration="781000" />
+      <workItem from="1546704452773" duration="11326000" />
+      <workItem from="1546742812528" duration="29339000" />
+      <workItem from="1546780782987" duration="30562000" />
+      <workItem from="1546843037575" duration="19874000" />
+      <workItem from="1546870667834" duration="41869000" />
+      <workItem from="1547006634342" duration="94362000" />
+      <workItem from="1547182600909" duration="26938000" />
+      <workItem from="1547257861897" duration="52140000" />
+      <workItem from="1547321725365" duration="119000" />
+      <workItem from="1547345857821" duration="8031000" />
+      <workItem from="1547354127687" duration="5126000" />
+      <workItem from="1547361168381" duration="4688000" />
+    </task>
+    <task id="LOCAL-00262" summary=":bulb: 【java.lang.ThreadLocal】 为当前线程缓存数据">
+      <created>1544241434270</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1544241434270</updated>
+    </task>
+    <task id="LOCAL-00263" summary=":white_check_mark: 【java.lang.ThreadLocal】 测试ThreadLocal">
+      <created>1544241621268</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1544241621268</updated>
+    </task>
+    <task id="LOCAL-00264" summary=":bulb: 【java.lang.InheritableThreadLocal】 可以创建允许子线程继承的ThreadLocal（及其关联值）">
+      <created>1544285730393</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1544285730393</updated>
+    </task>
+    <task id="LOCAL-00265" summary=":bulb: 【jdk.internal.misc.TerminatingThreadLocal】 ThreadLocal的又一个扩展，在线程结束时使用。&#10;&#10;&#10;该ThreadLocal关联的值在线程结束前会被特殊处理，处理方式取决于回调方法threadTerminated(T value)">
+      <created>1544416380639</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1544416380639</updated>
+    </task>
+    <task id="LOCAL-00266" summary=":bulb: 【jdk.lang.ThreadGroup】 ThreadGroup用来管理一组线程和子线程组，每个ThreadGroup在进程中以树形方式存在">
+      <created>1544467629577</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1544467629578</updated>
+    </task>
+    <task id="LOCAL-00267" summary=":bulb: 【java.lang.StackTraceElement】 方法调用链的栈帧">
+      <created>1544577192135</created>
+      <option name="number" value="00267" />
+      <option name="presentableId" value="LOCAL-00267" />
+      <option name="project" value="LOCAL" />
+      <updated>1544577192135</updated>
+    </task>
+    <task id="LOCAL-00268" summary=":white_check_mark: 【java.lang.StackTraceElement】 打印栈帧">
+      <created>1544577709419</created>
+      <option name="number" value="00268" />
+      <option name="presentableId" value="LOCAL-00268" />
+      <option name="project" value="LOCAL" />
+      <updated>1544577709419</updated>
+    </task>
+    <task id="LOCAL-00269" summary=":memo: 更新ReadMe">
+      <created>1545148617422</created>
+      <option name="number" value="00269" />
+      <option name="presentableId" value="LOCAL-00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1545148617423</updated>
+    </task>
+    <task id="LOCAL-00270" summary=":memo: 更新README">
+      <created>1545149889537</created>
+      <option name="number" value="00270" />
+      <option name="presentableId" value="LOCAL-00270" />
+      <option name="project" value="LOCAL" />
+      <updated>1545149889537</updated>
+    </task>
+    <task id="LOCAL-00271" summary=":recycle: 【java.lang.ref.Reference】 更新对referent对象的理解">
+      <created>1545150355166</created>
+      <option name="number" value="00271" />
+      <option name="presentableId" value="LOCAL-00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1545150355166</updated>
+    </task>
+    <task id="LOCAL-00272" summary=":recycle: 【java.lang.ref.ReferenceQueue】 添加poll()方法的注释">
+      <created>1545150484211</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1545150484211</updated>
+    </task>
+    <task id="LOCAL-00273" summary=":white_check_mark: 【java.lang.ref.Reference】 更新Reference的测试用例">
+      <created>1545154348746</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1545154348746</updated>
+    </task>
+    <task id="LOCAL-00274" summary=":bulb: 【java.lang.Byte】 byte的包装类">
+      <created>1545273159070</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1545273159070</updated>
+    </task>
+    <task id="LOCAL-00275" summary=":bulb: 【java.lang.Byte】 byte的包装类">
+      <created>1545286873233</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1545286873234</updated>
+    </task>
+    <task id="LOCAL-00276" summary=":bulb: 【java.lang.Short】 short的包装类">
+      <created>1545323589427</created>
+      <option name="number" value="00276" />
+      <option name="presentableId" value="LOCAL-00276" />
+      <option name="project" value="LOCAL" />
+      <updated>1545323589428</updated>
+    </task>
+    <task id="LOCAL-00277" summary=":bulb: 【java.lang.Integer】 int的包装类">
+      <created>1545417091256</created>
+      <option name="number" value="00277" />
+      <option name="presentableId" value="LOCAL-00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1545417091257</updated>
+    </task>
+    <task id="LOCAL-00278" summary=":memo::pencil2: 更新文档；删除package-info文件；修复MethodHandles的语法错误">
+      <created>1545497492495</created>
+      <option name="number" value="00278" />
+      <option name="presentableId" value="LOCAL-00278" />
+      <option name="project" value="LOCAL" />
+      <updated>1545497492496</updated>
+    </task>
+    <task id="LOCAL-00279" summary=":bulb: 【java.lang.Long】 long的包装类">
+      <created>1545497662598</created>
+      <option name="number" value="00279" />
+      <option name="presentableId" value="LOCAL-00279" />
+      <option name="project" value="LOCAL" />
+      <updated>1545497662599</updated>
+    </task>
+    <task id="LOCAL-00280" summary=":bulb: 【java.lang.Float】 float的包装类">
+      <created>1545582483104</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1545582483104</updated>
+    </task>
+    <task id="LOCAL-00281" summary=":bulb: 【java.lang.Double】 double的包装类">
+      <created>1545668498985</created>
+      <option name="number" value="00281" />
+      <option name="presentableId" value="LOCAL-00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1545668498985</updated>
+    </task>
+    <task id="LOCAL-00282" summary=":bulb: 【java.lang.Number】 数值类型包装类的共同祖先，声明了各种包装类型的拆箱方法">
+      <created>1545783628683</created>
+      <option name="number" value="00282" />
+      <option name="presentableId" value="LOCAL-00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1545783628683</updated>
+    </task>
+    <task id="LOCAL-00283" summary=":bulb: 【java.lang.Character】 char的包装类">
+      <created>1545843296358</created>
+      <option name="number" value="00283" />
+      <option name="presentableId" value="LOCAL-00283" />
+      <option name="project" value="LOCAL" />
+      <updated>1545843296358</updated>
+    </task>
+    <task id="LOCAL-00284" summary=":bulb: 【java.lang.Boolean】 boolean的包装类">
+      <created>1545928187345</created>
+      <option name="number" value="00284" />
+      <option name="presentableId" value="LOCAL-00284" />
+      <option name="project" value="LOCAL" />
+      <updated>1545928187346</updated>
+    </task>
+    <task id="LOCAL-00285" summary=":bulb: 【java.util.Random】 伪随机数生成器">
+      <created>1546014830665</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1546014830666</updated>
+    </task>
+    <task id="LOCAL-00286" summary=":bulb: 【java.math.BigInteger】 大整数运算">
+      <created>1546176346601</created>
+      <option name="number" value="00286" />
+      <option name="presentableId" value="LOCAL-00286" />
+      <option name="project" value="LOCAL" />
+      <updated>1546176346602</updated>
+    </task>
+    <task id="LOCAL-00287" summary=":bulb: 【java.math.BigDecimal】 高精度数值运算">
+      <created>1546258112275</created>
+      <option name="number" value="00287" />
+      <option name="presentableId" value="LOCAL-00287" />
+      <option name="project" value="LOCAL" />
+      <updated>1546258112275</updated>
+    </task>
+    <task id="LOCAL-00288" summary=":bulb: 【java.math.RoundingMode】 舍入模式">
+      <created>1546273016555</created>
+      <option name="number" value="00288" />
+      <option name="presentableId" value="LOCAL-00288" />
+      <option name="project" value="LOCAL" />
+      <updated>1546273016555</updated>
+    </task>
+    <task id="LOCAL-00289" summary=":bulb: 【java.math.MathContext】 精度控制(封装了精度信息和舍入模式)">
+      <created>1546273248657</created>
+      <option name="number" value="00289" />
+      <option name="presentableId" value="LOCAL-00289" />
+      <option name="project" value="LOCAL" />
+      <updated>1546273248657</updated>
+    </task>
+    <task id="LOCAL-00290" summary=":bulb: 【java.lang.Math】 数学运算类，包含了常用的数学计算方法">
+      <created>1546363026108</created>
+      <option name="number" value="00290" />
+      <option name="presentableId" value="LOCAL-00290" />
+      <option name="project" value="LOCAL" />
+      <updated>1546363026109</updated>
+    </task>
+    <task id="LOCAL-00291" summary=":bulb: 【java.lang.StrictMath】 数学运算类，相当于一个严格版本的Math类，要求同样的运算在不同平台上结果一致">
+      <created>1546452010554</created>
+      <option name="number" value="00291" />
+      <option name="presentableId" value="LOCAL-00291" />
+      <option name="project" value="LOCAL" />
+      <updated>1546452010555</updated>
+    </task>
+    <task id="LOCAL-00292" summary=":bulb: 【jdk.internal.math.FloatConsts】 单精度浮点数结构常量">
+      <created>1546535784557</created>
+      <option name="number" value="00292" />
+      <option name="presentableId" value="LOCAL-00292" />
+      <option name="project" value="LOCAL" />
+      <updated>1546535784558</updated>
+    </task>
+    <task id="LOCAL-00293" summary=":bulb: 【jdk.internal.math.DoubleConsts】 双精度浮点数结构常量">
+      <created>1546535892481</created>
+      <option name="number" value="00293" />
+      <option name="presentableId" value="LOCAL-00293" />
+      <option name="project" value="LOCAL" />
+      <updated>1546535892481</updated>
+    </task>
+    <task id="LOCAL-00294" summary=":bulb: 【java.lang.String】 字符串">
+      <created>1546625753248</created>
+      <option name="number" value="00294" />
+      <option name="presentableId" value="LOCAL-00294" />
+      <option name="project" value="LOCAL" />
+      <updated>1546625753249</updated>
+    </task>
+    <task id="LOCAL-00295" summary=":bulb: 【java.lang.StringBuilder】 非线程安全的字符序列，适合单线程下操作大量字符，内部实现为字节数组">
+      <created>1546704791955</created>
+      <option name="number" value="00295" />
+      <option name="presentableId" value="LOCAL-00295" />
+      <option name="project" value="LOCAL" />
+      <updated>1546704791955</updated>
+    </task>
+    <task id="LOCAL-00296" summary=":bulb: 【java.lang.StringBuffer】 线程安全的字符序列，适合多线程下操作大量字符，内部实现为字节数组">
+      <created>1546791693559</created>
+      <option name="number" value="00296" />
+      <option name="presentableId" value="LOCAL-00296" />
+      <option name="project" value="LOCAL" />
+      <updated>1546791693559</updated>
+    </task>
+    <task id="LOCAL-00297" summary=":bulb: 【java.lang.AbstractStringBuilder】 字符序列的抽象实现，是StringBuilder和StringBuffer的父类">
+      <created>1546879830629</created>
+      <option name="number" value="00297" />
+      <option name="presentableId" value="LOCAL-00297" />
+      <option name="project" value="LOCAL" />
+      <updated>1546879830630</updated>
+    </task>
+    <task id="LOCAL-00298" summary=":bulb: 【java.lang.StringLatin1】 LATIN1-String">
+      <created>1546965696932</created>
+      <option name="number" value="00298" />
+      <option name="presentableId" value="LOCAL-00298" />
+      <option name="project" value="LOCAL" />
+      <updated>1546965696932</updated>
+    </task>
+    <task id="LOCAL-00299" summary=":recycle: 【java.lang.StrictMath】 完善注释">
+      <created>1547052320429</created>
+      <option name="number" value="00299" />
+      <option name="presentableId" value="LOCAL-00299" />
+      <option name="project" value="LOCAL" />
+      <updated>1547052320429</updated>
+    </task>
+    <task id="LOCAL-00300" summary=":recycle: 【java.lang.Math】 完善注释">
+      <created>1547052387646</created>
+      <option name="number" value="00300" />
+      <option name="presentableId" value="LOCAL-00300" />
+      <option name="project" value="LOCAL" />
+      <updated>1547052387647</updated>
+    </task>
+    <task id="LOCAL-00301" summary=":bulb: 【java.lang.StringUTF16】 UTF16-String">
+      <created>1547052438930</created>
+      <option name="number" value="00301" />
+      <option name="presentableId" value="LOCAL-00301" />
+      <option name="project" value="LOCAL" />
+      <updated>1547052438930</updated>
+    </task>
+    <task id="LOCAL-00302" summary=":bulb: 【java.lang.StringCoding】 用于解码[decoding]/编码[encoding]字符串的工具类">
+      <created>1547136430115</created>
+      <option name="number" value="00302" />
+      <option name="presentableId" value="LOCAL-00302" />
+      <option name="project" value="LOCAL" />
+      <updated>1547136430115</updated>
+    </task>
+    <task id="LOCAL-00303" summary=":recycle: 【java.lang.Character】 更新高代理区与低代理区范围常量的描述">
+      <created>1547306277618</created>
+      <option name="number" value="00303" />
+      <option name="presentableId" value="LOCAL-00303" />
+      <option name="project" value="LOCAL" />
+      <updated>1547306277618</updated>
+    </task>
+    <task id="LOCAL-00304" summary=":pencil2: 【java.lang.String】 修改注释排版">
+      <created>1547306477975</created>
+      <option name="number" value="00304" />
+      <option name="presentableId" value="LOCAL-00304" />
+      <option name="project" value="LOCAL" />
+      <updated>1547306477975</updated>
+    </task>
+    <task id="LOCAL-00305" summary=":recycle: 【java.lang.Thread】 更新与线程中断和ThreadLocalRandom相关的字段/方法的注释">
+      <created>1547308544108</created>
+      <option name="number" value="00305" />
+      <option name="presentableId" value="LOCAL-00305" />
+      <option name="project" value="LOCAL" />
+      <updated>1547308544108</updated>
+    </task>
+    <task id="LOCAL-00306" summary=":bulb: 【sun.nio.ch.Interruptible】 线程中断回调标记">
+      <created>1547308725932</created>
+      <option name="number" value="00306" />
+      <option name="presentableId" value="LOCAL-00306" />
+      <option name="project" value="LOCAL" />
+      <updated>1547308725932</updated>
+    </task>
+    <task id="LOCAL-00307" summary=":recycle: 【java.lang.Integer】 更新Integer缓存的描述">
+      <created>1547318507276</created>
+      <option name="number" value="00307" />
+      <option name="presentableId" value="LOCAL-00307" />
+      <option name="project" value="LOCAL" />
+      <updated>1547318507276</updated>
+    </task>
+    <task id="LOCAL-00308" summary=":memo: 调整已阅代码分组">
+      <created>1547350560738</created>
+      <option name="number" value="00308" />
+      <option name="presentableId" value="LOCAL-00308" />
+      <option name="project" value="LOCAL" />
+      <updated>1547350560739</updated>
+    </task>
+    <task id="LOCAL-00309" summary=":recycle: 【java.util.Random】 更新该类的描述">
+      <created>1547350663658</created>
+      <option name="number" value="00309" />
+      <option name="presentableId" value="LOCAL-00309" />
+      <option name="project" value="LOCAL" />
+      <updated>1547350663658</updated>
+    </task>
+    <task id="LOCAL-00310" summary=":recycle: 【java.util.Random】 测试伪随机数生成器">
+      <created>1547351075001</created>
+      <option name="number" value="00310" />
+      <option name="presentableId" value="LOCAL-00310" />
+      <option name="project" value="LOCAL" />
+      <updated>1547351075001</updated>
+    </task>
+    <option name="localTasksCounter" value="311" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2021412000" />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="58" y="-8" width="1870" height="1096" extended-state="6" />
+    <layout>
+      <window_info id="Repositories" order="0" weight="0.32995737" />
+      <window_info active="true" content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.45753714" visible="true" weight="0.22872928" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5537806" side_tool="true" weight="0.17458564" />
+      <window_info id="Structure" order="7" sideWeight="0.5424628" side_tool="true" weight="0.16187845" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3280255" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32908705" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3652822" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.55910546" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5049724" side_tool="true" weight="0.32271764" />
+      <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49502763" visible="true" weight="0.43099788" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3280255" />
+      <window_info anchor="bottom" id="Messages" order="15" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24972437" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25138122" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="8" weight="0.3296582" />
+      <window_info anchor="right" id="Maven" order="9" weight="0.32928178" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Repositories" order="0" weight="0.32995737" />
+      <window_info active="true" content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.53567624" visible="true" weight="0.1762431" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5537806" side_tool="true" weight="0.17458564" />
+      <window_info id="Structure" order="7" sideWeight="0.46432376" side_tool="true" weight="0.1762431" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3290735" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32925472" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3652822" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.55910546" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5049724" side_tool="true" weight="0.32374868" />
+      <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49502763" weight="0.32374868" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3290735" />
+      <window_info anchor="bottom" id="Messages" order="15" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24972437" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25138122" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="8" weight="0.3296582" />
+      <window_info anchor="right" id="Maven" order="9" weight="0.32928178" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="LONG_EDGES_VISIBLE" value="true" />
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
+    <MESSAGE value=":bulb: 【java.math.BigInteger】 大整数运算" />
+    <MESSAGE value=":bulb: 【java.math.BigDecimal】 高精度数值运算" />
+    <MESSAGE value=":bulb: 【java.math.RoundingMode】 舍入模式" />
+    <MESSAGE value=":bulb: 【java.math.MathContext】 精度控制(封装了精度信息和舍入模式)" />
+    <MESSAGE value=":bulb: 【java.lang.Math】 数学运算类，包含了常用的数学计算方法" />
+    <MESSAGE value=":bulb: 【java.lang.StrictMath】 数学运算类，相当于一个严格版本的Math类，要求同样的运算在不同平台上结果一致" />
+    <MESSAGE value=":bulb: 【jdk.internal.math.FloatConsts】 单精度浮点数结构常量" />
+    <MESSAGE value=":bulb: 【jdk.internal.math.DoubleConsts】 双精度浮点数结构常量" />
+    <MESSAGE value=":bulb: 【java.lang.String】 字符串" />
+    <MESSAGE value=":bulb: 【java.lang.StringBuilder】 非线程安全的字符序列，适合单线程下操作大量字符，内部实现为字节数组" />
+    <MESSAGE value=":bulb: 【java.lang.StringBuffer】 线程安全的字符序列，适合多线程下操作大量字符，内部实现为字节数组" />
+    <MESSAGE value=":bulb: 【java.lang.AbstractStringBuilder】 字符序列的抽象实现，是StringBuilder和StringBuffer的父类" />
+    <MESSAGE value=":bulb: 【java.lang.StringLatin1】 LATIN1-String" />
+    <MESSAGE value=":recycle: 【java.lang.StrictMath】 完善注释" />
+    <MESSAGE value=":recycle: 【java.lang.Math】 完善注释" />
+    <MESSAGE value=":bulb: 【java.lang.StringUTF16】 UTF16-String" />
+    <MESSAGE value=":bulb: 【java.lang.StringCoding】 用于解码[decoding]/编码[encoding]字符串的工具类" />
+    <MESSAGE value=":recycle: 【java.lang.Character】 更新高代理区与低代理区范围常量的描述" />
+    <MESSAGE value=":pencil2: 【java.lang.String】 修改注释排版" />
+    <MESSAGE value=":recycle: 【java.lang.Thread】 更新与线程中断和ThreadLocalRandom相关的字段/方法的注释" />
+    <MESSAGE value=":bulb: 【sun.nio.ch.Interruptible】 线程中断回调标记" />
+    <MESSAGE value=":recycle: 【java.lang.Integer】 更新Integer缓存的描述" />
+    <MESSAGE value=":memo: 调整已阅代码分组" />
+    <MESSAGE value=":recycle: 【java.util.Random】 更新该类的描述" />
+    <MESSAGE value=":recycle: 【java.util.Random】 测试伪随机数生成器" />
+    <option name="LAST_COMMIT_MESSAGE" value=":recycle: 【java.util.Random】 测试伪随机数生成器" />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/sun/text/CollatorUtilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/text/ComposedCharIter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/text/IntHashtable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/text/Normalizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/text/UCompactIntArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/text/html/FrameEditorPaneTag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/text/CountingPrintable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/text/UndoableEditLockSupport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/text/CompoundPrintable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/text/TextComponentPrintable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/table/DefaultTableCellHeaderRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/plaf/windows/ClassicSortArrowIcon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/plaf/synth/SynthFileChooserUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="57" column="22" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/plaf/synth/DefaultSynthStyle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/plaf/GTKKeybindings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/plaf/DesktopProperty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/plaf/WindowsKeybindings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/icon/SortArrowIcon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/DefaultLayoutStyle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/swing/FilePane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/x509/AccessDescription.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/util/Length.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/util/PermissionFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/util/DerEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/tools/keytool/Resources_ja.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/tools/jarsigner/Resources_ja.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/tools/jarsigner/Resources_zh_CN.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-176">
+          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/tools/KeyStoreUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/timestamp/Timestamper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/timestamp/TimestampToken.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/security/ssl/ConnectionContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/misc/SignalHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/misc/Signal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="74" column="19" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/jvm/hotspot/tools/Tool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/jvm/hotspot/tools/FinalizerInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/jvm/hotspot/runtime/posix/POSIXSignals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/jvm/hotspot/prims/JvmtiExport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/jvm/hotspot/gc/cms/AdaptiveFreeList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/jvm/hotspot/debugger/remote/aarch64/RemoteAARCH64ThreadContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/applet/AppletClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#29713#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/applet/AppletThreadGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/applet/AppletSecurity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="59" column="6" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xml/sax/helpers/AttributesImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xml/sax/helpers/DefaultHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/phases/tiers/CompilerConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/phases/tiers/SuitesProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/phases/tiers/HighTierContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/phases/BasePhase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="53" column="22" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/options/processor/OptionProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/options/OptionDescriptors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/options/EnumOptionKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/virtual/EscapeObjectState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/virtual/AllocatedObjectNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/util/JavaConstantFormattable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/util/ConstantFoldUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/type/StampTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/type/NarrowOopStamp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/spi/ArrayLengthProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/spi/LIRLowerable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/memory/address/AddressNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/nodes/memory/address/OffsetAddressNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/lir/VerifyMaxRegisterSizePhase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/lir/HotSpotZapRegistersPhase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/debug/BenchmarkCounters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/debug/BenchmarkCounters_OptionDescriptors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/amd64/AMD64HotSpotEpilogueBlockEndOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="39" column="15" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/amd64/AMD64HotSpotEpilogueOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/aarch64/AArch64HotSpotEpilogueOp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/HotSpotCodeCacheListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/graph/spi/Simplifiable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/graph/spi/CanonicalizerTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/graph/iterators/NodePredicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/graph/iterators/NodeIterable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/graph/IterableNodeType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/core/amd64/AMD64CompressAddressLowering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/core/amd64/AMD64LIRGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="112" column="22" selection-start-line="112" selection-start-column="22" selection-end-line="112" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/core/amd64/AMD64LIRKindTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/core/aarch64/AArch64NodeLIRBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/core/CompilerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/core/CompilationWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="58" column="22" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/code/CompilationResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/bytecode/BytecodeSwitch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/asm/sparc/SPARCInstructionCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/asm/amd64/AMD64Assembler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jdk/nashorn/internal/runtime/CodeInstaller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jdk/nashorn/internal/runtime/ScriptFunctionData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jdk/nashorn/internal/runtime/ScriptObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/测试文件清单.md" />
+    <entry file="file://$PROJECT_DIR$/README.md" />
+    <entry file="file://$PROJECT_DIR$/src/TAG.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/Comparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="116" column="17" selection-start-line="116" selection-start-column="17" selection-end-line="116" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/Enumeration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/graalvm/compiler/hotspot/replacements/PluginFactory_MonitorSnippets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenJDK-11.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/io/Win32ErrorMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/java2d/DestSurfaceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/java2d/DisposerRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sun/java2d/DisposerTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lang/Float.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2208">
+          <folding>
+            <element signature="n#list#0;n#component#1;n#project#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArquillianSettingsConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Bootstrap</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>JDK-11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="MarkdownNavigator.LinkMap.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="MarkdownNavigator.Profiles.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>OpenJDK-11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>JDK-8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.34136933" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>OpenJDK-11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="OpenJDK-11" />
+          </order>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

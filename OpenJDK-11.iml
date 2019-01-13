@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/resource" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/test/VoidTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/StringCharacterIteratorTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/BreakIteratorTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ByteOrderTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/UnsafeTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ReferenceTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/CleanerTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/StreamTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/SystemTest/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test/SystemTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ObjectTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ThreadTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/SharedSecrets/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/SharedSecrets/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test/RandomTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/StackTraceElementTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ThreadLocalTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/SerializableTest/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test/SerializableTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ExternalizableTest/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ExternalizableTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ObjectStreamFieldTest/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ObjectStreamFieldTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ClassTest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test/ClassTest/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/test/EnumTest/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+  </component>
+</module>
