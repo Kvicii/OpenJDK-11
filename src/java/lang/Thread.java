@@ -196,15 +196,19 @@ public class Thread implements Runnable {
     /*▲ 线程属性 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
     
     
+    // 除非显式设置，否则为空，用于处理未捕获的异常的接口对象
+    private static volatile UncaughtExceptionHandler defaultUncaughtExceptionHandler;
+    
+    // 除非显式设置，否则为空，用于处理未捕获的异常的接口对象
+    private volatile UncaughtExceptionHandler uncaughtExceptionHandler;
+    
+    
     /**
      * Java thread status for tools, default indicates thread 'not yet started'
      */
     private volatile int threadStatus;  // 线程状态
     
     private static final StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];  // 空栈帧
-    
-    // null unless explicitly set
-    private static volatile UncaughtExceptionHandler defaultUncaughtExceptionHandler;
     
     /**
      * The argument supplied to the current call to java.util.concurrent.locks.LockSupport.park.
@@ -222,9 +226,6 @@ public class Thread implements Runnable {
     
     // 临时使用的锁，在设置/获取线程中断回调标记时使用
     private final Object blockerLock = new Object();    // 中断线程时
-    
-    // 除非显式设置，否则为空，用于处理未捕获的异常的接口对象
-    private volatile UncaughtExceptionHandler uncaughtExceptionHandler;
     
     /**
      * ThreadLocal values pertaining to this thread.
@@ -251,14 +252,17 @@ public class Thread implements Runnable {
      */
     
     /** The current seed for a ThreadLocalRandom */
+    // 本地化的原始种子
     @jdk.internal.vm.annotation.Contended("tlr")
-    long threadLocalRandomSeed; // 随机数种子
-    /** Probe hash value; nonzero if threadLocalRandomSeed initialized */
-    @jdk.internal.vm.annotation.Contended("tlr")
-    int threadLocalRandomProbe; // 探测值（如果ThreadLocalRandom已经初始化，则该值不为空）
+    long threadLocalRandomSeed;
     /** Secondary seed isolated from public ThreadLocalRandom sequence */
+    // 本地化的辅助种子
     @jdk.internal.vm.annotation.Contended("tlr")
-    int threadLocalRandomSecondarySeed; // 辅助种子
+    int threadLocalRandomSecondarySeed;
+    /** Probe hash value; nonzero if threadLocalRandomSeed initialized */
+    // 本地化的探测值，如果ThreadLocalRandom已经初始化，则该值不为0
+    @jdk.internal.vm.annotation.Contended("tlr")
+    int threadLocalRandomProbe;
     
     
     /* 以下字段由虚拟机设置 */
@@ -1605,6 +1609,7 @@ public class Thread implements Runnable {
      * @see #setDefaultUncaughtExceptionHandler
      * @since 1.5
      */
+    // 返回当前线程内[默认的]未捕获异常处理器
     public static UncaughtExceptionHandler getDefaultUncaughtExceptionHandler() {
         return defaultUncaughtExceptionHandler;
     }
@@ -1641,6 +1646,7 @@ public class Thread implements Runnable {
      * @see ThreadGroup#uncaughtException
      * @since 1.5
      */
+    // 向当前线程注册[默认的]未捕获异常处理器
     public static void setDefaultUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
         SecurityManager sm = System.getSecurityManager();
         if(sm != null) {
@@ -1661,8 +1667,21 @@ public class Thread implements Runnable {
      *
      * @since 1.5
      */
+    // 获取注册的未捕获异常处理器
     public UncaughtExceptionHandler getUncaughtExceptionHandler() {
-        return uncaughtExceptionHandler != null ? uncaughtExceptionHandler : group;
+        if(uncaughtExceptionHandler != null) {
+            // 如果显式设置过未捕获异常处理器，这里直接返回
+            return uncaughtExceptionHandler;
+        }
+        
+        /*
+         * 如果没有设置未捕获异常处理器，则返回当前线程所处的线程组
+         *
+         * 线程组本身也实现了UncaughtExceptionHandler接口，
+         * 在线程组中，它会通过获取到该线程[默认的]的未捕获异常处理器，
+         * 然后再调用其回调方法。
+         */
+        return group;
     }
     
     /**
@@ -1682,6 +1701,7 @@ public class Thread implements Runnable {
      * @see ThreadGroup#uncaughtException
      * @since 1.5
      */
+    // 向当前线程注册默认的未捕获异常处理器
     public void setUncaughtExceptionHandler(UncaughtExceptionHandler eh) {
         checkAccess();
         uncaughtExceptionHandler = eh;
@@ -1691,8 +1711,12 @@ public class Thread implements Runnable {
      * Dispatch an uncaught exception to the handler. This method is
      * intended to be called only by the JVM.
      */
+    // 很关键的一步：当前线程内出现未捕获异常时，JVM会调用此方法
     private void dispatchUncaughtException(Throwable e) {
-        getUncaughtExceptionHandler().uncaughtException(this, e);
+        // 获取未捕获异常处理器
+        UncaughtExceptionHandler handler = getUncaughtExceptionHandler();
+        // 处理未捕获的异常
+        handler.uncaughtException(this, e);
     }
     
     /*▲ 未捕获异常处理器 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -1886,7 +1910,9 @@ public class Thread implements Runnable {
         }
         
         processQueue(Caches.subclassAuditsQueue, Caches.subclassAudits);
+        
         WeakClassKey key = new WeakClassKey(cl, Caches.subclassAuditsQueue);
+        
         Boolean result = Caches.subclassAudits.get(key);
         if(result == null) {
             result = auditSubclass(cl);
@@ -1976,6 +2002,7 @@ public class Thread implements Runnable {
     }
     
     
+    
     /** Make sure registerNatives is the first thing <clinit> does. */
     private static native void registerNatives();
     
@@ -1994,6 +2021,7 @@ public class Thread implements Runnable {
      */
     @HotSpotIntrinsicCandidate
     private native boolean isInterrupted(boolean ClearInterrupted);
+    
     
     
     /**
@@ -2140,17 +2168,17 @@ public class Thread implements Runnable {
      * @see ThreadGroup#uncaughtException
      * @since 1.5
      */
+    // 未捕获异常处理接口
     @FunctionalInterface
     public interface UncaughtExceptionHandler {
         /**
-         * Method invoked when the given thread terminates due to the
-         * given uncaught exception.
-         * <p>Any exception thrown by this method will be ignored by the
-         * Java Virtual Machine.
+         * Method invoked when the given thread terminates due to the given uncaught exception.
+         * Any exception thrown by this method will be ignored by the Java Virtual Machine.
          *
          * @param t the thread
          * @param e the exception
          */
+        // JVM检测到未捕获异常时的回调方法
         void uncaughtException(Thread t, Throwable e);
     }
     
