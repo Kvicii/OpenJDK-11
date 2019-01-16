@@ -75,7 +75,7 @@ import java.util.function.Supplier;
  * @since 1.2
  */
 /*
- * 为线程缓存数据，共享某个值
+ * 为线程缓存数据，将数据本地化（脱离共享）
  *
  * 原理：
  * 1. 每个线程由一个ThreadLocalMap属性，本质就是一个map
@@ -106,7 +106,8 @@ public class ThreadLocal<T> {
      * - turns implicit sequential thread-local IDs into near-optimally spread multiplicative hash values for power-of-two-sized tables.
      */
     /*
-     * HASH_INCREMENT是个神奇的数字。
+     * HASH_INCREMENT是一个哈希魔数
+     *
      * 观察如下代码：
      *   int s = 0;
      *   double n = 4;
@@ -117,16 +118,15 @@ public class ThreadLocal<T> {
      *   }
      * 这将 随机-均匀 产生 [0,Max-1] 这 Max 个数字。
      * 而且，改变s的值，将产生不同的序列
+     *
+     * 这与伪随机数的生成原理很像
      */
     private static final int HASH_INCREMENT = 0x61c88647;
     
     /**
      * The next hash code to be given out. Updated atomically. Starts at zero.
      */
-    /*
-     * 用于生成当前ThreadLocal的指纹，作为静态变量，被所有ThreadLocal对象共享
-     * 其值为i*HASH_INCREMENT，i为nextHashCode属性的递增次数
-     */
+    // 内置种子，由所有ThreadLocal共享，但每次构造一个ThreadLocal实例，其值都会更新
     private static AtomicInteger nextHashCode = new AtomicInteger();
     
     /**
@@ -139,18 +139,43 @@ public class ThreadLocal<T> {
      * are used by the same threads, while remaining well-behaved in
      * less common cases.
      */
-    // 当前ThreadLocal的指纹，用于计算哈希值
+    /*
+     * 原始种子，由内置种子计算而来，用来生成均匀的索引
+     *
+     * 一个线程可以有多个ThreadLocal实例，各实例之内的原始种子值不相同
+     * 一个ThreadLocal实例也可被多个线程共享，此时多个线程内看到的原始种子值是相同的
+     */
     private final int threadLocalHashCode = nextHashCode();
     
     
+    
+    /*▼ 构造方法 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a thread local variable.
      *
      * @see #withInitial(java.util.function.Supplier)
      */
+    // 构造ThreadLocal实例前，原始种子也会被一同构造
     public ThreadLocal() {
     }
+    /*▲ 构造方法 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
+    
+    
+    /*▼ 种子 ████████████████████████████████████████████████████████████████████████████████┓ */
+    
+    /**
+     * Returns the next hash code.
+     */
+    // 返回计算出的下一个哈希值，其值为i*HASH_INCREMENT，其中i代表调用次数
+    private static int nextHashCode() {
+        // 每次调用都在上一次的哈希值上加HASH_INCREMENT
+        return nextHashCode.getAndAdd(HASH_INCREMENT);
+    }
+    
+    /*▲ 种子 ████████████████████████████████████████████████████████████████████████████████┛ */
+    
     
     
     /**
@@ -165,17 +190,17 @@ public class ThreadLocal<T> {
     // 为当前ThreadLocal对象关联value值
     public void set(T value) {
         // 返回当前ThreadLocal所在的线程
-        Thread t = Thread.currentThread();
+        Thread thread = Thread.currentThread();
     
-        // 返回当前线程t持有的map
-        ThreadLocalMap map = getMap(t);
+        // 返回当前线程持有的map
+        ThreadLocalMap map = getMap(thread);
         
         // 如果map不为空，则直接存储<ThreadLocal, T>键值对
         if(map != null) {
             map.set(this, value);
         } else {
             // 否则，需要为当前线程初始化map，并存储键值对<this, firstValue>
-            createMap(t, value);
+            createMap(thread, value);
         }
     }
     
@@ -305,25 +330,16 @@ public class ThreadLocal<T> {
     }
     
     /**
-     * Returns the next hash code.
-     */
-    // 返回计算出的下一个哈希值，其值为i*HASH_INCREMENT，其中i代表调用次数
-    private static int nextHashCode() {
-        // 每次调用都在上一次的哈希值上加HASH_INCREMENT
-        return nextHashCode.getAndAdd(HASH_INCREMENT);
-    }
-    
-    /**
      * Get the map associated with a ThreadLocal. Overridden in
      * InheritableThreadLocal.
      *
-     * @param t the current thread
+     * @param thread the current thread
      *
      * @return the map
      */
-    // 返回当前线程t持有的map
-    ThreadLocalMap getMap(Thread t) {
-        return t.threadLocals;
+    // 返回当前线程thread持有的map
+    ThreadLocalMap getMap(Thread thread) {
+        return thread.threadLocals;
     }
     
     /**
@@ -421,9 +437,9 @@ public class ThreadLocal<T> {
         // 初始化map，并存储键值对<firstKey, firstValue>
         ThreadLocalMap(ThreadLocal<?> firstKey, Object firstValue) {
             table = new Entry[INITIAL_CAPACITY];
-            // i是一个[0, INITIAL_CAPACITY)之间的值
-            int i = firstKey.threadLocalHashCode & (INITIAL_CAPACITY - 1);
-            table[i] = new Entry(firstKey, firstValue);
+            // index是一个[0, INITIAL_CAPACITY)之间的值
+            int index = firstKey.threadLocalHashCode & (INITIAL_CAPACITY - 1);
+            table[index] = new Entry(firstKey, firstValue);
             size = 1;
             setThreshold(INITIAL_CAPACITY);
         }
@@ -476,11 +492,11 @@ public class ThreadLocal<T> {
             Entry[] tab = table;
             int len = tab.length;
         
-            // 当前ThreadLocal的哈希值（理想位置）
-            int i = key.threadLocalHashCode & (len - 1);
+            // 当前ThreadLocal的哈希值（理想位置），需要考虑一个线程有多个ThreadLocal的情形
+            int index = key.threadLocalHashCode & (len - 1);
         
             // 遍历一段连续的元素，以查找匹配的ThreadLocal对象
-            for(Entry e = tab[i]; e != null; e = tab[i = nextIndex(i, len)]) {
+            for(Entry e = tab[index]; e != null; e = tab[index = nextIndex(index, len)]) {
                 // 获取该哈希值处的ThreadLocal对象
                 ThreadLocal<?> k = e.get();
             
@@ -498,20 +514,20 @@ public class ThreadLocal<T> {
                  */
                 if(k == null) {
                     /*
-                     * 继续从索引staleSlot开始遍历map，给ThreadLocal对象安排合适的位置
+                     * 继续从索引index开始遍历map，给ThreadLocal对象安排合适的位置
                      * 安排完ThreadLocal对象对象后，还会清理一部分垃圾
                      */
-                    replaceStaleEntry(key, value, i);
+                    replaceStaleEntry(key, value, index);
                     return;
                 }
             }
         
-            // 直到遇见了空隙也没找到匹配的ThreadLocal对象，那么在此空隙处安排ThreadLocal对象和缓存的value
-            tab[i] = new Entry(key, value);
+            // 直到遇见了空槽也没找到匹配的ThreadLocal对象，那么在此空槽处安排ThreadLocal对象和缓存的value
+            tab[index] = new Entry(key, value);
             int sz = ++size;
         
             // 从下标i开始向后遍历，清理一部分垃圾值，清理过后元素依然是紧凑的
-            boolean isRemoved = cleanSomeSlots(i, sz);
+            boolean isRemoved = cleanSomeSlots(index, sz);
         
             // 如果没有元素被清理，那么就要检查当前元素数量是否超过了容量阙值，以便决定是否扩容
             if(!isRemoved && sz >= threshold) {
@@ -646,11 +662,11 @@ public class ThreadLocal<T> {
          */
         /*
          * 从索引staleSlot开始，遍历一段【连续】的元素，清理其中的垃圾值，并使各元素排序更紧凑
-         * 返回值是那个终止遍历过程的空隙下标
+         * 返回值是那个终止遍历过程的空槽下标
          *
          * 执行过程：
          * 1. 清理staleSlot中的垃圾值
-         * 2. 遍历staleSlot后面的元素，直到遇见Entry数组中的空隙（即tab[i]==null）才停止。遍历过程中：
+         * 2. 遍历staleSlot后面的元素，直到遇见Entry数组中的空槽（即tab[i]==null）才停止。遍历过程中：
          * 2.1 清理遇到的垃圾值
          * 2.2 遇到“错位”的元素，将其向前放置在离“理想位置”最近的地方
          *     换句话说，经过2.2的操作后，从“理想位置”出发查找某个元素，只要该元素是存在的，
@@ -670,7 +686,7 @@ public class ThreadLocal<T> {
             Entry e;
             int i;
             
-            // 继续往后遍历连续的Entry数组，直到遇见一个空隙后停止遍历
+            // 继续往后遍历连续的Entry数组，直到遇见一个空槽后停止遍历
             for(i = nextIndex(staleSlot, len); (e = tab[i]) != null; i = nextIndex(i, len)) {
                 ThreadLocal<?> k = e.get();
                 
@@ -758,7 +774,7 @@ public class ThreadLocal<T> {
                 if(e != null && e.get() == null) {
                     n = len;
                     removed = true;
-                    // 从索引i开始，遍历一段【连续】的元素，清理其中的垃圾值，并使各元素排序更紧凑，返回值是那个终止遍历过程的空隙下标
+                    // 从索引i开始，遍历一段【连续】的元素，清理其中的垃圾值，并使各元素排序更紧凑，返回值是那个终止遍历过程的空槽下标
                     i = expungeStaleEntry(i);
                 }
             
@@ -807,16 +823,26 @@ public class ThreadLocal<T> {
             // to garbage collector freeing up refs in bunches (i.e., whenever the collector runs).
             int slotToExpunge = staleSlot;
         
-            // staleSlot开始往前遍历一段连续的元素，找出最早出现的垃圾值
+            // 从staleSlot开始往前遍历一段连续的元素，找出最早出现垃圾值的位置
             for(int i = prevIndex(staleSlot, len); (e = tab[i]) != null; i = prevIndex(i, len)) {
+                // 遇到了垃圾值
                 if(e.get() == null) {
                     // slotToExpunge用来记录在索引staleSlot之前的那段连续的元素中最早出现的垃圾值的下标
                     slotToExpunge = i;
                 }
             }
+            
+            /*
+             * 至此，i指向了一个空槽
+             * 如果slotToExpunge == staleSlot，说明在(i, staleSlot)这段没有垃圾值
+             * 如果slotToExpunge != staleSlot，说明在(i, staleSlot)这段有垃圾值，且从i开始遇到的第一个垃圾值是slotToExpunge
+             *
+             * 注：在此要想象一个循环链表，(i, staleSlot)只代表一段区域，i和staleSlot的值谁大谁小并不确定
+             */
         
-            // Find either the key or trailing null slot of run, whichever occurs first
-            for(int i = nextIndex(staleSlot, len); (e = tab[i]) != null; i = nextIndex(i, len)) {
+            /* Find either the key or trailing null slot of run, whichever occurs first */
+            // 从staleSlot开始向后遍历一段连续的元素，找出最晚出现垃圾值的位置
+            for(int j = nextIndex(staleSlot, len); (e = tab[j]) != null; j = nextIndex(j, len)) {
                 ThreadLocal<?> k = e.get();
             
                 /*
@@ -833,16 +859,16 @@ public class ThreadLocal<T> {
                      * 将ThreadLocal对象尽量往前挪，已知离理想位置最近且安全的“空”位置就是staleSlot
                      * 与此同时，垃圾值后移，稍后被清理
                      */
-                    tab[i] = tab[staleSlot];
+                    tab[j] = tab[staleSlot];
                     tab[staleSlot] = e;
                 
                     // Start expunge at preceding stale entry if it exists
                     if(slotToExpunge == staleSlot) {
                         // 可能需要更新slotToExpunge的位置（往后设置）
-                        slotToExpunge = i;
+                        slotToExpunge = j;
                     }
                 
-                    // 从索引slotToExpunge开始，遍历一段【连续】的元素，清理其中的垃圾值，并使各元素排序更紧凑，返回值是那个终止遍历过程的空隙下标
+                    // 从索引slotToExpunge开始，遍历一段【连续】的元素，清理其中的垃圾值，并使各元素排序更紧凑，返回值是那个终止遍历过程的空槽下标
                     int stop = expungeStaleEntry(slotToExpunge);
                 
                     // 从下标stop开始向后遍历，清理一部分垃圾值
@@ -857,19 +883,31 @@ public class ThreadLocal<T> {
                  */
                 // 发现新的垃圾值，将slotToExpunge设置到靠后一点的位置
                 if(k == null && slotToExpunge == staleSlot) {
-                    slotToExpunge = i;
+                    slotToExpunge = j;
                 }
             }
+    
+            /*
+             * 至此，j指向了一个空槽
+             * 如果slotToExpunge == staleSlot，说明在(staleSlot, j)这段没有垃圾值
+             * 如果slotToExpunge != staleSlot，有两种可能：
+             * 1.slotToExpunge在staleSlot之前最远的垃圾值处
+             * 2.slotToExpunge在staleSlot之后最近的垃圾值处
+             *
+             * 注1：这里的最远最近都是建立在连续元素的基础上讨论的，连续元素的意思是中间没有空槽（但可能有垃圾值）
+             *
+             * 注2：同上，在此也要想象一个循环链表
+             */
         
             /* If key not found, put new entry in stale slot */
             // 如果没有找到匹配的ThreadLocal对象，就在staleSlot处创建新的节点
-            tab[staleSlot].value = null;
-            tab[staleSlot] = new Entry(key, value);
+            tab[staleSlot].value = null;    // 释放值的引用
+            tab[staleSlot] = new Entry(key, value); // 存储键值对
         
             /* If there are any other stale entries in run, expunge them */
             // 清理标记处的垃圾值
             if(slotToExpunge != staleSlot) {
-                // 从索引slotToExpunge开始，遍历一段【连续】的元素，清理其中的垃圾值，并使各元素排序更紧凑，返回值是那个终止遍历过程的空隙下标
+                // 从索引slotToExpunge开始，遍历一段【连续】的元素，清理其中的垃圾值，并使各元素排序更紧凑，返回值是那个终止遍历过程的空槽下标
                 int stop = expungeStaleEntry(slotToExpunge);
             
                 // 从下标stop开始向后遍历，捎带清理一部分垃圾值，清理过后元素依然是紧凑的
@@ -900,7 +938,7 @@ public class ThreadLocal<T> {
          */
         // 哈希值发生冲突时，计算下一个哈希值。此处使用线性探测寻址，只是简单地将索引增一。
         private static int nextIndex(int i, int len) {
-            // 如果索引增一后越界，则返回到下标0的地方
+            // 如果索引增一后越界，则返回到下标0的地方，循环进行
             return ((i + 1<len) ? i + 1 : 0);
         }
     
