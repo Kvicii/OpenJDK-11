@@ -95,7 +95,7 @@ import java.util.stream.StreamSupport;
  * 非线程安全
  * 适用于少数单线程场景
  *
- * 支持使用系统时间计算的原始种子
+ * 支持使用内置种子计算的原始种子
  * 支持自定义原始种子
  * 支持使用安全种子（设置运行参数-Djava.util.secureRandomSeed=true）
  */
@@ -172,11 +172,47 @@ public final class SplittableRandom {
     static final String BAD_RANGE = "bound must be greater than origin";
     static final String BAD_SIZE  = "size must be non-negative";
     
+    
+    /*▼ 内置种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
+    
     /**
      * The seed generator for default constructors.
      */
-    // 原始种子，使用系统时间计算
+    // 内置种子，用来生成原始种子
     private static final AtomicLong defaultGen = new AtomicLong(mix64(System.currentTimeMillis()) ^ mix64(System.nanoTime()));
+    
+    /*▲ 内置种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
+    
+    
+    /*▼ 原始种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
+    
+    /**
+     * The seed. Updated only via method nextSeed.
+     */
+    // 原始种子，用来生成随机数
+    private long seed;
+    
+    /**
+     * The step value.
+     */
+    // 用于更新原始种子的步长
+    private final long gamma;
+    
+    /*▲ 原始种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
+    
+    
+    /**
+     * The golden ratio scaled to 64bits, used as the initial gamma value for (unsplit) SplittableRandoms.
+     */
+    private static final long GOLDEN_GAMMA = 0x9e3779b97f4a7c15L;
+    
+    /**
+     * The least non-zero value returned by nextDouble(). This value
+     * is scaled by a random value of 53 bits to produce a result.
+     */
+    // double值的二进制精度
+    private static final double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53);
+    
     
     // at end of <clinit> to survive static initialization circularity
     static {
@@ -194,38 +230,14 @@ public final class SplittableRandom {
         }
     }
 
-    /**
-     * The golden ratio scaled to 64bits, used as the initial gamma value for (unsplit) SplittableRandoms.
-     */
-    private static final long GOLDEN_GAMMA = 0x9e3779b97f4a7c15L;
-
-    /**
-     * The least non-zero value returned by nextDouble(). This value
-     * is scaled by a random value of 53 bits to produce a result.
-     */
-    private static final double DOUBLE_UNIT = 0x1.0p-53; // 1.0 / (1L << 53);
-
-    /**
-     * The seed. Updated only via method nextSeed.
-     */
-    // 随机数种子
-    private long seed;
-
-    /**
-     * The step value.
-     */
-    // 用于更新种子的步长
-    private final long gamma;
-    
     
     
     /*▼ 构造方法 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * Creates a new SplittableRandom instance that is likely to
-     * generate sequences of values that are statistically independent
-     * of those of any other instances in the current program; and
-     * may, and typically does, vary across program invocations.
+     * Creates a new SplittableRandom instance that is likely to generate sequences of values
+     * that are statistically independent  those of any other instances in the current program;
+     * and may, and typically does, vary across program invocations.
      */
     public SplittableRandom() { // emulate defaultGen.split()
         long s = defaultGen.getAndAdd(GOLDEN_GAMMA << 1);
@@ -272,6 +284,7 @@ public final class SplittableRandom {
      *
      * @return the new SplittableRandom instance
      */
+    // 获取SplittableRandom实例
     public SplittableRandom split() {
         return new SplittableRandom(nextLong(), mixGamma(nextSeed()));
     }
@@ -298,7 +311,7 @@ public final class SplittableRandom {
      * @throws NullPointerException if bytes is null
      * @since 10
      */
-    // 生成一组随机的byte值
+    // 随机填充一个byte数组，有正有负
     public void nextBytes(byte[] bytes) {
         int i = 0;
         int len = bytes.length;
@@ -319,7 +332,7 @@ public final class SplittableRandom {
      *
      * @return a pseudorandom {@code int} value
      */
-    // 生成一个随机的int值
+    // 随机生成一个int值，有正有负
     public int nextInt() {
         return mix32(nextSeed());
     }
@@ -335,7 +348,7 @@ public final class SplittableRandom {
      *
      * @throws IllegalArgumentException if {@code bound} is not positive
      */
-    // 生成(0, bound]之内的一个随机int值
+    // 随机生成一个[0, bound)之内的int值
     public int nextInt(int bound) {
         if(bound<=0) {
             throw new IllegalArgumentException(BAD_BOUND);
@@ -365,7 +378,7 @@ public final class SplittableRandom {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 生成(origin, bound]之内的一个随机int值
+    // 随机生成一个[origin, bound)之内的int值，有正有负
     public int nextInt(int origin, int bound) {
         if(origin >= bound) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -378,7 +391,7 @@ public final class SplittableRandom {
      *
      * @return a pseudorandom {@code long} value
      */
-    // 生成一个随机的long值
+    // 随机生成一个long值，有正有负
     public long nextLong() {
         return mix64(nextSeed());
     }
@@ -394,7 +407,7 @@ public final class SplittableRandom {
      *
      * @throws IllegalArgumentException if {@code bound} is not positive
      */
-    // 生成(0, bound]之内的一个随机long值
+    // 随机生成一个[0, bound)之内的long值
     public long nextLong(long bound) {
         if(bound<=0) {
             throw new IllegalArgumentException(BAD_BOUND);
@@ -424,7 +437,7 @@ public final class SplittableRandom {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 生成(origin, bound]之内的一个随机long值
+    // 随机生成一个[origin, bound)之内的long值，有正有负
     public long nextLong(long origin, long bound) {
         if(origin >= bound) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -439,7 +452,7 @@ public final class SplittableRandom {
      * @return a pseudorandom {@code double} value between zero
      * (inclusive) and one (exclusive)
      */
-    // 生成一个随机的double值
+    // 随机生成一个[0, 1)之内的double值
     public double nextDouble() {
         return (mix64(nextSeed()) >>> 11) * DOUBLE_UNIT;
     }
@@ -455,7 +468,7 @@ public final class SplittableRandom {
      *
      * @throws IllegalArgumentException if {@code bound} is not positive
      */
-    // 生成(0, bound]之内的一个随机double值
+    // 随机生成一个[0, bound)之内的double值
     public double nextDouble(double bound) {
         if(!(bound>0.0)) {
             throw new IllegalArgumentException(BAD_BOUND);
@@ -479,7 +492,7 @@ public final class SplittableRandom {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 生成(origin, bound]之内的一个随机double值
+    // 随机生成一个[origin, bound)之内的double值，有正有负
     public double nextDouble(double origin, double bound) {
         if(!(origin<bound)) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -492,7 +505,7 @@ public final class SplittableRandom {
      *
      * @return a pseudorandom {@code boolean} value
      */
-    // 生成一个随机的boolean值
+    // 随机生成一个boolean值
     public boolean nextBoolean() {
         return mix32(nextSeed())<0;
     }
@@ -781,7 +794,7 @@ public final class SplittableRandom {
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
      */
-    // 生成(origin, bound]之内的一个随机int值
+    // 随机生成一个[origin, bound)之内的int值
     final int internalNextInt(int origin, int bound) {
         int r = mix32(nextSeed());
         if (origin < bound) {
@@ -812,7 +825,7 @@ public final class SplittableRandom {
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
      */
-    // 生成(origin, bound]之内的一个随机long值
+    // 随机生成一个[origin, bound)之内的long值
     final long internalNextLong(long origin, long bound) {
         /*
          * Four Cases:
@@ -867,7 +880,7 @@ public final class SplittableRandom {
      * @param bound the upper bound (exclusive), must not equal origin
      * @return a pseudorandom value
      */
-    // 生成(origin, bound]之内的一个随机double值
+    // 随机生成一个[origin, bound)之内的double值
     final double internalNextDouble(double origin, double bound) {
         double r = (nextLong() >>> 11) * DOUBLE_UNIT;
         if (origin < bound) {
@@ -917,12 +930,16 @@ public final class SplittableRandom {
      * approach. The long and double versions of this class are
      * identical except for types.
      */
+    // 可以随机生成int元素的流
     private static final class RandomIntsSpliterator implements Spliterator.OfInt {
         final SplittableRandom rng;
-        final long fence;
-        final int origin;
-        final int bound;
-        long index;
+        
+        // 随机数数量：fence-index
+        long   index;
+        final long   fence;
+        // 随机数取值范围：[origin, bound)
+        final int    origin;
+        final int    bound;
         
         RandomIntsSpliterator(SplittableRandom rng, long index, long fence, int origin, int bound) {
             this.rng = rng;
@@ -975,12 +992,16 @@ public final class SplittableRandom {
     /**
      * Spliterator for long streams.
      */
+    // 可以随机生成long元素的流
     private static final class RandomLongsSpliterator implements Spliterator.OfLong {
         final SplittableRandom rng;
+        
+        // 随机数数量：fence-index
+        long index;
         final long fence;
+        // 随机数取值范围：[origin, bound)
         final long origin;
         final long bound;
-        long index;
         
         RandomLongsSpliterator(SplittableRandom rng, long index, long fence, long origin, long bound) {
             this.rng = rng;
@@ -1034,12 +1055,16 @@ public final class SplittableRandom {
     /**
      * Spliterator for double streams.
      */
+    // 可以随机生成double元素的流
     private static final class RandomDoublesSpliterator implements Spliterator.OfDouble {
         final SplittableRandom rng;
+        
+        // 随机数数量：fence-index
+        long index;
         final long fence;
+        // 随机数取值范围：[origin, bound)
         final double origin;
         final double bound;
-        long index;
         
         RandomDoublesSpliterator(SplittableRandom rng, long index, long fence, double origin, double bound) {
             this.rng = rng;

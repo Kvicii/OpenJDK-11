@@ -84,15 +84,16 @@ import jdk.internal.misc.VM;
  * @since 1.7
  */
 /*
- * 伪随机数生成器
+ * 伪随机数生成器，Random的子类
  *
  * 线程安全
  * 适用于多线程同步场景
  *
- * 在多线程内使用该随机数生成器，比起Random，随机数分布更稀疏，且生成随机数的性能更好
+ * 在多线程中，相比Random，该伪随机数生成器的性能更好
  *
- *   支持使用系统时间计算的原始种子
+ *   支持使用内置种子计算的原始种子
  * 不支持自定义原始种子
+ *   支持辅助种子
  *   支持使用安全种子（设置运行参数-Djava.util.secureRandomSeed=true）
  *
  * 注：虽然类名带有ThreadLocal字样，但跟ThreadLocal类几乎无关
@@ -152,16 +153,106 @@ public class ThreadLocalRandom extends Random {
      * @serialField initialized boolean
      * always true
      */
-    private static final ObjectStreamField[] serialPersistentFields
-        = {new ObjectStreamField("rnd", long.class), new ObjectStreamField("initialized", boolean.class),};
+    // 确定哪些字段参与序列化
+    private static final ObjectStreamField[] serialPersistentFields = {
+        new ObjectStreamField("rnd", long.class),
+        new ObjectStreamField("initialized", boolean.class)
+    };
     
     // IllegalArgumentException messages
     static final String BAD_BOUND = "bound must be positive";
     static final String BAD_RANGE = "bound must be greater than origin";
     static final String BAD_SIZE = "size must be non-negative";
     
+    
+    /*▼ 内置种子[共享] ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
+    
+    /*
+     * 内置种子由多个线程共享
+     * 每个线程都会以这个内置种子为蓝本，生成一个线程专有的原始种子值（参见SEED）
+     * 而且在这个过程中，会将这里的内置种子进行原子地改变
+     */
+    
+    /**
+     * The increment of seeder per new instance.
+     */
+    // 哈希魔数，内置种子的增量
+    private static final long SEEDER_INCREMENT = 0xbb67ae8584caa73bL;
+    /**
+     * The next seed for default constructors.
+     */
+    /*
+     * 内置种子
+     *
+     * ThreadLocalRandom实例使用该种子生成一个线程专有的原始种子值和线程专有的辅助种子值
+     *
+     * 内置种子的初值只能由系统时间生成
+     * 每个线程初次获取ThreadLocalRandom实例时，会将内置种子更新一次
+     * 更新后的值会作为该线程专有的原始种子值
+     */
+    private static final AtomicLong seeder = new AtomicLong(mix64(System.currentTimeMillis()) ^ mix64(System.nanoTime()));
+    
+    /*▲ 内置种子[共享] ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
+    
+    
+    /*▼ 原始种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
+    
+    /*
+     * 与Random不同的是，Random中原始种子是被各线程共享的
+     * 但是在ThreadLocalRandom中，每个线程都有自己的原始种子
+     * 且原始种子的初值不一样
+     * 这个原始种子生成自哈希魔数，利用它可以产生均匀的哈希值作为随机数
+     */
+    
+    /**
+     * The seed increment.
+     */
+    // 哈希魔数，用作线程内原始种子的增量。每使用next()生成一个随机数，就将线程内的原始种子更新一次
+    private static final long GAMMA = 0x9e3779b97f4a7c15L;
+    
+    /*▲ 原始种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
+    
+    
+    /*▼ 辅助种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
+    
+    /*▲ 辅助种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
+    
+    
+    /*▼ 探测值[共享] ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
+    
+    /*
+     * 这里的探测值由多个线程共享
+     * 每个线程都会以这个探测值为蓝本，生成一个线程专有的探测值（参见PROBE）
+     * 并且在这个过程中，会将这里的探测值进行原子地改变
+     */
+    
+    /** Generates per-thread initialization/probe field */
+    // 探测值，初值为0
+    private static final AtomicInteger probeGenerator = new AtomicInteger();
+    /**
+     * The increment for generating probe values.
+     */
+    // 哈希魔数，探测值增量
+    private static final int PROBE_INCREMENT = 0x9e3779b9;
+    
+    /*▲ 探测值[共享] ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
+    
+    
+    /**
+     * The least non-zero value returned by nextDouble().
+     * This value is scaled by a random value of 53 bits to produce a result.
+     */
+    // double值的二进制精度
+    private static final double DOUBLE_UNIT = 0x1.0p-53;  // 1.0  / (1L << 53)
+    // float值的二进制精度
+    private static final float FLOAT_UNIT   = 0x1.0p-24f; // 1.0f / (1 << 24)
+    
+    /** Rarely-used holder for the second of a pair of Gaussians */
+    private static final ThreadLocal<Double> nextLocalGaussian = new ThreadLocal<>();
+    
+    
     /** The common ThreadLocalRandom */
-    // ThreadLocalRandom实例是共享的，但是为每个线程生成的随机数种子是不一样的
+    // 由各线程共享的伪随机数实例，但是为每个线程生成的随机数种子是不一样的
     static final ThreadLocalRandom instance = new ThreadLocalRandom();
     
     /**
@@ -171,56 +262,20 @@ public class ThreadLocalRandom extends Random {
     // 标记ThreadLocalRandom实例instance是否已经创建
     boolean initialized;
     
-    /**
-     * The next seed for default constructors.
-     */
-    // 原始的种子
-    private static final AtomicLong seeder = new AtomicLong(mix64(System.currentTimeMillis()) ^ mix64(System.nanoTime()));
-    /**
-     * The increment of seeder per new instance.
-     */
-    // 原始种子的增量
-    private static final long SEEDER_INCREMENT = 0xbb67ae8584caa73bL;
-    
-    /** Generates per-thread initialization/probe field */
-    // 探测值
-    private static final AtomicInteger probeGenerator = new AtomicInteger();
-    /**
-     * The increment for generating probe values.
-     */
-    // 探测值增量
-    private static final int PROBE_INCREMENT = 0x9e3779b9;
-    
-    /**
-     * The seed increment.
-     */
-    // 更新随机数种子时使用的递增量，这个增量使得每个线程保存的随机数种子不同
-    private static final long GAMMA = 0x9e3779b97f4a7c15L;
-   
-    
-    /**
-     * The least non-zero value returned by nextDouble(). This value
-     * is scaled by a random value of 53 bits to produce a result.
-     */
-    private static final double DOUBLE_UNIT = 0x1.0p-53;  // 1.0  / (1L << 53)
-    private static final float FLOAT_UNIT = 0x1.0p-24f; // 1.0f / (1 << 24)
     
     // Unsafe mechanics
     private static final Unsafe U = Unsafe.getUnsafe();
     
-    // 当前线程内的随机数种子增量，是生成随机数的主力
+    // 当前线程内的【原始种子】，用来为当前线程生成均匀的随机数
     private static final long SEED = U.objectFieldOffset(Thread.class, "threadLocalRandomSeed");
-    // 当前线程内的探测值，用来判断当前线程的种子是否初始化
-    private static final long PROBE = U.objectFieldOffset(Thread.class, "threadLocalRandomProbe");
-    // 辅助种子
+    // 当前线程内的【辅助种子】
     private static final long SECONDARY = U.objectFieldOffset(Thread.class, "threadLocalRandomSecondarySeed");
+    // 当前线程内的【探测值】
+    private static final long PROBE = U.objectFieldOffset(Thread.class, "threadLocalRandomProbe");
     
     private static final long THREADLOCALS = U.objectFieldOffset(Thread.class, "threadLocals");
     private static final long INHERITABLETHREADLOCALS = U.objectFieldOffset(Thread.class, "inheritableThreadLocals");
     private static final long INHERITEDACCESSCONTROLCONTEXT = U.objectFieldOffset(Thread.class, "inheritedAccessControlContext");
-    
-    /** Rarely-used holder for the second of a pair of Gaussians */
-    private static final ThreadLocal<Double> nextLocalGaussian = new ThreadLocal<>();
     
     
     
@@ -243,6 +298,7 @@ public class ThreadLocalRandom extends Random {
     /*▼ 构造方法 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /** Constructor used only for static singleton */
+    // 不支持主动调用构造方法
     private ThreadLocalRandom() {
         initialized = true; // false during super() call
     }
@@ -260,12 +316,37 @@ public class ThreadLocalRandom extends Random {
      */
     // 获取当前线程中的ThreadLocalRandom，如有必要，需要完成种子的初始化工作
     public static ThreadLocalRandom current() {
-        // 如果当前线程内的探测值为0，则需要为当前线程初始化种子
+        // 如果当前线程内的探测值为0，则需要进行一些初始化工作
         if(U.getInt(Thread.currentThread(), PROBE) == 0) {
-            // 为当前线程初始化种子
+            // 为当前线程设置原始种子值和探测值
             localInit();
         }
+        
+        // 现在可以返回共享的伪随机数生成器了
         return instance;
+    }
+    
+    /**
+     * Initialize Thread fields for the current thread.  Called only
+     * when Thread.threadLocalRandomProbe is zero, indicating that a
+     * thread local seed value needs to be generated. Note that even
+     * though the initialization is purely thread-local, we need to
+     * rely on (static) atomic generators to initialize the values.
+     */
+    // 为当前线程设置原始种子值和探测值
+    static final void localInit() {
+        Thread thread = Thread.currentThread();
+    
+        // 原子地增加原始种子[共享]的值
+        long seed = mix64(seeder.getAndAdd(SEEDER_INCREMENT));
+        // 为当前线程初始化原始种子
+        U.putLong(thread, SEED, seed);
+        
+        // 原子地增加探测值[共享]
+        int p = probeGenerator.addAndGet(PROBE_INCREMENT);
+        int probe = (p == 0) ? 1 : p; // skip 0
+        // 为当前线程初始化探测值
+        U.putInt(thread, PROBE, probe);
     }
     
     /**
@@ -282,28 +363,41 @@ public class ThreadLocalRandom extends Random {
         }
     }
     
-    /**
-     * Initialize Thread fields for the current thread.  Called only
-     * when Thread.threadLocalRandomProbe is zero, indicating that a
-     * thread local seed value needs to be generated. Note that even
-     * though the initialization is purely thread-local, we need to
-     * rely on (static) atomic generators to initialize the values.
-     */
-    // 为当前线程初始化种子
-    static final void localInit() {
-        Thread t = Thread.currentThread();
-        int p = probeGenerator.addAndGet(PROBE_INCREMENT);
-        int probe = (p == 0) ? 1 : p; // skip 0
-        long seed = mix64(seeder.getAndAdd(SEEDER_INCREMENT));  // 获取一个原始的随机值
-        U.putLong(t, SEED, seed);   // 利用原始值初始化种子
-        U.putInt(t, PROBE, probe);  // 初始化探测值
+    // 更新当前线程内的原始种子，并返回更新后的值
+    final long nextSeed() {
+        Thread thread = Thread.currentThread();
+        long r= U.getLong(thread, SEED) + GAMMA;
+        U.putLong(thread, SEED, r);
+        return r;
     }
     
-    // 获取当前线程内的随机数种子，并更新种子
-    final long nextSeed() {
-        Thread t;
-        long r; // read and update per-thread seed
-        U.putLong(t = Thread.currentThread(), SEED, r = U.getLong(t, SEED) + GAMMA);
+    /**
+     * Returns the pseudo-randomly initialized or updated secondary seed.
+     */
+    // 获取下一个辅助种子
+    static final int nextSecondarySeed() {
+        int r;
+        
+        Thread t = Thread.currentThread();
+        
+        // 获取辅助种子的值
+        r = U.getInt(t, SECONDARY);
+        
+        // 如果已经设置过辅助种子，则更新它
+        if(r != 0) {
+            r ^= r << 13;   // xorshift
+            r ^= r >>> 17;
+            r ^= r << 5;
+        } else {
+            // 如果辅助种子还未设置，使用内置种子初始化它
+            r = mix32(seeder.getAndAdd(SEEDER_INCREMENT));
+            if(r==0) {
+                r = 1; // avoid zero
+            }
+        }
+        
+        U.putInt(t, SECONDARY, r);
+        
         return r;
     }
     
@@ -318,7 +412,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @return a pseudorandom {@code int} value
      */
-    // 生成一个随机的int值
+    // 随机生成一个int值，有正有负
     public int nextInt() {
         return mix32(nextSeed());
     }
@@ -333,7 +427,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @throws IllegalArgumentException if {@code bound} is not positive
      */
-    // 生成(0, bound]之内的一个随机int值
+    // 随机生成一个[0, bound)之内的int值
     public int nextInt(int bound) {
         if(bound<=0) {
             throw new IllegalArgumentException(BAD_BOUND);
@@ -361,7 +455,7 @@ public class ThreadLocalRandom extends Random {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 生成(origin, bound]之内的一个随机int值
+    // 随机生成一个[origin, bound)之内的int值，有正有负
     public int nextInt(int origin, int bound) {
         if(origin >= bound) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -374,7 +468,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @return a pseudorandom {@code long} value
      */
-    // 生成一个随机的long值
+    // 随机生成一个long值，有正有负
     public long nextLong() {
         return mix64(nextSeed());
     }
@@ -390,7 +484,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @throws IllegalArgumentException if {@code bound} is not positive
      */
-    // 生成(0, bound]之内的一个随机long值
+    // 随机生成一个[0, bound)之内的long值
     public long nextLong(long bound) {
         if(bound<=0) {
             throw new IllegalArgumentException(BAD_BOUND);
@@ -419,12 +513,24 @@ public class ThreadLocalRandom extends Random {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 生成(origin, bound]之内的一个随机long值
+    // 随机生成一个[origin, bound)之内的long值，有正有负
     public long nextLong(long origin, long bound) {
         if(origin >= bound) {
             throw new IllegalArgumentException(BAD_RANGE);
         }
         return internalNextLong(origin, bound);
+    }
+    
+    /**
+     * Returns a pseudorandom {@code float} value between zero
+     * (inclusive) and one (exclusive).
+     *
+     * @return a pseudorandom {@code float} value between zero
+     * (inclusive) and one (exclusive)
+     */
+    // 随机生成一个[0, 1)之内的float值
+    public float nextFloat() {
+        return (mix32(nextSeed()) >>> 8) * FLOAT_UNIT;
     }
     
     /**
@@ -434,7 +540,7 @@ public class ThreadLocalRandom extends Random {
      * @return a pseudorandom {@code double} value between zero
      * (inclusive) and one (exclusive)
      */
-    // 生成一个随机的double值
+    // 随机生成一个[0, 1)之内的double值
     public double nextDouble() {
         return (mix64(nextSeed()) >>> 11) * DOUBLE_UNIT;
     }
@@ -450,7 +556,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @throws IllegalArgumentException if {@code bound} is not positive
      */
-    // 生成(0, bound]之内的一个随机double值
+    // 随机生成一个[0, bound)之内的double值
     public double nextDouble(double bound) {
         if(!(bound>0.0)) {
             throw new IllegalArgumentException(BAD_BOUND);
@@ -474,7 +580,7 @@ public class ThreadLocalRandom extends Random {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 生成(origin, bound]之内的一个随机double值
+    // 随机生成一个[origin, bound)之内的double值，有正有负
     public double nextDouble(double origin, double bound) {
         if(!(origin<bound)) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -487,24 +593,12 @@ public class ThreadLocalRandom extends Random {
      *
      * @return a pseudorandom {@code boolean} value
      */
-    // 生成一个随机的boolean值
+    // 随机生成一个boolean值
     public boolean nextBoolean() {
         return mix32(nextSeed())<0;
     }
     
-    /**
-     * Returns a pseudorandom {@code float} value between zero
-     * (inclusive) and one (exclusive).
-     *
-     * @return a pseudorandom {@code float} value between zero
-     * (inclusive) and one (exclusive)
-     */
-    // 生成一个随机的float值
-    public float nextFloat() {
-        return (mix32(nextSeed()) >>> 8) * FLOAT_UNIT;
-    }
-    
-    // 随机非均匀地生成一个double值，生成的double符合正态分布，有正有负
+    // 随机生成一个double值，有正有负。所有生成的double值符合标准正态分布
     public double nextGaussian() {
         // Use nextLocalGaussian instead of nextGaussian field
         Double d = nextLocalGaussian.get();
@@ -532,7 +626,7 @@ public class ThreadLocalRandom extends Random {
      * @return the next pseudorandom value from this random number
      * generator's sequence
      */
-    // 随机均匀地生成一个int值，该值范围是[0, 2^bits -1)，正数
+    // 随机生成一个int值，该值范围是[0, 2^bits -1)
     protected int next(int bits) {
         return nextInt() >>> (32 - bits);
     }
@@ -852,7 +946,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @return a pseudorandom value
      */
-    // 生成(origin, bound]之内的一个随机int值
+    // 随机生成一个[origin, bound)之内的int值
     final int internalNextInt(int origin, int bound) {
         int r = mix32(nextSeed());
         if(origin<bound) {
@@ -881,7 +975,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @return a pseudorandom value
      */
-    // 生成(origin, bound]之内的一个随机long值
+    // 随机生成一个[origin, bound)之内的long值
     final long internalNextLong(long origin, long bound) {
         long r = mix64(nextSeed());
         if(origin<bound) {
@@ -910,7 +1004,7 @@ public class ThreadLocalRandom extends Random {
      *
      * @return a pseudorandom value
      */
-    // 生成(origin, bound]之内的一个随机double值
+    // 随机生成一个[origin, bound)之内的double值
     final double internalNextDouble(double origin, double bound) {
         double r = (nextLong() >>> 11) * DOUBLE_UNIT;
         if(origin<bound) {
@@ -935,20 +1029,16 @@ public class ThreadLocalRandom extends Random {
     }
     
     /*
-     * Descriptions of the usages of the methods below can be found in
-     * the classes that use them. Briefly, a thread's "probe" value is
-     * a non-zero hash code that (probably) does not collide with
-     * other existing threads with respect to any power of two
-     * collision space. When it does collide, it is pseudo-randomly
-     * adjusted (using a Marsaglia XorShift). The nextSecondarySeed
-     * method is used in the same contexts as ThreadLocalRandom, but
-     * only for transient usages such as random adaptive spin/block
-     * sequences for which a cheap RNG suffices and for which it could
-     * in principle disrupt user-visible statistical properties of the
-     * main ThreadLocalRandom if we were to use it.
+     * Descriptions of the usages of the methods below can be found in the classes that use them.
+     * Briefly, a thread's "probe" value is a non-zero hash code that (probably) does not collide with other existing threads
+     * with respect to any power of two collision space.
+     * When it does collide, it is pseudo-randomly adjusted (using a Marsaglia XorShift).
+     * The nextSecondarySeed method is used in the same contexts as ThreadLocalRandom,
+     * but only for transient usages such as random adaptive spin/block sequences for
+     * which a cheap RNG suffices and for which it could in principle disrupt user-visible statistical properties
+     * of the main ThreadLocalRandom if we were to use it.
      *
-     * Note: Because of package-protection issues, versions of some
-     * these methods also appear in some subpackage classes.
+     * Note: Because of package-protection issues, versions of some these methods also appear in some subpackage classes.
      */
     
     /**
@@ -956,7 +1046,7 @@ public class ThreadLocalRandom extends Random {
      * initialization. Note that invoking ThreadLocalRandom.current()
      * can be used to force initialization on zero return.
      */
-    // 获取探测值
+    // 获取当前线程内的【探测值】
     static final int getProbe() {
         return U.getInt(Thread.currentThread(), PROBE);
     }
@@ -964,8 +1054,9 @@ public class ThreadLocalRandom extends Random {
     /**
      * Pseudo-randomly advances and records the given probe value for the given thread.
      */
-    // 更新探测值
+    // 更新探测值，并返回更新后的值
     static final int advanceProbe(int probe) {
+        // 由形参计算出一个哈希魔数
         probe ^= probe << 13;   // xorshift
         probe ^= probe >>> 17;
         probe ^= probe << 5;
@@ -973,41 +1064,17 @@ public class ThreadLocalRandom extends Random {
         return probe;
     }
     
-    /**
-     * Returns the pseudo-randomly initialized or updated secondary seed.
-     */
-    // 使用辅助种子生成随机数
-    static final int nextSecondarySeed() {
-        int r;
-        
-        Thread t = Thread.currentThread();
-        
-        if((r = U.getInt(t, SECONDARY)) != 0) {
-            r ^= r << 13;   // xorshift
-            r ^= r >>> 17;
-            r ^= r << 5;
-        } else if((r = mix32(seeder.getAndAdd(SEEDER_INCREMENT))) == 0) {
-            r = 1; // avoid zero
-        }
-        
-        U.putInt(t, SECONDARY, r);
-        
-        return r;
-    }
-    
-    
-    // 根据MurmurHash3算法使随机数的分布变得稀疏
     private static int mix32(long z) {
         z = (z ^ (z >>> 33)) * 0xff51afd7ed558ccdL;
         return (int) (((z ^ (z >>> 33)) * 0xc4ceb9fe1a85ec53L) >>> 32);
     }
     
-    // 根据MurmurHash3算法使随机数的分布变得稀疏
     private static long mix64(long z) {
         z = (z ^ (z >>> 33)) * 0xff51afd7ed558ccdL;
         z = (z ^ (z >>> 33)) * 0xc4ceb9fe1a85ec53L;
         return z ^ (z >>> 33);
     }
+    
     
     
     /**
