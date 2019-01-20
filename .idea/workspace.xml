@@ -5,7 +5,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":bulb: 【java.lang.Enum】 可以看作是所有enum的包装类">
+    <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":bulb: 【java.util.CompoundEnumeration】 复合枚举类型，用于遍历">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/io/Externalizable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/Externalizable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" afterDir="false" />
@@ -13,7 +13,6 @@
       <change beforePath="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Class.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/ClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ClassLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/lang/Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Enum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Module.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/ModuleLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ModuleLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/NamedPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/NamedPackage.java" afterDir="false" />
@@ -56,11 +55,13 @@
       <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/TypeVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/TypeVariable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/WildcardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/WildcardType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/security/SecureClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/security/SecureClassLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/sql/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/sql/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/sql/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/sql/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/sql/DriverManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/sql/DriverManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/Arrays.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Arrays.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/ArraysParallelSortHelpers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/ArraysParallelSortHelpers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Calendar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/util/Enumeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Enumeration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/Iterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Iterator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/ListResourceBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/ListResourceBundle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/Locale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Locale.java" afterDir="false" />
@@ -200,6 +201,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="module" />
+    </option>
+  </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
     <option name="GROUP_DATA_SOURCES" value="true" />
@@ -221,72 +227,7 @@
     <fileColor scope="OpenJDK-11" color="99ffcc" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/lang/Enum.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="73" column="4" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
-              <folding>
-                <element signature="docComment;class#Enum#0" />
-                <element signature="docComment;field#name#0;class#Enum#0" />
-                <element signature="docComment;field#ordinal#0;class#Enum#0" />
-                <element signature="docComment;method#Enum#0;class#Enum#0" />
-                <element signature="method#Enum#0;class#Enum#0" />
-                <element signature="docComment;method#name#0;class#Enum#0" />
-                <element signature="method#name#0;class#Enum#0" />
-                <element signature="docComment;method#ordinal#0;class#Enum#0" />
-                <element signature="method#ordinal#0;class#Enum#0" />
-                <element signature="docComment;method#getDeclaringClass#0;class#Enum#0" />
-                <element signature="method#getDeclaringClass#0;class#Enum#0" />
-                <element signature="docComment;method#compareTo#0;class#Enum#0" />
-                <element signature="method#compareTo#0;class#Enum#0" />
-                <element signature="e#6698#6753#1" />
-                <element signature="docComment;method#valueOf#0;class#Enum#0" />
-                <element signature="method#valueOf#0;class#Enum#0" />
-                <element signature="docComment;method#hashCode#0;class#Enum#0" />
-                <element signature="method#hashCode#0;class#Enum#0" />
-                <element signature="docComment;method#equals#0;class#Enum#0" />
-                <element signature="method#equals#0;class#Enum#0" />
-                <element signature="docComment;method#toString#0;class#Enum#0" />
-                <element signature="method#toString#0;class#Enum#0" />
-                <element signature="docComment;method#clone#0;class#Enum#0" />
-                <element signature="method#clone#0;class#Enum#0" />
-                <element signature="docComment;method#finalize#0;class#Enum#0" />
-                <element signature="method#finalize#0;class#Enum#0" />
-                <element signature="docComment;method#readObject#0;class#Enum#0" />
-                <element signature="method#readObject#0;class#Enum#0" />
-                <element signature="method#readObjectNoData#0;class#Enum#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="341">
-                <caret line="84" column="16" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="160">
-                <caret line="19" column="2" lean-forward="true" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="39" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -297,7 +238,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>该流可以生成</find>
       <find>ThreadLocal</find>
       <find>public static void invokeAll</find>
       <find>ForkJoinTask[]</find>
@@ -327,9 +267,9 @@
       <find>盗取</find>
       <find>【非工作线程】</find>
       <find>【队列】</find>
+      <find>java.util.Properties</find>
     </findStrings>
     <replaceStrings>
-      <replace>服务实现者</replace>
       <replace>类路径下（未命名模块）</replace>
       <replace>资源加载类位于</replace>
       <replace>验证资源是否有效</replace>
@@ -359,6 +299,7 @@
       <replace>窃取</replace>
       <replace>【外部线程】</replace>
       <replace>top处</replace>
+      <replace>Properties</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -375,12 +316,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/javax/lang/model/util/ElementKindVisitor9.java" />
-        <option value="$PROJECT_DIR$/src/javax/lang/model/element/TypeElement.java" />
-        <option value="$PROJECT_DIR$/src/javax/lang/model/element/Element.java" />
-        <option value="$PROJECT_DIR$/src/javax/lang/model/element/VariableElement.java" />
-        <option value="$PROJECT_DIR$/src/javax/lang/model/element/ModuleElement.java" />
-        <option value="$PROJECT_DIR$/src/javax/lang/model/type/WildcardType.java" />
         <option value="$PROJECT_DIR$/src/javax/lang/model/type/TypeMirror.java" />
         <option value="$PROJECT_DIR$/src/javax/lang/model/type/TypeVisitor.java" />
         <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor6.java" />
@@ -462,7 +397,6 @@
         <option value="$PROJECT_DIR$/src/java/util/concurrent/ThreadLocalRandom.java" />
         <option value="$PROJECT_DIR$/src/java/util/SplittableRandom.java" />
         <option value="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest05.java" />
-        <option value="$PROJECT_DIR$/测试文件清单.md" />
         <option value="$PROJECT_DIR$/src/java/lang/reflect/Constructor.java" />
         <option value="$PROJECT_DIR$/src/java/util/concurrent/RecursiveTask.java" />
         <option value="$PROJECT_DIR$/src/java/util/concurrent/CountedCompleter.java" />
@@ -473,9 +407,16 @@
         <option value="$PROJECT_DIR$/src/java/util/Arrays.java" />
         <option value="$PROJECT_DIR$/src/java/util/DualPivotQuicksort.java" />
         <option value="$PROJECT_DIR$/src/java/util/ArraysParallelSortHelpers.java" />
-        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
-        <option value="$PROJECT_DIR$/已阅代码清单_按功能排序.md" />
         <option value="$PROJECT_DIR$/src/java/lang/Enum.java" />
+        <option value="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test02/EnumTest02.java" />
+        <option value="$PROJECT_DIR$/测试文件清单.md" />
+        <option value="$PROJECT_DIR$/src/java/sql/Driver.java" />
+        <option value="$PROJECT_DIR$/src/java/sql/DriverInfo.java" />
+        <option value="$PROJECT_DIR$/src/java/sql/DriverManager.java" />
+        <option value="$PROJECT_DIR$/src/java/sql/Connection.java" />
+        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
+        <option value="$PROJECT_DIR$/src/java/lang/CompoundEnumeration.java" />
+        <option value="$PROJECT_DIR$/已阅代码清单_按功能排序.md" />
       </list>
     </option>
   </component>
@@ -500,10 +441,10 @@
     <scope name="OpenJDK-11" pattern="(file:src/java/lang/Void.java||file:src/java/lang/CharacterData.java||file:src/java/lang/CharacterDataLatin1.java||file:src/java/text/CharacterIterator.java||file:src/java/text/StringCharacterIterator.java||file:src/sun/text/CompactByteArray.java||file:src/sun/text/SupplementaryCharacterData.java||file:src/sun/text/RuleBasedBreakIterator.java||file:src/java/text/BreakIterator.java||file:src/java/lang/ConditionalSpecialCasing.java||file:src/sun/util/PreHashedMap.java||file:src/sun/nio/cs/StandardCharsets.java||file:src/sun/nio/cs/ext/ExtendedCharsets.java||file:src/sun/nio/cs/ext/AbstractCharsetProvider.java||file:src/java/nio/charset/spi/CharsetProvider.java||file:src/java/lang/Readable.java||file:src/java/nio/ByteOrder.java||file:src/jdk/internal/util/ArraysSupport.java||file:src/java/nio/BufferMismatch.java||file:src/sun/misc/Unsafe.java||file:src/jdk/internal/misc/Unsafe.java||file:src/java/lang/ref/Reference.java||file:src/java/lang/ref/ReferenceQueue.java||file:src/java/lang/ref/SoftReference.java||file:src/java/lang/ref/WeakReference.java||file:src/java/lang/ref/PhantomReference.java||file:src/java/lang/ref/FinalReference.java||file:src/java/lang/ref/Finalizer.java||file:src/jdk/internal/ref/Cleaner.java||file:src/jdk/internal/ref/CleanerFactory.java||file:src/jdk/internal/ref/CleanerImpl.java||file:src/jdk/internal/ref/PhantomCleanable.java||file:src/jdk/internal/ref/SoftCleanable.java||file:src/jdk/internal/ref/WeakCleanable.java||file:src/java/lang/ref/Cleaner.java||file:src/java/util/concurrent/ThreadFactory.java||file:src/jdk/internal/misc/InnocuousThread.java||file:src/java/io/FileCleanable.java||file:src/java/io/FileDescriptor.java||file:src/java/lang/Comparable.java||file:src/java/nio/Bits.java||file:src/java/lang/Runnable.java||file:src/java/util/Tripwire.java||file[OpenJDK-11]:src/java/util/function/*)&amp;&amp;!file:src/java/util/function/package-info.java||file:src/java/util/stream/Tripwire.java||file:src/java/util/StringJoiner.java||file:src/java/util/Objects.java||file:src/jdk/internal/util/Preconditions.java||file:src/java/util/Comparators.java||file:src/java/util/Comparator.java||file:src/java/nio/CharBuffer.java||file:src/java/nio/StringCharBuffer.java||file:src/java/nio/HeapCharBuffer.java||file:src/java/nio/HeapCharBufferR.java||file:src/java/nio/DirectCharBufferS.java||file:src/java/nio/DirectCharBufferRS.java||file:src/java/nio/DirectCharBufferU.java||file:src/java/nio/DirectCharBufferRU.java||file:src/java/nio/ByteBufferAsCharBufferB.java||file:src/java/nio/ByteBufferAsCharBufferRB.java||file:src/java/nio/ByteBufferAsCharBufferL.java||file:src/java/nio/ByteBufferAsCharBufferRL.java||file:src/java/nio/ShortBuffer.java||file:src/java/nio/HeapShortBuffer.java||file:src/java/nio/HeapShortBufferR.java||file:src/java/nio/DirectShortBufferS.java||file:src/java/nio/DirectShortBufferRS.java||file:src/java/nio/DirectShortBufferU.java||file:src/java/nio/DirectShortBufferRU.java||file:src/java/nio/ByteBufferAsShortBufferB.java||file:src/java/nio/ByteBufferAsShortBufferRB.java||file:src/java/nio/ByteBufferAsShortBufferL.java||file:src/java/nio/ByteBufferAsShortBufferRL.java||file:src/java/nio/IntBuffer.java||file:src/java/nio/HeapIntBuffer.java||file:src/java/nio/HeapIntBufferR.java||file:src/java/nio/DirectIntBufferS.java||file:src/java/nio/DirectIntBufferRS.java||file:src/java/nio/DirectIntBufferU.java||file:src/java/nio/DirectIntBufferRU.java||file:src/java/nio/ByteBufferAsIntBufferB.java||file:src/java/nio/ByteBufferAsIntBufferRB.java||file:src/java/nio/ByteBufferAsIntBufferL.java||file:src/java/nio/ByteBufferAsIntBufferRL.java||file:src/java/nio/LongBuffer.java||file:src/java/nio/HeapLongBuffer.java||file:src/java/nio/HeapLongBufferR.java||file:src/java/nio/DirectLongBufferS.java||file:src/java/nio/DirectLongBufferRS.java||file:src/java/nio/DirectLongBufferU.java||file:src/java/nio/DirectLongBufferRU.java||file:src/java/nio/ByteBufferAsLongBufferB.java||file:src/java/nio/ByteBufferAsLongBufferRB.java||file:src/java/nio/ByteBufferAsLongBufferL.java||file:src/java/nio/ByteBufferAsLongBufferRL.java||file:src/java/nio/FloatBuffer.java||file:src/java/nio/HeapFloatBuffer.java||file:src/java/nio/HeapFloatBufferR.java||file:src/java/nio/DirectFloatBufferS.java||file:src/java/nio/DirectFloatBufferRS.java||file:src/java/nio/DirectFloatBufferU.java||file:src/java/nio/DirectFloatBufferRU.java||file:src/java/nio/ByteBufferAsFloatBufferB.java||file:src/java/nio/ByteBufferAsFloatBufferRB.java||file:src/java/nio/ByteBufferAsFloatBufferL.java||file:src/java/nio/ByteBufferAsFloatBufferRL.java||file:src/java/nio/DoubleBuffer.java||file:src/java/nio/HeapDoubleBuffer.java||file:src/java/nio/HeapDoubleBufferR.java||file:src/java/nio/DirectDoubleBufferS.java||file:src/java/nio/DirectDoubleBufferRS.java||file:src/java/nio/DirectDoubleBufferU.java||file:src/java/nio/DirectDoubleBufferRU.java||file:src/java/nio/ByteBufferAsDoubleBufferB.java||file:src/java/nio/ByteBufferAsDoubleBufferRB.java||file:src/java/nio/ByteBufferAsDoubleBufferL.java||file:src/java/nio/ByteBufferAsDoubleBufferRL.java||file:src/java/nio/ByteBuffer.java||file:src/java/nio/MappedByteBuffer.java||file:src/java/nio/DirectByteBuffer.java||file:src/java/nio/DirectByteBufferR.java||file:src/java/nio/HeapByteBuffer.java||file:src/java/nio/HeapByteBufferR.java||file:src/java/nio/Buffer.java||file:src/sun/nio/ch/DirectBuffer.java||file:src/java/util/stream/BaseStream.java||file:src/java/util/stream/Stream.java||file:src/java/util/stream/PipelineHelper.java||file:src/java/util/stream/AbstractPipeline.java||file:src/java/util/stream/ReferencePipeline.java||file:src/java/util/stream/StreamShape.java||file:src/java/util/stream/StreamSupport.java||file:src/java/util/Spliterator.java||file:src/java/util/Spliterators.java||file:src/java/util/stream/Sink.java||file:src/java/util/stream/AbstractSpinedBuffer.java||file:src/java/util/stream/SpinedBuffer.java||file:src/java/util/stream/Node.java||file:src/java/util/stream/Nodes.java||file:src/java/util/Optional.java||file:src/java/util/stream/Collector.java||file:src/java/util/stream/Collectors.java||file:src/java/util/stream/IntStream.java||file:src/java/util/stream/LongStream.java||file:src/java/util/stream/DoubleStream.java||file:src/java/util/stream/IntPipeline.java||file:src/java/util/stream/LongPipeline.java||file:src/java/util/stream/DoublePipeline.java||file:src/java/util/stream/Streams.java||file:src/java/util/PrimitiveIterator.java||file:src/java/util/IntSummaryStatistics.java||file:src/java/util/LongSummaryStatistics.java||file:src/java/util/DoubleSummaryStatistics.java||file:src/java/util/OptionalInt.java||file:src/java/util/OptionalLong.java||file:src/java/util/OptionalDouble.java||file:src/java/nio/CharBufferSpliterator.java||file:src/java/lang/CharSequence.java||file:src/java/nio/charset/StandardCharsets.java||file:src/java/nio/charset/Charset.java||file:src/java/nio/charset/CharsetEncoder.java||file:src/java/nio/charset/CharsetDecoder.java||file:src/java/nio/charset/CoderResult.java||file:src/java/nio/charset/CodingErrorAction.java||file:src/sun/nio/cs/ThreadLocalCoders.java||file:src/java/lang/Appendable.java||file:src/java/util/Arrays.java||file:src/java/lang/System.java||file:src/java/lang/StringLatin1.java||file:src/java/lang/StringUTF16.java||file:src/java/lang/StringCoding.java||file:src/java/lang/StringBuilder.java||file:src/java/lang/StringBuffer.java||file:src/java/lang/String.java||file:src/java/lang/AbstractStringBuilder.java||file:src/java/lang/Character.java||file:src/java/lang/Object.java||file:src/java/lang/Thread.java||file:src/java/lang/ThreadGroup.java||file:src/java/lang/ThreadLocal.java||file:src/java/lang/InheritableThreadLocal.java||file:src/java/lang/StackTraceElement.java||file:src/jdk/internal/misc/TerminatingThreadLocal.java||file:src/jdk/internal/misc/SharedSecrets.java||file:src/java/lang/Byte.java||file:src/java/lang/Short.java||file:src/java/lang/Integer.java||file:src/java/lang/Long.java||file:src/java/lang/Float.java||file:src/java/lang/Double.java||file:src/java/lang/Boolean.java||file:src/java/lang/Number.java||file:src/java/lang/Enum.java||file:src/java/util/concurrent/atomic/AtomicBoolean.java||file:src/java/util/concurrent/atomic/AtomicInteger.java||file:src/java/util/concurrent/atomic/AtomicLong.java||file:src/java/util/Random.java||file:src/java/lang/Math.java||file:src/java/lang/StrictMath.java||file:src/jdk/internal/math/FloatConsts.java||file:src/jdk/internal/math/DoubleConsts.java||file:src/java/math/BigInteger.java||file:src/java/math/BigDecimal.java||file:src/java/io/Serializable.java||file:src/java/io/Externalizable.java||file:src/java/io/ObjectStreamField.java||file:src/jdk/internal/loader/AbstractClassLoaderValue.java||file:src/jdk/internal/loader/BootLoader.java||file:src/jdk/internal/loader/ClassLoaderValue.java||file:src/jdk/internal/loader/ClassLoaders.java||file:src/jdk/internal/loader/BuiltinClassLoader.java||file:src/java/lang/reflect/Array.java||file:src/java/lang/reflect/Constructor.java||file:src/java/lang/reflect/Executable.java||file:src/java/lang/reflect/Field.java||file:src/java/lang/reflect/GenericArrayType.java||file:src/java/lang/reflect/GenericDeclaration.java||file:src/java/lang/reflect/InvocationHandler.java||file:src/java/lang/reflect/Member.java||file:src/java/lang/reflect/Method.java||file:src/java/lang/reflect/Modifier.java||file:src/java/lang/reflect/Parameter.java||file:src/java/lang/reflect/ParameterizedType.java||file:src/java/lang/reflect/Proxy.java||file:src/java/lang/reflect/ProxyGenerator.java||file:src/java/lang/reflect/Type.java||file:src/java/lang/reflect/TypeVariable.java||file:src/java/lang/reflect/WildcardType.java||file:src/java/lang/annotation/Annotation.java||file:src/java/lang/annotation/Documented.java||file:src/java/lang/annotation/ElementType.java||file:src/java/lang/annotation/Inherited.java||file:src/java/lang/annotation/Repeatable.java||file:src/java/lang/annotation/Retention.java||file:src/java/lang/annotation/RetentionPolicy.java||file:src/java/lang/annotation/Target.java||file:src/java/lang/reflect/AccessibleObject.java||file:src/java/lang/reflect/AnnotatedElement.java||file:src/java/lang/reflect/AnnotatedType.java||file:src/java/lang/Class.java||file:src/java/lang/ClassLoader.java||file:src/java/lang/Module.java||file:src/java/lang/NamedPackage.java||file:src/java/lang/Package.java||file:src/java/util/Calendar.java||file:src/java/util/Date.java||file:src/java/util/Enumeration.java||file:src/java/util/spi/AbstractResourceBundleProvider.java||file:src/java/util/spi/ResourceBundleControlProvider.java||file:src/java/util/spi/ResourceBundleProvider.java||file:src/java/util/Iterator.java||file:src/java/util/ListResourceBundle.java||file:src/java/util/Locale.java||file:src/java/util/Properties.java||file:src/java/util/PropertyResourceBundle.java||file:src/java/util/ResourceBundle.java||file:src/java/util/ServiceLoader.java||file:src/sun/util/ResourceBundleEnumeration.java||file:src/sun/util/PropertyResourceBundleCharset.java||file:src/jdk/internal/reflect/Reflection.java||file:src/java/security/SecureClassLoader.java||file:src/jdk/internal/module/ServicesCatalog.java||file:src/java/lang/reflect/AnnotatedArrayType.java||file:src/java/lang/reflect/AnnotatedParameterizedType.java||file:src/java/lang/reflect/AnnotatedTypeVariable.java||file:src/java/lang/reflect/AnnotatedWildcardType.java||file:src/java/math/MathContext.java||file:src/java/math/RoundingMode.java||file:src/javax/annotation/processing/Messager.java||file:src/javax/annotation/processing/RoundEnvironment.java||file:src/javax/annotation/processing/ProcessingEnvironment.java||file:src/javax/annotation/processing/Filer.java||file:src/javax/annotation/processing/AbstractProcessor.java||file:src/javax/annotation/processing/SupportedSourceVersion.java||file:src/javax/annotation/processing/SupportedOptions.java||file:src/javax/annotation/processing/SupportedAnnotationTypes.java||file:src/javax/annotation/processing/Processor.java||file:src/javax/lang/model/element/Modifier.java||file:src/javax/lang/model/element/ElementKind.java||file:src/javax/lang/model/type/TypeKind.java||file:src/javax/lang/model/SourceVersion.java||file:src/javax/lang/model/element/AnnotationMirror.java||file:src/javax/lang/model/element/AnnotationValue.java||file:src/javax/lang/model/element/AnnotationValueVisitor.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor6.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor7.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor8.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor9.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor6.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor7.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor8.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor9.java||file:src/javax/lang/model/element/Element.java||file:src/javax/lang/model/element/ElementVisitor.java||file:src/javax/lang/model/util/AbstractElementVisitor6.java||file:src/javax/lang/model/util/AbstractElementVisitor7.java||file:src/javax/lang/model/util/AbstractElementVisitor8.java||file:src/javax/lang/model/util/AbstractElementVisitor9.java||file:src/javax/lang/model/util/SimpleElementVisitor6.java||file:src/javax/lang/model/util/SimpleElementVisitor7.java||file:src/javax/lang/model/util/SimpleElementVisitor8.java||file:src/javax/lang/model/util/SimpleElementVisitor9.java||file:src/javax/lang/model/element/PackageElement.java||file:src/javax/lang/model/element/Parameterizable.java||file:src/javax/lang/model/element/ExecutableElement.java||file:src/javax/lang/model/element/Name.java||file:src/javax/lang/model/element/QualifiedNameable.java||file:src/javax/lang/model/element/TypeParameterElement.java||file:src/javax/lang/model/element/NestingKind.java||file:src/javax/lang/model/util/ElementKindVisitor6.java||file:src/javax/lang/model/util/ElementKindVisitor7.java||file:src/javax/lang/model/util/ElementKindVisitor8.java||file:src/javax/lang/model/util/ElementKindVisitor9.java||file:src/javax/lang/model/util/ElementScanner6.java||file:src/javax/lang/model/util/ElementScanner7.java||file:src/javax/lang/model/util/ElementScanner8.java||file:src/javax/lang/model/util/ElementScanner9.java||file:src/javax/lang/model/element/ModuleElement.java||file:src/javax/lang/model/element/TypeElement.java||file:src/javax/lang/model/element/VariableElement.java||file:src/javax/lang/model/AnnotatedConstruct.java||file:src/javax/lang/model/util/AbstractTypeVisitor6.java||file:src/javax/lang/model/util/AbstractTypeVisitor7.java||file:src/javax/lang/model/util/AbstractTypeVisitor8.java||file:src/javax/lang/model/util/AbstractTypeVisitor9.java||file:src/javax/lang/model/util/SimpleTypeVisitor6.java||file:src/javax/lang/model/util/SimpleTypeVisitor7.java||file:src/javax/lang/model/util/SimpleTypeVisitor8.java||file:src/javax/lang/model/util/SimpleTypeVisitor9.java||file:src/javax/lang/model/util/TypeKindVisitor6.java||file:src/javax/lang/model/util/TypeKindVisitor7.java||file:src/javax/lang/model/util/TypeKindVisitor8.java||file:src/javax/lang/model/util/TypeKindVisitor9.java||file:src/javax/lang/model/type/TypeVisitor.java||file:src/javax/lang/model/type/TypeMirror.java||file:src/javax/lang/model/type/TypeVariable.java||file:src/javax/lang/model/type/WildcardType.java||file:src/javax/lang/model/type/ReferenceType.java||file:src/javax/lang/model/type/PrimitiveType.java||file:src/javax/lang/model/type/IntersectionType.java||file:src/javax/lang/model/type/UnionType.java||file:src/javax/lang/model/type/NoType.java||file:src/javax/lang/model/type/NullType.java||file:src/javax/lang/model/type/ErrorType.java||file:src/javax/lang/model/type/DeclaredType.java||file:src/javax/lang/model/type/ArrayType.java||file:src/javax/lang/model/type/ExecutableType.java||file:src/javax/lang/model/util/ElementFilter.java||file:src/javax/lang/model/util/Elements.java||file:src/javax/lang/model/util/Types.java||file:src/javax/tools/StandardLocation.java||file:src/javax/tools/JavaFileObject.java||file:src/javax/tools/FileObject.java||file:src/java/lang/module/Configuration.java||file:src/java/lang/module/ModuleReader.java||file:src/java/lang/module/ModuleDescriptor.java||file:src/java/lang/module/ModuleReference.java||file:src/java/lang/module/ResolvedModule.java||file:src/java/lang/ModuleLayer.java||file:src/jdk/internal/module/ModuleLoaderMap.java||file:src/java/util/concurrent/locks/AbstractOwnableSynchronizer.java||file:src/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java||file:src/java/util/concurrent/locks/AbstractQueuedSynchronizer.java||file:src/java/util/concurrent/locks/Condition.java||file:src/java/util/concurrent/locks/Lock.java||file:src/java/util/concurrent/locks/LockSupport.java||file:src/java/util/concurrent/locks/ReentrantLock.java||file:src/java/util/concurrent/Semaphore.java||file:src/java/util/concurrent/locks/ReadWriteLock.java||file:src/java/util/concurrent/locks/ReentrantReadWriteLock.java||file:src/java/util/concurrent/CountDownLatch.java||file:src/java/util/concurrent/CyclicBarrier.java||file:src/java/util/concurrent/locks/StampedLock.java||file:src/sun/nio/ch/Interruptible.java||file:src/java/io/StreamTokenizer.java||file:src/java/util/StringTokenizer.java||file:src/java/util/SplittableRandom.java||file:src/java/util/concurrent/ThreadLocalRandom.java" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1612" />
-    <option name="height" value="876" />
+    <option name="x" value="516" />
+    <option name="y" value="26" />
+    <option name="width" value="1308" />
+    <option name="height" value="1003" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -603,13 +544,6 @@
               <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="lang" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -617,24 +551,7 @@
               <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
-              <item name="invoke" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
-              <item name="ref" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
-              <item name="reflect" type="462c0819:PsiDirectoryNode" />
+              <item name="sql" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
@@ -649,113 +566,12 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="concurrent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="concurrent" type="462c0819:PsiDirectoryNode" />
-              <item name="locks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="stream" type="462c0819:PsiDirectoryNode" />
+              <item name="Timer.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
               <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
               <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="enumeration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="enumeration" type="462c0819:PsiDirectoryNode" />
-              <item name="test01" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="enumeration" type="462c0819:PsiDirectoryNode" />
-              <item name="test02" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="enumeration" type="462c0819:PsiDirectoryNode" />
-              <item name="test03" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="EnumTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="enumeration" type="462c0819:PsiDirectoryNode" />
-              <item name="test04" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -764,7 +580,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="ChangesTree.GroupingKeys" value="module" />
+    <property name="ChangesTree.GroupingKeys" value="directory" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -775,14 +591,14 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/src/TAG.java&#10;true" />
     <property name="android.sdk.path" value="D:/SDK-IDEA" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547810641024" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547908024056" />
     <property name="last.edited.regexp" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JavaSE/untitled1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JDBC/Demo3" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.34136933" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -829,7 +645,6 @@
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -945,28 +760,12 @@
       <workItem from="1547361168381" duration="4688000" />
       <workItem from="1547368096939" duration="56798000" />
       <workItem from="1547480637555" duration="8260000" />
-      <workItem from="1547527253429" duration="145812000" />
-    </task>
-    <task id="LOCAL-00270" summary=":memo: 更新README">
-      <created>1545149889537</created>
-      <option name="number" value="00270" />
-      <option name="presentableId" value="LOCAL-00270" />
-      <option name="project" value="LOCAL" />
-      <updated>1545149889537</updated>
-    </task>
-    <task id="LOCAL-00271" summary=":recycle: 【java.lang.ref.Reference】 更新对referent对象的理解">
-      <created>1545150355166</created>
-      <option name="number" value="00271" />
-      <option name="presentableId" value="LOCAL-00271" />
-      <option name="project" value="LOCAL" />
-      <updated>1545150355166</updated>
-    </task>
-    <task id="LOCAL-00272" summary=":recycle: 【java.lang.ref.ReferenceQueue】 添加poll()方法的注释">
-      <created>1545150484211</created>
-      <option name="number" value="00272" />
-      <option name="presentableId" value="LOCAL-00272" />
-      <option name="project" value="LOCAL" />
-      <updated>1545150484211</updated>
+      <workItem from="1547527253429" duration="146516000" />
+      <workItem from="1547811413720" duration="6553000" />
+      <workItem from="1547818928556" duration="538000" />
+      <workItem from="1547824192514" duration="3178000" />
+      <workItem from="1547870981813" duration="40000" />
+      <workItem from="1547871091553" duration="3348000" />
     </task>
     <task id="LOCAL-00273" summary=":white_check_mark: 【java.lang.ref.Reference】 更新Reference的测试用例">
       <created>1545154348746</created>
@@ -1290,11 +1089,32 @@
       <option name="project" value="LOCAL" />
       <updated>1547654650490</updated>
     </task>
-    <option name="localTasksCounter" value="319" />
+    <task id="LOCAL-00319" summary=":bulb: 【java.lang.Enum】 可以看作是所有enum的包装类">
+      <created>1547810666524</created>
+      <option name="number" value="00319" />
+      <option name="presentableId" value="LOCAL-00319" />
+      <option name="project" value="LOCAL" />
+      <updated>1547810666525</updated>
+    </task>
+    <task id="LOCAL-00320" summary=":white_check_mark: 【java.lang.Enum】 枚举使用方法">
+      <created>1547811069892</created>
+      <option name="number" value="00320" />
+      <option name="presentableId" value="LOCAL-00320" />
+      <option name="project" value="LOCAL" />
+      <updated>1547811069893</updated>
+    </task>
+    <task id="LOCAL-00321" summary=":bulb: 【java.util.Enumeration】 枚举器接口，跟迭代器接口很像，只用于遍历，没有移除功能">
+      <created>1547904480089</created>
+      <option name="number" value="00321" />
+      <option name="presentableId" value="LOCAL-00321" />
+      <option name="project" value="LOCAL" />
+      <updated>1547904480090</updated>
+    </task>
+    <option name="localTasksCounter" value="322" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2232282000" />
+    <option name="totallyTimeSpent" value="2246643000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -1307,10 +1127,45 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-8" width="1870" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Repositories" order="0" weight="0.32995737" />
-      <window_info active="true" content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.4501845" visible="true" weight="0.15911601" />
+      <window_info content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.44827586" visible="true" weight="0.1640884" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5537806" side_tool="true" weight="0.17458564" />
+      <window_info id="Structure" order="7" sideWeight="0.55172414" side_tool="true" weight="0.16077349" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3280255" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32908705" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3652822" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.55910546" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5049724" side_tool="true" weight="0.32271764" />
+      <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="12" sideWeight="0.49502763" visible="true" weight="0.32271764" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3280255" />
+      <window_info anchor="bottom" id="Messages" order="15" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24972437" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25138122" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="8" weight="0.3296582" />
+      <window_info anchor="right" id="Maven" order="9" weight="0.32928178" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Repositories" order="0" weight="0.32995737" />
+      <window_info active="true" content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.4501845" visible="true" weight="0.16077349" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -1329,7 +1184,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.55910546" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5049724" side_tool="true" weight="0.32271764" />
       <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49502763" visible="true" weight="0.32271764" />
+      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49502763" weight="0.32271764" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3280255" />
       <window_info anchor="bottom" id="Messages" order="15" />
@@ -1343,7 +1198,7 @@
       <window_info anchor="right" id="Maven Projects" order="7" weight="0.32995737" />
       <window_info anchor="right" id="Database" order="8" weight="0.3296582" />
       <window_info anchor="right" id="Maven" order="9" weight="0.32928178" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1464,10 +1319,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value=":bulb: 【java.lang.String】 字符串" />
-    <MESSAGE value=":bulb: 【java.lang.StringBuilder】 非线程安全的字符序列，适合单线程下操作大量字符，内部实现为字节数组" />
-    <MESSAGE value=":bulb: 【java.lang.StringBuffer】 线程安全的字符序列，适合多线程下操作大量字符，内部实现为字节数组" />
     <MESSAGE value=":bulb: 【java.lang.AbstractStringBuilder】 字符序列的抽象实现，是StringBuilder和StringBuffer的父类" />
     <MESSAGE value=":bulb: 【java.lang.StringLatin1】 LATIN1-String" />
     <MESSAGE value=":recycle: 【java.lang.StrictMath】 完善注释" />
@@ -1490,211 +1341,16 @@
     <MESSAGE value=":recycle: 【java.lang.ThreadLocal】 更新对哈希魔数的理解" />
     <MESSAGE value=":recycle: 【java.lang.Thread】 添加对未捕获异常处理器的理解" />
     <MESSAGE value=":white_check_mark: 【java.lang.Thread】 实现未捕获异常处理器接口" />
-    <option name="LAST_COMMIT_MESSAGE" value=":white_check_mark: 【java.lang.Thread】 实现未捕获异常处理器接口" />
+    <MESSAGE value=":bulb: 【java.lang.Enum】 可以看作是所有enum的包装类" />
+    <MESSAGE value=":white_check_mark: 【java.lang.Enum】 枚举使用方法" />
+    <MESSAGE value=":bulb: 【java.util.Enumeration】 枚举器接口，跟迭代器接口很像，只用于遍历，没有移除功能" />
+    <option name="LAST_COMMIT_MESSAGE" value=":bulb: 【java.util.Enumeration】 枚举器接口，跟迭代器接口很像，只用于遍历，没有移除功能" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/OpenJDK-11.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/io/Win32ErrorMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/java2d/DestSurfaceProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/java2d/DisposerRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/java2d/DisposerTarget.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="383">
-            <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/RunnableFuture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/ExecutorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-454">
-          <caret line="137" column="17" selection-start-line="137" selection-start-column="17" selection-end-line="137" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/java.util.concurrent.ForkJoinTask">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>java.util.concurrent.ForkJoinTask</OriginalElement>
-          <nodes>
-            <node x="" y="">java.util.concurrent.ForkJoinTask</node>
-            <node x="" y="">java.util.concurrent.Future</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="-320.0" y="-163.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/java.util.concurrent.ForkJoinPool">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>java.util.concurrent.ForkJoinPool</OriginalElement>
-          <nodes>
-            <node x="" y="">java.util.concurrent.AbstractExecutorService</node>
-            <node x="" y="">java.util.concurrent.Executor</node>
-            <node x="" y="">java.util.concurrent.ForkJoinPool</node>
-            <node x="" y="">java.util.concurrent.ExecutorService</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="-339.0" y="-83.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/java.util.concurrent.FutureTask">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>java.util.concurrent.FutureTask</OriginalElement>
-          <nodes>
-            <node x="" y="">java.util.concurrent.RunnableFuture</node>
-            <node x="" y="">java.util.concurrent.Future</node>
-            <node x="" y="">java.util.concurrent.FutureTask</node>
-            <node x="" y="">java.lang.Runnable</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="-313.0" y="-83.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/FutureTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
-          <folding>
-            <element signature="docComment;class#FutureTask#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/java.util.concurrent.RecursiveTask">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>java.util.concurrent.RecursiveTask</OriginalElement>
-          <nodes>
-            <node x="" y="">java.util.concurrent.ForkJoinTask</node>
-            <node x="" y="">java.util.concurrent.Future</node>
-            <node x="" y="">java.util.concurrent.RecursiveTask</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="-320.0" y="-123.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/AbstractExecutorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="232" column="31" selection-start-line="232" selection-start-column="31" selection-end-line="232" selection-end-column="31" />
-          <folding>
-            <element signature="docComment;class#AbstractExecutorService#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/function/Supplier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/function/Predicate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/invoke/MethodHandles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="2635" column="37" selection-start-line="2632" selection-start-column="7" selection-end-line="2636" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="2178" column="22" selection-start-line="2178" selection-start-column="22" selection-end-line="2178" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/Callable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="50" column="2" selection-start-line="50" selection-start-column="2" selection-end-line="50" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/ThreadPoolExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1856">
@@ -2375,16 +2031,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/测试文件清单.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="288">
-            <caret line="71" column="21" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="21" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest05.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -2399,13 +2045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="314">
           <caret line="433" column="23" selection-start-line="433" selection-start-column="23" selection-end-line="433" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/System.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="1165" column="29" selection-start-line="1165" selection-start-column="29" selection-end-line="1165" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -4076,13 +3715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TAG.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/RecursiveAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="705">
@@ -4675,34 +4307,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test01/EnumTest01.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test02/EnumTest02.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test03/EnumTest03.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test04/EnumTest04.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="23" lean-forward="true" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -4721,26 +4325,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="160">
-            <caret line="19" column="2" lean-forward="true" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="39" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="341">
-            <caret line="84" column="16" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -4778,6 +4362,437 @@
             <element signature="docComment;method#readObject#0;class#Enum#0" />
             <element signature="method#readObject#0;class#Enum#0" />
             <element signature="method#readObjectNoData#0;class#Enum#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test01/EnumTest01.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test02/EnumTest02.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test03/EnumTest03.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test04/EnumTest04.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/测试文件清单.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="821">
+            <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/Wrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/SQLData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="63" column="19" lean-forward="true" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/DriverAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="63" column="9" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jdk/nashorn/api/scripting/ScriptUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1551">
+          <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TAG.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="32" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/Statement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="68" column="11" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
+          <folding>
+            <element signature="docComment;class#Statement#0" />
+            <element signature="e#2045#3192#0" />
+            <element signature="e#3258#4589#0" />
+            <element signature="e#4650#5361#0" />
+            <element signature="e#5483#6352#0" />
+            <element signature="e#6405#7368#0" />
+            <element signature="e#7429#8024#0" />
+            <element signature="e#8072#8650#0" />
+            <element signature="e#8706#9873#0" />
+            <element signature="e#9945#10421#0" />
+            <element signature="e#10474#11880#0" />
+            <element signature="e#11945#12436#0" />
+            <element signature="e#12481#13484#0" />
+            <element signature="e#13540#13964#0" />
+            <element signature="e#14016#15396#0" />
+            <element signature="e#15534#17222#0" />
+            <element signature="e#17281#17743#0" />
+            <element signature="e#17799#18339#0" />
+            <element signature="e#18391#19252#0" />
+            <element signature="e#19381#20310#0" />
+            <element signature="e#20379#21062#0" />
+            <element signature="e#21117#21741#0" />
+            <element signature="e#21800#22470#0" />
+            <element signature="e#22520#22935#0" />
+            <element signature="e#22996#23466#0" />
+            <element signature="e#23521#24375#0" />
+            <element signature="e#24434#24814#0" />
+            <element signature="e#24863#27980#0" />
+            <element signature="e#28032#28361#0" />
+            <element signature="e#28489#28669#0" />
+            <element signature="e#28709#28893#0" />
+            <element signature="e#28932#29148#0" />
+            <element signature="e#29185#29370#0" />
+            <element signature="e#29406#29538#0" />
+            <element signature="e#29573#29707#0" />
+            <element signature="e#29748#29886#0" />
+            <element signature="e#29923#31796#0" />
+            <element signature="e#31863#32753#0" />
+            <element signature="e#32813#34922#0" />
+            <element signature="e#35006#37035#0" />
+            <element signature="e#37117#39186#0" />
+            <element signature="e#39269#42041#0" />
+            <element signature="e#42123#44791#0" />
+            <element signature="e#44871#47558#0" />
+            <element signature="e#47638#48083#0" />
+            <element signature="e#48144#48526#0" />
+            <element signature="e#48580#49717#0" />
+            <element signature="e#49807#50306#0" />
+            <element signature="e#50450#51128#0" />
+            <element signature="e#51191#51593#0" />
+            <element signature="e#51734#52502#0" />
+            <element signature="e#51734#52657#0" />
+            <element signature="e#52663#53461#0" />
+            <element signature="e#52663#53616#0" />
+            <element signature="e#53622#54419#0" />
+            <element signature="e#53622#54500#0" />
+            <element signature="e#54506#57542#0" />
+            <element signature="e#54506#57695#0" />
+            <element signature="e#57701#59268#0" />
+            <element signature="e#57701#59431#0" />
+            <element signature="e#59437#61774#0" />
+            <element signature="e#59437#61974#0" />
+            <element signature="e#61980#64237#0" />
+            <element signature="e#61980#64423#0" />
+            <element signature="e#64429#66726#0" />
+            <element signature="e#64429#66925#0" />
+            <element signature="e#66948#68188#0" />
+            <element signature="e#66948#68317#0" />
+            <element signature="e#68325#71969#0" />
+            <element signature="e#68325#72701#0" />
+            <element signature="e#72142#72205#1" />
+            <element signature="e#72295#72379#1" />
+            <element signature="e#72424#72494#1" />
+            <element signature="e#72570#72626#1" />
+            <element signature="e#72632#72695#1" />
+            <element signature="e#72707#74553#0" />
+            <element signature="e#72707#74812#0" />
+            <element signature="e#74818#76416#0" />
+            <element signature="e#74818#76548#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/ResultSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1952">
+          <caret line="148" column="17" selection-start-line="148" selection-start-column="17" selection-end-line="148" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/PreparedStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
+          <folding>
+            <element signature="docComment;class#PreparedStatement#0" />
+            <element signature="e#2552#3343#0" />
+            <element signature="e#3399#4348#0" />
+            <element signature="e#4399#5400#0" />
+            <element signature="e#5477#6056#0" />
+            <element signature="e#6134#6683#0" />
+            <element signature="e#6755#7306#0" />
+            <element signature="e#7380#7928#0" />
+            <element signature="e#7998#8546#0" />
+            <element signature="e#8618#9165#0" />
+            <element signature="e#9239#9789#0" />
+            <element signature="e#9865#10425#0" />
+            <element signature="e#10509#11207#0" />
+            <element signature="e#11283#11957#0" />
+            <element signature="e#12032#12679#0" />
+            <element signature="e#12772#13322#0" />
+            <element signature="e#13415#13981#0" />
+            <element signature="e#14084#15181#0" />
+            <element signature="e#15299#16742#0" />
+            <element signature="e#16905#17921#0" />
+            <element signature="e#18053#18631#0" />
+            <element signature="e#18685#18757#0" />
+            <element signature="e#18788#19666#0" />
+            <element signature="e#19767#21789#0" />
+            <element signature="e#21865#23409#0" />
+            <element signature="e#23529#23842#0" />
+            <element signature="e#23889#25059#0" />
+            <element signature="e#25221#25917#0" />
+            <element signature="e#25988#26701#0" />
+            <element signature="e#26774#27487#0" />
+            <element signature="e#27560#28278#0" />
+            <element signature="e#28353#29714#0" />
+            <element signature="e#29777#30845#0" />
+            <element signature="e#30952#32020#0" />
+            <element signature="e#32127#33216#0" />
+            <element signature="e#33333#35421#0" />
+            <element signature="e#35596#36290#0" />
+            <element signature="e#36369#36907#0" />
+            <element signature="e#37057#37726#0" />
+            <element signature="e#37801#38785#0" />
+            <element signature="e#38867#39828#0" />
+            <element signature="e#39932#40728#0" />
+            <element signature="e#40807#42158#0" />
+            <element signature="e#42258#43757#0" />
+            <element signature="e#43867#45367#0" />
+            <element signature="e#45469#46392#0" />
+            <element signature="e#46477#49095#0" />
+            <element signature="e#49219#50333#0" />
+            <element signature="e#50451#51485#0" />
+            <element signature="e#51621#52791#0" />
+            <element signature="e#52965#54267#0" />
+            <element signature="e#54372#55593#0" />
+            <element signature="e#55695#57058#0" />
+            <element signature="e#57179#58444#0" />
+            <element signature="e#58535#59869#0" />
+            <element signature="e#59956#61324#0" />
+            <element signature="e#61421#62810#0" />
+            <element signature="e#62976#65622#0" />
+            <element signature="e#62976#65842#0" />
+            <element signature="e#65848#66832#0" />
+            <element signature="e#65848#67026#0" />
+            <element signature="e#67032#68210#0" />
+            <element signature="e#67032#68363#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/SQLType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/SQLXML.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2576">
+          <caret line="190" column="18" selection-start-line="190" selection-start-column="17" selection-end-line="190" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/DriverManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="193" column="23" selection-start-line="193" selection-start-column="23" selection-end-line="193" selection-end-column="23" />
+          <folding>
+            <element signature="docComment;class#DriverManager#0" />
+            <element signature="docComment;field#SET_LOG_PERMISSION#0;class#DriverManager#0" />
+            <element signature="docComment;field#DEREGISTER_DRIVER_PERMISSION#0;class#DriverManager#0" />
+            <element signature="method#DriverManager#0;class#DriverManager#0" />
+            <element signature="docComment;method#getLogWriter#0;class#DriverManager#0" />
+            <element signature="method#getLogWriter#0;class#DriverManager#0" />
+            <element signature="docComment;method#setLogWriter#0;class#DriverManager#0" />
+            <element signature="method#setLogWriter#0;class#DriverManager#0" />
+            <element signature="docComment;method#getConnection#0;class#DriverManager#0" />
+            <element signature="method#getConnection#0;class#DriverManager#0" />
+            <element signature="docComment;method#getConnection#1;class#DriverManager#0" />
+            <element signature="method#getConnection#1;class#DriverManager#0" />
+            <element signature="docComment;method#getConnection#2;class#DriverManager#0" />
+            <element signature="method#getConnection#2;class#DriverManager#0" />
+            <element signature="method#getConnection#3;class#DriverManager#0" />
+            <element signature="docComment;method#registerDriver#0;class#DriverManager#0" />
+            <element signature="method#registerDriver#0;class#DriverManager#0" />
+            <element signature="docComment;method#registerDriver#1;class#DriverManager#0" />
+            <element signature="method#registerDriver#1;class#DriverManager#0" />
+            <element signature="docComment;method#getDriver#0;class#DriverManager#0" />
+            <element signature="docComment;method#deregisterDriver#0;class#DriverManager#0" />
+            <element signature="method#getDrivers#0;class#DriverManager#0" />
+            <element signature="docComment;method#drivers#0;class#DriverManager#0" />
+            <element signature="method#drivers#0;class#DriverManager#0" />
+            <element signature="method#getDrivers#1;class#DriverManager#0" />
+            <element signature="docComment;method#ensureDriversInitialized#0;class#DriverManager#0" />
+            <element signature="method#ensureDriversInitialized#0;class#DriverManager#0" />
+            <element signature="docComment;method#setLoginTimeout#0;class#DriverManager#0" />
+            <element signature="method#setLoginTimeout#0;class#DriverManager#0" />
+            <element signature="docComment;method#getLoginTimeout#0;class#DriverManager#0" />
+            <element signature="method#getLoginTimeout#0;class#DriverManager#0" />
+            <element signature="docComment;method#setLogStream#0;class#DriverManager#0" />
+            <element signature="method#setLogStream#0;class#DriverManager#0" />
+            <element signature="docComment;method#getLogStream#0;class#DriverManager#0" />
+            <element signature="method#getLogStream#0;class#DriverManager#0" />
+            <element signature="docComment;method#println#0;class#DriverManager#0" />
+            <element signature="method#println#0;class#DriverManager#0" />
+            <element signature="docComment;method#isDriverAllowed#0;class#DriverManager#0" />
+            <element signature="method#isDriverAllowed#0;class#DriverManager#0" />
+            <element signature="method#isDriverAllowed#1;class#DriverManager#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/Driver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="110" column="55" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Driver#0" />
+            <element signature="docComment;method#connect#0;class#Driver#0" />
+            <element signature="docComment;method#acceptsURL#0;class#Driver#0" />
+            <element signature="docComment;method#getPropertyInfo#0;class#Driver#0" />
+            <element signature="docComment;method#getMajorVersion#0;class#Driver#0" />
+            <element signature="docComment;method#getMinorVersion#0;class#Driver#0" />
+            <element signature="docComment;method#jdbcCompliant#0;class#Driver#0" />
+            <element signature="docComment;method#getParentLogger#0;class#Driver#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="1624" column="8" selection-start-line="1624" selection-start-column="8" selection-end-line="1624" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/Timer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="579" lean-forward="true" selection-start-line="579" selection-end-line="579" />
+          <folding>
+            <element signature="e#0#30504#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="1456" column="19" selection-start-line="1456" selection-start-column="19" selection-end-line="1456" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="105" column="4" selection-start-line="105" selection-start-column="4" selection-end-line="105" selection-end-column="4" />
+          <folding>
+            <element signature="docComment;class#Connection#0" />
+            <element signature="e#4087#4957#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lang/Terminator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/PrimitiveIterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/Enumeration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="docComment;class#Enumeration#0" />
+            <element signature="docComment;method#hasMoreElements#0;class#Enumeration#0" />
+            <element signature="docComment;method#nextElement#0;class#Enumeration#0" />
+            <element signature="docComment;method#asIterator#0;class#Enumeration#0" />
+            <element signature="method#asIterator#0;class#Enumeration#0" />
+            <element signature="class#4892:5150" />
+            <element signature="method#hasNext#0;class#4892:5150" />
+            <element signature="method#next#0;class#4892:5150" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="272">
+            <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="69" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="421">
+            <caret line="308" column="75" lean-forward="true" selection-start-line="308" selection-start-column="56" selection-end-line="308" selection-end-column="75" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/DriverInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/sql/JDBCType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-560">
+          <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lang/CompoundEnumeration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-175">
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+          <folding>
+            <element signature="docComment;class#CompoundEnumeration#0" />
           </folding>
         </state>
       </provider>
