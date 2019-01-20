@@ -5,7 +5,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":bulb: 【java.util.CompoundEnumeration】 复合枚举类型，用于遍历">
+    <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":bulb: 【java.util.Iterator】 迭代器接口，跟枚举器接口很像，可以遍历元素，也可以移除元素。关键是，支持foreach遍历方式">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/io/Externalizable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/Externalizable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" afterDir="false" />
@@ -201,11 +201,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager">
-    <option name="groupingKeys">
-      <option value="module" />
-    </option>
-  </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
     <option name="GROUP_DATA_SOURCES" value="true" />
@@ -227,7 +222,20 @@
     <fileColor scope="OpenJDK-11" color="99ffcc" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/util/Timer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="104" column="1" selection-start-line="104" selection-start-column="1" selection-end-line="104" selection-end-column="1" />
+              <folding>
+                <element signature="docComment;class#Timer#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -414,9 +422,9 @@
         <option value="$PROJECT_DIR$/src/java/sql/DriverInfo.java" />
         <option value="$PROJECT_DIR$/src/java/sql/DriverManager.java" />
         <option value="$PROJECT_DIR$/src/java/sql/Connection.java" />
-        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
         <option value="$PROJECT_DIR$/src/java/lang/CompoundEnumeration.java" />
         <option value="$PROJECT_DIR$/已阅代码清单_按功能排序.md" />
+        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
       </list>
     </option>
   </component>
@@ -531,6 +539,11 @@
             <path>
               <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
               <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -551,13 +564,6 @@
               <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sql" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -567,11 +573,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
               <item name="Timer.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -591,7 +592,7 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/src/TAG.java&#10;true" />
     <property name="android.sdk.path" value="D:/SDK-IDEA" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547908024056" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548001323419" />
     <property name="last.edited.regexp" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JDBC/Demo3" />
@@ -765,14 +766,7 @@
       <workItem from="1547818928556" duration="538000" />
       <workItem from="1547824192514" duration="3178000" />
       <workItem from="1547870981813" duration="40000" />
-      <workItem from="1547871091553" duration="3348000" />
-    </task>
-    <task id="LOCAL-00273" summary=":white_check_mark: 【java.lang.ref.Reference】 更新Reference的测试用例">
-      <created>1545154348746</created>
-      <option name="number" value="00273" />
-      <option name="presentableId" value="LOCAL-00273" />
-      <option name="project" value="LOCAL" />
-      <updated>1545154348746</updated>
+      <workItem from="1547871091553" duration="6953000" />
     </task>
     <task id="LOCAL-00274" summary=":bulb: 【java.lang.Byte】 byte的包装类">
       <created>1545273159070</created>
@@ -1110,11 +1104,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547904480090</updated>
     </task>
-    <option name="localTasksCounter" value="322" />
+    <task id="LOCAL-00322" summary=":bulb: 【java.lang.CompoundEnumeration】 复合枚举类型，用于遍历">
+      <created>1547943792382</created>
+      <option name="number" value="00322" />
+      <option name="presentableId" value="LOCAL-00322" />
+      <option name="project" value="LOCAL" />
+      <updated>1547943792382</updated>
+    </task>
+    <option name="localTasksCounter" value="323" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2246643000" />
+    <option name="totallyTimeSpent" value="2250248000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -1146,9 +1147,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Statistic" order="8" weight="0.3652822" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.55910546" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5049724" side_tool="true" weight="0.32271764" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5055249" side_tool="true" weight="0.32271764" />
       <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="12" sideWeight="0.49502763" visible="true" weight="0.32271764" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="12" sideWeight="0.49447513" visible="true" weight="0.32271764" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3280255" />
       <window_info anchor="bottom" id="Messages" order="15" />
@@ -1319,7 +1320,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value=":bulb: 【java.lang.AbstractStringBuilder】 字符序列的抽象实现，是StringBuilder和StringBuffer的父类" />
     <MESSAGE value=":bulb: 【java.lang.StringLatin1】 LATIN1-String" />
     <MESSAGE value=":recycle: 【java.lang.StrictMath】 完善注释" />
     <MESSAGE value=":recycle: 【java.lang.Math】 完善注释" />
@@ -1344,30 +1344,14 @@
     <MESSAGE value=":bulb: 【java.lang.Enum】 可以看作是所有enum的包装类" />
     <MESSAGE value=":white_check_mark: 【java.lang.Enum】 枚举使用方法" />
     <MESSAGE value=":bulb: 【java.util.Enumeration】 枚举器接口，跟迭代器接口很像，只用于遍历，没有移除功能" />
-    <option name="LAST_COMMIT_MESSAGE" value=":bulb: 【java.util.Enumeration】 枚举器接口，跟迭代器接口很像，只用于遍历，没有移除功能" />
+    <MESSAGE value=":bulb: 【java.lang.CompoundEnumeration】 复合枚举类型，用于遍历" />
+    <option name="LAST_COMMIT_MESSAGE" value=":bulb: 【java.lang.CompoundEnumeration】 复合枚举类型，用于遍历" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/ThreadPoolExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1856">
-          <caret line="321" column="13" selection-start-line="321" selection-start-column="13" selection-end-line="321" selection-end-column="13" />
-          <folding>
-            <element signature="docComment;class#ThreadPoolExecutor#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jdk/internal/misc/Unsafe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="842" column="22" selection-start-line="842" selection-start-column="22" selection-end-line="842" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/CyclicBarrier.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -2052,13 +2036,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="586">
           <caret line="359" column="38" lean-forward="true" selection-start-line="359" selection-start-column="38" selection-end-line="359" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="76" column="33" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -4297,16 +4274,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6208">
-          <caret line="220" column="37" lean-forward="true" selection-start-line="220" selection-start-column="37" selection-end-line="220" selection-end-column="37" />
-          <folding>
-            <element signature="n#list#0;n#component#1;n#project#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -4694,16 +4661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/Timer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="579" lean-forward="true" selection-start-line="579" selection-end-line="579" />
-          <folding>
-            <element signature="e#0#30504#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
@@ -4753,26 +4710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="272">
-            <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="69" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="421">
-            <caret line="308" column="75" lean-forward="true" selection-start-line="308" selection-start-column="56" selection-end-line="308" selection-end-column="75" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/sql/DriverInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -4793,6 +4730,80 @@
           <caret column="18" selection-start-column="18" selection-end-column="18" />
           <folding>
             <element signature="docComment;class#CompoundEnumeration#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="225" column="31" lean-forward="true" selection-start-line="225" selection-start-column="31" selection-end-line="225" selection-end-column="31" />
+          <folding>
+            <element signature="n#list#0;n#component#1;n#project#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="533">
+            <caret line="316" lean-forward="true" selection-start-line="316" selection-end-line="316" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="224">
+            <caret line="164" column="47" lean-forward="true" selection-start-line="164" selection-start-column="47" selection-end-line="164" selection-end-column="47" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/Iterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="56" column="25" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="25" />
+          <folding>
+            <element signature="docComment;class#Iterator#0" />
+            <element signature="docComment;method#hasNext#0;class#Iterator#0" />
+            <element signature="docComment;method#next#0;class#Iterator#0" />
+            <element signature="docComment;method#remove#0;class#Iterator#0" />
+            <element signature="method#remove#0;class#Iterator#0" />
+            <element signature="docComment;method#forEachRemaining#0;class#Iterator#0" />
+            <element signature="method#forEachRemaining#0;class#Iterator#0" />
+            <element signature="e#5374#5420#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/TimerTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="docComment;class#TimerTask#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="593" column="29" selection-start-line="593" selection-start-column="29" selection-end-line="593" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/util/Timer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="104" column="1" selection-start-line="104" selection-start-column="1" selection-end-line="104" selection-end-column="1" />
+          <folding>
+            <element signature="docComment;class#Timer#0" />
           </folding>
         </state>
       </provider>
