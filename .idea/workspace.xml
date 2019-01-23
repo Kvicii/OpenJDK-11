@@ -5,10 +5,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":bulb: 【java.io.ObjectStreamField】 指定哪些字段将参与序列化，并封装这些参与序列化的字段信息">
+    <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":bulb: 【java.io.Externalizable】 序列化接口。如果实现了接口，则强制要求自定义序列化/反序列化逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/io/Externalizable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/Externalizable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Class.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/lang/ClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ClassLoader.java" afterDir="false" />
@@ -227,90 +226,15 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/io/ObjectStreamField.java">
+        <entry file="file://$PROJECT_DIR$/src/java/io/Externalizable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1200">
-              <caret line="267" column="7" selection-start-line="267" selection-start-column="7" selection-end-line="267" selection-end-column="7" />
+            <state relative-caret-position="48">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
               <folding>
-                <element signature="docComment;class#ObjectStreamField#0" />
-                <element signature="docComment;field#field#0;class#ObjectStreamField#0" />
-                <element signature="docComment;field#name#0;class#ObjectStreamField#0" />
-                <element signature="docComment;field#type#0;class#ObjectStreamField#0" />
-                <element signature="docComment;field#signature#0;class#ObjectStreamField#0" />
-                <element signature="docComment;field#unshared#0;class#ObjectStreamField#0" />
-                <element signature="docComment;field#typeSignature#0;class#ObjectStreamField#0" />
-                <element signature="docComment;field#offset#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#ObjectStreamField#0;class#ObjectStreamField#0" />
-                <element signature="method#ObjectStreamField#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#ObjectStreamField#1;class#ObjectStreamField#0" />
-                <element signature="method#ObjectStreamField#1;class#ObjectStreamField#0" />
-                <element signature="e#3981#4038#1" />
-                <element signature="docComment;method#ObjectStreamField#2;class#ObjectStreamField#0" />
-                <element signature="method#ObjectStreamField#2;class#ObjectStreamField#0" />
-                <element signature="e#4425#4482#1" />
-                <element signature="e#4660#5516#0" />
-                <element signature="docComment;method#ObjectStreamField#3;class#ObjectStreamField#0" />
-                <element signature="method#ObjectStreamField#3;class#ObjectStreamField#0" />
-                <element signature="docComment;method#getField#0;class#ObjectStreamField#0" />
-                <element signature="method#getField#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#getName#0;class#ObjectStreamField#0" />
-                <element signature="method#getName#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#getType#0;class#ObjectStreamField#0" />
-                <element signature="method#getType#0;class#ObjectStreamField#0" />
-                <element signature="e#7206#7446#1" />
-                <element signature="e#7367#7436#1" />
-                <element signature="docComment;method#getTypeCode#0;class#ObjectStreamField#0" />
-                <element signature="method#getTypeCode#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#getTypeString#0;class#ObjectStreamField#0" />
-                <element signature="method#getTypeString#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#getOffset#0;class#ObjectStreamField#0" />
-                <element signature="method#getOffset#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#setOffset#0;class#ObjectStreamField#0" />
-                <element signature="method#setOffset#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#isPrimitive#0;class#ObjectStreamField#0" />
-                <element signature="method#isPrimitive#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#isUnshared#0;class#ObjectStreamField#0" />
-                <element signature="method#isUnshared#0;class#ObjectStreamField#0" />
-                <element signature="docComment;method#getSignature#0;class#ObjectStreamField#0" />
-                <element signature="method#getSignature#0;class#ObjectStreamField#0" />
-                <element signature="e#9967#10008#1" />
-                <element signature="e#10062#10130#0" />
-                <element signature="e#10309#10388#1" />
-                <element signature="docComment;method#getClassSignature#0;class#ObjectStreamField#0" />
-                <element signature="method#getClassSignature#0;class#ObjectStreamField#0" />
-                <element signature="e#10388#10445#1" />
-                <element signature="e#10451#10539#1" />
-                <element signature="method#appendClassSignature#0;class#ObjectStreamField#0" />
-                <element signature="e#10660#10741#1" />
-                <element signature="e#10780#10843#1" />
-                <element signature="e#10849#10941#1" />
-                <element signature="docComment;method#getPrimitiveSignature#0;class#ObjectStreamField#0" />
-                <element signature="method#getPrimitiveSignature#0;class#ObjectStreamField#0" />
-                <element signature="e#11336#11371#1" />
-                <element signature="e#11397#11432#1" />
-                <element signature="e#11458#11493#1" />
-                <element signature="e#11520#11555#1" />
-                <element signature="e#11583#11618#1" />
-                <element signature="e#11645#11680#1" />
-                <element signature="e#11711#11746#1" />
-                <element signature="e#11775#11810#1" />
-                <element signature="e#11836#11871#1" />
-                <element signature="e#11877#11927#1" />
-                <element signature="docComment;method#compareTo#0;class#ObjectStreamField#0" />
-                <element signature="method#compareTo#0;class#ObjectStreamField#0" />
-                <element signature="e#12450#12497#1" />
-                <element signature="docComment;method#toString#0;class#ObjectStreamField#0" />
-                <element signature="method#toString#0;class#ObjectStreamField#0" />
+                <element signature="docComment;class#Externalizable#0" />
+                <element signature="docComment;method#writeExternal#0;class#Externalizable#0" />
+                <element signature="docComment;method#readExternal#0;class#Externalizable#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TAG.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="32" column="8" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -404,7 +328,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/javax/lang/model/type/TypeVisitor.java" />
         <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor6.java" />
         <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor7.java" />
         <option value="$PROJECT_DIR$/src/javax/lang/model/util/AbstractTypeVisitor8.java" />
@@ -502,9 +425,10 @@
         <option value="$PROJECT_DIR$/src/java/sql/DriverManager.java" />
         <option value="$PROJECT_DIR$/src/java/sql/Connection.java" />
         <option value="$PROJECT_DIR$/src/java/lang/CompoundEnumeration.java" />
-        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
-        <option value="$PROJECT_DIR$/已阅代码清单_按功能排序.md" />
         <option value="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" />
+        <option value="$PROJECT_DIR$/已阅代码清单_按功能排序.md" />
+        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
+        <option value="$PROJECT_DIR$/src/java/io/Externalizable.java" />
       </list>
     </option>
   </component>
@@ -632,240 +556,7 @@
               <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="awt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="awt" type="462c0819:PsiDirectoryNode" />
-              <item name="event" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lang" type="462c0819:PsiDirectoryNode" />
-              <item name="reflect" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="concurrent" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="function" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="stream" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="Timer.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="javax" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="javax" type="462c0819:PsiDirectoryNode" />
-              <item name="swing" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="jdk" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="jdk" type="462c0819:PsiDirectoryNode" />
-              <item name="internal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="jdk" type="462c0819:PsiDirectoryNode" />
-              <item name="internal" type="462c0819:PsiDirectoryNode" />
-              <item name="net" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="jdk" type="462c0819:PsiDirectoryNode" />
-              <item name="internal" type="462c0819:PsiDirectoryNode" />
-              <item name="net" type="462c0819:PsiDirectoryNode" />
-              <item name="http" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="graalvm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="graalvm" type="462c0819:PsiDirectoryNode" />
-              <item name="compiler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="graalvm" type="462c0819:PsiDirectoryNode" />
-              <item name="compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="hotspot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="sun" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="sun" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="serializable" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="serializable" type="462c0819:PsiDirectoryNode" />
-              <item name="test05" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="serializable" type="462c0819:PsiDirectoryNode" />
-              <item name="test06" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SerializableTest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="kang" type="462c0819:PsiDirectoryNode" />
-              <item name="serializable" type="462c0819:PsiDirectoryNode" />
-              <item name="test07" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -885,7 +576,7 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/src/TAG.java&#10;true" />
     <property name="android.sdk.path" value="D:/SDK-IDEA" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548237031137" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548261293403" />
     <property name="last.edited.regexp" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JavaSE/Demo35" />
@@ -1062,14 +753,7 @@
       <workItem from="1547871091553" duration="11886000" />
       <workItem from="1548086439599" duration="2641000" />
       <workItem from="1548153793443" duration="1068000" />
-      <workItem from="1548202228660" duration="1663000" />
-    </task>
-    <task id="LOCAL-00276" summary=":bulb: 【java.lang.Short】 short的包装类">
-      <created>1545323589427</created>
-      <option name="number" value="00276" />
-      <option name="presentableId" value="LOCAL-00276" />
-      <option name="project" value="LOCAL" />
-      <updated>1545323589428</updated>
+      <workItem from="1548202228660" duration="6121000" />
     </task>
     <task id="LOCAL-00277" summary=":bulb: 【java.lang.Integer】 int的包装类">
       <created>1545417091256</created>
@@ -1407,11 +1091,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548154648226</updated>
     </task>
-    <option name="localTasksCounter" value="325" />
+    <task id="LOCAL-00325" summary=":bulb: 【java.io.ObjectStreamField】 代表可被序列化的字段">
+      <created>1548237263299</created>
+      <option name="number" value="00325" />
+      <option name="presentableId" value="LOCAL-00325" />
+      <option name="project" value="LOCAL" />
+      <updated>1548237263300</updated>
+    </task>
+    <option name="localTasksCounter" value="326" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2260553000" />
+    <option name="totallyTimeSpent" value="2265011000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -1427,7 +1118,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Repositories" order="0" weight="0.32995737" />
-      <window_info active="true" content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.44827586" visible="true" weight="0.14585635" />
+      <window_info content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.44827586" visible="true" weight="0.14585635" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -1446,7 +1137,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.55910546" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5055249" side_tool="true" weight="0.32271764" />
       <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49447513" visible="true" weight="0.22717622" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="12" sideWeight="0.49447513" visible="true" weight="0.46178344" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3280255" />
       <window_info anchor="bottom" id="Messages" order="15" />
@@ -1606,7 +1297,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value=":recycle: 【java.lang.Math】 完善注释" />
     <MESSAGE value=":bulb: 【java.lang.StringUTF16】 UTF16-String" />
     <MESSAGE value=":bulb: 【java.lang.StringCoding】 用于解码[decoding]/编码[encoding]字符串的工具类" />
     <MESSAGE value=":recycle: 【java.lang.Character】 更新高代理区与低代理区范围常量的描述" />
@@ -1631,7 +1321,8 @@
     <MESSAGE value=":bulb: 【java.lang.CompoundEnumeration】 复合枚举类型，用于遍历" />
     <MESSAGE value=":bulb: 【java.util.Iterator】 迭代器接口，跟枚举器接口很像，可以遍历元素，也可以移除元素。关键是，支持foreach遍历方式" />
     <MESSAGE value=":bulb: 【java.io.Serializable】 将对象序列化/反序列化，是对象的一种固化行为" />
-    <option name="LAST_COMMIT_MESSAGE" value=":bulb: 【java.io.Serializable】 将对象序列化/反序列化，是对象的一种固化行为" />
+    <MESSAGE value=":bulb: 【java.io.ObjectStreamField】 代表可被序列化的字段" />
+    <option name="LAST_COMMIT_MESSAGE" value=":bulb: 【java.io.ObjectStreamField】 代表可被序列化的字段" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -4249,15 +3940,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/io/Externalizable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-345">
-          <folding>
-            <element signature="docComment;class#Externalizable#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test07/User07.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -4320,26 +4002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-1168">
-            <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="459">
-            <caret line="320" selection-start-line="320" selection-end-line="320" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -4361,13 +4023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TAG.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="32" column="8" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/io/ObjectOutputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -4375,24 +4030,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/io/ObjectInputStream.java">
+    <entry file="file://$PROJECT_DIR$/src/java/io/ObjectStreamClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="897" column="40" selection-start-line="897" selection-start-column="40" selection-end-line="897" selection-end-column="40" />
+        <state relative-caret-position="338">
+          <caret line="1713" column="52" selection-start-line="1713" selection-start-column="52" selection-end-line="1713" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/io/ObjectStreamClass.java">
+    <entry file="file://$PROJECT_DIR$/src/java/io/ObjectInputStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="754" column="14" lean-forward="true" selection-start-line="754" selection-start-column="14" selection-end-line="754" selection-end-column="14" />
+        <state relative-caret-position="227">
+          <caret line="1700" column="41" lean-forward="true" selection-start-line="1700" selection-start-column="41" selection-end-line="1700" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TAG.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="32" column="8" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/io/ObjectStreamField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="267" column="7" selection-start-line="267" selection-start-column="7" selection-end-line="267" selection-end-column="7" />
+        <state relative-caret-position="80">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="docComment;class#ObjectStreamField#0" />
             <element signature="docComment;field#field#0;class#ObjectStreamField#0" />
@@ -4463,6 +4125,38 @@
             <element signature="e#12450#12497#1" />
             <element signature="docComment;method#toString#0;class#ObjectStreamField#0" />
             <element signature="method#toString#0;class#ObjectStreamField#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="32">
+            <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="402">
+            <caret line="321" lean-forward="true" selection-start-line="321" selection-end-line="321" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/io/Externalizable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="docComment;class#Externalizable#0" />
+            <element signature="docComment;method#writeExternal#0;class#Externalizable#0" />
+            <element signature="docComment;method#readExternal#0;class#Externalizable#0" />
           </folding>
         </state>
       </provider>
