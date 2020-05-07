@@ -341,10 +341,17 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * cheapest possible way to reduce systematic lossage, as well as
      * to incorporate impact of the highest bits that would otherwise
      * never be used in index calculations because of table bounds.
+     * <p>
+     * hash函数有两个方面十分重要
+     * 1.性能足够高 基本HashMap所有的操作都需要用到哈希函数
+     * 2.对于计算出来的哈希值足够离散 保证哈希冲突的概率更小
      */
     static final int hash(Object key) {
         int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        // 从整个计算过程上来说: ^ (h >>> 16)只有这一块的逻辑 两个位操作性能肯定是有保障的 那么如果想要保证哈希函数的高效性 只需要传入的key自身的Object#hashCode()方法的高效即可
+        // 增加^ (h >>> 16)扰动函数的目的在于直接计算出的hashcode在32位有符号数的范围中(-2147483648到2147483648)大约占用40亿的映射空间 该空间内存是放不下的
+        // 高16位与低16位做异或就是为了混合高位和低位 以此增大低位的随机性 混合后的低位也混有高位的部分特征 高位的信息也变相的被保留下来
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);   // 先计算hashcode 再与计算出来的hashcode的高16位进行异或 保证计算出来的hash值更加离散
     }
 
     /**
@@ -384,10 +391,14 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * Returns a power of two size for the given target capacity.
+     * 返回 >= cap 的最小的2的幂次方
+     * 为什么一定要是2的幂次方:
+     * 1.计算table数组对应的位置时 使用了(n - 1) & hash 该方式 (n - 1) % hash的效果是一致的 出于性能考虑最终选择了& 这样就要求数组容量n一定要做到2的幂次方
+     * 2.resize扩容时 HashMap的容量一直时2的幂次方
      */
     static final int tableSizeFor(int cap) {
-        int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
-        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+        int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);   // 将 cap 从最高位(最左边)第一个为1开始的位开始全部设置为 1
+        return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;    // 由于第一行处理的结果都如 0000 00 ... 1111 这种形式 + 1之后返回2的幂次方(例如 cap = 10 经计算后是 -1 >>> 28 + 1 = 16)
     }
 
     /* ---------------- Fields -------------- */
@@ -459,7 +470,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
             throw new IllegalArgumentException("Illegal load factor: " +
                     loadFactor);
         this.loadFactor = loadFactor;
-        this.threshold = tableSizeFor(initialCapacity);
+        this.threshold = tableSizeFor(initialCapacity); // * 设置扩容阈值
     }
 
     /**
@@ -492,7 +503,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      */
     public HashMap(Map<? extends K, ? extends V> m) {
         this.loadFactor = DEFAULT_LOAD_FACTOR;
-        putMapEntries(m, false);
+        putMapEntries(m, false);    // * 批量将m中的数据添加到HashMap中
     }
 
     /**
@@ -505,15 +516,15 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
         int s = m.size();
         if (s > 0) {
-            if (table == null) { // pre-size
-                float ft = ((float) s / loadFactor) + 1.0F;
-                int t = ((ft < (float) MAXIMUM_CAPACITY) ?
+            if (table == null) { // pre-size. 如果table数组是null 说明还未初始化 table的初始化放到了put过程 此处只是为了计算合适的阈值(保证HashMap的扩容阈值 > 传入map需要的最小空间)
+                float ft = (s / loadFactor) + 1.0F; // 根据传入map的size计算所需要的最小分配空间 +1.0F 的目的是因为下面(int)直接取整 避免不够
+                int t = ((ft < MAXIMUM_CAPACITY) ?
                         (int) ft : MAXIMUM_CAPACITY);
-                if (t > threshold)
-                    threshold = tableSizeFor(t);
-            } else if (s > threshold)
+                if (t > threshold)  // 计算出来的t > 扩容阈值
+                    threshold = tableSizeFor(t);    // 重新计算扩容阈值
+            } else if (s > threshold)   // table数组不为空 但是传入map的size > 扩容阈值 进行扩容操作 直到大于传入map的size
                 resize();
-            for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {
+            for (Map.Entry<? extends K, ? extends V> e : m.entrySet()) {    // 将传入map的元素逐个加入到HashMap
                 K key = e.getKey();
                 V value = e.getValue();
                 putVal(hash(key), key, value, false, evict);
@@ -632,15 +643,15 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      */
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
-        Node<K, V>[] tab;
-        Node<K, V> p;
-        int n, i;
+        Node<K, V>[] tab;   // tables 数组
+        Node<K, V> p;   // 对应位置的 Node 节点
+        int n, i;   // 数组大小, 对应的 table 的位置
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;    // 延迟初始化思想 如果当前的桶是空的就需要进行初始化 resize方法会判断是否进行初始化
-        if ((p = tab[i = (n - 1) & hash]) == null)  // 根据key的hashcode定位到具体的桶并判断是否为空 为空表明没有发生hash冲突 直接构造node放入
+        if ((p = tab[i = (n - 1) & hash]) == null)  // 根据key的hashcode定位到具体的桶并判断是否为空 为空表明没有发生hash冲突 直接构造node放入 (n - 1) & hash定位到桶
             tab[i] = newNode(hash, key, value, null);
         else {  // 以下是存在hash冲突的情况
-            Node<K, V> e;
+            Node<K, V> e;   // key 在 HashMap 对应的老节点
             K k;
             if (p.hash == hash &&
                     ((k = p.key) == key || (key != null && key.equals(k)))) // 比较桶中首个元素的与写入的值的hashcode和key 相等进行赋值
@@ -649,7 +660,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                 e = ((TreeNode<K, V>) p).putTreeVal(this, tab, hash, key, value);
             else {  // 说明是链表 思想是 没有到达链表尾部就进行遍历寻找相同key值的node 如果到了链表尾部还没有找到则在链表尾部追加新的node
                 for (int binCount = 0; ; ++binCount) {
-                    if ((e = p.next) == null) { // 位于链表尾部 构造节点
+                    if ((e = p.next) == null) { // 从p.next的位置开始判断 因为之前已经判断过p的位置 位于链表尾部 构造节点
                         p.next = newNode(hash, key, value, null);
                         if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st. 达到了红黑树的扩容阈值 转换为红黑树
                             treeifyBin(tab, hash);
@@ -658,21 +669,21 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                     if (e.hash == hash &&
                             ((k = e.key) == key || (key != null && key.equals(k)))) // 说明链表的非首位元素存在相同key值的node 进行记录
                         break;
-                    p = e;
+                    p = e;  // 令p指向下一个node节点
                 }
             }
-            if (e != null) { // existing mapping for key. 说明hash冲突的元素中存在相同key值的node   针对上述情况统一进行值的覆盖
+            if (e != null) { // existing mapping for key. 说明hash冲突的元素中存在相同key值的node 针对上述情况统一进行值的覆盖
                 V oldValue = e.value;
-                if (!onlyIfAbsent || oldValue == null)
+                if (!onlyIfAbsent || oldValue == null)  // 在value允许修改的情况下 对节点的value进行修改
                     e.value = value;
-                afterNodeAccess(e); // 定制化实现
+                afterNodeAccess(e); // 节点被访问的回调 用于HashMap的子类LinkedHashMap需要做的拓展逻辑
                 return oldValue;
             }
         }
-        ++modCount;
+        ++modCount; // 增加修改次数
         if (++size > threshold) // 达到扩容阈值进行扩容
             resize();
-        afterNodeInsertion(evict);  //定制化实现
+        afterNodeInsertion(evict);  // 添加节点后的回调
         return null;
     }
 
@@ -1111,6 +1122,14 @@ public class HashMap<K, V> extends AbstractMap<K, V>
         return (e = getNode(hash(key), key)) == null ? defaultValue : e.value;
     }
 
+    /**
+     * 如果传入key对应的value已经存在 就返回存在的value 不进行替换
+     * 如果不存在 就添加key和value 返回null
+     *
+     * @param key   key with which the specified value is to be associated
+     * @param value value to be associated with the specified key
+     * @return
+     */
     @Override
     public V putIfAbsent(K key, V value) {
         return putVal(hash(key), key, value, true, true);
