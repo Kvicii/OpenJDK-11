@@ -192,7 +192,7 @@ public final class Short extends Number implements Comparable<Short> {
      * @throws NumberFormatException If the {@code String} does
      *                               not contain a parsable {@code short}.
      */
-    // 按10进制形式将字符串s解析为short值，随后再装箱
+    // 按10进制形式将字符串s解析为short值 随后再装箱
     public static Short valueOf(String s) throws NumberFormatException {
         return valueOf(s, 10);
     }
@@ -224,7 +224,7 @@ public final class Short extends Number implements Comparable<Short> {
      * @throws NumberFormatException If the {@code String} does
      *                               not contain a parsable {@code short}.
      */
-    // 按radix进制形式将字符串s解析为short值，随后再装箱
+    // 按radix进制形式将字符串s解析为short值 随后再装箱
     public static Short valueOf(String s, int radix) throws NumberFormatException {
         return valueOf(parseShort(s, radix));
     }
@@ -274,11 +274,11 @@ public final class Short extends Number implements Comparable<Short> {
      * @see java.lang.Short#parseShort(java.lang.String, int)
      */
     /*
-     * 将字符串nm解析为short，随后再装箱
+     * 将字符串nm解析为short 随后再装箱
      *
-     * 采用哪种进制解析nm取决于nm的格式：
-     * > 0x、0X、#开头，代表按16进制解析
-     * > 0开头，代表按8进制解析
+     * 采用哪种进制解析nm取决于nm的格式:
+     * > 0x、0X、#开头 代表按16进制解析
+     * > 0开头 代表按8进制解析
      * > 其他情形默认按10进制解析
      */
     public static Short decode(String nm) throws NumberFormatException {
@@ -498,7 +498,7 @@ public final class Short extends Number implements Comparable<Short> {
      *
      * @since 1.8
      */
-    // 将当前short转换为无符号形式，用int存储
+    // 将当前short转换为无符号形式 用int存储
     public static int toUnsignedInt(short x) {
         return ((int) x) & 0xffff;
     }
@@ -521,7 +521,7 @@ public final class Short extends Number implements Comparable<Short> {
      *
      * @since 1.8
      */
-    // 将当前short转换为无符号形式，用long存储
+    // 将当前short转换为无符号形式 用long存储
     public static long toUnsignedLong(short x) {
         return ((long) x) & 0xffffL;
     }
@@ -548,7 +548,7 @@ public final class Short extends Number implements Comparable<Short> {
      *
      * @since 1.7
      */
-    // 比较两个short（按自然顺序比较）
+    // 比较两个short(按自然顺序比较)
     public static int compare(short x, short y) {
         return x - y;
     }
@@ -568,7 +568,7 @@ public final class Short extends Number implements Comparable<Short> {
      *
      * @since 1.2
      */
-    // 比较两个Short（按自然顺序比较）
+    // 比较两个Short(按自然顺序比较)
     public int compareTo(Short anotherShort) {
         return compare(this.value, anotherShort.value);
     }
@@ -587,7 +587,7 @@ public final class Short extends Number implements Comparable<Short> {
      *
      * @since 9
      */
-    // 以无符号形式比较两个short（按自然顺序比较）
+    // 以无符号形式比较两个short(按自然顺序比较)
     public static int compareUnsigned(short x, short y) {
         return Short.toUnsignedInt(x) - Short.toUnsignedInt(y);
     }
@@ -664,9 +664,9 @@ public final class Short extends Number implements Comparable<Short> {
     
     
     
-    // Short缓存，缓存了-128~127之间的Short对象
+    // Short缓存 缓存了-128~127之间的Short对象
     private static class ShortCache {
-        // 256个Short对象缓存，依次表示-128~127
+        // 256个Short对象缓存 依次表示-128~127
         static final Short[] cache = new Short[-(-128) + 127 + 1];
         
         static {

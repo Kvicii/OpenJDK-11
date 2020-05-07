@@ -30,7 +30,7 @@ import sun.nio.ch.DirectBuffer;
 
 import java.lang.ref.Reference;
 
-// 可读写、直接缓冲区，采用与平台字节顺序相同的字节序，其他部分与DirectCharBufferS相同
+// 可读写、直接缓冲区 采用与平台字节顺序相同的字节序 其他部分与DirectCharBufferS相同
 class DirectCharBufferU extends CharBuffer implements DirectBuffer {
     // Cached unaligned-access capability
     protected static final boolean UNALIGNED = Bits.unaligned();
@@ -72,30 +72,30 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 切片，截取旧缓冲区的【活跃区域】，作为新缓冲区的【原始区域】。两个缓冲区标记独立。
+    // 切片 截取旧缓冲区的【活跃区域】 作为新缓冲区的【原始区域】。两个缓冲区标记独立。
     public CharBuffer slice() {
         int pos = this.position();
         int lim = this.limit();
         assert (pos <= lim);
         int rem = (pos <= lim ? lim - pos : 0);
-        int off = (pos << 1);   // 每个char是两个字节，所以这里要乘以2
+        int off = (pos << 1);   // 每个char是两个字节 所以这里要乘以2
         assert (off >= 0);
         return new DirectCharBufferU(this, -1, 0, rem, rem, off);
     }
     
-    // 副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     public CharBuffer duplicate() {
         return new DirectCharBufferU(this, this.markValue(), this.position(), this.limit(), this.capacity(), 0);
     }
     
-    // 只读副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 只读副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     public CharBuffer asReadOnlyBuffer() {
         return new DirectCharBufferRU(this, this.markValue(), this.position(), this.limit(), this.capacity(), 0);
     }
     
-    // 副本，新缓冲区的【活跃区域】取自旧缓冲区【活跃区域】的[start，end)部分
+    // 副本 新缓冲区的【活跃区域】取自旧缓冲区【活跃区域】的[start end)部分
     public CharBuffer subSequence(int start, int end) {
         int pos = position();
         int lim = limit();
@@ -109,13 +109,13 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
         return new DirectCharBufferU(this, -1, pos + start, pos + end, capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
     /*▼ get/读取 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 读取position处的char，然后递增position。
+    // 读取position处的char 然后递增position。
     public char get() {
         try {
             // 直接从本地内存中访问
@@ -125,7 +125,7 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
         }
     }
     
-    // 读取i处的char（有越界检查）
+    // 读取i处的char(有越界检查)
     public char get(int i) {
         try {
             return ((UNSAFE.getChar(ix(checkIndex(i)))));
@@ -134,7 +134,7 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
         }
     }
     
-    // 读取i处的char（无越界检查）
+    // 读取i处的char(无越界检查)
     char getUnchecked(int i) {
         try {
             return ((UNSAFE.getChar(ix(i))));
@@ -158,9 +158,9 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
             long dstOffset = ARRAY_BASE_OFFSET + ((long) offset << 1);
             try {
                 // null参数代表直接从内存地址拷贝
-                if(order() != ByteOrder.nativeOrder()) {    // 缓冲区与本地字节序不一致，拷贝字节时涉及到大小端转换
+                if(order() != ByteOrder.nativeOrder()) {    // 缓冲区与本地字节序不一致 拷贝字节时涉及到大小端转换
                     UNSAFE.copySwapMemory(null, ix(pos), dst, dstOffset, (long) length << 1, (long) 1 << 1);
-                } else {    // 缓冲区与本地字节序一致，直接拷贝
+                } else {    // 缓冲区与本地字节序一致 直接拷贝
                     UNSAFE.copyMemory(null, ix(pos), dst, dstOffset, (long) length << 1);
                 }
             } finally {
@@ -181,7 +181,7 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
     
     /*▼ put/写入 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 向position处写入char，并将position递增
+    // 向position处写入char 并将position递增
     public CharBuffer put(char x) {
         try {
             UNSAFE.putChar(ix(nextPutIndex()), x);
@@ -243,7 +243,7 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
         return this;
     }
     
-    // 从源字符数组src的offset处开始，复制length个元素，写入到当前缓冲区【活跃区域】内（考虑偏移量）
+    // 从源字符数组src的offset处开始 复制length个元素 写入到当前缓冲区【活跃区域】内(考虑偏移量)
     public CharBuffer put(char[] src, int offset, int length) {
         if(((long) length << 1) > Bits.JNI_COPY_FROM_ARRAY_THRESHOLD) {
             checkBounds(offset, length, src.length);
@@ -277,7 +277,7 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
     
     /*▼ 压缩 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 压缩缓冲区，将当前未读完的数据挪到容器起始处，可用于读模式到写模式的切换，但又不丢失之前读入的数据。
+    // 压缩缓冲区 将当前未读完的数据挪到容器起始处 可用于读模式到写模式的切换 但又不丢失之前读入的数据。
     public CharBuffer compact() {
         int pos = position();
         int lim = limit();
@@ -305,7 +305,7 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
         return ((ByteOrder.nativeOrder() != ByteOrder.BIG_ENDIAN) ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN);
     }
     
-    // 返回‘char’的字节序（此类中与平台字节序相同）
+    // 返回‘char’的字节序(此类中与平台字节序相同)
     ByteOrder charRegionOrder() {
         return order();
     }
@@ -314,7 +314,7 @@ class DirectCharBufferU extends CharBuffer implements DirectBuffer {
     
     
     
-    // 返回内部存储结构的引用（一般用于非直接缓存区）
+    // 返回内部存储结构的引用(一般用于非直接缓存区)
     @Override
     Object base() {
         return null;

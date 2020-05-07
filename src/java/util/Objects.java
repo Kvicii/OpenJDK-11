@@ -51,7 +51,7 @@ import java.util.function.Supplier;
  * functional interface allocation, may exceed the cost of checking bounds.
  * @since 1.7
  */
-// 工具类，主要完成一些非空检查、范围检查、判等、求哈希码等操作
+// 工具类 主要完成一些非空检查、范围检查、判等、求哈希码等操作
 public final class Objects {
     private Objects() {
         throw new AssertionError("No java.util.Objects instances for you!");
@@ -120,7 +120,7 @@ public final class Objects {
      *
      * @see Objects#toString(Object)
      */
-    // 将对象o转为String。如果o为null，返回默认值nullDefault
+    // 将对象o转为String。如果o为null 返回默认值nullDefault
     public static String toString(Object o, String nullDefault) {
         return (o != null) ? o.toString() : nullDefault;
     }
@@ -148,7 +148,7 @@ public final class Objects {
      *
      * @see Object#equals(Object)
      */
-    // 判等（会调用对象的equals方法）
+    // 判等(会调用对象的equals方法)
     public static boolean equals(Object a, Object b) {
         return (a == b) || (a != null && a.equals(b));
     }
@@ -172,7 +172,7 @@ public final class Objects {
      * @see Arrays#deepEquals(Object[], Object[])
      * @see Objects#equals(Object, Object)
      */
-    // 深度判等，会递归比较两个元素是否相等（e1和e2可能是嵌套的数组）
+    // 深度判等 会递归比较两个元素是否相等(e1和e2可能是嵌套的数组)
     public static boolean deepEquals(Object a, Object b) {
         if(a == b)
             return true;
@@ -297,7 +297,7 @@ public final class Objects {
      *
      * @throws NullPointerException if {@code obj} is {@code null}
      */
-    // 如果obj非null则返回它，否则抛出异常
+    // 如果obj非null则返回它 否则抛出异常
     public static <T> T requireNonNull(T obj) {
         if(obj == null) {
             throw new NullPointerException();
@@ -326,7 +326,7 @@ public final class Objects {
      *
      * @throws NullPointerException if {@code obj} is {@code null}
      */
-    // 如果obj非null则返回它，否则抛出异常，异常信息显示为message
+    // 如果obj非null则返回它 否则抛出异常 异常信息显示为message
     public static <T> T requireNonNull(T obj, String message) {
         if(obj == null) {
             throw new NullPointerException(message);
@@ -350,7 +350,7 @@ public final class Objects {
      *                              {@code defaultObj} is {@code null}
      * @since 9
      */
-    // 如果obj非null则返回它，否则返回默认值defaultObj。如果默认值也null，则抛出异常
+    // 如果obj非null则返回它 否则返回默认值defaultObj。如果默认值也null 则抛出异常
     public static <T> T requireNonNullElse(T obj, T defaultObj) {
         return (obj != null)
             ? obj
@@ -374,7 +374,7 @@ public final class Objects {
      *                              the {@code supplier.get()} value is {@code null}
      * @since 9
      */
-    // 如果obj非null则返回它，否则从supplier中取出默认值defaultObj。如果取不到默认值，则抛出异常
+    // 如果obj非null则返回它 否则从supplier中取出默认值defaultObj。如果取不到默认值 则抛出异常
     public static <T> T requireNonNullElseGet(T obj, Supplier<? extends T> supplier) {
         return (obj != null)
             ? obj
@@ -403,7 +403,7 @@ public final class Objects {
      * @throws NullPointerException if {@code obj} is {@code null}
      * @since 1.8
      */
-    // 如果obj非null则返回它，否则抛出异常，异常信息取自messageSupplier
+    // 如果obj非null则返回它 否则抛出异常 异常信息取自messageSupplier
     public static <T> T requireNonNull(T obj, Supplier<String> messageSupplier) {
         if(obj == null) {
             throw new NullPointerException(messageSupplier == null ? null : messageSupplier.get());

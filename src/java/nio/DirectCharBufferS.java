@@ -30,7 +30,7 @@ import sun.nio.ch.DirectBuffer;
 
 import java.lang.ref.Reference;
 
-// 可读写、直接缓冲区，采用与平台字节顺序不同的字节序，其他部分与DirectCharBufferU相同
+// 可读写、直接缓冲区 采用与平台字节顺序不同的字节序 其他部分与DirectCharBufferU相同
 class DirectCharBufferS extends CharBuffer implements DirectBuffer {
     // Cached unaligned-access capability
     protected static final boolean UNALIGNED = Bits.unaligned();
@@ -72,7 +72,7 @@ class DirectCharBufferS extends CharBuffer implements DirectBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public CharBuffer slice() {
         int pos = this.position();
@@ -105,7 +105,7 @@ class DirectCharBufferS extends CharBuffer implements DirectBuffer {
         return new DirectCharBufferS(this, -1, pos + start, pos + end, capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -113,7 +113,7 @@ class DirectCharBufferS extends CharBuffer implements DirectBuffer {
     
     public char get() {
         try {
-            // 转换字节顺序（大小端转换）
+            // 转换字节顺序(大小端转换)
             return (Bits.swap(UNSAFE.getChar(ix(nextGetIndex()))));
         } finally {
             Reference.reachabilityFence(this);
@@ -293,7 +293,7 @@ class DirectCharBufferS extends CharBuffer implements DirectBuffer {
         return ((ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN) ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN);
     }
     
-    // 返回该缓冲区的字节序（本类的字节序与机器字平台相反）
+    // 返回该缓冲区的字节序(本类的字节序与机器字平台相反)
     ByteOrder charRegionOrder() {
         return order();
     }

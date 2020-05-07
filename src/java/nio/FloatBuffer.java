@@ -87,14 +87,14 @@ package java.nio;
  * HeapFloatBufferR
  *
  *
- * 直接缓冲区（缓冲区字节序与本地相同）
+ * 直接缓冲区(缓冲区字节序与本地相同)
  * FloatBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectFloatBufferU     │
  *             ├────────────┘
  *    DirectFloatBufferRU
  *
- * 直接缓冲区（缓冲区字节序与本地不同）
+ * 直接缓冲区(缓冲区字节序与本地不同)
  * FloatBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectFloatBufferS     │
@@ -220,7 +220,7 @@ public abstract class FloatBuffer extends Buffer implements Comparable<FloatBuff
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a new float buffer whose content is a shared subsequence of
@@ -281,7 +281,7 @@ public abstract class FloatBuffer extends Buffer implements Comparable<FloatBuff
      */
     public abstract FloatBuffer asReadOnlyBuffer();
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

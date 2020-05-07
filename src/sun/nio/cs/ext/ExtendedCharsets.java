@@ -164,7 +164,7 @@ public class ExtendedCharsets extends AbstractCharsetProvider {
         instance = this;
     }
     
-    // 根据规范名，返回别名集合
+    // 根据规范名 返回别名集合
     public static String[] aliasesFor(String charsetName) {
         if(instance == null)
             return null;
@@ -174,7 +174,7 @@ public class ExtendedCharsets extends AbstractCharsetProvider {
     
     private static String getProperty(String key) {
         /* this method may be called during initialization of system class loader and thus not using lambda */
-        // 在系统类加载器的初始化期间可以调用此方法，因此不使用lambda表达式
+        // 在系统类加载器的初始化期间可以调用此方法 因此不使用lambda表达式
         return AccessController.doPrivileged(new PrivilegedAction<String>() {
             @Override
             public String run() {

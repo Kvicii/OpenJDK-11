@@ -48,7 +48,7 @@ import java.util.stream.StreamSupport;
  * @author Ulf Zibis
  * @since 1.5
  */
-// 字符序列的抽象实现，是StringBuilder和StringBuffer的父类
+// 字符序列的抽象实现 是StringBuilder和StringBuffer的父类
 abstract class AbstractStringBuilder implements Appendable, CharSequence {
     
     /**
@@ -68,7 +68,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * The id of the encoding used to encode the bytes in {@code value}.
      */
-    // 当前字符序列的编码：LATIN1或UTF16，由此可将ASB分为LATIN1-ASB或UTF16-ASB两类
+    // 当前字符序列的编码:LATIN1或UTF16 由此可将ASB分为LATIN1-ASB或UTF16-ASB两类
     byte coder;
     
     /**
@@ -91,7 +91,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     /**
      * Creates an AbstractStringBuilder of the specified capacity.
      */
-    // 构造指定容量的ASB，内容为空
+    // 构造指定容量的ASB 内容为空
     AbstractStringBuilder(int capacity) {
         if(String.COMPACT_STRINGS) {
             value = new byte[capacity];
@@ -157,7 +157,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *                                   {@code start} is greater than {@code end} or
      *                                   {@code end} is greater than {@code s.length()}
      */
-    // 向ASB末尾添加一个子序列，该子序列取自字符序列s的[start, end)范围
+    // 向ASB末尾添加一个子序列 该子序列取自字符序列s的[start, end)范围
     @Override
     public AbstractStringBuilder append(CharSequence s, int start, int end) {
         if(s == null) {
@@ -277,7 +277,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * @throws IndexOutOfBoundsException if {@code offset < 0} or {@code len < 0}
      *                                   or {@code offset+len > str.length}
      */
-    // 向ASB末尾添加一个子序列，该子序列取自字符数组s的[offset, offset+len)范围
+    // 向ASB末尾添加一个子序列 该子序列取自字符数组s的[offset, offset+len)范围
     public AbstractStringBuilder append(char str[], int offset, int len) {
         int end = offset + len;
         checkRange(offset, end, str.length);
@@ -497,7 +497,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         return append(Character.toChars(codePoint));
     }
     
-    // 向ASB末尾添加一个子序列，该子序列取自字符数组s的[off, end)范围
+    // 向ASB末尾添加一个子序列 该子序列取自字符数组s的[off, end)范围
     private final void appendChars(char[] s, int off, int end) {
         int count = this.count;
         if(isLatin1()) {
@@ -520,7 +520,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         this.count = count + end - off;
     }
     
-    // 向ASB末尾添加一个子序列，该子序列取自字符序列s的[start, end)范围
+    // 向ASB末尾添加一个子序列 该子序列取自字符序列s的[start, end)范围
     private final void appendChars(CharSequence s, int off, int end) {
         if(isLatin1()) {
             byte[] val = this.value;
@@ -537,13 +537,13 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
                 }
             }
         } else {
-            // 将LATIN1-CS内部的字节批量转换为UTF16-SB内部的字节后，存入value
+            // 将LATIN1-CS内部的字节批量转换为UTF16-SB内部的字节后 存入value
             StringUTF16.putCharsSB(this.value, count, s, off, end);
         }
         count += end - off;
     }
     
-    // 添加一个字符串："null"
+    // 添加一个字符串:"null"
     private AbstractStringBuilder appendNull() {
         ensureCapacityInternal(count + 4);
         int count = this.count;
@@ -592,7 +592,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         checkRangeSIOOBE(start, end, count);
         int len = end - start;  // 计算删除元素的数量
         if(len>0) {
-            // 从end处的char开始，将后续所有的char平移-len个单位
+            // 从end处的char开始 将后续所有的char平移-len个单位
             shift(end, -len);
             this.count = count - len;
         }
@@ -621,7 +621,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
     // 删除索引为index的char
     public AbstractStringBuilder deleteCharAt(int index) {
         String.checkIndex(index, count);
-        // 从index+1处的char开始，将后续所有的char平移-1个单位，即删除一个cahr
+        // 从index+1处的char开始 将后续所有的char平移-1个单位 即删除一个cahr
         shift(index + 1, -1);
         count--;
         return this;
@@ -713,7 +713,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *                                   {@code start} is greater than {@code end} or
      *                                   {@code end} is greater than {@code s.length()}
      */
-    // 向ASB的dstOffset索引处插入一个子序列，该子序列取自字符序列s的[start, end)范围
+    // 向ASB的dstOffset索引处插入一个子序列 该子序列取自字符序列s的[start, end)范围
     public AbstractStringBuilder insert(int dstOffset, CharSequence s, int start, int end) {
         if(s == null) {
             s = "null";
@@ -788,7 +788,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *                                         {@code (offset+len)} is greater than
      *                                         {@code str.length}.
      */
-    // 向ASB的index索引处插入一个子序列，该子序列取自字符序列str的[offset, offset+len)范围
+    // 向ASB的index索引处插入一个子序列 该子序列取自字符序列str的[offset, offset+len)范围
     public AbstractStringBuilder insert(int index, char[] str, int offset, int len) {
         String.checkOffset(index, count);
         checkRangeSIOOBE(offset, offset + len, str.length);
@@ -1099,7 +1099,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         str.getBytes(value, index, coder);
     }
     
-    // 向ASB的index索引处插入一个子序列，该子序列取自字符序列s的[off, end)范围
+    // 向ASB的index索引处插入一个子序列 该子序列取自字符序列s的[off, end)范围
     private final void putCharsAt(int index, CharSequence s, int off, int end) {
         if(isLatin1()) {
             byte[] val = this.value;
@@ -1118,7 +1118,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         }
     }
     
-    // 将s[off, end)内部的char批量转换为字节后，存入ASB的index处
+    // 将s[off, end)内部的char批量转换为字节后 存入ASB的index处
     private final void putCharsAt(int index, char[] s, int off, int end) {
         if(isLatin1()) {
             byte[] val = this.value;
@@ -1137,7 +1137,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         }
     }
     
-    // 从offset处的char开始，将后续所有的char平移n个单位，n的正负决定了前移或者后移
+    // 从offset处的char开始 将后续所有的char平移n个单位 n的正负决定了前移或者后移
     private void shift(int offset, int n) {
         System.arraycopy(value, offset << coder, value, (offset + n) << coder, (count - offset) << coder);
     }
@@ -1267,7 +1267,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * starting at the specified index,
      * or {@code -1} if there is no such occurrence.
      */
-    // 返回子串str在当前主串ASB中第一次出现的位置（从主串fromIndex处向后搜索）
+    // 返回子串str在当前主串ASB中第一次出现的位置(从主串fromIndex处向后搜索)
     public int indexOf(String str, int fromIndex) {
         return String.indexOf(value, coder, count, str, fromIndex);
     }
@@ -1311,7 +1311,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * searching backward from the specified index,
      * or {@code -1} if there is no such occurrence.
      */
-    // 返回子串str在当前主串ASB中最后一次出现的位置（从主串fromIndex处向前搜索）
+    // 返回子串str在当前主串ASB中最后一次出现的位置(从主串fromIndex处向前搜索)
     public int lastIndexOf(String str, int fromIndex) {
         return String.lastIndexOf(value, coder, count, str, fromIndex);
     }
@@ -1449,7 +1449,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *                                   argument is negative or not less than the length of this
      *                                   sequence.
      */
-    // 返回ASB内index索引处的Unicode编码（从前到后试探）
+    // 返回ASB内index索引处的Unicode编码(从前到后试探)
     public int codePointAt(int index) {
         int count = this.count;
         byte[] value = this.value;
@@ -1483,7 +1483,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *                                   argument is less than 1 or greater than the length
      *                                   of this sequence.
      */
-    // 返回ASB内index-1索引处的Unicode编码（从后往前试探）
+    // 返回ASB内index-1索引处的Unicode编码(从后往前试探)
     public int codePointBefore(int index) {
         int i = index - 1;
         if(i<0 || i >= count) {
@@ -1549,7 +1549,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *                                   before {@code index} has fewer than the absolute value of
      *                                   {@code codePointOffset} code points.
      */
-    // 返回从index偏移codePointOffset个Unicode符号后新的索引值，codePointOffset的正负决定了偏移方向
+    // 返回从index偏移codePointOffset个Unicode符号后新的索引值 codePointOffset的正负决定了偏移方向
     public int offsetByCodePoints(int index, int codePointOffset) {
         if(index<0 || index>count) {
             throw new IndexOutOfBoundsException();
@@ -1568,7 +1568,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *
      * @since 9
      */
-    // 将当前char序列转为流序列，序列中每个元素是char
+    // 将当前char序列转为流序列 序列中每个元素是char
     @Override
     public IntStream chars() {
         // Reuse String-based spliterator. This requires a supplier to capture the value and count when the terminal operation is executed
@@ -1586,7 +1586,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *
      * @since 9
      */
-    // 将当前Unicode符号序列转为流序列，序列中每个元素是Unicode符号
+    // 将当前Unicode符号序列转为流序列 序列中每个元素是Unicode符号
     @Override
     public IntStream codePoints() {
         // Reuse String-based spliterator. This requires a supplier to capture the value and count when the terminal operation is executed
@@ -1612,7 +1612,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      *
      * @return the current capacity
      */
-    // 返回当前ASB的容量（可以容纳的char的数量）
+    // 返回当前ASB的容量(可以容纳的char的数量)
     public int capacity() {
         return value.length >> coder;
     }
@@ -1681,7 +1681,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * @throws IndexOutOfBoundsException if the
      *                                   {@code newLength} argument is negative.
      */
-    // 扩展ASB容量，多出来的部分用0填充，且设置ASB的长度为newLength
+    // 扩展ASB容量 多出来的部分用0填充 且设置ASB的长度为newLength
     public void setLength(int newLength) {
         if(newLength<0) {
             throw new StringIndexOutOfBoundsException(newLength);
@@ -1710,7 +1710,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * @throws OutOfMemoryError if minCapacity is less than zero or
      *                          greater than (Integer.MAX_VALUE >> coder)
      */
-    // 根据申请的容量minCapacity，计算实际可使用的容量（防止容量越界）
+    // 根据申请的容量minCapacity 计算实际可使用的容量(防止容量越界)
     private int newCapacity(int minCapacity) {
         // overflow-conscious code
         int oldCapacity = value.length >> coder;
@@ -1729,7 +1729,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
         return (newCapacity>0 && SAFE_BOUND - newCapacity >= 0) ? newCapacity : hugeCapacity(minCapacity);
     }
     
-    // 处理可能越界的情形，确保返回一个安全容量
+    // 处理可能越界的情形 确保返回一个安全容量
     private int hugeCapacity(int minCapacity) {
         int SAFE_BOUND = MAX_ARRAY_SIZE >> coder;
         int UNSAFE_BOUND = Integer.MAX_VALUE >> coder;
@@ -1746,7 +1746,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
      * If {@code minimumCapacity} is non positive due to numeric
      * overflow, this method throws {@code OutOfMemoryError}.
      */
-    // 确保ASB内部拥有最小容量minimumCapacity（容量按存储char的能力计算）
+    // 确保ASB内部拥有最小容量minimumCapacity(容量按存储char的能力计算)
     private void ensureCapacityInternal(int minimumCapacity) {
         // overflow-conscious code
         int oldCapacity = value.length >> coder;

@@ -125,7 +125,7 @@ public enum RoundingMode {
      * </tbody>
      * </table>
      */
-    // 向两端舍入（负数朝左，正数朝右）
+    // 向两端舍入(负数朝左 正数朝右)
     UP(BigDecimal.ROUND_UP),
     
     /**
@@ -154,7 +154,7 @@ public enum RoundingMode {
      * </tbody>
      * </table>
      */
-    // 向0舍入（负数朝右，正数朝左）
+    // 向0舍入(负数朝右 正数朝左)
     DOWN(BigDecimal.ROUND_DOWN),
     
     /**
@@ -246,7 +246,7 @@ public enum RoundingMode {
      * </tbody>
      * </table>
      */
-    // 返回最近的整数，如果该数位于两个整数正中间，向两端舍入
+    // 返回最近的整数 如果该数位于两个整数正中间 向两端舍入
     HALF_UP(BigDecimal.ROUND_HALF_UP),
     
     /**
@@ -277,7 +277,7 @@ public enum RoundingMode {
      * </tbody>
      * </table>
      */
-    // 返回最近的整数，如果该数位于两个整数正中间，向0舍入
+    // 返回最近的整数 如果该数位于两个整数正中间 向0舍入
     HALF_DOWN(BigDecimal.ROUND_HALF_DOWN),
     
     /**
@@ -315,7 +315,7 @@ public enum RoundingMode {
      * </tbody>
      * </table>
      */
-    // 返回最近的整数，如果该数位于两个整数正中间，向偶数舍入
+    // 返回最近的整数 如果该数位于两个整数正中间 向偶数舍入
     HALF_EVEN(BigDecimal.ROUND_HALF_EVEN),
     
     /**
@@ -344,7 +344,7 @@ public enum RoundingMode {
      * </tbody>
      * </table>
      */
-    // 用于诊断该舍入操作的数据是否为整数，如果不是整数，抛异常
+    // 用于诊断该舍入操作的数据是否为整数 如果不是整数 抛异常
     UNNECESSARY(BigDecimal.ROUND_UNNECESSARY);
     
     // Corresponding BigDecimal rounding constant

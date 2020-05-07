@@ -48,14 +48,14 @@ import java.util.Objects;
  *     └──────────┬────────────┘
  *         PhantomCleanable
  *
- * 抽象基类：可清理的虚引用，此类的属性既是虚引用，又是清理器。
+ * 抽象基类:可清理的虚引用 此类的属性既是虚引用 又是清理器。
  */
 public abstract class PhantomCleanable<T> extends PhantomReference<T> implements Cleaner.Cleanable {
     
     /**
      * The list of PhantomCleanable; synchronizes insert and remove.
      */
-    // 指向CleanerImpl内部维护的PhantomCleanableList，在这里完成插入和删除操作
+    // 指向CleanerImpl内部维护的PhantomCleanableList 在这里完成插入和删除操作
     private final PhantomCleanable<?> list;
     
     /**
@@ -80,11 +80,11 @@ public abstract class PhantomCleanable<T> extends PhantomReference<T> implements
         
         this.list = CleanerImpl.getCleanerImpl(cleaner).phantomCleanableList;
     
-        // 将该虚引用（清理器）插入到PhantomCleanableList中
+        // 将该虚引用(清理器)插入到PhantomCleanableList中
         insert();
         
         // Ensure referent and cleaner remain accessible
-        // 确保被追踪对象referent和cleaner在此处是存活的，即还不能被GC回收
+        // 确保被追踪对象referent和cleaner在此处是存活的 即还不能被GC回收
         Reference.reachabilityFence(referent);
         Reference.reachabilityFence(cleaner);
     }
@@ -103,7 +103,7 @@ public abstract class PhantomCleanable<T> extends PhantomReference<T> implements
      * The {@code performCleanup} method should not be called except
      * by the {@link #clean} method which ensures at most once semantics.
      */
-    // 虚引用清理器的清理操作，被clean()方法调用，由子类完善
+    // 虚引用清理器的清理操作 被clean()方法调用 由子类完善
     protected abstract void performCleanup();
     
     /**
@@ -111,7 +111,7 @@ public abstract class PhantomCleanable<T> extends PhantomReference<T> implements
      */
     /*
      * CleanerImpl.run()==>清理器clean()-->清理器performCleanup()-->action.run()
-     * 可以等待清理清理服务自动调用，也可以手动执行清理操作
+     * 可以等待清理清理服务自动调用 也可以手动执行清理操作
      */
     @Override
     public final void clean() {
@@ -174,7 +174,7 @@ public abstract class PhantomCleanable<T> extends PhantomReference<T> implements
     /**
      * Insert this PhantomCleanable after the list head.
      */
-    // 将该虚引用（清理器）插入到PhantomCleanableList中
+    // 将该虚引用(清理器)插入到PhantomCleanableList中
     private void insert() {
         synchronized(list) {
             prev = list;
@@ -190,7 +190,7 @@ public abstract class PhantomCleanable<T> extends PhantomReference<T> implements
      * @return true if Cleanable was removed or false if not because
      * it had already been removed before
      */
-    // 将该虚引用（清理器）从PhantomCleanableList中移除。原因是ReferenceQueue中已记录到该引用属于"报废引用"了。
+    // 将该虚引用(清理器)从PhantomCleanableList中移除。原因是ReferenceQueue中已记录到该引用属于"报废引用"了。
     private boolean remove() {
         synchronized(list) {
             if(next != this) {

@@ -75,41 +75,41 @@ import java.util.stream.StreamSupport;
  * @since  1.2
  */
 /*
- * 用来操作各类型数组的工具类，包含的方法类别如下：
+ * 用来操作各类型数组的工具类 包含的方法类别如下:
  *
- * 【Array转List】：asList
+ * 【Array转List】:asList
  *
- * 【流】：stream
- * 【迭代器】：spliterator
+ * 【流】:stream
+ * 【迭代器】:spliterator
  *
- * 【排序】：sort
- * 【并行排序】：parallelSort
+ * 【排序】:sort
+ * 【并行排序】:parallelSort
  *
- * 【二分查找】：binarySearch（要求数组元素有序）
+ * 【二分查找】:binarySearch(要求数组元素有序)
  *
- * 【填充】：fill
+ * 【填充】:fill
  *
- * 【复制】：copyOf
- * 【范围复制】：copyOfRange
+ * 【复制】:copyOf
+ * 【范围复制】:copyOfRange
  *
- * 【判等】：equals
- * 【深度判等】：deepEquals
+ * 【判等】:equals
+ * 【深度判等】:deepEquals
  *
- * 【比较】：compare（返回值为-1、0、1，分别代表a<b、a==b、a>b）
- * 【无符号比较】：compareUnsigned
+ * 【比较】:compare(返回值为-1、0、1 分别代表a<b、a==b、a>b)
+ * 【无符号比较】:compareUnsigned
  *
- * 【失配比较】：mismatch（返回首个失配元素的下标，返回-1表示相等）
+ * 【失配比较】:mismatch(返回首个失配元素的下标 返回-1表示相等)
  *
- * 【批量设置】：setAll（设置的值与下标相关）
- * 【并行批量设置】：parallelSetAll（设置的值与下标相关）
+ * 【批量设置】:setAll(设置的值与下标相关)
+ * 【并行批量设置】:parallelSetAll(设置的值与下标相关)
  *
- * 【哈希】：hashCode
- * 【深度哈希】：deepHashCode
+ * 【哈希】:hashCode
+ * 【深度哈希】:deepHashCode
  *
- * 【字符串化】：toString
- * 【深度字符串化】：deepToString
+ * 【字符串化】:toString
+ * 【深度字符串化】:deepToString
  *
- * 【并行前缀计算】：parallelPrefix
+ * 【并行前缀计算】:parallelPrefix
  */
 public class Arrays {
     
@@ -290,7 +290,7 @@ public class Arrays {
      *         the array size
      * @since 1.8
      */
-    // 从数组中（可限定范围）创建一个Stream
+    // 从数组中(可限定范围)创建一个Stream
     public static <T> Stream<T> stream(T[] array, int startInclusive, int endExclusive) {
         return StreamSupport.stream(spliterator(array, startInclusive, endExclusive), false);
     }
@@ -2865,7 +2865,7 @@ public class Arrays {
      *                                    an array of class {@code newType}
      * @since 1.6
      */
-    // 截取original中newLength个U值，并强转为T值，然后返回
+    // 截取original中newLength个U值 并强转为T值 然后返回
     @HotSpotIntrinsicCandidate
     public static <T, U> T[] copyOf(U[] original, int newLength, Class<? extends T[]> newType) {
         @SuppressWarnings("unchecked")
@@ -3258,7 +3258,7 @@ public class Arrays {
      *                                        an array of class {@code newType}.
      * @since 1.6
      */
-    // 截取original中[from, from+to)范围内的U值，并强转为T值，然后返回
+    // 截取original中[from, from+to)范围内的U值 并强转为T值 然后返回
     @HotSpotIntrinsicCandidate
     public static <T, U> T[] copyOfRange(U[] original, int from, int to, Class<? extends T[]> newType) {
         int newLength = to - from;
@@ -4085,14 +4085,14 @@ public class Arrays {
      * @see Objects#deepEquals(Object, Object)
      * @since 1.5
      */
-    // 深度判等（会递归比较两个数组的内容）
+    // 深度判等(会递归比较两个数组的内容)
     public static boolean deepEquals(Object[] a1, Object[] a2) {
-        // 指向同一个数组，或同时为null
+        // 指向同一个数组 或同时为null
         if(a1 == a2) {
             return true;
         }
         
-        // 一个为null，另一个不为null
+        // 一个为null 另一个不为null
         if(a1 == null || a2 == null) {
             return false;
         }
@@ -4117,7 +4117,7 @@ public class Arrays {
             }
             
             /* Figure out whether the two elements are equal */
-            // 递归比较（e1和e2可能是嵌套的数组）
+            // 递归比较(e1和e2可能是嵌套的数组)
             boolean eq = deepEquals0(e1, e2);
             
             if(!eq) {
@@ -7649,7 +7649,7 @@ public class Arrays {
      * @see #deepHashCode(Object[])
      * @since 1.5
      */
-    // 计算数组a的哈希值，计算公式为：31^n + a[0]*31^(n-1) + a[1]*31^(n-2) + ... + a[n-1]。
+    // 计算数组a的哈希值 计算公式为:31^n + a[0]*31^(n-1) + a[1]*31^(n-2) + ... + a[n-1]。
     public static int hashCode(Object a[]) {
         if(a == null)
             return 0;
@@ -8618,7 +8618,7 @@ public class Arrays {
     
     /*▼ 判等相关的内部实现 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 递归比较两个元素是否相等（e1和e2可能是嵌套的数组）
+    // 递归比较两个元素是否相等(e1和e2可能是嵌套的数组)
     static boolean deepEquals0(Object e1, Object e2) {
         assert e1 != null;
         boolean eq;
@@ -8728,7 +8728,7 @@ public class Arrays {
      * Checks that {@code fromIndex} and {@code toIndex} are in
      * the range and throws an exception if they aren't.
      */
-    // 范围检查：0<=fromIndex<=toIndex<=arrayLength
+    // 范围检查:0<=fromIndex<=toIndex<=arrayLength
     static void rangeCheck(int arrayLength, int fromIndex, int toIndex) {
         if(fromIndex > toIndex) {
             throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
@@ -8758,7 +8758,7 @@ public class Arrays {
      * public Object parallelSort methods use the same comparator
      * based implementation.
      */
-    // 自然顺序比较器，要求待比较对象实现Comparable接口，内部实现调用了Comparable接口的compareTo方法
+    // 自然顺序比较器 要求待比较对象实现Comparable接口 内部实现调用了Comparable接口的compareTo方法
     static final class NaturalOrder implements Comparator<Object> {
         static final NaturalOrder INSTANCE = new NaturalOrder();
         
@@ -8771,7 +8771,7 @@ public class Arrays {
     /**
      * @serial include
      */
-    // 内部实现的固定长度的ArrayList，不能改变元素数量
+    // 内部实现的固定长度的ArrayList 不能改变元素数量
     private static class ArrayList<E> extends AbstractList<E> implements RandomAccess, Serializable {
         private static final long serialVersionUID = -2764017481108945198L;
         private final E[] a;

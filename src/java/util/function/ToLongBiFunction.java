@@ -39,10 +39,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：ToLongBiFunction<T, U>
+ * 函数式接口:ToLongBiFunction<T, U>
  *
- * 参数：T, U
- * 返回：long
+ * 参数:T, U
+ * 返回:long
  */
 @FunctionalInterface
 public interface ToLongBiFunction<T, U> {

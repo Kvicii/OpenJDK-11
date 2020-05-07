@@ -38,11 +38,11 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：LongFunction<R>
+ * 函数式接口:LongFunction<R>
  *
- * 参数：long
- * 返回：R
- * 示例：将long型数据l转换为字符串
+ * 参数:long
+ * 返回:R
+ * 示例:将long型数据l转换为字符串
  * LongFunction<String> f = l->Long.toString(l);
  */
 @FunctionalInterface

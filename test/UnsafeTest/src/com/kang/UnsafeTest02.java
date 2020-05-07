@@ -26,7 +26,7 @@ public class UnsafeTest02 {
         unsafe.putChar(chars, B+4*S, '承');  // chars[4]='承'
         unsafe.putChar(chars, B+5*S, '恩');  // chars[5]='恩'
         
-        // 修改数据后，输出数组中所有元素
+        // 修改数据后 输出数组中所有元素
         for(int n=0; n<chars.length; n++){
             char c = unsafe.getChar(chars, B+n*S);
             if(c!='\0'){

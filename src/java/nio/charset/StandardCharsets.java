@@ -33,7 +33,7 @@ package java.nio.charset;
  * @since 1.7
  */
 
-// 标准字符集的常量定义，这些字符集保证在Java平台的每个实现中都可用
+// 标准字符集的常量定义 这些字符集保证在Java平台的每个实现中都可用
 public final class StandardCharsets {
     
     // To avoid accidental eager initialization of often unused Charsets from happening while the VM is booting up,

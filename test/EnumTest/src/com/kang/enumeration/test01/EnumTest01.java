@@ -4,7 +4,7 @@ package com.kang.enumeration.test01;
 public class EnumTest01 {
     public static void main(String[] args) {
         
-        System.out.println("\n直接输出枚举常量（名称）");
+        System.out.println("\n直接输出枚举常量(名称)");
         System.out.println(Color.WHITE);
     
         System.out.println("\n输出枚举常量序号");

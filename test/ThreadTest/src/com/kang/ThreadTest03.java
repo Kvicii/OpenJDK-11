@@ -18,7 +18,7 @@ public class ThreadTest03 extends Thread{
                     } catch(InterruptedException e) {
                         System.out.println("线程t1在阻塞中收到了中断请求");
     
-                        // 抛出异常相当于激活了阻塞的线程t1，在这里给线程t1设置真正的中断标记，设置成功后线程t1退出
+                        // 抛出异常相当于激活了阻塞的线程t1 在这里给线程t1设置真正的中断标记 设置成功后线程t1退出
                         Thread.currentThread().interrupt();
                     }
                 }
@@ -36,7 +36,7 @@ public class ThreadTest03 extends Thread{
                     e.printStackTrace();
                 }
                 
-                // 线程处于阻塞状态时，只能收到中断通知，但无法设置中断位
+                // 线程处于阻塞状态时 只能收到中断通知 但无法设置中断位
                 t1.interrupt();
             }
         });

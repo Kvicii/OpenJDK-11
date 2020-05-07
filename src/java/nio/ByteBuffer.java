@@ -244,7 +244,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     // which is especially costly when coding small buffers.
     final byte[] hb;            // Non-null only for heap buffers
     
-    final int offset;       // 寻址偏移量，用于ByteBuffer/HeapByteBuffer/DirectByteBuffer这三组实现
+    final int offset;       // 寻址偏移量 用于ByteBuffer/HeapByteBuffer/DirectByteBuffer这三组实现
     boolean isReadOnly;     // 该缓冲区是否只读
     
     // 缓冲区字节是否为大端法存储
@@ -291,7 +291,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     /**
      * {@inheritDoc}
      */
-    // 在当前游标position处设置新的mark（备忘）
+    // 在当前游标position处设置新的mark(备忘)
     @Override
     public ByteBuffer mark() {
         super.mark();
@@ -321,7 +321,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     /**
      * {@inheritDoc}
      */
-    // 将当前游标position回退到mark（备忘）位置
+    // 将当前游标position回退到mark(备忘)位置
     @Override
     public ByteBuffer reset() {
         super.reset();
@@ -331,7 +331,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     /**
      * {@inheritDoc}
      */
-    // 清理缓冲区，重置标记
+    // 清理缓冲区 重置标记
     @Override
     public ByteBuffer clear() {
         super.clear();
@@ -341,7 +341,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     /**
      * {@inheritDoc}
      */
-    // 修改标记，可以切换缓冲区读/写模式
+    // 修改标记 可以切换缓冲区读/写模式
     @Override
     public ByteBuffer flip() {
         super.flip();
@@ -351,7 +351,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     /**
      * {@inheritDoc}
      */
-    // 丢弃备忘，游标归零
+    // 丢弃备忘 游标归零
     @Override
     public ByteBuffer rewind() {
         super.rewind();
@@ -362,7 +362,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a new byte buffer whose content is a shared subsequence of
@@ -386,11 +386,11 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *
      * @see #alignedSlice(int)
      */
-    // 切片，截取旧缓冲区的【活跃区域】，作为新缓冲区的【原始区域】。两个缓冲区标记独立
+    // 切片 截取旧缓冲区的【活跃区域】 作为新缓冲区的【原始区域】。两个缓冲区标记独立
     @Override
     public abstract ByteBuffer slice();
     
-    // 切片，截取旧缓冲区【活跃区域】中pos-lim中的一段，作为新缓冲区的【原始区域】。两个缓冲区标记独立
+    // 切片 截取旧缓冲区【活跃区域】中pos-lim中的一段 作为新缓冲区的【原始区域】。两个缓冲区标记独立
     abstract ByteBuffer slice(int pos, int lim);
     
     /**
@@ -443,7 +443,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @see #slice()
      * @since 9
      */
-    // 切片，首先得根据unitSize对position和limit进行字节对齐校准
+    // 切片 首先得根据unitSize对position和limit进行字节对齐校准
     public final ByteBuffer alignedSlice(int unitSize) {
         int pos = position();
         int lim = limit();
@@ -482,7 +482,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *
      * @return The new byte buffer
      */
-    // 副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     @Override
     public abstract ByteBuffer duplicate();
     
@@ -506,10 +506,10 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *
      * @return The new, read-only byte buffer
      */
-    // 只读副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 只读副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     public abstract ByteBuffer asReadOnlyBuffer();
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -523,7 +523,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
-    // 读取position处（可能需要加offset）的byte，然后递增position。
+    // 读取position处(可能需要加offset)的byte 然后递增position。
     public abstract byte get();
     
     /**
@@ -537,7 +537,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws IndexOutOfBoundsException If {@code index} is negative
      *                                   or not smaller than the buffer's limit
      */
-    // 读取index处（可能需要加offset）的byte（有越界检查）
+    // 读取index处(可能需要加offset)的byte(有越界检查)
     public abstract byte get(int index);
     
     /**
@@ -610,7 +610,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferUnderflowException If there are fewer than {@code length} bytes
      *                                  remaining in this buffer
      */
-    // 复制原缓存区的内容到dst数组（复制dst数组能容纳的所有内容，不考虑偏移量offset）
+    // 复制原缓存区的内容到dst数组(复制dst数组能容纳的所有内容 不考虑偏移量offset)
     public ByteBuffer get(byte[] dst) {
         return get(dst, 0, dst.length);
     }
@@ -627,7 +627,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferUnderflowException If there are fewer than two bytes
      *                                  remaining in this buffer
      */
-    // 一次读2个字节，按char解析，将position增加2个单位
+    // 一次读2个字节 按char解析 将position增加2个单位
     public abstract char getChar();
     
     /**
@@ -644,7 +644,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   or not smaller than the buffer's limit,
      *                                   minus one
      */
-    // 读取i处2个字节解析为char（有越界检查）
+    // 读取i处2个字节解析为char(有越界检查)
     public abstract char getChar(int index);
     
     /**
@@ -659,7 +659,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferUnderflowException If there are fewer than two bytes
      *                                  remaining in this buffer
      */
-    // 一次读2个字节，按short解析，将position增加2个单位
+    // 一次读2个字节 按short解析 将position增加2个单位
     public abstract short getShort();
     
     /**
@@ -676,7 +676,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   or not smaller than the buffer's limit,
      *                                   minus one
      */
-    // 读取i处2个字节解析为short（有越界检查）
+    // 读取i处2个字节解析为short(有越界检查)
     public abstract short getShort(int index);
     
     /**
@@ -691,7 +691,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferUnderflowException If there are fewer than four bytes
      *                                  remaining in this buffer
      */
-    // 一次读4个字节，按int解析，将position增加4个单位
+    // 一次读4个字节 按int解析 将position增加4个单位
     public abstract int getInt();
     
     /**
@@ -708,7 +708,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   or not smaller than the buffer's limit,
      *                                   minus three
      */
-    // 读取i处4个字节解析为int（有越界检查）
+    // 读取i处4个字节解析为int(有越界检查)
     public abstract int getInt(int index);
     
     /**
@@ -723,7 +723,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferUnderflowException If there are fewer than eight bytes
      *                                  remaining in this buffer
      */
-    // 一次读8个字节，按long解析，将position增加8个单位
+    // 一次读8个字节 按long解析 将position增加8个单位
     public abstract long getLong();
     
     /**
@@ -740,7 +740,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   or not smaller than the buffer's limit,
      *                                   minus seven
      */
-    // 读取i处8个字节解析为long（有越界检查）
+    // 读取i处8个字节解析为long(有越界检查)
     public abstract long getLong(int index);
     
     /**
@@ -755,7 +755,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferUnderflowException If there are fewer than four bytes
      *                                  remaining in this buffer
      */
-    // 一次读4个字节，按float解析，将position增加4个单位
+    // 一次读4个字节 按float解析 将position增加4个单位
     public abstract float getFloat();
     
     /**
@@ -772,7 +772,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   or not smaller than the buffer's limit,
      *                                   minus three
      */
-    // 读取i处4个字节解析为float（有越界检查）
+    // 读取i处4个字节解析为float(有越界检查)
     public abstract float getFloat(int index);
     
     /**
@@ -787,7 +787,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferUnderflowException If there are fewer than eight bytes
      *                                  remaining in this buffer
      */
-    // 一次读8个字节，按double解析，将position增加8个单位
+    // 一次读8个字节 按double解析 将position增加8个单位
     public abstract double getDouble();
     
     /**
@@ -804,7 +804,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   or not smaller than the buffer's limit,
      *                                   minus seven
      */
-    // 读取i处8个字节解析为double（有越界检查）
+    // 读取i处8个字节解析为double(有越界检查)
     public abstract double getDouble(int index);
     
     /*▲ get ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -826,7 +826,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 向position处（可能需要加offset）写入byte，并将position递增
+    // 向position处(可能需要加offset)写入byte 并将position递增
     public abstract ByteBuffer put(byte b);
     
     /**
@@ -844,7 +844,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   or not smaller than the buffer's limit
      * @throws ReadOnlyBufferException   If this buffer is read-only
      */
-    // 向index处（可能需要加offset）写入byte
+    // 向index处(可能需要加offset)写入byte
     public abstract ByteBuffer put(int index, byte b);
     
     /**
@@ -937,7 +937,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                   parameters do not hold
      * @throws ReadOnlyBufferException   If this buffer is read-only
      */
-    // 从源字节数组src的offset处开始，复制length个元素，写入到当前缓冲区（具体行为由子类实现）
+    // 从源字节数组src的offset处开始 复制length个元素 写入到当前缓冲区(具体行为由子类实现)
     public ByteBuffer put(byte[] src, int offset, int length) {
         checkBounds(offset, length, src.length);
         if(length > remaining())
@@ -987,7 +987,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                 remaining in this buffer
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 将char转为byte存入缓冲区，将position增加2个单位
+    // 将char转为byte存入缓冲区 将position增加2个单位
     public abstract ByteBuffer putChar(char value);
     
     /**
@@ -1026,7 +1026,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                 remaining in this buffer
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 将short转为byte存入缓冲区，将position增加2个单位
+    // 将short转为byte存入缓冲区 将position增加2个单位
     public abstract ByteBuffer putShort(short value);
     
     /**
@@ -1065,7 +1065,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                 remaining in this buffer
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 将int转为byte存入缓冲区，将position增加4个单位
+    // 将int转为byte存入缓冲区 将position增加4个单位
     public abstract ByteBuffer putInt(int value);
     
     /**
@@ -1104,7 +1104,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                 remaining in this buffer
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 将long转为byte存入缓冲区，将position增加8个单位
+    // 将long转为byte存入缓冲区 将position增加8个单位
     public abstract ByteBuffer putLong(long value);
     
     /**
@@ -1143,7 +1143,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                 remaining in this buffer
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 将float转为byte存入缓冲区，将position增加4个单位
+    // 将float转为byte存入缓冲区 将position增加4个单位
     public abstract ByteBuffer putFloat(float value);
     
     /**
@@ -1182,7 +1182,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *                                 remaining in this buffer
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 将double转为byte存入缓冲区，将position增加8个单位
+    // 将double转为byte存入缓冲区 将position增加8个单位
     public abstract ByteBuffer putDouble(double value);
     
     /**
@@ -1423,7 +1423,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length}
      *                                   parameters do not hold
      */
-    // 包装一个字节数组到buffer（包装一部分）
+    // 包装一个字节数组到buffer(包装一部分)
     public static ByteBuffer wrap(byte[] array, int offset, int length) {
         try {
             return new HeapByteBuffer(array, offset, length);
@@ -1451,7 +1451,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *
      * @return The new byte buffer
      */
-    // 包装一个字节数组到buffer（包装一部分）
+    // 包装一个字节数组到buffer(包装一部分)
     public static ByteBuffer wrap(byte[] array) {
         return wrap(array, 0, array.length);
     }
@@ -1499,7 +1499,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 压缩缓冲区，将当前未读完的数据挪到容器起始处，可用于读模式到写模式的切换，但又不丢失之前读入的数据。
+    // 压缩缓冲区 将当前未读完的数据挪到容器起始处 可用于读模式到写模式的切换 但又不丢失之前读入的数据。
     public abstract ByteBuffer compact();
     
     /*▲ 压缩 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -1631,7 +1631,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      *
      * @since 11
      */
-    // 快速比较两个缓冲区内容，并返回失配元素的索引。返回-1代表缓冲区内容相同。
+    // 快速比较两个缓冲区内容 并返回失配元素的索引。返回-1代表缓冲区内容相同。
     public int mismatch(ByteBuffer that) {
         int length = Math.min(this.remaining(), that.remaining());
         int r = BufferMismatch.mismatch(this, this.position(), that, that.position(), length);
@@ -1655,7 +1655,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @return {@code true} if, and only if, this buffer
      * is backed by an array and is not read-only
      */
-    // true：此buffer由可访问的数组实现
+    // true:此buffer由可访问的数组实现
     public final boolean hasArray() {
         return (hb != null) && !isReadOnly;
     }
@@ -1685,7 +1685,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
         return hb;
     }
     
-    // 返回内部存储结构的引用（一般用于非直接缓存区）
+    // 返回内部存储结构的引用(一般用于非直接缓存区)
     @Override
     Object base() {
         return hb;
@@ -1708,7 +1708,7 @@ public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer
      * @throws ReadOnlyBufferException       If this buffer is backed by an array but is read-only
      * @throws UnsupportedOperationException If this buffer is not backed by an accessible array
      */
-    // 返回此缓冲区中的第一个元素在缓冲区的底层实现数组中的偏移量（可选操作）
+    // 返回此缓冲区中的第一个元素在缓冲区的底层实现数组中的偏移量(可选操作)
     public final int arrayOffset() {
         if(hb == null)
             throw new UnsupportedOperationException();

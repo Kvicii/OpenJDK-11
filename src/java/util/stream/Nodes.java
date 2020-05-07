@@ -49,7 +49,7 @@ import java.util.function.LongFunction;
  * @since 1.8
  */
 
-// Node工厂，定义了六大类Node，应用于流水线的终端阶段
+// Node工厂 定义了六大类Node 应用于流水线的终端阶段
 final class Nodes {
 
     private Nodes() {
@@ -170,8 +170,8 @@ final class Nodes {
     // 返回Nodes.FixedNodeBuilder或Nodes.SpinedNodeBuilder
     static <T> Node.Builder<T> builder(long exactSizeIfKnown, IntFunction<T[]> generator) {
         return (exactSizeIfKnown >= 0 && exactSizeIfKnown < MAX_ARRAY_SIZE)
-            ? new FixedNodeBuilder<>(exactSizeIfKnown, generator)    // 新建FixedNodeBuilder，该Builder可用于创建固定长度的Node
-            : builder();                                             // 新建SpinedNodeBuilder，该Builder可用于创建可变长度的Node
+            ? new FixedNodeBuilder<>(exactSizeIfKnown, generator)    // 新建FixedNodeBuilder 该Builder可用于创建固定长度的Node
+            : builder();                                             // 新建SpinedNodeBuilder 该Builder可用于创建可变长度的Node
     }
     
     /**
@@ -303,7 +303,7 @@ final class Nodes {
      * @throws IllegalStateException if all {@link Node} elements of the list
      * are an not instance of type supported by this factory.
      */
-    // 将两个Node串联起来，并返回串联后的Node
+    // 将两个Node串联起来 并返回串联后的Node
     @SuppressWarnings("unchecked")
     static <T> Node<T> conc(StreamShape shape, Node<T> left, Node<T> right) {
         switch (shape) {
@@ -324,7 +324,7 @@ final class Nodes {
     
     
     
-    /*▼ flatten，给Node降维 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ flatten 给Node降维 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Flatten, in parallel, a {@link Node}.  A flattened node is one that has
@@ -343,17 +343,17 @@ final class Nodes {
      */
     // 将当前的Node降维成非树形Node
     public static <T> Node<T> flatten(Node<T> node, IntFunction<T[]> generator) {
-        // 非线性Node（一般指树形Node）
+        // 非线性Node(一般指树形Node)
         if (node.getChildCount() > 0) {
             long size = node.count();
             if (size >= MAX_ARRAY_SIZE)
                 throw new IllegalArgumentException(BAD_SIZE);
             T[] array = generator.apply((int) size);
-            // 执行专用任务：将Node中的元素转存到线性数组中
+            // 执行专用任务:将Node中的元素转存到线性数组中
             new ToArrayTask.OfRef<>(node, array, 0).invoke();
             return node(array);
         } else {
-            // 线性Node，包括存储结构为二维数组的Node
+            // 线性Node 包括存储结构为二维数组的Node
             return node;
         }
     }
@@ -439,11 +439,11 @@ final class Nodes {
         }
     }
     
-    /*▲ flatten，给Node降维 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ flatten 给Node降维 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ collect，并行收集元素 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ collect 并行收集元素 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Collect, in parallel, elements output from a pipeline and describe those elements with a {@link Node}.
@@ -592,7 +592,7 @@ final class Nodes {
         }
     }
     
-    /*▲ collect，并行收集元素 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ collect 并行收集元素 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -605,7 +605,7 @@ final class Nodes {
     
     /*▼ (1) 空 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // (1) 空Node，不包含有效数据
+    // (1) 空Node 不包含有效数据
     private abstract static class EmptyNode<T, T_ARR, T_CONS>
         implements Node<T> {
         
@@ -704,7 +704,7 @@ final class Nodes {
         final T[] array;
         int curSize;    // 数组元素数量
         
-        // 新建ArrayNode，内部包含一个长度为size的空数组
+        // 新建ArrayNode 内部包含一个长度为size的空数组
         @SuppressWarnings("unchecked")
         ArrayNode(long size, IntFunction<T[]> generator) {
             if(size >= MAX_ARRAY_SIZE)
@@ -719,19 +719,19 @@ final class Nodes {
             this.curSize = array.length;
         }
         
-        // 返回描述此ArrayNode中元素的Spliterator（这里直接将内部数组包装到Spliterator后返回）
+        // 返回描述此ArrayNode中元素的Spliterator(这里直接将内部数组包装到Spliterator后返回)
         @Override
         public Spliterator<T> spliterator() {
             return Arrays.spliterator(array, 0, curSize);
         }
         
-        // 将ArrayNode的内容复制到数组dest中（这里直接进行数组拷贝）
+        // 将ArrayNode的内容复制到数组dest中(这里直接进行数组拷贝)
         @Override
         public void copyInto(T[] dest, int destOffset) {
             System.arraycopy(array, 0, dest, destOffset, curSize);
         }
         
-        // 返回ArrayNode内部数据的数组视图（这里直接返回内部数组）
+        // 返回ArrayNode内部数据的数组视图(这里直接返回内部数组)
         @Override
         public T[] asArray(IntFunction<T[]> generator) {
             if(array.length == curSize) {
@@ -741,13 +741,13 @@ final class Nodes {
             }
         }
         
-        // 返回ArrayNode中包含的元素数量（这里直接返回数组中元素的个数）
+        // 返回ArrayNode中包含的元素数量(这里直接返回数组中元素的个数)
         @Override
         public long count() {
             return curSize;
         }
         
-        // 遍历ArrayNode中的元素，并在其上执行Consumer操作
+        // 遍历ArrayNode中的元素 并在其上执行Consumer操作
         @Override
         public void forEach(Consumer<? super T> consumer) {
             for(int i = 0; i < curSize; i++) {
@@ -766,7 +766,7 @@ final class Nodes {
         final int[] array;
         int curSize;
         
-        // 新建Node，内部包含一个长度为size的空数组
+        // 新建Node 内部包含一个长度为size的空数组
         IntArrayNode(long size) {
             if (size >= MAX_ARRAY_SIZE)
                 throw new IllegalArgumentException(BAD_SIZE);
@@ -780,7 +780,7 @@ final class Nodes {
             this.curSize = array.length;
         }
         
-        // 返回描述此Node中元素的Spliterator（这里是IntArraySpliterator）
+        // 返回描述此Node中元素的Spliterator(这里是IntArraySpliterator)
         @Override
         public Spliterator.OfInt spliterator() {
             return Arrays.spliterator(array, 0, curSize);
@@ -796,19 +796,19 @@ final class Nodes {
             }
         }
         
-        // 将Node的内容复制到数组dest中（这里直接进行数组拷贝）
+        // 将Node的内容复制到数组dest中(这里直接进行数组拷贝)
         @Override
         public void copyInto(int[] dest, int destOffset) {
             System.arraycopy(array, 0, dest, destOffset, curSize);
         }
         
-        // 返回Node中包含的元素数量（这里直接返回数组中元素的个数）
+        // 返回Node中包含的元素数量(这里直接返回数组中元素的个数)
         @Override
         public long count() {
             return curSize;
         }
         
-        // 遍历Node中的元素，并在其上执行consumer操作
+        // 遍历Node中的元素 并在其上执行consumer操作
         @Override
         public void forEach(IntConsumer consumer) {
             for (int i = 0; i < curSize; i++) {
@@ -828,7 +828,7 @@ final class Nodes {
         final long[] array;
         int curSize;
         
-        // 新建Node，内部包含一个长度为size的空数组
+        // 新建Node 内部包含一个长度为size的空数组
         LongArrayNode(long size) {
             if (size >= MAX_ARRAY_SIZE)
                 throw new IllegalArgumentException(BAD_SIZE);
@@ -841,7 +841,7 @@ final class Nodes {
             this.curSize = array.length;
         }
         
-        // 返回描述此Node中元素的Spliterator（这里是LongArraySpliterator）
+        // 返回描述此Node中元素的Spliterator(这里是LongArraySpliterator)
         @Override
         public Spliterator.OfLong spliterator() {
             return Arrays.spliterator(array, 0, curSize);
@@ -857,19 +857,19 @@ final class Nodes {
             }
         }
         
-        // 将Node的内容复制到数组dest中（这里直接进行数组拷贝）
+        // 将Node的内容复制到数组dest中(这里直接进行数组拷贝)
         @Override
         public void copyInto(long[] dest, int destOffset) {
             System.arraycopy(array, 0, dest, destOffset, curSize);
         }
         
-        // 返回Node中包含的元素数量（这里直接返回数组中元素的个数）
+        // 返回Node中包含的元素数量(这里直接返回数组中元素的个数)
         @Override
         public long count() {
             return curSize;
         }
         
-        // 遍历Node中的元素，并在其上执行consumer操作
+        // 遍历Node中的元素 并在其上执行consumer操作
         @Override
         public void forEach(LongConsumer consumer) {
             for (int i = 0; i < curSize; i++) {
@@ -889,7 +889,7 @@ final class Nodes {
         final double[] array;
         int curSize;
         
-        // 新建Node，内部包含一个长度为size的空数组
+        // 新建Node 内部包含一个长度为size的空数组
         DoubleArrayNode(long size) {
             if (size >= MAX_ARRAY_SIZE)
                 throw new IllegalArgumentException(BAD_SIZE);
@@ -902,7 +902,7 @@ final class Nodes {
             this.curSize = array.length;
         }
         
-        // 返回描述此Node中元素的Spliterator（这里是DoubleArraySpliterator）
+        // 返回描述此Node中元素的Spliterator(这里是DoubleArraySpliterator)
         @Override
         public Spliterator.OfDouble spliterator() {
             return Arrays.spliterator(array, 0, curSize);
@@ -918,19 +918,19 @@ final class Nodes {
             }
         }
         
-        // 将Node的内容复制到数组dest中（这里直接进行数组拷贝）
+        // 将Node的内容复制到数组dest中(这里直接进行数组拷贝)
         @Override
         public void copyInto(double[] dest, int destOffset) {
             System.arraycopy(array, 0, dest, destOffset, curSize);
         }
         
-        // 返回Node中包含的元素数量（这里直接返回数组中元素的个数）
+        // 返回Node中包含的元素数量(这里直接返回数组中元素的个数)
         @Override
         public long count() {
             return curSize;
         }
         
-        // 遍历Node中的元素，并在其上执行consumer操作
+        // 遍历Node中的元素 并在其上执行consumer操作
         @Override
         public void forEach(DoubleConsumer consumer) {
             for (int i = 0; i < curSize; i++) {
@@ -949,7 +949,7 @@ final class Nodes {
     
     
     
-    /*▼ (3) 固定长度的Node，这些Node本身也是Sink，可以接收元素 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (3) 固定长度的Node 这些Node本身也是Sink 可以接收元素 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Fixed-sized builder class for reference nodes
@@ -959,7 +959,7 @@ final class Nodes {
         extends ArrayNode<T>
         implements Node.Builder<T> {
         
-        // 新建FixedNodeBuilder，内部包含一个长度为size的空数组
+        // 新建FixedNodeBuilder 内部包含一个长度为size的空数组
         FixedNodeBuilder(long size, IntFunction<T[]> generator) {
             super(size, generator);
             assert size < MAX_ARRAY_SIZE;
@@ -1004,7 +1004,7 @@ final class Nodes {
         }
     }
     
-    // 【Node/Builder->Sink子类】为int类型特化，用在Node长度固定的场景
+    // 【Node/Builder->Sink子类】为int类型特化 用在Node长度固定的场景
     private static final class IntFixedNodeBuilder
         extends IntArrayNode
         implements Node.Builder.OfInt {
@@ -1058,7 +1058,7 @@ final class Nodes {
         }
     }
     
-    // 【Node/Builder->Sink子类】为long类型特化，用在Node长度固定的场景
+    // 【Node/Builder->Sink子类】为long类型特化 用在Node长度固定的场景
     private static final class LongFixedNodeBuilder
         extends LongArrayNode
         implements Node.Builder.OfLong {
@@ -1112,7 +1112,7 @@ final class Nodes {
         }
     }
     
-    // 【Node/Builder->Sink子类】为double类型特化，用在Node长度固定的场景
+    // 【Node/Builder->Sink子类】为double类型特化 用在Node长度固定的场景
     private static final class DoubleFixedNodeBuilder
         extends DoubleArrayNode
         implements Node.Builder.OfDouble {
@@ -1166,11 +1166,11 @@ final class Nodes {
         }
     }
     
-    /*▲ (3) 固定长度的Node，这些Node本身也是Sink，可以接收元素 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (3) 固定长度的Node 这些Node本身也是Sink 可以接收元素 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (4) 可变长度的Node，这些Node本身也是Sink，可以接收元素 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (4) 可变长度的Node 这些Node本身也是Sink 可以接收元素 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Variable-sized builder class for reference nodes
@@ -1191,7 +1191,7 @@ final class Nodes {
             assert !building : "was already building";
             building = true;
             clear();                // 清空SpinedBuffer
-            ensureCapacity(size);   // 传入需要的容量，确保SpinedBuffer容量充足，不够的话就分配
+            ensureCapacity(size);   // 传入需要的容量 确保SpinedBuffer容量充足 不够的话就分配
         }
         
         // 向SpinedBuffer存入一个元素
@@ -1223,7 +1223,7 @@ final class Nodes {
             return super.spliterator();
         }
         
-        // 遍历SpinedNodeBuilder中的元素，并在其上应用consumer函数
+        // 遍历SpinedNodeBuilder中的元素 并在其上应用consumer函数
         @Override
         public void forEach(Consumer<? super T> consumer) {
             assert !building : "during building";
@@ -1245,7 +1245,7 @@ final class Nodes {
         }
     }
     
-    // 【Node/Builder->Sink/SpinedBuffer子类】为int类型特化，用在Node长度可变的场景
+    // 【Node/Builder->Sink/SpinedBuffer子类】为int类型特化 用在Node长度可变的场景
     private static final class IntSpinedNodeBuilder
         extends SpinedBuffer.OfInt
         implements Node.OfInt, Node.Builder.OfInt {
@@ -1292,7 +1292,7 @@ final class Nodes {
             return super.spliterator();
         }
         
-        // 遍历SpinedNodeBuilder中的元素，并在其上应用consumer函数
+        // 遍历SpinedNodeBuilder中的元素 并在其上应用consumer函数
         @Override
         public void forEach(IntConsumer consumer) {
             assert !building : "during building";
@@ -1314,7 +1314,7 @@ final class Nodes {
         }
     }
     
-    // 【Node/Builder->Sink/SpinedBuffer子类】为long类型特化，用在Node长度可变的场景
+    // 【Node/Builder->Sink/SpinedBuffer子类】为long类型特化 用在Node长度可变的场景
     private static final class LongSpinedNodeBuilder
         extends SpinedBuffer.OfLong
         implements Node.OfLong, Node.Builder.OfLong {
@@ -1361,7 +1361,7 @@ final class Nodes {
             return super.spliterator();
         }
         
-        // 遍历SpinedNodeBuilder中的元素，并在其上应用consumer函数
+        // 遍历SpinedNodeBuilder中的元素 并在其上应用consumer函数
         @Override
         public void forEach(LongConsumer consumer) {
             assert !building : "during building";
@@ -1383,7 +1383,7 @@ final class Nodes {
         }
     }
     
-    // 【Node/Builder->Sink/SpinedBuffer子类】为double类型特化，用在Node长度可变的场景
+    // 【Node/Builder->Sink/SpinedBuffer子类】为double类型特化 用在Node长度可变的场景
     private static final class DoubleSpinedNodeBuilder
         extends SpinedBuffer.OfDouble
         implements Node.OfDouble, Node.Builder.OfDouble {
@@ -1423,7 +1423,7 @@ final class Nodes {
             return this;
         }
         
-        // 遍历SpinedNodeBuilder中的元素，并在其上应用consumer函数
+        // 遍历SpinedNodeBuilder中的元素 并在其上应用consumer函数
         @Override
         public Spliterator.OfDouble spliterator() {
             assert !building : "during building";
@@ -1452,7 +1452,7 @@ final class Nodes {
         }
     }
     
-    /*▲ (4) 可变长度的Node，这些Node本身也是Sink，可以接收元素 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (4) 可变长度的Node 这些Node本身也是Sink 可以接收元素 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -1575,7 +1575,7 @@ final class Nodes {
             right.copyInto(array, offset + (int) left.count());
         }
         
-        // 返回Node内部数据的数组视图（将两个子Node的内容复制到一个数组）
+        // 返回Node内部数据的数组视图(将两个子Node的内容复制到一个数组)
         @Override
         public T[] asArray(IntFunction<T[]> generator) {
             long size = count();
@@ -1586,14 +1586,14 @@ final class Nodes {
             return array;
         }
         
-        // 依次遍历两个子Node中的元素，并在其上执行Consumer操作
+        // 依次遍历两个子Node中的元素 并在其上执行Consumer操作
         @Override
         public void forEach(Consumer<? super T> consumer) {
             left.forEach(consumer);
             right.forEach(consumer);
         }
         
-        // 从当前Node生成一个子Node返回（把两个子Node看成整体去考虑）
+        // 从当前Node生成一个子Node返回(把两个子Node看成整体去考虑)
         @Override
         public Node<T> truncate(long from, long to, IntFunction<T[]> generator) {
             if(from == 0 && to == count())
@@ -1626,7 +1626,7 @@ final class Nodes {
                 super(left, right);
             }
             
-            // 依次遍历两个子Node中的元素，并在其上执行consumer操作
+            // 依次遍历两个子Node中的元素 并在其上执行consumer操作
             @Override
             public void forEach(T_CONS consumer) {
                 left.forEach(consumer);
@@ -1722,7 +1722,7 @@ final class Nodes {
         N curNode;  // 当前Node
         
         // next child of curNode to consume
-        int curChildIndex;  // curNode的子Node索引（0或1）
+        int curChildIndex;  // curNode的子Node索引(0或1)
         
         // The spliterator of the curNode if that node is last and has no children.
         // This spliterator will be delegated to for splitting and traversing.
@@ -1735,17 +1735,17 @@ final class Nodes {
         
         // node stack used when traversing to search and find leaf nodes
         // null if no partial traversal has occurred
-        Deque<N> tryAdvanceStack;   // 双端队列，存储curNode的子Node
+        Deque<N> tryAdvanceStack;   // 双端队列 存储curNode的子Node
         
         InternalNodeSpliterator(N curNode) {
             this.curNode = curNode;
         }
         
-        // 从容器的指定范围切割一段元素，将其打包到Spliterator后返回，特征值不变
+        // 从容器的指定范围切割一段元素 将其打包到Spliterator后返回 特征值不变
         @Override
         @SuppressWarnings("unchecked")
         public final S trySplit() {
-            if(curNode == null || tryAdvanceSpliterator != null) {  // 已经全部遍历完，或者遍历了一部分，则无法分割
+            if(curNode == null || tryAdvanceSpliterator != null) {  // 已经全部遍历完 或者遍历了一部分 则无法分割
                 return null; // Cannot split if fully or partially traversed
             } else if(lastNodeSpliterator != null) {    //
                 return (S) lastNodeSpliterator.trySplit();
@@ -1789,7 +1789,7 @@ final class Nodes {
         /**
          * Initiate a stack containing, in left-to-right order, the child nodes covered by this spliterator
          */
-        // 将子Node存入双端队列，队头是左Node，队尾是右Node
+        // 将子Node存入双端队列 队头是左Node 队尾是右Node
         @SuppressWarnings("unchecked")
         protected final Deque<N> initStack() {
             // Bias size to the case where leaf nodes are close to this node
@@ -1803,7 +1803,7 @@ final class Nodes {
         /**
          * Depth first search, in left-to-right order, of the node tree, using an explicit stack, to find the next non-empty leaf node.
          */
-        // 深度优先遍历Node树，直到找到一个非空的叶子节点（该Node包含有效元素）
+        // 深度优先遍历Node树 直到找到一个非空的叶子节点(该Node包含有效元素)
         @SuppressWarnings("unchecked")
         protected final N findNextLeafNode(Deque<N> stack) {
             N n;
@@ -1840,7 +1840,7 @@ final class Nodes {
                     else {
                         // A non-empty leaf node was not found
                         // No elements to traverse
-                        curNode = null; // 找不到非空的叶子节点，不需要遍历
+                        curNode = null; // 找不到非空的叶子节点 不需要遍历
                         return false;
                     }
                 } else {
@@ -1986,7 +1986,7 @@ final class Nodes {
     /**
      * @return an array generator for an array whose elements are of type T.
      */
-    // 创建T[]类型的数组，数组长度由参数指定
+    // 创建T[]类型的数组 数组长度由参数指定
     @SuppressWarnings("unchecked")
     static <T> IntFunction<T[]> castingArray() {
         return size -> (T[]) new Object[size];
@@ -1997,9 +1997,9 @@ final class Nodes {
     /*▼ 专用Task ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /*
-     * 专用任务：用于将Node中的元素转存到线性数组中（可用于降维）
-     * 如果是普通的Node（不包含子Node），直接将其内容拷贝到数组中返回
-     * 如果是树形Node（包含子Node），则并行地从Node中拷贝内容
+     * 专用任务:用于将Node中的元素转存到线性数组中(可用于降维)
+     * 如果是普通的Node(不包含子Node) 直接将其内容拷贝到数组中返回
+     * 如果是树形Node(包含子Node) 则并行地从Node中拷贝内容
      */
     @SuppressWarnings("serial")
     private abstract static class ToArrayTask<T, T_NODE extends Node<T>, K extends ToArrayTask<T, T_NODE, K>>

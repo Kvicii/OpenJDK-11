@@ -63,7 +63,7 @@ import java.lang.ref.Reference;
  * @since 1.4
  */
 
-// 基于内存的直接字节缓冲区，该对象的数据元素是存储在磁盘上的文件
+// 基于内存的直接字节缓冲区 该对象的数据元素是存储在磁盘上的文件
 public abstract class MappedByteBuffer extends ByteBuffer {
     /*
      * This is a little bit backwards: By rights MappedByteBuffer should be a subclass of DirectByteBuffer,
@@ -105,23 +105,23 @@ public abstract class MappedByteBuffer extends ByteBuffer {
      * @return This buffer
      */
     /*
-     * 该方法的主要作用是为提前加载文件埋单，以便后续的访问速度可以尽可能的快。
+     * 该方法的主要作用是为提前加载文件埋单 以便后续的访问速度可以尽可能的快。
      *
-     * 为一个文件建立虚拟内存映射后，文件数据往往不会因此从磁盘读取到内存（这取决于操作系统）。
-     * 该过程类似打开一个文件：文件先被定位，然后一个文件句柄会被创建，随后通过文件句柄来访问文件数据。
+     * 为一个文件建立虚拟内存映射后 文件数据往往不会因此从磁盘读取到内存(这取决于操作系统)。
+     * 该过程类似打开一个文件:文件先被定位 然后一个文件句柄会被创建 随后通过文件句柄来访问文件数据。
      *
-     * 对于映射缓冲区，虚拟内存系统将根据需要来把文件中相应区块的数据读进来。
-     * 这个页验证或防错过程需要一定的时间，因为将文件数据读取到内存需要一次或多次的磁盘访问。
-     * 某些场景下，可能想先把所有的页都读进内存以实现最小的缓冲区访问延迟。
-     * 如果文件的所有页都是常驻内存的，那么它的访问速度就和访问一个基于内存的缓冲区一样了。
+     * 对于映射缓冲区 虚拟内存系统将根据需要来把文件中相应区块的数据读进来。
+     * 这个页验证或防错过程需要一定的时间 因为将文件数据读取到内存需要一次或多次的磁盘访问。
+     * 某些场景下 可能想先把所有的页都读进内存以实现最小的缓冲区访问延迟。
+     * 如果文件的所有页都是常驻内存的 那么它的访问速度就和访问一个基于内存的缓冲区一样了。
      *
-     * load()方法会加载整个文件以使它常驻内存，此映射使得操作系统的底层虚拟内存子系统可以根据需要将文件中相应区块的数据读进内存。
-     * 已经在内存中或通过验证的页会占用实际内存空间，并且在它们被读进RAM时会挤出最近较少使用的其他内存页。
+     * load()方法会加载整个文件以使它常驻内存 此映射使得操作系统的底层虚拟内存子系统可以根据需要将文件中相应区块的数据读进内存。
+     * 已经在内存中或通过验证的页会占用实际内存空间 并且在它们被读进RAM时会挤出最近较少使用的其他内存页。
      *
-     * 在一个映射缓冲区上调用load()方法会是一个代价高的操作，因为它会导致大量的页调入（page-in），具体数量取决于文件中被映射区域的实际大小。
-     * 然而，load()方法返回并不能保证文件就会完全常驻内存，这是由于请求页面调入（demand paging）是动态的。
-     * 具体结果会因某些因素而有所差异，这些因素包括：操作系统、文件系统，可用Java虚拟机内存，最大Java虚拟机内存，垃圾收集器实现过程等等。
-     * 务必小心使用load()方法，它可能会导致不希望出现的结果。
+     * 在一个映射缓冲区上调用load()方法会是一个代价高的操作 因为它会导致大量的页调入(page-in) 具体数量取决于文件中被映射区域的实际大小。
+     * 然而 load()方法返回并不能保证文件就会完全常驻内存 这是由于请求页面调入(demand paging)是动态的。
+     * 具体结果会因某些因素而有所差异 这些因素包括:操作系统、文件系统 可用Java虚拟机内存 最大Java虚拟机内存 垃圾收集器实现过程等等。
+     * 务必小心使用load()方法 它可能会导致不希望出现的结果。
      */
     public final MappedByteBuffer load() {
         if(fd == null) {
@@ -175,10 +175,10 @@ public abstract class MappedByteBuffer extends ByteBuffer {
      */
     /*
      * 可以通过调用isLoaded()方法来判断一个被映射的文件是否完全常驻内存了。
-     * 如果该方法返回true值，那么很大概率是映射缓冲区的访问延迟很少或者根本没有延迟。
-     * 不过，这也是不能保证的。
-     * 同样地，返回false值并不一定意味着访问缓冲区将很慢或者该文件并未完全常驻内存。
-     * isLoaded()方法的返回值只是一个暗示，由于垃圾收集的异步性质、底层操作系统以及运行系统的动态性等因素，想要在任意时刻准确判断全部映射页的状态是不可能的。
+     * 如果该方法返回true值 那么很大概率是映射缓冲区的访问延迟很少或者根本没有延迟。
+     * 不过 这也是不能保证的。
+     * 同样地 返回false值并不一定意味着访问缓冲区将很慢或者该文件并未完全常驻内存。
+     * isLoaded()方法的返回值只是一个暗示 由于垃圾收集的异步性质、底层操作系统以及运行系统的动态性等因素 想要在任意时刻准确判断全部映射页的状态是不可能的。
      */
     public final boolean isLoaded() {
         if(fd == null) {
@@ -210,10 +210,10 @@ public abstract class MappedByteBuffer extends ByteBuffer {
      * @return This buffer
      */
     /*
-     * force()同FileChannel类中的同名方法相似，该方法会强制将映射缓冲区上的更改应用到永久磁盘存储器上。
-     * 当用MappedByteBuffer对象来更新一个文件，应该总是使用MappedByteBuffer.force()而非FileChannel.force()，因为通道对象可能不清楚通过映射缓冲区做出的文件的全部更改。
+     * force()同FileChannel类中的同名方法相似 该方法会强制将映射缓冲区上的更改应用到永久磁盘存储器上。
+     * 当用MappedByteBuffer对象来更新一个文件 应该总是使用MappedByteBuffer.force()而非FileChannel.force() 因为通道对象可能不清楚通过映射缓冲区做出的文件的全部更改。
      *
-     * 如果映射是以MapMode.READ_ONLY或MAP_MODE.PRIVATE模式建立的，那么调用force( )方法将不起任何作用，因为永远不会有更改需要应用到磁盘上（但是这样做也没有害处）。
+     * 如果映射是以MapMode.READ_ONLY或MAP_MODE.PRIVATE模式建立的 那么调用force( )方法将不起任何作用 因为永远不会有更改需要应用到磁盘上(但是这样做也没有害处)。
      */
     public final MappedByteBuffer force() {
         if(fd == null) {
@@ -255,7 +255,7 @@ public abstract class MappedByteBuffer extends ByteBuffer {
     /**
      * {@inheritDoc}
      */
-    // 在当前游标position处设置新的mark（备忘）
+    // 在当前游标position处设置新的mark(备忘)
     @Override
     public final MappedByteBuffer mark() {
         super.mark();
@@ -265,7 +265,7 @@ public abstract class MappedByteBuffer extends ByteBuffer {
     /**
      * {@inheritDoc}
      */
-    // 将当前游标position回退到mark（备忘）位置
+    // 将当前游标position回退到mark(备忘)位置
     @Override
     public final MappedByteBuffer reset() {
         super.reset();
@@ -275,7 +275,7 @@ public abstract class MappedByteBuffer extends ByteBuffer {
     /**
      * {@inheritDoc}
      */
-    // 清理缓冲区，重置标记
+    // 清理缓冲区 重置标记
     @Override
     public final MappedByteBuffer clear() {
         super.clear();
@@ -285,7 +285,7 @@ public abstract class MappedByteBuffer extends ByteBuffer {
     /**
      * {@inheritDoc}
      */
-    // 修改标记，可以切换缓冲区读/写模式
+    // 修改标记 可以切换缓冲区读/写模式
     @Override
     public final MappedByteBuffer flip() {
         super.flip();
@@ -295,7 +295,7 @@ public abstract class MappedByteBuffer extends ByteBuffer {
     /**
      * {@inheritDoc}
      */
-    // 丢弃备忘，游标归零
+    // 丢弃备忘 游标归零
     @Override
     public final MappedByteBuffer rewind() {
         super.rewind();

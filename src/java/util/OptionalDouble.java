@@ -113,7 +113,7 @@ public final class OptionalDouble {
     }
     
     
-    /*▼ 静态工厂，创建OptionalDouble ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 静态工厂 创建OptionalDouble ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Returns an empty {@code OptionalDouble} instance.  No value is present
@@ -141,7 +141,7 @@ public final class OptionalDouble {
         return new OptionalDouble(value);
     }
     
-    /*▲ 静态工厂，创建OptionalDouble ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 静态工厂 创建OptionalDouble ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -156,7 +156,7 @@ public final class OptionalDouble {
      * @throws NoSuchElementException if no value is present
      * @apiNote The preferred alternative to this method is {@link #orElseThrow()}.
      */
-    // 如果元素存在，则返回它
+    // 如果元素存在 则返回它
     public double getAsDouble() {
         if(!isPresent) {
             throw new NoSuchElementException("No value present");
@@ -172,7 +172,7 @@ public final class OptionalDouble {
      *
      * @return the value, if present, otherwise {@code other}
      */
-    // 如果元素存在，返回它。否则，返回other
+    // 如果元素存在 返回它。否则 返回other
     public double orElse(double other) {
         return isPresent ? value : other;
     }
@@ -189,7 +189,7 @@ public final class OptionalDouble {
      * @throws NullPointerException if no value is present and the supplying
      *                              function is {@code null}
      */
-    // 如果元素存在，返回它。否则，从supplier中获取
+    // 如果元素存在 返回它。否则 从supplier中获取
     public double orElseGet(DoubleSupplier supplier) {
         return isPresent ? value : supplier.getAsDouble();
     }
@@ -203,7 +203,7 @@ public final class OptionalDouble {
      * @throws NoSuchElementException if no value is present
      * @since 10
      */
-    // 如果元素存在，返回它。否则，抛出异常
+    // 如果元素存在 返回它。否则 抛出异常
     public double orElseThrow() {
         if(!isPresent) {
             throw new NoSuchElementException("No value present");
@@ -228,7 +228,7 @@ public final class OptionalDouble {
      * list can be used as the supplier. For example,
      * {@code IllegalStateException::new}
      */
-    // 如果元素存在，返回它。否则，从exceptionSupplier中取出异常并抛出
+    // 如果元素存在 返回它。否则 从exceptionSupplier中取出异常并抛出
     public <X extends Throwable> double orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
         if(isPresent) {
             return value;
@@ -275,7 +275,7 @@ public final class OptionalDouble {
      * @throws NullPointerException if value is present and the given action is
      *                              {@code null}
      */
-    // 如果元素存在，执行action动作
+    // 如果元素存在 执行action动作
     public void ifPresent(DoubleConsumer action) {
         if(isPresent) {
             action.accept(value);
@@ -295,7 +295,7 @@ public final class OptionalDouble {
      *                              action is {@code null}.
      * @since 9
      */
-    // 如果元素存在，执行actin动作。否则，执行emptyAction动作。
+    // 如果元素存在 执行actin动作。否则 执行emptyAction动作。
     public void ifPresentOrElse(DoubleConsumer action, Runnable emptyAction) {
         if(isPresent) {
             action.accept(value);

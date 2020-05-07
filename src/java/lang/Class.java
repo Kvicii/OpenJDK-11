@@ -189,7 +189,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     // 当前类关联的类加载器
     private final ClassLoader classLoader;
     
-    // 数组的组件类型，int[]对应int，int[][]对应int[]，不是数组则为null
+    // 数组的组件类型 int[]对应int int[][]对应int[] 不是数组则为null
     private final Class<?> componentType;
     
     
@@ -295,7 +295,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                                     by this method fails
      * @throws ClassNotFoundException      if the class cannot be located
      */
-    // 根据类的全名加载类对象，而且加载类的同时对类进行初始化
+    // 根据类的全名加载类对象 而且加载类的同时对类进行初始化
     @CallerSensitive
     public static Class<?> forName(String className) throws ClassNotFoundException {
         Class<?> caller = Reflection.getCallerClass();
@@ -361,7 +361,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @see java.lang.ClassLoader
      * @since 1.2
      */
-    // 根据类的全名和指定的类加载器加载类对象，initialize参数指示是否在加载类的同时对类进行初始化
+    // 根据类的全名和指定的类加载器加载类对象 initialize参数指示是否在加载类的同时对类进行初始化
     @CallerSensitive
     public static Class<?> forName(String className, boolean initialize, ClassLoader loader) throws ClassNotFoundException {
         Class<?> caller = null;
@@ -423,7 +423,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @spec JPMS
      * @since 9
      */
-    // 根据类的全名和所在的Module加载类对象，如果该module下没有该类，返回null
+    // 根据类的全名和所在的Module加载类对象 如果该module下没有该类 返回null
     @CallerSensitive
     public static Class<?> forName(Module module, String name) {
         Objects.requireNonNull(module);
@@ -506,7 +506,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * NoSuchMethodException}. Both of these exception types are
      * subclasses of {@link ReflectiveOperationException}.
      */
-    // 创建类的新实例（该方法已过时，不再建议使用）
+    // 创建类的新实例(该方法已过时 不再建议使用)
     @CallerSensitive
     @Deprecated(since = "9")
     public T newInstance() throws InstantiationException, IllegalAccessException {
@@ -647,7 +647,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *
      * @since 1.5
      */
-    // 不带包名的名称（匿名类没有）
+    // 不带包名的名称(匿名类没有)
     public String getSimpleName() {
         ReflectionData<T> rd = reflectionData();
         String simpleName = rd.simpleName;
@@ -669,7 +669,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *
      * @since 1.5
      */
-    // 规范名，与源码中的书写方式一致（匿名类为null）
+    // 规范名 与源码中的书写方式一致(匿名类为null)
     public String getCanonicalName() {
         ReflectionData<T> rd = reflectionData();
         String canonicalName = rd.canonicalName;
@@ -686,7 +686,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *
      * @since 1.8
      */
-    // 类型名称，对于数组类型，与getCanonicalName一样，对于其他类型，与getName一致
+    // 类型名称 对于数组类型 与getCanonicalName一样 对于其他类型 与getName一致
     public String getTypeName() {
         if(isArray()) {
             try {
@@ -747,7 +747,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /*
      * X.class.isInstance(obj) ==> 判断[对象]obj是否可以作为X类的实例
      * obj instanceof X 与上述调用作用一致
-     * 关键字instanceof更简洁，isInstance()方法更灵活
+     * 关键字instanceof更简洁 isInstance()方法更灵活
      */
     @HotSpotIntrinsicCandidate
     public native boolean isInstance(Object obj);
@@ -778,7 +778,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                              null.
      * @since 1.1
      */
-    // X.class.isAssignableFrom(cls) ==> 判断X与cls所属的类/接口是否相同，或者X是cls的父类/父接口
+    // X.class.isAssignableFrom(cls) ==> 判断X与cls所属的类/接口是否相同 或者X是cls的父类/父接口
     @HotSpotIntrinsicCandidate
     public native boolean isAssignableFrom(Class<?> cls);
     
@@ -803,7 +803,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *
      * @since 1.5
      */
-    // X.class.isAnnotation() ==> 判断X是否为注解类，如果成立，则X.class.isInterface()也返回true
+    // X.class.isAnnotation() ==> 判断X是否为注解类 如果成立 则X.class.isInterface()也返回true
     public boolean isAnnotation() {
         return (getModifiers() & ANNOTATION) != 0;
     }
@@ -836,7 +836,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @see java.lang.Void#TYPE
      * @since 1.1
      */
-    // X.class.isPrimitive() ==> 判断X是否为基本类型，如int.class
+    // X.class.isPrimitive() ==> 判断X是否为基本类型 如int.class
     @HotSpotIntrinsicCandidate
     public native boolean isPrimitive();
     
@@ -917,7 +917,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jls 13.1 The Form of a Binary
      * @since 1.5
      */
-    // 合成类，如((Runnable) () -> {}).getClass().isSynthetic()为true
+    // 合成类 如((Runnable) () -> {}).getClass().isSynthetic()为true
     public boolean isSynthetic() {
         return (getModifiers() & SYNTHETIC) != 0;
     }
@@ -928,7 +928,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @throws NullPointerException {@inheritDoc}
      * @since 1.5
      */
-    // 判断当前类上是否存在注解annotationClass，要求注解annotationClass运行时可见（@Retention(RetentionPolicy.RUNTIME)）
+    // 判断当前类上是否存在注解annotationClass 要求注解annotationClass运行时可见(@Retention(RetentionPolicy.RUNTIME))
     @Override
     public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
         return GenericDeclaration.super.isAnnotationPresent(annotationClass);
@@ -951,7 +951,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @see java.lang.reflect.Array
      * @since 1.1
      */
-    // 获取数组的组件类型，如int[]返回int，int[][]返回int[]。如果不是数组，则返回空
+    // 获取数组的组件类型 如int[]返回int int[][]返回int[]。如果不是数组 则返回空
     public Class<?> getComponentType() {
         // Only return for array types. Storage may be reused for Class for instance types.
         if(isArray()) {
@@ -972,7 +972,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *
      * @return the direct superclass of the class represented by this object
      */
-    // 获取当前类的父类（只识别非泛型类型）
+    // 获取当前类的父类(只识别非泛型类型)
     @HotSpotIntrinsicCandidate
     public native Class<? super T> getSuperclass();
     
@@ -1020,7 +1020,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *
      * @return an array of interfaces directly implemented by this class
      */
-    // 获取当前类的父接口（只识别非泛型类型）
+    // 获取当前类的父接口(只识别非泛型类型)
     public Class<?>[] getInterfaces() {
         // defensively copy before handing over to user code
         return getInterfaces(true);
@@ -1040,7 +1040,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           denies access to the package of the enclosing class
      * @since 1.5
      */
-    // 获取[内部类]所处的外部类（对成员内部类、方法内部类、匿名内部类均有效），如果并非内部类，则返回null
+    // 获取[内部类]所处的外部类(对成员内部类、方法内部类、匿名内部类均有效) 如果并非内部类 则返回null
     @CallerSensitive
     public Class<?> getEnclosingClass() throws SecurityException {
         // There are five kinds of classes (or interfaces):
@@ -1095,7 +1095,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           denies access to the package of the declaring class
      * @since 1.1
      */
-    // 获取[成员内部类]所处的外部类(仅对成员内部类有效)，如果并非内部类，则返回null
+    // 获取[成员内部类]所处的外部类(仅对成员内部类有效) 如果并非内部类 则返回null
     @CallerSensitive
     public Class<?> getDeclaringClass() throws SecurityException {
         final Class<?> candidate = getDeclaringClass0();
@@ -1143,7 +1143,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           </ul>
      * @since 1.1
      */
-    // 获取当前类包含的内部类/接口，包含所有权限修饰符修饰的内部接口、内部抽象类、内部实例类，不会继承父类和父接口的内容
+    // 获取当前类包含的内部类/接口 包含所有权限修饰符修饰的内部接口、内部抽象类、内部实例类 不会继承父类和父接口的内容
     @CallerSensitive
     public Class<?>[] getDeclaredClasses() throws SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -1175,7 +1175,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           of this class.
      * @since 1.1
      */
-    // 获取当前类包含的内部类/接口，仅包含public修饰的内部接口、内部抽象类、内部实例类，会继承父类内容，但不会继承父接口的内容
+    // 获取当前类包含的内部类/接口 仅包含public修饰的内部接口、内部抽象类、内部实例类 会继承父类内容 但不会继承父接口的内容
     @CallerSensitive
     public Class<?>[] getClasses() {
         SecurityManager sm = System.getSecurityManager();
@@ -1244,7 +1244,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jvms 5.4.4 Access Control
      * @since 11
      */
-    // 与getEnclosingClass()方法语义基本相同，不同点在于如果并非内部类，则返回当前类本身
+    // 与getEnclosingClass()方法语义基本相同 不同点在于如果并非内部类 则返回当前类本身
     @CallerSensitive
     public Class<?> getNestHost() {
         if(isPrimitive() || isArray()) {
@@ -1306,7 +1306,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @see #getNestHost()
      * @since 11
      */
-    // 与getDeclaredClasses()方法语义基本相同，不同点在于返回的数组首元素是当前类本身
+    // 与getDeclaredClasses()方法语义基本相同 不同点在于返回的数组首元素是当前类本身
     @CallerSensitive
     public Class<?>[] getNestMembers() {
         if(isPrimitive() || isArray()) {
@@ -1362,7 +1362,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                                                               instantiated  for any reason
      * @since 1.5
      */
-    // 获取当前类的父类（可识别泛型类型和非泛型类型）
+    // 获取当前类的父类(可识别泛型类型和非泛型类型)
     public Type getGenericSuperclass() {
         ClassRepository info = getGenericInfo();
         if(info == null) {
@@ -1425,7 +1425,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                                                               type that cannot be instantiated for any reason
      * @since 1.5
      */
-    // 获取当前类的父接口（可识别泛型类型和非泛型类型）
+    // 获取当前类的父接口(可识别泛型类型和非泛型类型)
     public Type[] getGenericInterfaces() {
         ClassRepository info = getGenericInfo();
         return (info == null) ? getInterfaces() : info.getSuperInterfaces();
@@ -1447,7 +1447,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                                                       <cite>The Java&trade; Virtual Machine Specification</cite>
      * @since 1.5
      */
-    // 返回generic type中的type variable，如：Map<K, V>中的K和V
+    // 返回generic type中的type variable 如:Map<K, V>中的K和V
     @SuppressWarnings("unchecked")
     public TypeVariable<Class<T>>[] getTypeParameters() {
         ClassRepository info = getGenericInfo();
@@ -1463,7 +1463,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     
     /*▼ Constructor ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    /* 构造方法不属于成员，不能被子类继承 */
+    /* 构造方法不属于成员 不能被子类继承 */
     
     /**
      * Returns an array containing {@code Constructor} objects reflecting
@@ -1493,7 +1493,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           of this class.
      * @since 1.1
      */
-    // 返回当前类中所有public构造方法，但不包括父类中的构造方法
+    // 返回当前类中所有public构造方法 但不包括父类中的构造方法
     @CallerSensitive
     public Constructor<?>[] getConstructors() throws SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -1532,7 +1532,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                               of this class.
      * @since 1.1
      */
-    // 返回当前类中指定形参的public构造方法，但不包括父类中的构造方法
+    // 返回当前类中指定形参的public构造方法 但不包括父类中的构造方法
     @CallerSensitive
     public Constructor<T> getConstructor(Class<?>... parameterTypes) throws NoSuchMethodException, SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -1579,7 +1579,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           </ul>
      * @since 1.1
      */
-    // 返回当前类中所有构造方法，但不包括父类中的构造方法
+    // 返回当前类中所有构造方法 但不包括父类中的构造方法
     @CallerSensitive
     public Constructor<?>[] getDeclaredConstructors() throws SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -1627,7 +1627,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                               </ul>
      * @since 1.1
      */
-    // 返回当前类中指定形参的构造方法，但不包括父类中的构造方法
+    // 返回当前类中指定形参的构造方法 但不包括父类中的构造方法
     @CallerSensitive
     public Constructor<T> getDeclaredConstructor(Class<?>... parameterTypes) throws NoSuchMethodException, SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -1672,7 +1672,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           </ul>
      * @since 1.5
      */
-    // 返回构造方法内部类或定义在构造方法内部的匿名类所处的构造方法。如果该类定义在构造方法外部，则调用此方法时返回null
+    // 返回构造方法内部类或定义在构造方法内部的匿名类所处的构造方法。如果该类定义在构造方法外部 则调用此方法时返回null
     @CallerSensitive
     public Constructor<?> getEnclosingConstructor() throws SecurityException {
         EnclosingMethodInfo enclosingInfo = getEnclosingMethodInfo();
@@ -1801,9 +1801,9 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @since 1.1
      */
     /*
-     * 返回当前类中所有public方法，包括父类/父接口中的public方法
-     * 特别地，如果当前类是实例类，则无法获取父接口中的static方法（该方法虽然是public，但只有父接口可视）
-     * 对于父接口中的default方法，无论子类是否重写，这里均可以获取到它
+     * 返回当前类中所有public方法 包括父类/父接口中的public方法
+     * 特别地 如果当前类是实例类 则无法获取父接口中的static方法(该方法虽然是public 但只有父接口可视)
+     * 对于父接口中的default方法 无论子类是否重写 这里均可以获取到它
      */
     @CallerSensitive
     public Method[] getMethods() throws SecurityException {
@@ -1907,9 +1907,9 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @since 1.1
      */
     /*
-     * 返回当前类中指定名称和形参的public方法，包括父类/父接口中的public方法
-     * 特别地，如果当前类是实例类，则无法获取父接口中的static方法（该方法虽然是public，但只有父接口可视）
-     * 对于父接口中的default方法，无论子类是否重写，这里均可以获取到它
+     * 返回当前类中指定名称和形参的public方法 包括父类/父接口中的public方法
+     * 特别地 如果当前类是实例类 则无法获取父接口中的static方法(该方法虽然是public 但只有父接口可视)
+     * 对于父接口中的default方法 无论子类是否重写 这里均可以获取到它
      */
     @CallerSensitive
     public Method getMethod(String name, Class<?>... parameterTypes) throws NoSuchMethodException, SecurityException {
@@ -1975,7 +1975,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jls 8.4 Method Declarations
      * @since 1.1
      */
-    // 返回当前类中所有方法，但不包括父类/父接口中的方法
+    // 返回当前类中所有方法 但不包括父类/父接口中的方法
     @CallerSensitive
     public Method[] getDeclaredMethods() throws SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -2033,7 +2033,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jls 8.4 Method Declarations
      * @since 1.1
      */
-    // 返回当前类中指定名称和形参的方法，但不包括父类/父接口中的方法
+    // 返回当前类中指定名称和形参的方法 但不包括父类/父接口中的方法
     @CallerSensitive
     public Method getDeclaredMethod(String name, Class<?>... parameterTypes) throws NoSuchMethodException, SecurityException {
         Objects.requireNonNull(name);
@@ -2083,7 +2083,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                           </ul>
      * @since 1.5
      */
-    // 返回方法内部类或定义在方法内部的匿名类所处的外部方法。如果该类定义在方法外部，则调用此方法时返回null
+    // 返回方法内部类或定义在方法内部的匿名类所处的外部方法。如果该类定义在方法外部 则调用此方法时返回null
     @CallerSensitive
     public Method getEnclosingMethod() throws SecurityException {
         EnclosingMethodInfo enclosingInfo = getEnclosingMethodInfo();
@@ -2175,7 +2175,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jls 8.3 Field Declarations
      * @since 1.1
      */
-    // 返回当前类中所有public字段，包括父类/父接口中的public字段
+    // 返回当前类中所有public字段 包括父类/父接口中的public字段
     @CallerSensitive
     public Field[] getFields() throws SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -2227,7 +2227,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jls 8.3 Field Declarations
      * @since 1.1
      */
-    // 返回当前类中指定名称的public字段，包括父类/父接口中的public字段
+    // 返回当前类中指定名称的public字段 包括父类/父接口中的public字段
     @CallerSensitive
     public Field getField(String name) throws NoSuchFieldException, SecurityException {
         Objects.requireNonNull(name);
@@ -2283,7 +2283,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jls 8.3 Field Declarations
      * @since 1.1
      */
-    // 返回当前类中所有字段，但不包括父类/父接口中的字段
+    // 返回当前类中所有字段 但不包括父类/父接口中的字段
     @CallerSensitive
     public Field[] getDeclaredFields() throws SecurityException {
         SecurityManager sm = System.getSecurityManager();
@@ -2333,7 +2333,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @jls 8.3 Field Declarations
      * @since 1.1
      */
-    // 返回当前类中指定名称的字段，但不包括父类/父接口中的字段
+    // 返回当前类中指定名称的字段 但不包括父类/父接口中的字段
     @CallerSensitive
     public Field getDeclaredField(String name) throws NoSuchFieldException, SecurityException {
         Objects.requireNonNull(name);
@@ -2357,7 +2357,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /**
      * @since 1.5
      */
-    // 1-1 返回该类上所有类型的注解，包括继承来的注解
+    // 1-1 返回该类上所有类型的注解 包括继承来的注解
     public Annotation[] getAnnotations() {
         return AnnotationParser.toArray(annotationData().annotations);
     }
@@ -2366,7 +2366,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @throws NullPointerException {@inheritDoc}
      * @since 1.5
      */
-    // 1-2 返回该类上指定类型的注解，包括继承来的注解
+    // 1-2 返回该类上指定类型的注解 包括继承来的注解
     @SuppressWarnings("unchecked")
     public <A extends Annotation> A getAnnotation(Class<A> annotationClass) {
         Objects.requireNonNull(annotationClass);
@@ -2381,10 +2381,10 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /*
      * 1-3
      *
-     * 返回该类上指定类型的注解，包括继承来的注解。[支持获取@Repeatable类型的注解]
-     * 与getAnnotation()方法的区别是：
-     * 1. 此方法可以处理标记为@Repeatable的注解，对于多个@Repeatable注解，将其放到一个数组中返回
-     * 2. 对于非@Repeatable注解，该方法也将其放入数组中返回，但getAnnotation()方法可以直接将其返回
+     * 返回该类上指定类型的注解 包括继承来的注解。[支持获取@Repeatable类型的注解]
+     * 与getAnnotation()方法的区别是:
+     * 1. 此方法可以处理标记为@Repeatable的注解 对于多个@Repeatable注解 将其放到一个数组中返回
+     * 2. 对于非@Repeatable注解 该方法也将其放入数组中返回 但getAnnotation()方法可以直接将其返回
      */
     @Override
     public <A extends Annotation> A[] getAnnotationsByType(Class<A> annotationClass) {
@@ -2397,7 +2397,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /**
      * @since 1.5
      */
-    // 2-1 返回该类上所有类型的注解，不包括继承来的注解
+    // 2-1 返回该类上所有类型的注解 不包括继承来的注解
     public Annotation[] getDeclaredAnnotations() {
         return AnnotationParser.toArray(annotationData().declaredAnnotations);
     }
@@ -2406,7 +2406,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
      */
-    // 2-2 返回该类上指定类型的注解，不包括继承来的注解
+    // 2-2 返回该类上指定类型的注解 不包括继承来的注解
     @Override
     @SuppressWarnings("unchecked")
     public <A extends Annotation> A getDeclaredAnnotation(Class<A> annotationClass) {
@@ -2422,10 +2422,10 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /*
      * 2-3
      *
-     * 返回该类上指定类型的注解，不包括继承来的注解。[支持获取@Repeatable类型的注解]
-     * 与getDeclaredAnnotation()方法的区别是：
-     * 1. 此方法可以处理标记为@Repeatable的注解，对于多个@Repeatable注解，将其放到一个数组中返回
-     * 2. 对于非@Repeatable注解，该方法也将其放入数组中返回，但getDeclaredAnnotation()方法可以直接将其返回
+     * 返回该类上指定类型的注解 不包括继承来的注解。[支持获取@Repeatable类型的注解]
+     * 与getDeclaredAnnotation()方法的区别是:
+     * 1. 此方法可以处理标记为@Repeatable的注解 对于多个@Repeatable注解 将其放到一个数组中返回
+     * 2. 对于非@Repeatable注解 该方法也将其放入数组中返回 但getDeclaredAnnotation()方法可以直接将其返回
      */
     @Override
     public <A extends Annotation> A[] getDeclaredAnnotationsByType(Class<A> annotationClass) {
@@ -2457,19 +2457,19 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /*
      * 返回"类型注解+父类"
      *
-     * 示例：
+     * 示例:
      *
      * public class Child
      *     extends @注解01 @注解02 Parent
      *     implements @注解03 Interface01, @注解04 Interface02 {
      * }
      *
-     * 则：
+     * 则:
      * AnnotatedType at = Child.class.getAnnotatedSuperclass();
      * Annotation[] annotations =at.getAnnotations();
      * Type type = at.getType();
      *
-     * 其中：
+     * 其中:
      * at代表“@注解01 @注解02 Parent”这个整体
      * annotations代表"@注解01"和"@注解02"这两个注解
      * type代表Parent这个类
@@ -2517,21 +2517,21 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /*
      * 返回"类型注解+父接口"
      *
-     * 示例：
+     * 示例:
      *
      * public class Child
      *     extends @注解01 @注解02 Parent
      *     implements @注解03 Interface01, @注解04 Interface02 {
      * }
      *
-     * 则：
+     * 则:
      * AnnotatedType[] ats = Child.class.getAnnotatedInterfaces();
      * for(AnnotatedType at : ats){
      *     Annotation[] annotations =at.getAnnotations();
      *     Type type = at.getType();
      * }
      *
-     * 其中：
+     * 其中:
      * ats数组中包含了“@注解03 Interface01”、“@注解04 Interface02”这两个整体
      * annotations分别包含了每个整体上的注解
      * type代表每个整体中包含的接口
@@ -2657,10 +2657,10 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @spec JPMS
      * @since 1.1
      */
-    // 查找首个匹配的资源，并返回其URL。或者在当前类所在的模块中查找，或者在当前类的类路径上查找
+    // 查找首个匹配的资源 并返回其URL。或者在当前类所在的模块中查找 或者在当前类的类路径上查找
     @CallerSensitive
     public URL getResource(String resName) {
-        // 如果资源名为绝对路径，将其变为相对路径。如果资源名为相对路径，将其变为绝对路径
+        // 如果资源名为绝对路径 将其变为相对路径。如果资源名为相对路径 将其变为绝对路径
         resName = resolveName(resName);
         
         // 获取当前类所在的module
@@ -2754,10 +2754,10 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @see Module#getResourceAsStream(String)
      * @since 1.1
      */
-    // 查找首个匹配的资源，并返回其输入流。或者在当前类所在的模块中查找，或者在当前类的类路径上查找
+    // 查找首个匹配的资源 并返回其输入流。或者在当前类所在的模块中查找 或者在当前类的类路径上查找
     @CallerSensitive
     public InputStream getResourceAsStream(String resName) {
-        // 如果资源名为绝对路径，将其变为相对路径。如果资源名为相对路径，将其变为绝对路径
+        // 如果资源名为绝对路径 将其变为相对路径。如果资源名为相对路径 将其变为绝对路径
         resName = resolveName(resName);
         
         // 获取当前类所在的module
@@ -2817,7 +2817,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *
      * @since 1.5
      */
-    // 如果当前类是枚举类，则返回其包含的枚举常量
+    // 如果当前类是枚举类 则返回其包含的枚举常量
     public T[] getEnumConstants() {
         T[] values = getEnumConstantsShared();
         return (values != null) ? values.clone() : null;
@@ -2946,7 +2946,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      * @see java.lang.reflect.Modifier
      * @since 1.1
      */
-    // 获取类的修饰符信息，参见java.lang.reflect.Modifier
+    // 获取类的修饰符信息 参见java.lang.reflect.Modifier
     @HotSpotIntrinsicCandidate
     public native int getModifiers();
     
@@ -3055,7 +3055,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                            null and is not assignable to the type T.
      * @since 1.5
      */
-    // 将非空的obj转换为该类型代表的类或接口（要保证兼容性）
+    // 将非空的obj转换为该类型代表的类或接口(要保证兼容性)
     @SuppressWarnings("unchecked")
     @HotSpotIntrinsicCandidate
     public T cast(Object obj) {
@@ -3088,7 +3088,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
      *                            the class itself).
      * @since 1.5
      */
-    // 如果clazz是当前类对象this的父类/父接口，则将当前类对象的类型提升为父类型
+    // 如果clazz是当前类对象this的父类/父接口 则将当前类对象的类型提升为父类型
     @SuppressWarnings("unchecked")
     public <U> Class<? extends U> asSubclass(Class<U> clazz) {
         if(clazz.isAssignableFrom(this))
@@ -3613,7 +3613,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
     /**
      * Add a package name prefix if the resName is not absolute Remove leading "/" if name is absolute
      */
-    // 如果资源名为绝对路径，将其变为相对路径。如果资源名为相对路径，将其变为绝对路径
+    // 如果资源名为绝对路径 将其变为相对路径。如果资源名为相对路径 将其变为绝对路径
     private String resolveName(String resName) {
         if(!resName.startsWith("/")) {
             Class<?> c = this;
@@ -3624,7 +3624,7 @@ public final class Class<T> implements Serializable, GenericDeclaration, Type, A
             // 获取当前类的包名
             String baseName = c.getPackageName();
             if(baseName != null && !baseName.isEmpty()) {
-                // 将包名替换为路径名，并在其后添加资源名
+                // 将包名替换为路径名 并在其后添加资源名
                 resName = baseName.replace('.', '/') + "/" + resName;
             }
         } else {

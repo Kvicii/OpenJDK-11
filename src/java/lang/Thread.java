@@ -164,7 +164,7 @@ public class Thread implements Runnable {
     private int priority; // 线程优先级
     
     /** Whether or not the thread is a daemon thread. */
-    private boolean daemon = false; // 当前线程是否为守护线程，默认与父线程属性一致
+    private boolean daemon = false; // 当前线程是否为守护线程 默认与父线程属性一致
     
     /**
      * Thread ID
@@ -175,7 +175,7 @@ public class Thread implements Runnable {
     private Runnable target; // 当前线程将要执行的动作
     
     /** The context ClassLoader for this thread */
-    private ClassLoader contextClassLoader; // 当前线程（所处的类）的类加载器
+    private ClassLoader contextClassLoader; // 当前线程(所处的类)的类加载器
     
     /** The inherited AccessControlContext of this thread */
     private AccessControlContext inheritedAccessControlContext; // 此线程继承的AccessControlContext
@@ -188,7 +188,7 @@ public class Thread implements Runnable {
     
     
     /** For autonumbering anonymous threads. */
-    private static int threadInitNumber; // 下一个线程编号，用于合成线程名
+    private static int threadInitNumber; // 下一个线程编号 用于合成线程名
     
     /** For generating thread ID */
     private static long threadSeqNumber; // 下一个线程ID
@@ -196,10 +196,10 @@ public class Thread implements Runnable {
     /*▲ 线程属性 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
     
     
-    // 除非显式设置，否则为空，用于处理未捕获的异常的接口对象
+    // 除非显式设置 否则为空 用于处理未捕获的异常的接口对象
     private static volatile UncaughtExceptionHandler defaultUncaughtExceptionHandler;
     
-    // 除非显式设置，否则为空，用于处理未捕获的异常的接口对象
+    // 除非显式设置 否则为空 用于处理未捕获的异常的接口对象
     private volatile UncaughtExceptionHandler uncaughtExceptionHandler;
     
     
@@ -215,30 +215,30 @@ public class Thread implements Runnable {
      * Set by (private) java.util.concurrent.locks.LockSupport.setBlocker
      * Accessed using java.util.concurrent.locks.LockSupport.getBlocker
      */
-    volatile Object parkBlocker;    // 此对象不为null时说明线程进入了park（阻塞）状态，参见LockSupport
+    volatile Object parkBlocker;    // 此对象不为null时说明线程进入了park(阻塞)状态 参见LockSupport
     
     /**
      * The object in which this thread is blocked in an interruptible I/O operation, if any.
      * The blocker's interrupt method should be invoked after setting this thread's interrupt status.
      */
-    // 线程中断回调标记，设置此标记后，可在线程被中断时调用标记对象的回调方法
+    // 线程中断回调标记 设置此标记后 可在线程被中断时调用标记对象的回调方法
     private volatile Interruptible blocker;
     
-    // 临时使用的锁，在设置/获取线程中断回调标记时使用
+    // 临时使用的锁 在设置/获取线程中断回调标记时使用
     private final Object blockerLock = new Object();    // 中断线程时
     
     /**
      * ThreadLocal values pertaining to this thread.
      * This map is maintained by the ThreadLocal class.
      */
-    // 一个键值对组合，为当前线程关联一些“独享”变量，ThreadLocal是key。
+    // 一个键值对组合 为当前线程关联一些“独享”变量 ThreadLocal是key。
     ThreadLocal.ThreadLocalMap threadLocals = null;
     
     /**
      * InheritableThreadLocal values pertaining to this thread.
      * This map is maintained by the InheritableThreadLocal class.
      */
-    // 从父线程继承而来的键值对组合<ThreadLocal, Object>，由InheritableThreadLocal维护
+    // 从父线程继承而来的键值对组合<ThreadLocal, Object> 由InheritableThreadLocal维护
     ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;
     
     
@@ -260,7 +260,7 @@ public class Thread implements Runnable {
     @jdk.internal.vm.annotation.Contended("tlr")
     int threadLocalRandomSecondarySeed;
     /** Probe hash value; nonzero if threadLocalRandomSeed initialized */
-    // 本地化的探测值，如果ThreadLocalRandom已经初始化，则该值不为0
+    // 本地化的探测值 如果ThreadLocalRandom已经初始化 则该值不为0
     @jdk.internal.vm.annotation.Contended("tlr")
     int threadLocalRandomProbe;
     
@@ -566,7 +566,7 @@ public class Thread implements Runnable {
      */
     // ▶ 1
     private Thread(ThreadGroup g, Runnable target, String name, long stackSize, AccessControlContext acc, boolean inheritThreadLocals) {
-        // 线程必须有名称，没有主动设置的话就使用默认名称
+        // 线程必须有名称 没有主动设置的话就使用默认名称
         if(name == null) {
             throw new NullPointerException("name cannot be null");
         }
@@ -599,7 +599,7 @@ public class Thread implements Runnable {
             }
         }
         
-        // 将当前线程视为未启动线程，并在其线程组中计数
+        // 将当前线程视为未启动线程 并在其线程组中计数
         g.addUnstarted();
         
         this.group = g; // 线程组
@@ -620,9 +620,9 @@ public class Thread implements Runnable {
         
         setPriority(priority);
         
-        // 如果需要继承父线程的键值对组合<ThreadLocal, Object>，且该键值对存在
+        // 如果需要继承父线程的键值对组合<ThreadLocal, Object> 且该键值对存在
         if(inheritThreadLocals && parent.inheritableThreadLocals != null) {
-            // 创建新的map，并继承父线程的数据
+            // 创建新的map 并继承父线程的数据
             this.inheritableThreadLocals = ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
         }
         
@@ -829,7 +829,7 @@ public class Thread implements Runnable {
      *                           {@link RuntimePermission}{@code ("getClassLoader")}
      * @since 1.2
      */
-    // 获取当前线程（所处的类）的类加载器
+    // 获取当前线程(所处的类)的类加载器
     @CallerSensitive
     public ClassLoader getContextClassLoader() {
         if(contextClassLoader == null)
@@ -874,7 +874,7 @@ public class Thread implements Runnable {
     
     /* 以下方法用于构造方法的默认行为 */
     
-    // 获取下一个线程编号，用于合成线程名
+    // 获取下一个线程编号 用于合成线程名
     private static synchronized int nextThreadNum() {
         return threadInitNumber++;
     }
@@ -907,7 +907,7 @@ public class Thread implements Runnable {
      * @see #run()
      * @see #stop()
      */
-    // 启动线程，线程状态从NEW进入RUNNABLE
+    // 启动线程 线程状态从NEW进入RUNNABLE
     public synchronized void start() {
         /*
          * This method is not invoked for the main method thread or "system"
@@ -923,7 +923,7 @@ public class Thread implements Runnable {
          * Notify the group that this thread is about to be started so that it can be added to the group's list of threads
          * and the group's unstarted count can be decremented.
          */
-        // 将当前线程加入到所在的线程组，记录为活跃线程
+        // 将当前线程加入到所在的线程组 记录为活跃线程
         group.add(this);
         
         boolean started = false;
@@ -933,7 +933,7 @@ public class Thread implements Runnable {
             started = true;
         } finally {
             try {
-                // 线程启动失败，将其从线程组中删除，未启动线程数量重新加一
+                // 线程启动失败 将其从线程组中删除 未启动线程数量重新加一
                 if(!started) {
                     group.threadStartFailed(this);
                 }
@@ -986,7 +986,7 @@ public class Thread implements Runnable {
             throw new IllegalArgumentException("nanosecond timeout value out of range");
         }
         
-        // 类似四舍五入，近似到1毫秒
+        // 类似四舍五入 近似到1毫秒
         if(nanos >= 500000 || (nanos != 0 && millis == 0)) {
             millis++;
         }
@@ -1012,9 +1012,9 @@ public class Thread implements Runnable {
      *                                  cleared when this exception is thrown.
      */
     /*
-     * 让调用join的线程对象一直执行，直到它死亡之后，再去执行该线程对象后续启动的线程
+     * 让调用join的线程对象一直执行 直到它死亡之后 再去执行该线程对象后续启动的线程
      *
-     * 原理分析，示例如下：
+     * 原理分析 示例如下:
      *
      * public static void main(String[] args) {
      *     Thread t1 = ...;
@@ -1026,7 +1026,7 @@ public class Thread implements Runnable {
      *     t2.start();   // 持有t2锁
      * }
      *
-     * 相当于：
+     * 相当于:
      * 01 public static void main(String[] args) {
      * 02     Thread t1 = ...;
      * 03     Thread t2 = ...;
@@ -1043,19 +1043,19 @@ public class Thread implements Runnable {
      * 14     t2.start();   // t2线程
      * 15 }
      *
-     * 执行步骤：
-     * 1 main线程执行到第5行后，使t1开始运行，此时还不关线程t2什么事。
-     * 2 接着，main线程执行到第8行，main线程尝试获取t1对象锁，此时分两种情形：
-     * 2.1 main线程刚好抢到了t1对象锁（由CPU分配执行权）
-     * 2.1.1 然后，main方法在第9行进入循环，相当于掉进了陷阱
-     * 2.1.2 随后，如果线程t1仍然存活，main方法执行到第10行，做了两件事：
+     * 执行步骤:
+     * 1 main线程执行到第5行后 使t1开始运行 此时还不关线程t2什么事。
+     * 2 接着 main线程执行到第8行 main线程尝试获取t1对象锁 此时分两种情形:
+     * 2.1 main线程刚好抢到了t1对象锁(由CPU分配执行权)
+     * 2.1.1 然后 main方法在第9行进入循环 相当于掉进了陷阱
+     * 2.1.2 随后 如果线程t1仍然存活 main方法执行到第10行 做了两件事:
      * 2.1.2.1 让main线程释放t1锁
-     * 2.1.2.2 使main线程和t1线程重新抢占CPU时间片（执行权），此时，又分为两种情形：
-     * 2.1.2.2.1 如果接下来是t1抢到了执行权，那么t1继续输出，当然此时main线程也没有放弃抢锁的努力，在运行效果上等同于回到了步骤1
-     * 2.1.2.2.2 如果接下来是main线程抢到了执行权，在执行效果上相当于又回到了步骤2.1
-     * 2.2 如果在第8行main线程没有抢到锁，那么t1继续执行，main线程继续努力抢锁，在执行效果上相当于回到了步骤2
-     * 3 综上，只要t1线程存活，main线程就掉在循环陷阱里，即使抢到了执行权，也待在循环中出不来，这使得线程t2一直没法被调用（一直执行不到第14行）
-     * 4 直到t1执行完，即t1死亡，main线程跳出循环陷阱，此时开始执行线程t2
+     * 2.1.2.2 使main线程和t1线程重新抢占CPU时间片(执行权) 此时 又分为两种情形:
+     * 2.1.2.2.1 如果接下来是t1抢到了执行权 那么t1继续输出 当然此时main线程也没有放弃抢锁的努力 在运行效果上等同于回到了步骤1
+     * 2.1.2.2.2 如果接下来是main线程抢到了执行权 在执行效果上相当于又回到了步骤2.1
+     * 2.2 如果在第8行main线程没有抢到锁 那么t1继续执行 main线程继续努力抢锁 在执行效果上相当于回到了步骤2
+     * 3 综上 只要t1线程存活 main线程就掉在循环陷阱里 即使抢到了执行权 也待在循环中出不来 这使得线程t2一直没法被调用(一直执行不到第14行)
+     * 4 直到t1执行完 即t1死亡 main线程跳出循环陷阱 此时开始执行线程t2
      */
     public final synchronized void join(long millis) throws InterruptedException {
         long base = System.currentTimeMillis();
@@ -1078,7 +1078,7 @@ public class Thread implements Runnable {
                 
                 wait(delay);
                 
-                // 记录流逝的时间，保证中途不能被唤醒
+                // 记录流逝的时间 保证中途不能被唤醒
                 now = System.currentTimeMillis() - base;
             }
         }
@@ -1157,7 +1157,7 @@ public class Thread implements Runnable {
      * concurrency control constructs such as the ones in the
      * {@link java.util.concurrent.locks} package.
      */
-    // 当前线程让出CPU时间片，大家重新抢占执行权
+    // 当前线程让出CPU时间片 大家重新抢占执行权
     public static native void yield();
     
     /**
@@ -1197,7 +1197,7 @@ public class Thread implements Runnable {
      * @revised 6.0
      * @spec JSR-51
      */
-    // 中断线程（只是给线程预设一个标记，不是立即让线程停下来）
+    // 中断线程(只是给线程预设一个标记 不是立即让线程停下来)
     public void interrupt() {
         // 如果由别的线程对当前线程发起中断
         if(this != Thread.currentThread()) {
@@ -1222,7 +1222,7 @@ public class Thread implements Runnable {
     /**
      * Set the blocker field; invoked via jdk.internal.misc.SharedSecrets from java.nio code
      */
-    // 为当前线程设置一个线程中断回调标记，以便在线程被中断时调用该标记的回调方法
+    // 为当前线程设置一个线程中断回调标记 以便在线程被中断时调用该标记的回调方法
     static void blockedOn(Interruptible b) {
         Thread me = Thread.currentThread();
         synchronized(me.blockerLock) {
@@ -1244,7 +1244,7 @@ public class Thread implements Runnable {
      * @revised 6.0
      * @see #interrupted()
      */
-    // （非静态）测试线程是否已经中断，线程的中断状态不受影响
+    // (非静态)测试线程是否已经中断 线程的中断状态不受影响
     public boolean isInterrupted() {
         return isInterrupted(false);
     }
@@ -1267,7 +1267,7 @@ public class Thread implements Runnable {
      * @revised 6.0
      * @see #isInterrupted()
      */
-    // （静态）测试当前线程是否已经中断，线程的中断状态会被清除
+    // (静态)测试当前线程是否已经中断 线程的中断状态会被清除
     public static boolean interrupted() {
         return currentThread().isInterrupted(true);
     }
@@ -1277,7 +1277,7 @@ public class Thread implements Runnable {
      *
      * @return {@code true} if this thread is alive; {@code false} otherwise.
      */
-    // 当前线程是否仍然存活（没有到达TERMINATED状态）
+    // 当前线程是否仍然存活(没有到达TERMINATED状态)
     public final native boolean isAlive();
     
     
@@ -1298,9 +1298,9 @@ public class Thread implements Runnable {
     
     
     /*
-     * 一个线程不应该由其他线程来强制中断或停止，而是应该由线程自己自行停止。
-     * 所以，以下状态方法已经废弃，不再推荐使用。
-     * 建议使用interrupt()设置中断标记，然后让线程自身处理该中断位（决定中断还是停止还是继续运行）
+     * 一个线程不应该由其他线程来强制中断或停止 而是应该由线程自己自行停止。
+     * 所以 以下状态方法已经废弃 不再推荐使用。
+     * 建议使用interrupt()设置中断标记 然后让线程自身处理该中断位(决定中断还是停止还是继续运行)
      */
     
     
@@ -1670,15 +1670,15 @@ public class Thread implements Runnable {
     // 获取注册的未捕获异常处理器
     public UncaughtExceptionHandler getUncaughtExceptionHandler() {
         if(uncaughtExceptionHandler != null) {
-            // 如果显式设置过未捕获异常处理器，这里直接返回
+            // 如果显式设置过未捕获异常处理器 这里直接返回
             return uncaughtExceptionHandler;
         }
         
         /*
-         * 如果没有设置未捕获异常处理器，则返回当前线程所处的线程组
+         * 如果没有设置未捕获异常处理器 则返回当前线程所处的线程组
          *
-         * 线程组本身也实现了UncaughtExceptionHandler接口，
-         * 在线程组中，它会通过获取到该线程[默认的]的未捕获异常处理器，
+         * 线程组本身也实现了UncaughtExceptionHandler接口
+         * 在线程组中 它会通过获取到该线程[默认的]的未捕获异常处理器
          * 然后再调用其回调方法。
          */
         return group;
@@ -1711,7 +1711,7 @@ public class Thread implements Runnable {
      * Dispatch an uncaught exception to the handler. This method is
      * intended to be called only by the JVM.
      */
-    // 很关键的一步：当前线程内出现未捕获异常时，JVM会调用此方法
+    // 很关键的一步:当前线程内出现未捕获异常时 JVM会调用此方法
     private void dispatchUncaughtException(Throwable e) {
         // 获取未捕获异常处理器
         UncaughtExceptionHandler handler = getUncaughtExceptionHandler();
@@ -1760,7 +1760,7 @@ public class Thread implements Runnable {
      * thread's thread group and in any other thread group that
      * has the current thread's thread group as an ancestor
      */
-    // 递归获取当前线程所在线程组的所有线程数量（可能与实际数量有出入，因为线程数量动态变化），建议仅用作监视目的
+    // 递归获取当前线程所在线程组的所有线程数量(可能与实际数量有出入 因为线程数量动态变化) 建议仅用作监视目的
     public static int activeCount() {
         return currentThread().getThreadGroup().activeCount();
     }
@@ -1789,7 +1789,7 @@ public class Thread implements Runnable {
      * @throws SecurityException if {@link java.lang.ThreadGroup#checkAccess} determines that
      *                           the current thread cannot access its thread group
      */
-    // 递归获取当前线程所在线程组的所有线程（可能与实际状态有出入，因为线程数量动态变化），建议仅用作监视目的
+    // 递归获取当前线程所在线程组的所有线程(可能与实际状态有出入 因为线程数量动态变化) 建议仅用作监视目的
     public static int enumerate(Thread tarray[]) {
         return currentThread().getThreadGroup().enumerate(tarray);
     }
@@ -1798,7 +1798,7 @@ public class Thread implements Runnable {
      * Prints a stack trace of the current thread to the standard error stream.
      * This method is used only for debugging.
      */
-    // 生成一个异常栈信息，仅用作测试
+    // 生成一个异常栈信息 仅用作测试
     public static void dumpStack() {
         new Exception("Stack trace").printStackTrace();
     }
@@ -1840,7 +1840,7 @@ public class Thread implements Runnable {
      * code patterns in a more beneficial way.
      * @since 9
      */
-    // 标记线程处于忙等待(busy-waiting)状态，减小线程上下文切换的开销，参见StampedLock
+    // 标记线程处于忙等待(busy-waiting)状态 减小线程上下文切换的开销 参见StampedLock
     @HotSpotIntrinsicCandidate
     public static void onSpinWait() {
     }
@@ -1950,11 +1950,11 @@ public class Thread implements Runnable {
         if(threadLocals != null // 存在ThreadLocal键值对
             && TerminatingThreadLocal.REGISTRY.isPresent()) {   // 存在TerminatingThreadLocal类型的键
             /*
-             * 如果在当前线程中注册过TerminatingThreadLocal类型的键，这里就会体现出来
-             * TerminatingThreadLocal.REGISTRY是TerminatingThreadLocal的内部属性，其本质是一个关联了【容器】的ThreadLocal
+             * 如果在当前线程中注册过TerminatingThreadLocal类型的键 这里就会体现出来
+             * TerminatingThreadLocal.REGISTRY是TerminatingThreadLocal的内部属性 其本质是一个关联了【容器】的ThreadLocal
              * 该【容器】内存储了当前线程内注册的所有TerminatingThreadLocal
              *
-             * 此处使用TerminatingThreadLocal中的回调，在线程结束前，
+             * 此处使用TerminatingThreadLocal中的回调 在线程结束前
              * 对TerminatingThreadLocal关联的值做一些收尾操作
              */
             TerminatingThreadLocal.threadTerminated();
@@ -2081,12 +2081,12 @@ public class Thread implements Runnable {
          * or reenter a synchronized block/method after calling {@link Object#wait() Object.wait}.
          */
         /*
-         * 阻塞状态，正在积极争取获得锁的使用权
+         * 阻塞状态 正在积极争取获得锁的使用权
          *
-         * 可能的情形：
-         * 1. 一开始就没抢到锁，但一直在等待机会
-         * 2. 抢到了锁，但是调用了Object#wait()，随后又被notify唤醒，进入抢锁状态
-         * 3. 抢到了锁，但是调用了Object#wait(long)，随后或者被notify唤醒，或者超时后自动醒来，然后进入抢锁状态
+         * 可能的情形:
+         * 1. 一开始就没抢到锁 但一直在等待机会
+         * 2. 抢到了锁 但是调用了Object#wait() 随后又被notify唤醒 进入抢锁状态
+         * 3. 抢到了锁 但是调用了Object#wait(long) 随后或者被notify唤醒 或者超时后自动醒来 然后进入抢锁状态
          */
         BLOCKED,
         
@@ -2105,11 +2105,11 @@ public class Thread implements Runnable {
          * A thread that has called {@code Thread.join()} is waiting for a specified thread to terminate.
          */
         /*
-         * 等待状态，正在等待被唤醒
+         * 等待状态 正在等待被唤醒
          *
-         * 可能的情形：
-         * 1. 抢到了锁，但是调用了Object#wait()，进入了漫长的等待。如果中途被notify唤醒唤醒，则进入RUNNABLE或BLOCKED状态
-         * 2. 调用了join()方法，join的内部实现也是wait
+         * 可能的情形:
+         * 1. 抢到了锁 但是调用了Object#wait() 进入了漫长的等待。如果中途被notify唤醒唤醒 则进入RUNNABLE或BLOCKED状态
+         * 2. 调用了join()方法 join的内部实现也是wait
          * 3. 调用了LockSupport#park()方法
          */
         WAITING,
@@ -2127,9 +2127,9 @@ public class Thread implements Runnable {
          * </ul>
          */
         /*
-         * 带有时间间隔的等待状态，正在等待自己醒来或被唤醒
+         * 带有时间间隔的等待状态 正在等待自己醒来或被唤醒
          *
-         * 可能的情形：
+         * 可能的情形:
          * Thread.sleep(long)
          * Object#wait(long)
          * join(long)

@@ -11,7 +11,7 @@ public class ThreadTest05 {
         // 注册未捕获异常处理器
         Thread.setDefaultUncaughtExceptionHandler(handler);
         
-        // 这里出现了除0的未捕获异常，会被MyHandler捕获到
+        // 这里出现了除0的未捕获异常 会被MyHandler捕获到
         int i = 1/0;
     }
 }
@@ -20,6 +20,6 @@ public class ThreadTest05 {
 class MyHandler implements Thread.UncaughtExceptionHandler{
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        System.out.println("线程"+t+"内出现了未捕获异常："+e);
+        System.out.println("线程"+t+"内出现了未捕获异常:"+e);
     }
 }

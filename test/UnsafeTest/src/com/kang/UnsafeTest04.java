@@ -8,7 +8,7 @@ import java.lang.reflect.Modifier;
 // 利用Unsafe#objectFieldOffse方法获取某个对象的近似大小
 public class UnsafeTest04 {
     public static void main(String[] args) {
-        System.out.println("Entry对象占用的内存大小(字节)：" + sizeOf(Entry.class));
+        System.out.println("Entry对象占用的内存大小(字节):" + sizeOf(Entry.class));
     }
     
     public static long sizeOf(Class<?> clazz) {
@@ -17,7 +17,7 @@ public class UnsafeTest04 {
         long maxOffset = 0;
         
         do {
-            // 遍历指定的类及其父对象，找到偏移量最大的那个字段（内存分布中最后那个字段）
+            // 遍历指定的类及其父对象 找到偏移量最大的那个字段(内存分布中最后那个字段)
             for(Field f : clazz.getDeclaredFields()) {
                 if(!Modifier.isStatic(f.getModifiers())) {
                     maxOffset = Math.max(maxOffset, unsafe.objectFieldOffset(f));
@@ -25,6 +25,6 @@ public class UnsafeTest04 {
             }
         } while((clazz = clazz.getSuperclass()) != null);
         
-        return maxOffset + 8;   // 字段占用内存的最大值为long或者double：8个字节
+        return maxOffset + 8;   // 字段占用内存的最大值为long或者double:8个字节
     }
 }

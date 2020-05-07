@@ -48,14 +48,14 @@ import java.util.Objects;
  *     └──────┬────────┘
  *         WeakCleanable
  *
- * 抽象基类：可清理的弱引用，此类的属性既是弱引用，又是清理器。
+ * 抽象基类:可清理的弱引用 此类的属性既是弱引用 又是清理器。
  */
 public abstract class WeakCleanable<T> extends WeakReference<T> implements Cleaner.Cleanable {
     
     /**
      * The list of WeakCleanable; synchronizes insert and remove.
      */
-    // 指向CleanerImpl内部维护的WeakCleanableList，在这里完成插入和删除操作
+    // 指向CleanerImpl内部维护的WeakCleanableList 在这里完成插入和删除操作
     private final WeakCleanable<?> list;
     
     /**
@@ -99,7 +99,7 @@ public abstract class WeakCleanable<T> extends WeakReference<T> implements Clean
      * The {@code performCleanup} method should not be called except
      * by the {@link #clean} method which ensures at most once semantics.
      */
-    // 弱引用清理器的清理操作，被clean()方法调用，由子类完善
+    // 弱引用清理器的清理操作 被clean()方法调用 由子类完善
     protected abstract void performCleanup();
     
     /**
@@ -108,7 +108,7 @@ public abstract class WeakCleanable<T> extends WeakReference<T> implements Clean
      */
     /*
      * CleanerImpl.run()==>清理器clean()-->清理器performCleanup()-->action.run()
-     * 可以等待清理清理服务自动调用，也可以手动执行清理操作
+     * 可以等待清理清理服务自动调用 也可以手动执行清理操作
      */
     @Override
     public final void clean() {
@@ -171,7 +171,7 @@ public abstract class WeakCleanable<T> extends WeakReference<T> implements Clean
     /**
      * Insert this WeakCleanableReference after the list head.
      */
-    // 将该弱引用（清理器）插入到WeakCleanableList中
+    // 将该弱引用(清理器)插入到WeakCleanableList中
     private void insert() {
         synchronized(list) {
             prev = list;
@@ -187,7 +187,7 @@ public abstract class WeakCleanable<T> extends WeakReference<T> implements Clean
      * @return true if Cleanable was removed or false if not because
      * it had already been removed before
      */
-    // 将该弱引用（清理器）从WeakCleanableList中移除。原因是ReferenceQueue中已记录到该引用属于"报废引用"了。
+    // 将该弱引用(清理器)从WeakCleanableList中移除。原因是ReferenceQueue中已记录到该引用属于"报废引用"了。
     private boolean remove() {
         synchronized(list) {
             if(next != this) {

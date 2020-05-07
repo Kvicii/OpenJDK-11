@@ -60,7 +60,7 @@ package java.io;
  * @see java.io.Serializable
  * @since 1.1
  */
-// 序列化接口。如果实现了该接口，则强制要求自定义序列化/反序列化逻辑
+// 序列化接口。如果实现了该接口 则强制要求自定义序列化/反序列化逻辑
 public interface Externalizable extends Serializable {
     /**
      * The object implements the writeExternal method to save its contents

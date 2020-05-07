@@ -38,10 +38,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：LongPredicate
+ * 函数式接口:LongPredicate
  *
- * 参数：long
- * 返回：boolean
+ * 参数:long
+ * 返回:boolean
  */
 @FunctionalInterface
 public interface LongPredicate {

@@ -47,19 +47,19 @@ package java.text;
  * @see CharacterIterator
  * @since 1.1
  */
-// StringCharacterIterator实现了CharacterIterator接口（协议），用来遍历非空String。
+// StringCharacterIterator实现了CharacterIterator接口(协议) 用来遍历非空String。
 public final class StringCharacterIterator implements CharacterIterator {
     private String text;
     private int begin;  // 游标pos的起点
     private int end;    // 游标pos的终点
-    private int pos;    // 游标pos的迭代范围是[begin, end]，且在end时，需要标记为DONE，表示结束/异常/错误
+    private int pos;    // 游标pos的迭代范围是[begin, end] 且在end时 需要标记为DONE 表示结束/异常/错误
     
     /**
      * Constructs an iterator with an initial index of 0.
      *
      * @param text the {@code String} to be iterated over
      */
-    // 为非空String初始化一个字符迭代器，并设置迭代范围为[0, length]，游标位置为0
+    // 为非空String初始化一个字符迭代器 并设置迭代范围为[0, length] 游标位置为0
     public StringCharacterIterator(String text) {
         this(text, 0);
     }
@@ -70,7 +70,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      * @param text The String to be iterated over
      * @param pos  Initial iterator position
      */
-    // 为非空String初始化一个字符迭代器，并设置可迭代范围为[0, length]，游标当前位置pos
+    // 为非空String初始化一个字符迭代器 并设置可迭代范围为[0, length] 游标当前位置pos
     public StringCharacterIterator(String text, int pos) {
         this(text, 0, text.length(), pos);
     }
@@ -83,7 +83,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      * @param end   Index of the character following the last character
      * @param pos   Initial iterator position
      */
-    // 为非空String初始化一个字符迭代器，并设置可迭代范围为[begin, end]，游标当前位置pos
+    // 为非空String初始化一个字符迭代器 并设置可迭代范围为[begin, end] 游标当前位置pos
     public StringCharacterIterator(String text, int begin, int end, int pos) {
         if(text == null)
             throw new NullPointerException();
@@ -108,7 +108,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @since 1.2
      */
-    // 为迭代器关联新的非空文本，并将可迭代范围重置为[0, length]，游标重置为0
+    // 为迭代器关联新的非空文本 并将可迭代范围重置为[0, length] 游标重置为0
     public void setText(String text) {
         if(text == null)
             throw new NullPointerException();
@@ -123,7 +123,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @see CharacterIterator#setIndex
      */
-    // 重置游标为p，并返回该处的char。如果游标指向了终点end，则返回无效字符DONE。
+    // 重置游标为p 并返回该处的char。如果游标指向了终点end 则返回无效字符DONE。
     public char setIndex(int p) {
         if(p < begin || p > end)
             throw new IllegalArgumentException("Invalid index");
@@ -136,7 +136,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @see CharacterIterator#first
      */
-    // 设置游标到第一个有效字符位置，并返回该char。
+    // 设置游标到第一个有效字符位置 并返回该char。
     public char first() {
         pos = begin;
         return current();
@@ -147,7 +147,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @see CharacterIterator#last
      */
-    // 设置游标到最后一个有效字符位置，并返回该char。
+    // 设置游标到最后一个有效字符位置 并返回该char。
     public char last() {
         if(end != begin) {
             pos = end - 1;
@@ -162,7 +162,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @see CharacterIterator#current
      */
-    // 返回游标当前指向的char。如果游标指向了终点end，则返回无效字符DONE。
+    // 返回游标当前指向的char。如果游标指向了终点end 则返回无效字符DONE。
     public char current() {
         if(pos >= begin && pos < end) {
             return text.charAt(pos);
@@ -176,7 +176,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @see CharacterIterator#previous
      */
-    // 如果游标未到起点，则先前移游标，再返回指向的char。否则游标位置不变，且返回DONE。
+    // 如果游标未到起点 则先前移游标 再返回指向的char。否则游标位置不变 且返回DONE。
     public char previous() {
         if(pos > begin) {
             pos--;
@@ -191,7 +191,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @see CharacterIterator#next
      */
-    // 如果游标未到终点，则先后移游标，再返回指向的char。否则游标设置在终点，且返回DONE。
+    // 如果游标未到终点 则先后移游标 再返回指向的char。否则游标设置在终点 且返回DONE。
     public char next() {
         if(pos < end - 1) {
             pos++;
@@ -227,7 +227,7 @@ public final class StringCharacterIterator implements CharacterIterator {
      *
      * @see CharacterIterator#getIndex
      */
-    // 返回游标当前位置（索引）
+    // 返回游标当前位置(索引)
     public int getIndex() {
         return pos;
     }

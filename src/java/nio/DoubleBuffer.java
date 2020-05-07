@@ -87,14 +87,14 @@ package java.nio;
  * HeapDoubleBufferR
  *
  *
- * 直接缓冲区（缓冲区字节序与本地相同）
+ * 直接缓冲区(缓冲区字节序与本地相同)
  * DoubleBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectDoubleBufferU   │
  *             ├────────────┘
  *    DirectDoubleBufferRU
  *
- * 直接缓冲区（缓冲区字节序与本地不同）
+ * 直接缓冲区(缓冲区字节序与本地不同)
  * DoubleBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectDoubleBufferS   │
@@ -220,7 +220,7 @@ public abstract class DoubleBuffer extends Buffer implements Comparable<DoubleBu
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a new double buffer whose content is a shared subsequence of
@@ -281,7 +281,7 @@ public abstract class DoubleBuffer extends Buffer implements Comparable<DoubleBu
      */
     public abstract DoubleBuffer asReadOnlyBuffer();
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

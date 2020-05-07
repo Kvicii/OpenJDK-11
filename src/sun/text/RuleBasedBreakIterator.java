@@ -212,9 +212,9 @@ import java.util.MissingResourceException;
  * @author Richard Gillam
  */
 /*
- * BreakIterator的子类，使用指定的规则文件指导如何解析文本。
+ * BreakIterator的子类 使用指定的规则文件指导如何解析文本。
  *
- * 【由于对解析文本的规则文件未知，所以对某些方法及字段的理解还不到位...】
+ * 【由于对解析文本的规则文件未知 所以对某些方法及字段的理解还不到位...】
  *
  * 使用方式参考BreakIterator的测试用例
  */
@@ -260,25 +260,25 @@ public class RuleBasedBreakIterator extends BreakIterator {
     /**
      * The table of state transitions used for forward iteration
      */
-    // 状态转换表，用于前向迭代
+    // 状态转换表 用于前向迭代
     private short[] stateTable = null;
     
     /**
      * The table of state transitions used to sync up the iterator with the text in backwards and random-access iteration
      */
-    // 状态转换表，用于将迭代器与向后和随机访问迭代中的文本同步
+    // 状态转换表 用于将迭代器与向后和随机访问迭代中的文本同步
     private short[] backwardsStateTable = null;
     
     /**
      * A list of flags indicating which states in the state table are accepting ("end") states
      */
-    // 一个状态标记列表，用来指示状态转换表中哪些状态是accepting ("end")状态
+    // 一个状态标记列表 用来指示状态转换表中哪些状态是accepting ("end")状态
     private boolean[] endStates = null;
     
     /**
      * A list of flags indicating which states in the state table are lookahead states (states which turn lookahead on and off)
      */
-    // 一个状态标记列表，用来只是状态转换表中哪些状态是lookahead状态
+    // 一个状态标记列表 用来只是状态转换表中哪些状态是lookahead状态
     private boolean[] lookaheadStates = null;
     
     /**
@@ -290,7 +290,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
     /**
      * The number of character categories (and, thus, the number of columns in the state tables)
      */
-    // 字符类别的数量（同时也是状态状态表中的列数）
+    // 字符类别的数量(同时也是状态状态表中的列数)
     private int numCategories;
     
     /**
@@ -302,7 +302,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
     /**
      * A CRC32 value of all data in datafile
      */
-    // 数据文件的循环冗余校验码，用来保证数据的完整性
+    // 数据文件的循环冗余校验码 用来保证数据的完整性
     private long checksum;
     
     private int cachedLastKnownBreak = BreakIterator.DONE;
@@ -313,8 +313,8 @@ public class RuleBasedBreakIterator extends BreakIterator {
      * @throws MissingResourceException if the rule data is invalid or corrupted
      */
     /*
-     * 使用给定的规则文件构造RuleBasedBreakIterator，以字符分词器为例：
-     * 规则文件名ruleFile==CharacterBreakIteratorData，ruleData是从规则文件sun/text/resources/CharacterBreakIteratorData中加载的规则信息。
+     * 使用给定的规则文件构造RuleBasedBreakIterator 以字符分词器为例:
+     * 规则文件名ruleFile==CharacterBreakIteratorData ruleData是从规则文件sun/text/resources/CharacterBreakIteratorData中加载的规则信息。
      */
     public RuleBasedBreakIterator(String ruleFile, byte[] ruleData) {
         ByteBuffer bb = ByteBuffer.wrap(ruleData);
@@ -349,7 +349,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
      *
      * @return The offset of the beginning of the text.
      */
-    // 返回整个文本的起点索引，并将游标设置到起点
+    // 返回整个文本的起点索引 并将游标设置到起点
     @Override
     public int first() {
         CharacterIterator t = getText();
@@ -363,7 +363,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
      *
      * @return The text's past-the-end offset.
      */
-    // 返回整个文本的终点索引（此处由DONE标记），并将游标设置到终点
+    // 返回整个文本的终点索引(此处由DONE标记) 并将游标设置到终点
     @Override
     public int last() {
         CharacterIterator t = getText();
@@ -377,10 +377,10 @@ public class RuleBasedBreakIterator extends BreakIterator {
      *
      * @return The position of the last boundary position preceding this one.
      */
-    // 返回前一个最近的左边界（当游标位于某个元素中间时，返回的就是当前元素的左边界）
+    // 返回前一个最近的左边界(当游标位于某个元素中间时 返回的就是当前元素的左边界)
     @Override
     public int previous() {
-        // 如果已经在文本的起点，则返回DONE
+        // 如果已经在文本的起点 则返回DONE
         CharacterIterator text = getText();
         if(current() == text.getBeginIndex()) {
             return BreakIterator.DONE;
@@ -395,7 +395,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
         int start = current();
         int lastResult = cachedLastKnownBreak;
         if(lastResult >= start || lastResult <= BreakIterator.DONE) {
-            // 返回前一个Unicode符号码点值，且游标值也挪到前一个Unicode符号的起始部位
+            // 返回前一个Unicode符号码点值 且游标值也挪到前一个Unicode符号的起始部位
             getPrevious();
             lastResult = handlePrevious();
         } else {
@@ -422,7 +422,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
      *
      * @return The position of the first boundary after this one.
      */
-    // 返回当前索引所在的元素的下一个元素（字符/单词/行/句子）的左边界索引，且游标也要后移。
+    // 返回当前索引所在的元素的下一个元素(字符/单词/行/句子)的左边界索引 且游标也要后移。
     @Override
     public int next() {
         return handleNext();
@@ -439,7 +439,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
      * @return The character offset of the boundary position n boundaries away from
      * the current one.
      */
-    // 返回游标前进/后退n个元素后的左边界索引，并将游标挪到相应的新位置。
+    // 返回游标前进/后退n个元素后的左边界索引 并将游标挪到相应的新位置。
     @Override
     public int next(int n) {
         // 找到游标的当前索引
@@ -465,7 +465,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
      *
      * @offset The position from which to begin searching for a break position.
      */
-    // 返回offset索引所在的元素的下一个元素的左边界，游标也会跟着移动。
+    // 返回offset索引所在的元素的下一个元素的左边界 游标也会跟着移动。
     @Override
     public int following(int offset) {
         
@@ -533,7 +533,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
      *
      * @return True if "offset" is a boundary position.
      */
-    // 判断offset索引处是否是一个（左）边界。
+    // 判断offset索引处是否是一个(左)边界。
     @Override
     public boolean isBoundary(int offset) {
         CharacterIterator text = getText();
@@ -583,18 +583,18 @@ public class RuleBasedBreakIterator extends BreakIterator {
         int end = newText.getEndIndex();
         boolean goodIterator;
         try {
-            // 检测使用的迭代器是否为一个安全的迭代器（意味着游标可以定位到终点）
+            // 检测使用的迭代器是否为一个安全的迭代器(意味着游标可以定位到终点)
             newText.setIndex(end);  // some buggy iterators throw an exception here
             goodIterator = newText.getIndex() == end;
         } catch(IllegalArgumentException e) {
             goodIterator = false;
         }
     
-        // 如果是一个安全的迭代器，将其设置给分词器
+        // 如果是一个安全的迭代器 将其设置给分词器
         if(goodIterator) {
             text = newText;
         } else {
-            // 如果不是一个安全的迭代器，将其包装到“安全迭代器”中
+            // 如果不是一个安全的迭代器 将其包装到“安全迭代器”中
             text = new SafeCharIterator(newText);
         }
         
@@ -693,7 +693,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
         int lastCategory = 0;
         int c = getCurrent();
         
-        // 循环，直到我们到达文本的开头或转换到状态为0
+        // 循环 直到我们到达文本的开头或转换到状态为0
         while(c != CharacterIterator.DONE && state != STOP_STATE) {
             
             // save the last character's category and look up the current character's category
@@ -701,13 +701,13 @@ public class RuleBasedBreakIterator extends BreakIterator {
             category = lookupCategory(c);   // 查找字符类别
             
             // if the current character isn't an ignore character, look up a state transition in the backwards state table
-            // 如果当前字符不是一个可忽略字符，则在backwardsStateTable中查找其状态转换信息
+            // 如果当前字符不是一个可忽略字符 则在backwardsStateTable中查找其状态转换信息
             if(category != IGNORE) {
-                // 给定当前状态和字符类别，在backwardsStateTable中查找要转换到的下一个状态。
+                // 给定当前状态和字符类别 在backwardsStateTable中查找要转换到的下一个状态。
                 state = lookupBackwardState(state, category);
             }
             
-            // 返回前一个Unicode符号码点值，且游标值也挪到前一个Unicode符号的起始部位
+            // 返回前一个Unicode符号码点值 且游标值也挪到前一个Unicode符号的起始部位
             c = getPrevious();
         }
         
@@ -729,7 +729,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
     /**
      * Looks up a character's category (i.e., its category for breaking purposes, not its Unicode category)
      */
-    // 查找字符类别（由规则文件决定）
+    // 查找字符类别(由规则文件决定)
     protected int lookupCategory(int c) {
         if(c < Character.MIN_SUPPLEMENTARY_CODE_POINT) {
             return charCategoryTable.elementAt((char) c);
@@ -741,7 +741,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
     /**
      * Given a current state and a character category, looks up the next state to transition to in the state table.
      */
-    // 给定当前状态和字符类别，在stateTable中查找要转换到的下一个状态。
+    // 给定当前状态和字符类别 在stateTable中查找要转换到的下一个状态。
     protected int lookupState(int state, int category) {
         return stateTable[state * numCategories + category];
     }
@@ -749,7 +749,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
     /**
      * Given a current state and a character category, looks up the next state to transition to in the backwards state table.
      */
-    // 给定当前状态和字符类别，在backwardsStateTable中查找要转换到的下一个状态。
+    // 给定当前状态和字符类别 在backwardsStateTable中查找要转换到的下一个状态。
     protected int lookupBackwardState(int state, int category) {
         return backwardsStateTable[state * numCategories + category];
     }
@@ -787,7 +787,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
     /**
      * Returns previous character
      */
-    // 返回前一个Unicode符号码点值，且游标值也挪到前一个Unicode符号的起始部位
+    // 返回前一个Unicode符号码点值 且游标值也挪到前一个Unicode符号的起始部位
     private int getPrevious() {
         char c2 = text.previous();
         if(Character.isLowSurrogate(c2) && text.getIndex() > text.getBeginIndex()) {
@@ -1065,7 +1065,7 @@ public class RuleBasedBreakIterator extends BreakIterator {
      * Does that matter?
      */
     // TODO: Review this class to see if it's still required.
-    // 用来包装可能不安全的文本迭代器，即包装那些游标不支持定位到终点（有效元素的下一个位置）的迭代器
+    // 用来包装可能不安全的文本迭代器 即包装那些游标不支持定位到终点(有效元素的下一个位置)的迭代器
     private static final class SafeCharIterator implements CharacterIterator, Cloneable {
         
         private CharacterIterator base;

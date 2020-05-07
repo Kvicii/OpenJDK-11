@@ -38,12 +38,12 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：LongUnaryOperator
+ * 函数式接口:LongUnaryOperator
  *
  * long一元操作
  *
- * 参数：long
- * 返回：long
+ * 参数:long
+ * 返回:long
  */
 @FunctionalInterface
 public interface LongUnaryOperator {
@@ -81,7 +81,7 @@ public interface LongUnaryOperator {
      * @throws NullPointerException if before is null
      * @see #andThen(LongUnaryOperator)
      */
-    // f1.compose(f2)：先执行f2，再执行f1
+    // f1.compose(f2):先执行f2 再执行f1
     default LongUnaryOperator compose(LongUnaryOperator before) {
         Objects.requireNonNull(before);
         return (long v) -> applyAsLong(before.applyAsLong(v));
@@ -101,7 +101,7 @@ public interface LongUnaryOperator {
      * @throws NullPointerException if after is null
      * @see #compose(LongUnaryOperator)
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default LongUnaryOperator andThen(LongUnaryOperator after) {
         Objects.requireNonNull(after);
         return (long t) -> after.applyAsLong(applyAsLong(t));

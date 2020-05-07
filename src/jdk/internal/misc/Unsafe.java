@@ -49,9 +49,9 @@ import java.security.ProtectionDomain;
  * @see #getUnsafe
  */
 /*
- * 除了实现sun.misc.Unsafe中列出的方法，还提供了其他更精细的低级别操作，与底层交互紧密
+ * 除了实现sun.misc.Unsafe中列出的方法 还提供了其他更精细的低级别操作 与底层交互紧密
  *
- * 针对多线程中单变量的可视性，以及多变量的顺序依赖和值依赖，JDK 9 引入五种资源同步的语义，由弱到强分别是：
+ * 针对多线程中单变量的可视性 以及多变量的顺序依赖和值依赖 JDK 9 引入五种资源同步的语义 由弱到强分别是:
  * Plain, Opaque, Release[write]/Acquire[read], Volatile, Locks。【参见VarHandle】
  */
 public final class Unsafe {
@@ -149,7 +149,7 @@ public final class Unsafe {
     
     
     /** The value of {@code addressSize()} */
-    // 本机指针的大小（以字节为单位）。参见#addressSize方法
+    // 本机指针的大小(以字节为单位)。参见#addressSize方法
     public static final int ADDRESS_SIZE = theUnsafe.addressSize0();
     
     
@@ -188,7 +188,7 @@ public final class Unsafe {
      *
      * (It may assist compilers to make the local variable {@code final}.)
      */
-    // 返回单例对象，由系统内部的方法调用
+    // 返回单例对象 由系统内部的方法调用
     public static Unsafe getUnsafe() {
         return theUnsafe;
     }
@@ -201,7 +201,7 @@ public final class Unsafe {
      * Allocates an instance but does not run any constructor.
      * Initializes the class if it has not yet been.
      */
-    // 不调用构造方法就生成对象，但是该对象的字段会被赋为对应类型的"零值"，为该对象赋过的默认值也无效
+    // 不调用构造方法就生成对象 但是该对象的字段会被赋为对应类型的"零值" 为该对象赋过的默认值也无效
     @HotSpotIntrinsicCandidate
     public native Object allocateInstance(Class<?> cls) throws InstantiationException;
     
@@ -414,7 +414,7 @@ public final class Unsafe {
      * @see #getByte(long)
      * @see #putByte(long, byte)
      */
-    // 申请bytes字节的本地内存，并返回分配的内存地址
+    // 申请bytes字节的本地内存 并返回分配的内存地址
     public long allocateMemory(long bytes) {
         allocateMemoryChecks(bytes);
         
@@ -454,7 +454,7 @@ public final class Unsafe {
      * @throws OutOfMemoryError if the allocation is refused by the system
      * @see #allocateMemory
      */
-    // 在地址address的基础上扩容，如果address为0，则效果与#allocateMemory一致
+    // 在地址address的基础上扩容 如果address为0 则效果与#allocateMemory一致
     public long reallocateMemory(long address, long bytes) {
         reallocateMemoryChecks(address, bytes);
         
@@ -478,7 +478,7 @@ public final class Unsafe {
      *
      * <p>Equivalent to {@code setMemory(null, address, bytes, value)}.
      */
-    // 为申请的内存批量填充初值，通常用0填充
+    // 为申请的内存批量填充初值 通常用0填充
     public void setMemory(long address, long bytes, byte value) {
         setMemory(null, address, bytes, value);
     }
@@ -510,7 +510,7 @@ public final class Unsafe {
      * @throws RuntimeException if any of the arguments is invalid
      * @since 1.7
      */
-    // 为对象o的内存批量填充初值，通常用0填充
+    // 为对象o的内存批量填充初值 通常用0填充
     public void setMemory(Object o, long offset, long bytes, byte value) {
         setMemoryChecks(o, offset, bytes, value);
         
@@ -672,7 +672,7 @@ public final class Unsafe {
     // 获取对象o中offset地址处对应的long型字段的值
     @ForceInline
     public long getAddress(Object o, long offset) {
-        // 如果本机指针的宽度小于8字节，则将其作为无符号数扩展为Java的long类型
+        // 如果本机指针的宽度小于8字节 则将其作为无符号数扩展为Java的long类型
         if (ADDRESS_SIZE == 4) {
             // 获取对象o中offset地址处对应的int型字段的值
             int x = getInt(o, offset);
@@ -717,7 +717,7 @@ public final class Unsafe {
      * This value will be either 4 or 8.
      * Note that the sizes of other primitive types (as stored in native memory blocks) is determined fully by their information content.
      */
-    // 检查通过{@link #putAddress}存储的本机指针的大小（以字节为单位）。此值为4或8。请注意，其他基本类型的大小（存储在本机内存块中）完全由其信息内容决定。
+    // 检查通过{@link #putAddress}存储的本机指针的大小(以字节为单位)。此值为4或8。请注意 其他基本类型的大小(存储在本机内存块中)完全由其信息内容决定。
     public int addressSize() {
         return ADDRESS_SIZE;
     }
@@ -740,34 +740,34 @@ public final class Unsafe {
     /* 获取/设置字段值 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
     
     /*
-     * (1.1) 基于JVM内存地址，获取/设置字段值
+     * (1.1) 基于JVM内存地址 获取/设置字段值
      * - getXXX(o, offset)
      *    获取对象o中offset地址处对应的字段值
      *    对象o可以是数组
      *    offset的值由#objectFieldOffset或#staticFieldOffset获取
-     *    也可以由#arrayBaseOffset[B]和#arrayIndexScale[S]共同构成：B + N * S
+     *    也可以由#arrayBaseOffset[B]和#arrayIndexScale[S]共同构成:B + N * S
      *
      * - putXXX(o, offset, x)
      *     设置对象o中offset地址处对应的字段为新值x
      *
-     * (1.2) 基于本地内存地址，获取/设置字段值
+     * (1.2) 基于本地内存地址 获取/设置字段值
      * - getXXX(address)
      * - putXXX(address, x)
      *
-     * (2) 基于JVM内存地址，获取/设置字段值，Opaque版本
+     * (2) 基于JVM内存地址 获取/设置字段值 Opaque版本
      * - getXXXOpaque(o, offset)
      * - putXXXOpaque(o, offset, x)
      *
-     * (3) 基于JVM内存地址，获取/设置字段值，Release/Acquire版本
+     * (3) 基于JVM内存地址 获取/设置字段值 Release/Acquire版本
      * - getXXXAcquire(o, offset)
      * - putXXXRelease(o, offset, x)
      *
-     * (4) 基于JVM内存地址，获取/设置字段值，Volatile版本
+     * (4) 基于JVM内存地址 获取/设置字段值 Volatile版本
      * - getXXXVolatile(o, offset)
      * - putXXXVolatile(o, offset, x)
      */
     
-    /*▼ (1.1) getXXX/putXXX 获取/设置字段值（基于JVM内存地址） ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.1) getXXX/putXXX 获取/设置字段值(基于JVM内存地址) ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * @see #getInt(Object, long)
@@ -977,11 +977,11 @@ public final class Unsafe {
     @HotSpotIntrinsicCandidate
     public native void putObject(Object o, long offset, Object x);
     
-    /*▲ (1.1) getXXX/putXXX 获取/设置字段值（基于JVM内存地址） ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.1) getXXX/putXXX 获取/设置字段值(基于JVM内存地址) ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.2) getXXX/putXXX 获取/设置字段值（基于本地内存地址） ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.2) getXXX/putXXX 获取/设置字段值(基于本地内存地址) ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Fetches a value from a given memory address.  If the address is zero, or
@@ -1095,11 +1095,11 @@ public final class Unsafe {
         putChar(null, address, x);
     }
     
-    /*▲ (1.2) getXXX/putXXX 获取/设置字段值（基于本地内存地址） ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.2) getXXX/putXXX 获取/设置字段值(基于本地内存地址) ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (2) getXXXOpaque/putXXXOpaque 获取/设置字段值，Opaque版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (2) getXXXOpaque/putXXXOpaque 获取/设置字段值 Opaque版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Opaque version of {@link #getByteVolatile(Object, long)}
@@ -1265,11 +1265,11 @@ public final class Unsafe {
         putObjectVolatile(o, offset, x);
     }
     
-    /*▲ (2) getXXXOpaque/putXXXOpaque 获取/设置字段值，Opaque版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (2) getXXXOpaque/putXXXOpaque 获取/设置字段值 Opaque版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (3) getXXXAcquire/putXXXRelease 获取/设置字段值，Release/Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (3) getXXXAcquire/putXXXRelease 获取/设置字段值 Release/Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Acquire version of {@link #getByteVolatile(Object, long)}
@@ -1425,11 +1425,11 @@ public final class Unsafe {
         putObjectVolatile(o, offset, x);
     }
     
-    /*▲ (3) getXXXAcquire/putXXXRelease 获取/设置字段值，Release/Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (3) getXXXAcquire/putXXXRelease 获取/设置字段值 Release/Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Volatile version of {@link #getByte(Object, long)}
@@ -1561,7 +1561,7 @@ public final class Unsafe {
     @HotSpotIntrinsicCandidate
     public native void putObjectVolatile(Object o, long offset, Object x);
     
-    /*▲ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -1577,7 +1577,7 @@ public final class Unsafe {
      * @see #getInt(Object, long)
      * @see #putInt(Object, long, int)
      */
-    // 寻找某类型数组中的元素时约定的起始偏移地址（更像是一个标记），与#arrayIndexScale配合使用
+    // 寻找某类型数组中的元素时约定的起始偏移地址(更像是一个标记) 与#arrayIndexScale配合使用
     public int arrayBaseOffset(Class<?> arrayClass) {
         if(arrayClass == null) {
             throw new NullPointerException();
@@ -1597,7 +1597,7 @@ public final class Unsafe {
      * @see #getInt(Object, long)
      * @see #putInt(Object, long, int)
      */
-    // 某类型数组每个元素所占字节数，与#arrayBaseOffset配合使用
+    // 某类型数组每个元素所占字节数 与#arrayBaseOffset配合使用
     public int arrayIndexScale(Class<?> arrayClass) {
         if(arrayClass == null) {
             throw new NullPointerException();
@@ -1618,38 +1618,38 @@ public final class Unsafe {
     
     
     
-    /* 原子操作，设置值，基于JVM内存操作，属于乐观锁&自旋锁 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+    /* 原子操作 设置值 基于JVM内存操作 属于乐观锁&自旋锁 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
     
     /*
-     * (1.1) 设置值，Release版本
+     * (1.1) 设置值 Release版本
      * - getAndSetXXXRelease(o, offset, newValue)
-     *   返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
-     *   设置新值newValue的时候，要保证该字段修改过程中没有被其他线程修改，否则不断自旋，直到成功修改
+     *   返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
+     *   设置新值newValue的时候 要保证该字段修改过程中没有被其他线程修改 否则不断自旋 直到成功修改
      *
-     * (1.2) 设置值，Acquire版本
+     * (1.2) 设置值 Acquire版本
      * - getAndSetXXXAcquire(o, offset, newValue)
      *
-     * (1.3) 设置值，Volatile版本
+     * (1.3) 设置值 Volatile版本
      * - getAndSetXXX(o, offset, newValue)
      *
      *
      *
      * (2.1) 设置值
      * - compareAndExchangeXXX(o, offset, expected, x)
-     *   拿对象o中offset地址的field值与期望值expected作比较（内存值可能被其他线程修改掉，所以需要比较）。
-     *   如果field值与期望值相等，则设置field为x，否则不断重试，直到成功。
+     *   拿对象o中offset地址的field值与期望值expected作比较(内存值可能被其他线程修改掉 所以需要比较)。
+     *   如果field值与期望值相等 则设置field为x 否则不断重试 直到成功。
      *   返回的是期望值。
      *
-     * (2.2) 设置值，Release版本
+     * (2.2) 设置值 Release版本
      * - compareAndExchangeXXX(o, offset, expected, x)
      *
-     * (2.3) 设置值，Acquire版本
+     * (2.3) 设置值 Acquire版本
      * - compareAndExchangeXXX(o, offset, expected, x)
      */
     
-    /*▼ (1.1) getAndSetXXXRelease 设置值，Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.1) getAndSetXXXRelease 设置值 Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
 
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final byte getAndSetByteRelease(Object o, long offset, byte newValue) {
         byte v;
@@ -1659,7 +1659,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final short getAndSetShortRelease(Object o, long offset, short newValue) {
         short v;
@@ -1669,7 +1669,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final int getAndSetIntRelease(Object o, long offset, int newValue) {
         int v;
@@ -1679,7 +1679,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final long getAndSetLongRelease(Object o, long offset, long newValue) {
         long v;
@@ -1689,33 +1689,33 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final float getAndSetFloatRelease(Object o, long offset, float newValue) {
         int v = getAndSetIntRelease(o, offset, Float.floatToRawIntBits(newValue));
         return Float.intBitsToFloat(v);
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final double getAndSetDoubleRelease(Object o, long offset, double newValue) {
         long v = getAndSetLongRelease(o, offset, Double.doubleToRawLongBits(newValue));
         return Double.longBitsToDouble(v);
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final char getAndSetCharRelease(Object o, long offset, char newValue) {
         return s2c(getAndSetShortRelease(o, offset, c2s(newValue)));
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final boolean getAndSetBooleanRelease(Object o, long offset, boolean newValue) {
         return byte2bool(getAndSetByteRelease(o, offset, bool2byte(newValue)));
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final Object getAndSetObjectRelease(Object o, long offset, Object newValue) {
         Object v;
@@ -1725,13 +1725,13 @@ public final class Unsafe {
         return v;
     }
     
-    /*▲ (1.1) getAndSetXXXRelease 设置值，Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.1) getAndSetXXXRelease 设置值 Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.2) getAndSetXXXAcquire 设置值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.2) getAndSetXXXAcquire 设置值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final byte getAndSetByteAcquire(Object o, long offset, byte newValue) {
         byte v;
@@ -1741,7 +1741,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final short getAndSetShortAcquire(Object o, long offset, short newValue) {
         short v;
@@ -1751,7 +1751,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final int getAndSetIntAcquire(Object o, long offset, int newValue) {
         int v;
@@ -1761,7 +1761,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final long getAndSetLongAcquire(Object o, long offset, long newValue) {
         long v;
@@ -1771,33 +1771,33 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final float getAndSetFloatAcquire(Object o, long offset, float newValue) {
         int v = getAndSetIntAcquire(o, offset, Float.floatToRawIntBits(newValue));
         return Float.intBitsToFloat(v);
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final double getAndSetDoubleAcquire(Object o, long offset, double newValue) {
         long v = getAndSetLongAcquire(o, offset, Double.doubleToRawLongBits(newValue));
         return Double.longBitsToDouble(v);
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final char getAndSetCharAcquire(Object o, long offset, char newValue) {
         return s2c(getAndSetShortAcquire(o, offset, c2s(newValue)));
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final boolean getAndSetBooleanAcquire(Object o, long offset, boolean newValue) {
         return byte2bool(getAndSetByteAcquire(o, offset, bool2byte(newValue)));
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final Object getAndSetObjectAcquire(Object o, long offset, Object newValue) {
         Object v;
@@ -1807,13 +1807,13 @@ public final class Unsafe {
         return v;
     }
     
-    /*▲ (1.2) getAndSetXXXAcquire 设置值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.2) getAndSetXXXAcquire 设置值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.3) getAndSetXXX 设置值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.3) getAndSetXXX 设置值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @HotSpotIntrinsicCandidate
     public final byte getAndSetByte(Object o, long offset, byte newValue) {
         byte v;
@@ -1823,7 +1823,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @HotSpotIntrinsicCandidate
     public final short getAndSetShort(Object o, long offset, short newValue) {
         short v;
@@ -1844,7 +1844,7 @@ public final class Unsafe {
      * @return the previous value
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @HotSpotIntrinsicCandidate
     public final int getAndSetInt(Object o, long offset, int newValue) {
         int v;
@@ -1865,7 +1865,7 @@ public final class Unsafe {
      * @return the previous value
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @HotSpotIntrinsicCandidate
     public final long getAndSetLong(Object o, long offset, long newValue) {
         long v;
@@ -1875,27 +1875,27 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final float getAndSetFloat(Object o, long offset, float newValue) {
         int v = getAndSetInt(o, offset, Float.floatToRawIntBits(newValue));
         return Float.intBitsToFloat(v);
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final double getAndSetDouble(Object o, long offset, double newValue) {
         long v = getAndSetLong(o, offset, Double.doubleToRawLongBits(newValue));
         return Double.longBitsToDouble(v);
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final char getAndSetChar(Object o, long offset, char newValue) {
         return s2c(getAndSetShort(o, offset, c2s(newValue)));
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final boolean getAndSetBoolean(Object o, long offset, boolean newValue) {
         return byte2bool(getAndSetByte(o, offset, bool2byte(newValue)));
@@ -1912,7 +1912,7 @@ public final class Unsafe {
      * @return the previous value
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @HotSpotIntrinsicCandidate
     public final Object getAndSetObject(Object o, long offset, Object newValue) {
         Object v;
@@ -1922,12 +1922,12 @@ public final class Unsafe {
         return v;
     }
     
-    /*▲ (1.3) getAndSetXXX 设置值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.3) getAndSetXXX 设置值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     /*▼ (2.1) compareAndExchangeXXX 设置值 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final byte compareAndExchangeByte(Object o, long offset, byte expected, byte x) {
         long wordOffset = offset & ~3;
@@ -1947,7 +1947,7 @@ public final class Unsafe {
         return expected;
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final short compareAndExchangeShort(Object o, long offset, short expected, short x) {
         if((offset & 3) == 3) {
@@ -1971,41 +1971,41 @@ public final class Unsafe {
         return expected;
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final native int compareAndExchangeInt(Object o, long offset, int expected, int x);
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final native long compareAndExchangeLong(Object o, long offset, long expected, long x);
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final float compareAndExchangeFloat(Object o, long offset, float expected, float x) {
         int w = compareAndExchangeInt(o, offset, Float.floatToRawIntBits(expected), Float.floatToRawIntBits(x));
         return Float.intBitsToFloat(w);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final double compareAndExchangeDouble(Object o, long offset, double expected, double x) {
         long w = compareAndExchangeLong(o, offset, Double.doubleToRawLongBits(expected), Double.doubleToRawLongBits(x));
         return Double.longBitsToDouble(w);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final char compareAndExchangeChar(Object o, long offset, char expected, char x) {
         return s2c(compareAndExchangeShort(o, offset, c2s(expected), c2s(x)));
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final boolean compareAndExchangeBoolean(Object o, long offset, boolean expected, boolean x) {
         return byte2bool(compareAndExchangeByte(o, offset, bool2byte(expected), bool2byte(x)));
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final native Object compareAndExchangeObject(Object o, long offset, Object expected, Object x);
     
@@ -2013,69 +2013,69 @@ public final class Unsafe {
     
     
     
-    /*▼ (2.2) compareAndExchangeXXXRelease 设置值，Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (2.2) compareAndExchangeXXXRelease 设置值 Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final byte compareAndExchangeByteRelease(Object o, long offset, byte expected, byte x) {
         return compareAndExchangeByte(o, offset, expected, x);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final short compareAndExchangeShortRelease(Object o, long offset, short expected, short x) {
         return compareAndExchangeShort(o, offset, expected, x);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final int compareAndExchangeIntRelease(Object o, long offset, int expected, int x) {
         return compareAndExchangeInt(o, offset, expected, x);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final long compareAndExchangeLongRelease(Object o, long offset, long expected, long x) {
         return compareAndExchangeLong(o, offset, expected, x);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final float compareAndExchangeFloatRelease(Object o, long offset, float expected, float x) {
         int w = compareAndExchangeIntRelease(o, offset, Float.floatToRawIntBits(expected), Float.floatToRawIntBits(x));
         return Float.intBitsToFloat(w);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final double compareAndExchangeDoubleRelease(Object o, long offset, double expected, double x) {
         long w = compareAndExchangeLongRelease(o, offset, Double.doubleToRawLongBits(expected), Double.doubleToRawLongBits(x));
         return Double.longBitsToDouble(w);
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final char compareAndExchangeCharRelease(Object o, long offset, char expected, char x) {
         return s2c(compareAndExchangeShortRelease(o, offset, c2s(expected), c2s(x)));
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @ForceInline
     public final boolean compareAndExchangeBooleanRelease(Object o, long offset, boolean expected, boolean x) {
         return byte2bool(compareAndExchangeByteRelease(o, offset, bool2byte(expected), bool2byte(x)));
     }
     
-    // 原子地设置对象o的offset地址处的值为x，返回期望值expected
+    // 原子地设置对象o的offset地址处的值为x 返回期望值expected
     @HotSpotIntrinsicCandidate
     public final Object compareAndExchangeObjectRelease(Object o, long offset, Object expected, Object x) {
         return compareAndExchangeObject(o, offset, expected, x);
     }
     
-    /*▲ (2.2) compareAndExchangeXXXRelease 设置值，Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (2.2) compareAndExchangeXXXRelease 设置值 Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (2.3) compareAndExchangeXXXAcquire 设置值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (2.3) compareAndExchangeXXXAcquire 设置值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     @HotSpotIntrinsicCandidate
     public final byte compareAndExchangeByteAcquire(Object o, long offset, byte expected, byte x) {
@@ -2124,35 +2124,35 @@ public final class Unsafe {
         return compareAndExchangeObject(o, offset, expected, x);
     }
     
-    /*▲ (2.3) compareAndExchangeXXXAcquire 设置值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (2.3) compareAndExchangeXXXAcquire 设置值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
-    /* 原子操作，设置值，基于JVM内存操作，属于乐观锁&自旋锁 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
-    
-    
+    /* 原子操作 设置值 基于JVM内存操作 属于乐观锁&自旋锁 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
     
     
     
     
-    /* 原子操作，更新值，基于JVM内存操作 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+    
+    
+    /* 原子操作 更新值 基于JVM内存操作 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
     
     /*
-     * (1.1) 更新值，Plain版本
+     * (1.1) 更新值 Plain版本
      * - weakCompareAndSetBytePlain(o, offset, expected, x)
-     *   拿对象o中offset地址的field值与期望值expected作比较（内存值可能被其他线程修改掉，所以需要比较）。
-     *   如果发现该值被修改，则返回false，否则，原子地更新该值为x，且返回true。
-     *   @param offset   JVM内存偏移地址，对象o中某字段field的地址
+     *   拿对象o中offset地址的field值与期望值expected作比较(内存值可能被其他线程修改掉 所以需要比较)。
+     *   如果发现该值被修改 则返回false 否则 原子地更新该值为x 且返回true。
+     *   @param offset   JVM内存偏移地址 对象o中某字段field的地址
      *   @param o        包含field值的对象
      *   @param expected field当前的期望值
-     *   @param x        如果field的当前值与期望值expected相同，那么更新filed的值为这个新值x
-     *   @return         更新成功返回true，更新失败返回false
+     *   @param x        如果field的当前值与期望值expected相同 那么更新filed的值为这个新值x
+     *   @return         更新成功返回true 更新失败返回false
      *
-     * (1.2) 更新值，Release版本
+     * (1.2) 更新值 Release版本
      * - weakCompareAndSetXXXRelease(o, offset, expected, x)
      *
-     * (1.3) 更新值，Acquire版本
+     * (1.3) 更新值 Acquire版本
      * - weakCompareAndSetXXXAcquire(o, offset, expected, x)
      *
-     * (1.4) 更新值，Volatile版本
+     * (1.4) 更新值 Volatile版本
      * - weakCompareAndSetXXX(o, offset, expected, x)
      *
      *
@@ -2161,256 +2161,256 @@ public final class Unsafe {
      * - compareAndSetXXX(o, offset, expected, x)
      */
     
-    /*▼ (1.1) weakCompareAndSetXXXPlain 更新值，Plain版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.1) weakCompareAndSetXXXPlain 更新值 Plain版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetBytePlain(Object o, long offset, byte expected, byte x) {
         return weakCompareAndSetByte(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetShortPlain(Object o, long offset, short expected, short x) {
         return weakCompareAndSetShort(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetIntPlain(Object o, long offset, int expected, int x) {
         return compareAndSetInt(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetLongPlain(Object o, long offset, long expected, long x) {
         return compareAndSetLong(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetFloatPlain(Object o, long offset, float expected, float x) {
         return weakCompareAndSetIntPlain(o, offset, Float.floatToRawIntBits(expected), Float.floatToRawIntBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetDoublePlain(Object o, long offset, double expected, double x) {
         return weakCompareAndSetLongPlain(o, offset, Double.doubleToRawLongBits(expected), Double.doubleToRawLongBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetCharPlain(Object o, long offset, char expected, char x) {
         return weakCompareAndSetShortPlain(o, offset, c2s(expected), c2s(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetBooleanPlain(Object o, long offset, boolean expected, boolean x) {
         return weakCompareAndSetBytePlain(o, offset, bool2byte(expected), bool2byte(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetObjectPlain(Object o, long offset, Object expected, Object x) {
         return compareAndSetObject(o, offset, expected, x);
     }
     
-    /*▲ (1.1) weakCompareAndSetXXXPlain 更新值，Plain版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.1) weakCompareAndSetXXXPlain 更新值 Plain版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.2) weakCompareAndSetXXXRelease 更新值，Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.2) weakCompareAndSetXXXRelease 更新值 Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetIntRelease(Object o, long offset, int expected, int x) {
         return compareAndSetInt(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetByteRelease(Object o, long offset, byte expected, byte x) {
         return weakCompareAndSetByte(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetShortRelease(Object o, long offset, short expected, short x) {
         return weakCompareAndSetShort(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetCharRelease(Object o, long offset, char expected, char x) {
         return weakCompareAndSetShortRelease(o, offset, c2s(expected), c2s(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetLongRelease(Object o, long offset, long expected, long x) {
         return compareAndSetLong(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetFloatRelease(Object o, long offset, float expected, float x) {
         return weakCompareAndSetIntRelease(o, offset, Float.floatToRawIntBits(expected), Float.floatToRawIntBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetDoubleRelease(Object o, long offset, double expected, double x) {
         return weakCompareAndSetLongRelease(o, offset, Double.doubleToRawLongBits(expected), Double.doubleToRawLongBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetBooleanRelease(Object o, long offset, boolean expected, boolean x) {
         return weakCompareAndSetByteRelease(o, offset, bool2byte(expected), bool2byte(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetObjectRelease(Object o, long offset, Object expected, Object x) {
         return compareAndSetObject(o, offset, expected, x);
     }
     
-    /*▲ (1.2) weakCompareAndSetXXXRelease 更新值，Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.2) weakCompareAndSetXXXRelease 更新值 Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.3) weakCompareAndSetXXXAcquire 更新值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.3) weakCompareAndSetXXXAcquire 更新值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetByteAcquire(Object o, long offset, byte expected, byte x) {
         return weakCompareAndSetByte(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetShortAcquire(Object o, long offset, short expected, short x) {
         return weakCompareAndSetShort(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetIntAcquire(Object o, long offset, int expected, int x) {
         return compareAndSetInt(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetLongAcquire(Object o, long offset, long expected, long x) {
         return compareAndSetLong(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetFloatAcquire(Object o, long offset, float expected, float x) {
         return weakCompareAndSetIntAcquire(o, offset, Float.floatToRawIntBits(expected), Float.floatToRawIntBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetDoubleAcquire(Object o, long offset, double expected, double x) {
         return weakCompareAndSetLongAcquire(o, offset, Double.doubleToRawLongBits(expected), Double.doubleToRawLongBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetCharAcquire(Object o, long offset, char expected, char x) {
         return weakCompareAndSetShortAcquire(o, offset, c2s(expected), c2s(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetBooleanAcquire(Object o, long offset, boolean expected, boolean x) {
         return weakCompareAndSetByteAcquire(o, offset, bool2byte(expected), bool2byte(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetObjectAcquire(Object o, long offset, Object expected, Object x) {
         return compareAndSetObject(o, offset, expected, x);
     }
     
-    /*▲ (1.3) weakCompareAndSetXXXAcquire 更新值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.3) weakCompareAndSetXXXAcquire 更新值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.4) weakCompareAndSetXXX 更新值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.4) weakCompareAndSetXXX 更新值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetByte(Object o, long offset, byte expected, byte x) {
         return compareAndSetByte(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetShort(Object o, long offset, short expected, short x) {
         return compareAndSetShort(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetInt(Object o, long offset, int expected, int x) {
         return compareAndSetInt(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetLong(Object o, long offset, long expected, long x) {
         return compareAndSetLong(o, offset, expected, x);
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetFloat(Object o, long offset, float expected, float x) {
         return weakCompareAndSetInt(o, offset, Float.floatToRawIntBits(expected), Float.floatToRawIntBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetDouble(Object o, long offset, double expected, double x) {
         return weakCompareAndSetLong(o, offset, Double.doubleToRawLongBits(expected), Double.doubleToRawLongBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetChar(Object o, long offset, char expected, char x) {
         return weakCompareAndSetShort(o, offset, c2s(expected), c2s(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean weakCompareAndSetBoolean(Object o, long offset, boolean expected, boolean x) {
         return weakCompareAndSetByte(o, offset, bool2byte(expected), bool2byte(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean weakCompareAndSetObject(Object o, long offset, Object expected, Object x) {
         return compareAndSetObject(o, offset, expected, x);
     }
     
-    /*▲ (1.4) weakCompareAndSetXXX 更新值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.4) weakCompareAndSetXXX 更新值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
     
     /*▼ (2.1) compareAndSetXXX 更新值 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean compareAndSetByte(Object o, long offset, byte expected, byte x) {
         return compareAndExchangeByte(o, offset, expected, x) == expected;
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final boolean compareAndSetShort(Object o, long offset, short expected, short x) {
         return compareAndExchangeShort(o, offset, expected, x) == expected;
@@ -2424,7 +2424,7 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final native boolean compareAndSetInt(Object o, long offset, int expected, int x);
     
@@ -2437,7 +2437,7 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final native boolean compareAndSetLong(Object o, long offset, long expected, long x);
     
@@ -2450,7 +2450,7 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean compareAndSetFloat(Object o, long offset, float expected, float x) {
         return compareAndSetInt(o, offset, Float.floatToRawIntBits(expected), Float.floatToRawIntBits(x));
@@ -2465,19 +2465,19 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean compareAndSetDouble(Object o, long offset, double expected, double x) {
         return compareAndSetLong(o, offset, Double.doubleToRawLongBits(expected), Double.doubleToRawLongBits(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean compareAndSetChar(Object o, long offset, char expected, char x) {
         return compareAndSetShort(o, offset, c2s(expected), c2s(x));
     }
     
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean compareAndSetBoolean(Object o, long offset, boolean expected, boolean x) {
         return compareAndSetByte(o, offset, bool2byte(expected), bool2byte(x));
@@ -2492,37 +2492,37 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @HotSpotIntrinsicCandidate
     public final native boolean compareAndSetObject(Object o, long offset, Object expected, Object x);
     
     /*▲ (2.1) compareAndSetXXX 更新值 ████████████████████████████████████████████████████████████████████████████████┛ */
     
-    /* 原子操作，更新值，基于JVM内存操作 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+    /* 原子操作 更新值 基于JVM内存操作 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
     
     
     
     
     
     
-    /* 原子操作，增减值，基于JVM内存操作，属于乐观锁&自旋锁 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+    /* 原子操作 增减值 基于JVM内存操作 属于乐观锁&自旋锁 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
     
     /*
-     * (1.1) 增减值，Release版本
+     * (1.1) 增减值 Release版本
      * - getAndAddXXXRelease(o, offset, newValue)
-     *   返回对象o的offset地址处的值，并将该值原子性地增加delta（delta可以为负数）
-     *   增减值的时候，要保证该字段增减过程中没有被其他线程修改，否则不断自旋，直到增减成功
+     *   返回对象o的offset地址处的值 并将该值原子性地增加delta(delta可以为负数)
+     *   增减值的时候 要保证该字段增减过程中没有被其他线程修改 否则不断自旋 直到增减成功
      *
-     * (1.2) 增减值，Acquire版本
+     * (1.2) 增减值 Acquire版本
      * - getAndAddXXXAcquire(o, offset, delta)
      *
-     * (1.3) 增减值，Volatile版本
+     * (1.3) 增减值 Volatile版本
      * - getAndAddXXX(o, offset, delta)
      */
     
-    /*▼ (1.1) getAndAddXXXRelease，增减值，Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.1) getAndAddXXXRelease 增减值 Release版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final byte getAndAddByteRelease(Object o, long offset, byte delta) {
         byte v;
@@ -2532,7 +2532,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final short getAndAddShortRelease(Object o, long offset, short delta) {
         short v;
@@ -2542,7 +2542,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final int getAndAddIntRelease(Object o, long offset, int delta) {
         int v;
@@ -2552,7 +2552,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final long getAndAddLongRelease(Object o, long offset, long delta) {
         long v;
@@ -2562,7 +2562,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final float getAndAddFloatRelease(Object o, long offset, float delta) {
         int expectedBits;
@@ -2578,7 +2578,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final double getAndAddDoubleRelease(Object o, long offset, double delta) {
         long expectedBits;
@@ -2594,19 +2594,19 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final char getAndAddCharRelease(Object o, long offset, char delta) {
         return (char) getAndAddShortRelease(o, offset, (short) delta);
     }
     
-    /*▲ (1.1) getAndAddXXXRelease，增减值，Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.1) getAndAddXXXRelease 增减值 Release版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.2) getAndAddXXXAcquire，增减值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.2) getAndAddXXXAcquire 增减值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final byte getAndAddByteAcquire(Object o, long offset, byte delta) {
         byte v;
@@ -2616,7 +2616,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final short getAndAddShortAcquire(Object o, long offset, short delta) {
         short v;
@@ -2626,7 +2626,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final int getAndAddIntAcquire(Object o, long offset, int delta) {
         int v;
@@ -2636,7 +2636,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final long getAndAddLongAcquire(Object o, long offset, long delta) {
         long v;
@@ -2646,7 +2646,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final float getAndAddFloatAcquire(Object o, long offset, float delta) {
         int expectedBits;
@@ -2662,7 +2662,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final double getAndAddDoubleAcquire(Object o, long offset, double delta) {
         long expectedBits;
@@ -2678,19 +2678,19 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final char getAndAddCharAcquire(Object o, long offset, char delta) {
         return (char) getAndAddShortAcquire(o, offset, (short) delta);
     }
     
-    /*▲ (1.2) getAndAddXXXAcquire，增减值，Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.2) getAndAddXXXAcquire 增减值 Acquire版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.3) getAndAddXXX，增减值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.3) getAndAddXXX 增减值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @HotSpotIntrinsicCandidate
     public final byte getAndAddByte(Object o, long offset, byte delta) {
         byte v;
@@ -2700,7 +2700,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @HotSpotIntrinsicCandidate
     public final short getAndAddShort(Object o, long offset, short delta) {
         short v;
@@ -2723,16 +2723,16 @@ public final class Unsafe {
      * @return the previous value
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @HotSpotIntrinsicCandidate
     public final int getAndAddInt(Object o, long offset, int delta) {
         int v;
         
         do {
-            // 获取对象o中offset地址处对应的int型字段的值，支持volatile语义
+            // 获取对象o中offset地址处对应的int型字段的值 支持volatile语义
             v = getIntVolatile(o, offset);
             
-            // 拿期望值v与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为v + delta，并返回true，否则返回false
+            // 拿期望值v与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为v + delta 并返回true 否则返回false
         } while (!weakCompareAndSetInt(o, offset, v, v + delta));
         
         return v;
@@ -2749,7 +2749,7 @@ public final class Unsafe {
      * @return the previous value
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @HotSpotIntrinsicCandidate
     public final long getAndAddLong(Object o, long offset, long delta) {
         long v;
@@ -2759,7 +2759,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final float getAndAddFloat(Object o, long offset, float delta) {
         int expectedBits;
@@ -2774,7 +2774,7 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final double getAndAddDouble(Object o, long offset, double delta) {
         long expectedBits;
@@ -2788,16 +2788,16 @@ public final class Unsafe {
         return v;
     }
     
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final char getAndAddChar(Object o, long offset, char delta) {
         // 转为short形式相加
         return (char) getAndAddShort(o, offset, (short) delta);
     }
     
-    /*▲ (1.3) getAndAddXXX，增减值，Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.3) getAndAddXXX 增减值 Volatile版本 ████████████████████████████████████████████████████████████████████████████████┛ */
     
-    /* 原子操作，增减值，基于JVM内存操作，属于乐观锁&自旋锁 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+    /* 原子操作 增减值 基于JVM内存操作 属于乐观锁&自旋锁 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
     
     
     
@@ -2808,19 +2808,19 @@ public final class Unsafe {
     
     /*
      * (1) 按位与
-     * (1.1) getAndBitwiseAndXXXRelease，Release版本
-     * (1.2) getAndBitwiseAndXXXAcquire，Acquire版本
-     * (1.3) getAndBitwiseAndXXX，Volatile版本
+     * (1.1) getAndBitwiseAndXXXRelease Release版本
+     * (1.2) getAndBitwiseAndXXXAcquire Acquire版本
+     * (1.3) getAndBitwiseAndXXX Volatile版本
      *
      * (2) 按位或
-     * (2.1) getAndBitwiseOrXXXRelease，Release版本
-     * (2.2) getAndBitwiseOrXXXAcquire，Acquire版本
-     * (2.3) getAndBitwiseOrXXX，Volatile版本
+     * (2.1) getAndBitwiseOrXXXRelease Release版本
+     * (2.2) getAndBitwiseOrXXXAcquire Acquire版本
+     * (2.3) getAndBitwiseOrXXX Volatile版本
      *
      * (3) 按位异或
-     * (3.1) getAndBitwiseXorXXXRelease，Release版本
-     * (3.2) getAndBitwiseXorXXXAcquire，Acquire版本
-     * (3.3) getAndBitwiseXorXXX，Volatile版本
+     * (3.1) getAndBitwiseXorXXXRelease Release版本
+     * (3.2) getAndBitwiseXorXXXAcquire Acquire版本
+     * (3.3) getAndBitwiseXorXXX Volatile版本
      */
     
     /*▼ (1.1) getAndBitwiseAndXXXRelease ████████████████████████████████████████████████████████████████████████████████┓ */
@@ -3337,7 +3337,7 @@ public final class Unsafe {
      *
      * @param thread the thread to unpark.
      */
-    // 发给目标线程一个许可证，该许可证被park消费，用于唤醒被park阻塞的线程
+    // 发给目标线程一个许可证 该许可证被park消费 用于唤醒被park阻塞的线程
     @HotSpotIntrinsicCandidate
     public native void unpark(Object thread);
     
@@ -3352,7 +3352,7 @@ public final class Unsafe {
      * because {@code unpark} is, so it would be strange to place it
      * elsewhere.
      */
-    // 等待消费一个许可证，这会使线程陷入阻塞。
+    // 等待消费一个许可证 这会使线程陷入阻塞。
     @HotSpotIntrinsicCandidate
     public native void park(boolean isAbsolute, long time);
     
@@ -3686,7 +3686,7 @@ public final class Unsafe {
     /**
      * @return Returns true if this platform is capable of performing accesses at addresses which are not aligned for the type of the primitive type being accessed, false otherwise.
      */
-    // true：该平台支持对字节未对齐的基本类型访问
+    // true:该平台支持对字节未对齐的基本类型访问
     public final boolean unalignedAccess() {
         return unalignedAccess;
     }

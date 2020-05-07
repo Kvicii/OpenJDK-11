@@ -107,7 +107,7 @@ import java.io.Serializable;
  * @since 1.0
  */
 /*
- * 线程安全的字符序列，适合多线程下操作大量字符，内部实现为字节数组
+ * 线程安全的字符序列 适合多线程下操作大量字符 内部实现为字节数组
  * 线程安全的原理是涉及到修改StringBuffer的操作被synchronized修饰
  */
 public final class StringBuffer extends AbstractStringBuilder implements Serializable, Comparable<StringBuffer>, CharSequence {
@@ -115,7 +115,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
     /**
      * A cache of the last value returned by toString. Cleared whenever the StringBuffer is modified.
      */
-    // 调用toString()后生成的缓存，用于存储ASB中的字符序列。每次更改ASB都会清理缓存
+    // 调用toString()后生成的缓存 用于存储ASB中的字符序列。每次更改ASB都会清理缓存
     private transient String toStringCache;
     
     
@@ -213,7 +213,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
         return this;
     }
     
-    // 向StringBuffer末尾添加一个子序列，该子序列取自字符序列s的[start, end)范围
+    // 向StringBuffer末尾添加一个子序列 该子序列取自字符序列s的[start, end)范围
     /**
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since 1.5
@@ -286,7 +286,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
         return this;
     }
     
-    // 向StringBuffer末尾添加一个子序列，该子序列取自字符数组s的[offset, offset+len)范围
+    // 向StringBuffer末尾添加一个子序列 该子序列取自字符数组s的[offset, offset+len)范围
     /**
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
@@ -420,7 +420,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since 1.5
      */
-    // 向StringBuffer的dstOffset索引处插入一个子序列，该子序列取自字符序列s的[start, end)范围
+    // 向StringBuffer的dstOffset索引处插入一个子序列 该子序列取自字符序列s的[start, end)范围
     @Override
     public synchronized StringBuffer insert(int dstOffset, CharSequence s, int start, int end) {
         toStringCache = null;
@@ -443,7 +443,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      * @since 1.2
      */
-    // 向StringBuffer的index索引处插入一个子序列，该子序列取自字符序列str的[offset, offset+len)范围
+    // 向StringBuffer的index索引处插入一个子序列 该子序列取自字符序列str的[offset, offset+len)范围
     @Override
     public synchronized StringBuffer insert(int index, char[] str, int offset, int len) {
         toStringCache = null;
@@ -622,7 +622,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
     /**
      * @since 1.4
      */
-    // 返回子串str在当前主串StringBuffer中第一次出现的位置（从主串fromIndex处向后搜索）
+    // 返回子串str在当前主串StringBuffer中第一次出现的位置(从主串fromIndex处向后搜索)
     @Override
     public synchronized int indexOf(String str, int fromIndex) {
         return super.indexOf(str, fromIndex);
@@ -641,7 +641,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
     /**
      * @since 1.4
      */
-    // 返回子串str在当前主串StringBuffer中最后一次出现的位置（从主串fromIndex处向前搜索）
+    // 返回子串str在当前主串StringBuffer中最后一次出现的位置(从主串fromIndex处向前搜索)
     @Override
     public synchronized int lastIndexOf(String str, int fromIndex) {
         return super.lastIndexOf(str, fromIndex);
@@ -744,7 +744,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since 1.5
      */
-    // 返回StringBuffer内index索引处的Unicode编码（从前到后试探）
+    // 返回StringBuffer内index索引处的Unicode编码(从前到后试探)
     @Override
     public synchronized int codePointAt(int index) {
         return super.codePointAt(index);
@@ -754,7 +754,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since 1.5
      */
-    // 返回StringBuffer内index-1索引处的Unicode编码（从后往前试探）
+    // 返回StringBuffer内index-1索引处的Unicode编码(从后往前试探)
     @Override
     public synchronized int codePointBefore(int index) {
         return super.codePointBefore(index);
@@ -774,7 +774,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @since 1.5
      */
-    // 返回从index偏移codePointOffset个Unicode符号后新的索引值，codePointOffset的正负决定了偏移方向
+    // 返回从index偏移codePointOffset个Unicode符号后新的索引值 codePointOffset的正负决定了偏移方向
     @Override
     public synchronized int offsetByCodePoints(int index, int codePointOffset) {
         return super.offsetByCodePoints(index, codePointOffset);
@@ -786,7 +786,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
     
     /*▼ 容量 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回当前StringBuffer的容量（可以容纳的char的数量）
+    // 返回当前StringBuffer的容量(可以容纳的char的数量)
     @Override
     public synchronized int capacity() {
         return super.capacity();
@@ -811,7 +811,7 @@ public final class StringBuffer extends AbstractStringBuilder implements Seriali
      * @throws IndexOutOfBoundsException {@inheritDoc}
      * @see #length()
      */
-    // 扩展StringBuffer容量，多出来的部分用0填充，且设置StringBuffer的长度为newLength
+    // 扩展StringBuffer容量 多出来的部分用0填充 且设置StringBuffer的长度为newLength
     @Override
     public synchronized void setLength(int newLength) {
         toStringCache = null;

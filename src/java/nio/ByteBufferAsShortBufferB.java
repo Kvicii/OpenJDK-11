@@ -25,7 +25,7 @@
 
 package java.nio;
 
-// ByteBuffer转为ShortBuffer，使用可读写的缓冲区。采用大端字节序，其他部分与ByteBufferAsShortBufferL相同
+// ByteBuffer转为ShortBuffer 使用可读写的缓冲区。采用大端字节序 其他部分与ByteBufferAsShortBufferL相同
 class ByteBufferAsShortBufferB extends ShortBuffer {
     
     protected final ByteBuffer bb;
@@ -69,7 +69,7 @@ class ByteBufferAsShortBufferB extends ShortBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public ShortBuffer slice() {
         int pos = this.position();
@@ -88,7 +88,7 @@ class ByteBufferAsShortBufferB extends ShortBuffer {
         return new ByteBufferAsShortBufferRB(bb, this.markValue(), this.position(), this.limit(), this.capacity(), address);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

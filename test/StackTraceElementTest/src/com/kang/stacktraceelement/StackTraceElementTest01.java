@@ -16,7 +16,7 @@ public class StackTraceElementTest01 {
         System.out.println("\n-----------打印方法调用链的栈帧-----------");
         stet.fun1();
         
-        System.out.println("\n-----------查看main方法的栈帧信息（位于栈底）-----------");
+        System.out.println("\n-----------查看main方法的栈帧信息(位于栈底)-----------");
         StackTraceElement ste = stet.stackTraceElements[stet.stackTraceElements.length-1];
         System.out.println(ste);
         System.out.println(ste.getModuleName());

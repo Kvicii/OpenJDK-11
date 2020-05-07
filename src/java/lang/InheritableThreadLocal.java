@@ -48,7 +48,7 @@ package java.lang;
  * @see ThreadLocal
  * @since 1.2
  */
-// 可以创建允许子线程继承的ThreadLocal（及其关联值）
+// 可以创建允许子线程继承的ThreadLocal(及其关联值)
 public class InheritableThreadLocal<T> extends ThreadLocal<T> {
     /**
      * Computes the child's initial value for this inheritable thread-local
@@ -63,7 +63,7 @@ public class InheritableThreadLocal<T> extends ThreadLocal<T> {
      *
      * @return the child thread's initial value
      */
-    // 拿到父线程的值后，可以在这里处理后再返回给子线程
+    // 拿到父线程的值后 可以在这里处理后再返回给子线程
     protected T childValue(T parentValue) {
         return parentValue;
     }

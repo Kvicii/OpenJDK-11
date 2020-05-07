@@ -114,7 +114,7 @@ public final class OptionalLong {
     }
     
     
-    /*▼ 静态工厂，创建OptionalLong ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 静态工厂 创建OptionalLong ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Returns an empty {@code OptionalLong} instance.  No value is present for
@@ -142,7 +142,7 @@ public final class OptionalLong {
         return new OptionalLong(value);
     }
     
-    /*▲ 静态工厂，创建OptionalLong ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 静态工厂 创建OptionalLong ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -157,7 +157,7 @@ public final class OptionalLong {
      * @throws NoSuchElementException if no value is present
      * @apiNote The preferred alternative to this method is {@link #orElseThrow()}.
      */
-    // 如果元素存在，则返回它
+    // 如果元素存在 则返回它
     public long getAsLong() {
         if(!isPresent) {
             throw new NoSuchElementException("No value present");
@@ -173,7 +173,7 @@ public final class OptionalLong {
      *
      * @return the value, if present, otherwise {@code other}
      */
-    // 如果元素存在，返回它。否则，返回other
+    // 如果元素存在 返回它。否则 返回other
     public long orElse(long other) {
         return isPresent ? value : other;
     }
@@ -190,7 +190,7 @@ public final class OptionalLong {
      * @throws NullPointerException if no value is present and the supplying
      *                              function is {@code null}
      */
-    // 如果元素存在，返回它。否则，从supplier中获取
+    // 如果元素存在 返回它。否则 从supplier中获取
     public long orElseGet(LongSupplier supplier) {
         return isPresent ? value : supplier.getAsLong();
     }
@@ -204,7 +204,7 @@ public final class OptionalLong {
      * @throws NoSuchElementException if no value is present
      * @since 10
      */
-    // 如果元素存在，返回它。否则，抛出异常
+    // 如果元素存在 返回它。否则 抛出异常
     public long orElseThrow() {
         if(!isPresent) {
             throw new NoSuchElementException("No value present");
@@ -229,7 +229,7 @@ public final class OptionalLong {
      * list can be used as the supplier. For example,
      * {@code IllegalStateException::new}
      */
-    // 如果元素存在，返回它。否则，从exceptionSupplier中取出异常并抛出
+    // 如果元素存在 返回它。否则 从exceptionSupplier中取出异常并抛出
     public <X extends Throwable> long orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
         if(isPresent) {
             return value;
@@ -276,7 +276,7 @@ public final class OptionalLong {
      * @throws NullPointerException if value is present and the given action is
      *                              {@code null}
      */
-    // 如果元素存在，执行action动作
+    // 如果元素存在 执行action动作
     public void ifPresent(LongConsumer action) {
         if(isPresent) {
             action.accept(value);
@@ -296,7 +296,7 @@ public final class OptionalLong {
      *                              action is {@code null}.
      * @since 9
      */
-    // 如果元素存在，执行actin动作。否则，执行emptyAction动作。
+    // 如果元素存在 执行actin动作。否则 执行emptyAction动作。
     public void ifPresentOrElse(LongConsumer action, Runnable emptyAction) {
         if(isPresent) {
             action.accept(value);

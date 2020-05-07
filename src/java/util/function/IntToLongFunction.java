@@ -36,10 +36,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：IntToLongFunction
+ * 函数式接口:IntToLongFunction
  *
- * 参数：int
- * 返回：long
+ * 参数:int
+ * 返回:long
  */
 @FunctionalInterface
 public interface IntToLongFunction {

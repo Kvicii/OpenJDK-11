@@ -27,7 +27,7 @@ package java.nio;
 
 /* If the sequence is a string, use reflection to share its array */
 
-// 只读、非直接缓冲区，内部存储结构实现为CharSequence的子类（包括CharBuffer和String）
+// 只读、非直接缓冲区 内部存储结构实现为CharSequence的子类(包括CharBuffer和String)
 class StringCharBuffer extends CharBuffer {
     
     CharSequence str;   // 缓冲区
@@ -55,12 +55,12 @@ class StringCharBuffer extends CharBuffer {
     
     /*▼ 只读/非直接 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // StringCharBuffer是只读缓冲区，返回true
+    // StringCharBuffer是只读缓冲区 返回true
     public final boolean isReadOnly() {
         return true;
     }
     
-    // StringCharBuffer是非直接缓冲区，返回false
+    // StringCharBuffer是非直接缓冲区 返回false
     public boolean isDirect() {
         return false;
     }
@@ -69,24 +69,24 @@ class StringCharBuffer extends CharBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 切片，截取旧缓冲区的【活跃区域】，作为新缓冲区的【原始区域】。两个缓冲区标记独立
+    // 切片 截取旧缓冲区的【活跃区域】 作为新缓冲区的【原始区域】。两个缓冲区标记独立
     public CharBuffer slice() {
         return new StringCharBuffer(str, -1, 0, this.remaining(), this.remaining(), offset + this.position());
     }
     
-    // 副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     public CharBuffer duplicate() {
         return new StringCharBuffer(str, markValue(), position(), limit(), capacity(), offset);
     }
     
-    // 只读副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 只读副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     public CharBuffer asReadOnlyBuffer() {
         return duplicate();
     }
     
-    // 副本，新缓冲区的【活跃区域】取自旧缓冲区【活跃区域】的[start，end)部分
+    // 副本 新缓冲区的【活跃区域】取自旧缓冲区【活跃区域】的[start end)部分
     public final CharBuffer subSequence(int start, int end) {
         try {
             int pos = position();
@@ -96,23 +96,23 @@ class StringCharBuffer extends CharBuffer {
         }
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
     /*▼ get ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 读取position+offset处的char，然后递增position
+    // 读取position+offset处的char 然后递增position
     public final char get() {
         return str.charAt(nextGetIndex() + offset);
     }
     
-    // 读取index+offset处的char（有越界检查）
+    // 读取index+offset处的char(有越界检查)
     public final char get(int index) {
         return str.charAt(checkIndex(index) + offset);
     }
     
-    // 读取index+offset处的char（无越界检查）
+    // 读取index+offset处的char(无越界检查)
     char getUnchecked(int index) {
         return str.charAt(index + offset);
     }
@@ -121,7 +121,7 @@ class StringCharBuffer extends CharBuffer {
     
     
     
-    /*▼ 只读缓冲区，禁止写入 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 只读缓冲区 禁止写入 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public final CharBuffer put(char c) {
         throw new ReadOnlyBufferException();
@@ -131,13 +131,13 @@ class StringCharBuffer extends CharBuffer {
         throw new ReadOnlyBufferException();
     }
     
-    /*▲ 只读缓冲区，禁止写入 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 只读缓冲区 禁止写入 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
     /*▼ 压缩 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 禁止压缩，因为禁止写入，压缩没意义
+    // 禁止压缩 因为禁止写入 压缩没意义
     public final CharBuffer compact() {
         throw new ReadOnlyBufferException();
     }
@@ -148,12 +148,12 @@ class StringCharBuffer extends CharBuffer {
     
     /*▼ 字节顺序 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回该缓冲区的字节序（本类的字节序与机器字平台相同）
+    // 返回该缓冲区的字节序(本类的字节序与机器字平台相同)
     public ByteOrder order() {
         return ByteOrder.nativeOrder();
     }
     
-    // 返回‘char’的字节序（此类中返回null）
+    // 返回‘char’的字节序(此类中返回null)
     ByteOrder charRegionOrder() {
         return null;
     }

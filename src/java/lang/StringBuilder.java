@@ -85,7 +85,7 @@ import java.io.Serializable;
  * @see java.lang.String
  * @since 1.5
  */
-// 非线程安全的字符序列，适合单线程下操作大量字符，内部实现为字节数组
+// 非线程安全的字符序列 适合单线程下操作大量字符 内部实现为字节数组
 public final class StringBuilder extends AbstractStringBuilder implements Serializable, Comparable<StringBuilder>, CharSequence {
     
     /** use serialVersionUID for interoperability */
@@ -159,7 +159,7 @@ public final class StringBuilder extends AbstractStringBuilder implements Serial
     /**
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
-    // 向StringBuilder末尾添加一个字符序列，该子序列取自字符序列s的[start, end)范围
+    // 向StringBuilder末尾添加一个字符序列 该子序列取自字符序列s的[start, end)范围
     @Override
     public StringBuilder append(CharSequence s, int start, int end) {
         super.append(s, start, end);
@@ -207,7 +207,7 @@ public final class StringBuilder extends AbstractStringBuilder implements Serial
         return this;
     }
     
-    // 向StringBuilder末尾添加一个子序列，该子序列取自字符数组s的[offset, offset+len)范围
+    // 向StringBuilder末尾添加一个子序列 该子序列取自字符数组s的[offset, offset+len)范围
     /**
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
@@ -319,7 +319,7 @@ public final class StringBuilder extends AbstractStringBuilder implements Serial
         return this;
     }
     
-    // 向StringBuilder的dstOffset索引处插入一个子序列，该子序列取自字符序列s的[start, end)范围
+    // 向StringBuilder的dstOffset索引处插入一个子序列 该子序列取自字符序列s的[start, end)范围
     /**
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
@@ -339,7 +339,7 @@ public final class StringBuilder extends AbstractStringBuilder implements Serial
         return this;
     }
     
-    // 向StringBuilder的index索引处插入一个子序列，该子序列取自字符序列str的[offset, offset+len)范围
+    // 向StringBuilder的index索引处插入一个子序列 该子序列取自字符序列str的[offset, offset+len)范围
     /**
      * @throws StringIndexOutOfBoundsException {@inheritDoc}
      */
@@ -463,7 +463,7 @@ public final class StringBuilder extends AbstractStringBuilder implements Serial
         return super.indexOf(str);
     }
     
-    // 返回子串str在当前主串StringBuilder中第一次出现的位置（从主串fromIndex处向后搜索）
+    // 返回子串str在当前主串StringBuilder中第一次出现的位置(从主串fromIndex处向后搜索)
     @Override
     public int indexOf(String str, int fromIndex) {
         return super.indexOf(str, fromIndex);
@@ -475,7 +475,7 @@ public final class StringBuilder extends AbstractStringBuilder implements Serial
         return super.lastIndexOf(str);
     }
     
-    // 返回子串str在当前主串StringBuilder中最后一次出现的位置（从主串fromIndex处向前搜索）
+    // 返回子串str在当前主串StringBuilder中最后一次出现的位置(从主串fromIndex处向前搜索)
     @Override
     public int lastIndexOf(String str, int fromIndex) {
         return super.lastIndexOf(str, fromIndex);

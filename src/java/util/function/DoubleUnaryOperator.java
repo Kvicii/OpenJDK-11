@@ -38,12 +38,12 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：DoubleUnaryOperator
+ * 函数式接口:DoubleUnaryOperator
  *
  * double一元操作
  *
- * 参数：double
- * 返回：double
+ * 参数:double
+ * 返回:double
  */
 @FunctionalInterface
 public interface DoubleUnaryOperator {
@@ -81,7 +81,7 @@ public interface DoubleUnaryOperator {
      * @throws NullPointerException if before is null
      * @see #andThen(DoubleUnaryOperator)
      */
-    // f1.compose(f2)：先执行f2，再执行f1
+    // f1.compose(f2):先执行f2 再执行f1
     default DoubleUnaryOperator compose(DoubleUnaryOperator before) {
         Objects.requireNonNull(before);
         return (double v) -> applyAsDouble(before.applyAsDouble(v));
@@ -101,7 +101,7 @@ public interface DoubleUnaryOperator {
      * @throws NullPointerException if after is null
      * @see #compose(DoubleUnaryOperator)
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default DoubleUnaryOperator andThen(DoubleUnaryOperator after) {
         Objects.requireNonNull(after);
         return (double t) -> after.applyAsDouble(applyAsDouble(t));

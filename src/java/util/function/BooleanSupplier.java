@@ -38,10 +38,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：BooleanSupplier
+ * 函数式接口:BooleanSupplier
  *
- * 参数：无参数
- * 返回：boolean
+ * 参数:无参数
+ * 返回:boolean
  */
 @FunctionalInterface
 public interface BooleanSupplier {

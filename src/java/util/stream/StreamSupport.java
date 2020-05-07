@@ -37,7 +37,7 @@ import java.util.function.Supplier;
  * @since 1.8
  */
 
-// 辅助类，用于创建流的源头阶段（HEAD）
+// 辅助类 用于创建流的源头阶段(HEAD)
 public final class StreamSupport {
     
     private StreamSupport() {
@@ -107,7 +107,7 @@ public final class StreamSupport {
      *
      * @see #stream(java.util.Spliterator, boolean)
      */
-    // 返回Stream的HEAD阶段，需要从supplier中提取Spliterator
+    // 返回Stream的HEAD阶段 需要从supplier中提取Spliterator
     public static <T> Stream<T> stream(Supplier<? extends Spliterator<T>> supplier, int characteristics, boolean parallel) {
         Objects.requireNonNull(supplier);
         return new ReferencePipeline.Head<>(supplier, StreamOpFlag.fromCharacteristics(characteristics), parallel);
@@ -174,7 +174,7 @@ public final class StreamSupport {
      *
      * @see #intStream(java.util.Spliterator.OfInt, boolean)
      */
-    // 返回IntStream的HEAD阶段，需要从supplier中提取Spliterator
+    // 返回IntStream的HEAD阶段 需要从supplier中提取Spliterator
     public static IntStream intStream(Supplier<? extends Spliterator.OfInt> supplier, int characteristics, boolean parallel) {
         return new IntPipeline.Head<>(supplier, StreamOpFlag.fromCharacteristics(characteristics), parallel);
     }
@@ -240,7 +240,7 @@ public final class StreamSupport {
      *
      * @see #longStream(java.util.Spliterator.OfLong, boolean)
      */
-    // 返回LongStream的HEAD阶段，需要从supplier中提取Spliterator
+    // 返回LongStream的HEAD阶段 需要从supplier中提取Spliterator
     public static LongStream longStream(Supplier<? extends Spliterator.OfLong> supplier, int characteristics, boolean parallel) {
         return new LongPipeline.Head<>(supplier, StreamOpFlag.fromCharacteristics(characteristics), parallel);
     }
@@ -306,7 +306,7 @@ public final class StreamSupport {
      *
      * @see #doubleStream(java.util.Spliterator.OfDouble, boolean)
      */
-    // 返回DoubleStream的HEAD阶段，需要从supplier中提取Spliterator
+    // 返回DoubleStream的HEAD阶段 需要从supplier中提取Spliterator
     public static DoubleStream doubleStream(Supplier<? extends Spliterator.OfDouble> supplier, int characteristics, boolean parallel) {
         return new DoublePipeline.Head<>(supplier, StreamOpFlag.fromCharacteristics(characteristics), parallel);
     }

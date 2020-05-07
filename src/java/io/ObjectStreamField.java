@@ -40,7 +40,7 @@ import java.lang.reflect.Field;
  * @see ObjectStreamClass
  * @since 1.2
  */
-// 代表可被序列化的字段。即指定哪些字段将参与序列化，并封装这些参与序列化的字段信息
+// 代表可被序列化的字段。即指定哪些字段将参与序列化 并封装这些参与序列化的字段信息
 public class ObjectStreamField implements Comparable<Object> {
     
     /** corresponding reflective field object, if any */
@@ -252,7 +252,7 @@ public class ObjectStreamField implements Comparable<Object> {
      *
      * REMIND: deprecate?
      */
-    // 返回字段签名，对于基本类型，返回null
+    // 返回字段签名 对于基本类型 返回null
     public String getTypeString() {
         return isPrimitive() ? null : getSignature();
     }

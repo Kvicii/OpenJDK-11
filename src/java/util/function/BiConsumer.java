@@ -42,10 +42,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：BiConsumer<T, U>
+ * 函数式接口:BiConsumer<T, U>
  *
- * 参数：T, U
- * 返回：void
+ * 参数:T, U
+ * 返回:void
  */
 @FunctionalInterface
 public interface BiConsumer<T, U> {
@@ -72,7 +72,7 @@ public interface BiConsumer<T, U> {
      *
      * @throws NullPointerException if {@code after} is null
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default BiConsumer<T, U> andThen(BiConsumer<? super T, ? super U> after) {
         Objects.requireNonNull(after);
         

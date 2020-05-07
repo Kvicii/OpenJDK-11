@@ -20,6 +20,6 @@ public class User {
     
     @Override
     public String toString() {
-        return "姓名：" + name + " ";
+        return "姓名:" + name + " ";
     }
 }

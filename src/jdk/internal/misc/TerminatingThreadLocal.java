@@ -33,13 +33,13 @@ import java.util.IdentityHashMap;
  * it has been initialized in the terminating thread (even if it was
  * initialized with a null value).
  */
-// ThreadLocal的又一个扩展。该ThreadLocal关联的值在线程结束前会被特殊处理，处理方式取决于回调方法threadTerminated(T value)
+// ThreadLocal的又一个扩展。该ThreadLocal关联的值在线程结束前会被特殊处理 处理方式取决于回调方法threadTerminated(T value)
 public class TerminatingThreadLocal<T> extends ThreadLocal<T> {
     
     /**
      * a per-thread registry of TerminatingThreadLocal(s) that have been registered but later not unregistered in a particular thread.
      */
-    // 关联了静态容器的ThreadLocal，该容器可供所有TerminatingThreadLocal对象共享，目的是让它们把自身注册进来
+    // 关联了静态容器的ThreadLocal 该容器可供所有TerminatingThreadLocal对象共享 目的是让它们把自身注册进来
     public static final ThreadLocal<Collection<TerminatingThreadLocal<?>>> REGISTRY = new ThreadLocal<>() {
         @Override
         protected Collection<TerminatingThreadLocal<?>> initialValue() {
@@ -51,7 +51,7 @@ public class TerminatingThreadLocal<T> extends ThreadLocal<T> {
      * Invokes the TerminatingThreadLocal's {@link #threadTerminated()} method
      * on all instances registered in current thread.
      */
-    // 在线程结束前，对TerminatingThreadLocal中静态容器内包含的所有ThreadLocal关联的值做一些收尾操作
+    // 在线程结束前 对TerminatingThreadLocal中静态容器内包含的所有ThreadLocal关联的值做一些收尾操作
     public static void threadTerminated() {
         for(TerminatingThreadLocal<?> ttl : REGISTRY.get()) {
             ttl._threadTerminated();
@@ -78,14 +78,14 @@ public class TerminatingThreadLocal<T> extends ThreadLocal<T> {
         REGISTRY.get().remove(tl);
     }
     
-    // 为该ThreadLocal关联value值，并将其自身注册到静态容器
+    // 为该ThreadLocal关联value值 并将其自身注册到静态容器
     @Override
     public void set(T value) {
         super.set(value);
         register(this);
     }
     
-    // 移除ThreadLocal关联的键值对，并将其从静态容器中一并移除
+    // 移除ThreadLocal关联的键值对 并将其从静态容器中一并移除
     @Override
     public void remove() {
         super.remove();
@@ -100,7 +100,7 @@ public class TerminatingThreadLocal<T> extends ThreadLocal<T> {
      * @param value current thread's value of this thread-local variable
      *              (may be null but only if null value was explicitly initialized)
      */
-    // 对value值做一些收尾操作，具体过程由子类实现
+    // 对value值做一些收尾操作 具体过程由子类实现
     protected void threadTerminated(T value) {
     }
     

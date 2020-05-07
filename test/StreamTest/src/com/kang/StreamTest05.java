@@ -19,6 +19,6 @@ public class StreamTest05 {
             .peek(x->System.out.println(x+" "))
             .toArray();
         
-        System.out.println("最后输出："+Arrays.toString(is));
+        System.out.println("最后输出:"+Arrays.toString(is));
     }
 }

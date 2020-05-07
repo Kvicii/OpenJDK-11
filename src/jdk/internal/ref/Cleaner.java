@@ -57,7 +57,7 @@ import java.security.PrivilegedAction;
 /*
  * 虚引用清理器(非公开)
  *
- * 虚引用的子类，用作清理器。当虚引用被回收时，在Reference中回调此类的清理功能。
+ * 虚引用的子类 用作清理器。当虚引用被回收时 在Reference中回调此类的清理功能。
  * 一个程序可以有多个Cleaner。多个Cleaner组成了一个双向链表。
  */
 public class Cleaner extends PhantomReference<Object> {
@@ -66,7 +66,7 @@ public class Cleaner extends PhantomReference<Object> {
      * Nothing will ever be placed on this queue since the reference handler invokes cleaners explicitly.
      *
      * 声明此字段的原因是虚引用构造方法必须使用一个ReferenceQueue参数
-     * 实际上，被GC回收的对象，其相应的"虚引用清理器"不会被加入到此队列中。
+     * 实际上 被GC回收的对象 其相应的"虚引用清理器"不会被加入到此队列中。
      * 可参见Reference类的processPendingReferences()方法。
      */
     private static final ReferenceQueue<Object> dummyQueue = new ReferenceQueue<>();
@@ -97,7 +97,7 @@ public class Cleaner extends PhantomReference<Object> {
      *
      * @return The new cleaner
      */
-    // 创建一个Cleaner，并将其添加到双向链表中
+    // 创建一个Cleaner 并将其添加到双向链表中
     public static Cleaner create(Object ob, Runnable thunk) {
         if(thunk == null)
             return null;
@@ -141,9 +141,9 @@ public class Cleaner extends PhantomReference<Object> {
     /**
      * Runs this cleaner, if it has not been run before.
      */
-    // 对追踪对象进行清理，在Reference类中完成
+    // 对追踪对象进行清理 在Reference类中完成
     public void clean() {
-        // 已移除的不再执行其功能，保证每个Cleaner只发挥一次作用
+        // 已移除的不再执行其功能 保证每个Cleaner只发挥一次作用
         if(!remove(this)) {
             return;
         }

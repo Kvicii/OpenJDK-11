@@ -39,8 +39,8 @@ import java.util.function.Consumer;
 // 存储GC之后报废的Reference
 public class ReferenceQueue<T> {
     
-    static final ReferenceQueue<Object> NULL = new Null();      // 此处代表Reference没有关联的ReferenceQueue，无法入队
-    static final ReferenceQueue<Object> ENQUEUED = new Null();  // 此处代表Reference已经在队列中，无法再入队
+    static final ReferenceQueue<Object> NULL = new Null();      // 此处代表Reference没有关联的ReferenceQueue 无法入队
+    static final ReferenceQueue<Object> ENQUEUED = new Null();  // 此处代表Reference已经在队列中 无法再入队
     
     private final Lock lock = new Lock();
     
@@ -104,7 +104,7 @@ public class ReferenceQueue<T> {
      *
      * @throws InterruptedException If the wait is interrupted
      */
-    // 从ReferenceQueue中删除并返回一个Reference（如果没有就陷入阻塞，直到队列里有引用就取出）
+    // 从ReferenceQueue中删除并返回一个Reference(如果没有就陷入阻塞 直到队列里有引用就取出)
     public Reference<? extends T> remove() throws InterruptedException {
         return remove(0);
     }
@@ -126,7 +126,7 @@ public class ReferenceQueue<T> {
      * @throws IllegalArgumentException If the value of the timeout argument is negative
      * @throws InterruptedException     If the timeout wait is interrupted
      */
-    // 轮询，在指定时间内，直到找到一个非空的Reference才返回
+    // 轮询 在指定时间内 直到找到一个非空的Reference才返回
     public Reference<? extends T> remove(long timeout) throws IllegalArgumentException, InterruptedException {
         if(timeout < 0) {
             throw new IllegalArgumentException("Negative timeout value");

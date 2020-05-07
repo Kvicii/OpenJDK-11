@@ -97,32 +97,32 @@ import java.util.stream.StreamSupport;
  */
 
 /*
- * 从JDK9开始，String对象不再以char[]形式存储，而是以名为value的byte[]形式存储。
+ * 从JDK9开始 String对象不再以char[]形式存储 而是以名为value的byte[]形式存储。
  *
- * value有一个名为coder的编码标记，该标记有两种取值：LATIN1和UTF-16（UTF-16使用大端法还是小端法取决于系统）。
+ * value有一个名为coder的编码标记 该标记有两种取值:LATIN1和UTF-16(UTF-16使用大端法还是小端法取决于系统)。
  *
- * Java中存储String的byte数组的默认编码是LATIN1（即ISO-8859-1）和UTF16。
+ * Java中存储String的byte数组的默认编码是LATIN1(即ISO-8859-1)和UTF16。
  *
- * String由一系列Unicode符号组成，根据这些符号的Unicode编码范围[0x0, 0x10FFFF]，将其分为两类：
- *   符号1. 在[0x0, 0xFF]范围内的符号（属于LATIN1/ISO_8859_1字符集范围）
+ * String由一系列Unicode符号组成 根据这些符号的Unicode编码范围[0x0, 0x10FFFF] 将其分为两类:
+ *   符号1. 在[0x0, 0xFF]范围内的符号(属于LATIN1/ISO_8859_1字符集范围)
  *   符号2. 在其他范围内的Unicode符号
- * 对于第一类符号，其二进制形式仅用一个byte即可容纳，对于第二类符号，其二进制形式需用两个或四个UTF-16形式的byte存储。
+ * 对于第一类符号 其二进制形式仅用一个byte即可容纳 对于第二类符号 其二进制形式需用两个或四个UTF-16形式的byte存储。
  *
- * 由此，JDK内部将String的存储方式也分为两类：
- *   第一类：String只包含符号1。这种类型的String里，每个符号使用一个byte存储。coder==LATIN1
- *   第二类：String包含第二类符号。这种类型的String里，每个符号使用两个或四个UTF-16形式的byte存储（即使遇到符号1也使用两个byte存储）。coder==UTF16
+ * 由此 JDK内部将String的存储方式也分为两类:
+ *   第一类:String只包含符号1。这种类型的String里 每个符号使用一个byte存储。coder==LATIN1
+ *   第二类:String包含第二类符号。这种类型的String里 每个符号使用两个或四个UTF-16形式的byte存储(即使遇到符号1也使用两个byte存储)。coder==UTF16
  *
- * 为了便于后续描述这两类字符串，此处将第一类字符串称为LATIN1-String，将第二类字符串称为UTF16-String。
+ * 为了便于后续描述这两类字符串 此处将第一类字符串称为LATIN1-String 将第二类字符串称为UTF16-String。
  *
- * 另注：
- * 鉴于windows中以小端法存储数据，所以存储String的字节数组value也以UTF16小端法显示。
- * 在后续的动态操作中，会将String转换为其他的编码（例如UTF_8、ISO_8859_1、US_ASCII、GBK等）形式。
- * 如果不另指定编码形式，则以JVM的当前默认的字符集为依据去转换String。
+ * 另注:
+ * 鉴于windows中以小端法存储数据 所以存储String的字节数组value也以UTF16小端法显示。
+ * 在后续的动态操作中 会将String转换为其他的编码(例如UTF_8、ISO_8859_1、US_ASCII、GBK等)形式。
+ * 如果不另指定编码形式 则以JVM的当前默认的字符集为依据去转换String。
  *
- * ★ 关于大端小端：
+ * ★ 关于大端小端:
  * 1.char永远是UTF-16大端
- * 2.String（内置的value）永远取决于系统，在windows上是UTF-16小端
- * 3 String外面的byte[]，大小端取决于当时转换中所用的编码格式
+ * 2.String(内置的value)永远取决于系统 在windows上是UTF-16小端
+ * 3 String外面的byte[] 大小端取决于当时转换中所用的编码格式
  */
 public final class String implements Serializable, Comparable<String>, CharSequence {
     
@@ -169,12 +169,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * The static initialization block is used to set the value here to communicate that this static final field is not statically foldable,
      * and to avoid any possible circular dependency during vm initialization.
      */
-    // 如果禁用字符串压缩，则其字符始终以UTF-16编码，默认设置为true
+    // 如果禁用字符串压缩 则其字符始终以UTF-16编码 默认设置为true
     static final boolean COMPACT_STRINGS;
     
     /*
-     * Latin1是ISO-8859-1的别名，有些环境下写作Latin-1。ISO-8859-1编码是单字节编码，向下兼容ASCII。
-     * 其编码范围是0x00-0xFF，0x00-0x7F之间完全和ASCII一致，0x80-0x9F之间是控制字符，0xA0-0xFF之间是文字符号。
+     * Latin1是ISO-8859-1的别名 有些环境下写作Latin-1。ISO-8859-1编码是单字节编码 向下兼容ASCII。
+     * 其编码范围是0x00-0xFF 0x00-0x7F之间完全和ASCII一致 0x80-0x9F之间是控制字符 0xA0-0xFF之间是文字符号。
      */
     @Native
     static final byte LATIN1 = 0;
@@ -205,14 +205,14 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * {@link Stable} is safe here, because value is never null.
      */
     /*
-     * 以字节形式存储String中的char，即存储码元
+     * 以字节形式存储String中的char 即存储码元
      *
-     * 如果是纯英文字符，则采用压缩存储，一个byte代表一个char。
-     * 出现汉字等符号后，汉字可占多个byte，且一个英文字符也将占有2个byte。
+     * 如果是纯英文字符 则采用压缩存储 一个byte代表一个char。
+     * 出现汉字等符号后 汉字可占多个byte 且一个英文字符也将占有2个byte。
      *
      * windows上使用小端法存字符串。
-     * 如果输入是：String s = "\u56DB\u6761\uD869\uDEA5"; // "四条𪚥"，"𪚥"在UTF16中占4个字节
-     * 则value中存储（十六进制）：[DB, 56, 61, 67, 69, D8, A5, DE]
+     * 如果输入是:String s = "\u56DB\u6761\uD869\uDEA5"; // "四条𪚥" "𪚥"在UTF16中占4个字节
+     * 则value中存储(十六进制):[DB, 56, 61, 67, 69, D8, A5, DE]
      */
     @Stable
     private final byte[] value;
@@ -223,20 +223,20 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @implNote This field is trusted by the VM, and is a subject to constant folding if String instance is constant.
      * Overwriting this field after construction will cause problems.
      */
-    // 当前字符串的编码：LATIN1(0)或UTF16(1)
+    // 当前字符串的编码:LATIN1(0)或UTF16(1)
     private final byte coder;
     
     /**
      * Cache the hash code for the string
      */
-    // 当前字符串哈希码，初始值默认为0
+    // 当前字符串哈希码 初始值默认为0
     private int hash; // Default to 0
     
     static {
         /*
-         * 默认情形下，虚拟机会开启“紧凑字符串”选项，即令COMPACT_STRINGS = true。
+         * 默认情形下 虚拟机会开启“紧凑字符串”选项 即令COMPACT_STRINGS = true。
          * 可以在虚拟机参数上设置-XX:-CompactStrings来关闭“紧凑字符串”选项。
-         * 如果COMPACT_STRINGS == true，则String会有LATIN1或UTF16两种存储形式。否则，只使用UTF16形式。
+         * 如果COMPACT_STRINGS == true 则String会有LATIN1或UTF16两种存储形式。否则 只使用UTF16形式。
          */
         COMPACT_STRINGS = true;
     }
@@ -271,7 +271,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param original A {@code String}
      */
-    // ▶ 2 构造String的副本（哈希值都一样）
+    // ▶ 2 构造String的副本(哈希值都一样)
     @HotSpotIntrinsicCandidate
     public String(String original) {
         this.value = original.value;
@@ -285,7 +285,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @param buffer A {@code StringBuffer}
      */
-    // ▶ 2-1 构造SB的副本（哈希值都一样）
+    // ▶ 2-1 构造SB的副本(哈希值都一样)
     public String(StringBuffer buffer) {
         this(buffer.toString());
     }
@@ -319,7 +319,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         }
         
         this.coder = UTF16;
-        // 将value中的char批量转换为UTF16-String内部的字节，并返回
+        // 将value中的char批量转换为UTF16-String内部的字节 并返回
         this.value = StringUTF16.toBytes(value, off, len);
     }
     
@@ -365,10 +365,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * or {@code offset} is greater than {@code bytes.length - length}
      * @since 1.1
      */
-    // ▶ 4 以JVM默认字符集格式解析byte[]，进而构造String
+    // ▶ 4 以JVM默认字符集格式解析byte[] 进而构造String
     public String(byte bytes[], int offset, int length) {
         checkBoundsOffCount(offset, length, bytes.length);
-        // 以JVM默认字符集格式解码byte[]，返回结果集
+        // 以JVM默认字符集格式解码byte[] 返回结果集
         StringCoding.Result ret = StringCoding.decode(bytes, offset, length);
         this.value = ret.value;
         this.coder = ret.coder;
@@ -386,7 +386,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 1.1
      */
-    // ▶ 4-1 以JVM默认字符集格式解析byte[]，进而构造String
+    // ▶ 4-1 以JVM默认字符集格式解析byte[] 进而构造String
     public String(byte[] bytes) {
         this(bytes, 0, bytes.length);
     }
@@ -408,12 +408,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * or {@code offset} is greater than {@code bytes.length - length}
      * @since 1.1
      */
-    // ▶ 5 以charsetName格式解析byte[]，进而构造String
+    // ▶ 5 以charsetName格式解析byte[] 进而构造String
     public String(byte bytes[], int offset, int length, String charsetName) throws UnsupportedEncodingException {
         if(charsetName == null)
             throw new NullPointerException("charsetName");
         checkBoundsOffCount(offset, length, bytes.length);
-        // 以charsetName格式解析byte[]，返回结果集
+        // 以charsetName格式解析byte[] 返回结果集
         StringCoding.Result ret = StringCoding.decode(charsetName, bytes, offset, length);
         this.value = ret.value;
         this.coder = ret.coder;
@@ -433,7 +433,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @throws UnsupportedEncodingException If the named charset is not supported
      * @since 1.1
      */
-    // ▶ 5-1 以charsetName格式解析byte[]，进而构造String
+    // ▶ 5-1 以charsetName格式解析byte[] 进而构造String
     public String(byte bytes[], String charsetName) throws UnsupportedEncodingException {
         this(bytes, 0, bytes.length, charsetName);
     }
@@ -455,12 +455,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * or {@code offset} is greater than {@code bytes.length - length}
      * @since 1.6
      */
-    // ▶ 6 以charset格式解码byte[]，返回结果集
+    // ▶ 6 以charset格式解码byte[] 返回结果集
     public String(byte bytes[], int offset, int length, Charset charset) {
         if(charset == null)
             throw new NullPointerException("charset");
         checkBoundsOffCount(offset, length, bytes.length);
-        // 以charset格式解码byte[]，返回结果集
+        // 以charset格式解码byte[] 返回结果集
         StringCoding.Result ret = StringCoding.decode(charset, bytes, offset, length);
         this.value = ret.value;
         this.coder = ret.coder;
@@ -479,7 +479,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 1.6
      */
-    // ▶ 6-1 以charset格式解码byte[]，返回结果集
+    // ▶ 6-1 以charset格式解码byte[] 返回结果集
     public String(byte bytes[], Charset charset) {
         this(bytes, 0, bytes.length, charset);
     }
@@ -497,7 +497,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             this.value = Arrays.copyOfRange(val, 0, length);
         } else {
             if(COMPACT_STRINGS) {
-                // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后，再返回
+                // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后 再返回
                 byte[] buf = StringUTF16.compress(val, 0, length);
                 if(buf != null) {
                     this.coder = LATIN1;
@@ -540,7 +540,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * or {@code offset} is greater than {@code codePoints.length - count}
      * @since 1.5
      */
-    // ▶ 8 将codePoints中的一组Unicode值批量转换为String内部的字节，再包装为String
+    // ▶ 8 将codePoints中的一组Unicode值批量转换为String内部的字节 再包装为String
     public String(int[] codePoints, int offset, int count) {
         // 范围检查
         checkBoundsOffCount(offset, count, codePoints.length);
@@ -552,7 +552,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         }
         // 可压缩的字符串
         if(COMPACT_STRINGS) {
-            // 将codePoints中的一组Unicode值批量转换为LATIN1-String内部的字节，再返回
+            // 将codePoints中的一组Unicode值批量转换为LATIN1-String内部的字节 再返回
             byte[] val = StringLatin1.toBytes(codePoints, offset, count);
             if(val != null) {
                 this.coder = LATIN1;
@@ -561,7 +561,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             }
         }
         this.coder = UTF16;
-        // 将codePoints中的一组Unicode值批量转换为UTF16-String内部的字节，再返回
+        // 将codePoints中的一组Unicode值批量转换为UTF16-String内部的字节 再返回
         this.value = StringUTF16.toBytes(codePoints, offset, count);
     }
     
@@ -610,7 +610,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             // 创建长度为2*len的字节数组
             byte[] val = StringUTF16.newBytesFor(count);
             for(int i = 0; i < count; i++) {
-                // 将形参三的两个低字节转换为UTF16-String内部的字节，存入val
+                // 将形参三的两个低字节转换为UTF16-String内部的字节 存入val
                 StringUTF16.putChar(val, i, hibyte | (ascii[offset++] & 0xff));
             }
             this.value = val;
@@ -663,7 +663,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 1.1
      */
-    // 编码String，返回JVM默认字符集格式的byte[]
+    // 编码String 返回JVM默认字符集格式的byte[]
     public byte[] getBytes() {
         // coder指示了String是LATIN1-String还是UTF16-string。
         return StringCoding.encode(coder(), value);
@@ -682,7 +682,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @throws UnsupportedEncodingException If the named charset is not supported
      * @since 1.1
      */
-    // 编码String，返回charsetName字符集格式的byte[]
+    // 编码String 返回charsetName字符集格式的byte[]
     public byte[] getBytes(String charsetName) throws UnsupportedEncodingException {
         if(charsetName == null)
             throw new NullPointerException();
@@ -702,7 +702,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 1.6
      */
-    // 编码String，返回charset字符集格式的byte[]
+    // 编码String 返回charset字符集格式的byte[]
     public byte[] getBytes(Charset charset) {
         if(charset == null)
             throw new NullPointerException();
@@ -740,19 +740,19 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @deprecated This method does not properly convert characters into bytes.
      * As of JDK&nbsp;1.1, the preferred way to do this is via the {@link #getBytes()} method, which uses the platform's default charset.
      *
-     * ※ 已过时，设计有缺陷
+     * ※ 已过时 设计有缺陷
      *
-     * 编码String，只保留原char中的低byte。
-     * 这意味着，只能正确处理[0x00, 0xFF]范围内的字符，对于超出范围的字节，则将其抛弃。
+     * 编码String 只保留原char中的低byte。
+     * 这意味着 只能正确处理[0x00, 0xFF]范围内的字符 对于超出范围的字节 则将其抛弃。
      *
-     * 例如：
+     * 例如:
      * byte[] value = new byte[4]{0x12,0x34, 0x56,0x78};
      * byte[] dst = new byte[4];
-     * s.getBytes(value, 0, 2, dst, 0);  // 字节数组dst：[34, 78]
+     * s.getBytes(value, 0, 2, dst, 0);  // 字节数组dst:[34, 78]
      *
-     * 只有原字节对表示的char在[0x00, 0xFF]范围内，才能得到一个正确的压缩
+     * 只有原字节对表示的char在[0x00, 0xFF]范围内 才能得到一个正确的压缩
      */
-    // ※ 已过时，设计有缺陷
+    // ※ 已过时 设计有缺陷
     @Deprecated(since = "1.1")
     public void getBytes(int srcBegin, int srcEnd, byte dst[], int dstBegin) {
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
@@ -783,7 +783,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         if(coder() == coder) {
             System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
         } else {
-            /* 如果两个coder不同，则将源字符串当做LATIN-String对待 */
+            /* 如果两个coder不同 则将源字符串当做LATIN-String对待 */
             // 从LATIN-String内部的字节转为UTF16-String内部的字节
             StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
         }
@@ -976,12 +976,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @return a string of length {@code 1} containing as its single character the argument {@code c}.
      */
     public static String valueOf(char c) {
-        // 将char转换为LATIN1-String内部的字节，并返回
+        // 将char转换为LATIN1-String内部的字节 并返回
         if(COMPACT_STRINGS && StringLatin1.canEncode(c)) {
             return new String(StringLatin1.toBytes(c), LATIN1);
         }
         
-        // 将char转换为UTF16-String内部的字节，并返回
+        // 将char转换为UTF16-String内部的字节 并返回
         return new String(StringUTF16.toBytes(c), UTF16);
     }
     
@@ -1054,9 +1054,9 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @throws IllegalArgumentException if the specified {@code codePoint} is not a {@linkplain Character#isValidCodePoint valid Unicode code point}.
      */
-    // 转换Unicode符号的codePoint为字节表示，再包装到String返回
+    // 转换Unicode符号的codePoint为字节表示 再包装到String返回
     static String valueOfCodePoint(int codePoint) {
-        // 先将码点值编码为byte数组，再将其解码为String序列
+        // 先将码点值编码为byte数组 再将其解码为String序列
         
         if(COMPACT_STRINGS && StringLatin1.canEncode(codePoint)) {
             // 解码单字节符号
@@ -1132,7 +1132,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @return the index of the first occurrence of the character in the character sequence represented by this object that is greater
      * than or equal to {@code fromIndex}, or {@code -1} if the character does not occur.
      */
-    // 返回ch在String的字节值value中第一次出现的下标（从某个索引开始搜索）
+    // 返回ch在String的字节值value中第一次出现的下标(从某个索引开始搜索)
     public int indexOf(int ch, int fromIndex) {
         return isLatin1() ? StringLatin1.indexOf(value, ch, fromIndex) : StringUTF16.indexOf(value, ch, fromIndex);
     }
@@ -1242,7 +1242,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @return the index of the first occurrence of the specified substring,
      * starting at the specified index, or {@code -1} if there is no such occurrence.
      */
-    // 返回子串str在当前主串String中第一次出现的下标（从主串fromIndex处向后搜索）
+    // 返回子串str在当前主串String中第一次出现的下标(从主串fromIndex处向后搜索)
     public int indexOf(String str, int fromIndex) {
         return indexOf(value, coder(), length(), str, fromIndex);
     }
@@ -1257,7 +1257,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param tgtStr    the characters being searched for.
      * @param fromIndex the index to begin searching from.
      */
-    // 返回子串tgstr在主串src中第一次出现的下标（从主串fromIndex处向后搜索）
+    // 返回子串tgstr在主串src中第一次出现的下标(从主串fromIndex处向后搜索)
     static int indexOf(byte[] src, byte srcCoder, int srcCount, String tgtStr, int fromIndex) {
         byte[] tgt = tgtStr.value;
         byte tgtCoder = tgtStr.coder();
@@ -1283,7 +1283,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         if(srcCoder == LATIN1) {    //  && tgtCoder == UTF16
             return -1;
         }
-        // 比对UTF16-String主串src和Latin1子串tgt，返回子串str在主串src中第一次出现的位置，加入了范围检查
+        // 比对UTF16-String主串src和Latin1子串tgt 返回子串str在主串src中第一次出现的位置 加入了范围检查
         return StringUTF16.indexOfLatin1(src, srcCount, tgt, tgtCount, fromIndex);
     }
     
@@ -1301,7 +1301,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return the index of the last occurrence of the specified substring, or {@code -1} if there is no such occurrence.
      */
-    // 返回从某处开始，子串str在主串src中最后一次出现的下标
+    // 返回从某处开始 子串str在主串src中最后一次出现的下标
     public int lastIndexOf(String str) {
         return lastIndexOf(str, length());
     }
@@ -1322,7 +1322,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @return the index of the last occurrence of the specified substring,
      * searching backward from the specified index, or {@code -1} if there is no such occurrence.
      */
-    // 返回子串str在当前主串String中最后一次出现的下标（从主串fromIndex处向前搜索）
+    // 返回子串str在当前主串String中最后一次出现的下标(从主串fromIndex处向前搜索)
     public int lastIndexOf(String str, int fromIndex) {
         return lastIndexOf(value, coder(), length(), str, fromIndex);
     }
@@ -1336,7 +1336,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @param srcCount  count of the source string.
      * @param fromIndex the index to begin searching from.
      */
-    // 返回子串tgtStr在主串src中最后一次出现的下标（从主串fromIndex处向前搜索）
+    // 返回子串tgtStr在主串src中最后一次出现的下标(从主串fromIndex处向前搜索)
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount, String tgtStr, int fromIndex) {
         byte[] tgt = tgtStr.value;
         byte tgtCoder = tgtStr.coder();
@@ -1362,7 +1362,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         if(srcCoder == LATIN1) {    // && tgtCoder == UTF16
             return -1;
         }
-        // 比对UTF16-String主串src和Latin1子串tgt，返回子串str在主串src中最后一次出现的位置
+        // 比对UTF16-String主串src和Latin1子串tgt 返回子串str在主串src中最后一次出现的位置
         return StringUTF16.lastIndexOfLatin1(src, srcCount, tgt, tgtCount, fromIndex);
     }
     
@@ -1453,38 +1453,38 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @since 1.5
      *
      *
-     * 此方法用来返回索引index处码元的码点值，如果该码元位于Unicode编码的高代理区，则需返回完整的Unicode编码
+     * 此方法用来返回索引index处码元的码点值 如果该码元位于Unicode编码的高代理区 则需返回完整的Unicode编码
      *
      * Java字符编码中涉及到的码点跟码元跟Unicode中涉及到的概率略有不同
      *
-     * 不是每个码点值都代表一个Unicode符号（打印在屏幕上与预期的效果一致）：
-     * 对于英文符号，一个Unicode符号可用一个字节表示，如"0" -->"\u0030"，这就是它的码点值
-     * 常用中文符号，一个Unicode符号可用两个字节表示，如"哈"-->"\u54c8"，这就是它的码点值
-     * 一些生僻汉字，一个“合法符号”可用四个字节表示，如"𫠝"-->"\uD86E\uDC1D"，这不是它的码点值，它的码点值需要再次计算
+     * 不是每个码点值都代表一个Unicode符号(打印在屏幕上与预期的效果一致):
+     * 对于英文符号 一个Unicode符号可用一个字节表示 如"0" -->"\u0030" 这就是它的码点值
+     * 常用中文符号 一个Unicode符号可用两个字节表示 如"哈"-->"\u54c8" 这就是它的码点值
+     * 一些生僻汉字 一个“合法符号”可用四个字节表示 如"𫠝"-->"\uD86E\uDC1D" 这不是它的码点值 它的码点值需要再次计算
      *
-     * 注：对于4个字节的字符，需要将4个字节进行特殊转换才能求得码点值
+     * 注:对于4个字节的字符 需要将4个字节进行特殊转换才能求得码点值
      *
-     * 补充：
-     * 一个码元是两个字节组成的char（UTF-16）
-     * 一个码元不一定是一个Unicode符号，比如四字节字符
-     * 同理，一个char也不一定能表示一个Unicode符号，比如四字节字符
+     * 补充:
+     * 一个码元是两个字节组成的char(UTF-16)
+     * 一个码元不一定是一个Unicode符号 比如四字节字符
+     * 同理 一个char也不一定能表示一个Unicode符号 比如四字节字符
      *
-     * Unicode字符集划分为17个区域：
-     * [U+ 0000 ~ U+  FFFF]：基本平面（1个区域）
-     * [U+10000 ~ U+10FFFF]：其他平面（16个区域）
+     * Unicode字符集划分为17个区域:
+     * [U+ 0000 ~ U+  FFFF]:基本平面(1个区域)
+     * [U+10000 ~ U+10FFFF]:其他平面(16个区域)
      *
      * Unicode值小于0x10000的符号用等于该值的16位整数来表示
      * Unicode值大于0x10000的符号需要拼凑
      *
-     * 基本平面区域内，有个特殊的代理区：[U+D800 ~ U+DFFF]。
-     * 代理区中单个16-bit单元无意义，两个16-bit单元合一起才有意义。
-     * 代理区分为两段：
+     * 基本平面区域内 有个特殊的代理区:[U+D800 ~ U+DFFF]。
+     * 代理区中单个16-bit单元无意义 两个16-bit单元合一起才有意义。
+     * 代理区分为两段:
      *      高代理区             低代理区
      * U+D800 ---- U+DBFF | 0xDC00 ---- 0xDFFF
      *      前导代理             后尾代理
-     * 取一个高代理区的16-bit单元和一个低代理区的16-bit单元，就合成了一个大于0x10000的符号
+     * 取一个高代理区的16-bit单元和一个低代理区的16-bit单元 就合成了一个大于0x10000的符号
      *
-     * 具体转换规则：
+     * 具体转换规则:
      * 1.基本平面代理区的码点值 ---> 其他平面的字符X的码点值
      *   X = 0x10000 + (高代理-0xD800)<<10 + 低代理-0xDC00
      *
@@ -1493,20 +1493,20 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *   2>. 高代理 = Y>>10 + 0xD800     // 右移了10位
      *   3>. 低代理 = Y&0x3FF + 0xDC00  // 保留低10位
      *
-     * 注：
-     * 如果给出的索引位置不合适，则可能无法得到预期的码点
+     * 注:
+     * 如果给出的索引位置不合适 则可能无法得到预期的码点
      *
-     * 举例，在多字节字符中：
+     * 举例 在多字节字符中:
      * 哈 = "\u54c8";
      * 𫠝 = "\uD86E\uDC1D";
-     * 对于：
+     * 对于:
      * String s = "\u54c8\uD86E\uDC1D\u54c8";
      * s.codePointAt(0) == "\u54c8"的Unicode值        // 哈
      * s.codePointAt(1) == "\uD86E\uDC1D"的Unicode值  // 𫠝
      * s.codePointAt(2) == "\uDC1D"的Unicode值        // ?
      * s.codePointAt(3) == "\u54c8"                   // 哈
      */
-    // 返回String中某处符号（一字节/双字节/四字节）的Unicode编码（从前到后试探）
+    // 返回String中某处符号(一字节/双字节/四字节)的Unicode编码(从前到后试探)
     public int codePointAt(int index) {
         // 可以用压缩的Latin1字符集表示
         if(isLatin1()) {
@@ -1514,11 +1514,11 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             // 返回单字节符号码点
             return value[index] & 0xff;
         }
-        // 计算码元（char）数量
+        // 计算码元(char)数量
         int length = value.length >> 1;
         checkIndex(index, length);
         
-        // 返回UTF16-String中某处符号（双字节/四字节）的Unicode编码
+        // 返回UTF16-String中某处符号(双字节/四字节)的Unicode编码
         return StringUTF16.codePointAt(value, index, length);
     }
     
@@ -1538,20 +1538,20 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @throws IndexOutOfBoundsException if the {@code index} argument is less than 1 or greater than the length of this string.
      * @since 1.5
      *
-     * 返回索引index-1处码元的码点值，如果该码元位于Unicode编码的低代理区，则需返回完整的Unicode编码
+     * 返回索引index-1处码元的码点值 如果该码元位于Unicode编码的低代理区 则需返回完整的Unicode编码
      *
-     * 如果索引位置不合适，则之前这个码点可能不能显示为正确的字符。
-     * 举例，在多字节字符中：
+     * 如果索引位置不合适 则之前这个码点可能不能显示为正确的字符。
+     * 举例 在多字节字符中:
      * 哈 = "\u54c8";
      * 𫠝 = "\uD86E\uDC1D";
-     * 对于：
+     * 对于:
      * String s = "\u54c8\uD86E\uDC1D\u54c8";
      * s.codePointBefore(1) == "\u54c8"         // 哈
-     * s.codePointBefore(2) == "\uD86E"         // ? （索引落在了高代理区）
-     * s.codePointBefore(3) == "\uD86E\uDC1D"   // 𫠝（索引落在了低代理区）
+     * s.codePointBefore(2) == "\uD86E"         // ? (索引落在了高代理区)
+     * s.codePointBefore(3) == "\uD86E\uDC1D"   // 𫠝(索引落在了低代理区)
      * s.codePointBefore(4) == "\u54c8"         // 哈
      */
-    // 返回String中某处(index-1)符号的Unicode编码（从后往前试探）
+    // 返回String中某处(index-1)符号的Unicode编码(从后往前试探)
     public int codePointBefore(int index) {
         int i = index - 1;
         if(i < 0 || i >= length()) {
@@ -1580,7 +1580,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @since 1.5
      *
      * 返回指定码元范围内存在多少个Unicode符号
-     * 例如，求整个String内的Unicode符号个数：
+     * 例如 求整个String内的Unicode符号个数:
      *   codePointCount(0, s.length())
      */
     // 统计String中指定码元范围内存在多少个Unicode符号
@@ -1612,7 +1612,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * 返回index偏移codePointOffset个Unicode符号后新的索引值
      * codePointOffset的正负决定了偏移方向
      *
-     * 考虑多字节字符：
+     * 考虑多字节字符:
      * String s = "\u54c8\uD86E\uDC1D\u54c8";   // \uD86E\uDC1D代表一个Unicode符号
      * s.offsetByCodePoints(0, 1) == 1
      * s.offsetByCodePoints(0, 2) == 3
@@ -1685,7 +1685,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see String#toUpperCase(Locale)
      * @since 1.1
      */
-    // 小写转换，需要指定语言环境
+    // 小写转换 需要指定语言环境
     public String toLowerCase(Locale locale) {
         return isLatin1()
             ? StringLatin1.toLowerCase(this, value, locale)
@@ -1707,7 +1707,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @see String#toLowerCase(Locale)
      */
-    // 小写转换，本地语言环境
+    // 小写转换 本地语言环境
     public String toLowerCase() {
         return toLowerCase(Locale.getDefault());
     }
@@ -1767,7 +1767,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see String#toLowerCase(Locale)
      * @since 1.1
      */
-    // 大写转换，需要指定语言环境
+    // 大写转换 需要指定语言环境
     public String toUpperCase(Locale locale) {
         return isLatin1()
             ? StringLatin1.toUpperCase(this, value, locale)
@@ -1789,7 +1789,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @see String#toUpperCase(Locale)
      */
-    // 大写转换，大写，本地语言环境
+    // 大写转换 大写 本地语言环境
     public String toUpperCase() {
         return toUpperCase(Locale.getDefault());
     }
@@ -1815,7 +1815,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @throws IndexOutOfBoundsException if {@code beginIndex} is negative or larger than the length of this {@code String} object.
      */
-    // 截取[beginIndex, len)范围内的子串，按Unicode符号而非char截取
+    // 截取[beginIndex, len)范围内的子串 按Unicode符号而非char截取
     public String substring(int beginIndex) {
         if(beginIndex < 0) {
             throw new StringIndexOutOfBoundsException(beginIndex);
@@ -1852,7 +1852,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * or {@code endIndex} is larger than the length of this {@code String} object,
      * or {@code beginIndex} is larger than {@code endIndex}.
      */
-    // 截取[beginIndex, endIndex)范围内的子串，按Unicode符号而非char截取
+    // 截取[beginIndex, endIndex)范围内的子串 按Unicode符号而非char截取
     public String substring(int beginIndex, int endIndex) {
         int length = length();
         checkBoundsBeginEnd(beginIndex, endIndex, length);
@@ -1889,7 +1889,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @spec JSR-51
      * @since 1.4
      */
-    // 截取[beginIndex, endIndex)范围内的子串，按Unicode符号而非char截取
+    // 截取[beginIndex, endIndex)范围内的子串 按Unicode符号而非char截取
     public CharSequence subSequence(int beginIndex, int endIndex) {
         return this.substring(beginIndex, endIndex);
     }
@@ -1977,7 +1977,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see Pattern
      * @since 1.4
      */
-    // 以正则表达式regex形式切割String，返回切割后的子串集合
+    // 以正则表达式regex形式切割String 返回切割后的子串集合
     public String[] split(String regex, int limit) {
         /*
          * fastpath if the regex is a
@@ -2069,7 +2069,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see Pattern
      * @since 1.4
      */
-    // 以正则表达式regex形式切割String，返回切割后的子串集合
+    // 以正则表达式regex形式切割String 返回切割后的子串集合
     public String[] split(String regex) {
         return split(regex, 0);
     }
@@ -2215,7 +2215,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return a string derived from this string by replacing every occurrence of {@code oldChar} with {@code newChar}.
      */
-    // 使用newChar替换String中的oldChar，并返回替换后的String
+    // 使用newChar替换String中的oldChar 并返回替换后的String
     public String replace(char oldChar, char newChar) {
         if(oldChar != newChar) {
             String ret = isLatin1()
@@ -2373,7 +2373,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see StringJoiner
      * @since 1.8
      */
-    // 拼接子串elements，中间用分隔符delimiter隔开（借助字符串拼接器StringJoiner来实现）
+    // 拼接子串elements 中间用分隔符delimiter隔开(借助字符串拼接器StringJoiner来实现)
     public static String join(CharSequence delimiter, CharSequence... elements) {
         Objects.requireNonNull(delimiter);
         Objects.requireNonNull(elements);
@@ -2413,7 +2413,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see StringJoiner
      * @since 1.8
      */
-    // 拼接子串elements，中间用分隔符delimiter隔开（借助字符串拼接器StringJoiner来实现）
+    // 拼接子串elements 中间用分隔符delimiter隔开(借助字符串拼接器StringJoiner来实现)
     public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements) {
         Objects.requireNonNull(delimiter);
         Objects.requireNonNull(elements);
@@ -2456,10 +2456,10 @@ public final class String implements Serializable, Comparable<String>, CharSeque
             return new String(buf, coder);
         }
         int len = length();
-        // 创建长度为2*（len+olen）的字节数组
+        // 创建长度为2*(len+olen)的字节数组
         byte[] buf = StringUTF16.newBytesFor(len + olen);
         
-        // 字符串类型不一样时，统一转为UTF16-String
+        // 字符串类型不一样时 统一转为UTF16-String
         getBytes(buf, 0, UTF16);
         str.getBytes(buf, len, UTF16);
         return new String(buf, UTF16);
@@ -2482,7 +2482,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * otherwise the result is the same as the result of the expression
      * <pre> this.substring(toffset).startsWith(prefix) </pre>
      */
-    // 判断指定范围的字符串是否以prefix开头，从下标toffset处开始搜索
+    // 判断指定范围的字符串是否以prefix开头 从下标toffset处开始搜索
     public boolean startsWith(String prefix, int toffset) {
         // Note: toffset might be near -1>>>1.
         if(toffset < 0 || toffset > length() - prefix.length()) {
@@ -2526,7 +2526,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 1.0
      */
-    // 判断指定范围的字符串是否以prefix开头，从下标0处开始搜索
+    // 判断指定范围的字符串是否以prefix开头 从下标0处开始搜索
     public boolean startsWith(String prefix) {
         return startsWith(prefix, 0);
     }
@@ -2599,7 +2599,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 9
      */
-    // 将当前char序列转为流序列，序列中每个元素是char
+    // 将当前char序列转为流序列 序列中每个元素是char
     @Override
     public IntStream chars() {
         return StreamSupport.intStream(
@@ -2620,7 +2620,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 9
      */
-    // 将当前Unicode符号序列转为流序列，序列中每个元素是Unicode符号
+    // 将当前Unicode符号序列转为流序列 序列中每个元素是Unicode符号
     @Override
     public IntStream codePoints() {
         return StreamSupport.intStream(
@@ -2650,7 +2650,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @implNote This method provides better performance than split("\R") by supplying elements lazily and by faster search of new line terminators.
      * @since 11
      */
-    // 将String按行转为流序列，序列中每个元素都代表一行（遇到\n或\r才换行）
+    // 将String按行转为流序列 序列中每个元素都代表一行(遇到\n或\r才换行)
     public Stream<String> lines() {
         return isLatin1() ? StringLatin1.lines(value) : StringUTF16.lines(value);
     }
@@ -2842,7 +2842,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @return {@code true} if the specified subregion of this string matches the specified subregion of the string argument;
      * {@code false} otherwise. Whether the matching is exact or case insensitive depends on the {@code ignoreCase} argument.
      */
-    // 比较两个String指定的区域，是否忽略大小写由ignoreCase决定
+    // 比较两个String指定的区域 是否忽略大小写由ignoreCase决定
     public boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len) {
         if(!ignoreCase) {
             return regionMatches(toffset, other, ooffset, len);
@@ -3002,7 +3002,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
         return true;
     }
     
-    // 判等。如果是UTF-16字符串和AbstractStringBuilder比较，则一定返回false。
+    // 判等。如果是UTF-16字符串和AbstractStringBuilder比较 则一定返回false。
     private boolean nonSyncContentEquals(AbstractStringBuilder sb) {
         int len = length();
         if(len != sb.length()) {
@@ -3039,7 +3039,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @since 1.6
      */
-    // true：String为空串
+    // true:String为空串
     public boolean isEmpty() {
         return value.length == 0;
     }
@@ -3052,7 +3052,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      * @see Character#isWhitespace(int)
      * @since 11
      */
-    // true：String为空串，或仅包含空白符号
+    // true:String为空串 或仅包含空白符号
     public boolean isBlank() {
         return indexOfNonWhitespace() == length();
     }
@@ -3067,7 +3067,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return the length of the sequence of characters represented by this object.
      */
-    // 返回String中包含的char的个数，但不一定是Unicode符号个数。
+    // 返回String中包含的char的个数 但不一定是Unicode符号个数。
     public int length() {
         return value.length >> coder();
     }
@@ -3093,7 +3093,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @jls 3.10.5 String Literals
      */
-    // 在常量池中查找该字符串，如果找到，就返回常量池中等值字符串的地址，否则，就返回原地址。
+    // 在常量池中查找该字符串 如果找到 就返回常量池中等值字符串的地址 否则 就返回原地址。
     public native String intern();
     
     /**
@@ -3140,12 +3140,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     }
     
     
-    // 如果字符串可压缩，则返回coder字段的值。否则，始终返回UTF-16。
+    // 如果字符串可压缩 则返回coder字段的值。否则 始终返回UTF-16。
     byte coder() {
         return COMPACT_STRINGS ? coder : UTF16;
     }
     
-    // true：表示该字符串可以用压缩的Latin1字符集表示（一个字节对应了一个符号）
+    // true:表示该字符串可以用压缩的Latin1字符集表示(一个字节对应了一个符号)
     private boolean isLatin1() {
         return COMPACT_STRINGS && coder == LATIN1;
     }
@@ -3162,7 +3162,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
      *
      * @return a hash code value for this object.
      */
-    // 计算String的哈希值，计算公式为：s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]。空串的哈希值为0。
+    // 计算String的哈希值 计算公式为:s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]。空串的哈希值为0。
     public int hashCode() {
         int h = hash;
         if(h == 0 && value.length > 0) {

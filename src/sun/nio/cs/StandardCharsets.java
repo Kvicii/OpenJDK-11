@@ -38,7 +38,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-// 标准"字符集"提供商，内部实现了与标准字符集相关的[规范名-别名-字符集类名-字符集实例]多重映射
+// 标准"字符集"提供商 内部实现了与标准字符集相关的[规范名-别名-字符集类名-字符集实例]多重映射
 public class StandardCharsets extends CharsetProvider {
     private static final String packagePrefix = "sun.nio.cs.";
     
@@ -51,7 +51,7 @@ public class StandardCharsets extends CharsetProvider {
     @Stable
     private Map<String, String> aliasMap;       // [别名-规范名]映射
     @Stable
-    private Map<String, Charset> cache;         // [规范名-字符集实例]映射（初始时只包含常用实例）
+    private Map<String, Charset> cache;         // [规范名-字符集实例]映射(初始时只包含常用实例)
     
     private boolean initialized = false;
     
@@ -282,7 +282,7 @@ public class StandardCharsets extends CharsetProvider {
     /*▲ 返回相应的字符集别名 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
-    // 将字符集名称转为小写。专用于ASCII的版本，针对启动期间的解析进行了优化
+    // 将字符集名称转为小写。专用于ASCII的版本 针对启动期间的解析进行了优化
     private static String toLower(String s) {
         int n = s.length();
         
@@ -311,18 +311,18 @@ public class StandardCharsets extends CharsetProvider {
         return sb.toString();
     }
     
-    // 通过给定的字符集名称，查找相应的字符集
+    // 通过给定的字符集名称 查找相应的字符集
     public final Charset charsetForName(String charsetName) {
         synchronized(this) {
             return lookup(charsetName);
         }
     }
     
-    // 返回一个迭代器，用来让外部程序访问标准字符集。
+    // 返回一个迭代器 用来让外部程序访问标准字符集。
     public final Iterator<Charset> charsets() {
         Set<String> charsetNames;
         
-        // 创建StandardCharsets中三大映射，确保在synchronized中初始化
+        // 创建StandardCharsets中三大映射 确保在synchronized中初始化
         synchronized(this) {
             init();
             // 返回[规范名-字符集类名]映射中的规范名集合
@@ -335,7 +335,7 @@ public class StandardCharsets extends CharsetProvider {
             // 包装了字符集规范名集合的迭代器
             Iterator<String> it = charsetNames.iterator();
             
-            // true：存在下一个规范名
+            // true:存在下一个规范名
             public boolean hasNext() {
                 return it.hasNext();
             }
@@ -354,9 +354,9 @@ public class StandardCharsets extends CharsetProvider {
     }
     
     /*
-     * 在[别名-规范名]映射系统中查找字符集名称，并将字符集名称规范化
-     * 如果找到了别名对于的规范名，则返回规范名
-     * 否则，返回这个别名（可能是个错误的名字，后面还需要继续判断）
+     * 在[别名-规范名]映射系统中查找字符集名称 并将字符集名称规范化
+     * 如果找到了别名对于的规范名 则返回规范名
+     * 否则 返回这个别名(可能是个错误的名字 后面还需要继续判断)
      */
     private String canonicalize(String csn) {
         String acn = aliasMap().get(csn);
@@ -381,7 +381,7 @@ public class StandardCharsets extends CharsetProvider {
         return map;
     }
     
-    // 返回/新建[规范名-字符集实例]映射（初始时只包含常用实例）系统
+    // 返回/新建[规范名-字符集实例]映射(初始时只包含常用实例)系统
     private Map<String, Charset> cache() {
         Map<String, Charset> map = cache;
         if(map == null) {
@@ -397,7 +397,7 @@ public class StandardCharsets extends CharsetProvider {
         return map;
     }
     
-    // 返回指定名称的字符集实例，如果不支持该字符集，返回null
+    // 返回指定名称的字符集实例 如果不支持该字符集 返回null
     private Charset lookup(String charsetName) {
         init();
         
@@ -408,7 +408,7 @@ public class StandardCharsets extends CharsetProvider {
         // as it may delay initialization of performance critical VM subsystems.
         String csn;
         
-        // 先尝试通过常用标准名称"UTF-8"、"US-ASCII"、"ISO-8859-1"查找这几个缓存，没有的话，再到别名系统中去查找
+        // 先尝试通过常用标准名称"UTF-8"、"US-ASCII"、"ISO-8859-1"查找这几个缓存 没有的话 再到别名系统中去查找
         switch(charsetName) {
             case "UTF-8":
                 return UTF_8.INSTANCE;
@@ -417,24 +417,24 @@ public class StandardCharsets extends CharsetProvider {
             case "ISO-8859-1":
                 return ISO_8859_1.INSTANCE;
             default:
-                // 考虑输入的是不是别名，所以去[别名-规范名]映射系统中查找字符集名称（先转为小写），并将字符集名称规范化
+                // 考虑输入的是不是别名 所以去[别名-规范名]映射系统中查找字符集名称(先转为小写) 并将字符集名称规范化
                 csn = canonicalize(toLower(charsetName));
                 break;
         }
         
-        // 在[规范名-字符集实例]映射（初始时只包含常用实例）系统中查找字符集实例
+        // 在[规范名-字符集实例]映射(初始时只包含常用实例)系统中查找字符集实例
         Charset cs = cache().get(csn);
         if(cs != null)
             return cs;
         
-        /* 如果还没找到，就得看是否支持这种字符集了 */
+        /* 如果还没找到 就得看是否支持这种字符集了 */
         
         // 在[规范名-字符集类名]映射系统中查找是否存在该规范名对应的类
         String cln = classMap().get(csn);
         if(cln == null)
             return null;
         
-        // 实例化该字符集，并将其放入[规范名-字符集实例]映射（初始时只包含常用实例）系统
+        // 实例化该字符集 并将其放入[规范名-字符集实例]映射(初始时只包含常用实例)系统
         try {
             @SuppressWarnings("deprecation")
             Object o = Class.forName(packagePrefix + cln, true, this.getClass().getClassLoader()).newInstance();
@@ -443,10 +443,10 @@ public class StandardCharsets extends CharsetProvider {
             return null;
         }
         
-        // 无论在哪一步找到字符集都将其返回，否则就返回null
+        // 无论在哪一步找到字符集都将其返回 否则就返回null
     }
     
-    // 缓存规范名csn的字符集cs，到[规范名-字符集实例]映射（初始时只包含常用实例）系统
+    // 缓存规范名csn的字符集cs 到[规范名-字符集实例]映射(初始时只包含常用实例)系统
     private Charset cache(String csn, Charset cs) {
         cache().put(csn, cs);
         return cs;
@@ -796,7 +796,7 @@ public class StandardCharsets extends CharsetProvider {
         }
     }
     
-    // [规范名-字符集实例]映射（初始时只包含常用实例）
+    // [规范名-字符集实例]映射(初始时只包含常用实例)
     private static final class Cache extends sun.util.PreHashedMap<Charset> {
         
         private static final int ROWS = 64;

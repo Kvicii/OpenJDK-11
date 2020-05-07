@@ -5,7 +5,7 @@ import java.io.Serializable;
 // 实现Serializable接口的才可以被序列化
 public class User02 implements Serializable {
     
-    // 这里的序列化ID必须用static final修饰，变量名必须是serialVersionUID
+    // 这里的序列化ID必须用static final修饰 变量名必须是serialVersionUID
 //    private static final long serialVersionUID = 12345L;
 
 //    private int id = 123456789;

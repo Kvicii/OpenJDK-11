@@ -39,10 +39,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：ToIntBiFunction<T, U>
+ * 函数式接口:ToIntBiFunction<T, U>
  *
- * 参数：T, U
- * 返回：int
+ * 参数:T, U
+ * 返回:int
  */
 @FunctionalInterface
 public interface ToIntBiFunction<T, U> {

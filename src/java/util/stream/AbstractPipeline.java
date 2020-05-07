@@ -70,7 +70,7 @@ import java.util.function.Supplier;
  * @since 1.8
  */
 
-// 流水线的抽象基类，主要实现了BaseStream接口和PipelineHelper抽象类中的方法
+// 流水线的抽象基类 主要实现了BaseStream接口和PipelineHelper抽象类中的方法
 abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
     extends PipelineHelper<E_OUT>
     implements BaseStream<E_OUT, S> {
@@ -82,7 +82,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      * Backlink to the head of the pipeline chain (self if this is the source stage).
      */
     @SuppressWarnings("rawtypes")
-    private final AbstractPipeline sourceStage;     // 流水线的源头阶段（常见的是HEAD）
+    private final AbstractPipeline sourceStage;     // 流水线的源头阶段(常见的是HEAD)
     
     /**
      * The "upstream" pipeline, or null if this is the source stage.
@@ -102,7 +102,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      * and the stream source if sequential, or the previous stateful if parallel.
      * Valid at the point of pipeline preparation for evaluation.
      */
-    private int depth;                              // 当前的流是第几个阶段（HEAD是第0个阶段）
+    private int depth;                              // 当前的流是第几个阶段(HEAD是第0个阶段)
     
     /**
      * The operation flags for the intermediate operation represented by this pipeline object.
@@ -121,7 +121,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      * Before the pipeline is consumed if non-null then {@code sourceSupplier} must be null.
      * After the pipeline is consumed if non-null then is set to null.
      */
-    // 源头阶段的Spliterator，仅在流的源头阶段生效，消费后置空
+    // 源头阶段的Spliterator 仅在流的源头阶段生效 消费后置空
     private Spliterator<?> sourceSpliterator;
     
     /**
@@ -129,7 +129,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      * Before the pipeline is consumed if non-null then {@code sourceSpliterator} must be null.
      * After the pipeline is consumed if non-null then is set to null.
      */
-    // 源头阶段的Spliterator的提供商，仅在流的源头阶段生效，消费后置空
+    // 源头阶段的Spliterator的提供商 仅在流的源头阶段生效 消费后置空
     private Supplier<? extends Spliterator<?>> sourceSupplier;  // 比较少见
     
     /**
@@ -161,7 +161,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      *                    {@link StreamOpFlag}
      * @param parallel    True if the pipeline is parallel
      */
-    // 构造Stream，常用于构建流的源头阶段（HEAD），需要从source中提取Spliterator
+    // 构造Stream 常用于构建流的源头阶段(HEAD) 需要从source中提取Spliterator
     AbstractPipeline(Supplier<? extends Spliterator<?>> source, int sourceFlags, boolean parallel) {
         this.previousStage = null;
         this.sourceSupplier = source;
@@ -181,7 +181,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      *                    {@link StreamOpFlag}
      * @param parallel    {@code true} if the pipeline is parallel
      */
-    // 构造Stream，常用于构建流的源头阶段（HEAD）
+    // 构造Stream 常用于构建流的源头阶段(HEAD)
     AbstractPipeline(Spliterator<?> source, int sourceFlags, boolean parallel) {
         this.previousStage = null;
         this.sourceSpliterator = source;
@@ -202,7 +202,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      *                      {@link StreamOpFlag}
      */
     /*
-     * 构造Stream，常用于构建流的中间阶段，包括有状态流和无状态流。
+     * 构造Stream 常用于构建流的中间阶段 包括有状态流和无状态流。
      * upstream是调用此构造方法的流
      */
     AbstractPipeline(AbstractPipeline<?, E_IN, ?> previousStage, int opFlags) {
@@ -314,7 +314,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
     
     /*▼ 实现BaseStream接口 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回流中元素的Spliterator（可分割的迭代器）
+    // 返回流中元素的Spliterator(可分割的迭代器)
     @Override
     @SuppressWarnings("unchecked")
     public Spliterator<E_OUT> spliterator() {
@@ -347,7 +347,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
         return sourceStage.parallel;
     }
     
-    // 中间操作，返回顺序的等效流。
+    // 中间操作 返回顺序的等效流。
     @Override
     @SuppressWarnings("unchecked")
     public final S sequential() {
@@ -355,7 +355,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
         return (S) this;
     }
     
-    // 中间操作，返回并行的等效流。
+    // 中间操作 返回并行的等效流。
     @Override
     @SuppressWarnings("unchecked")
     public final S parallel() {
@@ -363,7 +363,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
         return (S) this;
     }
     
-    // 中间操作，返回附加close操作的等效流，可能会返回自身。
+    // 中间操作 返回附加close操作的等效流 可能会返回自身。
     @Override
     @SuppressWarnings("unchecked")
     public S onClose(Runnable closeHandler) {
@@ -377,7 +377,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
         return (S) this;
     }
     
-    // 关闭此流，这将导致调用此流水线的所有关闭处理程序。
+    // 关闭此流 这将导致调用此流水线的所有关闭处理程序。
     @Override
     public void close() {
         linkedOrConsumed = true;
@@ -415,53 +415,53 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
         return combinedFlags;
     }
     
-    // 返回输出的元素数量，如果未知或无穷，则返回-1
+    // 返回输出的元素数量 如果未知或无穷 则返回-1
     @Override
     final <P_IN> long exactOutputSizeIfKnown(Spliterator<P_IN> spliterator) {
         return StreamOpFlag.SIZED.isKnown(getStreamAndOpFlags()) ? spliterator.getExactSizeIfKnown() : -1;
     }
     
-    // 从后往前包装sink的同时，从前到后择取数据
+    // 从后往前包装sink的同时 从前到后择取数据
     @Override
     final <P_IN, SINK extends Sink<E_OUT>> SINK wrapAndCopyInto(SINK sink, Spliterator<P_IN> spliterator) {
         Objects.requireNonNull(sink);
         
-        // 从终端的Sink开始，逐段向前包装Sink形成一个单链表，然后将最靠前的sink返回
+        // 从终端的Sink开始 逐段向前包装Sink形成一个单链表 然后将最靠前的sink返回
         Sink<P_IN> wrappedSink = wrapSink(sink);
         
         // 从第一个中间阶段开始择取数据
         copyInto(wrappedSink, spliterator);
         
-        // 这里返回的还是形参中未经过包装的sink，即终端的sink
+        // 这里返回的还是形参中未经过包装的sink 即终端的sink
         return sink;
     }
     
-    // 从终端的Sink开始，逐段向前包装Sink形成一个单链表，然后将最靠前的sink返回
+    // 从终端的Sink开始 逐段向前包装Sink形成一个单链表 然后将最靠前的sink返回
     @Override
     @SuppressWarnings("unchecked")
     final <P_IN> Sink<P_IN> wrapSink(Sink<E_OUT> sink) {
         Objects.requireNonNull(sink);
         
         /*
-         * 举例：筛选出所有偶数，求平方，最后存入数组
+         * 举例:筛选出所有偶数 求平方 最后存入数组
          * Stream.of(1, 2, 3, 4).filter(i -> i % 2 == 0).map(x->x*x).toArray()
-         * 这里有一个源头阶段：of，两个中间阶段filter和map，一个终端阶段toArray
-         * 一开始，形参中的sink代表toArray阶段的sink，称作toArray-sink，而p代表终端阶段前一个阶段的流，这里是map流。
-         * 通过不断调用opWrapSink，将在p阶段生成一个新的sink，该sink持有了指向下一个阶段的引用
-         * 最终，该循环生成了两个新的sink：filter-sink和map-sink，且返回的是最靠前的sink。
+         * 这里有一个源头阶段:of 两个中间阶段filter和map 一个终端阶段toArray
+         * 一开始 形参中的sink代表toArray阶段的sink 称作toArray-sink 而p代表终端阶段前一个阶段的流 这里是map流。
+         * 通过不断调用opWrapSink 将在p阶段生成一个新的sink 该sink持有了指向下一个阶段的引用
+         * 最终 该循环生成了两个新的sink:filter-sink和map-sink 且返回的是最靠前的sink。
          */
         for(@SuppressWarnings("rawtypes") AbstractPipeline p = AbstractPipeline.this; p.depth > 0; p = p.previousStage) {
             sink = p.opWrapSink(p.previousStage.combinedFlags, sink);
         }
         
-        // 返回包装后的sink，该sink持有流的下一个阶段的sink，所有sink形成了一个单链表
+        // 返回包装后的sink 该sink持有流的下一个阶段的sink 所有sink形成了一个单链表
         return (Sink<P_IN>) sink;
     }
     
     /*
      * 从HEAD阶段之后开始择取数据
      *
-     * 会调用源头阶段的Spliterator的forEachRemaining方法（如果重写不当可能会陷入死循环）
+     * 会调用源头阶段的Spliterator的forEachRemaining方法(如果重写不当可能会陷入死循环)
      * 还会依次调用sink链条上的begin、accept、end方法
      *
      * wrappedSink 第一个中间阶段的Sink
@@ -475,9 +475,9 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
         if(!StreamOpFlag.SHORT_CIRCUIT.isKnown(getStreamAndOpFlags())) {
             long size = spliterator.getExactSizeIfKnown();
             
-            wrappedSink.begin(size);    // 从第一个中间阶段开始，依次调用整个Sink链条上begin，激活流
-            spliterator.forEachRemaining(wrappedSink);  // 遍历容器内每个元素，在其上执行相应的择取操作
-            wrappedSink.end();          // 从第一个中间阶段开始，依次调用整个Sink链条上end，关闭流
+            wrappedSink.begin(size);    // 从第一个中间阶段开始 依次调用整个Sink链条上begin 激活流
+            spliterator.forEachRemaining(wrappedSink);  // 遍历容器内每个元素 在其上执行相应的择取操作
+            wrappedSink.end();          // 从第一个中间阶段开始 依次调用整个Sink链条上end 关闭流
         } else {
             // 短路操作
             copyIntoWithCancel(wrappedSink, spliterator);
@@ -485,7 +485,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
     }
     
     /*
-     * 从HEAD阶段之后开始择取数据，存在短路操作（即满足某种条件就终止择取）
+     * 从HEAD阶段之后开始择取数据 存在短路操作(即满足某种条件就终止择取)
      *
      * wrappedSink 第一个中间阶段的Sink
      * spliterator 源头阶段的Spliterator
@@ -499,21 +499,21 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
             p = p.previousStage;    // 找到流的源头阶段HEAD
         }
         
-        // 通过源头阶段的Spliterator中获取当前情境中的元素数量（精确值）
+        // 通过源头阶段的Spliterator中获取当前情境中的元素数量(精确值)
         long size = spliterator.getExactSizeIfKnown();
         
-        // 从第一个中间阶段开始，依次调用整个Sink链条上begin，激活流
+        // 从第一个中间阶段开始 依次调用整个Sink链条上begin 激活流
         wrappedSink.begin(size);
         
         /*
-         * 逐个择取元素，每次择取之前都要先判断是否应当停止接收数据
-         * 当不需要再择取数据，或者已择取完所有数据时，退出择取，返回false
+         * 逐个择取元素 每次择取之前都要先判断是否应当停止接收数据
+         * 当不需要再择取数据 或者已择取完所有数据时 退出择取 返回false
          *
-         * 比如判断一个序列中是否存在大于0的元素，那么只要发现有一个元素大于0，那么就立即停止择取
+         * 比如判断一个序列中是否存在大于0的元素 那么只要发现有一个元素大于0 那么就立即停止择取
          */
         boolean cancelled = p.forEachWithCancel(spliterator, wrappedSink);
         
-        // 从第一个中间阶段开始，依次调用整个Sink链条上end，关闭流
+        // 从第一个中间阶段开始 依次调用整个Sink链条上end 关闭流
         wrappedSink.end();
         
         return cancelled;
@@ -534,7 +534,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      *
      * @return a node builder
      */
-    // 返回第(3)、(4)类Node（固定长度Node和可变长度Node）
+    // 返回第(3)、(4)类Node(固定长度Node和可变长度Node)
     @Override
     abstract Node.Builder<E_OUT> makeNodeBuilder(long exactSizeIfKnown, IntFunction<E_OUT[]> generator);
     
@@ -543,23 +543,23 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
     @SuppressWarnings("unchecked")
     final <P_IN> Node<E_OUT> evaluate(Spliterator<P_IN> spliterator, boolean flatten, IntFunction<E_OUT[]> generator) {
         if(isParallel()) {
-            // 并行收集元素。如果流水线上存在有状态的中间操作，则优化计算过程
+            // 并行收集元素。如果流水线上存在有状态的中间操作 则优化计算过程
             return evaluateToNode(this, spliterator, flatten, generator);
         } else {
             /*
-             * 返回第(3)、(4)类Node（固定长度Node和可变长度Node）
+             * 返回第(3)、(4)类Node(固定长度Node和可变长度Node)
              *
-             * ★ 这些类型的Node兼具Node和Node.Builder属性（实现了Sink接口）
+             * ★ 这些类型的Node兼具Node和Node.Builder属性(实现了Sink接口)
              */
             Node.Builder<E_OUT> nb = makeNodeBuilder(exactOutputSizeIfKnown(spliterator), generator);
             
             /*
              * 这里的sink与上面的nd指向相同的对象。
-             * 但是，经过wrapAndCopyInto调用后，会完成sink的包装和数据的择取
+             * 但是 经过wrapAndCopyInto调用后 会完成sink的包装和数据的择取
              */
             Node.Builder<E_OUT> sink = wrapAndCopyInto(nb, spliterator);
             
-            // 返回由Builder构建的Node（返回自身）
+            // 返回由Builder构建的Node(返回自身)
             return sink.build();
         }
     }
@@ -599,7 +599,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      *
      * @return true if the cancellation was requested
      */
-    // 逐个择取元素，每次择取之前都要先判断是否应当停止接收数据
+    // 逐个择取元素 每次择取之前都要先判断是否应当停止接收数据
     abstract boolean forEachWithCancel(Spliterator<E_OUT> spliterator, Sink<E_OUT> sink);
     
     /**
@@ -612,7 +612,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      *
      * @return a Node holding the output of the pipeline
      */
-    // 并行收集元素。如果流水线上存在有状态的中间操作，则优化计算过程
+    // 并行收集元素。如果流水线上存在有状态的中间操作 则优化计算过程
     abstract <P_IN> Node<E_OUT> evaluateToNode(PipelineHelper<E_OUT> helper, Spliterator<P_IN> spliterator, boolean flattenTree, IntFunction<E_OUT[]> generator);
     
     /**
@@ -747,7 +747,7 @@ abstract class AbstractPipeline<E_IN, E_OUT, S extends BaseStream<E_OUT, S>>
      * the implementation for the {@code Stream#distinct()} method could just
      * return the sink it was passed.
      */
-    // 完成Sink的链接。从后向前包装SInk，传入下一个阶段的Sink，连同当前阶段的Sink包装到一起再返回
+    // 完成Sink的链接。从后向前包装SInk 传入下一个阶段的Sink 连同当前阶段的Sink包装到一起再返回
     abstract Sink<E_IN> opWrapSink(int flags, Sink<E_OUT> sink);
     
     /**

@@ -292,11 +292,11 @@ import java.util.function.LongConsumer;
  */
 
 /*
- * Spliterator称作可分割迭代器(Splitable Iterator)，内部包装一个容器，随后需要对该容器中的元素进行切割和遍历（应用给定的函数）
+ * Spliterator称作可分割迭代器(Splitable Iterator) 内部包装一个容器 随后需要对该容器中的元素进行切割和遍历(应用给定的函数)
  *
- * 将数据打包到Spliterator后，交给流的源头阶段，随后可以对Spliterator应用某个方法，Spliterator内部将遍历所有数据去执行那个方法。
+ * 将数据打包到Spliterator后 交给流的源头阶段 随后可以对Spliterator应用某个方法 Spliterator内部将遍历所有数据去执行那个方法。
  *
- * Spliterator有很多种形式，大多实现为内部类嵌套内部类，代码非常恶心...
+ * Spliterator有很多种形式 大多实现为内部类嵌套内部类 代码非常恶心...
  *
  * Spliterator和Iterator可以通过适配器模式进行转换
  */
@@ -309,7 +309,7 @@ public interface Spliterator<T> {
      * encountered elements {@code x, y}, {@code !x.equals(y)}. This
      * applies for example, to a Spliterator based on a {@link Set}.
      */
-    // 表示每对元素各不相同，比如Set中的元素
+    // 表示每对元素各不相同 比如Set中的元素
     int DISTINCT = 0x00000001;
     /**
      * Characteristic value signifying that encounter order follows a defined
@@ -325,12 +325,12 @@ public interface Spliterator<T> {
      */
     /*
      * 表示Spliterator中的元素序列遵循已定义的排序顺序。
-     * 这种情况下，调用getComparator()时，要么返回一个Comparator，
-     * 要么返回null，此时意味着所有元素（的对象）都具备Comparable接口。
+     * 这种情况下 调用getComparator()时 要么返回一个Comparator
+     * 要么返回null 此时意味着所有元素(的对象)都具备Comparable接口。
      *
      * 具有#SORTED特征的Spliterator也应当具备#ORDERED特征。
      *
-     * 实现了NavigableSet或SortedSet接口的Collection子类元素，
+     * 实现了NavigableSet或SortedSet接口的Collection子类元素
      * 其Spliterator应具备#SORTED特征。
      */
     int SORTED = 0x00000004;
@@ -352,7 +352,7 @@ public interface Spliterator<T> {
      * {@code ORDERED} are expected to preserve ordering constraints in
      * non-commutative parallel computations.
      */
-    // 表示元素有固定的遭遇顺序（遍历顺序）
+    // 表示元素有固定的遭遇顺序(遍历顺序)
     int ORDERED = 0x00000010;
     /**
      * Characteristic value signifying that the value returned from
@@ -367,7 +367,7 @@ public interface Spliterator<T> {
      * approximate their reported size do not.
      */
     /*
-     * 表示可以调用estimateSize()后返回一个有限大小（往往是元素的确切数量）
+     * 表示可以调用estimateSize()后返回一个有限大小(往往是元素的确切数量)
      * 大多数Collection的Spliterator都拥有此特征。
      */
     int SIZED = 0x00000040;
@@ -376,7 +376,7 @@ public interface Spliterator<T> {
      * encountered elements will not be {@code null}. (This applies,
      * for example, to most concurrent collections, queues, and maps.)
      */
-    // 表示元素非空，如大多数并行容器
+    // 表示元素非空 如大多数并行容器
     int NONNULL = 0x00000100;
     /**
      * Characteristic value signifying that the element source cannot be
@@ -387,7 +387,7 @@ public interface Spliterator<T> {
      * {@link ConcurrentModificationException}) concerning structural
      * interference detected during traversal.
      */
-    // 表示元素结构不能被修改，即无法添加、删除、替换元素（遍历期间不会进行这类操作）
+    // 表示元素结构不能被修改 即无法添加、删除、替换元素(遍历期间不会进行这类操作)
     int IMMUTABLE = 0x00000400;
     /**
      * Characteristic value signifying that the element source may be safely
@@ -434,7 +434,7 @@ public interface Spliterator<T> {
      */
     /*
      * 表示调用trySplit()后返回的子Spliterator将同时具有#SIZED和#SUBSIZED特征。
-     * 有些树形Node只具有#SIZED特征而不具有#SUBSIZED特征，因为整棵树的元素个数是已知的，但子树元素个数为知
+     * 有些树形Node只具有#SIZED特征而不具有#SUBSIZED特征 因为整棵树的元素个数是已知的 但子树元素个数为知
      */
     int SUBSIZED = 0x00004000;
     
@@ -461,7 +461,7 @@ public interface Spliterator<T> {
      * accurate count, it could estimate size to be the power of two
      * corresponding to its maximum depth.
      */
-    // 返回当前情境中的元素数量（可能是估算值）
+    // 返回当前情境中的元素数量(可能是估算值)
     long estimateSize();
     
     /**
@@ -528,7 +528,7 @@ public interface Spliterator<T> {
      * trySplit} mechanics typically result in poor parallel
      * performance.
      */
-    // 从容器的指定范围切割一段元素，将其打包到Spliterator后返回，特征值不变
+    // 从容器的指定范围切割一段元素 将其打包到Spliterator后返回 特征值不变
     Spliterator<T> trySplit();
     
     /**
@@ -561,7 +561,7 @@ public interface Spliterator<T> {
      * @implSpec The default implementation repeatedly invokes {@link #tryAdvance} until
      * it returns {@code false}.  It should be overridden whenever possible.
      */
-    // 遍历容器内每个元素，在其上执行相应的择取操作
+    // 遍历容器内每个元素 在其上执行相应的择取操作
     default void forEachRemaining(Consumer<? super T> action) {
         do {
         } while(tryAdvance(action));
@@ -575,7 +575,7 @@ public interface Spliterator<T> {
      * @implSpec The default implementation returns the result of {@code estimateSize()}
      * if the Spliterator reports a characteristic of {@code SIZED}, and {@code -1} otherwise.
      */
-    // 返回当前情境中的元素数量（精确值）
+    // 返回当前情境中的元素数量(精确值)
     default long getExactSizeIfKnown() {
         return (characteristics() & SIZED) == 0 ? -1L : estimateSize();
     }
@@ -608,11 +608,11 @@ public interface Spliterator<T> {
      * @implSpec The default implementation always throws {@link IllegalStateException}.
      */
     /*
-     * 对于具有SORTED特征值的容器来说，
-     * 如果该容器使用Comparator排序，则返回其Comparator；
-     * 如果该容器使用Comparable实现自然排序，则返回null；
+     * 对于具有SORTED特征值的容器来说
+     * 如果该容器使用Comparator排序 则返回其Comparator；
+     * 如果该容器使用Comparable实现自然排序 则返回null；
      *
-     * 对于不具有SORTED特征值的容器来说，抛出异常。
+     * 对于不具有SORTED特征值的容器来说 抛出异常。
      */
     default Comparator<? super T> getComparator() {
         throw new IllegalStateException();
@@ -641,7 +641,7 @@ public interface Spliterator<T> {
     interface OfPrimitive<T, T_CONS, T_SPLITR extends Spliterator.OfPrimitive<T, T_CONS, T_SPLITR>>
         extends Spliterator<T> {
         
-        // 从容器的指定范围切割一段元素，将其打包到为基本类型特化的Spliterator后返回，特征值不变
+        // 从容器的指定范围切割一段元素 将其打包到为基本类型特化的Spliterator后返回 特征值不变
         @Override
         T_SPLITR trySplit();
         
@@ -677,7 +677,7 @@ public interface Spliterator<T> {
          * until it returns {@code false}.  It should be overridden whenever
          * possible.
          */
-        // 遍历容器内每个元素，在其上执行相应的择取操作[基本类型版本]
+        // 遍历容器内每个元素 在其上执行相应的择取操作[基本类型版本]
         @SuppressWarnings("overloads")
         default void forEachRemaining(T_CONS action) {
             do {
@@ -694,7 +694,7 @@ public interface Spliterator<T> {
     interface OfInt
         extends OfPrimitive<Integer, IntConsumer, OfInt> {
         
-        // 从容器的指定范围切割一段元素，将其打包到为基本类型int特化的Spliterator后返回，特征值不变
+        // 从容器的指定范围切割一段元素 将其打包到为基本类型int特化的Spliterator后返回 特征值不变
         @Override
         OfInt trySplit();
     
@@ -724,7 +724,7 @@ public interface Spliterator<T> {
             }
         }
     
-        // 遍历容器内每个元素，在其上执行相应的择取操作[基本类型版本]
+        // 遍历容器内每个元素 在其上执行相应的择取操作[基本类型版本]
         @Override
         default void forEachRemaining(IntConsumer action) {
             do {
@@ -742,10 +742,10 @@ public interface Spliterator<T> {
          * {@link #forEachRemaining(java.util.function.IntConsumer)}.
          */
         /*
-         * 对每个剩余元素执行给定的择取操作，择取操作封装在action函数中[包装类型版本]
+         * 对每个剩余元素执行给定的择取操作 择取操作封装在action函数中[包装类型版本]
          *
-         * 如果操作是{IntConsumer}的实例，那么它将被强制转换为{IntConsumer}并传递给{#forEachRemaining};
-         * 否则，通过装箱{IntConsumer}的参数，将其适配为{IntConsumer}的实例，然后传递给{#forEachRemaining}。
+         * 如果操作是{IntConsumer}的实例 那么它将被强制转换为{IntConsumer}并传递给{#forEachRemaining};
+         * 否则 通过装箱{IntConsumer}的参数 将其适配为{IntConsumer}的实例 然后传递给{#forEachRemaining}。
          */
         @Override
         default void forEachRemaining(Consumer<? super Integer> action) {
@@ -768,7 +768,7 @@ public interface Spliterator<T> {
     interface OfLong
         extends OfPrimitive<Long, LongConsumer, OfLong> {
         
-        // 从容器的指定范围切割一段元素，将其打包到为基本类型long特化的Spliterator后返回，特征值不变
+        // 从容器的指定范围切割一段元素 将其打包到为基本类型long特化的Spliterator后返回 特征值不变
         @Override
         OfLong trySplit();
     
@@ -798,7 +798,7 @@ public interface Spliterator<T> {
             }
         }
     
-        // 遍历容器内每个元素，在其上执行相应的择取操作[基本类型版本]
+        // 遍历容器内每个元素 在其上执行相应的择取操作[基本类型版本]
         @Override
         default void forEachRemaining(LongConsumer action) {
             do {
@@ -816,10 +816,10 @@ public interface Spliterator<T> {
          * {@link #forEachRemaining(java.util.function.LongConsumer)}.
          */
         /*
-         * 对每个剩余元素执行给定的择取操作，择取操作封装在action函数中[包装类型版本]
+         * 对每个剩余元素执行给定的择取操作 择取操作封装在action函数中[包装类型版本]
          *
-         * 如果操作是{LongConsumer}的实例，那么它将被强制转换为{LongConsumer}并传递给{#forEachRemaining};
-         * 否则，通过装箱{LongConsumer}的参数，将其适配为{LongConsumer}的实例，然后传递给{#forEachRemaining}。
+         * 如果操作是{LongConsumer}的实例 那么它将被强制转换为{LongConsumer}并传递给{#forEachRemaining};
+         * 否则 通过装箱{LongConsumer}的参数 将其适配为{LongConsumer}的实例 然后传递给{#forEachRemaining}。
          */
         @Override
         default void forEachRemaining(Consumer<? super Long> action) {
@@ -842,7 +842,7 @@ public interface Spliterator<T> {
     interface OfDouble
         extends OfPrimitive<Double, DoubleConsumer, OfDouble> {
         
-        // 从容器的指定范围切割一段元素，将其打包到为基本类型double特化的Spliterator后返回，特征值不变
+        // 从容器的指定范围切割一段元素 将其打包到为基本类型double特化的Spliterator后返回 特征值不变
         @Override
         OfDouble trySplit();
     
@@ -872,7 +872,7 @@ public interface Spliterator<T> {
             }
         }
     
-        // 遍历容器内每个元素，在其上执行相应的择取操作[基本类型版本]
+        // 遍历容器内每个元素 在其上执行相应的择取操作[基本类型版本]
         @Override
         default void forEachRemaining(DoubleConsumer action) {
             do {
@@ -891,10 +891,10 @@ public interface Spliterator<T> {
          * {@link #forEachRemaining(java.util.function.DoubleConsumer)}.
          */
         /*
-         * 对每个剩余元素执行给定的择取操作，择取操作封装在action函数中[包装类型版本]
+         * 对每个剩余元素执行给定的择取操作 择取操作封装在action函数中[包装类型版本]
          *
-         * 如果操作是{DoubleConsumer}的实例，那么它将被强制转换为{DoubleConsumer}并传递给{#forEachRemaining};
-         * 否则，通过装箱{DoubleConsumer}的参数，将其适配为{DoubleConsumer}的实例，然后传递给{#forEachRemaining}。
+         * 如果操作是{DoubleConsumer}的实例 那么它将被强制转换为{DoubleConsumer}并传递给{#forEachRemaining};
+         * 否则 通过装箱{DoubleConsumer}的参数 将其适配为{DoubleConsumer}的实例 然后传递给{#forEachRemaining}。
          */
         @Override
         default void forEachRemaining(Consumer<? super Double> action) {

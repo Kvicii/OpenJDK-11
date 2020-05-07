@@ -61,7 +61,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>> extends AutoCloseable
      *
      * @return the element iterator for this stream
      */
-    // 返回流中元素的Iterator（迭代器）
+    // 返回流中元素的Iterator(迭代器)
     Iterator<T> iterator();
     
     /**
@@ -80,7 +80,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>> extends AutoCloseable
      *
      * @return the element spliterator for this stream
      */
-    // 返回流中元素的Spliterator（可分割的迭代器）
+    // 返回流中元素的Spliterator(可分割的迭代器)
     Spliterator<T> spliterator();
     
     /**
@@ -105,8 +105,8 @@ public interface BaseStream<T, S extends BaseStream<T, S>> extends AutoCloseable
      * @return an unordered stream
      */
     /*
-     * 中间操作，返回等效的无序流。
-     * 可能会返回自身，因为该流已经是无序的，或流的状态已经被修改为无序。
+     * 中间操作 返回等效的无序流。
+     * 可能会返回自身 因为该流已经是无序的 或流的状态已经被修改为无序。
      */
     S unordered();
     
@@ -121,8 +121,8 @@ public interface BaseStream<T, S extends BaseStream<T, S>> extends AutoCloseable
      * @return a sequential stream
      */
     /*
-     * 中间操作，返回顺序的等效流。
-     * 可能会返回自身，因为该流已经是顺序的，或流的状态已经被修改为顺序。
+     * 中间操作 返回顺序的等效流。
+     * 可能会返回自身 因为该流已经是顺序的 或流的状态已经被修改为顺序。
      */
     S sequential();
     
@@ -137,8 +137,8 @@ public interface BaseStream<T, S extends BaseStream<T, S>> extends AutoCloseable
      * @return a parallel stream
      */
     /*
-     * 中间操作，返回并行的等效流。
-     * 可能会返回自身，因为流已经是并行的，或流的状态已经被修改为并行。
+     * 中间操作 返回并行的等效流。
+     * 可能会返回自身 因为流已经是并行的 或流的状态已经被修改为并行。
      */
     S parallel();
     
@@ -162,10 +162,10 @@ public interface BaseStream<T, S extends BaseStream<T, S>> extends AutoCloseable
      * @return a stream with a handler that is run if the stream is closed
      */
     /*
-     * 中间操作，返回附加close操作的等效流，可能会返回自身。
-     * 在流上调用close()方法时，将运行关闭处理程序，并按其添加的顺序执行。
-     * 即使先前的关闭处理程序抛出异常，也会运行所有关闭处理程序。
-     * 如果任何关闭处理程序抛出异常，则抛出的第一个异常将被转播到close()的调用者，并将任何剩余的异常作为抑制异常添加到该异常中（除非剩下的异常之一与第一个异常相同，因为异常无法抑制自己）。
+     * 中间操作 返回附加close操作的等效流 可能会返回自身。
+     * 在流上调用close()方法时 将运行关闭处理程序 并按其添加的顺序执行。
+     * 即使先前的关闭处理程序抛出异常 也会运行所有关闭处理程序。
+     * 如果任何关闭处理程序抛出异常 则抛出的第一个异常将被转播到close()的调用者 并将任何剩余的异常作为抑制异常添加到该异常中(除非剩下的异常之一与第一个异常相同 因为异常无法抑制自己)。
      */
     S onClose(Runnable closeHandler);
     
@@ -174,7 +174,7 @@ public interface BaseStream<T, S extends BaseStream<T, S>> extends AutoCloseable
      *
      * @see AutoCloseable#close()
      */
-    // 关闭此流，这将导致调用此流水线的所有关闭处理程序。
+    // 关闭此流 这将导致调用此流水线的所有关闭处理程序。
     @Override
     void close();
 }

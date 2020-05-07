@@ -37,9 +37,9 @@ import java.util.function.LongConsumer;
  * @since 1.8
  */
 
-// Spliterator工厂，定义了常用的五大类Spliterators，应用于各种场合
+// Spliterator工厂 定义了常用的五大类Spliterators 应用于各种场合
 public final class Spliterators {
-    // 空的Spliterator，不包含任何待处理元素
+    // 空的Spliterator 不包含任何待处理元素
     private static final Spliterator<Object> EMPTY_SPLITERATOR = new EmptySpliterator.OfRef<>();
     private static final Spliterator.OfInt EMPTY_INT_SPLITERATOR = new EmptySpliterator.OfInt();
     private static final Spliterator.OfLong EMPTY_LONG_SPLITERATOR = new EmptySpliterator.OfLong();
@@ -660,7 +660,7 @@ public final class Spliterators {
     
     /*▼ (1) 空 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 空的Spliterator，不包含任何待处理元素
+    // 空的Spliterator 不包含任何待处理元素
     private abstract static class EmptySpliterator<T, S extends Spliterator<T>, C> {
         
         EmptySpliterator() {
@@ -687,25 +687,25 @@ public final class Spliterators {
             return Spliterator.SIZED | Spliterator.SUBSIZED;
         }
         
-        // 为引用类型特化的空的Spliterator，不包含任何待处理元素
+        // 为引用类型特化的空的Spliterator 不包含任何待处理元素
         private static final class OfRef<T> extends EmptySpliterator<T, Spliterator<T>, Consumer<? super T>> implements Spliterator<T> {
             OfRef() {
             }
         }
         
-        // 为int类型特化的空的Spliterator，不包含任何待处理元素
+        // 为int类型特化的空的Spliterator 不包含任何待处理元素
         private static final class OfInt extends EmptySpliterator<Integer, Spliterator.OfInt, IntConsumer> implements Spliterator.OfInt {
             OfInt() {
             }
         }
         
-        // 为long类型特化的空的Spliterator，不包含任何待处理元素
+        // 为long类型特化的空的Spliterator 不包含任何待处理元素
         private static final class OfLong extends EmptySpliterator<Long, Spliterator.OfLong, LongConsumer> implements Spliterator.OfLong {
             OfLong() {
             }
         }
         
-        // 为double类型特化的空的Spliterator，不包含任何待处理元素
+        // 为double类型特化的空的Spliterator 不包含任何待处理元素
         private static final class OfDouble extends EmptySpliterator<Double, Spliterator.OfDouble, DoubleConsumer> implements Spliterator.OfDouble {
             OfDouble() {
             }
@@ -722,7 +722,7 @@ public final class Spliterators {
     /**
      * A Spliterator designed for use by sources that traverse and split elements maintained in an unmodifiable {@code Object[]} array.
      */
-    // 将Object数组打包到ArraySpliterator中用于切割和遍历（对每个元素执行特定的择取操作），要求改数组元素不可变。
+    // 将Object数组打包到ArraySpliterator中用于切割和遍历(对每个元素执行特定的择取操作) 要求改数组元素不可变。
     static final class ArraySpliterator<T> implements Spliterator<T> {
         /**
          * The array, explicitly typed as Object[].
@@ -766,7 +766,7 @@ public final class Spliterators {
             this.characteristics = additionalCharacteristics | Spliterator.SIZED | Spliterator.SUBSIZED;
         }
         
-        // 折半分割[index, fence]范围内的数组，将其打包到Spliterator后返回，特征值不变
+        // 折半分割[index, fence]范围内的数组 将其打包到Spliterator后返回 特征值不变
         @Override
         public Spliterator<T> trySplit() {
             int lo = index, mid = (lo + fence) >>> 1;
@@ -775,7 +775,7 @@ public final class Spliterators {
                 : new ArraySpliterator<>(array, lo, index = mid, characteristics);
         }
         
-        // 对数组中的单个元素array[index]执行择取操作，且index要递增一次
+        // 对数组中的单个元素array[index]执行择取操作 且index要递增一次
         @Override
         public boolean tryAdvance(Consumer<? super T> action) {
             if(action == null)
@@ -792,9 +792,9 @@ public final class Spliterators {
         }
         
         /*
-         * 遍历数组每个元素，在其上执行相应的择取操作。
-         * 执行择取操作的主体是Sink[水槽]（Sink继承了Consumer），它将择取操作统一封装到accept方法中。
-         * 在链式操作中，当前阶段的Sink执行完accept方法后，会将择取出的数据传递给下一个Sink[水槽]。
+         * 遍历数组每个元素 在其上执行相应的择取操作。
+         * 执行择取操作的主体是Sink[水槽](Sink继承了Consumer) 它将择取操作统一封装到accept方法中。
+         * 在链式操作中 当前阶段的Sink执行完accept方法后 会将择取出的数据传递给下一个Sink[水槽]。
          */
         @SuppressWarnings("unchecked")
         @Override
@@ -806,19 +806,19 @@ public final class Spliterators {
                 throw new NullPointerException();
             /*
              * 1. hi保存当前遍历范围的上界fence
-             * 2. i初始化为当前的下界index，并一直遍历到当前的上界hi
+             * 2. i初始化为当前的下界index 并一直遍历到当前的上界hi
              * 3. 将当前的下界index更新为当前的上界fence
-             * 做这一堆的目的是为了并行操作，每个线程负责处理一段不重叠的数据
+             * 做这一堆的目的是为了并行操作 每个线程负责处理一段不重叠的数据
              */
             if((a = array).length >= (hi = fence) && (i = index) >= 0 && i < (index = hi)) {
                 do {
-                    // 从第一个中间阶段开始，依次调用整个Sink链条上accept，完成择取操作
+                    // 从第一个中间阶段开始 依次调用整个Sink链条上accept 完成择取操作
                     action.accept((T) a[i]);
                 } while(++i < hi);
             }
         }
         
-        // 返回当前情境中的元素数量（可能是估算值）
+        // 返回当前情境中的元素数量(可能是估算值)
         @Override
         public long estimateSize() {
             return (long) (fence - index);
@@ -831,11 +831,11 @@ public final class Spliterators {
         }
         
         /*
-         * 对于具有SORTED特征值的容器来说，
-         * 如果该容器使用Comparator排序，则返回其Comparator；
-         * 如果该容器使用Comparable实现自然排序，则返回null；
+         * 对于具有SORTED特征值的容器来说 
+         * 如果该容器使用Comparator排序 则返回其Comparator；
+         * 如果该容器使用Comparable实现自然排序 则返回null；
          *
-         * 对于不具有SORTED特征值的容器来说，抛出异常。
+         * 对于不具有SORTED特征值的容器来说 抛出异常。
          */
         @Override
         public Comparator<? super T> getComparator() {
@@ -848,7 +848,7 @@ public final class Spliterators {
     /**
      * A Spliterator.OfInt designed for use by sources that traverse and split elements maintained in an unmodifiable {@code int[]} array.
      */
-    // 将int数组打包到IntArraySpliterator中用于切割和遍历（对每个元素执行特定的择取操作），要求改数组元素不可变。
+    // 将int数组打包到IntArraySpliterator中用于切割和遍历(对每个元素执行特定的择取操作) 要求改数组元素不可变。
     static final class IntArraySpliterator implements Spliterator.OfInt {
         private final int[] array;
         private final int characteristics;
@@ -884,7 +884,7 @@ public final class Spliterators {
             this.characteristics = additionalCharacteristics | Spliterator.SIZED | Spliterator.SUBSIZED;
         }
         
-        // 折半分割[index, fence]范围内的数组，将其打包到为基本类型int特化的Spliterator后返回，特征值不变
+        // 折半分割[index, fence]范围内的数组 将其打包到为基本类型int特化的Spliterator后返回 特征值不变
         @Override
         public OfInt trySplit() {
             int lo = index, mid = (lo + fence) >>> 1;
@@ -904,7 +904,7 @@ public final class Spliterators {
             return false;
         }
         
-        // 遍历数组每个元素，在其上执行相应的择取操作。
+        // 遍历数组每个元素 在其上执行相应的择取操作。
         @Override
         public void forEachRemaining(IntConsumer action) {
             int[] a;
@@ -940,7 +940,7 @@ public final class Spliterators {
      * A Spliterator.OfLong designed for use by sources that traverse and split
      * elements maintained in an unmodifiable {@code int[]} array.
      */
-    // 将long数组打包到LongArraySpliterator中用于切割和遍历（对每个元素执行特定的择取操作），要求改数组元素不可变。
+    // 将long数组打包到LongArraySpliterator中用于切割和遍历(对每个元素执行特定的择取操作) 要求改数组元素不可变。
     static final class LongArraySpliterator implements Spliterator.OfLong {
         private final long[] array;
         private final int characteristics;
@@ -993,7 +993,7 @@ public final class Spliterators {
             return false;
         }
         
-        // 遍历数组每个元素，在其上执行相应的择取操作。
+        // 遍历数组每个元素 在其上执行相应的择取操作。
         @Override
         public void forEachRemaining(LongConsumer action) {
             long[] a;
@@ -1029,7 +1029,7 @@ public final class Spliterators {
      * A Spliterator.OfDouble designed for use by sources that traverse and split
      * elements maintained in an unmodifiable {@code int[]} array.
      */
-    // 将double数组打包到DoubleArraySpliterator中用于切割和遍历（对每个元素执行特定的择取操作），要求改数组元素不可变。
+    // 将double数组打包到DoubleArraySpliterator中用于切割和遍历(对每个元素执行特定的择取操作) 要求改数组元素不可变。
     static final class DoubleArraySpliterator implements Spliterator.OfDouble {
         private final double[] array;
         private final int characteristics;
@@ -1084,7 +1084,7 @@ public final class Spliterators {
             return false;
         }
         
-        // 遍历数组每个元素，在其上执行相应的择取操作。
+        // 遍历数组每个元素 在其上执行相应的择取操作。
         @Override
         public void forEachRemaining(DoubleConsumer action) {
             double[] a;
@@ -1126,7 +1126,7 @@ public final class Spliterators {
      * A Spliterator using a given Iterator for element operations.
      * The spliterator implements {@code trySplit} to permit limited parallelism.
      */
-    // 内部封装了Collection和Iterator，使用Iterator去遍历Collection
+    // 内部封装了Collection和Iterator 使用Iterator去遍历Collection
     static class IteratorSpliterator<T> implements Spliterator<T> {
         static final int BATCH_UNIT = 1 << 10;  // batch array size increment
         static final int MAX_BATCH = 1 << 25;  // max batch array size;
@@ -1609,19 +1609,19 @@ public final class Spliterators {
     public static <T> Iterator<T> iterator(Spliterator<? extends T> spliterator) {
         Objects.requireNonNull(spliterator);
         
-        // 适配器，包装Spliterator，使其发挥Iterator的功能
+        // 适配器 包装Spliterator 使其发挥Iterator的功能
         class Adapter implements Iterator<T>, Consumer<T> {
-            boolean valueReady = false; // 下一个值是否已准备好（被取出）
+            boolean valueReady = false; // 下一个值是否已准备好(被取出)
             T nextElement;  // 下一个元素
             
-            // 重写了accept，被tryAdvance回调
+            // 重写了accept 被tryAdvance回调
             @Override
             public void accept(T t) {
                 valueReady = true;
                 nextElement = t;
             }
             
-            // 如果存在下一个元素，将valueReady置为true
+            // 如果存在下一个元素 将valueReady置为true
             @Override
             public boolean hasNext() {
                 if(!valueReady) {
@@ -1630,7 +1630,7 @@ public final class Spliterators {
                 return valueReady;
             }
             
-            // 获取到下一个元素后，将valueReady置为false。如果没有经过hasNext就获取值，则不会返回需要的值
+            // 获取到下一个元素后 将valueReady置为false。如果没有经过hasNext就获取值 则不会返回需要的值
             @Override
             public T next() {
                 if(!valueReady && !hasNext())
@@ -1659,7 +1659,7 @@ public final class Spliterators {
      *
      * @throws NullPointerException if the given spliterator is {@code null}
      */
-    // 将Spliterator适配到Iterator来使用，参见
+    // 将Spliterator适配到Iterator来使用 参见
     public static PrimitiveIterator.OfInt iterator(Spliterator.OfInt spliterator) {
         Objects.requireNonNull(spliterator);
         
@@ -1866,7 +1866,7 @@ public final class Spliterators {
              */
             HoldingConsumer<T> holder = new HoldingConsumer<>();
             long s = est;
-            // 这里使用tryAdvance(holder)，可以将该Spliterator的元素取出来缓存到holder中
+            // 这里使用tryAdvance(holder) 可以将该Spliterator的元素取出来缓存到holder中
             if(s > 1 && tryAdvance(holder)) {
                 int n = batch + BATCH_UNIT;
                 if(n > s)

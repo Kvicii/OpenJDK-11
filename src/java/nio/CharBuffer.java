@@ -82,14 +82,14 @@ import java.util.stream.StreamSupport;
  *                    HeapCharBufferR
  *
  *
- * 直接缓冲区（缓冲区字节序与本地相同）
+ * 直接缓冲区(缓冲区字节序与本地相同)
  * CharBuffer        DirectBuffer
  *     └──────┬──────────┘ │
  *    DirectCharBufferU    │
  *            ├────────────┘
  *    DirectCharBufferRU
  *
- * 直接缓冲区（缓冲区字节序与本地不同）
+ * 直接缓冲区(缓冲区字节序与本地不同)
  * CharBuffer        DirectBuffer
  *     └──────┬──────────┘ │
  *    DirectCharBufferS    │
@@ -108,9 +108,9 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
     
     // These fields are declared here rather than in Heap-X-Buffer in order to reduce the number of virtual method invocations needed to access these values,
     // which is especially costly when coding small buffers.
-    final char[] hb;    // Non-null only for heap buffers（并非用在所有子类）
+    final char[] hb;    // Non-null only for heap buffers(并非用在所有子类)
     
-    final int offset;   // 寻址偏移量，用于StringCharBuffer/HeapCharBuffer/DirectCharBufferU/DirectCharBufferS这四组实现
+    final int offset;   // 寻址偏移量 用于StringCharBuffer/HeapCharBuffer/DirectCharBufferU/DirectCharBufferS这四组实现
     boolean isReadOnly; // 该缓冲区是否只读
     
     
@@ -140,7 +140,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return {@code true} if, and only if, this buffer is direct
      */
-    // true：该缓冲区是直接缓冲区
+    // true:该缓冲区是直接缓冲区
     public abstract boolean isDirect();
     
     /*▲ 缓冲区属性 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -152,7 +152,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
     /**
      * {@inheritDoc}
      */
-    // 在当前游标position处设置新的mark（备忘）
+    // 在当前游标position处设置新的mark(备忘)
     @Override
     public final CharBuffer mark() {
         super.mark();
@@ -182,7 +182,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
     /**
      * {@inheritDoc}
      */
-    // 将当前游标position回退到mark（备忘）位置
+    // 将当前游标position回退到mark(备忘)位置
     @Override
     public final CharBuffer reset() {
         super.reset();
@@ -192,7 +192,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
     /**
      * {@inheritDoc}
      */
-    // 清理缓冲区，重置标记
+    // 清理缓冲区 重置标记
     @Override
     public final CharBuffer clear() {
         super.clear();
@@ -202,7 +202,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
     /**
      * {@inheritDoc}
      */
-    // 修改标记，可以切换缓冲区读/写模式
+    // 修改标记 可以切换缓冲区读/写模式
     @Override
     public final CharBuffer flip() {
         super.flip();
@@ -212,7 +212,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
     /**
      * {@inheritDoc}
      */
-    // 丢弃备忘，游标归零
+    // 丢弃备忘 游标归零
     @Override
     public final CharBuffer rewind() {
         super.rewind();
@@ -223,7 +223,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a new char buffer whose content is a shared subsequence of this buffer's content.
@@ -242,7 +242,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return The new char buffer
      */
-    // 切片，截取旧缓冲区的【活跃区域】，作为新缓冲区的【原始区域】。两个缓冲区标记独立
+    // 切片 截取旧缓冲区的【活跃区域】 作为新缓冲区的【原始区域】。两个缓冲区标记独立
     @Override
     public abstract CharBuffer slice();
     
@@ -263,7 +263,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return The new char buffer
      */
-    // 副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     @Override
     public abstract CharBuffer duplicate();
     
@@ -290,7 +290,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return The new, read-only char buffer
      */
-    // 只读副本，新缓冲区共享旧缓冲区的【原始区域】，且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
+    // 只读副本 新缓冲区共享旧缓冲区的【原始区域】 且新旧缓冲区【活跃区域】一致。两个缓冲区标记独立。
     public abstract CharBuffer asReadOnlyBuffer();
     
     /**
@@ -319,10 +319,10 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws IndexOutOfBoundsException If the preconditions on {@code start} and {@code end}
      *                                   do not hold
      */
-    // 副本，新缓冲区的【活跃区域】取自旧缓冲区【活跃区域】的[start，end)部分
+    // 副本 新缓冲区的【活跃区域】取自旧缓冲区【活跃区域】的[start end)部分
     public abstract CharBuffer subSequence(int start, int end);
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -336,7 +336,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @throws BufferUnderflowException If the buffer's current position is not smaller than its limit
      */
-    // 读取position处（可能需要加offset）的char，然后递增position。
+    // 读取position处(可能需要加offset)的char 然后递增position。
     public abstract char get();
     
     /**
@@ -350,7 +350,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws IndexOutOfBoundsException If {@code index} is negative
      *                                   or not smaller than the buffer's limit
      */
-    // 读取index处（可能需要加offset）的char（有越界检查）
+    // 读取index处(可能需要加offset)的char(有越界检查)
     public abstract char get(int index);
     
     /**
@@ -361,7 +361,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return The char at the given index
      */
-    // 返回index处的字符，不经过越界检查
+    // 返回index处的字符 不经过越界检查
     abstract char getUnchecked(int index);
     
     /**
@@ -434,7 +434,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws BufferUnderflowException If there are fewer than {@code length} chars
      *                                  remaining in this buffer
      */
-    // 复制原缓存区的内容到dst数组（复制dst数组能容纳的所有内容，不考虑偏移量offset）
+    // 复制原缓存区的内容到dst数组(复制dst数组能容纳的所有内容 不考虑偏移量offset)
     public CharBuffer get(char[] dst) {
         return get(dst, 0, dst.length);
     }
@@ -458,7 +458,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws BufferOverflowException If this buffer's current position is not smaller than its limit
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 向position处（可能需要加offset）写入char，并将position递增
+    // 向position处(可能需要加offset)写入char 并将position递增
     public abstract CharBuffer put(char c);
     
     /**
@@ -476,7 +476,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *                                   or not smaller than the buffer's limit
      * @throws ReadOnlyBufferException   If this buffer is read-only
      */
-    // 向index处（可能需要加offset）写入char
+    // 向index处(可能需要加offset)写入char
     public abstract CharBuffer put(int index, char c);
     
     /**
@@ -614,7 +614,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *                                   parameters do not hold
      * @throws ReadOnlyBufferException   If this buffer is read-only
      */
-    // 从源字符数组src的offset处开始，复制length个元素，写入到当前缓冲区（具体行为由子类实现）
+    // 从源字符数组src的offset处开始 复制length个元素 写入到当前缓冲区(具体行为由子类实现)
     public CharBuffer put(char[] src, int offset, int length) {
         checkBounds(offset, length, src.length);
         if(length > remaining())
@@ -714,7 +714,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws IndexOutOfBoundsException If the preconditions on the {@code offset} and {@code length}
      *                                   parameters do not hold
      */
-    // 包装一个字符数组到buffer（包装一部分）
+    // 包装一个字符数组到buffer(包装一部分)
     public static CharBuffer wrap(char[] array, int offset, int length) {
         try {
             return new HeapCharBuffer(array, offset, length);
@@ -740,7 +740,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return The new char buffer
      */
-    // 包装一个字符数组到buffer（包装一部分）
+    // 包装一个字符数组到buffer(包装一部分)
     public static CharBuffer wrap(char[] array) {
         return wrap(array, 0, array.length);
     }
@@ -768,7 +768,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws IndexOutOfBoundsException If the preconditions on the {@code start} and {@code end}
      *                                   parameters do not hold
      */
-    // 包装一个CharSequence到buffer（包装一部分）
+    // 包装一个CharSequence到buffer(包装一部分)
     public static CharBuffer wrap(CharSequence csq, int start, int end) {
         try {
             return new StringCharBuffer(csq, start, end);
@@ -790,7 +790,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return The new character buffer
      */
-    // 包装一个CharSequence到buffer（包装全部）
+    // 包装一个CharSequence到buffer(包装全部)
     public static CharBuffer wrap(CharSequence csq) {
         return wrap(csq, 0, csq.length());
     }
@@ -827,7 +827,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws ReadOnlyBufferException If this buffer is read-only
      * @since 1.5
      */
-    // 向buffer中添加CharSequence（添加全部）
+    // 向buffer中添加CharSequence(添加全部)
     public CharBuffer append(CharSequence csq) {
         if(csq == null)
             return put("null");
@@ -860,7 +860,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws ReadOnlyBufferException   If this buffer is read-only
      * @since 1.5
      */
-    // 向buffer中添加CharSequence（添加一部分）
+    // 向buffer中添加CharSequence(添加一部分)
     public CharBuffer append(CharSequence csq, int start, int end) {
         CharSequence cs = (csq == null ? "null" : csq);
         return put(cs.subSequence(start, end).toString());
@@ -917,7 +917,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @throws ReadOnlyBufferException If this buffer is read-only
      */
-    // 压缩缓冲区，将当前未读完的数据挪到容器起始处，可用于读模式到写模式的切换，但又不丢失之前读入的数据。
+    // 压缩缓冲区 将当前未读完的数据挪到容器起始处 可用于读模式到写模式的切换 但又不丢失之前读入的数据。
     public abstract CharBuffer compact();
     
     /*▲ 压缩 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -938,11 +938,11 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return This buffer's byte order
      */
-    // 返回该缓冲区的字节序（大端还是小端）
+    // 返回该缓冲区的字节序(大端还是小端)
     public abstract ByteOrder order();
     
     /* The order or null if the buffer does not cover a memory region, such as StringCharBuffer */
-    // 返回‘char’的字节顺序（大端还是小端），在StringCharBuffer中换回null，其他缓冲区中由实现而定。
+    // 返回‘char’的字节顺序(大端还是小端) 在StringCharBuffer中换回null 其他缓冲区中由实现而定。
     abstract ByteOrder charRegionOrder();
     
     /*▲ 字节顺序 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -982,7 +982,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
         return BufferMismatch.mismatch(this, this.position(), that, that.position(), this.remaining()) < 0;
     }
     
-    // 比较字符x和字符y，返回x-y的结果
+    // 比较字符x和字符y 返回x-y的结果
     private static int compare(char x, char y) {
         return Character.compare(x, y);
     }
@@ -1032,7 +1032,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @since 11
      */
-    // 快速比较两个缓冲区内容，并返回失配元素的索引。返回-1代表缓冲区内容相同。
+    // 快速比较两个缓冲区内容 并返回失配元素的索引。返回-1代表缓冲区内容相同。
     public int mismatch(CharBuffer that) {
         int length = Math.min(this.remaining(), that.remaining());
         int r = BufferMismatch.mismatch(this, this.position(), that, that.position(), length);
@@ -1055,7 +1055,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @return The length of this character buffer
      */
-    // 返回缓冲区长度（在读/写模式下意义不同）
+    // 返回缓冲区长度(在读/写模式下意义不同)
     public final int length() {
         return remaining();
     }
@@ -1072,12 +1072,12 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @throws IndexOutOfBoundsException If the preconditions on {@code index} do not hold
      */
-    // 返回position+index处的char，position位置不变
+    // 返回position+index处的char position位置不变
     public final char charAt(int index) {
         return get(position() + checkIndex(index, 1));
     }
     
-    // 将当前字符序列转为流序列，序列中每个元素是char的编码值
+    // 将当前字符序列转为流序列 序列中每个元素是char的编码值
     @Override
     public IntStream chars() {
         return StreamSupport.intStream(() -> new CharBufferSpliterator(this), Buffer.SPLITERATOR_CHARACTERISTICS, false);
@@ -1120,9 +1120,9 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws ReadOnlyBufferException if target is a read only buffer
      * @since 1.5
      */
-    // 读取此缓冲区内容，并写入目标缓冲区target（如果放不下，则只写入放得下的部分）
+    // 读取此缓冲区内容 并写入目标缓冲区target(如果放不下 则只写入放得下的部分)
     public int read(CharBuffer target) throws IOException {
-        // 确定可传输的字节数（还剩多少字节未被读取）
+        // 确定可传输的字节数(还剩多少字节未被读取)
         int targetRemaining = target.remaining();
         int remaining = remaining();
         if(remaining == 0)
@@ -1158,7 +1158,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @return {@code true} if, and only if, this buffer
      * is backed by an array and is not read-only
      */
-    // true：此buffer由可访问的数组实现
+    // true:此buffer由可访问的数组实现
     public final boolean hasArray() {
         return (hb != null) && !isReadOnly;
     }
@@ -1188,7 +1188,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
         return hb;
     }
     
-    // 返回内部存储结构的引用（一般用于非直接缓存区）
+    // 返回内部存储结构的引用(一般用于非直接缓存区)
     @Override
     Object base() {
         return hb;
@@ -1205,7 +1205,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      * @throws ReadOnlyBufferException       If this buffer is backed by an array but is read-only
      * @throws UnsupportedOperationException If this buffer is not backed by an accessible array
      */
-    // 返回此缓冲区中的第一个元素在缓冲区的底层实现数组中的偏移量（可选操作）
+    // 返回此缓冲区中的第一个元素在缓冲区的底层实现数组中的偏移量(可选操作)
     public final int arrayOffset() {
         if(hb == null)
             throw new UnsupportedOperationException();
@@ -1232,7 +1232,7 @@ public abstract class CharBuffer extends Buffer implements Comparable<CharBuffer
      *
      * @throws IllegalArgumentException If the {@code capacity} is a negative integer
      */
-    // 分配非直接缓冲区HeapCharBuffer：将缓冲区建立在JVM的内存中
+    // 分配非直接缓冲区HeapCharBuffer:将缓冲区建立在JVM的内存中
     public static CharBuffer allocate(int capacity) {
         if(capacity < 0)
             throw createCapacityException(capacity);

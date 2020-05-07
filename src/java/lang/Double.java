@@ -91,7 +91,7 @@ public final class Double extends Number implements Comparable<Double> {
      * {@code 0x1.fffffffffffffP+1023} and also equal to
      * {@code Double.longBitsToDouble(0x7fefffffffffffffL)}.
      */
-    public static final double MAX_VALUE = 0x1.fffffffffffffP+1023; // double最大值：1.7976931348623157e+308
+    public static final double MAX_VALUE = 0x1.fffffffffffffP+1023; // double最大值:1.7976931348623157e+308
     
     /**
      * A constant holding the smallest positive normal value of type
@@ -101,7 +101,7 @@ public final class Double extends Number implements Comparable<Double> {
      *
      * @since 1.6
      */
-    public static final double MIN_NORMAL = 0x1.0p-1022; // double最小正值：2.2250738585072014E-308，正规数
+    public static final double MIN_NORMAL = 0x1.0p-1022; // double最小正值:2.2250738585072014E-308 正规数
     
     /**
      * A constant holding the smallest positive nonzero value of type
@@ -110,7 +110,7 @@ public final class Double extends Number implements Comparable<Double> {
      * {@code 0x0.0000000000001P-1022} and also equal to
      * {@code Double.longBitsToDouble(0x1L)}.
      */
-    public static final double MIN_VALUE = 0x0.0000000000001P-1022; // double最小正值：4.9e-324，次正规数
+    public static final double MIN_VALUE = 0x0.0000000000001P-1022; // double最小正值:4.9e-324 次正规数
     
     /**
      * Maximum exponent a finite {@code double} variable may have.
@@ -381,7 +381,7 @@ public final class Double extends Number implements Comparable<Double> {
      * @throws NumberFormatException if the string does not contain a
      *                               parsable number.
      */
-    // 将字符串s解析为double值，然后再装箱
+    // 将字符串s解析为double值 然后再装箱
     public static Double valueOf(String s) throws NumberFormatException {
         return new Double(parseDouble(s));
     }
@@ -845,7 +845,7 @@ public final class Double extends Number implements Comparable<Double> {
      *
      * @return the bits that represent the floating-point number.
      */
-    // 先计算value的二进制格式，然后返回该二进制格式表示的long
+    // 先计算value的二进制格式 然后返回该二进制格式表示的long
     @HotSpotIntrinsicCandidate
     public static long doubleToLongBits(double value) {
         if(!isNaN(value)) {
@@ -892,7 +892,7 @@ public final class Double extends Number implements Comparable<Double> {
      *
      * @since 1.3
      */
-    // 先计算value的二进制格式，然后返回该二进制格式表示的long
+    // 先计算value的二进制格式 然后返回该二进制格式表示的long
     @HotSpotIntrinsicCandidate
     public static native long doubleToRawLongBits(double value);
     
@@ -958,7 +958,7 @@ public final class Double extends Number implements Comparable<Double> {
      * @return the {@code double} floating-point value with the same
      * bit pattern.
      */
-    // 先计算bits的二进制格式，然后返回该二进制格式表示的double
+    // 先计算bits的二进制格式 然后返回该二进制格式表示的double
     @HotSpotIntrinsicCandidate
     public static native double longBitsToDouble(long bits);
     

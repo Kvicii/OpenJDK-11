@@ -33,7 +33,7 @@ import java.nio.charset.CharsetEncoder;
  * Utility class for caching per-thread decoders and encoders.
  */
 
-// 工厂类，利用ThreadLocal为当前线程缓存编码器和解码器
+// 工厂类 利用ThreadLocal为当前线程缓存编码器和解码器
 public class ThreadLocalCoders {
     
     private static final int CACHE_SIZE = 3;
@@ -77,7 +77,7 @@ public class ThreadLocalCoders {
             return null;
         }
         
-        // 指定的字符集name是否存在（ob是已经存在的字符集）
+        // 指定的字符集name是否存在(ob是已经存在的字符集)
         boolean hasName(Object ob, Object name) {
             if(name instanceof String) {
                 return (((CharsetDecoder) ob).charset().name().equals(name));
@@ -89,14 +89,14 @@ public class ThreadLocalCoders {
         }
     };
     
-    // 返回编码器（先从缓冲中查找）
+    // 返回编码器(先从缓冲中查找)
     public static CharsetEncoder encoderFor(Object name) {
         CharsetEncoder ce = (CharsetEncoder) encoderCache.forName(name);
         ce.reset();
         return ce;
     }
     
-    // 返回解码器（先从缓冲中查找）
+    // 返回解码器(先从缓冲中查找)
     public static CharsetDecoder decoderFor(Object name) {
         CharsetDecoder cd = (CharsetDecoder) decoderCache.forName(name);
         cd.reset();
@@ -115,10 +115,10 @@ public class ThreadLocalCoders {
             this.size = size;
         }
     
-        // 创建编码/解码器，name可能是字符集名，也可能是字符集实例
+        // 创建编码/解码器 name可能是字符集名 也可能是字符集实例
         abstract Object create(Object name);
     
-        // 指定的字符集name是否存在（ob是已经存在的字符集）
+        // 指定的字符集name是否存在(ob是已经存在的字符集)
         abstract boolean hasName(Object ob, Object name);
         
         Object forName(Object name) {
@@ -126,14 +126,14 @@ public class ThreadLocalCoders {
             if(oa == null) {    // 没有缓存
                 oa = new Object[size];
                 cache.set(oa);
-            } else {    // 存在缓存，则在缓存中查找
+            } else {    // 存在缓存 则在缓存中查找
                 for(int i = 0; i<oa.length; i++) {
                     Object ob = oa[i];
                     if(ob == null)
                         continue;
                     if(hasName(ob, name)) {
                         if(i>0) {
-                            // 如果查找的字符集存在，则将其挪到缓存的最前面
+                            // 如果查找的字符集存在 则将其挪到缓存的最前面
                             moveToFront(oa, i);
                         }
                         return ob;
@@ -141,7 +141,7 @@ public class ThreadLocalCoders {
                 }
             }
             
-            // 如果缓存中没有查找的字符集，则需要新建
+            // 如果缓存中没有查找的字符集 则需要新建
             Object ob = create(name);
             oa[oa.length - 1] = ob;
             moveToFront(oa, oa.length - 1);

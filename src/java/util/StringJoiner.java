@@ -60,7 +60,7 @@ package java.util;
  * @see java.util.stream.Collectors#joining(CharSequence, CharSequence, CharSequence)
  * @since 1.8
  */
-// 专用工具类，作为字符串拼接器，用来拼接字符串。内部使用String[]实现。
+// 专用工具类 作为字符串拼接器 用来拼接字符串。内部使用String[]实现。
 public final class StringJoiner {
     private final String delimiter;     // 分隔符
     private final String prefix;        // 前缀
@@ -73,14 +73,14 @@ public final class StringJoiner {
     private int size;       // 记录当前已拼接的子串数量
     
     /** Total length in chars so far, excluding prefix and suffix. */
-    private int len;        // 记录已拼接的所有子串以及分隔符的长度（不包括前缀和后缀）
+    private int len;        // 记录已拼接的所有子串以及分隔符的长度(不包括前缀和后缀)
     
     /**
      * When overriden by the user to be non-null via {@link #setEmptyValue}, the
      * string returned by toString() when no elements have yet been added.
      * When null, prefix + suffix is used as the empty value.
      */
-    private String emptyValue;  // 设定一个“空值”，可以理解为StringJoiner的默认值
+    private String emptyValue;  // 设定一个“空值” 可以理解为StringJoiner的默认值
     
     /**
      * Constructs a {@code StringJoiner} with no characters in it, with no
@@ -128,7 +128,7 @@ public final class StringJoiner {
         this.suffix = suffix.toString();
     }
     
-    // 将字符串s中的char存入数组chars，并返回char的数量
+    // 将字符串s中的char存入数组chars 并返回char的数量
     private static int getChars(String s, char[] chars, int start) {
         int len = s.length();
         s.getChars(0, len, chars, start);
@@ -168,7 +168,7 @@ public final class StringJoiner {
      * @throws NullPointerException when the {@code emptyValue} parameter is
      *                              {@code null}
      */
-    // 设定空值（可以理解为StringJoiner的默认值）
+    // 设定空值(可以理解为StringJoiner的默认值)
     public StringJoiner setEmptyValue(CharSequence emptyValue) {
         this.emptyValue = Objects.requireNonNull(emptyValue, "The empty value must not be null").toString();
         return this;
@@ -189,7 +189,7 @@ public final class StringJoiner {
         if(elts == null) {
             elts = new String[8];
         } else {
-            // 子串数组满了，需要扩容
+            // 子串数组满了 需要扩容
             if(size == elts.length) {
                 elts = Arrays.copyOf(elts, 2 * size);
             }
@@ -223,22 +223,22 @@ public final class StringJoiner {
      *
      * @throws NullPointerException if the other {@code StringJoiner} is null
      */
-    // 合并两个拼接器中的字符串，other中的所有子串连带分隔符将作为当前拼接器的一个子串
+    // 合并两个拼接器中的字符串 other中的所有子串连带分隔符将作为当前拼接器的一个子串
     public StringJoiner merge(StringJoiner other) {
         Objects.requireNonNull(other);
         if(other.elts == null) {
             return this;
         }
-        // 把other中所有子串连带其分隔符拼接到一起，存入other.elts[0]
+        // 把other中所有子串连带其分隔符拼接到一起 存入other.elts[0]
         other.compactElts();
         // 将other.elts[0]添加到当前拼接器中
         return add(other.elts[0]);
     }
     
-    // 把所有子串连带分隔符拼接到一起，存入elts[0]
+    // 把所有子串连带分隔符拼接到一起 存入elts[0]
     private void compactElts() {
         if(size>1) {
-            // 定义一个大数组，足够存储所有子串和分割符
+            // 定义一个大数组 足够存储所有子串和分割符
             final char[] chars = new char[len];
             int k = getChars(elts[0], chars, 0);
             int i = 1;

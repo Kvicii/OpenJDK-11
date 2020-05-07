@@ -129,31 +129,31 @@ import java.util.function.Function;
  */
 
 /*
- * 清理器(公开)，内部默认使用虚引用完成对对象的跟踪。
+ * 清理器(公开) 内部默认使用虚引用完成对对象的跟踪。
  *
- * 注：此清理器与非公开的清理器jdk.internal.ref.Cleaner实现原理有些不一样。
+ * 注:此清理器与非公开的清理器jdk.internal.ref.Cleaner实现原理有些不一样。
  *
- * 下面就以虚引用清理器（PhantomCleanableRef）介绍Cleaner工作原理。
+ * 下面就以虚引用清理器(PhantomCleanableRef)介绍Cleaner工作原理。
  *
  *                               ┌───█│█│█│█│█│█    ReferenceQueue
  * Cleaner───────CleanerImpl─────┤
  *                               └───▉│▉│▉│▉│▉  PhantomCleanableList
  *
- * 一个程序可以由多个清理器（Cleaner）。
- * 每个清理器（Cleaner）可以追踪多个对象（obj），每个对象都有特定的清理操作（action）。
- * 每当把一组[obj, action]注册给清理器（Cleaner），都会新建一个虚引用清理器（PhantomCleanableRef），并加入到虚引用清理器列表。
- * 虚引用清理器本身是个虚引用(PhantomReference)，它会跟踪此obj，并且记下其对应的action。
- * 每次GC时，JVM将回收只剩虚引用的obj，并将追踪它的虚引用（这里是PhantomCleanableRef）加入到ReferenceQueue。
+ * 一个程序可以由多个清理器(Cleaner)。
+ * 每个清理器(Cleaner)可以追踪多个对象(obj) 每个对象都有特定的清理操作(action)。
+ * 每当把一组[obj, action]注册给清理器(Cleaner) 都会新建一个虚引用清理器(PhantomCleanableRef) 并加入到虚引用清理器列表。
+ * 虚引用清理器本身是个虚引用(PhantomReference) 它会跟踪此obj 并且记下其对应的action。
+ * 每次GC时 JVM将回收只剩虚引用的obj 并将追踪它的虚引用(这里是PhantomCleanableRef)加入到ReferenceQueue。
  *
- * 每创建（create）一个清理器（Cleaner），就开启一个清理服务（CleanerImpl）。
- * 每个清理服务（CleanerImpl）运行在一个全新的守护线程中。
- * 且每个清理服务（CleanerImpl）内部缓冲一个上述的虚引用清理器列表。
+ * 每创建(create)一个清理器(Cleaner) 就开启一个清理服务(CleanerImpl)。
+ * 每个清理服务(CleanerImpl)运行在一个全新的守护线程中。
+ * 且每个清理服务(CleanerImpl)内部缓冲一个上述的虚引用清理器列表。
  *
- * 清理服务的作用就是轮询"报废引用"队列（ReferenceQueue），只要该队列中有报废的引用（PhantomCleanableRef），
- * 就将其从ReferenceQueue和PhantomCleanableList中移除，并调用其相应的action。
- * 如果ReferenceQueue为空，清理服务陷入阻塞。
+ * 清理服务的作用就是轮询"报废引用"队列(ReferenceQueue) 只要该队列中有报废的引用(PhantomCleanableRef)
+ * 就将其从ReferenceQueue和PhantomCleanableList中移除 并调用其相应的action。
+ * 如果ReferenceQueue为空 清理服务陷入阻塞。
  *
- * 不同于Finalizer，这里拿虚引用追踪引用，在遇到GC时，对象就会被自动清理了。
+ * 不同于Finalizer 这里拿虚引用追踪引用 在遇到GC时 对象就会被自动清理了。
  * 而Finalizer需要手动释放对象。
  */
 public final class Cleaner {
@@ -161,11 +161,11 @@ public final class Cleaner {
     /**
      * The Cleaner implementation.
      */
-    // Cleaner细节的实现者，提供清理服务，与Cleaner是一对一关系
+    // Cleaner细节的实现者 提供清理服务 与Cleaner是一对一关系
     final CleanerImpl impl;
     
     static {
-        // 等价于：CleanerImpl.setCleanerImplAccess(cleaner -> cleaner.impl);
+        // 等价于:CleanerImpl.setCleanerImplAccess(cleaner -> cleaner.impl);
         CleanerImpl.setCleanerImplAccess(new Function<>() {
             @Override
             public CleanerImpl apply(Cleaner cleaner) {
@@ -177,7 +177,7 @@ public final class Cleaner {
     /**
      * Construct a Cleaner implementation and start it.
      */
-    // 创建清理器，初始化清理服务
+    // 创建清理器 初始化清理服务
     private Cleaner() {
         impl = new CleanerImpl();
     }
@@ -195,10 +195,10 @@ public final class Cleaner {
      *
      * @throws SecurityException if the current thread is not allowed to create or start the thread.
      */
-    // 创建一个清理器，并开启清理服务
+    // 创建一个清理器 并开启清理服务
     public static Cleaner create() {
         Cleaner cleaner = new Cleaner();
-        // 为清理器开启清理服务（守护线程）
+        // 为清理器开启清理服务(守护线程)
         cleaner.impl.start(cleaner, null);
         return cleaner;
     }
@@ -225,7 +225,7 @@ public final class Cleaner {
      * @throws SecurityException           if the current thread is not allowed to
      *                                     create or start the thread.
      */
-    // 创建一个清理器，附带自定义的线程工厂
+    // 创建一个清理器 附带自定义的线程工厂
     public static Cleaner create(ThreadFactory threadFactory) {
         Objects.requireNonNull(threadFactory, "threadFactory");
         Cleaner cleaner = new Cleaner();
@@ -246,9 +246,9 @@ public final class Cleaner {
      */
     /*
      * 向Cleaner注册跟踪的对象obj和清理动作action
-     * obj默认使用虚引用包裹，在该对象被回收后，可执行action动作
+     * obj默认使用虚引用包裹 在该对象被回收后 可执行action动作
      *
-     * 返回的Cleanable对象可用于手动执行清理操作（不必要等到下一次GC）
+     * 返回的Cleanable对象可用于手动执行清理操作(不必要等到下一次GC)
      *
      * CleanerImpl.run()==>清理器clean()-->清理器performCleanup()-->action.run()
      */
@@ -264,7 +264,7 @@ public final class Cleaner {
      *
      * @since 9
      */
-    // 清理器接口：可清理的
+    // 清理器接口:可清理的
     public interface Cleanable {
         /**
          * Unregisters the cleanable and invokes the cleaning action.

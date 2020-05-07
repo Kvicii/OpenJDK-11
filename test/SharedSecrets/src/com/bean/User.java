@@ -6,7 +6,7 @@ import com.internal.misc.SharedSecrets;
 public class User {
     
     static {
-        // 留下后门，以便对非public方法fun1和fun2的方法
+        // 留下后门 以便对非public方法fun1和fun2的方法
         SharedSecrets.setComBeanAccess(new ComBeanAccess() {
             @Override
             public void fun1(User user) {

@@ -102,7 +102,7 @@ import java.util.function.ToLongFunction;
  * @since 1.8
  */
 
-// 收集器(Collector)工厂，定义了各种收集器，以完成各种收纳操作
+// 收集器(Collector)工厂 定义了各种收集器 以完成各种收纳操作
 public final class Collectors {
     
     static final Set<Collector.Characteristics> CH_NOID
@@ -134,7 +134,7 @@ public final class Collectors {
      * @return a {@code Collector} which collects all the input elements into a
      * {@code Collection}, in encounter order
      */
-    // 自定义容器，在参数中指定，该容器需要实现add方法
+    // 自定义容器 在参数中指定 该容器需要实现add方法
     public static <T, C extends Collection<T>> Collector<T, ?, C> toCollection(Supplier<C> collectionFactory) {
         return new CollectorImpl<>(
             collectionFactory,  // 1.构造容器
@@ -155,7 +155,7 @@ public final class Collectors {
      * @return a {@code Collector} which collects all the input elements into a
      * {@code List}, in encounter order
      */
-    // ArrayList容器，内部定义
+    // ArrayList容器 内部定义
     public static <T> Collector<T, ?, List<T>> toList() {
         return new CollectorImpl<>(
             (Supplier<List<T>>) ArrayList::new, // 1.构造容器
@@ -178,7 +178,7 @@ public final class Collectors {
      *
      * @since 10
      */
-    // 不可变的ArrayList容器，内部定义。按遭遇顺序收纳元素。
+    // 不可变的ArrayList容器 内部定义。按遭遇顺序收纳元素。
     @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, List<T>> toUnmodifiableList() {
         return new CollectorImpl<>(
@@ -205,7 +205,7 @@ public final class Collectors {
      * @return a {@code Collector} which collects all the input elements into a
      * {@code Set}
      */
-    // HashSet容器，内部定义
+    // HashSet容器 内部定义
     public static <T> Collector<T, ?, Set<T>> toSet() {
         return new CollectorImpl<>(
             (Supplier<Set<T>>) HashSet::new, // 1.构造容器
@@ -239,7 +239,7 @@ public final class Collectors {
      *
      * @since 10
      */
-    // 不可变的HashSet容器，内部定义。
+    // 不可变的HashSet容器 内部定义。
     @SuppressWarnings("unchecked")
     public static <T> Collector<T, ?, Set<T>> toUnmodifiableSet() {
         return new CollectorImpl<>(
@@ -264,7 +264,7 @@ public final class Collectors {
      * @return a {@code Collector} that concatenates the input elements into a
      * {@code String}, in encounter order
      */
-    // StringBuilder容器，拼接String。
+    // StringBuilder容器 拼接String。
     public static Collector<CharSequence, ?, String> joining() {
         return new CollectorImpl<CharSequence, StringBuilder, String>(
             StringBuilder::new, // 1.构造容器
@@ -283,7 +283,7 @@ public final class Collectors {
      * @return A {@code Collector} which concatenates CharSequence elements,
      * separated by the specified delimiter, in encounter order
      */
-    // StringJoiner容器，使用指定的分隔符拼接String。
+    // StringJoiner容器 使用指定的分隔符拼接String。
     public static Collector<CharSequence, ?, String> joining(CharSequence delimiter) {
         return joining(delimiter, "", "");
     }
@@ -302,7 +302,7 @@ public final class Collectors {
      * @return A {@code Collector} which concatenates CharSequence elements,
      * separated by the specified delimiter, in encounter order
      */
-    // StringJoiner容器，使用指定的分隔符、前缀、后缀拼接String。
+    // StringJoiner容器 使用指定的分隔符、前缀、后缀拼接String。
     public static Collector<CharSequence, ?, String> joining(CharSequence delimiter, CharSequence prefix, CharSequence suffix) {
         return new CollectorImpl<>(
             () -> new StringJoiner(delimiter, prefix, suffix), // 1.构造容器
@@ -348,7 +348,7 @@ public final class Collectors {
      * no mapping for that department at all.
      * @since 9
      */
-    // 自定义容器，收纳之前先过滤，在groupingBy中很实用
+    // 自定义容器 收纳之前先过滤 在groupingBy中很实用
     public static <T, A, R> Collector<T, ?, R> filtering(Predicate<? super T> predicate, Collector<? super T, A, R> downstream) {
         BiConsumer<A, ? super T> downstreamAccumulator = downstream.accumulator();
         return new CollectorImpl<>(
@@ -390,7 +390,7 @@ public final class Collectors {
      *                        toSet())));
      * }</pre>
      */
-    // 自定义容器，收纳之前先映射，在groupingBy中很实用
+    // 自定义容器 收纳之前先映射 在groupingBy中很实用
     public static <T, U, A, R> Collector<T, ?, R> mapping(Function<? super T, ? extends U> mapper, Collector<? super U, A, R> downstream) {
         BiConsumer<A, ? super U> downstreamAccumulator = downstream.accumulator();
         return new CollectorImpl<>(
@@ -437,7 +437,7 @@ public final class Collectors {
      * }</pre>
      * @since 9
      */
-    // 自定义容器，收纳之前先降维，在groupingBy中很实用
+    // 自定义容器 收纳之前先降维 在groupingBy中很实用
     public static <T, U, A, R> Collector<T, ?, R> flatMapping(Function<? super T, ? extends Stream<? extends U>> mapper, Collector<? super U, A, R> downstream) {
         BiConsumer<A, ? super U> downstreamAccumulator = downstream.accumulator();
         return new CollectorImpl<>(
@@ -473,7 +473,7 @@ public final class Collectors {
      * @return a collector which performs the action of the downstream collector,
      * followed by an additional finishing step
      */
-    // 自定义容器，收纳之后对容器进行操作
+    // 自定义容器 收纳之后对容器进行操作
     public static <T, A, R, RR> Collector<T, A, RR> collectingAndThen(Collector<T, A, R> downstream, Function<R, RR> finisher) {
         Set<Collector.Characteristics> characteristics = downstream.characteristics();
         if(characteristics.contains(Collector.Characteristics.IDENTITY_FINISH)) {
@@ -523,7 +523,7 @@ public final class Collectors {
      *
      * @return a {@code Collector} that produces the sum of a derived property
      */
-    // int求和，参数是求和时对每个元素所做的动作
+    // int求和 参数是求和时对每个元素所做的动作
     public static <T> Collector<T, ?, Integer> summingInt(ToIntFunction<? super T> mapper) {
         return new CollectorImpl<>(
             () -> new int[1], // 1.构造容器
@@ -543,7 +543,7 @@ public final class Collectors {
      *
      * @return a {@code Collector} that produces the sum of a derived property
      */
-    // long求和，参数是求和时对每个元素所做的动作
+    // long求和 参数是求和时对每个元素所做的动作
     public static <T> Collector<T, ?, Long> summingLong(ToLongFunction<? super T> mapper) {
         return new CollectorImpl<>(
             () -> new long[1], // 1.构造容器
@@ -571,7 +571,7 @@ public final class Collectors {
      *
      * @return a {@code Collector} that produces the sum of a derived property
      */
-    // double求和，参数是求和时对每个元素所做的动作
+    // double求和 参数是求和时对每个元素所做的动作
     public static <T> Collector<T, ?, Double> summingDouble(ToDoubleFunction<? super T> mapper) {
         /*
          * In the arrays allocated for the collect operation, index 0
@@ -722,7 +722,7 @@ public final class Collectors {
      *     reducing(BinaryOperator.minBy(comparator))
      * }</pre>
      */
-    // 求最小值（返回值是Optional）
+    // 求最小值(返回值是Optional)
     public static <T> Collector<T, ?, Optional<T>> minBy(Comparator<? super T> comparator) {
         return reducing(BinaryOperator.minBy(comparator));
     }
@@ -741,7 +741,7 @@ public final class Collectors {
      *     reducing(BinaryOperator.maxBy(comparator))
      * }</pre>
      */
-    // 求最大值（返回值是Optional）
+    // 求最大值(返回值是Optional)
     public static <T> Collector<T, ?, Optional<T>> maxBy(Comparator<? super T> comparator) {
         return reducing(BinaryOperator.maxBy(comparator));
     }
@@ -823,7 +823,7 @@ public final class Collectors {
      * @see #reducing(BinaryOperator)
      * @see #reducing(Object, Function, BinaryOperator)
      */
-    // 使用指定的动作归约输出元素，identity可以看做是初始值
+    // 使用指定的动作归约输出元素 identity可以看做是初始值
     public static <T> Collector<T, ?, T> reducing(T identity, BinaryOperator<T> op) {
         return new CollectorImpl<>(
             boxSupplier(identity),  // 1.构造容器
@@ -873,7 +873,7 @@ public final class Collectors {
      * @see #reducing(Object, BinaryOperator)
      * @see #reducing(BinaryOperator)
      */
-    // 使用指定的动作归约输出元素，归约之前，可先对元素执行mapper操作
+    // 使用指定的动作归约输出元素 归约之前 可先对元素执行mapper操作
     public static <T, U> Collector<T, ?, U> reducing(U identity, Function<? super T, ? extends U> mapper, BinaryOperator<U> op) {
         return new CollectorImpl<>(
             boxSupplier(identity), // 1.构造容器
@@ -919,7 +919,7 @@ public final class Collectors {
      * @see #groupingBy(Function, Supplier, Collector)
      * @see #groupingByConcurrent(Function)
      */
-    // 分组，HashMap容器，classifier用来制定分类依据生成key值，下游收集器默认使用ArrayList
+    // 分组 HashMap容器 classifier用来制定分类依据生成key值 下游收集器默认使用ArrayList
     public static <T, K> Collector<T, ?, Map<K, List<T>>> groupingBy(Function<? super T, ? extends K> classifier) {
         return groupingBy(classifier, toList());
     }
@@ -967,7 +967,7 @@ public final class Collectors {
      * @see #groupingBy(Function, Supplier, Collector)
      * @see #groupingByConcurrent(Function, Collector)
      */
-    // 分组，HashMap容器，classifier用来制定分类依据生成key值，downstream代表下游的收集器，可以进一步分解上游收集到的元素以作为上游容器的value
+    // 分组 HashMap容器 classifier用来制定分类依据生成key值 downstream代表下游的收集器 可以进一步分解上游收集到的元素以作为上游容器的value
     public static <T, K, A, D> Collector<T, ?, Map<K, D>> groupingBy(Function<? super T, ? extends K> classifier, Collector<? super T, A, D> downstream) {
         return groupingBy(classifier, HashMap::new, downstream);
     }
@@ -1018,7 +1018,7 @@ public final class Collectors {
      * @see #groupingBy(Function)
      * @see #groupingByConcurrent(Function, Supplier, Collector)
      */
-    // 分组，自定义Map类的容器，classifier用来制定分类依据生成key值，downstream代表下游的收集器，可以进一步分解上游收集到的元素以作为上游容器的value
+    // 分组 自定义Map类的容器 classifier用来制定分类依据生成key值 downstream代表下游的收集器 可以进一步分解上游收集到的元素以作为上游容器的value
     public static <T, K, D, A, M extends Map<K, D>> Collector<T, ?, M> groupingBy(Function<? super T, ? extends K> classifier, Supplier<M> mapFactory, Collector<? super T, A, D> downstream) {
         Supplier<A> downstreamSupplier = downstream.supplier();
         BiConsumer<A, ? super T> downstreamAccumulator = downstream.accumulator();
@@ -1090,7 +1090,7 @@ public final class Collectors {
      * @see #groupingByConcurrent(Function, Collector)
      * @see #groupingByConcurrent(Function, Supplier, Collector)
      */
-    // 分组，ConcurrentHashMap容器
+    // 分组 ConcurrentHashMap容器
     public static <T, K> Collector<T, ?, ConcurrentMap<K, List<T>>> groupingByConcurrent(Function<? super T, ? extends K> classifier) {
         return groupingByConcurrent(classifier, ConcurrentHashMap::new, toList());
     }
@@ -1136,7 +1136,7 @@ public final class Collectors {
      * @see #groupingByConcurrent(Function)
      * @see #groupingByConcurrent(Function, Supplier, Collector)
      */
-    // 分组，ConcurrentHashMap容器
+    // 分组 ConcurrentHashMap容器
     public static <T, K, A, D> Collector<T, ?, ConcurrentMap<K, D>> groupingByConcurrent(Function<? super T, ? extends K> classifier, Collector<? super T, A, D> downstream) {
         return groupingByConcurrent(classifier, ConcurrentHashMap::new, downstream);
     }
@@ -1184,7 +1184,7 @@ public final class Collectors {
      * @see #groupingByConcurrent(Function, Collector)
      * @see #groupingBy(Function, Supplier, Collector)
      */
-    // 分组，自定义ConcurrentMap类的容器
+    // 分组 自定义ConcurrentMap类的容器
     public static <T, K, A, D, M extends ConcurrentMap<K, D>> Collector<T, ?, M> groupingByConcurrent(Function<? super T, ? extends K> classifier, Supplier<M> mapFactory, Collector<? super T, A, D> downstream) {
         Supplier<A> downstreamSupplier = downstream.supplier();
         BiConsumer<A, ? super T> downstreamAccumulator = downstream.accumulator();
@@ -1255,7 +1255,7 @@ public final class Collectors {
      * an empty List.
      * @see #partitioningBy(Predicate, Collector)
      */
-    // 分组，下游容器是ArrayList
+    // 分组 下游容器是ArrayList
     public static <T> Collector<T, ?, Map<Boolean, List<T>>> partitioningBy(Predicate<? super T> predicate) {
         return partitioningBy(predicate, toList());
     }
@@ -1288,7 +1288,7 @@ public final class Collectors {
      * applying the finisher function.
      * @see #partitioningBy(Predicate)
      */
-    // 分组，自定义下游容器
+    // 分组 自定义下游容器
     public static <T, D, A> Collector<T, ?, Map<Boolean, D>> partitioningBy(Predicate<? super T> predicate, Collector<? super T, A, D> downstream) {
         BiConsumer<A, ? super T> downstreamAccumulator = downstream.accumulator();
         BiConsumer<Partition<A>, T> accumulator = (result, t) -> downstreamAccumulator.accept(predicate.test(t) ? result.forTrue : result.forFalse, t);
@@ -1368,7 +1368,7 @@ public final class Collectors {
      * @see #toMap(Function, Function, BinaryOperator, Supplier)
      * @see #toConcurrentMap(Function, Function)
      */
-    // 键值对，使用HashMap容器，key不能重复
+    // 键值对 使用HashMap容器 key不能重复
     public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper) {
         return new CollectorImpl<>(
             HashMap::new, // 1.构造容器
@@ -1431,7 +1431,7 @@ public final class Collectors {
      * @see #toMap(Function, Function, BinaryOperator, Supplier)
      * @see #toConcurrentMap(Function, Function, BinaryOperator)
      */
-    // 键值对，使用HashMap容器，当key重复时，需要借助合并函数来合并value（所以本质上来说，key还是不重复）
+    // 键值对 使用HashMap容器 当key重复时 需要借助合并函数来合并value(所以本质上来说 key还是不重复)
     public static <T, K, U> Collector<T, ?, Map<K, U>> toMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U> mergeFunction) {
         return toMap(keyMapper, valueMapper, mergeFunction, HashMap::new);
     }
@@ -1475,7 +1475,7 @@ public final class Collectors {
      * @see #toMap(Function, Function, BinaryOperator)
      * @see #toConcurrentMap(Function, Function, BinaryOperator, Supplier)
      */
-    // 键值对，自定义Map类容器接收元素，当key重复时，需要合并value
+    // 键值对 自定义Map类容器接收元素 当key重复时 需要合并value
     public static <T, K, U, M extends Map<K, U>> Collector<T, ?, M> toMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U> mergeFunction, Supplier<M> mapFactory) {
         BiConsumer<M, T> accumulator = (map, element) -> map.merge(keyMapper.apply(element), valueMapper.apply(element), mergeFunction);
         return new CollectorImpl<>(
@@ -1515,7 +1515,7 @@ public final class Collectors {
      * @see #toUnmodifiableMap(Function, Function, BinaryOperator)
      * @since 10
      */
-    // 键值对，使用HashMap容器，key不能重复，元素放到容器后不能被修改
+    // 键值对 使用HashMap容器 key不能重复 元素放到容器后不能被修改
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper) {
         Objects.requireNonNull(keyMapper, "keyMapper");
@@ -1555,7 +1555,7 @@ public final class Collectors {
      * @see #toUnmodifiableMap(Function, Function)
      * @since 10
      */
-    // 键值对，使用HashMap容器，当key重复时，需要合并value，元素放到容器后不能被修改
+    // 键值对 使用HashMap容器 当key重复时 需要合并value 元素放到容器后不能被修改
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static <T, K, U> Collector<T, ?, Map<K, U>> toUnmodifiableMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U> mergeFunction) {
         Objects.requireNonNull(keyMapper, "keyMapper");
@@ -1615,7 +1615,7 @@ public final class Collectors {
      * @see #toConcurrentMap(Function, Function, BinaryOperator)
      * @see #toConcurrentMap(Function, Function, BinaryOperator, Supplier)
      */
-    // 键值对，使用ConcurrentHashMap容器，key不能重复
+    // 键值对 使用ConcurrentHashMap容器 key不能重复
     public static <T, K, U> Collector<T, ?, ConcurrentMap<K, U>> toConcurrentMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper) {
         return new CollectorImpl<>(
             ConcurrentHashMap::new, // 1.构造容器
@@ -1674,7 +1674,7 @@ public final class Collectors {
      * @see #toConcurrentMap(Function, Function, BinaryOperator, Supplier)
      * @see #toMap(Function, Function, BinaryOperator)
      */
-    // 键值对，使用ConcurrentHashMap容器，当key重复时，需要合并value
+    // 键值对 使用ConcurrentHashMap容器 当key重复时 需要合并value
     public static <T, K, U> Collector<T, ?, ConcurrentMap<K, U>> toConcurrentMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U> mergeFunction) {
         return toConcurrentMap(keyMapper, valueMapper, mergeFunction, ConcurrentHashMap::new);
     }
@@ -1714,7 +1714,7 @@ public final class Collectors {
      * @see #toConcurrentMap(Function, Function, BinaryOperator)
      * @see #toMap(Function, Function, BinaryOperator, Supplier)
      */
-    // 键值对，自定义ConcurrentMap类容器，当key重复时，需要合并value
+    // 键值对 自定义ConcurrentMap类容器 当key重复时 需要合并value
     public static <T, K, U, M extends ConcurrentMap<K, U>> Collector<T, ?, M> toConcurrentMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends U> valueMapper, BinaryOperator<U> mergeFunction, Supplier<M> mapFactory) {
         BiConsumer<M, T> accumulator = (map, element) -> map.merge(keyMapper.apply(element), valueMapper.apply(element), mergeFunction);
         return new CollectorImpl<>(
@@ -1738,7 +1738,7 @@ public final class Collectors {
      * @see #summarizingDouble(ToDoubleFunction)
      * @see #summarizingLong(ToLongFunction)
      */
-    // 信息统计，对int类型的元素统计相关信息：计数、求和、均值、最小值、最大值
+    // 信息统计 对int类型的元素统计相关信息:计数、求和、均值、最小值、最大值
     public static <T> Collector<T, ?, IntSummaryStatistics> summarizingInt(ToIntFunction<? super T> mapper) {
         return new CollectorImpl<T, IntSummaryStatistics, IntSummaryStatistics>(
             IntSummaryStatistics::new,  // 1.构造容器
@@ -1761,7 +1761,7 @@ public final class Collectors {
      * @see #summarizingDouble(ToDoubleFunction)
      * @see #summarizingInt(ToIntFunction)
      */
-    // 信息统计，对long类型的元素统计相关信息：计数、求和、均值、最小值、最大值
+    // 信息统计 对long类型的元素统计相关信息:计数、求和、均值、最小值、最大值
     public static <T> Collector<T, ?, LongSummaryStatistics> summarizingLong(ToLongFunction<? super T> mapper) {
         return new CollectorImpl<T, LongSummaryStatistics, LongSummaryStatistics>(
             LongSummaryStatistics::new, // 1.构造容器
@@ -1784,7 +1784,7 @@ public final class Collectors {
      * @see #summarizingLong(ToLongFunction)
      * @see #summarizingInt(ToIntFunction)
      */
-    // 信息统计，对double类型的元素统计相关信息：计数、求和、均值、最小值、最大值
+    // 信息统计 对double类型的元素统计相关信息:计数、求和、均值、最小值、最大值
     public static <T> Collector<T, ?, DoubleSummaryStatistics> summarizingDouble(ToDoubleFunction<? super T> mapper) {
         return new CollectorImpl<T, DoubleSummaryStatistics, DoubleSummaryStatistics>(
             DoubleSummaryStatistics::new, // 1.构造容器
@@ -1807,15 +1807,15 @@ public final class Collectors {
      * @param value           the name value to be included in the running sum
      */
     /*
-     * Kahan求和精度补偿算法，弥补浮点运算中的精度损失
-     * intermediateSum[0]：存储的是上次求和的结果（有精度损失）
-     * intermediateSum[1]：存储的是上次运算产生的误差（精度损失）
+     * Kahan求和精度补偿算法 弥补浮点运算中的精度损失
+     * intermediateSum[0]:存储的是上次求和的结果(有精度损失)
+     * intermediateSum[1]:存储的是上次运算产生的误差(精度损失)
      */
     static double[] sumWithCompensation(double[] intermediateSum, double value) {
         double tmp = value - intermediateSum[1];    // 当前的值补上上一次的误差
         double sum = intermediateSum[0];            // 前一次的和
         // Little wolf of rounding error
-        double velvel = sum + tmp;                  // 本次的求和结果，已补上上次的误差
+        double velvel = sum + tmp;                  // 本次的求和结果 已补上上次的误差
         intermediateSum[1] = (velvel - sum) - tmp;  // 本次运算产生的新误差
         intermediateSum[0] = velvel;                // 记下本次的求和结果
         
@@ -1826,7 +1826,7 @@ public final class Collectors {
      * If the compensated sum is spuriously NaN from accumulating one or more same-signed infinite values,
      * return the correctly-signed infinity stored in the simple sum.
      */
-    // 返回求和的结果，要考虑精度损失的问题
+    // 返回求和的结果 要考虑精度损失的问题
     static double computeFinalSum(double[] summands) {
         // Better error bounds to add both terms as the final sum
         double tmp = summands[0] + summands[1];
@@ -1849,7 +1849,7 @@ public final class Collectors {
      *
      * @return a merge function for two maps
      */
-    // 确保key不重复，否则抛异常
+    // 确保key不重复 否则抛异常
     private static <K, V, M extends Map<K, V>> BinaryOperator<M> uniqKeysMapMerger() {
         return (m1, m2) -> {
             for(Map.Entry<K, V> e : m2.entrySet()) {
@@ -1877,7 +1877,7 @@ public final class Collectors {
      *
      * @return an accumulating consumer
      */
-    // 确保key不重复，否则抛异常
+    // 确保key不重复 否则抛异常
     private static <T, K, V> BiConsumer<Map<K, V>, T> uniqKeysMapAccumulator(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends V> valueMapper) {
         return (map, element) -> {
             K k = keyMapper.apply(element);
@@ -1908,7 +1908,7 @@ public final class Collectors {
      *
      * @return a merge function for two maps
      */
-    // key出现重复时，合并对应的value
+    // key出现重复时 合并对应的value
     private static <K, V, M extends Map<K, V>> BinaryOperator<M> mapMerger(BinaryOperator<V> mergeFunction) {
         return (m1, m2) -> {
             for(Map.Entry<K, V> e : m2.entrySet()) {

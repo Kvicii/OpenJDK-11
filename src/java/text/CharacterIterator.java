@@ -90,14 +90,14 @@ package java.text;
 /*
  * 该接口定义了用于双向迭代文本时的协议。
  *
- * 该协议中，使用迭代器用来迭代有界字符序列。
- * 有效字符范围是：[getBeginIndex(), getEndIndex()-1]。
+ * 该协议中 使用迭代器用来迭代有界字符序列。
+ * 有效字符范围是:[getBeginIndex(), getEndIndex()-1]。
  *
- * 迭代器需要维护一个游标来指向当前字符索引，其有效范围是从[getBeginIndex(), getEndIndex()]。
+ * 迭代器需要维护一个游标来指向当前字符索引 其有效范围是从[getBeginIndex(), getEndIndex()]。
  *
- * 可以通过调用getIndex()来检索当前游标索引，并通过调用setIndex()，first()和last()直接设置游标索引。
- * 方法previous()和next()用于迭代。如果游标超出有效字符范围，则返回DONE，表示迭代器已到达有效序列的边界。
- * 其他方法中也可能会返回DONE，以指示当前索引超出有效字符的范围。
+ * 可以通过调用getIndex()来检索当前游标索引 并通过调用setIndex() first()和last()直接设置游标索引。
+ * 方法previous()和next()用于迭代。如果游标超出有效字符范围 则返回DONE 表示迭代器已到达有效序列的边界。
+ * 其他方法中也可能会返回DONE 以指示当前索引超出有效字符的范围。
  */
 public interface CharacterIterator extends Cloneable {
     
@@ -105,7 +105,7 @@ public interface CharacterIterator extends Cloneable {
      * Constant that is returned when the iterator has reached either the end or the beginning of the text.
      * The value is '\\uFFFF', the "not a character" value which should not occur in any valid Unicode string.
      */
-    // 迭代器访问无效的位置时，应当返回此标记
+    // 迭代器访问无效的位置时 应当返回此标记
     char DONE = '\uFFFF';
     
     /**
@@ -118,7 +118,7 @@ public interface CharacterIterator extends Cloneable {
      *
      * @return the character at the specified position or DONE if the specified position is equal to getEndIndex()
      */
-    // 重置游标为position，并返回该处的char。
+    // 重置游标为position 并返回该处的char。
     char setIndex(int position);
     
     /**
@@ -128,7 +128,7 @@ public interface CharacterIterator extends Cloneable {
      *
      * @see #getBeginIndex()
      */
-    // 将设置游标到getBeginIndex()（第一个有效字符）的位置，并返回该char。
+    // 将设置游标到getBeginIndex()(第一个有效字符)的位置 并返回该char。
     char first();
     
     /**
@@ -138,7 +138,7 @@ public interface CharacterIterator extends Cloneable {
      *
      * @see #getEndIndex()
      */
-    // 将设置游标到getEndIndex()-1（最后一个有效字符）的位置。如果文本为空，则设置游标到getEndIndex()位置。最后返回该char。
+    // 将设置游标到getEndIndex()-1(最后一个有效字符)的位置。如果文本为空 则设置游标到getEndIndex()位置。最后返回该char。
     char last();
     
     /**
@@ -148,7 +148,7 @@ public interface CharacterIterator extends Cloneable {
      *
      * @see #getIndex()
      */
-    // 返回游标当前指向的char。如果游标指向了终点end，则返回无效字符DONE。
+    // 返回游标当前指向的char。如果游标指向了终点end 则返回无效字符DONE。
     char current();
     
     /**
@@ -157,7 +157,7 @@ public interface CharacterIterator extends Cloneable {
      *
      * @return the character at the new position or DONE if the current position is equal to getBeginIndex().
      */
-    // 如果游标未到起点，则先前移游标，再返回指向的char。否则游标位置不变，且返回DONE。
+    // 如果游标未到起点 则先前移游标 再返回指向的char。否则游标位置不变 且返回DONE。
     char previous();
     
     /**
@@ -166,7 +166,7 @@ public interface CharacterIterator extends Cloneable {
      *
      * @return the character at the new position or DONE if the new position is off the end of the text range.
      */
-    // 如果游标未到终点，则先后移游标，再返回指向的char。否则游标设置在终点，且返回DONE。
+    // 如果游标未到终点 则先后移游标 再返回指向的char。否则游标设置在终点 且返回DONE。
     char next();
     
     /**

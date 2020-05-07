@@ -36,10 +36,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：IntToDoubleFunction
+ * 函数式接口:IntToDoubleFunction
  *
- * 参数：int
- * 返回：double
+ * 参数:int
+ * 返回:double
  */
 @FunctionalInterface
 public interface IntToDoubleFunction {

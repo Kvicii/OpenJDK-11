@@ -10,7 +10,7 @@ public class ThreadLocalTest01 {
         
         int Max = (int) Math.pow(2, n);
         
-        // 如果循环次数大于Max，就会出现重复的值了
+        // 如果循环次数大于Max 就会出现重复的值了
         for(int i = s; i<Max + s; i++) {
             System.out.print(((i * HASH_INCREMENT) & (Max - 1)) + " ");
         }

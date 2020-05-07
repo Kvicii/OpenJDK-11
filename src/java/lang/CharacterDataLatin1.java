@@ -29,15 +29,15 @@ package java.lang;
 /*
  * 字符属性包装器的一个实现
  *
- * 封装了 java.lang.Character 中的一些属性，还提供了一些常用的字符操作
- * 将每个字符的属性打包为一组32-bit的二进制数据，以便在使用字符时做出准确、快速的判断
- * 处理的字符范围是：[0, 255]
+ * 封装了 java.lang.Character 中的一些属性 还提供了一些常用的字符操作
+ * 将每个字符的属性打包为一组32-bit的二进制数据 以便在使用字符时做出准确、快速的判断
+ * 处理的字符范围是:[0, 255]
  */
 class CharacterDataLatin1 extends CharacterData {
     static final CharacterDataLatin1 instance = new CharacterDataLatin1();
     
     /*
-     * 下表生成方式：
+     * 下表生成方式:
      * java GenerateCharacter -template t:/workspace/open/make/data/characterdata/CharacterDataLatin1.java.template
      * -spec t:/workspace/open/make/data/unicodedata/UnicodeData.txt
      * -specialcasing t:/workspace/open/make/data/unicodedata/SpecialCasing.txt
@@ -49,47 +49,47 @@ class CharacterDataLatin1 extends CharacterData {
      *
      * 总共封装了Layin1字符集中的256个字符
      *
-     * 字符属性序列被编码为32-bit的二进制序列，且将其分为10个区域，不同区域含义如下：
+     * 字符属性序列被编码为32-bit的二进制序列 且将其分为10个区域 不同区域含义如下:
      *
      * ⑴ ⑵      ⑶    ⑷⑸⑹ ⑺  ⑻   ⑼    ⑽
      * 0-0000-000000000-0-0-0-000-00-00000-00000
      *
-     * ⑴ 1 bit：镜像属性。像()[]<>这类型字符，此组值为1。
-     * ⑵ 4 bit：方向属性[directionality property]
-     * ⑶ 9 bit：符号偏移量，用于大小写转换
-     * ⑷ 1 bit：如果为1，代表大写。原始字符序列添加符号偏移量后可转为小写。
-     * ⑸ 1 bit：如果为1，代表小写。原始字符序列减去符号偏移量后可转为大写。
-     * ⑹ 1 bit：如果为1，该字符存在titlecase表现形式，可能为自身。
-     * ⑺ 3 bit：表示该字符可以出现的位置，规定四种位置：
+     * ⑴ 1 bit:镜像属性。像()[]<>这类型字符 此组值为1。
+     * ⑵ 4 bit:方向属性[directionality property]
+     * ⑶ 9 bit:符号偏移量 用于大小写转换
+     * ⑷ 1 bit:如果为1 代表大写。原始字符序列添加符号偏移量后可转为小写。
+     * ⑸ 1 bit:如果为1 代表小写。原始字符序列减去符号偏移量后可转为大写。
+     * ⑹ 1 bit:如果为1 该字符存在titlecase表现形式 可能为自身。
+     * ⑺ 3 bit:表示该字符可以出现的位置 规定四种位置:
      *                             起始位置   非起始位置
      *                Java标识符      <1>        <2>
      *             Unicode标识符      <3>        <4>
      *
-     *           存在8中不同取值：
+     *           存在8中不同取值:
      *             0/000 <-><-><-><->
-     *             1/001 <-><2><-><4>，可忽略（ignorable control; may continue a Unicode identifier or Java identifier）
-     *             2/010 <-><2><-><->（may continue a Java identifier but not a Unicode identifier (unused)）
-     *             3/011 <-><2><-><4>（may continue a Unicode identifier or Java identifier）
-     *             4/100 Java空白符（Java whitespace character）
-     *             5/101 <1><2><-><4>，如下划线_
-     *             6/110 <1><2><-><->，如下划线$
+     *             1/001 <-><2><-><4> 可忽略(ignorable control; may continue a Unicode identifier or Java identifier)
+     *             2/010 <-><2><-><->(may continue a Java identifier but not a Unicode identifier (unused))
+     *             3/011 <-><2><-><4>(may continue a Unicode identifier or Java identifier)
+     *             4/100 Java空白符(Java whitespace character)
+     *             5/101 <1><2><-><4> 如下划线_
+     *             6/110 <1><2><-><-> 如下划线$
      *             7/111 <1><2><3><4>
-     *           注：
+     *           注:
      *             5、6、7 可位于Java标识符起始位置
      *             1、2、3、5、6、7 可位于Java标识符非起始位置
      *             7 可位于Unicode标识符起始位置
      *             1、3、5、7 可位于Unicode标识符非起始位置
      *             1 在标识符内是可忽略的
      *             4 是Java空白符
-     * ⑻ 2 bit：存在4种不同取值：
+     * ⑻ 2 bit:存在4种不同取值:
      *           0 此字符没有数值属性
-     *           1 简单的数值字符，如0~9。adding the digit offset to the character code and then masking with 0x1F will produce the desired numeric value
-     *           2 非常规数值字符，如第189号索引处的½，表示二分之一
-     *           3 超级数值字符，如a~z、A~Z，可用在进制表示当中
-     * ⑼ 5 bit：数值偏移量
-     * ⑽ 5 bit：字符类型（参见Character类中的"Unicode符号分类代号"）
+     *           1 简单的数值字符 如0~9。adding the digit offset to the character code and then masking with 0x1F will produce the desired numeric value
+     *           2 非常规数值字符 如第189号索引处的½ 表示二分之一
+     *           3 超级数值字符 如a~z、A~Z 可用在进制表示当中
+     * ⑼ 5 bit:数值偏移量
+     * ⑽ 5 bit:字符类型(参见Character类中的"Unicode符号分类代号")
      *
-     * 使用二进制表示下表（空白字符和控制字符用■代替显示）：
+     * 使用二进制表示下表(空白字符和控制字符用■代替显示):
      * 000┃■┃ 0-1001-000000000-0-0-0-001-00-00000-01111
      * 001┃■┃ 0-1001-000000000-0-0-0-001-00-00000-01111
      * 002┃■┃ 0-1001-000000000-0-0-0-001-00-00000-01111
@@ -866,7 +866,7 @@ class CharacterDataLatin1 extends CharacterData {
     };
     
     /*
-     * 生成方式：
+     * 生成方式:
      *
      * for (char i = 0; i < 256; i++) {
      *     int v = -1;
@@ -888,7 +888,7 @@ class CharacterDataLatin1 extends CharacterData {
      *     System.out.printf("%2d, ", v);
      * }
      *
-     * 预先生成数组，运行销量更高
+     * 预先生成数组 运行销量更高
      *
      * 反映某个字符在某个进制中代表的数值
      */
@@ -922,73 +922,73 @@ class CharacterDataLatin1 extends CharacterData {
     
     /*▼ 判断字符属性 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // true：该字符是Java空白符
+    // true:该字符是Java空白符
     boolean isWhitespace(int ch) {
         // 获取字符属性编码
         int props = getProperties(ch);
         return ((props & 0x00007000) == 0x00004000);
     }
     
-    // true：该字符是镜像字符，如<>[]()
+    // true:该字符是镜像字符 如<>[]()
     boolean isMirrored(int ch) {
         // 获取字符属性编码
         int props = getProperties(ch);
         return ((props & 0x80000000) != 0);
     }
     
-    // true：该字符可位于Java标识符起始位置
+    // true:该字符可位于Java标识符起始位置
     boolean isJavaIdentifierStart(int ch) {
         // 获取字符属性编码
         int props = getProperties(ch);
         return ((props & 0x00007000) >= 0x00005000);
     }
     
-    // true：该字符可位于Java标识符的非起始部分
+    // true:该字符可位于Java标识符的非起始部分
     boolean isJavaIdentifierPart(int ch) {
         // 获取字符属性编码
         int props = getProperties(ch);
         return ((props & 0x00003000) != 0);
     }
     
-    // true：该字符可位于Unicode标识符的起始部分
+    // true:该字符可位于Unicode标识符的起始部分
     boolean isUnicodeIdentifierStart(int ch) {
         // 获取字符属性编码
         int props = getProperties(ch);
         return ((props & 0x00007000) == 0x00007000);
     }
     
-    // true：该字符可位于Unicode标识符的非起始部分
+    // true:该字符可位于Unicode标识符的非起始部分
     boolean isUnicodeIdentifierPart(int ch) {
         int props = getProperties(ch);
         return ((props & 0x00001000) != 0);
     }
     
-    // true：该字符在标识符内是可忽略的
+    // true:该字符在标识符内是可忽略的
     boolean isIdentifierIgnorable(int ch) {
         // 获取字符属性编码
         int props = getProperties(ch);
         return ((props & 0x00007000) == 0x00001000);
     }
     
-    // true：该字符是扩展的小写字符
+    // true:该字符是扩展的小写字符
     boolean isOtherLowercase(int ch) {
         int props = getPropertiesEx(ch);
         return (props & 0x0001) != 0;
     }
     
-    // true：该字符是扩展的大写字符
+    // true:该字符是扩展的大写字符
     boolean isOtherUppercase(int ch) {
         int props = getPropertiesEx(ch);
         return (props & 0x0002) != 0;
     }
     
-    // true：该字符是扩展的字母[Alphabetic]字符
+    // true:该字符是扩展的字母[Alphabetic]字符
     boolean isOtherAlphabetic(int ch) {
         int props = getPropertiesEx(ch);
         return (props & 0x0004) != 0;
     }
     
-    // true：该字符是表意字符
+    // true:该字符是表意字符
     boolean isIdeographic(int ch) {
         int props = getPropertiesEx(ch);
         return (props & 0x0010) != 0;
@@ -999,28 +999,28 @@ class CharacterDataLatin1 extends CharacterData {
     
     /*▼ 获取字符属性 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 获取字符类型[字符属性后5位]（其含义参见Character类中的"Unicode符号分类代号"）
+    // 获取字符类型[字符属性后5位](其含义参见Character类中的"Unicode符号分类代号")
     int getType(int ch) {
         // 获取字符属性编码
         int props = getProperties(ch);
         return (props & 0x1F);
     }
     
-    // 获取字符属性编码，定义在数组A中
+    // 获取字符属性编码 定义在数组A中
     int getProperties(int ch) {
         char offset = (char) ch;
         int props = A[offset];
         return props;
     }
     
-    // 获取扩展的字符属性编码，定义在数组B中
+    // 获取扩展的字符属性编码 定义在数组B中
     int getPropertiesEx(int ch) {
         char offset = (char) ch;
         int props = B[offset];
         return props;
     }
     
-    // 获取该字符的方向属性（文本有不同的书写方向，参见Character类中的"Unicode双向字符类型"）
+    // 获取该字符的方向属性(文本有不同的书写方向 参见Character类中的"Unicode双向字符类型")
     byte getDirectionality(int ch) {
         // 获取字符属性编码
         int val = getProperties(ch);
@@ -1046,7 +1046,7 @@ class CharacterDataLatin1 extends CharacterData {
         
         if(((val & 0x00020000) != 0)    // 确定为大写形式
             && ((val & 0x07FC0000) != 0x07FC0000)) {
-            // 先左移再右移，将除⑶之外的字符都抹为0，只剩第⑶部分的偏移量信息
+            // 先左移再右移 将除⑶之外的字符都抹为0 只剩第⑶部分的偏移量信息
             int offset = val << 5 >> (5 + 18);
             mapChar = ch + offset;
         }
@@ -1063,10 +1063,10 @@ class CharacterDataLatin1 extends CharacterData {
         if((val & 0x00010000) != 0) {   // 确定为小写形式
             // 处理普通字符
             if((val & 0x07FC0000) != 0x07FC0000) {
-                // 先左移再右移，将除⑶之外的字符都抹为0，只剩第⑶部分的偏移量信息
+                // 先左移再右移 将除⑶之外的字符都抹为0 只剩第⑶部分的偏移量信息
                 int offset = val << 5 >> (5 + 18);
                 mapChar = ch - offset;
-            } else if(ch == 0x00B5) {   // 索引181处有个特殊的小写字母：µ，需要特殊处理
+            } else if(ch == 0x00B5) {   // 索引181处有个特殊的小写字母:µ 需要特殊处理
                 mapChar = 0x039C;
             }
             
@@ -1075,7 +1075,7 @@ class CharacterDataLatin1 extends CharacterData {
         return mapChar;
     }
     
-    // 转为大写形式（考虑出现的扩展字符）
+    // 转为大写形式(考虑出现的扩展字符)
     int toUpperCaseEx(int ch) {
         int mapChar = ch;
         // 获取字符属性编码
@@ -1084,14 +1084,14 @@ class CharacterDataLatin1 extends CharacterData {
         if((val & 0x00010000) != 0) {   // 确定为小写形式
             // 处理普通字符
             if((val & 0x07FC0000) != 0x07FC0000) {
-                // 先左移再右移，将除⑶之外的字符都抹为0，只剩第⑶部分的偏移量信息
+                // 先左移再右移 将除⑶之外的字符都抹为0 只剩第⑶部分的偏移量信息
                 int offset = val << 5 >> (5 + 18);
                 mapChar = ch - offset;
             } else {
                 switch(ch) {
                     // map overflow characters
                     case 0x00B5:
-                        // 索引181处有个特殊的小写字母：µ，需要特殊处理
+                        // 索引181处有个特殊的小写字母:µ 需要特殊处理
                         mapChar = 0x039C;
                         break;
                     default:
@@ -1104,7 +1104,7 @@ class CharacterDataLatin1 extends CharacterData {
         return mapChar;
     }
     
-    // 将字符ch存入字符数组，如果是索引223处的字符ß，需要特殊处理
+    // 将字符ch存入字符数组 如果是索引223处的字符ß 需要特殊处理
     char[] toUpperCaseCharArray(int ch) {
         char[] upperMap = {(char) ch};
         if(ch == 0x00DF) {
@@ -1114,7 +1114,7 @@ class CharacterDataLatin1 extends CharacterData {
         return upperMap;
     }
     
-    // 转为TitleCase形式，在这种字符集中，就是简单地转为大写形式
+    // 转为TitleCase形式 在这种字符集中 就是简单地转为大写形式
     int toTitleCase(int ch) {
         // 转为大写形式
         return toUpperCase(ch);
@@ -1123,13 +1123,13 @@ class CharacterDataLatin1 extends CharacterData {
     /*▲ 字符属性转换 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
-    // 返回字符ch表示的进制数值，如字母a或A将返回10（可用于16进制中）
+    // 返回字符ch表示的进制数值 如字母a或A将返回10(可用于16进制中)
     int digit(int ch, int radix) {
         int value = DIGITS[ch];
         return (value >= 0 && value < radix && radix >= Character.MIN_RADIX && radix <= Character.MAX_RADIX) ? value : -1;
     }
     
-    // 返回字符ch在进制运算中表示的数值，如输入'3'返回3，输入'A'或'a'返回10
+    // 返回字符ch在进制运算中表示的数值 如输入'3'返回3 输入'A'或'a'返回10
     int getNumericValue(int ch) {
         // 获取字符属性编码
         int val = getProperties(ch);
@@ -1141,7 +1141,7 @@ class CharacterDataLatin1 extends CharacterData {
             case (0x00000000):  // 0.非数值字符
                 retval = -1;
                 break;
-            case (0x00000400):  // 1.简单数值字符，如0~9
+            case (0x00000400):  // 1.简单数值字符 如0~9
                 /*
                  * 0b01-0000 == (val & 0x3E0) >> 5
                  * 0b11-0000 == '0'
@@ -1157,10 +1157,10 @@ class CharacterDataLatin1 extends CharacterData {
                  */
                 retval = ch + ((val & 0x3E0) >> 5) & 0x1F;
                 break;
-            case (0x00000800):  // 2.非常规数值字符，如第189号索引处的½
+            case (0x00000800):  // 2.非常规数值字符 如第189号索引处的½
                 retval = -2;
                 break;
-            case (0x00000C00):  // 3.超级数值字符，如a~z、A~Z，可用在进制表示当中。
+            case (0x00000C00):  // 3.超级数值字符 如a~z、A~Z 可用在进制表示当中。
                 /*
                  * 0b001-1111 == (val & 0x3E0) >> 5
                  * 0b100-0001 == 'A'

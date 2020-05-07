@@ -56,7 +56,7 @@ package java.util.concurrent;
  * @author Doug Lea
  * @since 1.5
  */
-// 线程工厂。创建自定义的Thread，可以添加自定义的名称、数量、状态、线程组等信息。
+// 线程工厂。创建自定义的Thread 可以添加自定义的名称、数量、状态、线程组等信息。
 public interface ThreadFactory {
     
     /**
@@ -68,6 +68,6 @@ public interface ThreadFactory {
      * @return constructed thread, or {@code null} if the request to
      * create a thread is rejected
      */
-    // 创建新线程，并为其绑定动作
+    // 创建新线程 并为其绑定动作
     Thread newThread(Runnable r);
 }

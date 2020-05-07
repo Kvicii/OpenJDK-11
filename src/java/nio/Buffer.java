@@ -183,22 +183,22 @@ import java.util.Spliterator;
  */
 
 /*
- * 缓冲区的抽象基类，其内部实现为一个数组或一个直接缓冲区。
+ * 缓冲区的抽象基类 其内部实现为一个数组或一个直接缓冲区。
  *
- * 该缓冲区读写两用，靠着游标position和上界limit标记【活跃区域】。
- * 不管处于读模式还是处于写模式，【活跃区域】总是：[position, limit)。
+ * 该缓冲区读写两用 靠着游标position和上界limit标记【活跃区域】。
+ * 不管处于读模式还是处于写模式 【活跃区域】总是:[position, limit)。
  * 要特别区分【读模式】和【写模式】下各方法及参数的含义。
  *
- * 缓冲区有四个标记，它们的关系是: mark <= position <= limit <= capacity
- * 注意，这些标记表示的是相对于当前缓存区的位置（相对位置），而不是相对于内部存储结构的位置（绝对位置）。
- * 比如postion=1，代表的是当前缓冲区中索引为1的元素，而不是内部存储结构中索引为1的元素。
- * 当前缓冲区脱胎于其内部存储结构，该内部存储结构是共享的，可被多个缓冲区共享。
+ * 缓冲区有四个标记 它们的关系是: mark <= position <= limit <= capacity
+ * 注意 这些标记表示的是相对于当前缓存区的位置(相对位置) 而不是相对于内部存储结构的位置(绝对位置)。
+ * 比如postion=1 代表的是当前缓冲区中索引为1的元素 而不是内部存储结构中索引为1的元素。
+ * 当前缓冲区脱胎于其内部存储结构 该内部存储结构是共享的 可被多个缓冲区共享。
  * 区分每个缓冲区的【绝对起点】靠的是address字段和offset字段。
  *
- * 非直接缓冲区：(堆内存)
- *     通过allocate()分配缓冲区，将缓冲区建立在JVM的内存中。通过常规手段存取元素。
- * 直接缓冲区：（堆外内存，可通过-XX:MaxDirectMemorySize设置大小）
- *     通过allocateDirect()分配直接缓冲区，将缓冲区建立在物理内存中，可以提高效率。通过Unsafe存取元素。
+ * 非直接缓冲区:(堆内存)
+ *     通过allocate()分配缓冲区 将缓冲区建立在JVM的内存中。通过常规手段存取元素。
+ * 直接缓冲区:(堆外内存 可通过-XX:MaxDirectMemorySize设置大小)
+ *     通过allocateDirect()分配直接缓冲区 将缓冲区建立在物理内存中 可以提高效率。通过Unsafe存取元素。
  */
 public abstract class Buffer {
     // Cached unsafe-access object
@@ -216,18 +216,18 @@ public abstract class Buffer {
     // The address might not align on a word boundary for slices, nor when created using JNI, see NewDirectByteBuffer(void*, long).
     // Should ideally be declared final
     // NOTE: hoisted here for speed in JNI GetDirectBufferAddress
-    long address;   // 缓冲区【绝对】起始地址，仅用于Unsafe类访问直接缓冲区的内部存储结构
+    long address;   // 缓冲区【绝对】起始地址 仅用于Unsafe类访问直接缓冲区的内部存储结构
     
     /*
      * 关系: mark <= position <= limit <= capacity
-     * 这里约定一些术语：：
-     * 【活跃区域】：[position, limit)范围的区域，这个区域是不断变化的
-     * 【原始区域】：position和limit的初始值限定的区域，这个区域一般不变
+     * 这里约定一些术语::
+     * 【活跃区域】:[position, limit)范围的区域 这个区域是不断变化的
+     * 【原始区域】:position和limit的初始值限定的区域 这个区域一般不变
      */
     private int mark = -1;      // 标记。一个备忘位置。调用mark()来设定mark = postion。调用reset()设定position = mark。标记在设定前是未定义的(undefined)。
     private int position = 0;   // 游标。下一个要被读或写的元素的索引。位置会自动由相应的get()和put()函数更新。
-    private int limit;          // 上界。缓冲区的第一个不能被读或写的元素。或者说，缓冲区中现存元素的计数。
-    private int capacity;       // 容量。缓冲区能够容纳的数据元素的最大数量。这一容量在缓冲区创建时被设定，并且永远不能被改变。
+    private int limit;          // 上界。缓冲区的第一个不能被读或写的元素。或者说 缓冲区中现存元素的计数。
+    private int capacity;       // 容量。缓冲区能够容纳的数据元素的最大数量。这一容量在缓冲区创建时被设定 并且永远不能被改变。
     
     static {
         // setup access to this package in SharedSecrets
@@ -303,7 +303,7 @@ public abstract class Buffer {
      *
      * @return This buffer
      */
-    // 在当前游标position处设置新的mark（备忘）
+    // 在当前游标position处设置新的mark(备忘)
     public Buffer mark() {
         mark = position;
         return this;
@@ -365,7 +365,7 @@ public abstract class Buffer {
      *
      * @throws InvalidMarkException If the mark has not been set
      */
-    // 将当前游标position回退到mark（备忘）位置
+    // 将当前游标position回退到mark(备忘)位置
     public Buffer reset() {
         int m = mark;
         if(m < 0)
@@ -391,7 +391,7 @@ public abstract class Buffer {
      *
      * @return This buffer
      */
-    // 清理缓冲区，重置标记
+    // 清理缓冲区 重置标记
     public Buffer clear() {
         position = 0;
         limit = capacity;
@@ -420,7 +420,7 @@ public abstract class Buffer {
      *
      * @return This buffer
      */
-    // 修改标记，可以切换缓冲区读/写模式
+    // 修改标记 可以切换缓冲区读/写模式
     public Buffer flip() {
         limit = position;
         position = 0;
@@ -443,7 +443,7 @@ public abstract class Buffer {
      *
      * @return This buffer
      */
-    // 丢弃备忘，游标归零
+    // 丢弃备忘 游标归零
     public Buffer rewind() {
         position = 0;
         mark = -1;
@@ -490,7 +490,7 @@ public abstract class Buffer {
         mark = -1;
     }
     
-    // 消耗缓冲区（容量清零）
+    // 消耗缓冲区(容量清零)
     final void truncate() {
         mark = -1;
         position = 0;
@@ -502,7 +502,7 @@ public abstract class Buffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a new buffer whose content is a shared subsequence of
@@ -544,7 +544,7 @@ public abstract class Buffer {
      */
     public abstract Buffer duplicate();
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -554,7 +554,7 @@ public abstract class Buffer {
      *
      * @return The number of elements remaining in this buffer
      */
-    // 返回缓冲区长度（还剩多少元素/还剩多少空间）
+    // 返回缓冲区长度(还剩多少元素/还剩多少空间)
     public final int remaining() {
         return limit - position;
     }
@@ -566,7 +566,7 @@ public abstract class Buffer {
      * @return {@code true} if, and only if, there is at least one element
      * remaining in this buffer
      */
-    // true：缓冲区还有剩余（未读完/未写完）
+    // true:缓冲区还有剩余(未读完/未写完)
     public final boolean hasRemaining() {
         return position < limit;
     }
@@ -609,7 +609,7 @@ public abstract class Buffer {
      * @throws UnsupportedOperationException If this buffer is not backed by an accessible array
      * @since 1.6
      */
-    // 返回此缓冲区中的第一个元素在缓冲区的底层实现数组中的偏移量（可选操作）
+    // 返回此缓冲区中的第一个元素在缓冲区的底层实现数组中的偏移量(可选操作)
     public abstract int arrayOffset();
     
     /**
@@ -621,13 +621,13 @@ public abstract class Buffer {
      *
      * @since 1.6
      */
-    // true：此buffer由可访问的数组实现
+    // true:此buffer由可访问的数组实现
     public abstract boolean hasArray();
     
     /**
      * @return the base reference, paired with the address field, which in combination can be used for unsafe access into a heap buffer or direct byte buffer (and views of).
      */
-    // 返回内部存储结构的引用（一般用于非直接缓存区）
+    // 返回内部存储结构的引用(一般用于非直接缓存区)
     abstract Object base();
     
     
@@ -639,14 +639,14 @@ public abstract class Buffer {
      *
      * @return The current position value, before it is incremented
      */
-    // 返回position，并将position递增
+    // 返回position 并将position递增
     final int nextGetIndex() {
         if(position >= limit)
             throw new BufferUnderflowException();
         return position++;
     }
     
-    // 返回position，并将position增加nb个单位
+    // 返回position 并将position增加nb个单位
     final int nextGetIndex(int nb) {
         if(limit - position < nb)
             throw new BufferUnderflowException();
@@ -662,14 +662,14 @@ public abstract class Buffer {
      *
      * @return The current position value, before it is incremented
      */
-    // 返回position，并将position递增
+    // 返回position 并将position递增
     final int nextPutIndex() {                          // package-private
         if(position >= limit)
             throw new BufferOverflowException();
         return position++;
     }
     
-    // 返回position，并将position增加nb个单位
+    // 返回position 并将position增加nb个单位
     final int nextPutIndex(int nb) {
         if(limit - position < nb)
             throw new BufferOverflowException();

@@ -14,7 +14,7 @@ public class ThreadTest04 {
         
         Thread t2 = new Thread() {
             public void run() {
-                // 注意，这里在交换了一下位置
+                // 注意 这里在交换了一下位置
                 deathLock(lock2, lock1);
             }
         };
@@ -29,14 +29,14 @@ public class ThreadTest04 {
         t1.interrupt();
         t2.interrupt();
         
-        // 至此，main线程可以结束了，但是线程t1和t2陷入了死锁
+        // 至此 main线程可以结束了 但是线程t1和t2陷入了死锁
     }
     
     private static void deathLock(Object lock1, Object lock2) {
         try {
             synchronized(lock1) {
                 Thread.sleep(10);// 不会在这里死掉
-                synchronized(lock2) {// 会锁在这里，虽然阻塞了，但不会抛异常
+                synchronized(lock2) {// 会锁在这里 虽然阻塞了 但不会抛异常
                     System.out.println(Thread.currentThread());
                 }
             }

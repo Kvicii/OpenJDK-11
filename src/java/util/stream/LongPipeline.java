@@ -65,7 +65,7 @@ abstract class LongPipeline<E_IN>
      *                    {@link StreamOpFlag}
      * @param parallel    {@code true} if the pipeline is parallel
      */
-    // 构造Stream，常用于构建流的源头阶段（HEAD），需要从source中提取Spliterator
+    // 构造Stream 常用于构建流的源头阶段(HEAD) 需要从source中提取Spliterator
     LongPipeline(Supplier<? extends Spliterator<Long>> source, int sourceFlags, boolean parallel) {
         super(source, sourceFlags, parallel);
     }
@@ -78,7 +78,7 @@ abstract class LongPipeline<E_IN>
      *                    {@link StreamOpFlag}
      * @param parallel    {@code true} if the pipeline is parallel
      */
-    // 构造Stream，常用于构建流的源头阶段（HEAD）
+    // 构造Stream 常用于构建流的源头阶段(HEAD)
     LongPipeline(Spliterator<Long> source, int sourceFlags, boolean parallel) {
         super(source, sourceFlags, parallel);
     }
@@ -89,7 +89,7 @@ abstract class LongPipeline<E_IN>
      * @param upstream the upstream element source.
      * @param opFlags  the operation flags
      */
-    // 构造Stream，常用于构建流的中间阶段，包括有状态流和无状态流。upstream是调用此构造方法的流
+    // 构造Stream 常用于构建流的中间阶段 包括有状态流和无状态流。upstream是调用此构造方法的流
     LongPipeline(AbstractPipeline<?, E_IN, ?> upstream, int opFlags) {
         super(upstream, opFlags);
     }
@@ -258,7 +258,7 @@ abstract class LongPipeline<E_IN>
         };
     }
     
-    // 用于查看流的内部结构，不会对流的结构产生影响
+    // 用于查看流的内部结构 不会对流的结构产生影响
     @Override
     public final LongStream peek(LongConsumer action) {
         Objects.requireNonNull(action);
@@ -298,7 +298,7 @@ abstract class LongPipeline<E_IN>
         };
     }
     
-    // 中间操作，返回等效的无序流
+    // 中间操作 返回等效的无序流
     @Override
     public LongStream unordered() {
         if(!isOrdered())
@@ -325,7 +325,7 @@ abstract class LongPipeline<E_IN>
         return boxed().distinct().mapToLong(i -> (long) i);
     }
     
-    // 排序（默认升序）
+    // 排序(默认升序)
     @Override
     public final LongStream sorted() {
         return SortedOps.makeLong(this);
@@ -374,13 +374,13 @@ abstract class LongPipeline<E_IN>
         return evaluate(MatchOps.makeLong(predicate, MatchOps.MatchKind.NONE));
     }
     
-    // 找出第一个元素，返回一个可选的操作
+    // 找出第一个元素 返回一个可选的操作
     @Override
     public final OptionalLong findFirst() {
         return evaluate(FindOps.makeLong(true));
     }
     
-    // 找到一个元素就返回，往往是第一个元素
+    // 找到一个元素就返回 往往是第一个元素
     @Override
     public final OptionalLong findAny() {
         return evaluate(FindOps.makeLong(false));
@@ -398,25 +398,25 @@ abstract class LongPipeline<E_IN>
         return Nodes.flattenLong((Node.OfLong) evaluateToArrayNode(Long[]::new)).asPrimitiveArray();
     }
     
-    // 遍历，并执行action操作
+    // 遍历 并执行action操作
     @Override
     public void forEach(LongConsumer action) {
         evaluate(ForEachOps.makeLong(action, false));
     }
     
-    // 按遭遇顺序遍历，并执行action操作
+    // 按遭遇顺序遍历 并执行action操作
     @Override
     public void forEachOrdered(LongConsumer action) {
         evaluate(ForEachOps.makeLong(action, true));
     }
     
-    // 收纳汇总，两两比对，完成指定动作
+    // 收纳汇总 两两比对 完成指定动作
     @Override
     public final OptionalLong reduce(LongBinaryOperator op) {
         return evaluate(ReduceOps.makeLong(op));
     }
     
-    // 收纳汇总，两两比对，完成op动作。identity是初值，op中的输入类型应当一致
+    // 收纳汇总 两两比对 完成op动作。identity是初值 op中的输入类型应当一致
     @Override
     public final long reduce(long identity, LongBinaryOperator op) {
         return evaluate(ReduceOps.makeLong(identity, op));
@@ -503,7 +503,7 @@ abstract class LongPipeline<E_IN>
         return StreamShape.LONG_VALUE;
     }
     
-    // 逐个择取元素，每次择取之前都要先判断是否应当停止接收数据
+    // 逐个择取元素 每次择取之前都要先判断是否应当停止接收数据
     @Override
     final boolean forEachWithCancel(Spliterator<Long> spliterator, Sink<Long> sink) {
         Spliterator.OfLong spl = adapt(spliterator);
@@ -514,13 +514,13 @@ abstract class LongPipeline<E_IN>
         return cancelled;
     }
     
-    // 返回第(3)、(4)类Node（固定长度Node和可变长度Node）
+    // 返回第(3)、(4)类Node(固定长度Node和可变长度Node)
     @Override
     final Node.Builder<Long> makeNodeBuilder(long exactSizeIfKnown, IntFunction<Long[]> generator) {
         return Nodes.longBuilder(exactSizeIfKnown);
     }
     
-    // 并行收集元素。如果流水线上存在有状态的中间操作，则优化计算过程
+    // 并行收集元素。如果流水线上存在有状态的中间操作 则优化计算过程
     @Override
     final <P_IN> Node<Long> evaluateToNode(PipelineHelper<Long> helper, Spliterator<P_IN> spliterator, boolean flattenTree, IntFunction<Long[]> generator) {
         return Nodes.collectLong(helper, spliterator, flattenTree);
@@ -576,7 +576,7 @@ abstract class LongPipeline<E_IN>
      *
      * @since 1.8
      */
-    // 流的源头阶段，包含了数据源和可以对数据源执行的遍历、分割操作
+    // 流的源头阶段 包含了数据源和可以对数据源执行的遍历、分割操作
     static class Head<E_IN> extends LongPipeline<E_IN> {
         /**
          * Constructor for the source stage of a LongStream.

@@ -29,7 +29,7 @@ import java.io.Serializable;
 /**
  * Package private supporting class for {@link Comparator}.
  */
-// 工具类。定义了自然顺序比较器与null优先比较器，以补充Comparator的操作。
+// 工具类。定义了自然顺序比较器与null优先比较器 以补充Comparator的操作。
 class Comparators {
     private Comparators() {
         throw new AssertionError("no instances");
@@ -40,7 +40,7 @@ class Comparators {
      *
      * @see Comparable
      */
-    // 自然顺序比较器，用于比较实现了Comparable的对象
+    // 自然顺序比较器 用于比较实现了Comparable的对象
     enum NaturalOrderComparator implements Comparator<Comparable<Object>> {
         INSTANCE;
         
@@ -62,8 +62,8 @@ class Comparators {
     static final class NullComparator<T> implements Comparator<T>, Serializable {
         private static final long serialVersionUID = -7569533591570686392L;
         /**
-         * nullFirst==true ：null被认为是序列中第一个元素
-         * nullFirst==false：null被认为是序列中最后一个元素
+         * nullFirst==true :null被认为是序列中第一个元素
+         * nullFirst==false:null被认为是序列中最后一个元素
          */
         private final boolean nullFirst;
         // if null, non-null Ts are considered equal
@@ -76,20 +76,20 @@ class Comparators {
         }
         
         /*
-         * 如果待比较元素非空，且预置的Comparator也为空，则这两个元素被认为是相同的
+         * 如果待比较元素非空 且预置的Comparator也为空 则这两个元素被认为是相同的
          *
-         * nullFirst==true：
+         * nullFirst==true:
          * null<--> obj  ===> -1
          * obj <--> null ===>  1
          *
-         * nullFirst==false：
+         * nullFirst==false:
          * null<--> obj  ===>  1
          * obj <--> null ===> -1
          *
-         * a和b都为null时，返回0。
-         * a和b都不为null时：
-         *   1.比较器real==null，返回0。
-         *   2.比较器real!=null，使用real比较两个元素。
+         * a和b都为null时 返回0。
+         * a和b都不为null时:
+         *   1.比较器real==null 返回0。
+         *   2.比较器real!=null 使用real比较两个元素。
          */
         @Override
         public int compare(T a, T b) {
@@ -102,19 +102,19 @@ class Comparators {
             }
         }
         
-        // 返回null优先的比较器，且带有备用比较器other
+        // 返回null优先的比较器 且带有备用比较器other
         @Override
         public Comparator<T> thenComparing(Comparator<? super T> other) {
             Objects.requireNonNull(other);
             return new NullComparator<>(
                 nullFirst,      // null优先
                 real == null
-                    ? other                     // 如果预置的比较器real为null，则直接启用备用比较器other
-                    : real.thenComparing(other) // 如果预置的比较器real不为null，则同时使用预置比较器和备用比较器
+                    ? other                     // 如果预置的比较器real为null 则直接启用备用比较器other
+                    : real.thenComparing(other) // 如果预置的比较器real不为null 则同时使用预置比较器和备用比较器
             );
         }
         
-        // 返回null不优先的与预置比较器real顺序相反的比较器，
+        // 返回null不优先的与预置比较器real顺序相反的比较器 
         @Override
         public Comparator<T> reversed() {
             return new NullComparator<>(

@@ -83,7 +83,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      *
      * @return the new stream
      */
-    // 从数组（或类似数组）中创建一个Stream
+    // 从数组(或类似数组)中创建一个Stream
     static LongStream of(long... values) {
         return Arrays.stream(values);
     }
@@ -93,7 +93,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      *
      * @return an empty sequential stream
      */
-    // 返回空的流水线，不包含任何待处理元素
+    // 返回空的流水线 不包含任何待处理元素
     static LongStream empty() {
         return StreamSupport.longStream(Spliterators.emptyLongSpliterator(), false);
     }
@@ -628,7 +628,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      * operations like {@code findFirst}, or in the example described in
      * {@link #count}), the action will not be invoked for those elements.
      */
-    // 用于查看流的内部结构，不会对流的结构产生影响
+    // 用于查看流的内部结构 不会对流的结构产生影响
     LongStream peek(LongConsumer action);
     
     /**
@@ -683,7 +683,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      *
      * @return the new stream
      */
-    // 排序（默认升序）
+    // 排序(默认升序)
     LongStream sorted();
     
     /**
@@ -831,7 +831,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      * @return an {@code OptionalLong} describing the first element of this
      * stream, or an empty {@code OptionalLong} if the stream is empty
      */
-    // 找出第一个元素，返回一个可选的操作
+    // 找出第一个元素 返回一个可选的操作
     OptionalLong findFirst();
     
     /**
@@ -852,7 +852,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      *
      * @see #findFirst()
      */
-    // 找到一个元素就返回，往往是第一个元素
+    // 找到一个元素就返回 往往是第一个元素
     OptionalLong findAny();
     
     /*▲ 终端操作-短路操作 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -888,7 +888,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      * @param action a <a href="package-summary.html#NonInterference">
      *               non-interfering</a> action to perform on the elements
      */
-    // 遍历，并执行action操作
+    // 遍历 并执行action操作
     void forEach(LongConsumer action);
     
     /**
@@ -904,7 +904,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      *
      * @see #forEach(LongConsumer)
      */
-    // 按遭遇顺序遍历，并执行action操作
+    // 按遭遇顺序遍历 并执行action操作
     void forEachOrdered(LongConsumer action);
     
     /**
@@ -944,7 +944,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      *
      * @see #reduce(long, LongBinaryOperator)
      */
-    // 收纳汇总，两两比对，完成指定动作
+    // 收纳汇总 两两比对 完成指定动作
     OptionalLong reduce(LongBinaryOperator op);
     
     /**
@@ -1001,7 +1001,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      * @see #max()
      * @see #average()
      */
-    // 收纳汇总，两两比对，完成op动作。identity是初值，op中的输入类型应当一致。
+    // 收纳汇总 两两比对 完成op动作。identity是初值 op中的输入类型应当一致。
     long reduce(long identity, LongBinaryOperator op);
     
     /**
@@ -1166,19 +1166,19 @@ public interface LongStream extends BaseStream<Long, LongStream> {
     
     /*▼ 实现BaseStream接口 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回流中元素的Iterator（迭代器）
+    // 返回流中元素的Iterator(迭代器)
     @Override
     PrimitiveIterator.OfLong iterator();
     
-    // 返回流中元素的Spliterator（可分割的迭代器）
+    // 返回流中元素的Spliterator(可分割的迭代器)
     @Override
     Spliterator.OfLong spliterator();
     
-    // 中间操作，返回顺序的等效流。
+    // 中间操作 返回顺序的等效流。
     @Override
     LongStream sequential();
     
-    // 中间操作，返回并行的等效流。
+    // 中间操作 返回并行的等效流。
     @Override
     LongStream parallel();
     
@@ -1209,7 +1209,7 @@ public interface LongStream extends BaseStream<Long, LongStream> {
      * @see LongStream#builder()
      * @since 1.8
      */
-    // Stream构建器接口，允许创建单元素流或多元素流。
+    // Stream构建器接口 允许创建单元素流或多元素流。
     interface Builder extends LongConsumer {
         
         /**

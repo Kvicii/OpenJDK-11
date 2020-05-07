@@ -29,7 +29,7 @@ package java.nio;
  * A read/write HeapShortBuffer.
  */
 
-// 可读写、非直接缓冲区，内部存储结构实现为short[]
+// 可读写、非直接缓冲区 内部存储结构实现为short[]
 class HeapShortBuffer extends ShortBuffer {
     
     // Cached array base offset
@@ -74,7 +74,7 @@ class HeapShortBuffer extends ShortBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public ShortBuffer slice() {
         return new HeapShortBuffer(hb, -1, 0, this.remaining(), this.remaining(), this.position() + offset);
@@ -88,7 +88,7 @@ class HeapShortBuffer extends ShortBuffer {
         return new HeapShortBufferR(hb, this.markValue(), this.position(), this.limit(), this.capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

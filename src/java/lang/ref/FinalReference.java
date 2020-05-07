@@ -28,7 +28,7 @@ package java.lang.ref;
 /**
  * Final references, used to implement finalization
  */
-// 特殊的Reference，其唯一的子类Finalizer用来实现finalize()方法的背后细节
+// 特殊的Reference 其唯一的子类Finalizer用来实现finalize()方法的背后细节
 class FinalReference<T> extends Reference<T> {
     
     public FinalReference(T referent, ReferenceQueue<? super T> q) {

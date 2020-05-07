@@ -25,7 +25,7 @@
 
 package java.nio;
 
-// ByteBuffer转为LongBuffer，使用可读写的缓冲区。采用小端字节序，其他部分与ByteBufferAsLongBufferB相同
+// ByteBuffer转为LongBuffer 使用可读写的缓冲区。采用小端字节序 其他部分与ByteBufferAsLongBufferB相同
 class ByteBufferAsLongBufferL extends LongBuffer {
     
     protected final ByteBuffer bb;
@@ -69,7 +69,7 @@ class ByteBufferAsLongBufferL extends LongBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public LongBuffer slice() {
         int pos = this.position();
@@ -88,11 +88,11 @@ class ByteBufferAsLongBufferL extends LongBuffer {
         return new ByteBufferAsLongBufferRL(bb, this.markValue(), this.position(), this.limit(), this.capacity(), address);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /* getLongUnaligned和putLongUnaligned方法中，最后一个参数为false，代表以小端法存取字节 */
+    /* getLongUnaligned和putLongUnaligned方法中 最后一个参数为false 代表以小端法存取字节 */
     
     /*▼ get/读取 ████████████████████████████████████████████████████████████████████████████████┓ */
     

@@ -53,19 +53,19 @@ import java.nio.ByteBuffer;
  * @see #getUnsafe
  */
 /*
- * 用于执行低级别，不安全操作的方法集合。
+ * 用于执行低级别 不安全操作的方法集合。
  *
  * 该类包装了jdk.internal.misc类中的部分操作
- * 虽然类和所有方法都是公共的，但是使用这个类是有限的，因为只有可信代码才能获得它的实例。
+ * 虽然类和所有方法都是公共的 但是使用这个类是有限的 因为只有可信代码才能获得它的实例。
  *
- * 该类支持在任意内存地址位置处读写数据，对于普通用户来说，使用起来还是比较危险的。
+ * 该类支持在任意内存地址位置处读写数据 对于普通用户来说 使用起来还是比较危险的。
  *
- * 常用的场景：
- * --> 创建某个类的对象（不经过构造方法）
- * --> 本地内存操作：分配/释放内存，向内存存值，从内存中取值
- * --> 获取对象中某字段的地址，获取该字段存储的值（通过地址），为某地址处的字段赋值（可支持Volatile语义）
+ * 常用的场景:
+ * --> 创建某个类的对象(不经过构造方法)
+ * --> 本地内存操作:分配/释放内存 向内存存值 从内存中取值
+ * --> 获取对象中某字段的地址 获取该字段存储的值(通过地址) 为某地址处的字段赋值(可支持Volatile语义)
  * --> 对JVM内存中某对象的数组字段/变量直接操作
- * --> 原子操作(CAS)，设置/更新/增减值
+ * --> 原子操作(CAS) 设置/更新/增减值
  * --> 线程操作
  * --> 内存屏障
  */
@@ -84,7 +84,7 @@ public final class Unsafe {
     public static final int INVALID_FIELD_OFFSET = jdk.internal.misc.Unsafe.INVALID_FIELD_OFFSET;
     
     /** The value of {@code addressSize()} */
-    // 本地指针尺寸，4字节或8字节
+    // 本地指针尺寸 4字节或8字节
     public static final int ADDRESS_SIZE = theInternalUnsafe.addressSize();
     
     
@@ -172,12 +172,12 @@ public final class Unsafe {
      *          class is not in the system domain in which all permissions
      *          are granted.
      */
-    // 返回单例对象，只能从引导类加载器（bootstrap class loader）加载，被自定义类直接调用会抛出异常
+    // 返回单例对象 只能从引导类加载器(bootstrap class loader)加载 被自定义类直接调用会抛出异常
     @CallerSensitive
     public static Unsafe getUnsafe() {
         // 得到调用该方法的Class对象
         Class<?> caller = Reflection.getCallerClass();
-        // 校验ClassLoader，从自己编写的类中调用此方法会抛出异常
+        // 校验ClassLoader 从自己编写的类中调用此方法会抛出异常
         if (!VM.isSystemDomainLoader(caller.getClassLoader())) {
             throw new SecurityException("Unsafe");
         }
@@ -192,7 +192,7 @@ public final class Unsafe {
      * Allocates an instance but does not run any constructor.
      * Initializes the class if it has not yet been.
      */
-    // 不调用构造方法就生成对象，但是该对象的字段会被赋为对应类型的"零值"，为该对象赋过的默认值也无效
+    // 不调用构造方法就生成对象 但是该对象的字段会被赋为对应类型的"零值" 为该对象赋过的默认值也无效
     @ForceInline
     public Object allocateInstance(Class<?> cls) throws InstantiationException {
         return theInternalUnsafe.allocateInstance(cls);
@@ -247,13 +247,13 @@ public final class Unsafe {
     /*
      * 获取非静态字段的JVM偏移地址
      *
-     * 通过该方法可以计算一个对象在内存中的空间大小，方法是：
-     * 通过反射得到它的所有Field(包括父类继承得到的)，找出Field中偏移量最大值，然后对该最大偏移值填充字节数即为对象大小。
+     * 通过该方法可以计算一个对象在内存中的空间大小 方法是:
+     * 通过反射得到它的所有Field(包括父类继承得到的) 找出Field中偏移量最大值 然后对该最大偏移值填充字节数即为对象大小。
      *
      * 关于该方法的使用例子可以看下面的修改内存数据的例子；
-     * putLong，putInt，putDouble，putChar，putObject等方法，直接修改内存数据（可以越过访问权限）
+     * putLong putInt putDouble putChar putObject等方法 直接修改内存数据(可以越过访问权限)
      *
-     * 这里，还有put对应的get方法，很简单就是直接读取内存地址处的数据。
+     * 这里 还有put对应的get方法 很简单就是直接读取内存地址处的数据。
      */
     @ForceInline
     public long objectFieldOffset(Field f) {
@@ -350,7 +350,7 @@ public final class Unsafe {
      * @see #getByte(long)
      * @see #putByte(long, byte)
      */
-    // 申请bytes字节的本地内存，并返回分配的内存地址
+    // 申请bytes字节的本地内存 并返回分配的内存地址
     @ForceInline
     public long allocateMemory(long bytes) {
         return theInternalUnsafe.allocateMemory(bytes);
@@ -382,7 +382,7 @@ public final class Unsafe {
      *
      * @see #allocateMemory
      */
-    // 在地址address的基础上扩容，如果address为0，则效果与#allocateMemory一致
+    // 在地址address的基础上扩容 如果address为0 则效果与#allocateMemory一致
     @ForceInline
     public long reallocateMemory(long address, long bytes) {
         return theInternalUnsafe.reallocateMemory(address, bytes);
@@ -394,7 +394,7 @@ public final class Unsafe {
      *
      * <p>Equivalent to {@code setMemory(null, address, bytes, value)}.
      */
-    // 为申请的内存批量填充初值，通常用0填充
+    // 为申请的内存批量填充初值 通常用0填充
     @ForceInline
     public void setMemory(long address, long bytes, byte value) {
         theInternalUnsafe.setMemory(address, bytes, value);
@@ -428,7 +428,7 @@ public final class Unsafe {
      *
      * @since 1.7
      */
-    // 为对象o处的内存批量填充初值，通常用0填充
+    // 为对象o处的内存批量填充初值 通常用0填充
     @ForceInline
     public void setMemory(Object o, long offset, long bytes, byte value) {
         theInternalUnsafe.setMemory(o, offset, bytes, value);
@@ -548,7 +548,7 @@ public final class Unsafe {
      * other primitive types (as stored in native memory blocks) is determined
      * fully by their information content.
      */
-    // 检查通过{@link #putAddress}存储的本机指针的大小（以字节为单位）。此值为4或8。请注意，其他基本类型的大小（存储在本机内存块中）完全由其信息内容决定。
+    // 检查通过{@link #putAddress}存储的本机指针的大小(以字节为单位)。此值为4或8。请注意 其他基本类型的大小(存储在本机内存块中)完全由其信息内容决定。
     @ForceInline
     public int addressSize() {
         return theInternalUnsafe.addressSize();
@@ -564,30 +564,30 @@ public final class Unsafe {
     /* 获取/设置字段值 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
     
     /*
-     * (1.1) 基于JVM内存地址，获取/设置字段值
+     * (1.1) 基于JVM内存地址 获取/设置字段值
      * - getXXX(o, offset)
      *    获取对象o中offset地址处对应的字段值
      *    对象o可以是数组
      *    offset的值由#objectFieldOffset或#staticFieldOffset获取
-     *    也可以由#arrayBaseOffset[B]和#arrayIndexScale[S]共同构成：B + N * S
+     *    也可以由#arrayBaseOffset[B]和#arrayIndexScale[S]共同构成:B + N * S
      *
      * - putXXX(o, offset, x)
      *     设置对象o中offset地址处对应的字段为新值x
      *
-     * (1.2) 基于本地内存地址，获取/设置字段值
+     * (1.2) 基于本地内存地址 获取/设置字段值
      * - getXXX(address)
      * - putXXX(address, x)
      *
-     * (3) 基于JVM内存地址，获取/设置字段值，Ordered/Lazy版本
+     * (3) 基于JVM内存地址 获取/设置字段值 Ordered/Lazy版本
      *     不保证值的改变被其他线程立即看到。
      * - putOrderedXXX(o, offset, x)
      *
-     * (4) 基于JVM内存地址，获取/设置字段值，Volatile版本
+     * (4) 基于JVM内存地址 获取/设置字段值 Volatile版本
      * - getXXXVolatile(o, offset)
      * - putXXXVolatile(o, offset, x)
      */
     
-    /*▼ (1.1) getXXX/putXXX 获取/设置字段值（基于JVM内存地址） ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.1) getXXX/putXXX 获取/设置字段值(基于JVM内存地址) ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * @see #getInt(Object, long)
@@ -833,11 +833,11 @@ public final class Unsafe {
         theInternalUnsafe.putObject(o, offset, x);
     }
     
-    /*▲ (1.1) getXXX/putXXX 获取/设置字段值（基于JVM内存地址） ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.1) getXXX/putXXX 获取/设置字段值(基于JVM内存地址) ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (1.2) getXXX/putXXX 获取/设置字段值（基于本地内存地址） ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1.2) getXXX/putXXX 获取/设置字段值(基于本地内存地址) ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Fetches a value from a given memory address.  If the address is zero, or
@@ -975,11 +975,11 @@ public final class Unsafe {
         theInternalUnsafe.putChar(address, x);
     }
     
-    /*▲ (1.2) getXXX/putXXX 获取/设置字段值（基于本地内存地址） ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1.2) getXXX/putXXX 获取/设置字段值(基于本地内存地址) ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (3) putOrderedXXX 获取/设置字段值（基于JVM内存地址），Ordered/Lazy版本 █████████████████████████████████████████████████████████████┓ */
+    /*▼ (3) putOrderedXXX 获取/设置字段值(基于JVM内存地址) Ordered/Lazy版本 █████████████████████████████████████████████████████████████┓ */
     
     /** Ordered/Lazy version of {@link #putIntVolatile(Object, long, int)}  */
     // 设置对象o中offset地址处对应的int型字段为新值x
@@ -1012,16 +1012,16 @@ public final class Unsafe {
         theInternalUnsafe.putObjectRelease(o, offset, x);
     }
     
-    /*▲ (3) putOrderedXXX 获取/设置字段值（基于JVM内存地址），Ordered/Lazy版本 █████████████████████████████████████████████████████████████┛ */
+    /*▲ (3) putOrderedXXX 获取/设置字段值(基于JVM内存地址) Ordered/Lazy版本 █████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值（基于JVM内存地址），Volatile版本 ███████████████████████████████████████████┓ */
+    /*▼ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值(基于JVM内存地址) Volatile版本 ███████████████████████████████████████████┓ */
     
     /**
      * Volatile version of {@link #getByte(Object, long)}
      */
-    // 获取对象o中offset地址处对应的byte型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的byte型字段的值 支持volatile语义
     @ForceInline
     public byte getByteVolatile(Object o, long offset) {
         return theInternalUnsafe.getByteVolatile(o, offset);
@@ -1030,14 +1030,14 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #getShort(Object, long)}
      */
-    // 获取对象o中offset地址处对应的short型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的short型字段的值 支持volatile语义
     @ForceInline
     public short getShortVolatile(Object o, long offset) {
         return theInternalUnsafe.getShortVolatile(o, offset);
     }
     
     /** Volatile version of {@link #getInt(Object, long)}  */
-    // 获取对象o中offset地址处对应的int型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的int型字段的值 支持volatile语义
     @ForceInline
     public int getIntVolatile(Object o, long offset) {
         return theInternalUnsafe.getIntVolatile(o, offset);
@@ -1046,7 +1046,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #getLong(Object, long)}
      */
-    // 获取对象o中offset地址处对应的long型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的long型字段的值 支持volatile语义
     @ForceInline
     public long getLongVolatile(Object o, long offset) {
         return theInternalUnsafe.getLongVolatile(o, offset);
@@ -1055,7 +1055,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #getFloat(Object, long)}
      */
-    // 获取对象o中offset地址处对应的float型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的float型字段的值 支持volatile语义
     @ForceInline
     public float getFloatVolatile(Object o, long offset) {
         return theInternalUnsafe.getFloatVolatile(o, offset);
@@ -1064,7 +1064,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #getDouble(Object, long)}
      */
-    // 获取对象o中offset地址处对应的double型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的double型字段的值 支持volatile语义
     @ForceInline
     public double getDoubleVolatile(Object o, long offset) {
         return theInternalUnsafe.getDoubleVolatile(o, offset);
@@ -1073,7 +1073,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #getChar(Object, long)}
      */
-    // 获取对象o中offset地址处对应的char型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的char型字段的值 支持volatile语义
     @ForceInline
     public char getCharVolatile(Object o, long offset) {
         return theInternalUnsafe.getCharVolatile(o, offset);
@@ -1082,7 +1082,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #getBoolean(Object, long)}
      */
-    // 获取对象o中offset地址处对应的boolean型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的boolean型字段的值 支持volatile语义
     @ForceInline
     public boolean getBooleanVolatile(Object o, long offset) {
         return theInternalUnsafe.getBooleanVolatile(o, offset);
@@ -1092,7 +1092,7 @@ public final class Unsafe {
      * Fetches a reference value from a given Java variable, with volatile
      * load semantics. Otherwise identical to {@link #getObject(Object, long)}
      */
-    // 获取对象o中offset地址处对应的引用类型字段的值，支持volatile语义
+    // 获取对象o中offset地址处对应的引用类型字段的值 支持volatile语义
     @ForceInline
     public Object getObjectVolatile(Object o, long offset) {
         return theInternalUnsafe.getObjectVolatile(o, offset);
@@ -1103,7 +1103,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #putByte(Object, long, byte)}
      */
-    // 设置对象o中offset地址处对应的byte型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的byte型字段为新值x 支持volatile语义
     @ForceInline
     public void putByteVolatile(Object o, long offset, byte x) {
         theInternalUnsafe.putByteVolatile(o, offset, x);
@@ -1112,14 +1112,14 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #putShort(Object, long, short)}
      */
-    // 设置对象o中offset地址处对应的short型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的short型字段为新值x 支持volatile语义
     @ForceInline
     public void putShortVolatile(Object o, long offset, short x) {
         theInternalUnsafe.putShortVolatile(o, offset, x);
     }
     
     /** Volatile version of {@link #putInt(Object, long, int)}  */
-    // 设置对象o中offset地址处对应的int型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的int型字段为新值x 支持volatile语义
     @ForceInline
     public void putIntVolatile(Object o, long offset, int x) {
         theInternalUnsafe.putIntVolatile(o, offset, x);
@@ -1128,7 +1128,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #putLong(Object, long, long)}
      */
-    // 设置对象o中offset地址处对应的long型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的long型字段为新值x 支持volatile语义
     @ForceInline
     public void putLongVolatile(Object o, long offset, long x) {
         theInternalUnsafe.putLongVolatile(o, offset, x);
@@ -1137,7 +1137,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #putFloat(Object, long, float)}
      */
-    // 设置对象o中offset地址处对应的float型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的float型字段为新值x 支持volatile语义
     @ForceInline
     public void putFloatVolatile(Object o, long offset, float x) {
         theInternalUnsafe.putFloatVolatile(o, offset, x);
@@ -1146,7 +1146,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #putDouble(Object, long, double)}
      */
-    // 设置对象o中offset地址处对应的double型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的double型字段为新值x 支持volatile语义
     @ForceInline
     public void putDoubleVolatile(Object o, long offset, double x) {
         theInternalUnsafe.putDoubleVolatile(o, offset, x);
@@ -1155,7 +1155,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #putChar(Object, long, char)}
      */
-    // 设置对象o中offset地址处对应的char型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的char型字段为新值x 支持volatile语义
     @ForceInline
     public void putCharVolatile(Object o, long offset, char x) {
         theInternalUnsafe.putCharVolatile(o, offset, x);
@@ -1164,7 +1164,7 @@ public final class Unsafe {
     /**
      * Volatile version of {@link #putBoolean(Object, long, boolean)}
      */
-    // 设置对象o中offset地址处对应的boolean型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的boolean型字段为新值x 支持volatile语义
     @ForceInline
     public void putBooleanVolatile(Object o, long offset, boolean x) {
         theInternalUnsafe.putBooleanVolatile(o, offset, x);
@@ -1174,13 +1174,13 @@ public final class Unsafe {
      * Stores a reference value into a given Java variable, with
      * volatile store semantics. Otherwise identical to {@link #putObject(Object, long, Object)}
      */
-    // 设置对象o中offset地址处对应的引用类型字段为新值x，支持volatile语义
+    // 设置对象o中offset地址处对应的引用类型字段为新值x 支持volatile语义
     @ForceInline
     public void putObjectVolatile(Object o, long offset, Object x) {
         theInternalUnsafe.putObjectVolatile(o, offset, x);
     }
     
-    /*▲ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值（基于JVM内存地址），Volatile版本 ███████████████████████████████████████████┛ */
+    /*▲ (4) getXXXVolatile/putXXXVolatile 获取/设置字段值(基于JVM内存地址) Volatile版本 ███████████████████████████████████████████┛ */
     
     
     
@@ -1196,7 +1196,7 @@ public final class Unsafe {
      * @see #getInt(Object, long)
      * @see #putInt(Object, long, int)
      */
-    // 寻找某类型数组中的元素时约定的起始偏移地址（更像是一个标记），与#arrayIndexScale配合使用
+    // 寻找某类型数组中的元素时约定的起始偏移地址(更像是一个标记) 与#arrayIndexScale配合使用
     @ForceInline
     public int arrayBaseOffset(Class<?> arrayClass) {
         return theInternalUnsafe.arrayBaseOffset(arrayClass);
@@ -1213,7 +1213,7 @@ public final class Unsafe {
      * @see #getInt(Object, long)
      * @see #putInt(Object, long, int)
      */
-    // 某类型数组每个元素所占字节数，与#arrayBaseOffset配合使用
+    // 某类型数组每个元素所占字节数 与#arrayBaseOffset配合使用
     @ForceInline
     public int arrayIndexScale(Class<?> arrayClass) {
         return theInternalUnsafe.arrayIndexScale(arrayClass);
@@ -1228,31 +1228,31 @@ public final class Unsafe {
     
     
     
-    /* 原子操作，基于JVM内存操作 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+    /* 原子操作 基于JVM内存操作 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
     
     /*
-     * (1) 设置值，失败后会重试，属于自旋锁&乐观锁
+     * (1) 设置值 失败后会重试 属于自旋锁&乐观锁
      * - getAndSetXXX(o, offset, newValue)
-     *   返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
-     *   设置新值newValue的时候，要保证该字段修改过程中没有被其他线程修改，否则不断自旋，直到成功修改
+     *   返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
+     *   设置新值newValue的时候 要保证该字段修改过程中没有被其他线程修改 否则不断自旋 直到成功修改
      *
-     * (2) 更新值，如果待更新字段与期望值expected相等，则原子地更新目标字段。返回值代表更新成功或失败。
+     * (2) 更新值 如果待更新字段与期望值expected相等 则原子地更新目标字段。返回值代表更新成功或失败。
      * - compareAndSwapXXX(o, offset, expected, x)
-     *   拿对象o中offset地址的field值与预期值expected作比较（内存值可能被其他线程修改掉，所以需要比较）。
-     *   如果发现该值被修改，则返回false，否则，原子地更新该值为x，且返回true。
-     *   @param offset   JVM内存偏移地址，对象o中某字段field的地址
+     *   拿对象o中offset地址的field值与预期值expected作比较(内存值可能被其他线程修改掉 所以需要比较)。
+     *   如果发现该值被修改 则返回false 否则 原子地更新该值为x 且返回true。
+     *   @param offset   JVM内存偏移地址 对象o中某字段field的地址
      *   @param o        包含field值的对象
      *   @param expected field当前的期望值
-     *   @param x        如果field的当前值与期望值expected相同，那么更新filed的值为这个新值x
-     *   @return         更新成功返回true，更新失败返回false
+     *   @param x        如果field的当前值与期望值expected相同 那么更新filed的值为这个新值x
+     *   @return         更新成功返回true 更新失败返回false
      *
-     * (3) 增减值，如果更新失败就不断尝试，属于乐观锁&自旋锁
+     * (3) 增减值 如果更新失败就不断尝试 属于乐观锁&自旋锁
      * - getAndAddXXX(o, offset, delta)
-     *   返回对象o的offset地址处的值，并将该值原子性地增加delta（delta可以为负数）
+     *   返回对象o的offset地址处的值 并将该值原子性地增加delta(delta可以为负数)
      *
      */
     
-    /*▼ (1) 设置值，失败后会重试，属于自旋锁&乐观锁 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (1) 设置值 失败后会重试 属于自旋锁&乐观锁 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Atomically exchanges the given value with the current value of
@@ -1267,7 +1267,7 @@ public final class Unsafe {
      *
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final int getAndSetInt(Object o, long offset, int newValue) {
         return theInternalUnsafe.getAndSetInt(o, offset, newValue);
@@ -1286,7 +1286,7 @@ public final class Unsafe {
      *
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final long getAndSetLong(Object o, long offset, long newValue) {
         return theInternalUnsafe.getAndSetLong(o, offset, newValue);
@@ -1305,17 +1305,17 @@ public final class Unsafe {
      *
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地设置为新值newValue
+    // 返回对象o的offset地址处的值 并将该值原子性地设置为新值newValue
     @ForceInline
     public final Object getAndSetObject(Object o, long offset, Object newValue) {
         return theInternalUnsafe.getAndSetObject(o, offset, newValue);
     }
     
-    /*▲ (1) 设置值，失败后会重试，属于自旋锁&乐观锁 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (1) 设置值 失败后会重试 属于自旋锁&乐观锁 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (2) 更新值，基于JVM内存操作 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (2) 更新值 基于JVM内存操作 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Atomically updates Java variable to {@code x} if it is currently holding {@code expected}.
@@ -1325,7 +1325,7 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean compareAndSwapInt(Object o, long offset, int expected, int x) {
         return theInternalUnsafe.compareAndSetInt(o, offset, expected, x);
@@ -1340,7 +1340,7 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean compareAndSwapLong(Object o, long offset, long expected, long x) {
         return theInternalUnsafe.compareAndSetLong(o, offset, expected, x);
@@ -1354,17 +1354,17 @@ public final class Unsafe {
      *
      * @return {@code true} if successful
      */
-    // 拿期望值expected与对象o的offset地址处的当前值比较，如果两个值相等，将当前值更新为x
+    // 拿期望值expected与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为x
     @ForceInline
     public final boolean compareAndSwapObject(Object o, long offset, Object expected, Object x) {
         return theInternalUnsafe.compareAndSetObject(o, offset, expected, x);
     }
     
-    /*▲ (2) 更新值，基于JVM内存操作 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (2) 更新值 基于JVM内存操作 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ (3) 增减值，如果更新失败就不断尝试，属于乐观锁&自旋锁 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ (3) 增减值 如果更新失败就不断尝试 属于乐观锁&自旋锁 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Atomically adds the given value to the current value of a field or array element within the given object {@code o} at the given {@code offset}.
@@ -1377,7 +1377,7 @@ public final class Unsafe {
      *
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final int getAndAddInt(Object o, long offset, int delta) {
         return theInternalUnsafe.getAndAddInt(o, offset, delta);
@@ -1396,15 +1396,15 @@ public final class Unsafe {
      *
      * @since 1.8
      */
-    // 返回对象o的offset地址处的值，并将该值原子性地增加delta
+    // 返回对象o的offset地址处的值 并将该值原子性地增加delta
     @ForceInline
     public final long getAndAddLong(Object o, long offset, long delta) {
         return theInternalUnsafe.getAndAddLong(o, offset, delta);
     }
     
-    /*▲ (3) 增减值，如果更新失败就不断尝试，属于乐观锁&自旋锁 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ (3) 增减值 如果更新失败就不断尝试 属于乐观锁&自旋锁 ████████████████████████████████████████████████████████████████████████████████┛ */
     
-    /* 原子操作，基于JVM内存操作 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
+    /* 原子操作 基于JVM内存操作 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ */
     
     
     
@@ -1426,13 +1426,13 @@ public final class Unsafe {
      * @param thread the thread to unpark.
      */
     /*
-     * unpark发给目标线程一个许可证，该许可证被park消费。
-     * 该许可证可以先发给线程使用，
-     * 也可以等线程陷入阻塞，等待许可证时再（由另一个线程）给它，进而唤醒线程。
+     * unpark发给目标线程一个许可证 该许可证被park消费。
+     * 该许可证可以先发给线程使用
+     * 也可以等线程陷入阻塞 等待许可证时再(由另一个线程)给它 进而唤醒线程。
      *
      * 连续重复发给线程的许可证只被视为一个许可证。
      *
-     * 注：该方法形参必须为线程
+     * 注:该方法形参必须为线程
      */
     @ForceInline
     public void unpark(Object thread) {
@@ -1451,15 +1451,15 @@ public final class Unsafe {
      * elsewhere.
      */
     /*
-     * 等待消费一个许可证，这会使线程陷入阻塞。
-     * 如果提前给过许可，则线程继续执行。
-     * 如果陷入阻塞后等待许可，则可由别的线程发给它许可。
+     * 等待消费一个许可证 这会使线程陷入阻塞。
+     * 如果提前给过许可 则线程继续执行。
+     * 如果陷入阻塞后等待许可 则可由别的线程发给它许可。
      * 使用线程中断也可以唤醒陷入阻塞的线程。
      *
-     * 参数absolute：true代表后面的time是一个绝对时间，是一个时间点；false代表后面的time是一个相对时间，相对于当前的时间间隔
-     * 参数time：可以是一个毫秒数时间点，该时间点是相对于1970年1月1日0时0分0秒开始的【绝对时间】，或者是一个纳秒数时间间隔【相对时间】
-     * 如果是相对时间，且time>0，代表阻塞在time时间后自动解除
-     * 如果是相对时间，且time==0，代表永远阻塞，除非被主动唤醒
+     * 参数absolute:true代表后面的time是一个绝对时间 是一个时间点；false代表后面的time是一个相对时间 相对于当前的时间间隔
+     * 参数time:可以是一个毫秒数时间点 该时间点是相对于1970年1月1日0时0分0秒开始的【绝对时间】 或者是一个纳秒数时间间隔【相对时间】
+     * 如果是相对时间 且time>0 代表阻塞在time时间后自动解除
+     * 如果是相对时间 且time==0 代表永远阻塞 除非被主动唤醒
      */
     @ForceInline
     public void park(boolean isAbsolute, long time) {
@@ -1566,7 +1566,7 @@ public final class Unsafe {
      */
     // 直接缓冲区清理器
     public void invokeCleaner(ByteBuffer directBuffer) {
-        // 如果非直接缓冲区（堆内存），抛异常
+        // 如果非直接缓冲区(堆内存) 抛异常
         if (!directBuffer.isDirect()) {
             throw new IllegalArgumentException("buffer is non-direct");
         }
@@ -1576,7 +1576,7 @@ public final class Unsafe {
             throw new IllegalArgumentException("duplicate or slice");
         }
         
-        // 获取附着的清理器，清理缓冲区
+        // 获取附着的清理器 清理缓冲区
         Cleaner cleaner = db.cleaner();
         if (cleaner != null) {
             cleaner.clean();

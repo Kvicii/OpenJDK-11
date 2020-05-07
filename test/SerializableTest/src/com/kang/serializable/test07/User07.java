@@ -19,7 +19,7 @@ public class User07 implements Serializable {
         this.sex = sex;
     }
     
-    // 如果实现此方法，每次返回的都是相同的user对象
+    // 如果实现此方法 每次返回的都是相同的user对象
     private Object readResolve(){
         user.name = this.name;
         user.age = this.age;

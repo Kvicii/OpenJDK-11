@@ -57,15 +57,15 @@ import java.util.function.LongConsumer;
  */
 
 /*
- * 一个不可变的容器，用于描述某种类型{T}的有序元素序列
+ * 一个不可变的容器 用于描述某种类型{T}的有序元素序列
  *
- * {Node}包含固定数量的元素，可以通过{#count}，{#spliterator}，{#forEach}，{#asArray}或{#copyInto}方法访问这些元素。
+ * {Node}包含固定数量的元素 可以通过{#count} {#spliterator} {#forEach} {#asArray}或{#copyInto}方法访问这些元素。
  * {Node}可以有零个或多个子节点；
- * 如果它没有子节点（通过{#getChildCount}和{#getChild(int)}访问，则它被认为是平面或叶子;
- * 如果它有子节点，则它被认为是内部节点。
+ * 如果它没有子节点(通过{#getChildCount}和{#getChild(int)}访问 则它被认为是平面或叶子;
+ * 如果它有子节点 则它被认为是内部节点。
  * 内部节点的大小是总和其子女的大小。
  *
- * {Node}通常不直接存储元素，而是对一个或多个现有数据结构的访问，例如{Collection}，数组或一组其他{Node} 。
+ * {Node}通常不直接存储元素 而是对一个或多个现有数据结构的访问 例如{Collection} 数组或一组其他{Node} 。
  *
  * 在流框架中使用{Node}主要是为了避免在并行操作期间不必要地复制数据。
  */
@@ -89,7 +89,7 @@ interface Node<T> {
      * @param consumer a {@code Consumer} that is to be invoked with each
      *                 element in this {@code Node}
      */
-    // 遍历Node中的元素，并在其上执行Consumer操作
+    // 遍历Node中的元素 并在其上执行Consumer操作
     void forEach(Consumer<? super T> consumer);
     
     /**
@@ -198,7 +198,7 @@ interface Node<T> {
         
         // 需要对所有元素进行操作
         if(to == count()) {
-            // 遍历Node内每个元素，在其上执行相应的择取操作
+            // 遍历Node内每个元素 在其上执行相应的择取操作
             spliterator.forEachRemaining(nodeBuilder);
         } else {    // 对部分元素执行择取操作
             for(int i = 0; i < size && spliterator.tryAdvance(nodeBuilder); i++) {
@@ -218,19 +218,19 @@ interface Node<T> {
      * @implSpec The default in {@code Node} returns
      * {@code StreamShape.REFERENCE}
      */
-    // 返回流的形状：引用类型
+    // 返回流的形状:引用类型
     default StreamShape getShape() {
         return StreamShape.REFERENCE;
     }
     
     
     
-    /*▼ 专用Sink，这里称作：【Builder->Sink接口】 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 专用Sink 这里称作:【Builder->Sink接口】 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * A mutable builder for a {@code Node} that implements {@link Sink}, which builds a flat node containing the elements that have been pushed to it.
      */
-    // 专用Sink，用来创建各种类型的Node
+    // 专用Sink 用来创建各种类型的Node
     interface Builder<T> extends Sink<T> {
         
         /**
@@ -276,7 +276,7 @@ interface Node<T> {
         }
     }
     
-    /*▲ 专用Sink，这里称作：【Builder->Sink接口】 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 专用Sink 这里称作:【Builder->Sink接口】 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -303,7 +303,7 @@ interface Node<T> {
          * @param action a consumer that is to be invoked with each
          *               element in this {@code Node.OfPrimitive}
          */
-        // 遍历Node中的元素，并在其上执行action操作
+        // 遍历Node中的元素 并在其上执行action操作
         @SuppressWarnings("overloads")
         void forEach(T_CONS action);
     
@@ -393,7 +393,7 @@ interface Node<T> {
          *                 {@code IntConsumer}, it is cast to {@code IntConsumer} so the
          *                 elements may be processed without boxing.
          */
-        // 遍历Node中的元素，并在其上执行Consumer操作
+        // 遍历Node中的元素 并在其上执行Consumer操作
         @Override
         default void forEach(Consumer<? super Integer> consumer) {
             if(consumer instanceof IntConsumer) {
@@ -458,7 +458,7 @@ interface Node<T> {
          * @implSpec The default in {@code Node.OfInt} returns
          * {@code StreamShape.INT_VALUE}
          */
-        // 返回流的形状：int类型
+        // 返回流的形状:int类型
         default StreamShape getShape() {
             return StreamShape.INT_VALUE;
         }
@@ -479,7 +479,7 @@ interface Node<T> {
          *                 {@code LongConsumer}, it is cast to {@code LongConsumer} so
          *                 the elements may be processed without boxing.
          */
-        // 遍历Node中的元素，并在其上执行Consumer操作
+        // 遍历Node中的元素 并在其上执行Consumer操作
         @Override
         default void forEach(Consumer<? super Long> consumer) {
             if(consumer instanceof LongConsumer) {
@@ -544,7 +544,7 @@ interface Node<T> {
          * @implSpec The default in {@code Node.OfLong} returns
          * {@code StreamShape.LONG_VALUE}
          */
-        // 返回流的形状：long类型
+        // 返回流的形状:long类型
         default StreamShape getShape() {
             return StreamShape.LONG_VALUE;
         }
@@ -565,7 +565,7 @@ interface Node<T> {
          *                 {@code DoubleConsumer}, it is cast to {@code DoubleConsumer}
          *                 so the elements may be processed without boxing.
          */
-        // 遍历Node中的元素，并在其上执行Consumer操作
+        // 遍历Node中的元素 并在其上执行Consumer操作
         @Override
         default void forEach(Consumer<? super Double> consumer) {
             if(consumer instanceof DoubleConsumer) {
@@ -630,7 +630,7 @@ interface Node<T> {
          * @implSpec The default in {@code Node.OfDouble} returns
          * {@code StreamShape.DOUBLE_VALUE}
          */
-        // 返回流的形状：double类型
+        // 返回流的形状:double类型
         default StreamShape getShape() {
             return StreamShape.DOUBLE_VALUE;
         }

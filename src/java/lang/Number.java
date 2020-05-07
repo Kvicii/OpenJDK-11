@@ -54,7 +54,7 @@ import java.io.Serializable;
  * @jls 5.1.3 Narrowing Primitive Conversions
  * @since 1.0
  */
-// 数值类型包装类的共同祖先，声明了各种包装类型的拆箱方法
+// 数值类型包装类的共同祖先 声明了各种包装类型的拆箱方法
 public abstract class Number implements Serializable {
     /** use serialVersionUID from JDK 1.0.2 for interoperability */
     private static final long serialVersionUID = -8742448824652078965L;

@@ -14,6 +14,6 @@ public class IDCard {
     
     @Override
     public String toString() {
-        return "身份证号：" + num + " ";
+        return "身份证号:" + num + " ";
     }
 }

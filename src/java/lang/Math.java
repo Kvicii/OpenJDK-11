@@ -105,7 +105,7 @@ import java.util.Random;
  * @since 1.0
  */
 /*
- * 数学运算类，包含了常用的数学计算方法
+ * 数学运算类 包含了常用的数学计算方法
  *
  * - 基本运算
  * - 乘方/开方
@@ -350,7 +350,7 @@ public final class Math {
      *
      * @since 9
      */
-    // 乘法，返回两个long乘积的高64位
+    // 乘法 返回两个long乘积的高64位
     @HotSpotIntrinsicCandidate
     public static long multiplyHigh(long x, long y) {
         if(x<0 || y<0) {
@@ -416,7 +416,7 @@ public final class Math {
      * @see #floor(double)
      * @since 1.8
      */
-    // 除法，如果两数符号不同，则向下取整
+    // 除法 如果两数符号不同 则向下取整
     public static int floorDiv(int x, int y) {
         int r = x / y;
         // if the signs are different and modulo not zero, round down
@@ -453,7 +453,7 @@ public final class Math {
      * @see #floor(double)
      * @since 9
      */
-    // 除法，如果两数符号不同，则向下取整
+    // 除法 如果两数符号不同 则向下取整
     public static long floorDiv(long x, int y) {
         return floorDiv(x, (long) y);
     }
@@ -485,7 +485,7 @@ public final class Math {
      * @see #floor(double)
      * @since 1.8
      */
-    // 除法，如果两数符号不同，则向下取整
+    // 除法 如果两数符号不同 则向下取整
     public static long floorDiv(long x, long y) {
         long r = x / y;
         // if the signs are different and modulo not zero, round down
@@ -541,7 +541,7 @@ public final class Math {
      * @see #floorDiv(int, int)
      * @since 1.8
      */
-    // 取模，相当于(x % y + y) % y
+    // 取模 相当于(x % y + y) % y
     public static int floorMod(int x, int y) {
         return x - floorDiv(x, y) * y;
     }
@@ -570,7 +570,7 @@ public final class Math {
      * @see #floorDiv(long, int)
      * @since 9
      */
-    // 取模，相当于(x % y + y) % y
+    // 取模 相当于(x % y + y) % y
     public static int floorMod(long x, int y) {
         // Result cannot overflow the range of int.
         return (int) (x - floorDiv(x, y) * y);
@@ -600,7 +600,7 @@ public final class Math {
      * @see #floorDiv(long, long)
      * @since 1.8
      */
-    // 取模，相当于(x % y + y) % y
+    // 取模 相当于(x % y + y) % y
     public static long floorMod(long x, long y) {
         return x - floorDiv(x, y) * y;
     }
@@ -629,17 +629,17 @@ public final class Math {
      * {@code f2}.
      */
     /*
-     * 按照 IEEE 754 标准的规定，对两个参数进行余数运算。
+     * 按照 IEEE 754 标准的规定 对两个参数进行余数运算。
      *
-     * 余数的算术值等于 f1 - f2 × n，其中 n 是最接近商 f1/f2 准确算术值的整数.
-     * 如果两个整数都同样接近 f1/f2，那么 n 是其中的偶数。
-     * 如果余数是 0，那么它的符号与第一个参数的符号相同。
+     * 余数的算术值等于 f1 - f2 × n 其中 n 是最接近商 f1/f2 准确算术值的整数.
+     * 如果两个整数都同样接近 f1/f2 那么 n 是其中的偶数。
+     * 如果余数是 0 那么它的符号与第一个参数的符号相同。
      *
-     * 特殊情况如下：
-     * 如果两个参数都为 NaN，或者第一个参数为无穷大，或者第二个参数为正 0 或负 0，那么结果为 NaN。
-     * 如果第一个参数为有限值，第二个参数为无穷大，那么结果与第一个参数相同。
+     * 特殊情况如下:
+     * 如果两个参数都为 NaN 或者第一个参数为无穷大 或者第二个参数为正 0 或负 0 那么结果为 NaN。
+     * 如果第一个参数为有限值 第二个参数为无穷大 那么结果与第一个参数相同。
      *
-     * 计算结果必须在准确结果的 1 ulp 范围内。如果一个参数保持常量，那么在另一个参数中，结果必须具有半单调性。
+     * 计算结果必须在准确结果的 1 ulp 范围内。如果一个参数保持常量 那么在另一个参数中 结果必须具有半单调性。
      */
     public static double IEEEremainder(double f1, double f2) {
         return StrictMath.IEEEremainder(f1, f2); // delegate to StrictMath
@@ -1211,7 +1211,7 @@ public final class Math {
      * @return the value ln&nbsp;{@code a}, the natural logarithm of
      * {@code a}.
      */
-    // 以e为底a的对数，自然对数
+    // 以e为底a的对数 自然对数
     @HotSpotIntrinsicCandidate
     public static double log(double a) {
         return StrictMath.log(a); // default impl. delegates to StrictMath
@@ -1578,7 +1578,7 @@ public final class Math {
      *
      * @since 1.5
      */
-    // 根号下x与y的平方和，可用于计算直角三角形的斜边长
+    // 根号下x与y的平方和 可用于计算直角三角形的斜边长
     public static double hypot(double x, double y) {
         return StrictMath.hypot(x, y);
     }
@@ -1636,7 +1636,7 @@ public final class Math {
      * in polar coordinates that corresponds to the point
      * (<i>x</i>,&nbsp;<i>y</i>) in Cartesian coordinates.
      */
-    // 计算y/x的反正切值。可用在将矩形坐标(x, y)转换成极坐标(r, θ)时，计算逆时针旋转的角度θ。
+    // 计算y/x的反正切值。可用在将矩形坐标(x, y)转换成极坐标(r, θ)时 计算逆时针旋转的角度θ。
     @HotSpotIntrinsicCandidate
     public static double atan2(double y, double x) {
         return StrictMath.atan2(y, x); // default impl. delegates to StrictMath
@@ -1662,7 +1662,7 @@ public final class Math {
      *
      * @return the sine of the argument.
      */
-    // 正弦，参数是弧度
+    // 正弦 参数是弧度
     @HotSpotIntrinsicCandidate
     public static double sin(double a) {
         return StrictMath.sin(a); // default impl. delegates to StrictMath
@@ -1680,7 +1680,7 @@ public final class Math {
      *
      * @return the cosine of the argument.
      */
-    // 余弦，参数是弧度
+    // 余弦 参数是弧度
     @HotSpotIntrinsicCandidate
     public static double cos(double a) {
         return StrictMath.cos(a); // default impl. delegates to StrictMath
@@ -1700,7 +1700,7 @@ public final class Math {
      *
      * @return the tangent of the argument.
      */
-    // 正切，参数是弧度
+    // 正切 参数是弧度
     @HotSpotIntrinsicCandidate
     public static double tan(double a) {
         return StrictMath.tan(a); // default impl. delegates to StrictMath
@@ -1721,7 +1721,7 @@ public final class Math {
      *
      * @return the arc sine of the argument.
      */
-    // 反正弦，返回值是弧度
+    // 反正弦 返回值是弧度
     public static double asin(double a) {
         return StrictMath.asin(a); // default impl. delegates to StrictMath
     }
@@ -1739,7 +1739,7 @@ public final class Math {
      *
      * @return the arc cosine of the argument.
      */
-    // 反余弦，返回值是弧度
+    // 反余弦 返回值是弧度
     public static double acos(double a) {
         return StrictMath.acos(a); // default impl. delegates to StrictMath
     }
@@ -1758,7 +1758,7 @@ public final class Math {
      *
      * @return the arc tangent of the argument.
      */
-    // 反正切，返回值是弧度
+    // 反正切 返回值是弧度
     public static double atan(double a) {
         return StrictMath.atan(a); // default impl. delegates to StrictMath
     }
@@ -1901,7 +1901,7 @@ public final class Math {
      * floating-point value that is greater than or equal to
      * the argument and is equal to a mathematical integer.
      */
-    // 向上取整，大于a的最小整数
+    // 向上取整 大于a的最小整数
     public static double ceil(double a) {
         return StrictMath.ceil(a); // default impl. delegates to StrictMath
     }
@@ -1922,7 +1922,7 @@ public final class Math {
      * floating-point value that less than or equal to the argument
      * and is equal to a mathematical integer.
      */
-    // 向下取整，小于a的最大整数
+    // 向下取整 小于a的最大整数
     public static double floor(double a) {
         return StrictMath.floor(a); // default impl. delegates to StrictMath
     }
@@ -1950,11 +1950,11 @@ public final class Math {
      * @see java.lang.Integer#MIN_VALUE
      */
     /*
-     * 返回离a最近的整数，如果a位于两个整数正中间，向右舍入
+     * 返回离a最近的整数 如果a位于两个整数正中间 向右舍入
      *
-     * 举例：
-     * round(1.4)==1，round(1.5)==2
-     * round(-1.5)==-1，round(-1.6)==-2
+     * 举例:
+     * round(1.4)==1 round(1.5)==2
+     * round(-1.5)==-1 round(-1.6)==-2
      */
     public static int round(float a) {
         int intBits = Float.floatToRawIntBits(a);
@@ -2004,7 +2004,7 @@ public final class Math {
      * @see java.lang.Long#MAX_VALUE
      * @see java.lang.Long#MIN_VALUE
      */
-    // 返回离a最近的整数，如果a位于两个整数正中间，向右舍入
+    // 返回离a最近的整数 如果a位于两个整数正中间 向右舍入
     public static long round(double a) {
         long longBits = Double.doubleToRawLongBits(a);
         long biasedExp = (longBits & DoubleConsts.EXP_BIT_MASK) >> (DoubleConsts.SIGNIFICAND_WIDTH - 1);
@@ -2048,13 +2048,13 @@ public final class Math {
      * equal to a mathematical integer.
      */
     /*
-     * 返回离a最近的整数，如果a位于两个整数正中间，向偶数舍入
+     * 返回离a最近的整数 如果a位于两个整数正中间 向偶数舍入
      *
-     * 举例：
-     * rint(2.4) = 2.0，rint(2.6) = 3.0
-     * rint(2.5) = 2.0，rint(3.5) = 4.0
-     * rint(-2.4) = -2.0，rint(-2.6) = -3.0
-     * rint(-2.5) = -2.0，rint(-3.5) = -4.0
+     * 举例:
+     * rint(2.4) = 2.0 rint(2.6) = 3.0
+     * rint(2.5) = 2.0 rint(3.5) = 4.0
+     * rint(-2.4) = -2.0 rint(-2.6) = -3.0
+     * rint(-2.5) = -2.0 rint(-3.5) = -4.0
      */
     public static double rint(double a) {
         return StrictMath.rint(a); // default impl. delegates to StrictMath
@@ -2358,7 +2358,7 @@ public final class Math {
      * @author Joseph D. Darcy
      * @since 1.5
      */
-    // d>0返回1，d<0返回-1，d==0返回0
+    // d>0返回1 d<0返回-1 d==0返回0
     public static double signum(double d) {
         return (d == 0.0 || Double.isNaN(d)) ? d : copySign(1.0, d);
     }
@@ -2382,7 +2382,7 @@ public final class Math {
      * @author Joseph D. Darcy
      * @since 1.5
      */
-    // f>0返回1，f<0返回-1，f==0返回0
+    // f>0返回1 f<0返回-1 f==0返回0
     public static float signum(float f) {
         return (f == 0.0f || Float.isNaN(f)) ? f : copySign(1.0f, f);
     }
@@ -2404,7 +2404,7 @@ public final class Math {
      *
      * @since 1.6
      */
-    // sign>=0返回magnitude，sign<0返回-magnitude
+    // sign>=0返回magnitude sign<0返回-magnitude
     public static double copySign(double magnitude, double sign) {
         return Double.longBitsToDouble(
             (Double.doubleToRawLongBits(sign) & (DoubleConsts.SIGN_BIT_MASK))
@@ -2429,7 +2429,7 @@ public final class Math {
      *
      * @since 1.6
      */
-    // sign>=0返回magnitude，sign<0返回-magnitude
+    // sign>=0返回magnitude sign<0返回-magnitude
     public static float copySign(float magnitude, float sign) {
         return Float.intBitsToFloat(
             (Float.floatToRawIntBits(sign) & (FloatConsts.SIGN_BIT_MASK))
@@ -2460,7 +2460,7 @@ public final class Math {
      *
      * @since 1.6
      */
-    // 返回e-127，其中e是浮点数指数位的无符号值
+    // 返回e-127 其中e是浮点数指数位的无符号值
     public static int getExponent(float f) {
         /*
          * Bitwise convert f to integer, mask out exponent bits, shift
@@ -2487,7 +2487,7 @@ public final class Math {
      *
      * @since 1.6
      */
-    // 返回e-1023，其中e是浮点数指数位的无符号值
+    // 返回e-1023 其中e是浮点数指数位的无符号值
     public static int getExponent(double d) {
         /*
          * Bitwise convert d to long, mask out exponent bits, shift
@@ -2522,7 +2522,7 @@ public final class Math {
      * @author Joseph D. Darcy
      * @since 1.5
      */
-    // 返回1/n，n代表区间[f-1, f)之间的浮点数个数
+    // 返回1/n n代表区间[f-1, f)之间的浮点数个数
     public static float ulp(float f) {
         int exp = getExponent(f);
         
@@ -2573,7 +2573,7 @@ public final class Math {
      * @author Joseph D. Darcy
      * @since 1.5
      */
-    // 返回1/n，n代表区间[d-1, d)之间的浮点数个数
+    // 返回1/n n代表区间[d-1, d)之间的浮点数个数
     public static double ulp(double d) {
         int exp = getExponent(d);
         
@@ -2626,7 +2626,7 @@ public final class Math {
      *
      * @since 1.6
      */
-    // 返回比当前浮点数大的最小浮点数（浮点数是非均匀且不连续的）
+    // 返回比当前浮点数大的最小浮点数(浮点数是非均匀且不连续的)
     public static float nextUp(float f) {
         // Use a single conditional and handle the likely cases first.
         if(f<Float.POSITIVE_INFINITY) {
@@ -2665,7 +2665,7 @@ public final class Math {
      *
      * @since 1.6
      */
-    // 返回比当前浮点数大的最小浮点数（浮点数是非均匀且不连续的）
+    // 返回比当前浮点数大的最小浮点数(浮点数是非均匀且不连续的)
     public static double nextUp(double d) {
         // Use a single conditional and handle the likely cases first.
         if(d<Double.POSITIVE_INFINITY) {
@@ -2704,7 +2704,7 @@ public final class Math {
      *
      * @since 1.8
      */
-    // 返回比当前浮点数小的最大浮点数（浮点数是非均匀且不连续的）
+    // 返回比当前浮点数小的最大浮点数(浮点数是非均匀且不连续的)
     public static float nextDown(float f) {
         if(Float.isNaN(f) || f == Float.NEGATIVE_INFINITY)
             return f;
@@ -2743,7 +2743,7 @@ public final class Math {
      *
      * @since 1.8
      */
-    // 返回比当前浮点数小的最大浮点数（浮点数是非均匀且不连续的）
+    // 返回比当前浮点数小的最大浮点数(浮点数是非均匀且不连续的)
     public static double nextDown(double d) {
         if(Double.isNaN(d) || d == Double.NEGATIVE_INFINITY)
             return d;
@@ -2797,9 +2797,9 @@ public final class Math {
      * @since 1.6
      */
     /*
-     * 如果start==direction，返回direction
-     * 如果start<direction，返回比start大的最小浮点数（浮点数是非均匀且不连续的）
-     * 如果start>direction，返回比start小的最大浮点数（浮点数是非均匀且不连续的）
+     * 如果start==direction 返回direction
+     * 如果start<direction 返回比start大的最小浮点数(浮点数是非均匀且不连续的)
+     * 如果start>direction 返回比start小的最大浮点数(浮点数是非均匀且不连续的)
      */
     public static float nextAfter(float start, double direction) {
         /*
@@ -2889,9 +2889,9 @@ public final class Math {
      * @since 1.6
      */
     /*
-     * 如果start==direction，返回direction
-     * 如果start<direction，返回比start大的最小浮点数（浮点数是非均匀且不连续的）
-     * 如果start>direction，返回比start小的最大浮点数（浮点数是非均匀且不连续的）
+     * 如果start==direction 返回direction
+     * 如果start<direction 返回比start大的最小浮点数(浮点数是非均匀且不连续的)
+     * 如果start>direction 返回比start小的最大浮点数(浮点数是非均匀且不连续的)
      */
     public static double nextAfter(double start, double direction) {
         /*
@@ -2977,7 +2977,7 @@ public final class Math {
      * @see #nextDown(double)
      * @see Random#nextDouble()
      */
-    // 随机均匀地生成一个double值，值的范围是[0, 1)，正数
+    // 随机均匀地生成一个double值 值的范围是[0, 1) 正数
     public static double random() {
         return RandomNumberGeneratorHolder.randomNumberGenerator.nextDouble();
     }
@@ -2993,7 +2993,7 @@ public final class Math {
      * @throws ArithmeticException if the {@code argument} overflows an int
      * @since 1.8
      */
-    // 将long转为int，要保证不溢出
+    // 将long转为int 要保证不溢出
     public static int toIntExact(long value) {
         if((int) value != value) {
             throw new ArithmeticException("integer overflow");

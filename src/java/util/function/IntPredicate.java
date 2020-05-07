@@ -38,10 +38,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：IntPredicate
+ * 函数式接口:IntPredicate
  *
- * 参数：int
- * 返回：boolean
+ * 参数:int
+ * 返回:boolean
  */
 @FunctionalInterface
 public interface IntPredicate {

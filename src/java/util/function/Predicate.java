@@ -37,11 +37,11 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：Predicate<T>
+ * 函数式接口:Predicate<T>
  *
- * 参数：T
- * 返回：boolean
- * 示例：x是否为偶数
+ * 参数:T
+ * 返回:boolean
+ * 示例:x是否为偶数
  *       Predicate<Integer> f = x -> x%2==0;
  */
 @FunctionalInterface
@@ -73,7 +73,7 @@ public interface Predicate<T> {
      * @throws NullPointerException if other is null
      */
     /*
-     * f1.and(f2)，返回一个“逻辑与”表达式，执行f1&&f2的判断
+     * f1.and(f2) 返回一个“逻辑与”表达式 执行f1&&f2的判断
      *
      * Predicate<Integer> p1 = x->x>10;
      * Predicate<Integer> p2 = x->x%2==1;
@@ -103,7 +103,7 @@ public interface Predicate<T> {
      * @throws NullPointerException if other is null
      */
     /*
-     * f1.or(f2)，返回一个“逻辑或”表达式，执行f1||f2的判断
+     * f1.or(f2) 返回一个“逻辑或”表达式 执行f1||f2的判断
      *
      * Predicate<Integer> p1 = x->x>5;
      * Predicate<Integer> p2 = x->x%2==1;
@@ -124,10 +124,10 @@ public interface Predicate<T> {
      * predicate
      */
     /*
-     * f.negate()，返回一个“逻辑非”表达式，执行!f的判断
+     * f.negate() 返回一个“逻辑非”表达式 执行!f的判断
      *
      * Predicate<Integer> p = x->x%2==1;
-     * // 判断2是不是非奇数，即偶数
+     * // 判断2是不是非奇数 即偶数
      * System.out.println(p.negate().test(2));
      */
     default Predicate<T> negate() {
@@ -145,7 +145,7 @@ public interface Predicate<T> {
      * to {@link Objects#equals(Object, Object)}
      */
     /*
-     * Predicate.isEqual(obj)，返回一个“判等”表达式
+     * Predicate.isEqual(obj) 返回一个“判等”表达式
      * // 判断两个字符串是否相等
      * System.out.println(Predicate.isEqual("abc").test("abc"));
      */
@@ -171,7 +171,7 @@ public interface Predicate<T> {
      * @since 11
      */
     /*
-     * Predicate.not()，返回一个“逻辑非”表达式，与negate()方法几乎一样
+     * Predicate.not() 返回一个“逻辑非”表达式 与negate()方法几乎一样
      * // 判断3是不是“不是”偶数
      * System.out.println(Predicate.<Integer>not(x->x%2==0).test(3));
      */

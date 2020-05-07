@@ -83,8 +83,8 @@ import jdk.internal.misc.Unsafe;
  * 线程安全
  * 适用于大多数单线程场景
  *
- * 在多线程中，生成随机数的性能欠佳（存在线程争用）
- * 该类更适用于单线程环境，在多线程中可以使用ThreadLocalRandom
+ * 在多线程中 生成随机数的性能欠佳(存在线程争用)
+ * 该类更适用于单线程环境 在多线程中可以使用ThreadLocalRandom
  *
  *   支持使用内置种子计算的原始种子
  *   支持自定义原始种子
@@ -118,15 +118,15 @@ public class Random implements Serializable {
     
     /*▼ 内置种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
     
-    // 哈希魔数[偶]，作为内置种子的初始值
+    // 哈希魔数[偶] 作为内置种子的初始值
     private static final long m0 = 0x5DEECE66DL;
-    // 哈希魔数[偶]，用来更新内置种子
+    // 哈希魔数[偶] 用来更新内置种子
     private static final long M = 1181783497276652981L;
     /*
-     * 内置种子，用于为默认的Random实例生成原始种子
+     * 内置种子 用于为默认的Random实例生成原始种子
      *
-     * 当用户没有显式指定随机数种子时，使用内置种子来推导原始种子的值
-     * 每创建一个默认的Random实例，内置种子的值就改变一次
+     * 当用户没有显式指定随机数种子时 使用内置种子来推导原始种子的值
+     * 每创建一个默认的Random实例 内置种子的值就改变一次
      */
     private static final AtomicLong seedUniquifier = new AtomicLong(m0); // 初始的种子标记
     
@@ -135,7 +135,7 @@ public class Random implements Serializable {
     
     /*▼ 原始种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┓ */
     
-    // 哈希魔数，用来更新原始种子
+    // 哈希魔数 用来更新原始种子
     private static final long multiplier = 0x5DEECE66DL;
     private static final long addend = 0xBL;    // 偏移量
     // 更新原始种子时使用的掩码
@@ -145,13 +145,13 @@ public class Random implements Serializable {
      * (The specs for the methods in this class describe the ongoing computation of this value.)
      */
     /*
-     * 原始种子，Random实例使用该种子生成伪随机数
+     * 原始种子 Random实例使用该种子生成伪随机数
      *
-     * 原始种子的初值可由系统的内置种子配合系统时间生成，也可由用户指定
-     * 每生成一个随机数，原始种子的值就改变一次
+     * 原始种子的初值可由系统的内置种子配合系统时间生成 也可由用户指定
+     * 每生成一个随机数 原始种子的值就改变一次
      *
-     * 如果原始种子被单个线程持有，那么接下来生成的一系列随机数是均匀的
-     * 如果原始种子被多个线程持有，那么从单个线程的角度观察，其生成的随机数是不均匀的
+     * 如果原始种子被单个线程持有 那么接下来生成的一系列随机数是均匀的
+     * 如果原始种子被多个线程持有 那么从单个线程的角度观察 其生成的随机数是不均匀的
      */
     private final AtomicLong seed;
     
@@ -189,7 +189,7 @@ public class Random implements Serializable {
      */
     // 构造默认的伪随机数生成器
     public Random() {
-        // 配合当前的系统时间，生成一个内置种子，并进一步计算出原始种子
+        // 配合当前的系统时间 生成一个内置种子 并进一步计算出原始种子
         this(seedUniquifier() ^ System.nanoTime());
     }
     
@@ -225,13 +225,13 @@ public class Random implements Serializable {
     
     /*▼ 种子 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 更新内置种子，每初始化一个默认的Random实例就调用一次
+    // 更新内置种子 每初始化一个默认的Random实例就调用一次
     private static long seedUniquifier() {
         // L'Ecuyer, "Tables of Linear Congruential Generators of Different Sizes and Good Lattice Structure", 1999
         for(; ; ) {
             long current = seedUniquifier.get();
             long next = current * M;
-            // 更新seedUniquifier为新值next，更新时参考的期望值是current
+            // 更新seedUniquifier为新值next 更新时参考的期望值是current
             if(seedUniquifier.compareAndSet(current, next)) {
                 return next;
             }
@@ -257,7 +257,7 @@ public class Random implements Serializable {
      *
      * @param seed the initial seed
      */
-    // 设置原始种子，该方法可能由子类重写
+    // 设置原始种子 该方法可能由子类重写
     public synchronized void setSeed(long seed) {
         this.seed.set(initialScramble(seed));
         haveNextNextGaussian = false;
@@ -299,7 +299,7 @@ public class Random implements Serializable {
      * @throws NullPointerException if the byte array is null
      * @since 1.1
      */
-    // 随机填充一个byte数组，有正有负
+    // 随机填充一个byte数组 有正有负
     public void nextBytes(byte[] bytes) {
         for(int i = 0, len = bytes.length; i<len; ) {
             for(int rnd = nextInt(), n = Math.min(len - i, Integer.SIZE / Byte.SIZE); n-->0; rnd >>= Byte.SIZE) {
@@ -325,7 +325,7 @@ public class Random implements Serializable {
      * @return the next pseudorandom, uniformly distributed {@code int}
      * value from this random number generator's sequence
      */
-    // 随机生成一个int值，有正有负
+    // 随机生成一个int值 有正有负
     public int nextInt() {
         return next(32);
     }
@@ -422,7 +422,7 @@ public class Random implements Serializable {
      * @return the next pseudorandom, uniformly distributed {@code long}
      * value from this random number generator's sequence
      */
-    // 随机生成一个long值，有正有负
+    // 随机生成一个long值 有正有负
     public long nextLong() {
         // it's okay that the bottom word remains signed.
         return ((long) (next(32)) << 32) + next(32);
@@ -586,7 +586,7 @@ public class Random implements Serializable {
      * standard deviation {@code 1.0} from this random number
      * generator's sequence
      */
-    // 随机生成一个double值，有正有负。所有生成的double值符合标准正态分布
+    // 随机生成一个double值 有正有负。所有生成的double值符合标准正态分布
     public synchronized double nextGaussian() {
         // See Knuth, ACP, Section 3.4.1 Algorithm C.
         if(haveNextNextGaussian) {
@@ -633,18 +633,18 @@ public class Random implements Serializable {
      *
      * @since 1.1
      */
-    // 随机生成一个int值，该值范围是[0, 2^bits -1)
+    // 随机生成一个int值 该值范围是[0, 2^bits -1)
     protected int next(int bits) {
         long oldseed, nextseed;
         AtomicLong seed = this.seed;
         
-        // 原子地更新原始种子，该种子取值范围是[0, mask]
+        // 原子地更新原始种子 该种子取值范围是[0, mask]
         do {
             oldseed = seed.get();
             nextseed = (oldseed * multiplier + addend) & mask;
         } while(!seed.compareAndSet(oldseed, nextseed));
         
-        // 由原始种子计算出哈希值，此时的哈希值与之前的哈希值可能重复
+        // 由原始种子计算出哈希值 此时的哈希值与之前的哈希值可能重复
         return (int) (nextseed >>> (48 - bits));
     }
     
@@ -729,7 +729,7 @@ public class Random implements Serializable {
      * ints(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      * @since 1.8
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机int值 取值范围是[randomNumberOrigin, randomNumberBound)
     public IntStream ints(int randomNumberOrigin, int randomNumberBound) {
         if(randomNumberOrigin >= randomNumberBound) {
             throw new IllegalArgumentException(BadRange);
@@ -771,7 +771,7 @@ public class Random implements Serializable {
      *                                  is greater than or equal to {@code randomNumberBound}
      * @since 1.8
      */
-    // 返回的流可以生成streamSize个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机int值 取值范围是[randomNumberOrigin, randomNumberBound)
     public IntStream ints(long streamSize, int randomNumberOrigin, int randomNumberBound) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BadSize);
@@ -862,7 +862,7 @@ public class Random implements Serializable {
      * longs(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      * @since 1.8
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机long值 取值范围是[randomNumberOrigin, randomNumberBound)
     public LongStream longs(long randomNumberOrigin, long randomNumberBound) {
         if(randomNumberOrigin >= randomNumberBound) {
             throw new IllegalArgumentException(BadRange);
@@ -909,7 +909,7 @@ public class Random implements Serializable {
      *                                  is greater than or equal to {@code randomNumberBound}
      * @since 1.8
      */
-    // 返回的流可以生成streamSize个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机long值 取值范围是[randomNumberOrigin, randomNumberBound)
     public LongStream longs(long streamSize, long randomNumberOrigin, long randomNumberBound) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BadSize);
@@ -934,7 +934,7 @@ public class Random implements Serializable {
      * doubles(Long.MAX_VALUE)}.
      * @since 1.8
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机double值，取值范围是[0, 1)
+    // 返回的流可以生成Long.MAX_VALUE个随机double值 取值范围是[0, 1)
     public DoubleStream doubles() {
         return StreamSupport.doubleStream(new RandomDoublesSpliterator(this, 0L, Long.MAX_VALUE, Double.MAX_VALUE, 0.0), false);
     }
@@ -955,7 +955,7 @@ public class Random implements Serializable {
      *                                  less than zero
      * @since 1.8
      */
-    // 返回的流可以生成streamSize个随机double值，取值范围是[0, 1)
+    // 返回的流可以生成streamSize个随机double值 取值范围是[0, 1)
     public DoubleStream doubles(long streamSize) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BadSize);
@@ -991,7 +991,7 @@ public class Random implements Serializable {
      * doubles(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      * @since 1.8
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机double值 取值范围是[randomNumberOrigin, randomNumberBound)
     public DoubleStream doubles(double randomNumberOrigin, double randomNumberBound) {
         if(!(randomNumberOrigin<randomNumberBound)) {
             throw new IllegalArgumentException(BadRange);
@@ -1028,7 +1028,7 @@ public class Random implements Serializable {
      *                                  is greater than or equal to {@code randomNumberBound}
      * @since 1.8
      */
-    // 返回的流可以生成streamSize个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机double值 取值范围是[randomNumberOrigin, randomNumberBound)
     public DoubleStream doubles(long streamSize, double randomNumberOrigin, double randomNumberBound) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BadSize);
@@ -1176,11 +1176,11 @@ public class Random implements Serializable {
     static final class RandomIntsSpliterator implements Spliterator.OfInt {
         final Random rng;   // 随机数生成器
         
-        // 随机数数量：fence-index
+        // 随机数数量:fence-index
               long   index;
         final long   fence;
         
-        // 随机数取值范围：[origin, bound)
+        // 随机数取值范围:[origin, bound)
         final int    origin;
         final int    bound;
         
@@ -1240,11 +1240,11 @@ public class Random implements Serializable {
     static final class RandomLongsSpliterator implements Spliterator.OfLong {
         final Random rng;
     
-        // 随机数数量：fence-index
+        // 随机数数量:fence-index
               long index;
         final long fence;
     
-        // 随机数取值范围：[origin, bound)
+        // 随机数取值范围:[origin, bound)
         final long origin;
         final long bound;
         
@@ -1305,11 +1305,11 @@ public class Random implements Serializable {
     static final class RandomDoublesSpliterator implements Spliterator.OfDouble {
         final Random rng;
     
-        // 随机数数量：fence-index
+        // 随机数数量:fence-index
               long index;
         final long fence;
     
-        // 随机数取值范围：[origin, bound)
+        // 随机数取值范围:[origin, bound)
         final double origin;
         final double bound;
         

@@ -29,7 +29,7 @@ import jdk.internal.util.ArraysSupport;
 /**
  * Mismatch methods for buffers
  */
-// 工具类，用于快速比较两个缓冲区内容是否相同，并返回第一个失配元素的索引。比较原理参见ArraysSupport类。
+// 工具类 用于快速比较两个缓冲区内容是否相同 并返回第一个失配元素的索引。比较原理参见ArraysSupport类。
 final class BufferMismatch {
     static int mismatch(ByteBuffer a, int aOff, ByteBuffer b, int bOff, int length) {
         int i = 0;

@@ -32,7 +32,7 @@ public interface DirectBuffer {
     // 返回直接缓冲区的【绝对】起始<地址>
     long address();
     
-    // 返回附件，一般是指母体缓冲区的引用
+    // 返回附件 一般是指母体缓冲区的引用
     Object attachment();
     
     // 返回该缓冲区的清理器

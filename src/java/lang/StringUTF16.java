@@ -66,7 +66,7 @@ final class StringUTF16 {
         return (char) (((val[index++] & 0xff) << HI_BYTE_SHIFT) | ((val[index] & 0xff) << LO_BYTE_SHIFT));
     }
     
-    // 将UTF16-String内部的字节转换为char后返回，加入范围检查
+    // 将UTF16-String内部的字节转换为char后返回 加入范围检查
     public static char charAt(byte[] value, int index) {
         // 越界检查
         checkIndex(index, value);
@@ -100,7 +100,7 @@ final class StringUTF16 {
     
     /*▼ 获取byte/byte[] ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 将c的两个低字节转换为UTF16-String内部的字节后，存入val的index处
+    // 将c的两个低字节转换为UTF16-String内部的字节后 存入val的index处
     @HotSpotIntrinsicCandidate
     static void putChar(byte[] val, int index, int c) {
         assert index >= 0 && index < length(val) : "Trusted caller missed bounds check";
@@ -109,13 +109,13 @@ final class StringUTF16 {
         val[index] = (byte) (c >> LO_BYTE_SHIFT);
     }
     
-    // 将c的两个低字节转换为UTF16-SB内部的字节后，存入val的index处，加入了范围检查
+    // 将c的两个低字节转换为UTF16-SB内部的字节后 存入val的index处 加入了范围检查
     public static void putCharSB(byte[] val, int index, int c) {
         checkIndex(index, val);
         putChar(val, index, c);
     }
     
-    // 将s[off, end)内部的字节批量转换为UTF16-SB内部的字节后，存入val的index处
+    // 将s[off, end)内部的字节批量转换为UTF16-SB内部的字节后 存入val的index处
     public static void putCharsSB(byte[] val, int index, CharSequence s, int off, int end) {
         checkBoundsBeginEnd(index, index + end - off, val);
         for(int i = off; i < end; i++) {
@@ -123,14 +123,14 @@ final class StringUTF16 {
         }
     }
     
-    // 将str[off, end)内部的char批量转换为UTF16-SB内部的字节后，存入val的index处
+    // 将str[off, end)内部的char批量转换为UTF16-SB内部的字节后 存入val的index处
     private static void putChars(byte[] val, int index, char[] str, int off, int end) {
         while(off < end) {
             putChar(val, index++, str[off++]);
         }
     }
     
-    // 将ca[off, end)内部的char批量转换为UTF16-SB内部的字节后，存入val的index处，加入范围检查
+    // 将ca[off, end)内部的char批量转换为UTF16-SB内部的字节后 存入val的index处 加入范围检查
     public static void putCharsSB(byte[] val, int index, char[] ca, int off, int end) {
         checkBoundsBeginEnd(index, index + end - off, val);
         putChars(val, index, ca, off, end);
@@ -161,20 +161,20 @@ final class StringUTF16 {
         return end;
     }
     
-    // 将char转换为UTF16-String内部的字节，并返回
+    // 将char转换为UTF16-String内部的字节 并返回
     public static byte[] toBytes(char c) {
         byte[] result = new byte[2];
         putChar(result, 0, c);
         return result;
     }
     
-    // 将value[off, off+len)中的char批量转换为UTF16-S内部的字节，并返回
+    // 将value[off, off+len)中的char批量转换为UTF16-S内部的字节 并返回
     @HotSpotIntrinsicCandidate
     public static byte[] toBytes(char[] value, int off, int len) {
         // 创建长度为2*len的字节数组
         byte[] val = newBytesFor(len);
         for(int i = 0; i < len; i++) {
-            // 将value[off]转换为UTF16-String内部的字节，存入val
+            // 将value[off]转换为UTF16-String内部的字节 存入val
             putChar(val, i, value[off]);
             off++;
         }
@@ -183,14 +183,14 @@ final class StringUTF16 {
     
     /**
      * int[] val = new int[]{0x56DB, 0x6761, 0x2A6A5};  // 分别是【四】【条】【𪚥】这三个字的Unicode编码值
-     * toBytes(val, 0, 3);  // 返回字节数组：[0x56, 0xDB, 0x67, 0x61, 0xD8, 0x69, 0xDE, 0xA5]
-     * 注：0x2A6A5是一个增补字符的编码，需要先将其拆分为高低代理单元对<0xD869,0xDEA5>，然后再转为字节存储
+     * toBytes(val, 0, 3);  // 返回字节数组:[0x56, 0xDB, 0x67, 0x61, 0xD8, 0x69, 0xDE, 0xA5]
+     * 注:0x2A6A5是一个增补字符的编码 需要先将其拆分为高低代理单元对<0xD869,0xDEA5> 然后再转为字节存储
      */
-    // 将val中的一组Unicode值批量转换为UTF16-String内部的字节，存入val的index处，再返回
+    // 将val中的一组Unicode值批量转换为UTF16-String内部的字节 存入val的index处 再返回
     public static byte[] toBytes(int[] val, int index, int len) {
         final int end = index + len;
         
-        // Pass 1: 根据Unicode值，计算码元（char）的个数
+        // Pass 1: 根据Unicode值 计算码元(char)的个数
         
         int n = len;    // 计算需要占几个char的空间
         for(int i = index; i < end; i++) {
@@ -198,7 +198,7 @@ final class StringUTF16 {
             if(Character.isBmpCodePoint(cp)) {
                 continue;
             } else if(Character.isValidCodePoint(cp)) {
-                n++;    // 如果是增补字符，则意味着需要多占一个char的空间
+                n++;    // 如果是增补字符 则意味着需要多占一个char的空间
             } else {
                 throw new IllegalArgumentException(Integer.toString(cp));
             }
@@ -213,8 +213,8 @@ final class StringUTF16 {
             if(Character.isBmpCodePoint(cp)) {
                 putChar(buf, j, cp);
             } else {
-                putChar(buf, j++, Character.highSurrogate(cp)); // 返回高代理处的码元（char）
-                putChar(buf, j,   Character.lowSurrogate(cp));  // 返回低代理处的码元（char）
+                putChar(buf, j++, Character.highSurrogate(cp)); // 返回高代理处的码元(char)
+                putChar(buf, j,   Character.lowSurrogate(cp));  // 返回低代理处的码元(char)
             }
         }
         return buf;
@@ -223,12 +223,12 @@ final class StringUTF16 {
     // 返回Unicode增补符号cp的四字节表示
     static byte[] toBytesSupplementary(int cp) {
         byte[] result = new byte[4];
-        putChar(result, 0, Character.highSurrogate(cp));    // 返回高代理处的码元（char）
-        putChar(result, 1, Character.lowSurrogate(cp));     // 返回低代理处的码元（char）
+        putChar(result, 0, Character.highSurrogate(cp));    // 返回高代理处的码元(char)
+        putChar(result, 1, Character.lowSurrogate(cp));     // 返回低代理处的码元(char)
         return result;
     }
     
-    // 将src(LATIN1-String)内部的字节批量转换为UTF16-String内部的字节，存入dst的dstOff处
+    // 将src(LATIN1-String)内部的字节批量转换为UTF16-String内部的字节 存入dst的dstOff处
     public static void inflate(byte[] src, int srcOff, byte[] dst, int dstOff, int len) {
         // 下标检查
         checkBoundsOffCount(dstOff, len, dst);
@@ -244,14 +244,14 @@ final class StringUTF16 {
     /*▼ 压缩 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
-     * 先将UTF16-String内部的字节存入一个char，再取这个char的一个低字节存入LATIN1-String内部的字节
-     * 如遇转换后的char在Latin1字符集之外，即遇到超出[0x00, 0xFF)范围的char，则停止压缩。
+     * 先将UTF16-String内部的字节存入一个char 再取这个char的一个低字节存入LATIN1-String内部的字节
+     * 如遇转换后的char在Latin1字符集之外 即遇到超出[0x00, 0xFF)范围的char 则停止压缩。
      *
      * byte[] src = new byte[]{0x00,0x12, 0x00,0x34, 0x00,0x56};
      * byte[] dst = new byte[2];
-     * compress(src, 1, dst, 0, 2); // dst：[0x34, 0x56]
+     * compress(src, 1, dst, 0, 2); // dst:[0x34, 0x56]
      */
-    // 将UTF16-String内部的字节转换为LATIN1-String内部的字节，加入范围检查
+    // 将UTF16-String内部的字节转换为LATIN1-String内部的字节 加入范围检查
     @HotSpotIntrinsicCandidate
     public static int compress(byte[] src, int srcOff, byte[] dst, int dstOff, int len) {
         // 下标范围检查
@@ -269,35 +269,35 @@ final class StringUTF16 {
             dstOff++;
         }
         
-        // 返回压缩成功的字节对数量，如果中途失败，则为0
+        // 返回压缩成功的字节对数量 如果中途失败 则为0
         return len;
     }
     
     /**
-     * 先将UTF16-String内部的字节存入一个char，再取这个char的一个低字节存入LATIN1-String内部的字节，再返回
-     * 如遇转换后的char在Latin1字符集之外，即遇到超出[0x00, 0xFF)范围的char，则停止压缩。
+     * 先将UTF16-String内部的字节存入一个char 再取这个char的一个低字节存入LATIN1-String内部的字节 再返回
+     * 如遇转换后的char在Latin1字符集之外 即遇到超出[0x00, 0xFF)范围的char 则停止压缩。
      *
      * byte[] val = new byte[]{0x00,0x12, 0x00,0x34, 0x00,0x56};
-     * compress(val, 1, 2); // 返回字节数组：[0x34, 0x56]
+     * compress(val, 1, 2); // 返回字节数组:[0x34, 0x56]
      */
-    // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后，再返回
+    // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后 再返回
     public static byte[] compress(byte[] val, int off, int len) {
         byte[] ret = new byte[len];
         if(compress(val, off, ret, 0, len) == len) {
-            // 如果成功完成指定范围内的压缩，则返回压缩后的字符序列的字节表示
+            // 如果成功完成指定范围内的压缩 则返回压缩后的字符序列的字节表示
             return ret;
         }
-        // 如果不能完成压缩任务，则返回nll
+        // 如果不能完成压缩任务 则返回nll
         return null;
     }
     
     /**
      * 将UTF16-String内部的字节转换为LATIN1-String内部的字节
-     * 如遇char在Latin1字符集之外，即遇到超出[0x00, 0xFF)范围的char，则停止压缩。
+     * 如遇char在Latin1字符集之外 即遇到超出[0x00, 0xFF)范围的char 则停止压缩。
      *
      * char[] src = new char[]{'\u0012', '\u0034', '\u0056'};
      * byte[] dst = new byte[2];
-     * compress(src, 1, dst, 0, 2); // dst：[0x34, 0x56]
+     * compress(src, 1, dst, 0, 2); // dst:[0x34, 0x56]
      */
     // 将UTF16-String内部的字节转换为LATIN1-String内部的字节
     @HotSpotIntrinsicCandidate
@@ -312,34 +312,34 @@ final class StringUTF16 {
             srcOff++;
             dstOff++;
         }
-        // 返回成功成功压缩的char的数量，如果中途失败，则为0
+        // 返回成功成功压缩的char的数量 如果中途失败 则为0
         return len;
     }
     
     /**
      * 将UTF16-String内部的字节转换为LATIN1-String内部的字节
-     * 如遇char在Latin1字符集之外，即遇到超出[0x00, 0xFF)范围的char，则停止压缩。
+     * 如遇char在Latin1字符集之外 即遇到超出[0x00, 0xFF)范围的char 则停止压缩。
      *
      * char[] src = new char[]{'\u0012', '\u0034', '\u0056'};
-     * compress(src, 1, 2); // 返回字节数组：[0x34, 0x56]
+     * compress(src, 1, 2); // 返回字节数组:[0x34, 0x56]
      */
     // 将UTF16-String内部的字节转换为LATIN1-String内部的字节
     public static byte[] compress(char[] val, int off, int len) {
         byte[] ret = new byte[len];
         if(compress(val, off, ret, 0, len) == len) {
-            // 如果成功完成指定范围内的压缩，则返回压缩后的字符序列的字节表示
+            // 如果成功完成指定范围内的压缩 则返回压缩后的字符序列的字节表示
             return ret;
         }
-        // 如果不能完成压缩任务，则返回nll
+        // 如果不能完成压缩任务 则返回nll
         return null;
     }
     
     /*
-     * 将UTF16-String内部的字节转换为LATIN1-String内部的字节，类似于压缩
-     * 要想数据无损转换，则原始字节对表示的char必须在[0x00, 0xFF]范围
+     * 将UTF16-String内部的字节转换为LATIN1-String内部的字节 类似于压缩
+     * 要想数据无损转换 则原始字节对表示的char必须在[0x00, 0xFF]范围
      *
      * byte[] value = new byte[]{0x12,0x34, 0x56,0x78, 0xAB,0xCD};
-     * getBytes(value, 1, 3, dst, 0);   // dst数组：[0x78, 0xCD]
+     * getBytes(value, 1, 3, dst, 0);   // dst数组:[0x78, 0xCD]
      */
     public static void getBytes(byte[] value, int srcBegin, int srcEnd, byte dst[], int dstBegin) {
         srcBegin <<= 1;
@@ -354,7 +354,7 @@ final class StringUTF16 {
     
     /*▼ 大小写转换 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 小写转换，需要指定语言环境,其中value存储了str的字节表现形式
+    // 小写转换 需要指定语言环境,其中value存储了str的字节表现形式
     public static String toLowerCase(String str, byte[] value, Locale locale) {
         if(locale == null) {
             throw new NullPointerException();
@@ -410,7 +410,7 @@ final class StringUTF16 {
         }
     }
     
-    // 大写转换，需要指定语言环境,其中value存储了str的字节表现形式
+    // 大写转换 需要指定语言环境,其中value存储了str的字节表现形式
     public static String toUpperCase(String str, byte[] value, Locale locale) {
         if(locale == null) {
             throw new NullPointerException();
@@ -463,7 +463,7 @@ final class StringUTF16 {
         }
     }
     
-    // 小写转换，处理增补字符以及一些特殊语言的场景
+    // 小写转换 处理增补字符以及一些特殊语言的场景
     private static String toLowerCaseEx(String str, byte[] value, byte[] result, int first, Locale locale, boolean localeDependent) {
         assert (result.length == value.length);
         assert (first >= 0);
@@ -491,7 +491,7 @@ final class StringUTF16 {
                 if(lowerChar == Character.ERROR) {
                     lowerCharArray = ConditionalSpecialCasing.toLowerCaseCharArray(str, i, locale);
                 } else {
-                    // 解码，Unicode码点值 ---> char，对于增补平面区码点值，需要拆分成高、低代理单元再存储
+                    // 解码 Unicode码点值 ---> char 对于增补平面区码点值 需要拆分成高、低代理单元再存储
                     lowerCharArray = Character.toChars(lowerChar);
                 }
                 /* Grow result if needed */
@@ -512,7 +512,7 @@ final class StringUTF16 {
         return newString(result, 0, resultOffset);
     }
     
-    // 大写转换，处理增补字符以及一些特殊语言的场景
+    // 大写转换 处理增补字符以及一些特殊语言的场景
     private static String toUpperCaseEx(String str, byte[] value, byte[] result, int first, Locale locale, boolean localeDependent) {
         assert (result.length == value.length);
         assert (first >= 0);
@@ -543,7 +543,7 @@ final class StringUTF16 {
                         upperCharArray = Character.toUpperCaseCharArray(srcChar);
                     }
                 } else {
-                    // 解码，Unicode码点值 ---> char，对于增补平面区码点值，需要拆分成高、低代理单元再存储
+                    // 解码 Unicode码点值 ---> char 对于增补平面区码点值 需要拆分成高、低代理单元再存储
                     upperCharArray = Character.toChars(upperChar);
                 }
                 /* Grow result if needed */
@@ -571,15 +571,15 @@ final class StringUTF16 {
     /*▼ 码点/码元 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /*
-     * ▶ 1 返回byte[]:value中某处所代表的符号的Unicode编码（从前到后试探）
+     * ▶ 1 返回byte[]:value中某处所代表的符号的Unicode编码(从前到后试探)
      *
      * byte[] value = new byte[]{0x56,0xDB, 0x67,0x61, 0xD8,0x69, 0xDE,0xA5};
-     * codePointAt(value, 1, 2, true);  // 返回0x6761，这是汉字【条】的Unicode编码值
-     * codePointAt(value, 2, 4, true);  // 返回0x2A6A5，这是汉字【𪚥】的Unicode编码值，这是个增补字符，其UTF-16BE编码的编码为：\uD869\uDEA5
-     * codePointAt(value, 2, 3, true);  // 返回0xD869，索引限制了继续往后判断，所以只返回了一个高代理单元，无法构成正确的Unicode符号
-     * codePointAt(value, 3, 4, true);  // 返回0xDEA5，后面没有字节了，所以只返回了一个低代理单元，无法构成正确的Unicode符号
+     * codePointAt(value, 1, 2, true);  // 返回0x6761 这是汉字【条】的Unicode编码值
+     * codePointAt(value, 2, 4, true);  // 返回0x2A6A5 这是汉字【𪚥】的Unicode编码值 这是个增补字符 其UTF-16BE编码的编码为:\uD869\uDEA5
+     * codePointAt(value, 2, 3, true);  // 返回0xD869 索引限制了继续往后判断 所以只返回了一个高代理单元 无法构成正确的Unicode符号
+     * codePointAt(value, 3, 4, true);  // 返回0xDEA5 后面没有字节了 所以只返回了一个低代理单元 无法构成正确的Unicode符号
      */
-    // ▶ 1 返回UTF16-S中某处符号（双字节/四字节）的Unicode编码
+    // ▶ 1 返回UTF16-S中某处符号(双字节/四字节)的Unicode编码
     private static int codePointAt(byte[] value, int index, int end, boolean checked) {
         assert index < end;
         if(checked) {
@@ -589,7 +589,7 @@ final class StringUTF16 {
         // 将UTF16-String内部的字节转换为char后返回
         char c1 = getChar(value, index);
         
-        // 如果出现了增补字符，一次遍历4个字节
+        // 如果出现了增补字符 一次遍历4个字节
         if(Character.isHighSurrogate(c1) && ++index < end) {
             if(checked) {
                 checkIndex(index, value);
@@ -603,23 +603,23 @@ final class StringUTF16 {
         return c1;
     }
     
-    // ▶ 1-1 返回UTF16-SB中某处符号（双字节/四字节）的Unicode编码（从前到后试探）
+    // ▶ 1-1 返回UTF16-SB中某处符号(双字节/四字节)的Unicode编码(从前到后试探)
     public static int codePointAtSB(byte[] val, int index, int end) {
         return codePointAt(val, index, end, true /*checked*/);
     }
     
-    // ▶ 1-2 返回UTF16-String中某处符号（双字节/四字节）的Unicode编码（从前到后试探）
+    // ▶ 1-2 返回UTF16-String中某处符号(双字节/四字节)的Unicode编码(从前到后试探)
     public static int codePointAt(byte[] value, int index, int end) {
         return codePointAt(value, index, end, false /*unchecked*/);
     }
     
     /*
      * byte[] value = new byte[]{0x56,0xDB, 0x67,0x61, 0xD8,0x69, 0xDE,0xA5}; // 四条𪚥
-     * codePointAt(value, 2, true);  // 返回0x6761，这是汉字【条】的Unicode编码值
-     * codePointAt(value, 4, true);  // 返回0x2A6A5，这是汉字【𪚥】的Unicode编码值，这是个增补字符，其UTF-16BE编码的编码为：\uD869\uDEA5
-     * codePointAt(value, 3, true);  // 返回0xD869，只返回了一个高代理单元，无法构成正确的Unicode符号
+     * codePointAt(value, 2, true);  // 返回0x6761 这是汉字【条】的Unicode编码值
+     * codePointAt(value, 4, true);  // 返回0x2A6A5 这是汉字【𪚥】的Unicode编码值 这是个增补字符 其UTF-16BE编码的编码为:\uD869\uDEA5
+     * codePointAt(value, 3, true);  // 返回0xD869 只返回了一个高代理单元 无法构成正确的Unicode符号
      */
-    // ▶ 2 返回UTF16-S中某处(index-1)符号（双字节/四字节）的Unicode编码（从后往前试探）
+    // ▶ 2 返回UTF16-S中某处(index-1)符号(双字节/四字节)的Unicode编码(从后往前试探)
     private static int codePointBefore(byte[] value, int index, boolean checked) {
         --index;
         if(checked) {
@@ -640,22 +640,22 @@ final class StringUTF16 {
         return c2;
     }
     
-    // ▶ 2-1 返回UTF16-SB中某处(index-1)符号（双字节/四字节）的Unicode编码（从后往前试探）
+    // ▶ 2-1 返回UTF16-SB中某处(index-1)符号(双字节/四字节)的Unicode编码(从后往前试探)
     public static int codePointBeforeSB(byte[] val, int index) {
         return codePointBefore(val, index, true /*checked*/);
     }
     
-    // ▶ 2-2 返回UTF16-String中某处(index-1)符号（双字节/四字节）的Unicode编码（从后往前试探）
+    // ▶ 2-2 返回UTF16-String中某处(index-1)符号(双字节/四字节)的Unicode编码(从后往前试探)
     public static int codePointBefore(byte[] value, int index) {
         return codePointBefore(value, index, false /* unchecked */);
     }
     
     /**
-     * 四U+56DB，条U+6761，𪚥U+2A6A5，其中𪚥的UTF-16大端法表示形式是：\uD869\uDEA5
+     * 四U+56DB 条U+6761 𪚥U+2A6A5 其中𪚥的UTF-16大端法表示形式是:\uD869\uDEA5
      * byte[] value = new byte[]{0x56,0xDB, 0x67,0x61, 0xD8,0x69, 0xDE,0xA5};
-     * codePointCount(value, 0, 4, true);  // 返回3，识别了全部三个Unicode符号
-     * codePointCount(value, 0, 3, true);  // 返回3，识别出了前两个Unicode符号和一个只存在高代理单元的符号
-     * codePointCount(value, 0, 2, true);  // 返回2，识别了前两个Unicode符号
+     * codePointCount(value, 0, 4, true);  // 返回3 识别了全部三个Unicode符号
+     * codePointCount(value, 0, 3, true);  // 返回3 识别出了前两个Unicode符号和一个只存在高代理单元的符号
+     * codePointCount(value, 0, 2, true);  // 返回2 识别了前两个Unicode符号
      */
     // ▶ 3 统计UTF16-S中指定码元范围内存在多少个Unicode符号
     private static int codePointCount(byte[] value, int beginIndex, int endIndex, boolean checked) {
@@ -667,7 +667,7 @@ final class StringUTF16 {
             checkBoundsBeginEnd(i, endIndex, value);
         }
         
-        // 以码元为单位，判断其是否属于四字节字符，如果是的话，修正Unicode符号个数
+        // 以码元为单位 判断其是否属于四字节字符 如果是的话 修正Unicode符号个数
         for(; i < endIndex - 1; ) {
             if(Character.isHighSurrogate(getChar(value, i++)) && Character.isLowSurrogate(getChar(value, i))) {
                 count--;
@@ -693,7 +693,7 @@ final class StringUTF16 {
     
     /*▼ 比较/判等 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // ▶ 1 比较两个UTF16-String的字节值，需要先将它们同时转为char再比较
+    // ▶ 1 比较两个UTF16-String的字节值 需要先将它们同时转为char再比较
     private static int compareValues(byte[] value, byte[] other, int len1, int len2) {
         int lim = Math.min(len1, len2);
         for(int k = 0; k < lim; k++) {
@@ -706,7 +706,7 @@ final class StringUTF16 {
         return len1 - len2;
     }
     
-    // ▶ 1-1 比较两个UTF16-String的字节值，需要先将它们同时转为char再比较
+    // ▶ 1-1 比较两个UTF16-String的字节值 需要先将它们同时转为char再比较
     @HotSpotIntrinsicCandidate
     public static int compareTo(byte[] value, byte[] other) {
         int len1 = length(value);
@@ -714,7 +714,7 @@ final class StringUTF16 {
         return compareValues(value, other, len1, len2);
     }
     
-    // ▶ 1-2 比较两个UTF16-String的字节值，需要先将它们同时转为char再比较，加入了范围检查
+    // ▶ 1-2 比较两个UTF16-String的字节值 需要先将它们同时转为char再比较 加入了范围检查
     public static int compareTo(byte[] value, byte[] other, int len1, int len2) {
         checkOffset(len1, value);
         checkOffset(len2, other);
@@ -722,13 +722,13 @@ final class StringUTF16 {
         return compareValues(value, other, len1, len2);
     }
     
-    // ▶ 2 比较UTF16-String的字节值(value)和Latin1-String的字节值(other)，需要先将它们同时转为char再比较
+    // ▶ 2 比较UTF16-String的字节值(value)和Latin1-String的字节值(other) 需要先将它们同时转为char再比较
     @HotSpotIntrinsicCandidate
     public static int compareToLatin1(byte[] value, byte[] other) {
         return -StringLatin1.compareToUTF16(other, value);
     }
     
-    // ▶ 3 比较UTF16-String的字节值(value)和Latin1-String的字节值(other)，需要先将它们同时转为char再比较
+    // ▶ 3 比较UTF16-String的字节值(value)和Latin1-String的字节值(other) 需要先将它们同时转为char再比较
     public static int compareToLatin1(byte[] value, byte[] other, int len1, int len2) {
         return -StringLatin1.compareToUTF16(other, value, len2, len1);
     }
@@ -787,17 +787,17 @@ final class StringUTF16 {
         return true;
     }
     
-    // ▶ 6 忽略大小写地比较UTF16-String的字节值(value)和Latin1-String的字节值(other)，需要先将它们同时转为char再比较
+    // ▶ 6 忽略大小写地比较UTF16-String的字节值(value)和Latin1-String的字节值(other) 需要先将它们同时转为char再比较
     public static int compareToCI_Latin1(byte[] value, byte[] other) {
         return -StringLatin1.compareToCI_UTF16(other, value);
     }
     
-    // ▶ 7 忽略大小写地比较UTF16-String的字节值(value)和Latin1-String的字节值(other)，需要先将它们同时转为char再比较
+    // ▶ 7 忽略大小写地比较UTF16-String的字节值(value)和Latin1-String的字节值(other) 需要先将它们同时转为char再比较
     public static boolean regionMatchesCI_Latin1(byte[] value, int toffset, byte[] other, int ooffset, int len) {
         return StringLatin1.regionMatchesCI_UTF16(other, ooffset, value, toffset, len);
     }
     
-    // true：两个UTF16-String内容相等
+    // true:两个UTF16-String内容相等
     @HotSpotIntrinsicCandidate
     public static boolean equals(byte[] value, byte[] other) {
         if(value.length == other.length) {
@@ -812,7 +812,7 @@ final class StringUTF16 {
         return false;
     }
     
-    // true：LATIN1-String v1 和 UTF16-String v2 表示的内涵一致
+    // true:LATIN1-String v1 和 UTF16-String v2 表示的内涵一致
     public static boolean contentEquals(byte[] v1, byte[] v2, int len) {
         checkBoundsOffCount(0, len, v2);
         for(int i = 0; i < len; i++) {
@@ -823,7 +823,7 @@ final class StringUTF16 {
         return true;
     }
     
-    // true：UTF16-String value 和 CharSequence:cs 表示的内涵一致
+    // true:UTF16-String value 和 CharSequence:cs 表示的内涵一致
     public static boolean contentEquals(byte[] value, CharSequence cs, int len) {
         checkOffset(len, value);
         for(int i = 0; i < len; i++) {
@@ -843,7 +843,7 @@ final class StringUTF16 {
     /*
      * 注意此节中术语【位置】与byte数组中的元素索引的区别
      *
-     * 比如对于byte[] bs = {0x12,0x34, 0x56,0x78}：
+     * 比如对于byte[] bs = {0x12,0x34, 0x56,0x78}:
      * 我们说字符'\u5678'在bs中的位置是1。
      */
     
@@ -861,7 +861,7 @@ final class StringUTF16 {
         return -1;
     }
     
-    // ▶ 1-1 返回基本符号ch在UTF16-String的字节值value中的下标，加入范围检查
+    // ▶ 1-1 返回基本符号ch在UTF16-String的字节值value中的下标 加入范围检查
     @HotSpotIntrinsicCandidate
     private static int indexOfChar(byte[] value, int ch, int fromIndex, int max) {
         checkBoundsBeginEnd(fromIndex, max, value);
@@ -872,16 +872,16 @@ final class StringUTF16 {
      * Handles (rare) calls of indexOf with a supplementary character.
      */
     /*
-     * ▶ 2 返回增补符号ch在UTF16-String的字节值value中的下标，加入范围检查
+     * ▶ 2 返回增补符号ch在UTF16-String的字节值value中的下标 加入范围检查
      *
      * byte[] value = new byte[]{0x56,0xDB, 0x67,0x61, 0xD8,0x69, 0xDE,0xA5};
      * indexOfSupplementary(value, 0x2A6A5, 0, 4);  // 返回2
-     * 因为0x2A6A5这个Unicode编码值拆成UTF-16编码大端表示法后就是：0xD869 0xDEA5
+     * 因为0x2A6A5这个Unicode编码值拆成UTF-16编码大端表示法后就是:0xD869 0xDEA5
      */
     private static int indexOfSupplementary(byte[] value, int ch, int fromIndex, int max) {
         if(Character.isValidCodePoint(ch)) {
-            final char hi = Character.highSurrogate(ch);    // 返回高代理处的码元（char）
-            final char lo = Character.lowSurrogate(ch);     // 返回低代理处的码元（char）
+            final char hi = Character.highSurrogate(ch);    // 返回高代理处的码元(char)
+            final char lo = Character.lowSurrogate(ch);     // 返回低代理处的码元(char)
             checkBoundsBeginEnd(fromIndex, max, value);
             for(int i = fromIndex; i < max - 1; i++) {
                 if(getChar(value, i) == hi && getChar(value, i + 1) == lo) {
@@ -892,7 +892,7 @@ final class StringUTF16 {
         return -1;
     }
     
-    // ▶ 3 返回符号ch在UTF16-String的字节值value中的下标，内部包括了范围检查
+    // ▶ 3 返回符号ch在UTF16-String的字节值value中的下标 内部包括了范围检查
     public static int indexOf(byte[] value, int ch, int fromIndex) {
         int max = value.length >> 1;
         if(fromIndex < 0) {
@@ -931,8 +931,8 @@ final class StringUTF16 {
     // 返回增补符号ch在UTF16-String的字节值value中最后一次出现的下标
     private static int lastIndexOfSupplementary(final byte[] value, int ch, int fromIndex) {
         if(Character.isValidCodePoint(ch)) {
-            char hi = Character.highSurrogate(ch);  // 返回高代理处的码元（char）
-            char lo = Character.lowSurrogate(ch);   // 返回低代理处的码元（char）
+            char hi = Character.highSurrogate(ch);  // 返回高代理处的码元(char)
+            char lo = Character.lowSurrogate(ch);   // 返回低代理处的码元(char)
             int i = Math.min(fromIndex, (value.length >> 1) - 2);
             for(; i >= 0; i--) {
                 if(getChar(value, i) == hi && getChar(value, i + 1) == lo) {
@@ -949,7 +949,7 @@ final class StringUTF16 {
     
     /*▼ 查找子串下标 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 比对两个UTF16-String，返回子串str在主串value中第一次出现的下标
+    // 比对两个UTF16-String 返回子串str在主串value中第一次出现的下标
     @HotSpotIntrinsicCandidate
     public static int indexOf(byte[] value, byte[] str) {
         if(str.length == 0) {
@@ -962,8 +962,8 @@ final class StringUTF16 {
     }
     
     /*
-     * 比对两个UTF16-String，返回子串str在主串value中第一次出现的下标
-     * 搜索时只比对主串的前valueCount个字符和子串的前strCount个字符，且从主串的fromIndex索引处向后搜索
+     * 比对两个UTF16-String 返回子串str在主串value中第一次出现的下标
+     * 搜索时只比对主串的前valueCount个字符和子串的前strCount个字符 且从主串的fromIndex索引处向后搜索
      */
     @HotSpotIntrinsicCandidate
     public static int indexOf(byte[] value, int valueCount, byte[] str, int strCount, int fromIndex) {
@@ -973,8 +973,8 @@ final class StringUTF16 {
     }
     
     /**
-     * 比对两个UTF16-String，返回子串str在主串value中第一次出现的下标
-     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符，且从主串fromIndex索引处向后搜索
+     * 比对两个UTF16-String 返回子串str在主串value中第一次出现的下标
+     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符 且从主串fromIndex索引处向后搜索
      */
     private static int indexOfUnsafe(byte[] value, int valueCount, byte[] str, int strCount, int fromIndex) {
         assert fromIndex >= 0;
@@ -986,12 +986,12 @@ final class StringUTF16 {
         // 主串长度-子串长度
         int max = (valueCount - strCount);
         for(int i = fromIndex; i <= max; i++) {
-            // 用i遍历主串，直到主串和子串第一个字符相等为止
+            // 用i遍历主串 直到主串和子串第一个字符相等为止
             if(getChar(value, i) != first) {
                 while(++i <= max && getChar(value, i) != first)
                     ;
             }
-            // 找到了第一个相等字符，此时游标i最远也必须满足i<=valueCount - strCount，否则就没必要比较了，可画图理解
+            // 找到了第一个相等字符 此时游标i最远也必须满足i<=valueCount - strCount 否则就没必要比较了 可画图理解
             if(i <= max) {
                 int j = i + 1;
                 int end = j + strCount - 1;
@@ -1009,7 +1009,7 @@ final class StringUTF16 {
     /**
      * Handles indexOf Latin1 substring in UTF16 string.
      */
-    // 比对UTF16-String主串src和Latin1-String子串str，返回子串str在主串value中第一次出现的下标
+    // 比对UTF16-String主串src和Latin1-String子串str 返回子串str在主串value中第一次出现的下标
     @HotSpotIntrinsicCandidate
     public static int indexOfLatin1(byte[] value, byte[] str) {
         if(str.length == 0) {
@@ -1021,7 +1021,7 @@ final class StringUTF16 {
         return indexOfLatin1Unsafe(value, length(value), str, str.length, 0);
     }
     
-    // 比对UTF16-String主串src和Latin1-String子串tgt，返回子串str在主串src中第一次出现的下标，加入了范围检查（从主串fromIndex索引处向后搜索）
+    // 比对UTF16-String主串src和Latin1-String子串tgt 返回子串str在主串src中第一次出现的下标 加入了范围检查(从主串fromIndex索引处向后搜索)
     @HotSpotIntrinsicCandidate
     public static int indexOfLatin1(byte[] src, int srcCount, byte[] tgt, int tgtCount, int fromIndex) {
         checkBoundsBeginEnd(fromIndex, srcCount, src);
@@ -1029,7 +1029,7 @@ final class StringUTF16 {
         return indexOfLatin1Unsafe(src, srcCount, tgt, tgtCount, fromIndex);
     }
     
-    // 比对UTF16-String主串src和Latin1-String子串tgt，返回子串tgt在主串src中第一次出现的下标（从主串fromIndex索引处向后搜索）
+    // 比对UTF16-String主串src和Latin1-String子串tgt 返回子串tgt在主串src中第一次出现的下标(从主串fromIndex索引处向后搜索)
     public static int indexOfLatin1Unsafe(byte[] src, int srcCount, byte[] tgt, int tgtCount, int fromIndex) {
         assert fromIndex >= 0;
         assert tgtCount > 0;
@@ -1060,8 +1060,8 @@ final class StringUTF16 {
     }
     
     /**
-     * 比对UTF16-String主串src和Latin1子串tgt，返回子串tgt在主串src中最后一次出现的下标
-     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符，且从主串的fromIndex索引处向前搜索
+     * 比对UTF16-String主串src和Latin1子串tgt 返回子串tgt在主串src中最后一次出现的下标
+     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符 且从主串的fromIndex索引处向前搜索
      */
     public static int lastIndexOf(byte[] src, int srcCount, byte[] tgt, int tgtCount, int fromIndex) {
         assert fromIndex >= 0;
@@ -1099,8 +1099,8 @@ startSearchForLastChar:
     }
     
     /**
-     * 比对UTF16-String主串src和Latin1-String子串tgt，返回子串tgt在主串src中最后一次出现的下标
-     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符，且从主串的fromIndex索引处向前搜索
+     * 比对UTF16-String主串src和Latin1-String子串tgt 返回子串tgt在主串src中最后一次出现的下标
+     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符 且从主串的fromIndex索引处向前搜索
      */
     public static int lastIndexOfLatin1(byte[] src, int srcCount, byte[] tgt, int tgtCount, int fromIndex) {
         assert fromIndex >= 0;
@@ -1141,7 +1141,7 @@ startSearchForLastChar:
     
     /*▼ 替换 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 使用newChar替换UTF16-String中的oldChar，并返回替换后的String
+    // 使用newChar替换UTF16-String中的oldChar 并返回替换后的String
     public static String replace(byte[] value, char oldChar, char newChar) {
         int len = value.length >> 1;
         int i = -1;
@@ -1163,7 +1163,7 @@ startSearchForLastChar:
             }
             // 尝试压缩
             if(String.COMPACT_STRINGS && !StringLatin1.canEncode(oldChar) && StringLatin1.canEncode(newChar)) {
-                // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后，再返回
+                // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后 再返回
                 byte[] val = compress(buf, 0, len);
                 if(val != null) {
                     return new String(val, LATIN1);
@@ -1212,7 +1212,7 @@ startSearchForLastChar:
         int length = value.length >> 1;
         int left = 0;
         while(left < length) {
-            // 返回UTF16-String中某处符号（双字节/四字节）的Unicode编码
+            // 返回UTF16-String中某处符号(双字节/四字节)的Unicode编码
             int codepoint = codePointAt(value, left, length);
             if(codepoint != ' ' && codepoint != '\t' && !Character.isWhitespace(codepoint)) {
                 break;
@@ -1264,14 +1264,14 @@ startSearchForLastChar:
     
     /*▼ 逆置 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 逆置UTF16-String（无增补符号）
+    // 逆置UTF16-String(无增补符号)
     public static void reverse(byte[] val, int count) {
         checkOffset(count, val);
         
         int n = count - 1;
         boolean hasSurrogates = false;
         
-        // 让k和j变成对称的位置，不断交换对称位置的char
+        // 让k和j变成对称的位置 不断交换对称位置的char
         for(int j = (n - 1) >> 1; j >= 0; j--) {
             int k = n - j;
             char cj = getChar(val, j);
@@ -1293,7 +1293,7 @@ startSearchForLastChar:
     /**
      * Outlined helper method for reverse()
      */
-    // 处理UTF16-String中那些增补符号（经过上述方法之后，增补字符全变成了逆序，所以只要转过来就好了）
+    // 处理UTF16-String中那些增补符号(经过上述方法之后 增补字符全变成了逆序 所以只要转过来就好了)
     private static void reverseAllValidSurrogatePairs(byte[] val, int count) {
         for(int i = 0; i < count - 1; i++) {
             char c2 = getChar(val, i);
@@ -1322,7 +1322,7 @@ startSearchForLastChar:
      *
      * @return index of the most significant digit or minus sign, if present
      */
-    // ▶ 1 将整数i的每一数位拆分为byte存储到buf中（将来用作字符串显示）
+    // ▶ 1 将整数i的每一数位拆分为byte存储到buf中(将来用作字符串显示)
     static int getChars(int i, int index, byte[] buf) {
         int q, r;
         int charPos = index;
@@ -1341,10 +1341,10 @@ startSearchForLastChar:
             putChar(buf, --charPos, Integer.DigitTens[r]);  // 存储十位数
         }
         
-        // 处理剩下的数据（绝对值在100以内）
+        // 处理剩下的数据(绝对值在100以内)
         q = i / 10;             // 抹掉个位数
         r = (q * 10) - i;       // 暂存抹掉的个位数
-        putChar(buf, --charPos, '0' + r);   // 存储个位数（如果）
+        putChar(buf, --charPos, '0' + r);   // 存储个位数(如果)
         
         // 如果q<0说明还剩最后一位数据
         if(q < 0) {
@@ -1359,7 +1359,7 @@ startSearchForLastChar:
         return charPos;
     }
     
-    // ▶ 1-1 将整数i的每一数位拆分为byte存储到value中（将来用作字符串显示），加入范围检查
+    // ▶ 1-1 将整数i的每一数位拆分为byte存储到value中(将来用作字符串显示) 加入范围检查
     public static int getChars(int i, int begin, int end, byte[] value) {
         checkBoundsBeginEnd(begin, end, value);
         int pos = getChars(i, end, value);
@@ -1376,7 +1376,7 @@ startSearchForLastChar:
      *
      * @return index of the most significant digit or minus sign, if present
      */
-    // ▶ 2 将整数i的每一数位拆分为byte存储到buf中（将来用作字符串显示）
+    // ▶ 2 将整数i的每一数位拆分为byte存储到buf中(将来用作字符串显示)
     static int getChars(long i, int index, byte[] buf) {
         long q;
         int r;
@@ -1423,7 +1423,7 @@ startSearchForLastChar:
         return charPos;
     }
     
-    // ▶ 2-1 将整数i的每一数位拆分为byte存储到value中（将来用作字符串显示），加入范围检查
+    // ▶ 2-1 将整数i的每一数位拆分为byte存储到value中(将来用作字符串显示) 加入范围检查
     public static int getChars(long l, int begin, int end, byte[] value) {
         checkBoundsBeginEnd(begin, end, value);
         int pos = getChars(l, end, value);
@@ -1437,7 +1437,7 @@ startSearchForLastChar:
     
     /*▼ 流 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 将UTF16-String按行转为流序列，序列中每个元素都代表一行（遇到\n或\r才换行）
+    // 将UTF16-String按行转为流序列 序列中每个元素都代表一行(遇到\n或\r才换行)
     static Stream<String> lines(byte[] value) {
         return StreamSupport.stream(new LinesSpliterator(value), false);
     }
@@ -1464,9 +1464,9 @@ startSearchForLastChar:
     // 用val在[index, index+len)范围内的byte值创建String
     public static String newString(byte[] val, int index, int len) {
         if(String.COMPACT_STRINGS) {
-            // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后，再返回
+            // 将UTF16-String内部的字节转换为LATIN1-String内部的字节后 再返回
             byte[] buf = compress(val, index, len);
-            // 如果上述转换成功，说明截取的子串中包含的char都在[0, 0xFF]范围内，直接返回压缩后的子串
+            // 如果上述转换成功 说明截取的子串中包含的char都在[0, 0xFF]范围内 直接返回压缩后的子串
             if(buf != null) {
                 return new String(buf, LATIN1);
             }
@@ -1483,13 +1483,13 @@ startSearchForLastChar:
     /*
      * 判断字节存储是大端还是小端
      *
-     * 例如对于整数：0x1234，其存储方式如下：
+     * 例如对于整数:0x1234 其存储方式如下:
      * ------------低地址-----高地址------>
      * 内存地址    0x1000    0x1001
      * 小 端 法     0x34      0x12
      * 大 端 法     0x12      0x34
      *
-     * 一般操作系统都是小端，而通讯协议是大端的。
+     * 一般操作系统都是小端 而通讯协议是大端的。
      */
     private static native boolean isBigEndian();
     
@@ -1527,7 +1527,7 @@ startSearchForLastChar:
     
     
     
-    // 按char分割元素的Spliterator，即CharsSpliterator的每个元素都是char
+    // 按char分割元素的Spliterator 即CharsSpliterator的每个元素都是char
     static class CharsSpliterator implements Spliterator.OfInt {
         private final byte[] array;
         private final int fence;  // one past last index
@@ -1588,7 +1588,7 @@ startSearchForLastChar:
         }
     }
     
-    // 按Unicode符号分割元素的Spliterator，即CodePointsSpliterator的每个元素都是Unicode符号
+    // 按Unicode符号分割元素的Spliterator 即CodePointsSpliterator的每个元素都是Unicode符号
     static class CodePointsSpliterator implements Spliterator.OfInt {
         private final byte[] array;
         private final int fence;  // one past last index
@@ -1675,7 +1675,7 @@ startSearchForLastChar:
         }
     }
     
-    // 按行分割元素的Spliterator，即LinesSpliterator的每个元素都是行
+    // 按行分割元素的Spliterator 即LinesSpliterator的每个元素都是行
     private static final class LinesSpliterator implements Spliterator<String> {
         private final int fence;  // one past last index
         private byte[] value;

@@ -9,10 +9,325 @@
     <list default="true" id="977b9e40-bb66-4bc8-924f-0823bbbc3c27" name="Default Changelist" comment=":bulb: 【java.lang.reflect.Method】 反射元素-方法">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenJDK-11.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OpenJDK-11.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/Externalizable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/Externalizable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/FileCleanable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/FileCleanable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/FileDescriptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/FileDescriptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/io/Serializable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/io/Serializable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/AbstractStringBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/AbstractStringBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Appendable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Appendable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Boolean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Boolean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Byte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Byte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/CharSequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/CharSequence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/CharacterData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/CharacterData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/CharacterDataLatin1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/CharacterDataLatin1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Class.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Comparable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Comparable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/CompoundEnumeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/CompoundEnumeration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ConditionalSpecialCasing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ConditionalSpecialCasing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Double.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Double.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Enum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Float.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Float.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/InheritableThreadLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/InheritableThreadLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Integer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Integer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Long.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Long.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Math.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Math.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Number.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Object.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Readable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Readable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Runnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Runnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Short.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Short.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/StackTraceElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/StackTraceElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/StrictMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/StrictMath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/String.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/String.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/StringBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/StringBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/StringBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/StringBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/StringCoding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/StringCoding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/StringLatin1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/StringLatin1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/StringUTF16.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/StringUTF16.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/System.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/System.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Thread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Thread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ThreadGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ThreadGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ThreadLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ThreadLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/Void.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/Void.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/Cleaner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/Cleaner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/FinalReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/FinalReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/Finalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/Finalizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/PhantomReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/PhantomReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/Reference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/Reference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/ReferenceQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/ReferenceQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/SoftReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/SoftReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/ref/WeakReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/ref/WeakReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/lang/reflect/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/lang/reflect/Method.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/math/BigDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/math/BigDecimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/math/BigInteger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/math/BigInteger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/math/MathContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/math/MathContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/math/RoundingMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/math/RoundingMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/Bits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/Bits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/Buffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/BufferMismatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/BufferMismatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferRB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferRB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferRL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsCharBufferRL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferRB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferRB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferRL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsDoubleBufferRL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferRB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferRB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferRL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsFloatBufferRL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferRB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferRB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferRL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsIntBufferRL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferRB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferRB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferRL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsLongBufferRL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferRB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferRB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferRL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ByteBufferAsShortBufferRL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/CharBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/CharBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/CharBufferSpliterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/CharBufferSpliterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectByteBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectByteBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectByteBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectByteBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectCharBufferRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectCharBufferRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectCharBufferRU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectCharBufferRU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectCharBufferS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectCharBufferS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectCharBufferU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectCharBufferU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferRU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferRU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectDoubleBufferU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferRU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferRU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectFloatBufferU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectIntBufferRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectIntBufferRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectIntBufferRU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectIntBufferRU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectIntBufferS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectIntBufferS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectIntBufferU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectIntBufferU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectLongBufferRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectLongBufferRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectLongBufferRU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectLongBufferRU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectLongBufferS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectLongBufferS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectLongBufferU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectLongBufferU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectShortBufferRS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectShortBufferRS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectShortBufferRU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectShortBufferRU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectShortBufferS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectShortBufferS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DirectShortBufferU.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DirectShortBufferU.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/DoubleBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/DoubleBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/FloatBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/FloatBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapByteBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapByteBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapByteBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapByteBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapCharBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapCharBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapCharBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapCharBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapDoubleBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapDoubleBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapDoubleBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapDoubleBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapFloatBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapFloatBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapFloatBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapFloatBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapIntBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapIntBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapIntBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapIntBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapLongBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapLongBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapLongBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapLongBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapShortBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapShortBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/HeapShortBufferR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/HeapShortBufferR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/IntBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/IntBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/LongBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/LongBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/MappedByteBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/MappedByteBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/ShortBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/ShortBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/StringCharBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/StringCharBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/charset/Charset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/charset/Charset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/charset/CharsetDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/charset/CharsetDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/charset/CharsetEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/charset/CharsetEncoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/charset/CoderResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/charset/CoderResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/charset/CodingErrorAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/charset/CodingErrorAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/charset/StandardCharsets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/charset/StandardCharsets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/nio/charset/spi/CharsetProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/nio/charset/spi/CharsetProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/text/BreakIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/text/BreakIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/text/CharacterIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/text/CharacterIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/text/StringCharacterIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/text/StringCharacterIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Arrays.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Arrays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Comparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Comparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Comparators.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Comparators.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/DoubleSummaryStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/DoubleSummaryStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Enumeration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Enumeration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/HashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/HashMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/IntSummaryStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/IntSummaryStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Iterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Iterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/LongSummaryStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/LongSummaryStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Objects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Objects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Optional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Optional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/OptionalDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/OptionalDouble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/OptionalInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/OptionalInt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/OptionalLong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/OptionalLong.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/PrimitiveIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/PrimitiveIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Random.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Random.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Spliterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Spliterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Spliterators.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Spliterators.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/SplittableRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/SplittableRandom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/StringJoiner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/StringJoiner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/Tripwire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/Tripwire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/ConcurrentHashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/ConcurrentHashMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/CopyOnWriteArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/CopyOnWriteArrayList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/ThreadFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/ThreadFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/concurrent/ThreadLocalRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/concurrent/ThreadLocalRandom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/BiConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/BiConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/BiFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/BiFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/BiPredicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/BiPredicate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/BinaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/BinaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/BooleanSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/BooleanSupplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/Consumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/Consumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoubleBinaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoubleBinaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoubleConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoubleConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoubleFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoubleFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoublePredicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoublePredicate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoubleSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoubleSupplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoubleToIntFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoubleToIntFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoubleToLongFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoubleToLongFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/DoubleUnaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/DoubleUnaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/Function.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntBinaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntBinaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntPredicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntPredicate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntSupplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntToDoubleFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntToDoubleFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntToLongFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntToLongFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/IntUnaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/IntUnaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongBinaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongBinaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongPredicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongPredicate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongSupplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongToDoubleFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongToDoubleFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongToIntFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongToIntFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/LongUnaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/LongUnaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ObjDoubleConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ObjDoubleConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ObjIntConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ObjIntConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ObjLongConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ObjLongConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/Predicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/Predicate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ToDoubleBiFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ToDoubleBiFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ToDoubleFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ToDoubleFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ToIntBiFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ToIntBiFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ToIntFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ToIntFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ToLongBiFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ToLongBiFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/ToLongFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/ToLongFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/function/UnaryOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/function/UnaryOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/AbstractPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/AbstractPipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/AbstractSpinedBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/AbstractSpinedBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/BaseStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/BaseStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Collector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Collector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Collectors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Collectors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/DoublePipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/DoublePipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/DoubleStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/DoubleStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/IntPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/IntPipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/IntStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/IntStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/LongPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/LongPipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/LongStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/LongStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Nodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Nodes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/PipelineHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/PipelineHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/ReferencePipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/ReferencePipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Sink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Sink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/SpinedBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/SpinedBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Stream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Stream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/StreamShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/StreamShape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/StreamSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/StreamSupport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Streams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Streams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/stream/Tripwire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/util/stream/Tripwire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/misc/InnocuousThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/misc/InnocuousThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/misc/SharedSecrets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/misc/SharedSecrets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/misc/TerminatingThreadLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/misc/TerminatingThreadLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/misc/Unsafe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/misc/Unsafe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/ref/Cleaner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/ref/Cleaner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/ref/CleanerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/ref/CleanerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/ref/CleanerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/ref/CleanerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/ref/PhantomCleanable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/ref/PhantomCleanable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/ref/SoftCleanable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/ref/SoftCleanable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/ref/WeakCleanable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/ref/WeakCleanable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdk/internal/util/ArraysSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdk/internal/util/ArraysSupport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/misc/Unsafe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/misc/Unsafe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/nio/ch/DirectBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/nio/ch/DirectBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/nio/ch/Interruptible.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/nio/ch/Interruptible.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/nio/cs/StandardCharsets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/nio/cs/StandardCharsets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/nio/cs/ThreadLocalCoders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/nio/cs/ThreadLocalCoders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/nio/cs/ext/AbstractCharsetProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/nio/cs/ext/AbstractCharsetProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/nio/cs/ext/ExtendedCharsets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/nio/cs/ext/ExtendedCharsets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/text/RuleBasedBreakIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/text/RuleBasedBreakIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sun/util/PreHashedMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sun/util/PreHashedMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest03.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/BreakIteratorTest/src/com/kang/BreakIteratorTest04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/CleanerTest/src/com/kang/CleanerTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/CleanerTest/src/com/kang/CleanerTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test01/EnumTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test01/EnumTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test04/EnumTest04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test04/EnumTest04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test04/Meal.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test04/Meal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test01/ExternalizableTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test01/ExternalizableTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test02/ExternalizableTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test02/ExternalizableTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test02/User02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test02/User02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ObjectStreamFieldTest/src/com/kang/objectstreamfield/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ObjectStreamFieldTest/src/com/kang/objectstreamfield/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ObjectTest/src/com/kang/ObjectTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ObjectTest/src/com/kang/ObjectTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest03.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/CustomReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/CustomReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/IDCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/IDCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest03.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/ReferenceTest04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ReferenceTest/src/com/kang/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test02/SerializableTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test02/SerializableTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test02/User02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test02/User02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test03/SerializableTest03.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test03/SerializableTest03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test03/User03.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test03/User03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test04/SerializableTest04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test04/SerializableTest04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test04/User04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test04/User04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test05/Child.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test05/Child.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test05/Parent.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test05/Parent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test05/SerializableTest05.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test05/SerializableTest05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test06/User06.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test06/User06.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test07/SerializableTest07.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test07/SerializableTest07.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test07/User07.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test07/User07.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SharedSecrets/src/com/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SharedSecrets/src/com/bean/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SharedSecrets/src/com/internal/misc/ComBeanAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SharedSecrets/src/com/internal/misc/ComBeanAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SharedSecrets/src/com/kang/SharedSecretsTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SharedSecrets/src/com/kang/SharedSecretsTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StackTraceElementTest/src/com/kang/stacktraceelement/StackTraceElementTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StackTraceElementTest/src/com/kang/stacktraceelement/StackTraceElementTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StackTraceElementTest/src/com/kang/stacktraceelement/StackTraceElementTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StackTraceElementTest/src/com/kang/stacktraceelement/StackTraceElementTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest05.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest06.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest06.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest07.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest07.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest10.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest10.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest11.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest12.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest13.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest13.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest17.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StreamTest/src/com/kang/StreamTest17.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SystemTest/src/com/kang/SystemTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SystemTest/src/com/kang/SystemTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest03.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest05.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest00.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest00.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest01.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest02.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest03.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest04.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest05.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeTest05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UnsafeTest/src/com/kang/UnsafeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/已阅代码清单_按功能排序.md" beforeDir="false" afterPath="$PROJECT_DIR$/已阅代码清单_按功能排序.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/测试文件清单.md" beforeDir="false" afterPath="$PROJECT_DIR$/测试文件清单.md" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +337,9 @@
     <option name="groupingKeys">
       <option value="directory" />
     </option>
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -37,76 +355,8 @@
     <expand />
     <select />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="OpenJDK-11" />
-  </component>
   <component name="FileColors">
     <fileColor scope="OpenJDK-11" color="99ffcc" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="196">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/ConcurrentHashMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="956" column="66" lean-forward="true" selection-start-line="956" selection-start-column="66" selection-end-line="956" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#270468#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#32270#32271#0" expanded="true" />
-                <element signature="e#32335#32336#0" expanded="true" />
-                <element signature="e#32507#32508#0" expanded="true" />
-                <element signature="e#32572#32573#0" expanded="true" />
-                <element signature="e#34610#34611#0" expanded="true" />
-                <element signature="e#34661#34662#0" expanded="true" />
-                <element signature="e#40182#40183#0" expanded="true" />
-                <element signature="e#40235#40236#0" expanded="true" />
-                <element signature="e#41194#41195#0" expanded="true" />
-                <element signature="e#41246#41247#0" expanded="true" />
-                <element signature="e#43067#43068#0" expanded="true" />
-                <element signature="e#43142#43143#0" expanded="true" />
-                <element signature="e#44899#44900#0" expanded="true" />
-                <element signature="e#44938#44939#0" expanded="true" />
-                <element signature="e#46566#46567#0" expanded="true" />
-                <element signature="e#46614#46615#0" expanded="true" />
-                <element signature="e#51140#51141#0" expanded="true" />
-                <element signature="e#51191#51192#0" expanded="true" />
-                <element signature="e#68401#68402#0" expanded="true" />
-                <element signature="e#68448#68449#0" expanded="true" />
-                <element signature="e#94196#94197#0" expanded="true" />
-                <element signature="e#94239#94240#0" expanded="true" />
-                <element signature="e#99005#99006#0" expanded="true" />
-                <element signature="e#99056#99057#0" expanded="true" />
-                <element signature="e#99099#99100#0" expanded="true" />
-                <element signature="e#99134#99135#0" expanded="true" />
-                <element signature="e#99403#99404#0" expanded="true" />
-                <element signature="e#99490#99491#0" expanded="true" />
-                <element signature="e#119211#119212#0" expanded="true" />
-                <element signature="e#119266#119267#0" expanded="true" />
-                <element signature="e#124357#124358#0" expanded="true" />
-                <element signature="e#124394#124395#0" expanded="true" />
-                <element signature="e#149788#149789#0" expanded="true" />
-                <element signature="e#149853#149854#0" expanded="true" />
-                <element signature="e#153521#153522#0" expanded="true" />
-                <element signature="e#153596#153597#0" expanded="true" />
-                <element signature="e#199469#199470#0" expanded="true" />
-                <element signature="e#199520#199521#0" expanded="true" />
-                <element signature="e#200161#200162#0" expanded="true" />
-                <element signature="e#200226#200227#0" expanded="true" />
-                <element signature="e#200291#200292#0" expanded="true" />
-                <element signature="e#200356#200357#0" expanded="true" />
-                <element signature="e#200831#200832#0" expanded="true" />
-                <element signature="e#200887#200888#0" expanded="true" />
-                <element signature="e#203115#203116#0" expanded="true" />
-                <element signature="e#203197#203198#0" expanded="true" />
-                <element signature="e#203523#203524#0" expanded="true" />
-                <element signature="e#203579#203580#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -115,72 +365,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>【非工作线程】</find>
-      <find>【队列】</find>
-      <find>java.util.Properties</find>
-      <find>table</find>
-      <find>Node</find>
-      <find>Forwardingn</find>
-      <find>ForwardingNode</find>
-      <find>sizeCtl</find>
-      <find>sizectl</find>
-      <find>node</find>
-      <find>Treebin</find>
-      <find>forwardingnode</find>
-      <find>ConcurrentHashMap</find>
-      <find>Segment</find>
-      <find>inittable</find>
-      <find>treenode</find>
-      <find>put</find>
-      <find>get</find>
-      <find>com</find>
-      <find>baseCount</find>
-      <find>public long mapp</find>
-      <find>private final void add</find>
-      <find>public V put</find>
-      <find>public V get</find>
-      <find>segment</find>
-      <find>mapping</find>
-      <find>size</find>
-      <find>helpT</find>
-      <find>hash</find>
-      <find>hash()</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>类路径下（未命名模块）</replace>
-      <replace>资源加载类位于</replace>
-      <replace>验证资源是否有效</replace>
-      <replace>定义</replace>
-      <replace>className</replace>
-      <replace>moduleName</replace>
-      <replace>packageName</replace>
-      <replace>获取包名</replace>
-      <replace>申请加载资源的类</replace>
-      <replace>只能在未命名module中被调用</replace>
-      <replace>筛选出符合</replace>
-      <replace>独占锁</replace>
-      <replace>// 判断是否超时（因为可能是半道被唤醒的）</replace>
-      <replace>结点</replace>
-      <replace>（不是头结点），并准备去抢锁</replace>
-      <replace>&quot;读&quot;锁</replace>
-      <replace>点</replace>
-      <replace>待解析字符串</replace>
-      <replace>引号</replace>
-      <replace>生成一个</replace>
-      <replace>返回的流可以生成</replace>
-      <replace>原始种子</replace>
-      <replace>辅助种子</replace>
-      <replace>探测值</replace>
-      <replace>工作组</replace>
-      <replace>空槽</replace>
-      <replace>窃取</replace>
-      <replace>【外部线程】</replace>
-      <replace>top处</replace>
-      <replace>Properties</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -188,63 +372,6 @@
   </component>
   <component name="HierarchyBrowserManager">
     <option name="SCOPE" value="All" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/java/lang/StringCoding.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/StampedLock.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/Character.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/String.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/locks/LockSupport.java" />
-        <option value="$PROJECT_DIR$/src/sun/nio/ch/Interruptible.java" />
-        <option value="$PROJECT_DIR$/test/RandomTest/src/com/kang/random/RandomTest01.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/Integer.java" />
-        <option value="$PROJECT_DIR$/src/jdk/internal/loader/ClassLoaders.java" />
-        <option value="$PROJECT_DIR$/src/jdk/internal/loader/BuiltinClassLoader.java" />
-        <option value="$PROJECT_DIR$/src/java/io/StreamTokenizer.java" />
-        <option value="$PROJECT_DIR$/src/java/util/StringTokenizer.java" />
-        <option value="$PROJECT_DIR$/src/org/graalvm/compiler/api/test/Graal.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/java/lang/ThreadLocal.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/Thread.java" />
-        <option value="$PROJECT_DIR$/src/java/util/Random.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/ThreadLocalRandom.java" />
-        <option value="$PROJECT_DIR$/src/java/util/SplittableRandom.java" />
-        <option value="$PROJECT_DIR$/test/ThreadTest/src/com/kang/ThreadTest05.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/reflect/Constructor.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/RecursiveTask.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/CountedCompleter.java" />
-        <option value="$PROJECT_DIR$/src/TAG.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/ForkJoinWorkerThread.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/ForkJoinTask.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/ForkJoinPool.java" />
-        <option value="$PROJECT_DIR$/src/java/util/Arrays.java" />
-        <option value="$PROJECT_DIR$/src/java/util/DualPivotQuicksort.java" />
-        <option value="$PROJECT_DIR$/src/java/util/ArraysParallelSortHelpers.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/Enum.java" />
-        <option value="$PROJECT_DIR$/test/EnumTest/src/com/kang/enumeration/test02/EnumTest02.java" />
-        <option value="$PROJECT_DIR$/src/java/sql/Driver.java" />
-        <option value="$PROJECT_DIR$/src/java/sql/DriverInfo.java" />
-        <option value="$PROJECT_DIR$/src/java/sql/DriverManager.java" />
-        <option value="$PROJECT_DIR$/src/java/sql/Connection.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/CompoundEnumeration.java" />
-        <option value="$PROJECT_DIR$/src/java/io/ObjectStreamField.java" />
-        <option value="$PROJECT_DIR$/src/java/io/Externalizable.java" />
-        <option value="$PROJECT_DIR$/test/SerializableTest/src/com/kang/serializable/test03/SerializableTest03.java" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test02/ExternalizableTest02.java" />
-        <option value="$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test01/ExternalizableTest01.java" />
-        <option value="$PROJECT_DIR$/test/ObjectStreamFieldTest/src/com/kang/objectstreamfield/User.java" />
-        <option value="$PROJECT_DIR$/测试文件清单.md" />
-        <option value="$PROJECT_DIR$/src/java/lang/Class.java" />
-        <option value="$PROJECT_DIR$/src/java/lang/reflect/Method.java" />
-        <option value="$PROJECT_DIR$/已阅代码清单_按功能排序.md" />
-        <option value="$PROJECT_DIR$/已阅代码清单_按名称排序.md" />
-        <option value="$PROJECT_DIR$/src/java/lang/Object.java" />
-        <option value="$PROJECT_DIR$/src/java/util/concurrent/ConcurrentHashMap.java" />
-      </list>
-    </option>
   </component>
   <component name="Jenkins.Settings">
     <option name="lastSelectedView" value="all" />
@@ -260,78 +387,19 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand />
-      <select />
-    </treeState>
-  </component>
   <component name="NamedScopeManager">
     <scope name="OpenJDK-11" pattern="(file:src/java/lang/Void.java||file:src/java/lang/CharacterData.java||file:src/java/lang/CharacterDataLatin1.java||file:src/java/text/CharacterIterator.java||file:src/java/text/StringCharacterIterator.java||file:src/sun/text/CompactByteArray.java||file:src/sun/text/SupplementaryCharacterData.java||file:src/sun/text/RuleBasedBreakIterator.java||file:src/java/text/BreakIterator.java||file:src/java/lang/ConditionalSpecialCasing.java||file:src/sun/util/PreHashedMap.java||file:src/sun/nio/cs/StandardCharsets.java||file:src/sun/nio/cs/ext/ExtendedCharsets.java||file:src/sun/nio/cs/ext/AbstractCharsetProvider.java||file:src/java/nio/charset/spi/CharsetProvider.java||file:src/java/lang/Readable.java||file:src/java/nio/ByteOrder.java||file:src/jdk/internal/util/ArraysSupport.java||file:src/java/nio/BufferMismatch.java||file:src/sun/misc/Unsafe.java||file:src/jdk/internal/misc/Unsafe.java||file:src/java/lang/ref/Reference.java||file:src/java/lang/ref/ReferenceQueue.java||file:src/java/lang/ref/SoftReference.java||file:src/java/lang/ref/WeakReference.java||file:src/java/lang/ref/PhantomReference.java||file:src/java/lang/ref/FinalReference.java||file:src/java/lang/ref/Finalizer.java||file:src/jdk/internal/ref/Cleaner.java||file:src/jdk/internal/ref/CleanerFactory.java||file:src/jdk/internal/ref/CleanerImpl.java||file:src/jdk/internal/ref/PhantomCleanable.java||file:src/jdk/internal/ref/SoftCleanable.java||file:src/jdk/internal/ref/WeakCleanable.java||file:src/java/lang/ref/Cleaner.java||file:src/java/util/concurrent/ThreadFactory.java||file:src/jdk/internal/misc/InnocuousThread.java||file:src/java/io/FileCleanable.java||file:src/java/io/FileDescriptor.java||file:src/java/lang/Comparable.java||file:src/java/nio/Bits.java||file:src/java/lang/Runnable.java||file:src/java/util/Tripwire.java||file[OpenJDK-11]:src/java/util/function/*)&amp;&amp;!file:src/java/util/function/package-info.java||file:src/java/util/stream/Tripwire.java||file:src/java/util/StringJoiner.java||file:src/java/util/Objects.java||file:src/jdk/internal/util/Preconditions.java||file:src/java/util/Comparators.java||file:src/java/util/Comparator.java||file:src/java/nio/CharBuffer.java||file:src/java/nio/StringCharBuffer.java||file:src/java/nio/HeapCharBuffer.java||file:src/java/nio/HeapCharBufferR.java||file:src/java/nio/DirectCharBufferS.java||file:src/java/nio/DirectCharBufferRS.java||file:src/java/nio/DirectCharBufferU.java||file:src/java/nio/DirectCharBufferRU.java||file:src/java/nio/ByteBufferAsCharBufferB.java||file:src/java/nio/ByteBufferAsCharBufferRB.java||file:src/java/nio/ByteBufferAsCharBufferL.java||file:src/java/nio/ByteBufferAsCharBufferRL.java||file:src/java/nio/ShortBuffer.java||file:src/java/nio/HeapShortBuffer.java||file:src/java/nio/HeapShortBufferR.java||file:src/java/nio/DirectShortBufferS.java||file:src/java/nio/DirectShortBufferRS.java||file:src/java/nio/DirectShortBufferU.java||file:src/java/nio/DirectShortBufferRU.java||file:src/java/nio/ByteBufferAsShortBufferB.java||file:src/java/nio/ByteBufferAsShortBufferRB.java||file:src/java/nio/ByteBufferAsShortBufferL.java||file:src/java/nio/ByteBufferAsShortBufferRL.java||file:src/java/nio/IntBuffer.java||file:src/java/nio/HeapIntBuffer.java||file:src/java/nio/HeapIntBufferR.java||file:src/java/nio/DirectIntBufferS.java||file:src/java/nio/DirectIntBufferRS.java||file:src/java/nio/DirectIntBufferU.java||file:src/java/nio/DirectIntBufferRU.java||file:src/java/nio/ByteBufferAsIntBufferB.java||file:src/java/nio/ByteBufferAsIntBufferRB.java||file:src/java/nio/ByteBufferAsIntBufferL.java||file:src/java/nio/ByteBufferAsIntBufferRL.java||file:src/java/nio/LongBuffer.java||file:src/java/nio/HeapLongBuffer.java||file:src/java/nio/HeapLongBufferR.java||file:src/java/nio/DirectLongBufferS.java||file:src/java/nio/DirectLongBufferRS.java||file:src/java/nio/DirectLongBufferU.java||file:src/java/nio/DirectLongBufferRU.java||file:src/java/nio/ByteBufferAsLongBufferB.java||file:src/java/nio/ByteBufferAsLongBufferRB.java||file:src/java/nio/ByteBufferAsLongBufferL.java||file:src/java/nio/ByteBufferAsLongBufferRL.java||file:src/java/nio/FloatBuffer.java||file:src/java/nio/HeapFloatBuffer.java||file:src/java/nio/HeapFloatBufferR.java||file:src/java/nio/DirectFloatBufferS.java||file:src/java/nio/DirectFloatBufferRS.java||file:src/java/nio/DirectFloatBufferU.java||file:src/java/nio/DirectFloatBufferRU.java||file:src/java/nio/ByteBufferAsFloatBufferB.java||file:src/java/nio/ByteBufferAsFloatBufferRB.java||file:src/java/nio/ByteBufferAsFloatBufferL.java||file:src/java/nio/ByteBufferAsFloatBufferRL.java||file:src/java/nio/DoubleBuffer.java||file:src/java/nio/HeapDoubleBuffer.java||file:src/java/nio/HeapDoubleBufferR.java||file:src/java/nio/DirectDoubleBufferS.java||file:src/java/nio/DirectDoubleBufferRS.java||file:src/java/nio/DirectDoubleBufferU.java||file:src/java/nio/DirectDoubleBufferRU.java||file:src/java/nio/ByteBufferAsDoubleBufferB.java||file:src/java/nio/ByteBufferAsDoubleBufferRB.java||file:src/java/nio/ByteBufferAsDoubleBufferL.java||file:src/java/nio/ByteBufferAsDoubleBufferRL.java||file:src/java/nio/ByteBuffer.java||file:src/java/nio/MappedByteBuffer.java||file:src/java/nio/DirectByteBuffer.java||file:src/java/nio/DirectByteBufferR.java||file:src/java/nio/HeapByteBuffer.java||file:src/java/nio/HeapByteBufferR.java||file:src/java/nio/Buffer.java||file:src/sun/nio/ch/DirectBuffer.java||file:src/java/util/stream/BaseStream.java||file:src/java/util/stream/Stream.java||file:src/java/util/stream/PipelineHelper.java||file:src/java/util/stream/AbstractPipeline.java||file:src/java/util/stream/ReferencePipeline.java||file:src/java/util/stream/StreamShape.java||file:src/java/util/stream/StreamSupport.java||file:src/java/util/Spliterator.java||file:src/java/util/Spliterators.java||file:src/java/util/stream/Sink.java||file:src/java/util/stream/AbstractSpinedBuffer.java||file:src/java/util/stream/SpinedBuffer.java||file:src/java/util/stream/Node.java||file:src/java/util/stream/Nodes.java||file:src/java/util/Optional.java||file:src/java/util/stream/Collector.java||file:src/java/util/stream/Collectors.java||file:src/java/util/stream/IntStream.java||file:src/java/util/stream/LongStream.java||file:src/java/util/stream/DoubleStream.java||file:src/java/util/stream/IntPipeline.java||file:src/java/util/stream/LongPipeline.java||file:src/java/util/stream/DoublePipeline.java||file:src/java/util/stream/Streams.java||file:src/java/util/PrimitiveIterator.java||file:src/java/util/IntSummaryStatistics.java||file:src/java/util/LongSummaryStatistics.java||file:src/java/util/DoubleSummaryStatistics.java||file:src/java/util/OptionalInt.java||file:src/java/util/OptionalLong.java||file:src/java/util/OptionalDouble.java||file:src/java/nio/CharBufferSpliterator.java||file:src/java/lang/CharSequence.java||file:src/java/nio/charset/StandardCharsets.java||file:src/java/nio/charset/Charset.java||file:src/java/nio/charset/CharsetEncoder.java||file:src/java/nio/charset/CharsetDecoder.java||file:src/java/nio/charset/CoderResult.java||file:src/java/nio/charset/CodingErrorAction.java||file:src/sun/nio/cs/ThreadLocalCoders.java||file:src/java/lang/Appendable.java||file:src/java/util/Arrays.java||file:src/java/lang/System.java||file:src/java/lang/StringLatin1.java||file:src/java/lang/StringUTF16.java||file:src/java/lang/StringCoding.java||file:src/java/lang/StringBuilder.java||file:src/java/lang/StringBuffer.java||file:src/java/lang/String.java||file:src/java/lang/AbstractStringBuilder.java||file:src/java/lang/Character.java||file:src/java/lang/Object.java||file:src/java/lang/Thread.java||file:src/java/lang/ThreadGroup.java||file:src/java/lang/ThreadLocal.java||file:src/java/lang/InheritableThreadLocal.java||file:src/java/lang/StackTraceElement.java||file:src/jdk/internal/misc/TerminatingThreadLocal.java||file:src/jdk/internal/misc/SharedSecrets.java||file:src/java/lang/Byte.java||file:src/java/lang/Short.java||file:src/java/lang/Integer.java||file:src/java/lang/Long.java||file:src/java/lang/Float.java||file:src/java/lang/Double.java||file:src/java/lang/Boolean.java||file:src/java/lang/Number.java||file:src/java/lang/Enum.java||file:src/java/util/concurrent/atomic/AtomicBoolean.java||file:src/java/util/concurrent/atomic/AtomicInteger.java||file:src/java/util/concurrent/atomic/AtomicLong.java||file:src/java/util/Random.java||file:src/java/lang/Math.java||file:src/java/lang/StrictMath.java||file:src/jdk/internal/math/FloatConsts.java||file:src/jdk/internal/math/DoubleConsts.java||file:src/java/math/BigInteger.java||file:src/java/math/BigDecimal.java||file:src/java/io/Serializable.java||file:src/java/io/Externalizable.java||file:src/java/io/ObjectStreamField.java||file:src/jdk/internal/loader/AbstractClassLoaderValue.java||file:src/jdk/internal/loader/BootLoader.java||file:src/jdk/internal/loader/ClassLoaderValue.java||file:src/jdk/internal/loader/ClassLoaders.java||file:src/jdk/internal/loader/BuiltinClassLoader.java||file:src/java/lang/reflect/Array.java||file:src/java/lang/reflect/Constructor.java||file:src/java/lang/reflect/Executable.java||file:src/java/lang/reflect/Field.java||file:src/java/lang/reflect/GenericArrayType.java||file:src/java/lang/reflect/GenericDeclaration.java||file:src/java/lang/reflect/InvocationHandler.java||file:src/java/lang/reflect/Member.java||file:src/java/lang/reflect/Method.java||file:src/java/lang/reflect/Modifier.java||file:src/java/lang/reflect/Parameter.java||file:src/java/lang/reflect/ParameterizedType.java||file:src/java/lang/reflect/Proxy.java||file:src/java/lang/reflect/ProxyGenerator.java||file:src/java/lang/reflect/Type.java||file:src/java/lang/reflect/TypeVariable.java||file:src/java/lang/reflect/WildcardType.java||file:src/java/lang/annotation/Annotation.java||file:src/java/lang/annotation/Documented.java||file:src/java/lang/annotation/ElementType.java||file:src/java/lang/annotation/Inherited.java||file:src/java/lang/annotation/Repeatable.java||file:src/java/lang/annotation/Retention.java||file:src/java/lang/annotation/RetentionPolicy.java||file:src/java/lang/annotation/Target.java||file:src/java/lang/reflect/AccessibleObject.java||file:src/java/lang/reflect/AnnotatedElement.java||file:src/java/lang/reflect/AnnotatedType.java||file:src/java/lang/Class.java||file:src/java/lang/ClassLoader.java||file:src/java/lang/Module.java||file:src/java/lang/NamedPackage.java||file:src/java/lang/Package.java||file:src/java/util/Calendar.java||file:src/java/util/Date.java||file:src/java/util/Enumeration.java||file:src/java/util/spi/AbstractResourceBundleProvider.java||file:src/java/util/spi/ResourceBundleControlProvider.java||file:src/java/util/spi/ResourceBundleProvider.java||file:src/java/util/Iterator.java||file:src/java/util/ListResourceBundle.java||file:src/java/util/Locale.java||file:src/java/util/Properties.java||file:src/java/util/PropertyResourceBundle.java||file:src/java/util/ResourceBundle.java||file:src/java/util/ServiceLoader.java||file:src/sun/util/ResourceBundleEnumeration.java||file:src/sun/util/PropertyResourceBundleCharset.java||file:src/jdk/internal/reflect/Reflection.java||file:src/java/security/SecureClassLoader.java||file:src/jdk/internal/module/ServicesCatalog.java||file:src/java/lang/reflect/AnnotatedArrayType.java||file:src/java/lang/reflect/AnnotatedParameterizedType.java||file:src/java/lang/reflect/AnnotatedTypeVariable.java||file:src/java/lang/reflect/AnnotatedWildcardType.java||file:src/java/math/MathContext.java||file:src/java/math/RoundingMode.java||file:src/javax/annotation/processing/Messager.java||file:src/javax/annotation/processing/RoundEnvironment.java||file:src/javax/annotation/processing/ProcessingEnvironment.java||file:src/javax/annotation/processing/Filer.java||file:src/javax/annotation/processing/AbstractProcessor.java||file:src/javax/annotation/processing/SupportedSourceVersion.java||file:src/javax/annotation/processing/SupportedOptions.java||file:src/javax/annotation/processing/SupportedAnnotationTypes.java||file:src/javax/annotation/processing/Processor.java||file:src/javax/lang/model/element/Modifier.java||file:src/javax/lang/model/element/ElementKind.java||file:src/javax/lang/model/type/TypeKind.java||file:src/javax/lang/model/SourceVersion.java||file:src/javax/lang/model/element/AnnotationMirror.java||file:src/javax/lang/model/element/AnnotationValue.java||file:src/javax/lang/model/element/AnnotationValueVisitor.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor6.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor7.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor8.java||file:src/javax/lang/model/util/AbstractAnnotationValueVisitor9.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor6.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor7.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor8.java||file:src/javax/lang/model/util/SimpleAnnotationValueVisitor9.java||file:src/javax/lang/model/element/Element.java||file:src/javax/lang/model/element/ElementVisitor.java||file:src/javax/lang/model/util/AbstractElementVisitor6.java||file:src/javax/lang/model/util/AbstractElementVisitor7.java||file:src/javax/lang/model/util/AbstractElementVisitor8.java||file:src/javax/lang/model/util/AbstractElementVisitor9.java||file:src/javax/lang/model/util/SimpleElementVisitor6.java||file:src/javax/lang/model/util/SimpleElementVisitor7.java||file:src/javax/lang/model/util/SimpleElementVisitor8.java||file:src/javax/lang/model/util/SimpleElementVisitor9.java||file:src/javax/lang/model/element/PackageElement.java||file:src/javax/lang/model/element/Parameterizable.java||file:src/javax/lang/model/element/ExecutableElement.java||file:src/javax/lang/model/element/Name.java||file:src/javax/lang/model/element/QualifiedNameable.java||file:src/javax/lang/model/element/TypeParameterElement.java||file:src/javax/lang/model/element/NestingKind.java||file:src/javax/lang/model/util/ElementKindVisitor6.java||file:src/javax/lang/model/util/ElementKindVisitor7.java||file:src/javax/lang/model/util/ElementKindVisitor8.java||file:src/javax/lang/model/util/ElementKindVisitor9.java||file:src/javax/lang/model/util/ElementScanner6.java||file:src/javax/lang/model/util/ElementScanner7.java||file:src/javax/lang/model/util/ElementScanner8.java||file:src/javax/lang/model/util/ElementScanner9.java||file:src/javax/lang/model/element/ModuleElement.java||file:src/javax/lang/model/element/TypeElement.java||file:src/javax/lang/model/element/VariableElement.java||file:src/javax/lang/model/AnnotatedConstruct.java||file:src/javax/lang/model/util/AbstractTypeVisitor6.java||file:src/javax/lang/model/util/AbstractTypeVisitor7.java||file:src/javax/lang/model/util/AbstractTypeVisitor8.java||file:src/javax/lang/model/util/AbstractTypeVisitor9.java||file:src/javax/lang/model/util/SimpleTypeVisitor6.java||file:src/javax/lang/model/util/SimpleTypeVisitor7.java||file:src/javax/lang/model/util/SimpleTypeVisitor8.java||file:src/javax/lang/model/util/SimpleTypeVisitor9.java||file:src/javax/lang/model/util/TypeKindVisitor6.java||file:src/javax/lang/model/util/TypeKindVisitor7.java||file:src/javax/lang/model/util/TypeKindVisitor8.java||file:src/javax/lang/model/util/TypeKindVisitor9.java||file:src/javax/lang/model/type/TypeVisitor.java||file:src/javax/lang/model/type/TypeMirror.java||file:src/javax/lang/model/type/TypeVariable.java||file:src/javax/lang/model/type/WildcardType.java||file:src/javax/lang/model/type/ReferenceType.java||file:src/javax/lang/model/type/PrimitiveType.java||file:src/javax/lang/model/type/IntersectionType.java||file:src/javax/lang/model/type/UnionType.java||file:src/javax/lang/model/type/NoType.java||file:src/javax/lang/model/type/NullType.java||file:src/javax/lang/model/type/ErrorType.java||file:src/javax/lang/model/type/DeclaredType.java||file:src/javax/lang/model/type/ArrayType.java||file:src/javax/lang/model/type/ExecutableType.java||file:src/javax/lang/model/util/ElementFilter.java||file:src/javax/lang/model/util/Elements.java||file:src/javax/lang/model/util/Types.java||file:src/javax/tools/StandardLocation.java||file:src/javax/tools/JavaFileObject.java||file:src/javax/tools/FileObject.java||file:src/java/lang/module/Configuration.java||file:src/java/lang/module/ModuleReader.java||file:src/java/lang/module/ModuleDescriptor.java||file:src/java/lang/module/ModuleReference.java||file:src/java/lang/module/ResolvedModule.java||file:src/java/lang/ModuleLayer.java||file:src/jdk/internal/module/ModuleLoaderMap.java||file:src/java/util/concurrent/locks/AbstractOwnableSynchronizer.java||file:src/java/util/concurrent/locks/AbstractQueuedLongSynchronizer.java||file:src/java/util/concurrent/locks/AbstractQueuedSynchronizer.java||file:src/java/util/concurrent/locks/Condition.java||file:src/java/util/concurrent/locks/Lock.java||file:src/java/util/concurrent/locks/LockSupport.java||file:src/java/util/concurrent/locks/ReentrantLock.java||file:src/java/util/concurrent/Semaphore.java||file:src/java/util/concurrent/locks/ReadWriteLock.java||file:src/java/util/concurrent/locks/ReentrantReadWriteLock.java||file:src/java/util/concurrent/CountDownLatch.java||file:src/java/util/concurrent/CyclicBarrier.java||file:src/java/util/concurrent/locks/StampedLock.java||file:src/sun/nio/ch/Interruptible.java||file:src/java/io/StreamTokenizer.java||file:src/java/util/StringTokenizer.java||file:src/java/util/SplittableRandom.java||file:src/java/util/concurrent/ThreadLocalRandom.java" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="857" />
-    <option name="y" value="366" />
-    <option name="width" value="1703" />
-    <option name="height" value="1033" />
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
+  <component name="ProjectId" id="1bYuxQGHngwIK3pwlmCkiGq9iYA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <flattenPackages ProjectPane="false" />
-      <showMembers ProjectPane="false" />
-      <hideEmptyPackages ProjectPane="false" />
-      <autoscrollToSource ProjectPane="true" />
-      <autoscrollFromSource ProjectPane="true" />
-      <sortByType ProjectPane="true" />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SharedSecrets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OpenJDK-11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OpenJDK-11" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="SharedSecrets" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ChangesTree.GroupingKeys" value="directory" />
@@ -339,6 +407,8 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SearchEverywhereHistoryKey" value="Obje&#9;FILE&#9;file://D:/ProgrammingData/Code/SourceCode/OpenJDK-11/src/java/io/ObjectOutputStream.java&#10;System&#9;FILE&#9;file://D:/ProgrammingData/Code/SourceCode/OpenJDK-11/src/java/lang/System.java&#10;WildcardType&#9;PSI&#9;JAVA://java.lang.reflect.WildcardType&#10;Class&#9;PSI&#9;JAVA://java.lang.Class&#10;CharsetProvider&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/nio/charset/spi/CharsetProvider.java&#10;forName()&#9;PSI&#9;JAVA://java.lang.Character.UnicodeBlock#forName&#10;ByteBufferAsIntBufferB&#9;PSI&#9;JAVA://java.nio.ByteBufferAsIntBufferB&#10;DirectCharBufferRS&#9;PSI&#9;JAVA://java.nio.DirectCharBufferRS&#10;Comparable&#9;PSI&#9;JAVA://java.lang.Comparable&#10;Fun&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/FunctionalInterface.java&#10;CharBufferSpliterator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/nio/CharBufferSpliterator.java&#10;CharSequence&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/CharSequence.java&#10;StandardCharsets&#9;PSI&#9;JAVA://sun.nio.cs.StandardCharsets&#10;OfRef&#9;PSI&#9;JAVA://java.util.Spliterators.EmptySpliterator.OfRef&#10;Comp&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/Comparator.java&#10;CharsSpliterator&#9;PSI&#9;JAVA://java.lang.StringUTF16.CharsSpliterator&#10;String&#9;PSI&#9;JAVA://java.lang.String&#10;FileD&#9;PSI&#9;JAVA://jdk.nashorn.internal.runtime.Source.FileData&#10;FileCh&#9;PSI&#9;JAVA://java.nio.channels.FileChannel&#10;Supplier&#9;PSI&#9;JAVA://java.util.function.DoubleSupplier&#10;IntSupplier&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/IntSupplier.java&#10;ConditionalSpecialCasing&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/ConditionalSpecialCasing.java&#10;StringLatin1&#9;PSI&#9;JAVA://java.lang.StringLatin1&#10;StringCoding&#9;PSI&#9;JAVA://java.lang.StringCoding&#10;Charset&#9;PSI&#9;JAVA://java.nio.charset.Charset&#10;Character&#9;PSI&#9;JAVA://java.lang.Character&#10;Com&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/lang/Comparable.java&#10;Arrays&#9;PSI&#9;JAVA://java.util.Arrays&#10;SpinedNodeBuilder&#9;PSI&#9;JAVA://java.util.stream.Nodes.SpinedNodeBuilder&#10;DoubleSpinedNodeBuilder&#9;PSI&#9;JAVA://java.util.stream.Nodes.DoubleSpinedNodeBuilder&#10;Stream&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/stream/Streams.java&#10;ForkJoinPool&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/concurrent/ForkJoinPool.java&#10;Thread&#9;PSI&#9;JAVA://java.lang.Thread&#10;BinaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/IntBinaryOperator.java&#10;UnaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/DoubleUnaryOperator.java&#10;BigDecimal&#9;PSI&#9;JAVA://java.math.BigDecimal&#10;Tripwire&#9;PSI&#9;JAVA://java.util.Tripwire&#10;IntStream&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/stream/IntStream.java&#10;DoubleBinaryOperator&#9;PSI&#9;JAVA://java.util.function.DoubleBinaryOperator&#10;LongBinaryOperator&#9;PSI&#9;JAVA://java.util.function.LongBinaryOperator&#10;IntBinaryOperator&#9;PSI&#9;JAVA://java.util.function.IntBinaryOperator&#10;DoubleUnaryOperator&#9;PSI&#9;JAVA://java.util.function.DoubleUnaryOperator&#10;LongUnaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/LongUnaryOperator.java&#10;IntUnaryOperator&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/IntUnaryOperator.java&#10;ToDoubleBiFunction&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/ToDoubleBiFunction.java&#10;ToLongBiFunction&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/ToLongBiFunction.java&#10;ToIntBiFunction&#9;FILE&#9;file://D:/MyData/Code/ProjectSourceCode/OpenJDK-11/src/java/util/function/ToIntBiFunction.java&#10;BiFunction&#9;PSI&#9;JAVA://java.util.function.BiFunction&#10;ToDoubleFunction&#9;PSI&#9;JAVA://java.util.function.ToDoubleFunction&#10;ToLongFunction&#9;PSI&#9;JAVA://java.util.function.ToLongFunction" />
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -346,9 +416,13 @@
     <property name="android.sdk.path" value="D:/SDK-IDEA" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548810911313" />
+    <property name="go.import.settings.migrated" value="true" />
     <property name="last.edited.regexp" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -356,6 +430,9 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.34136933" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -373,34 +450,16 @@
       <recent name="D:\ProgrammingData\Code\SourceCode\OpenJDK-11" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <option value="$PROJECT_DIR$" />
       </list>
     </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -418,6 +477,19 @@
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -892,93 +964,8 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="857" y="366" width="1703" height="1033" extended-state="1" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Repositories" order="0" weight="0.32995737" />
-      <window_info content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.44605118" weight="0.23957722" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" sideWeight="0.5539488" side_tool="true" weight="0.23957722" />
-      <window_info id="Structure" order="7" sideWeight="0.5529954" side_tool="true" weight="0.18924303" />
-      <window_info id="JRebel" order="8" side_tool="true" />
-      <window_info id="Alibaba Cloud Explorer" order="9" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32718894" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32908705" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3652822" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.31701806" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5055249" side_tool="true" weight="0.2756024" />
-      <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49447513" weight="0.6062992" />
-      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3280255" />
-      <window_info anchor="bottom" id="Messages" order="15" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="16" />
-      <window_info anchor="bottom" id="Inspection Results" order="17" weight="0.3298193" />
-      <window_info anchor="bottom" id="CheckStyle" order="18" />
-      <window_info anchor="bottom" id="Sequence" order="19" />
-      <window_info anchor="bottom" id="Alibaba Cloud View" order="20" />
-      <window_info anchor="bottom" id="JRebel Console" order="21" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24972437" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25138122" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" weight="0.32995737" />
-      <window_info anchor="right" id="Database" order="8" weight="0.3296582" />
-      <window_info anchor="right" id="Maven" order="9" weight="0.32928178" />
-      <window_info anchor="right" id="Jenkins" order="10" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Repositories" order="0" weight="0.32995737" />
-      <window_info active="true" content_ui="combo" x="762" y="70" width="395" height="899" id="Project" order="1" sideWeight="0.4501845" visible="true" weight="0.16077349" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" sideWeight="0.5537806" side_tool="true" weight="0.17458564" />
-      <window_info id="Structure" order="7" sideWeight="0.5498155" side_tool="true" weight="0.15911601" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3280255" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32908705" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Statistic" order="8" weight="0.3652822" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.55910546" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5049724" side_tool="true" weight="0.32271764" />
-      <window_info anchor="bottom" id="Thumbnails" order="11" weight="0.32925472" />
-      <window_info anchor="bottom" id="Version Control" order="12" sideWeight="0.49502763" weight="0.32271764" />
-      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Duplicate detector" order="14" weight="0.3280255" />
-      <window_info anchor="bottom" id="Messages" order="15" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24972437" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25138122" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven Projects" order="7" weight="0.32995737" />
-      <window_info anchor="right" id="Database" order="8" weight="0.3296582" />
-      <window_info anchor="right" id="Maven" order="9" weight="0.32928178" />
-    </layout-to-restore>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -995,62 +982,18 @@
       <map>
         <entry key="1">
           <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
         <entry key="2">
           <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
         <entry key="MAIN">
           <value>
             <State>
               <option name="LONG_EDGES_VISIBLE" value="true" />
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
             </State>
           </value>
         </entry>
@@ -1081,11 +1024,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
     <MESSAGE value=":bulb: 【java.util.SplittableRandom】 伪随机数生成器（非线程安全）" />
     <MESSAGE value=":memo: 上传.gitignore文件" />
     <MESSAGE value=":recycle: 更新对伪随机数种子的理解" />
@@ -1113,1008 +1056,33 @@
     <MESSAGE value=":bulb: 【java.lang.Class】 反射元素-类/接口" />
     <option name="LAST_COMMIT_MESSAGE" value=":bulb: 【java.lang.Class】 反射元素-类/接口" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="622" y="287" width="753" height="665" key="StructurePopup" timestamp="1588852642738">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="622" y="287" width="753" height="665" key="StructurePopup/-1340.79.1340.1001/0.0.1920.1200@0.0.1920.1200" timestamp="1588833758681" />
+    <state x="622" y="287" width="753" height="665" key="StructurePopup/-1366.56.1366.1024/0.0.1920.1200@0.0.1920.1200" timestamp="1588852642738" />
+    <state x="622" y="287" width="753" height="665" key="StructurePopup/0.0.1920.1200@0.0.1920.1200" timestamp="1588833630721" />
+    <state x="622" y="287" width="753" height="665" key="StructurePopup/29.23.1891.1177@29.23.1891.1177" timestamp="1588830178921" />
+    <state width="643" height="615" key="SwitcherDM" timestamp="1588854293942">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state width="643" height="615" key="SwitcherDM/-1366.56.1366.1024/0.0.1920.1200@0.0.1920.1200" timestamp="1588854293942" />
+    <state width="643" height="615" key="SwitcherDM/0.0.1920.1200@0.0.1920.1200" timestamp="1588833604809" />
+    <state x="577" y="329" width="765" height="576" key="find.popup" timestamp="1588843142735">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state x="577" y="329" width="765" height="576" key="find.popup/-1340.79.1340.1001/0.23.1920.1177@0.23.1920.1177" timestamp="1588843142735" />
+    <state x="577" y="312" width="765" height="576" key="find.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1588823522674" />
+    <state x="541" y="168" width="838" height="1032" key="search.everywhere.popup" timestamp="1588851571738">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="541" y="168" width="838" height="1032" key="search.everywhere.popup/-1366.56.1366.1024/0.0.1920.1200@0.0.1920.1200" timestamp="1588851571738" />
+    <state x="541" y="168" width="838" height="1032" key="search.everywhere.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1588833610759" />
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/ExternalizableTest/src/com/kang/externalizable/test02/ExternalizableTest02.java" />
-    <entry file="file://$PROJECT_DIR$/test/ObjectStreamFieldTest/src/com/kang/objectstreamfield/User.java" />
-    <entry file="file://$PROJECT_DIR$/test/ObjectStreamFieldTest/src/com/kang/objectstreamfield/ObjectStreamFieldTest01.java" />
-    <entry file="file://$PROJECT_DIR$/test/ObjectStreamFieldTest/src/com/kang/objectstreamfield/SerializableUtil.java" />
-    <entry file="file://$PROJECT_DIR$/src/java/io/ObjectStreamField.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-          <folding>
-            <element signature="docComment;class#ObjectStreamField#0" />
-            <element signature="docComment;field#field#0;class#ObjectStreamField#0" />
-            <element signature="docComment;field#name#0;class#ObjectStreamField#0" />
-            <element signature="docComment;field#type#0;class#ObjectStreamField#0" />
-            <element signature="docComment;field#signature#0;class#ObjectStreamField#0" />
-            <element signature="docComment;field#unshared#0;class#ObjectStreamField#0" />
-            <element signature="docComment;field#typeSignature#0;class#ObjectStreamField#0" />
-            <element signature="docComment;field#offset#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#ObjectStreamField#0;class#ObjectStreamField#0" />
-            <element signature="method#ObjectStreamField#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#ObjectStreamField#1;class#ObjectStreamField#0" />
-            <element signature="method#ObjectStreamField#1;class#ObjectStreamField#0" />
-            <element signature="docComment;method#ObjectStreamField#2;class#ObjectStreamField#0" />
-            <element signature="method#ObjectStreamField#2;class#ObjectStreamField#0" />
-            <element signature="docComment;method#ObjectStreamField#3;class#ObjectStreamField#0" />
-            <element signature="method#ObjectStreamField#3;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getField#0;class#ObjectStreamField#0" />
-            <element signature="method#getField#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getName#0;class#ObjectStreamField#0" />
-            <element signature="method#getName#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getType#0;class#ObjectStreamField#0" />
-            <element signature="method#getType#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getTypeCode#0;class#ObjectStreamField#0" />
-            <element signature="method#getTypeCode#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getTypeString#0;class#ObjectStreamField#0" />
-            <element signature="method#getTypeString#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getOffset#0;class#ObjectStreamField#0" />
-            <element signature="method#getOffset#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#setOffset#0;class#ObjectStreamField#0" />
-            <element signature="method#setOffset#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#isPrimitive#0;class#ObjectStreamField#0" />
-            <element signature="method#isPrimitive#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#isUnshared#0;class#ObjectStreamField#0" />
-            <element signature="method#isUnshared#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getSignature#0;class#ObjectStreamField#0" />
-            <element signature="method#getSignature#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getClassSignature#0;class#ObjectStreamField#0" />
-            <element signature="method#getClassSignature#0;class#ObjectStreamField#0" />
-            <element signature="method#appendClassSignature#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#getPrimitiveSignature#0;class#ObjectStreamField#0" />
-            <element signature="method#getPrimitiveSignature#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#compareTo#0;class#ObjectStreamField#0" />
-            <element signature="method#compareTo#0;class#ObjectStreamField#0" />
-            <element signature="docComment;method#toString#0;class#ObjectStreamField#0" />
-            <element signature="method#toString#0;class#ObjectStreamField#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/reflect/generics/tree/Tree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/reflect/generics/visitor/TypeTreeVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/reflect/generics/tree/TypeTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sun/reflect/generics/repository/ClassRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="109" column="12" lean-forward="true" selection-start-line="109" selection-start-column="12" selection-end-line="109" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/Enum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="225" column="28" selection-start-line="225" selection-start-column="28" selection-end-line="225" selection-end-column="28" />
-          <folding>
-            <element signature="docComment;class#Enum#0" />
-            <element signature="docComment;field#name#0;class#Enum#0" />
-            <element signature="docComment;field#ordinal#0;class#Enum#0" />
-            <element signature="docComment;method#Enum#0;class#Enum#0" />
-            <element signature="method#Enum#0;class#Enum#0" />
-            <element signature="docComment;method#name#0;class#Enum#0" />
-            <element signature="method#name#0;class#Enum#0" />
-            <element signature="docComment;method#ordinal#0;class#Enum#0" />
-            <element signature="method#ordinal#0;class#Enum#0" />
-            <element signature="docComment;method#getDeclaringClass#0;class#Enum#0" />
-            <element signature="method#getDeclaringClass#0;class#Enum#0" />
-            <element signature="docComment;method#compareTo#0;class#Enum#0" />
-            <element signature="method#compareTo#0;class#Enum#0" />
-            <element signature="docComment;method#valueOf#0;class#Enum#0" />
-            <element signature="docComment;method#hashCode#0;class#Enum#0" />
-            <element signature="method#hashCode#0;class#Enum#0" />
-            <element signature="docComment;method#equals#0;class#Enum#0" />
-            <element signature="method#equals#0;class#Enum#0" />
-            <element signature="docComment;method#toString#0;class#Enum#0" />
-            <element signature="method#toString#0;class#Enum#0" />
-            <element signature="docComment;method#clone#0;class#Enum#0" />
-            <element signature="method#clone#0;class#Enum#0" />
-            <element signature="docComment;method#finalize#0;class#Enum#0" />
-            <element signature="method#finalize#0;class#Enum#0" />
-            <element signature="docComment;method#readObject#0;class#Enum#0" />
-            <element signature="method#readObject#0;class#Enum#0" />
-            <element signature="method#readObjectNoData#0;class#Enum#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/reflect/AnnotatedElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="412" column="37" selection-start-line="412" selection-start-column="37" selection-end-line="412" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jdk/internal/reflect/ReflectionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-671">
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest02.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-80">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest01.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest04.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ThreadLocalTest/src/com/kang/threadlocal/ThreadLocalTest03.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/InheritableThreadLocal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="66" column="19" lean-forward="true" selection-start-line="66" selection-start-column="19" selection-end-line="66" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/ThreadLocal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-563">
-          <caret line="358" column="19" selection-start-line="358" selection-start-column="19" selection-end-line="358" selection-end-column="19" />
-          <folding>
-            <element signature="docComment;class#ThreadLocal#0" />
-            <element signature="docComment;field#HASH_INCREMENT#0;class#ThreadLocal#0" />
-            <element signature="docComment;field#nextHashCode#0;class#ThreadLocal#0" />
-            <element signature="docComment;field#threadLocalHashCode#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#nextHashCode#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#set#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#get#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#initialValue#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#setInitialValue#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#createMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#remove#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#getMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#withInitial#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#createInheritedMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#childValue#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#isPresent#0;class#ThreadLocal#0" />
-            <element signature="docComment;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;field#INITIAL_CAPACITY#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;field#table#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;field#size#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;field#threshold#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#ThreadLocalMap#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#ThreadLocalMap#1;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#set#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#getEntry#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#getEntryAfterMiss#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#resize#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#rehash#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#expungeStaleEntry#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#expungeStaleEntries#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#cleanSomeSlots#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#replaceStaleEntry#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#remove#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#nextIndex#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#prevIndex#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;method#setThreshold#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;class#Entry#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;field#value#0;class#Entry#0;class#ThreadLocalMap#0;class#ThreadLocal#0" />
-            <element signature="docComment;class#SuppliedThreadLocal#0;class#ThreadLocal#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="3965" column="19" selection-start-line="3965" selection-start-column="19" selection-end-line="3965" selection-end-column="19" />
-          <folding>
-            <element signature="docComment;class#Class#0" />
-            <element signature="e#6897#6958#0" />
-            <element signature="e#7199#7867#0" />
-            <element signature="e#8051#8223#0" />
-            <element signature="e#8398#8464#0" />
-            <element signature="e#9711#9835#0" />
-            <element signature="initializer##0;class#Class#0" />
-            <element signature="e#10068#10250#0" />
-            <element signature="e#10068#10572#0" />
-            <element signature="e#10328#10370#0" />
-            <element signature="e#10797#12016#0" />
-            <element signature="e#10797#12304#0" />
-            <element signature="e#12314#15276#0" />
-            <element signature="e#12314#16172#0" />
-            <element signature="e#15612#16093#1" />
-            <element signature="e#15626#15713#0" />
-            <element signature="e#15860#16083#1" />
-            <element signature="e#15964#16069#1" />
-            <element signature="e#16182#18252#0" />
-            <element signature="e#16182#19313#0" />
-            <element signature="e#18582#19055#1" />
-            <element signature="e#18706#18922#1" />
-            <element signature="e#19061#19114#1" />
-            <element signature="e#19147#19235#1" />
-            <element signature="e#19241#19307#1" />
-            <element signature="e#19323#19405#0" />
-            <element signature="e#19575#22204#0" />
-            <element signature="e#22239#22255#0" />
-            <element signature="e#19575#24526#0" />
-            <element signature="e#22449#22546#1" />
-            <element signature="e#22737#23790#1" />
-            <element signature="e#22775#22903#1" />
-            <element signature="e#22933#23634#0" />
-            <element signature="e#23112#23162#0" />
-            <element signature="class#23393:23579" />
-            <element signature="method#run#0;class#23393:23579" />
-            <element signature="e#23666#23780#0" />
-            <element signature="e#24037#24226#1" />
-            <element signature="e#24275#24350#0" />
-            <element signature="e#24386#24520#0" />
-            <element signature="e#24808#27334#0" />
-            <element signature="e#24808#27509#0" />
-            <element signature="e#27519#27983#0" />
-            <element signature="e#27519#28268#0" />
-            <element signature="e#28165#28235#1" />
-            <element signature="e#28278#28739#0" />
-            <element signature="e#28278#29114#0" />
-            <element signature="e#28944#29023#1" />
-            <element signature="e#29124#29293#0" />
-            <element signature="e#29124#29974#0" />
-            <element signature="e#29407#29942#1" />
-            <element signature="e#29425#29896#0" />
-            <element signature="e#29518#29619#1" />
-            <element signature="e#29788#29844#1" />
-            <element signature="e#30201#31820#0" />
-            <element signature="e#32058#33345#0" />
-            <element signature="e#33519#33730#0" />
-            <element signature="e#33854#34234#0" />
-            <element signature="e#33854#34406#0" />
-            <element signature="e#34416#35522#0" />
-            <element signature="e#35659#35878#0" />
-            <element signature="e#35994#36230#0" />
-            <element signature="e#35994#36570#0" />
-            <element signature="e#36306#36366#0" />
-            <element signature="e#36580#36787#0" />
-            <element signature="e#36580#36971#0" />
-            <element signature="e#36981#37185#0" />
-            <element signature="e#36981#37364#0" />
-            <element signature="e#37374#37580#0" />
-            <element signature="e#37374#37745#0" />
-            <element signature="e#37755#38069#0" />
-            <element signature="e#37755#38224#0" />
-            <element signature="e#38234#38341#0" />
-            <element signature="e#38234#38622#0" />
-            <element signature="e#38850#39208#0" />
-            <element signature="e#38850#39513#0" />
-            <element signature="e#39420#39465#1" />
-            <element signature="e#39471#39507#1" />
-            <element signature="e#39523#40074#0" />
-            <element signature="e#40193#42223#0" />
-            <element signature="e#40193#42393#0" />
-            <element signature="e#42403#43136#0" />
-            <element signature="e#42403#44763#0" />
-            <element signature="e#43293#43344#0" />
-            <element signature="e#43909#44059#1" />
-            <element signature="e#44065#44435#1" />
-            <element signature="e#44484#44722#1" />
-            <element signature="e#44575#44712#1" />
-            <element signature="e#44773#45743#0" />
-            <element signature="e#44773#46239#0" />
-            <element signature="e#45978#46207#1" />
-            <element signature="e#46069#46197#1" />
-            <element signature="e#46249#48099#0" />
-            <element signature="e#46249#48480#0" />
-            <element signature="e#48337#48436#1" />
-            <element signature="e#48490#49733#0" />
-            <element signature="e#48490#51091#0" />
-            <element signature="e#49944#50041#1" />
-            <element signature="e#50059#50125#0" />
-            <element signature="class#50478:51083" />
-            <element signature="method#run#0;class#50478:51083" />
-            <element signature="e#50692#51005#1" />
-            <element signature="e#50766#50922#1" />
-            <element signature="e#50832#50900#1" />
-            <element signature="e#51101#53241#0" />
-            <element signature="e#51101#54165#0" />
-            <element signature="e#53396#53432#1" />
-            <element signature="e#53468#53514#0" />
-            <element signature="e#53537#53686#0" />
-            <element signature="e#53551#53595#0" />
-            <element signature="e#53695#53751#0" />
-            <element signature="e#53845#53881#1" />
-            <element signature="e#54028#54138#1" />
-            <element signature="e#54175#56170#0" />
-            <element signature="e#54175#56961#0" />
-            <element signature="e#56329#56381#1" />
-            <element signature="e#56621#56931#1" />
-            <element signature="e#56803#56921#1" />
-            <element signature="e#57186#59083#0" />
-            <element signature="e#57186#59549#0" />
-            <element signature="e#59230#59277#1" />
-            <element signature="e#59295#59322#0" />
-            <element signature="e#59461#59497#1" />
-            <element signature="e#59559#62302#0" />
-            <element signature="e#59559#62509#0" />
-            <element signature="e#62519#63423#0" />
-            <element signature="e#62519#63805#0" />
-            <element signature="e#64069#65621#0" />
-            <element signature="e#64069#66009#0" />
-            <element signature="e#65836#65932#1" />
-            <element signature="e#66019#67567#0" />
-            <element signature="e#66019#68036#0" />
-            <element signature="e#67831#67927#1" />
-            <element signature="e#68046#70016#0" />
-            <element signature="e#68046#70409#0" />
-            <element signature="e#70233#70331#1" />
-            <element signature="e#70419#72413#0" />
-            <element signature="e#70419#72897#0" />
-            <element signature="e#72679#72777#1" />
-            <element signature="e#72907#74772#0" />
-            <element signature="e#72907#76751#0" />
-            <element signature="e#75090#76745#1" />
-            <element signature="e#75469#75521#0" />
-            <element signature="e#75981#76106#1" />
-            <element signature="e#76466#76650#1" />
-            <element signature="e#76565#76636#1" />
-            <element signature="e#76986#81316#0" />
-            <element signature="e#76986#81800#0" />
-            <element signature="e#81643#81739#1" />
-            <element signature="e#81810#87098#0" />
-            <element signature="e#81810#87868#0" />
-            <element signature="e#87528#87624#1" />
-            <element signature="e#87710#87804#1" />
-            <element signature="e#87878#90413#0" />
-            <element signature="e#87878#90783#0" />
-            <element signature="e#90617#90715#1" />
-            <element signature="e#90793#93398#0" />
-            <element signature="e#90793#94084#0" />
-            <element signature="e#93705#93803#1" />
-            <element signature="e#93926#94020#1" />
-            <element signature="e#94094#95935#0" />
-            <element signature="e#94094#98236#0" />
-            <element signature="e#96234#98230#1" />
-            <element signature="e#96667#96719#0" />
-            <element signature="e#97179#97304#1" />
-            <element signature="e#97775#98140#1" />
-            <element signature="e#97921#98126#1" />
-            <element signature="e#98034#98108#1" />
-            <element signature="e#98465#100117#0" />
-            <element signature="e#98465#100476#0" />
-            <element signature="e#100321#100417#1" />
-            <element signature="e#100486#102582#0" />
-            <element signature="e#100486#103142#0" />
-            <element signature="e#102857#102953#1" />
-            <element signature="e#103019#103080#1" />
-            <element signature="e#103152#105206#0" />
-            <element signature="e#103152#105572#0" />
-            <element signature="e#105408#105506#1" />
-            <element signature="e#105582#107594#0" />
-            <element signature="e#105582#108190#0" />
-            <element signature="e#107867#107965#1" />
-            <element signature="e#108067#108128#1" />
-            <element signature="e#108423#108452#0" />
-            <element signature="e#108423#108605#0" />
-            <element signature="e#108615#108694#0" />
-            <element signature="e#108615#108974#0" />
-            <element signature="e#108984#109063#0" />
-            <element signature="e#108984#109653#0" />
-            <element signature="e#109663#109692#0" />
-            <element signature="e#109663#109862#0" />
-            <element signature="e#109872#109951#0" />
-            <element signature="e#109990#109999#0" />
-            <element signature="e#109872#110262#0" />
-            <element signature="e#110272#110351#0" />
-            <element signature="e#110272#110911#0" />
-            <element signature="e#110921#111795#0" />
-            <element signature="e#110921#112591#0" />
-            <element signature="e#112428#112464#1" />
-            <element signature="e#112601#114258#0" />
-            <element signature="e#112601#114983#0" />
-            <element signature="e#115215#116253#0" />
-            <element signature="e#116280#116296#0" />
-            <element signature="e#115215#116662#0" />
-            <element signature="e#116423#116459#1" />
-            <element signature="e#116541#116637#1" />
-            <element signature="e#116672#116755#0" />
-            <element signature="e#117082#119573#0" />
-            <element signature="e#117082#120895#0" />
-            <element signature="e#119903#120662#1" />
-            <element signature="e#120070#120114#1" />
-            <element signature="e#120355#120584#0" />
-            <element signature="e#120388#120480#1" />
-            <element signature="e#120486#120570#1" />
-            <element signature="e#120608#120652#0" />
-            <element signature="e#120758#120828#1" />
-            <element signature="e#120834#120889#1" />
-            <element signature="e#120905#123411#0" />
-            <element signature="e#120905#125116#0" />
-            <element signature="e#123757#124860#1" />
-            <element signature="e#123924#123968#1" />
-            <element signature="e#124175#124764#0" />
-            <element signature="e#124210#124261#0" />
-            <element signature="e#124338#124430#1" />
-            <element signature="e#124473#124580#1" />
-            <element signature="e#124586#124733#1" />
-            <element signature="e#124806#124850#0" />
-            <element signature="e#124963#125041#1" />
-            <element signature="e#125047#125110#1" />
-            <element signature="e#125340#125717#0" />
-            <element signature="e#125340#125892#0" />
-            <element signature="e#125907#126173#0" />
-            <element signature="e#125907#126470#0" />
-            <element signature="e#126266#126302#1" />
-            <element signature="e#126480#127730#0" />
-            <element signature="e#126480#128301#0" />
-            <element signature="e#127848#128276#1" />
-            <element signature="e#127912#127969#1" />
-            <element signature="e#128002#128051#1" />
-            <element signature="e#128057#128231#1" />
-            <element signature="e#128316#128974#0" />
-            <element signature="e#128316#129053#0" />
-            <element signature="e#129068#130427#0" />
-            <element signature="e#130557#130821#0" />
-            <element signature="e#130872#131640#0" />
-            <element signature="e#130872#132293#0" />
-            <element signature="e#131774#131854#1" />
-            <element signature="e#131946#132268#1" />
-            <element signature="e#131986#132226#1" />
-            <element signature="e#132303#133689#0" />
-            <element signature="e#132303#134304#0" />
-            <element signature="e#133949#134010#0" />
-            <element signature="e#134108#134252#0" />
-            <element signature="e#134162#134242#1" />
-            <element signature="e#134526#134902#0" />
-            <element signature="e#134943#134973#0" />
-            <element signature="e#134526#135172#0" />
-            <element signature="e#135182#136398#0" />
-            <element signature="e#135182#136710#0" />
-            <element signature="e#136934#137578#0" />
-            <element signature="e#136934#137708#0" />
-            <element signature="e#137718#139182#0" />
-            <element signature="e#137718#141045#0" />
-            <element signature="e#139263#139305#1" />
-            <element signature="e#139311#141039#1" />
-            <element signature="e#139475#139701#1" />
-            <element signature="e#139496#139611#1" />
-            <element signature="e#139707#140514#1" />
-            <element signature="e#139893#140009#1" />
-            <element signature="e#140062#140117#1" />
-            <element signature="e#140152#140260#1" />
-            <element signature="e#140266#140430#1" />
-            <element signature="e#140636#140890#1" />
-            <element signature="e#140763#140834#1" />
-            <element signature="e#141183#141280#0" />
-            <element signature="e#141349#141494#0" />
-            <element signature="e#141504#141732#0" />
-            <element signature="e#141504#142741#0" />
-            <element signature="e#141837#142709#1" />
-            <element signature="e#141910#142435#0" />
-            <element signature="class#142035:142240" />
-            <element signature="method#run#0;class#142035:142240" />
-            <element signature="e#142448#142504#0" />
-            <element signature="e#142655#142699#0" />
-            <element signature="e#142751#143194#0" />
-            <element signature="e#142751#143745#0" />
-            <element signature="e#143503#143716#1" />
-            <element signature="e#143635#143706#1" />
-            <element signature="e#143755#143804#0" />
-            <element signature="e#144063#144426#0" />
-            <element signature="e#144063#145025#0" />
-            <element signature="e#144560#144993#1" />
-            <element signature="e#144851#144936#1" />
-            <element signature="e#145035#145181#0" />
-            <element signature="e#145191#145264#0" />
-            <element signature="e#145274#145406#0" />
-            <element signature="e#145416#145645#0" />
-            <element signature="e#145655#145780#0" />
-            <element signature="e#145741#145774#1" />
-            <element signature="e#145790#146078#0" />
-            <element signature="e#145949#146051#1" />
-            <element signature="e#145996#146041#1" />
-            <element signature="e#146088#146664#0" />
-            <element signature="e#146361#146638#1" />
-            <element signature="e#146674#147160#0" />
-            <element signature="e#146764#146824#1" />
-            <element signature="e#146857#146903#1" />
-            <element signature="e#146948#146985#1" />
-            <element signature="e#147036#147124#1" />
-            <element signature="e#147069#147114#1" />
-            <element signature="e#147170#147445#0" />
-            <element signature="e#147363#147419#1" />
-            <element signature="e#147455#147736#0" />
-            <element signature="e#147653#147710#1" />
-            <element signature="e#147746#148054#0" />
-            <element signature="e#147966#148028#1" />
-            <element signature="e#148216#148542#0" />
-            <element signature="e#148362#148502#1" />
-            <element signature="e#148650#149186#0" />
-            <element signature="e#148777#148860#1" />
-            <element signature="e#148866#149180#1" />
-            <element signature="e#148954#149060#1" />
-            <element signature="e#149305#149564#0" />
-            <element signature="e#149488#149558#1" />
-            <element signature="e#149629#150046#0" />
-            <element signature="e#149685#149758#1" />
-            <element signature="e#149841#150013#1" />
-            <element signature="e#150056#150833#0" />
-            <element signature="e#150115#150353#1" />
-            <element signature="e#150531#150591#1" />
-            <element signature="e#150597#150827#1" />
-            <element signature="e#150843#151071#0" />
-            <element signature="e#150843#151309#0" />
-            <element signature="e#151374#151484#0" />
-            <element signature="e#151374#151605#0" />
-            <element signature="e#151615#151743#0" />
-            <element signature="e#151615#151970#0" />
-            <element signature="e#151980#152234#0" />
-            <element signature="e#151980#153008#0" />
-            <element signature="e#152499#152981#1" />
-            <element signature="e#152623#152971#1" />
-            <element signature="e#152692#152796#1" />
-            <element signature="e#152854#152957#1" />
-            <element signature="e#153018#153272#0" />
-            <element signature="e#153151#153244#1" />
-            <element signature="e#153282#153344#0" />
-            <element signature="e#153414#153769#0" />
-            <element signature="e#153414#154537#0" />
-            <element signature="e#154274#154467#1" />
-            <element signature="e#154356#154457#1" />
-            <element signature="e#154547#154830#0" />
-            <element signature="e#154547#155638#0" />
-            <element signature="e#155058#155427#1" />
-            <element signature="e#155154#155417#1" />
-            <element signature="e#155336#155403#1" />
-            <element signature="e#155545#155632#1" />
-            <element signature="e#155648#155762#0" />
-            <element signature="e#155648#156414#0" />
-            <element signature="e#155896#156295#1" />
-            <element signature="e#155960#156017#1" />
-            <element signature="e#156161#156285#1" />
-            <element signature="e#156301#156384#1" />
-            <element signature="e#156424#156469#0" />
-            <element signature="e#156424#157045#0" />
-            <element signature="e#156806#156840#1" />
-            <element signature="e#156849#156922#0" />
-            <element signature="e#157055#157769#0" />
-            <element signature="e#157198#157763#1" />
-            <element signature="e#157401#157443#1" />
-            <element signature="e#157711#157753#1" />
-            <element signature="e#157779#157812#0" />
-            <element signature="e#157872#157899#0" />
-            <element signature="e#157872#158056#0" />
-            <element signature="e#158066#158145#0" />
-            <element signature="e#158066#158672#0" />
-            <element signature="e#158281#158591#1" />
-            <element signature="e#158372#158439#1" />
-            <element signature="e#158445#158537#1" />
-            <element signature="e#158682#158867#0" />
-            <element signature="e#158682#159521#0" />
-            <element signature="e#159028#159171#1" />
-            <element signature="e#159332#159495#1" />
-            <element signature="e#159361#159423#1" />
-            <element signature="e#159429#159485#1" />
-            <element signature="e#159531#159716#0" />
-            <element signature="e#159531#160749#0" />
-            <element signature="e#159857#159959#1" />
-            <element signature="e#159977#160034#0" />
-            <element signature="e#160350#160418#1" />
-            <element signature="e#160532#160600#1" />
-            <element signature="e#160677#160723#1" />
-            <element signature="e#160759#160962#0" />
-            <element signature="e#160759#161843#0" />
-            <element signature="e#161147#161294#1" />
-            <element signature="e#161381#161553#1" />
-            <element signature="e#161559#161626#1" />
-            <element signature="e#161650#161817#1" />
-            <element signature="e#161679#161739#1" />
-            <element signature="e#161745#161807#1" />
-            <element signature="e#161853#162041#0" />
-            <element signature="e#161853#162704#0" />
-            <element signature="e#162205#162350#1" />
-            <element signature="e#162513#162678#1" />
-            <element signature="e#162542#162605#1" />
-            <element signature="e#162611#162668#1" />
-            <element signature="e#162714#162902#0" />
-            <element signature="e#162714#164185#0" />
-            <element signature="e#163046#163149#1" />
-            <element signature="e#163167#163223#0" />
-            <element signature="e#163402#163439#1" />
-            <element signature="e#163554#163668#1" />
-            <element signature="e#163613#163658#1" />
-            <element signature="e#163791#164050#1" />
-            <element signature="e#163852#164040#1" />
-            <element signature="e#163973#164026#1" />
-            <element signature="e#164112#164159#1" />
-            <element signature="e#164195#164374#0" />
-            <element signature="e#164195#165591#0" />
-            <element signature="e#164426#164487#0" />
-            <element signature="e#164997#165032#1" />
-            <element signature="e#165188#165293#1" />
-            <element signature="e#165240#165283#1" />
-            <element signature="e#165363#165564#1" />
-            <element signature="e#165433#165554#1" />
-            <element signature="e#165489#165540#1" />
-            <element signature="e#165601#165783#0" />
-            <element signature="e#165601#166085#0" />
-            <element signature="e#166095#166288#0" />
-            <element signature="e#166095#167623#0" />
-            <element signature="e#166659#166728#0" />
-            <element signature="e#166886#166921#1" />
-            <element signature="e#166939#166987#0" />
-            <element signature="e#167116#167206#1" />
-            <element signature="e#167224#167287#0" />
-            <element signature="e#167431#167588#1" />
-            <element signature="e#167633#167830#0" />
-            <element signature="e#167633#168406#0" />
-            <element signature="e#168153#168317#1" />
-            <element signature="e#168256#168307#1" />
-            <element signature="e#168707#168766#0" />
-            <element signature="e#168707#169167#0" />
-            <element signature="e#168951#169131#1" />
-            <element signature="e#169004#169121#1" />
-            <element signature="e#169177#169304#0" />
-            <element signature="e#169314#170092#0" />
-            <element signature="e#169376#170086#1" />
-            <element signature="e#169616#169670#1" />
-            <element signature="e#169958#170076#1" />
-            <element signature="e#170102#171655#0" />
-            <element signature="e#170480#171232#1" />
-            <element signature="e#170699#171222#1" />
-            <element signature="e#170853#171208#1" />
-            <element signature="e#170899#171122#1" />
-            <element signature="e#171265#171405#1" />
-            <element signature="e#171411#171559#1" />
-            <element signature="e#171768#171857#0" />
-            <element signature="e#171768#172527#0" />
-            <element signature="e#172197#172521#0" />
-            <element signature="e#172537#172570#0" />
-            <element signature="e#172537#174079#0" />
-            <element signature="e#173383#173625#0" />
-            <element signature="e#173643#173849#0" />
-            <element signature="e#173867#174073#0" />
-            <element signature="e#174089#174256#0" />
-            <element signature="e#174089#175150#0" />
-            <element signature="e#175048#175144#0" />
-            <element signature="e#175160#177325#0" />
-            <element signature="e#175349#175612#0" />
-            <element signature="e#175630#176702#0" />
-            <element signature="e#175818#176552#0" />
-            <element signature="e#175836#175884#0" />
-            <element signature="e#176106#176158#0" />
-            <element signature="e#176288#176340#0" />
-            <element signature="e#176583#176692#0" />
-            <element signature="e#176720#176832#0" />
-            <element signature="e#176850#176943#0" />
-            <element signature="e#176961#177072#0" />
-            <element signature="e#177090#177165#0" />
-            <element signature="e#177183#177236#0" />
-            <element signature="e#177254#177319#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sun/rowset/internal/CachedRowSetReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="317" column="16" selection-start-line="317" selection-start-column="16" selection-end-line="317" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/sun/rowset/JdbcRowSetImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="4002" column="36" lean-forward="true" selection-start-line="4002" selection-start-column="36" selection-end-line="4002" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/javax/sql/DataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="78" column="22" selection-start-line="78" selection-start-column="22" selection-end-line="78" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/reflect/Executable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/reflect/Constructor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2774">
-          <caret line="64" column="45" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
-          <folding>
-            <element signature="docComment;class#Constructor#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/reflect/Field.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#54083#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/StringJoiner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="63" column="19" selection-start-line="63" selection-start-column="19" selection-end-line="63" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/reflect/Method.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/Spliterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="331" column="6" lean-forward="true" selection-start-line="331" selection-start-column="6" selection-end-line="331" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/ListIterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="60" column="21" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/FormatFlagsConversionMismatchException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="38" column="1" lean-forward="true" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/ch-0/183.5153.38/IntelliJ IDEA.app.vmoptions">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1213">
-          <caret line="3067" column="50" selection-start-line="3067" selection-start-column="50" selection-end-line="3067" selection-end-column="50" />
-          <folding>
-            <element signature="e#133340#133341#0" expanded="true" />
-            <element signature="e#133386#133387#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/Helpers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="100" column="60" lean-forward="true" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/locks/ReentrantLock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13187">
-          <caret line="107" column="13" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="1161" column="4" lean-forward="true" selection-start-line="1161" selection-start-column="4" selection-end-line="1161" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按名称排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="264">
-            <caret line="11" column="72" lean-forward="true" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/已阅代码清单_按功能排序.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="888">
-            <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/测试文件清单.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="196">
-            <caret line="76" column="31" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ExternalizableTest/res/ReadMe.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ObjectStreamFieldTest/res/ReadMe.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/SharedSecrets/res/javac参数.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/SharedSecrets/res/java参数.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/Queue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="153" column="26" selection-start-line="153" selection-start-column="26" selection-end-line="153" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jdk/internal/misc/Unsafe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40721">
-          <caret line="2428" column="32" selection-start-line="2428" selection-start-column="32" selection-end-line="2428" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicInteger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="133" column="21" selection-start-line="133" selection-start-column="21" selection-end-line="133" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicReferenceArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="172" column="24" lean-forward="true" selection-start-line="172" selection-start-column="24" selection-end-line="172" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/atomic/LongAdder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1428">
-          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/atomic/AtomicBoolean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="107" column="19" lean-forward="true" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/rmi/activation/ActivationGroupID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="115" column="22" selection-start-line="115" selection-start-column="22" selection-end-line="115" selection-end-column="22" />
-          <folding>
-            <element signature="e#7910#7911#0" expanded="true" />
-            <element signature="e#7993#7994#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/util/concurrent/ConcurrentHashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="956" column="66" lean-forward="true" selection-start-line="956" selection-start-column="66" selection-end-line="956" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#270468#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#32270#32271#0" expanded="true" />
-            <element signature="e#32335#32336#0" expanded="true" />
-            <element signature="e#32507#32508#0" expanded="true" />
-            <element signature="e#32572#32573#0" expanded="true" />
-            <element signature="e#34610#34611#0" expanded="true" />
-            <element signature="e#34661#34662#0" expanded="true" />
-            <element signature="e#40182#40183#0" expanded="true" />
-            <element signature="e#40235#40236#0" expanded="true" />
-            <element signature="e#41194#41195#0" expanded="true" />
-            <element signature="e#41246#41247#0" expanded="true" />
-            <element signature="e#43067#43068#0" expanded="true" />
-            <element signature="e#43142#43143#0" expanded="true" />
-            <element signature="e#44899#44900#0" expanded="true" />
-            <element signature="e#44938#44939#0" expanded="true" />
-            <element signature="e#46566#46567#0" expanded="true" />
-            <element signature="e#46614#46615#0" expanded="true" />
-            <element signature="e#51140#51141#0" expanded="true" />
-            <element signature="e#51191#51192#0" expanded="true" />
-            <element signature="e#68401#68402#0" expanded="true" />
-            <element signature="e#68448#68449#0" expanded="true" />
-            <element signature="e#94196#94197#0" expanded="true" />
-            <element signature="e#94239#94240#0" expanded="true" />
-            <element signature="e#99005#99006#0" expanded="true" />
-            <element signature="e#99056#99057#0" expanded="true" />
-            <element signature="e#99099#99100#0" expanded="true" />
-            <element signature="e#99134#99135#0" expanded="true" />
-            <element signature="e#99403#99404#0" expanded="true" />
-            <element signature="e#99490#99491#0" expanded="true" />
-            <element signature="e#119211#119212#0" expanded="true" />
-            <element signature="e#119266#119267#0" expanded="true" />
-            <element signature="e#124357#124358#0" expanded="true" />
-            <element signature="e#124394#124395#0" expanded="true" />
-            <element signature="e#149788#149789#0" expanded="true" />
-            <element signature="e#149853#149854#0" expanded="true" />
-            <element signature="e#153521#153522#0" expanded="true" />
-            <element signature="e#153596#153597#0" expanded="true" />
-            <element signature="e#199469#199470#0" expanded="true" />
-            <element signature="e#199520#199521#0" expanded="true" />
-            <element signature="e#200161#200162#0" expanded="true" />
-            <element signature="e#200226#200227#0" expanded="true" />
-            <element signature="e#200291#200292#0" expanded="true" />
-            <element signature="e#200356#200357#0" expanded="true" />
-            <element signature="e#200831#200832#0" expanded="true" />
-            <element signature="e#200887#200888#0" expanded="true" />
-            <element signature="e#203115#203116#0" expanded="true" />
-            <element signature="e#203197#203198#0" expanded="true" />
-            <element signature="e#203523#203524#0" expanded="true" />
-            <element signature="e#203579#203580#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

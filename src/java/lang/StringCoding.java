@@ -64,7 +64,7 @@ class StringCoding {
     private static final ThreadLocal<SoftReference<StringEncoder>> encoder = new ThreadLocal<>();
     
     /* The cached Result for each thread */
-    // 为当前线程指定缓存的Result对象（此刻还没缓存进去呢）
+    // 为当前线程指定缓存的Result对象(此刻还没缓存进去呢)
     private static final ThreadLocal<Result> resultCached = new ThreadLocal<>() {
         protected Result initialValue() {
             return new Result();
@@ -81,11 +81,11 @@ class StringCoding {
     private StringCoding() {
     }
     
-    // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+    // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
     @HotSpotIntrinsicCandidate
     public static boolean hasNegatives(byte[] ba, int off, int len) {
         for(int i = off; i < off + len; i++) {
-            // byte的非负范围是[0, 80)，此时可表示ANSI字符
+            // byte的非负范围是[0, 80) 此时可表示ANSI字符
             if(ba[i] < 0) {
                 return true;
             }
@@ -97,37 +97,37 @@ class StringCoding {
     
     /*▼ encode ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 编码String，需要先将String内部的byte[]转为char[]，然后以JVM默认字符集格式对char[]进行编码，并返回编码后的byte[]
+    // 编码String 需要先将String内部的byte[]转为char[] 然后以JVM默认字符集格式对char[]进行编码 并返回编码后的byte[]
     static byte[] encode(byte coder, byte[] val) {
         // JVM默认字符集
         Charset cs = Charset.defaultCharset();
         
-        // UTF_8可表示的字符范围：整个Unicode字符集
+        // UTF_8可表示的字符范围:整个Unicode字符集
         if(cs == UTF_8) {
-            // 编码String，返回UTF-8格式的byte[]。如发生编码错误，替换错误的码元为单字节'?'
+            // 编码String 返回UTF-8格式的byte[]。如发生编码错误 替换错误的码元为单字节'?'
             return encodeUTF8(coder, val, true);
         }
         
         // ISO_8859_1可表示的字符范围[0x0, 0xFF)
         if(cs == ISO_8859_1) {
-            // 编码String，返回ISO-8859-1格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+            // 编码String 返回ISO-8859-1格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
             return encode8859_1(coder, val);
         }
         
         // US_ASCII可表示的字符范围[0x0, 0x80)
         if(cs == US_ASCII) {
-            // 编码String，返回ASCII格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+            // 编码String 返回ASCII格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
             return encodeASCII(coder, val);
         }
         
-        // 取出当前线程关联的字符串编码器缓存，看与JVM默认字符集是否匹配
+        // 取出当前线程关联的字符串编码器缓存 看与JVM默认字符集是否匹配
         StringEncoder se = deref(encoder);
         
-        if(se == null   // 无缓存的编码器，或者：
+        if(se == null   // 无缓存的编码器 或者:
             || !cs.name().equals(se.cs.name())) {   // JVM默认字符集与缓存的编码器支持的字符集不同
             se = new StringEncoder(cs, cs.name());  // 新建一个支持JVM默认字符集的编码器
             
-            // 将字符串编码器放入缓存，并关联到当前线程
+            // 将字符串编码器放入缓存 并关联到当前线程
             set(encoder, se);
         }
         
@@ -135,7 +135,7 @@ class StringCoding {
         return se.encode(coder, val);
     }
     
-    // 编码String，返回charsetName字符集格式的byte[]
+    // 编码String 返回charsetName字符集格式的byte[]
     static byte[] encode(String charsetName, byte coder, byte[] val) throws UnsupportedEncodingException {
         // 取出当前线程关联的字符串编码器缓存
         StringEncoder se = deref(encoder);
@@ -146,15 +146,15 @@ class StringCoding {
                 Charset cs = lookupCharset(csn);
                 if(cs != null) {
                     if(cs == UTF_8) {
-                        // 编码String，返回UTF-8格式的byte[]。如发生编码错误，替换错误的码元为单字节'?'
+                        // 编码String 返回UTF-8格式的byte[]。如发生编码错误 替换错误的码元为单字节'?'
                         return encodeUTF8(coder, val, true);
                     }
                     if(cs == ISO_8859_1) {
-                        // 编码String，返回ISO-8859-1格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+                        // 编码String 返回ISO-8859-1格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
                         return encode8859_1(coder, val);
                     }
                     if(cs == US_ASCII) {
-                        // 编码String，返回ASCII格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+                        // 编码String 返回ASCII格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
                         return encodeASCII(coder, val);
                     }
                     se = new StringEncoder(cs, csn);
@@ -166,7 +166,7 @@ class StringCoding {
                 throw new UnsupportedEncodingException(csn);
             }
             
-            // 将字符串编码器放入缓存，并关联到当前线程
+            // 将字符串编码器放入缓存 并关联到当前线程
             set(encoder, se);
         }
     
@@ -174,29 +174,29 @@ class StringCoding {
         return se.encode(coder, val);
     }
     
-    // 编码String，返回cs字符集格式的byte[]
+    // 编码String 返回cs字符集格式的byte[]
     static byte[] encode(Charset cs, byte coder, byte[] val) {
         if(cs == UTF_8) {
-            // 编码String，返回UTF-8格式的byte[]。如发生编码错误，替换错误的码元为单字节'?'
+            // 编码String 返回UTF-8格式的byte[]。如发生编码错误 替换错误的码元为单字节'?'
             return encodeUTF8(coder, val, true);
         }
         if(cs == ISO_8859_1) {
-            // 编码String，返回ISO-8859-1格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+            // 编码String 返回ISO-8859-1格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
             return encode8859_1(coder, val);
         }
         if(cs == US_ASCII) {
-            // 编码String，返回ASCII格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+            // 编码String 返回ASCII格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
             return encodeASCII(coder, val);
         }
         
-        /* 编码String，返回其他编码格式的byte[]。*/
+        /* 编码String 返回其他编码格式的byte[]。*/
         
         CharsetEncoder ce = cs.newEncoder();
         // fastpath for ascii compatible
         if(coder == LATIN1
             && ((ce instanceof ArrayEncoder)
             && ((ArrayEncoder) ce).isASCIICompatible()
-            && !hasNegatives(val, 0, val.length))) {    // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+            && !hasNegatives(val, 0, val.length))) {    // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
             return Arrays.copyOf(val, val.length);
         }
         int len = val.length >> coder;  // assume LATIN1=0/UTF16=1;
@@ -230,24 +230,24 @@ class StringCoding {
     }
     
     /**
-     * @param coder     String类别，分为LATIN1-String和UTF16-String，参见String中的注释
-     * @param val       存储String的字节数组，在Windows上显示为LATIN1编码或UTF-16LE编码
-     * @param doReplace 当转码发生错误时，错误的码元是否接受使用'?'去替换，如果不接受，则抛出异常
+     * @param coder     String类别 分为LATIN1-String和UTF16-String 参见String中的注释
+     * @param val       存储String的字节数组 在Windows上显示为LATIN1编码或UTF-16LE编码
+     * @param doReplace 当转码发生错误时 错误的码元是否接受使用'?'去替换 如果不接受 则抛出异常
      *
      * @return 返回UTF-8编码格式的String。
      */
-    // 编码String，返回UTF-8格式的byte[]
+    // 编码String 返回UTF-8格式的byte[]
     private static byte[] encodeUTF8(byte coder, byte[] val, boolean doReplace) {
         if(coder == UTF16) {
-            // 编码UTF16-string，返回UTF-8格式的byte[]。
+            // 编码UTF16-string 返回UTF-8格式的byte[]。
             return encodeUTF8_UTF16(val, doReplace);
         }
         
-        /* 否则，需要编码LATIN1-String，返回UTF-8格式的byte[]*/
+        /* 否则 需要编码LATIN1-String 返回UTF-8格式的byte[]*/
     
-        // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+        // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
         if(!hasNegatives(val, 0, val.length)) {
-            // 返回val的一份拷贝（都是单字节）
+            // 返回val的一份拷贝(都是单字节)
             return Arrays.copyOf(val, val.length);
         }
         
@@ -255,11 +255,11 @@ class StringCoding {
         int dp = 0;
         byte[] dst = new byte[val.length << 1];
         for(byte c : val) {
-            // 处理[0x80, 0x800)范围内的字符，存储为两个字节：110x-xxxx|10xx-xxxx
+            // 处理[0x80, 0x800)范围内的字符 存储为两个字节:110x-xxxx|10xx-xxxx
             if(c < 0) {
                 dst[dp++] = (byte) (0xc0 | ((c & 0xff) >> 6));
                 dst[dp++] = (byte) (0x80 | (c & 0x3f));
-            } else {    // 处理[0x0, 0x80)范围内的字符，存储为一个字节：0xxx-xxxx
+            } else {    // 处理[0x0, 0x80)范围内的字符 存储为一个字节:0xxx-xxxx
                 dst[dp++] = c;
             }
         }
@@ -269,40 +269,40 @@ class StringCoding {
             return dst;
         }
         
-        // 后面有多余的空间，则将其去掉
+        // 后面有多余的空间 则将其去掉
         return Arrays.copyOf(dst, dp);
     }
     
     /**
-     * @param val       存储了UTF16-string的字节数组，在Windows上显示为UTF-16LE编码
-     * @param doReplace 当转码发生错误时，错误的码元是否接受使用'?'去替换
+     * @param val       存储了UTF16-string的字节数组 在Windows上显示为UTF-16LE编码
+     * @param doReplace 当转码发生错误时 错误的码元是否接受使用'?'去替换
      *
      * @return 返回UTF-8格式的byte[]。
      */
-    // 编码UTF16-string，返回UTF-8格式的byte[]
+    // 编码UTF16-string 返回UTF-8格式的byte[]
     private static byte[] encodeUTF8_UTF16(byte[] val, boolean doReplace) {
-        int dp = 0; // dst游标，统计转换后的符号所占的字节数
-        int sp = 0; // src游标，遍历原字节数组val中的符号
+        int dp = 0; // dst游标 统计转换后的符号所占的字节数
+        int sp = 0; // src游标 遍历原字节数组val中的符号
         
-        // 原UTF16-string中，最多可能容纳的符号个数（按char计算）。
+        // 原UTF16-string中 最多可能容纳的符号个数(按char计算)。
         int sl = val.length >> 1;
         
         /*
          * 创建新数组用来容纳转换后的字节序列
-         * 这里处理的是UTF16-string，即其符号由UTF16形式的两个字节或四个字节组成
+         * 这里处理的是UTF16-string 即其符号由UTF16形式的两个字节或四个字节组成
          * 所以这里按最大容量去开辟一个字节数组用来存储转码后的符号
          *
-         * 该最大容量确定的依据是：
-         * UTF-16两字节符号转换成UTF-8后，可能为1字节、2字节、3字节符号
-         * UTF-16四字节符号转换成UTF-8后，还是4字节符号
+         * 该最大容量确定的依据是:
+         * UTF-16两字节符号转换成UTF-8后 可能为1字节、2字节、3字节符号
+         * UTF-16四字节符号转换成UTF-8后 还是4字节符号
          */
         byte[] dst = new byte[sl * 3];
         
         char c;
         
         /*
-         * 快速解析字符串前面编码范围在[0x0, 0x80)之间的符号（其实就是ASCII码）
-         * 经过压缩（如0x0035--->0x35）后，存入UTF-8编码表示的一个byte
+         * 快速解析字符串前面编码范围在[0x0, 0x80)之间的符号(其实就是ASCII码)
+         * 经过压缩(如0x0035--->0x35)后 存入UTF-8编码表示的一个byte
          */
         while(sp < sl && (c = StringUTF16.getChar(val, sp)) < '\u0080') {
             // ascii fast loop;
@@ -310,15 +310,15 @@ class StringCoding {
             sp++;
         }
         
-        // 从第一个非ASCII码char开始遍历，当然，后面还可能遇到ASCII码char
+        // 从第一个非ASCII码char开始遍历 当然 后面还可能遇到ASCII码char
         while(sp < sl) {
             c = StringUTF16.getChar(val, sp++);
             
             /*
-             * (1).对于[0x    0, 0x    80)，有效位数为 0~ 7位，存储为一个字节：0xxx-xxxx
-             * (2).对于[0x   80, 0x   800)，有效位数为 8~11位，存储为两个字节：110x-xxxx|10xx-xxxx
-             * (3).对于[0x  800, 0x  FFFF)，有效位数为12~16位，存储为三个字节：1110-xxxx|10xx-xxxx|10xx-xxxx
-             * (4).对于[0x10000, 0x10FFFF)，有效位数为17~21位，存储为四个字节：1111-0xxx|10xx-xxxx|10xx-xxxx|10xx-xxxx
+             * (1).对于[0x    0, 0x    80) 有效位数为 0~ 7位 存储为一个字节:0xxx-xxxx
+             * (2).对于[0x   80, 0x   800) 有效位数为 8~11位 存储为两个字节:110x-xxxx|10xx-xxxx
+             * (3).对于[0x  800, 0x  FFFF) 有效位数为12~16位 存储为三个字节:1110-xxxx|10xx-xxxx|10xx-xxxx
+             * (4).对于[0x10000, 0x10FFFF) 有效位数为17~21位 存储为四个字节:1111-0xxx|10xx-xxxx|10xx-xxxx|10xx-xxxx
              */
             if(c < 0x80) {  // (1)
                 dst[dp++] = (byte) c;
@@ -332,13 +332,13 @@ class StringCoding {
                     // 高、低代理区的码点值 ---> Unicode符号编码值
                     uc = Character.toCodePoint(c, c2);
                 }
-                // 出现了异常的码元，即单独出现了高代理单元或低代理单元
+                // 出现了异常的码元 即单独出现了高代理单元或低代理单元
                 if(uc < 0) {
                     if(doReplace) {
-                        // 如果接受替换，则将异常的码元（两个byte）替换为一个单字节'?'
+                        // 如果接受替换 则将异常的码元(两个byte)替换为一个单字节'?'
                         dst[dp++] = '?';
                     } else {
-                        // 如果不接受替换，则抛出异常
+                        // 如果不接受替换 则抛出异常
                         throwUnmappable(sp - 1, 1); // or 2, does not matter here
                     }
                 } else {
@@ -360,45 +360,45 @@ class StringCoding {
             return dst;
         }
         
-        // 新数组空间没用完，则压缩空间（去掉后面没有使用的部分）
+        // 新数组空间没用完 则压缩空间(去掉后面没有使用的部分)
         return Arrays.copyOf(dst, dp);
     }
     
-    // 编码String，返回ISO-8859-1格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+    // 编码String 返回ISO-8859-1格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
     private static byte[] encode8859_1(byte coder, byte[] val) {
         return encode8859_1(coder, val, true);
     }
     
     /**
-     * @param coder     String类别，分为LATIN1-String和UTF16-String，参见String中的注释
-     * @param val       存储String的字节数组，在Windows上显示为UTF-16LE编码
-     * @param doReplace 当转码发生错误时，错误的单元是否接受使用'?'去替换，如果不接受，则抛出异常
+     * @param coder     String类别 分为LATIN1-String和UTF16-String 参见String中的注释
+     * @param val       存储String的字节数组 在Windows上显示为UTF-16LE编码
+     * @param doReplace 当转码发生错误时 错误的单元是否接受使用'?'去替换 如果不接受 则抛出异常
      * @return          返回ISO-8859-1格式的byte[]。
      */
-    // 编码String，返回以ISO-8859-1格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+    // 编码String 返回以ISO-8859-1格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
     private static byte[] encode8859_1(byte coder, byte[] val, boolean doReplace) {
-        // 编码LATIN1-String，返回ISO-8859-1格式的byte[]。
+        // 编码LATIN1-String 返回ISO-8859-1格式的byte[]。
         if(coder == LATIN1) {
-            // 两种格式完全一样，直接返回副本即可
+            // 两种格式完全一样 直接返回副本即可
             return Arrays.copyOf(val, val.length);
         }
         
-        /* 否则，编码UTF16-String，返回ISO-8859-1格式的byte[]。 */
+        /* 否则 编码UTF16-String 返回ISO-8859-1格式的byte[]。 */
         
-        // dst数组剩余容量，初始化为原UTF16-string中，最多可能容纳的符号个数（按char计算）。
+        // dst数组剩余容量 初始化为原UTF16-string中 最多可能容纳的符号个数(按char计算)。
         int len = val.length >> 1;
         
         // 创建新数组用来容纳转换后的字节序列
         byte[] dst = new byte[len];
         
-        int dp = 0; // dst游标，统计转换后的符号所占的字节数
-        int sp = 0; // src游标，遍历原字节数组val中的符号，也代表已经编码完成的符号数量
+        int dp = 0; // dst游标 统计转换后的符号所占的字节数
+        int sp = 0; // src游标 遍历原字节数组val中的符号 也代表已经编码完成的符号数量
         
-        // 总共需要编码的符号数量，初始化为原UTF16-string中，最多可能容纳的符号个数
+        // 总共需要编码的符号数量 初始化为原UTF16-string中 最多可能容纳的符号个数
         int sl = len;
         
         while(sp < sl) {
-            // 编码UTF16-String，返回成功处理的ISO-8859-1符号数量。
+            // 编码UTF16-String 返回成功处理的ISO-8859-1符号数量。
             int ret = implEncodeISOArray(val, sp, dst, dp, len);
             
             sp = sp + ret;
@@ -406,7 +406,7 @@ class StringCoding {
             
             // 编码过程中遇到了超出ISO-8859-1表示范围的符号
             if(ret != len) {
-                // 如果不允许替换这些异常byte，则抛出异常
+                // 如果不允许替换这些异常byte 则抛出异常
                 if(!doReplace) {
                     throwUnmappable(sp, 1);
                 }
@@ -417,7 +417,7 @@ class StringCoding {
                 if(Character.isHighSurrogate(c) && sp < sl && Character.isLowSurrogate(StringUTF16.getChar(val, sp))) {
                     sp++;
                 }
-                // 替换当前超出ISO_8859_1表示范围的单元（两个byte或四个byte）为一个单字节'?'
+                // 替换当前超出ISO_8859_1表示范围的单元(两个byte或四个byte)为一个单字节'?'
                 dst[dp++] = '?';
                 
                 // 更新dst数组剩余容量
@@ -435,13 +435,13 @@ class StringCoding {
     }
     
     /**
-     * @param coder String类别，分为LATIN1-String和UTF16-String，参见String中的注释
-     * @param val   存储String的字节数组，在Windows上显示为UTF-16LE编码
+     * @param coder String类别 分为LATIN1-String和UTF16-String 参见String中的注释
+     * @param val   存储String的字节数组 在Windows上显示为UTF-16LE编码
      * @return      返回ASCII格式的byte[]
      */
-    // 编码String，返回以ASCII格式的byte[]。如发生编码错误，替换错误的单元为单字节'?'
+    // 编码String 返回以ASCII格式的byte[]。如发生编码错误 替换错误的单元为单字节'?'
     private static byte[] encodeASCII(byte coder, byte[] val) {
-        // 编码LATIN1-String，返回ASCII格式的byte[]。
+        // 编码LATIN1-String 返回ASCII格式的byte[]。
         if(coder == LATIN1) {
             byte[] dst = new byte[val.length];
             for(int i = 0; i < val.length; i++) {
@@ -455,15 +455,15 @@ class StringCoding {
             return dst;
         }
         
-        /* 否则，编码UTF16-String，返回ASCII格式的byte[]。 */
+        /* 否则 编码UTF16-String 返回ASCII格式的byte[]。 */
         
-        // dst数组剩余容量，初始化为原UTF16-string中，最多可能容纳的符号个数（按char计算）。
+        // dst数组剩余容量 初始化为原UTF16-string中 最多可能容纳的符号个数(按char计算)。
         int len = val.length >> 1;
         
         // 创建新数组用来容纳转换后的字节序列
         byte[] dst = new byte[len];
         
-        // dst游标，统计转换后的符号所占的字节数
+        // dst游标 统计转换后的符号所占的字节数
         int dp = 0;
         
         for(int i = 0; i < len; i++) {
@@ -477,7 +477,7 @@ class StringCoding {
             if(Character.isHighSurrogate(c) && i + 1 < len && Character.isLowSurrogate(StringUTF16.getChar(val, i + 1))) {
                 i++;
             }
-            dst[dp++] = '?';    // 替换当前超出ISO_8859_1表示范围的单元（两个byte或四个byte）为一个单字节'?'
+            dst[dp++] = '?';    // 替换当前超出ISO_8859_1表示范围的单元(两个byte或四个byte)为一个单字节'?'
         }
         
         if(len == dp) {
@@ -488,7 +488,7 @@ class StringCoding {
     }
     
     /**
-     * 编码UTF16-String，编码过程中，如遇到超出表示范围的byte，则停止转换
+     * 编码UTF16-String 编码过程中 如遇到超出表示范围的byte 则停止转换
      *
      * @param sa  转换前的字节序列
      * @param sp  遍历sa的游标
@@ -498,14 +498,14 @@ class StringCoding {
      *
      * @return    返回成功处理的ISO-8859-1符号数量。
      */
-    // 编码UTF16-String，返回成功处理的ISO-8859-1符号数量。
+    // 编码UTF16-String 返回成功处理的ISO-8859-1符号数量。
     @HotSpotIntrinsicCandidate
     private static int implEncodeISOArray(byte[] sa, int sp, byte[] da, int dp, int len) {
         int i = 0;
         for(; i < len; i++) {
             // 将UTF16-String内部的字节转换为char后返回
             char c = StringUTF16.getChar(sa, sp++);
-            // 如果该char的编码超出了ISO-8859-1编码可表示的形式，则结束解码
+            // 如果该char的编码超出了ISO-8859-1编码可表示的形式 则结束解码
             if(c > '\u00FF')
                 break;
             da[dp++] = (byte) c;
@@ -516,7 +516,7 @@ class StringCoding {
     /**
      * Throws iae, instead of replacing, if unmappable.
      */
-    // 编码String，返回UTF-8格式的byte[]。如发生编码错误，抛出异常。
+    // 编码String 返回UTF-8格式的byte[]。如发生编码错误 抛出异常。
     static byte[] getBytesUTF8NoRepl(String s) {
         return encodeUTF8(s.coder(), s.value(), false);
     }
@@ -524,7 +524,7 @@ class StringCoding {
     /**
      * Throws CCE, instead of replacing, if unmappable.
      */
-    // 编码String，返回指定字符集格式的byte[]
+    // 编码String 返回指定字符集格式的byte[]
     static byte[] getBytesNoRepl(String s, Charset cs) throws CharacterCodingException {
         try {
             return getBytesNoRepl1(s, cs);
@@ -538,7 +538,7 @@ class StringCoding {
         }
     }
     
-    // 编码String，返回指定字符集格式的byte[]
+    // 编码String 返回指定字符集格式的byte[]
     static byte[] getBytesNoRepl1(String s, Charset cs) {
         byte[] val = s.value();
         byte coder = s.coder();
@@ -612,30 +612,30 @@ class StringCoding {
     
     /*▼ decode ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 以JVM默认字符集格式解码byte[]，返回结果集
+    // 以JVM默认字符集格式解码byte[] 返回结果集
     static Result decode(byte[] ba, int off, int len) {
         Charset cs = Charset.defaultCharset();
         
         if(cs == UTF_8) {
-            // 以UTF-8格式解码byte[]，返回结果集
+            // 以UTF-8格式解码byte[] 返回结果集
             return decodeUTF8(ba, off, len, true);
         }
         if(cs == ISO_8859_1) {
-            // 以Latin1格式解码byte[]，返回结果集
+            // 以Latin1格式解码byte[] 返回结果集
             return decodeLatin1(ba, off, len);
         }
         if(cs == US_ASCII) {
-            // 以ASCII格式解码byte[]，返回结果集
+            // 以ASCII格式解码byte[] 返回结果集
             return decodeASCII(ba, off, len);
         }
         
-        /* 解码其他字符集格式的byte[]，返回结果集 */
+        /* 解码其他字符集格式的byte[] 返回结果集 */
         
         // 取出当前线程关联的字符串解码器缓存
         StringDecoder sd = deref(decoder);
         if(sd == null || !cs.name().equals(sd.cs.name())) {
             sd = new StringDecoder(cs, cs.name());
-            // 将字符串解码器放入缓存，并关联到当前线程
+            // 将字符串解码器放入缓存 并关联到当前线程
             set(decoder, sd);
         }
     
@@ -643,7 +643,7 @@ class StringCoding {
         return sd.decode(ba, off, len);
     }
     
-    // 以charsetName格式解析byte[]，返回结果集
+    // 以charsetName格式解析byte[] 返回结果集
     static Result decode(String charsetName, byte[] ba, int off, int len) throws UnsupportedEncodingException {
         // 取出当前线程关联的字符串解码器缓存
         StringDecoder sd = deref(decoder);
@@ -651,7 +651,7 @@ class StringCoding {
         // 默认按"ISO-8859-1"格式解析byte[]
         String csn = (charsetName == null) ? "ISO-8859-1" : charsetName;
         
-        if((sd == null) // 没有缓存的解码器，或者：
+        if((sd == null) // 没有缓存的解码器 或者:
             || !(csn.equals(sd.requestedCharsetName()) || csn.equals(sd.charsetName()))) {  // 缓存的解码器不支持设定的字符集
             
             // 丢掉缓存中的解码器
@@ -676,7 +676,7 @@ class StringCoding {
             if(sd == null)
                 throw new UnsupportedEncodingException(csn);
             
-            // 将字符串解码器放入缓存，并关联到当前线程
+            // 将字符串解码器放入缓存 并关联到当前线程
             set(decoder, sd);
         }
         
@@ -684,7 +684,7 @@ class StringCoding {
         return sd.decode(ba, off, len);
     }
     
-    // 以cs格式解码byte[]，返回结果集
+    // 以cs格式解码byte[] 返回结果集
     static Result decode(Charset cs, byte[] ba, int off, int len) {
         if(cs == UTF_8) {
             return decodeUTF8(ba, off, len, true);
@@ -711,7 +711,7 @@ class StringCoding {
         // ascii fastpath
         if((cd instanceof ArrayDecoder)
             && ((ArrayDecoder) cd).isASCIICompatible()
-            && !hasNegatives(ba, off, len)) {   // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+            && !hasNegatives(ba, off, len)) {   // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
             return decodeLatin1(ba, off, len);
         }
         int en = scale(len, cd.maxCharsPerByte());
@@ -745,10 +745,10 @@ class StringCoding {
         return new Result().with(ca, 0, cb.position());
     }
     
-    // 以ASCII格式解码byte[]，返回结果集
+    // 以ASCII格式解码byte[] 返回结果集
     private static Result decodeASCII(byte[] ba, int off, int len) {
         Result result = resultCached.get();
-        if(COMPACT_STRINGS && !hasNegatives(ba, off, len)) {    // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+        if(COMPACT_STRINGS && !hasNegatives(ba, off, len)) {    // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
             return result.with(Arrays.copyOfRange(ba, off, off + len), LATIN1);
         }
         byte[] dst = new byte[len << 1];
@@ -760,7 +760,7 @@ class StringCoding {
         return result.with(dst, UTF16);
     }
     
-    // 以Latin1格式解码byte[]，返回结果集
+    // 以Latin1格式解码byte[] 返回结果集
     private static Result decodeLatin1(byte[] ba, int off, int len) {
         Result result = resultCached.get();
         if(COMPACT_STRINGS) {
@@ -771,15 +771,15 @@ class StringCoding {
         }
     }
     
-    // 以UTF-8格式解码byte[]，返回结果集
+    // 以UTF-8格式解码byte[] 返回结果集
     private static Result decodeUTF8(byte[] src, int sp, int len, boolean doReplace) {
         // ascii-bais, which has a relative impact to the non-ascii-only bytes
-        if(COMPACT_STRINGS && !hasNegatives(src, sp, len))  // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+        if(COMPACT_STRINGS && !hasNegatives(src, sp, len))  // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
             return resultCached.get().with(Arrays.copyOfRange(src, sp, sp + len), LATIN1);
         return decodeUTF8_0(src, sp, len, doReplace);
     }
     
-    // 以UTF-8格式解码byte[]，返回结果集
+    // 以UTF-8格式解码byte[] 返回结果集
     private static Result decodeUTF8_0(byte[] src, int sp, int len, boolean doReplace) {
         Result ret = resultCached.get();
         
@@ -893,8 +893,8 @@ class StringCoding {
                         sp -= 4;
                         sp += malformedN(src, sp, 4);
                     } else {
-                        putChar(dst, dp++, highSurrogate(uc));  // 返回高代理处的码元（char）
-                        putChar(dst, dp++, lowSurrogate(uc));   // 返回低代理处的码元（char）
+                        putChar(dst, dp++, highSurrogate(uc));  // 返回高代理处的码元(char)
+                        putChar(dst, dp++, lowSurrogate(uc));   // 返回低代理处的码元(char)
                     }
                     continue;
                 }
@@ -931,15 +931,15 @@ class StringCoding {
     /**
      * Throws iae, instead of replacing, if malformed or unmappable.
      */
-    // 以UTF-8格式解码byte[]，进而构造String
+    // 以UTF-8格式解码byte[] 进而构造String
     static String newStringUTF8NoRepl(byte[] src, int off, int len) {
-        if(COMPACT_STRINGS && !hasNegatives(src, off, len)) // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+        if(COMPACT_STRINGS && !hasNegatives(src, off, len)) // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
             return new String(Arrays.copyOfRange(src, off, off + len), LATIN1);
         Result ret = decodeUTF8_0(src, off, len, false);
         return new String(ret.value, ret.coder);
     }
     
-    // 以cs格式解码src，进而构造String
+    // 以cs格式解码src 进而构造String
     static String newStringNoRepl(byte[] src, Charset cs) throws CharacterCodingException {
         try {
             return newStringNoRepl1(src, cs);
@@ -953,7 +953,7 @@ class StringCoding {
         }
     }
     
-    // 以cs格式解码src，进而构造String
+    // 以cs格式解码src 进而构造String
     static String newStringNoRepl1(byte[] src, Charset cs) {
         if(cs == UTF_8) {
             if(COMPACT_STRINGS && isASCII(src))
@@ -1006,7 +1006,7 @@ class StringCoding {
     private static String newStringLatin1(byte[] src) {
         if(COMPACT_STRINGS)
             return new String(src, LATIN1);
-        // 从LATIN-String内部的字节转为UTF16-String内部的字节后，包装到UTF16-String中返回
+        // 从LATIN-String内部的字节转为UTF16-String内部的字节后 包装到UTF16-String中返回
         return new String(StringLatin1.inflate(src, 0, src.length), UTF16);
     }
     
@@ -1024,7 +1024,7 @@ class StringCoding {
         return sr.get();
     }
     
-    // 将字符串解码器/编码器放入缓存，并关联到当前线程
+    // 将字符串解码器/编码器放入缓存 并关联到当前线程
     private static <T> void set(ThreadLocal<SoftReference<T>> tl, T ob) {
         tl.set(new SoftReference<>(ob));
     }
@@ -1035,12 +1035,12 @@ class StringCoding {
     
     /**
      * 在系统中查找指定名称的字符集实例
-     * @param csn 字符集名称，可以是别名
+     * @param csn 字符集名称 可以是别名
      * @return    返回查找结果
      */
     // 返回从系统中查找到的字符集
     private static Charset lookupCharset(String csn) {
-        // 返回查找到的字符集，查找过程中会将找到的字符集缓存到Charset内时一级缓存
+        // 返回查找到的字符集 查找过程中会将找到的字符集缓存到Charset内时一级缓存
         if(Charset.isSupported(csn)) {
             try {
                 // 返回查找到的字符集
@@ -1060,7 +1060,7 @@ class StringCoding {
             return Arrays.copyOf(ba, len);
     }
     
-    // 计算在指定字符集下，解码/编码原字符串最多需要多少字节
+    // 计算在指定字符集下 解码/编码原字符串最多需要多少字节
     private static int scale(int len, float expansionFactor) {
         // We need to perform double, not float, arithmetic; otherwise
         // we lose low order bits when len is larger than 2**24.
@@ -1072,10 +1072,10 @@ class StringCoding {
      *
      * @param msg message to print
      */
-    // 直接向标准错误流打印消息，绕过所有字符转换方法。
+    // 直接向标准错误流打印消息 绕过所有字符转换方法。
     private static native void err(String msg);
     
-    // 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+    // 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
     private static boolean isASCII(byte[] src) {
         return !hasNegatives(src, 0, src.length);
     }
@@ -1186,19 +1186,19 @@ class StringCoding {
                 }
             }
             coder = UTF16;
-            // 将val中的char批量转换为UTF16-String内部的字节，并返回
+            // 将val中的char批量转换为UTF16-String内部的字节 并返回
             value = StringUTF16.toBytes(val, off, len);
             return this;
         }
         
     }
     
-    // 字符串解码器，内部调用根据不同的字符集信息调用相应的字符解码器
+    // 字符串解码器 内部调用根据不同的字符集信息调用相应的字符解码器
     static class StringDecoder {
         protected final Result result;
         private final String requestedCharsetName;  // 解析byte[]时要求使用的编码格式
         private final Charset cs;                   // requestedCharsetName对应的编码集
-        private final CharsetDecoder cd;            // cs对应的字节解码器，字节进来，字符出去
+        private final CharsetDecoder cd;            // cs对应的字节解码器 字节进来 字符出去
         private final boolean isASCIICompatible;    // 是否向前兼容ASCII字符集
         
         StringDecoder(Charset cs, String rcn) {
@@ -1219,14 +1219,14 @@ class StringCoding {
             return requestedCharsetName;
         }
         
-        // 使用字节解码器cd解码ba，然后把解码后的char[]转为byte[]存入结果集Result
+        // 使用字节解码器cd解码ba 然后把解码后的char[]转为byte[]存入结果集Result
         Result decode(byte[] ba, int off, int len) {
             if(len == 0) {
                 return result.with();
             }
             
             // fastpath for ascii compatible
-            if(isASCIICompatible && !hasNegatives(ba, off, len)) {// 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+            if(isASCIICompatible && !hasNegatives(ba, off, len)) {// 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
                 if(COMPACT_STRINGS) {
                     return result.with(Arrays.copyOfRange(ba, off, off + len), LATIN1);
                 } else {
@@ -1261,11 +1261,11 @@ class StringCoding {
         }
     }
     
-    // 字符串编码器，内部调用根据不同的字符集信息调用相应的字符编码器
+    // 字符串编码器 内部调用根据不同的字符集信息调用相应的字符编码器
     private static class StringEncoder {
         private final String requestedCharsetName;  // 解析byte[]时要求使用的编码格式
         private Charset cs;                         // requestedCharsetName对应的编码集
-        private CharsetEncoder ce;                  // cs对应的字符编码器，字符进来，字节出去
+        private CharsetEncoder ce;                  // cs对应的字符编码器 字符进来 字节出去
         private final boolean isASCIICompatible;    // 是否向前兼容ASCII字符集
         private final boolean isTrusted;            // 不属于StandardCharsets提供的字符集不被信任
         
@@ -1275,19 +1275,19 @@ class StringCoding {
             this.ce = cs.newEncoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.REPLACE);
             this.isASCIICompatible = (ce instanceof ArrayEncoder) && ((ArrayEncoder) ce).isASCIICompatible();
             /*
-             * JVM加载类时依次用到四种类加载器（四个阶段）：
-             *   1. Bootstrap class loader，该加载器用C++实现，它是虚拟机的内置类加载器，通常表示为null，并且没有父级。
-             *      这个加载器，java程序无法引用到，所以此时会有：getClassLoader0() == null
-             *   2. Platform class loader，Platform类加载器可以看到所有Platform类，它们可以用作ClassLoader实例的父级。
-             *      Platform类包括Java SE Platform API和它们的实现类，以及由Platform类加载器或其祖先定义的特定于JDK的运行时类。
-             *      注：Java 9之前使用的是Extension Loader
-             *   3. System class loader，也被称为Application class loader，这与Platform加载器不同。
-             *      System加载器通常用于在应用程序类路径，模块路径和JDK特定工具上定义类。
-             *      Platform类加载器是System类加载器的父级或祖先，所有Platform类都是可见的。
-             *   4. 用户自定义加载器，自己定义从哪里加载类的二进制流。
+             * JVM加载类时依次用到四种类加载器(四个阶段):
+             *   1. Bootstrap class loader 该加载器用C++实现 它是虚拟机的内置类加载器 通常表示为null 并且没有父级。
+             *      这个加载器 java程序无法引用到 所以此时会有:getClassLoader0() == null
+             *   2. Platform class loader Platform类加载器可以看到所有Platform类 它们可以用作ClassLoader实例的父级。
+             *      Platform类包括Java SE Platform API和它们的实现类 以及由Platform类加载器或其祖先定义的特定于JDK的运行时类。
+             *      注:Java 9之前使用的是Extension Loader
+             *   3. System class loader 也被称为Application class loader 这与Platform加载器不同。
+             *      System加载器通常用于在应用程序类路径 模块路径和JDK特定工具上定义类。
+             *      Platform类加载器是System类加载器的父级或祖先 所有Platform类都是可见的。
+             *   4. 用户自定义加载器 自己定义从哪里加载类的二进制流。
              *
-             * 加载标准字符集发生在第一个阶段，此时getClassLoader0() == null成立，即字符集被信任
-             * 非标准字符集在其他阶段加载，此时getClassLoader0() != null，即字符集不被信任
+             * 加载标准字符集发生在第一个阶段 此时getClassLoader0() == null成立 即字符集被信任
+             * 非标准字符集在其他阶段加载 此时getClassLoader0() != null 即字符集不被信任
              */
             this.isTrusted = (cs.getClass().getClassLoader0() == null);
         }
@@ -1307,14 +1307,14 @@ class StringCoding {
             // 快速处理兼容ascii码的LATIN1-String
             if(coder == LATIN1
                 && isASCIICompatible
-                && !hasNegatives(val, 0, val.length)) {// 判断数组元素是否全部为ANSI字符，即字符范围在[0x0, 0x80)
+                && !hasNegatives(val, 0, val.length)) {// 判断数组元素是否全部为ANSI字符 即字符范围在[0x0, 0x80)
                 return Arrays.copyOf(val, val.length);
             }
             
-            // 初始化为原String中，最多可容纳的符号个数（按char计算）。
+            // 初始化为原String中 最多可容纳的符号个数(按char计算)。
             int len = val.length >> coder;  // 预设 LATIN1=0/UTF16=1;
             
-            // ba数组最大容量。初始化为该编码下，存放原字符串需要多少字节。（需要先计算该编码中，一个char需要占用几个byte）
+            // ba数组最大容量。初始化为该编码下 存放原字符串需要多少字节。(需要先计算该编码中 一个char需要占用几个byte)
             int en = scale(len, ce.maxBytesPerChar());
             
             // 创建新数组用来容纳转换后的字节序列

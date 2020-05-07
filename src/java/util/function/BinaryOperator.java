@@ -43,12 +43,12 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：BinaryOperator<T>
+ * 函数式接口:BinaryOperator<T>
  *
- * 二元操作，继承了BiFunction<T, T, T>
+ * 二元操作 继承了BiFunction<T, T, T>
  *
- * 参数：T, T
- * 返回：T
+ * 参数:T, T
+ * 返回:T
  */
 @FunctionalInterface
 public interface BinaryOperator<T> extends BiFunction<T, T, T> {

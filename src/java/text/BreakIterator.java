@@ -164,7 +164,7 @@ import java.util.Locale;
  *     return BreakIterator.DONE;
  * }
  *
- * 语料：
+ * 语料:
  * (The iterator returned by BreakIterator.getWordInstance() is unique in that
  * the break positions it returns don't represent both the start and end of the
  * thing being iterated over.  That is, a sentence-break iterator returns breaks
@@ -181,7 +181,7 @@ import java.util.Locale;
  * @since 1.1
  */
 /*
- * 继承关系：
+ * 继承关系:
  *
  *   LocaleServiceProvider
  *           ∧                                     BreakIterator
@@ -193,17 +193,17 @@ import java.util.Locale;
  *                                        │ DictionaryBasedBreakIterator │
  *                                        └──────────────────────────────┘
  *
- * BreakIterator类是抽象的分词器，给出了在文本中定位边界的接口方法，其行为细节由分词器工厂构造的分词器实现。
+ * BreakIterator类是抽象的分词器 给出了在文本中定位边界的接口方法 其行为细节由分词器工厂构造的分词器实现。
  *
- * 在内部，BreakIterator使用CharacterIterator扫描文本，因此能够扫描实现该协议的任何对象所持有的文本。
+ * 在内部 BreakIterator使用CharacterIterator扫描文本 因此能够扫描实现该协议的任何对象所持有的文本。
  * 一般使用StringCharacterIterator用于扫描传递给setText的String对象。
  * 分词器采用的分词策略由底层算法定义。
  *
- * 要注意的是，有效元素范围是：[起点，终点)，是个左闭右开的区间，即起点同时也是第一个元素，但终点是最后一个元素的后面那个位置。
+ * 要注意的是 有效元素范围是:[起点 终点) 是个左闭右开的区间 即起点同时也是第一个元素 但终点是最后一个元素的后面那个位置。
  *
- * 另外，此类的工厂方法返回的BreakIterator实例仅用于自然语言，不适用于编程语言文本。
+ * 另外 此类的工厂方法返回的BreakIterator实例仅用于自然语言 不适用于编程语言文本。
  *
- * 如无特别说明，代码中“索引”的单位是char，即遇到四字节符号，其一个符号代表两个索引单位
+ * 如无特别说明 代码中“索引”的单位是char 即遇到四字节符号 其一个符号代表两个索引单位
  */
 public abstract class BreakIterator implements Cloneable {
     /**
@@ -217,7 +217,7 @@ public abstract class BreakIterator implements Cloneable {
     private static final int LINE_INDEX      = 2;   // 指示创建行分词器
     private static final int SENTENCE_INDEX  = 3;   // 指示创建语句分词器
     
-    // 存放包装了分词器缓存的软引用数组，从type上划分为4类，每一类可能对应不同的语言环境
+    // 存放包装了分词器缓存的软引用数组 从type上划分为4类 每一类可能对应不同的语言环境
     @SuppressWarnings("unchecked")
     private static final SoftReference<BreakIteratorCache>[] iterCache = (SoftReference<BreakIteratorCache>[]) new SoftReference<?>[4];
     
@@ -246,7 +246,7 @@ public abstract class BreakIterator implements Cloneable {
      * @see #following(int)
      * @see #preceding(int)
      */
-    // 返回游标当前的索引，游标的有效范围是[起点,终点]，而有效元素的范围是[起点，终点)
+    // 返回游标当前的索引 游标的有效范围是[起点,终点] 而有效元素的范围是[起点 终点)
     public abstract int current();
     
     /**
@@ -255,7 +255,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @return The character index of the first text boundary.
      */
-    // 返回整个文本的起点索引，并将游标设置到起点
+    // 返回整个文本的起点索引 并将游标设置到起点
     public abstract int first();
     
     /**
@@ -264,7 +264,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @return The character index of the last text boundary.
      */
-    // 返回整个文本的终点索引（此处由DONE标记），并将游标设置到终点
+    // 返回整个文本的终点索引(此处由DONE标记) 并将游标设置到终点
     public abstract int last();
     
     /**
@@ -276,7 +276,7 @@ public abstract class BreakIterator implements Cloneable {
      * BreakIterator.DONE if the current boundary is the first text
      * boundary.
      */
-    // 返回offset索引之前出现的最近一个左边界，且游标也要前移。如果已经在起点（即第一个元素），则返回DONE，游标设置为起点。
+    // 返回offset索引之前出现的最近一个左边界 且游标也要前移。如果已经在起点(即第一个元素) 则返回DONE 游标设置为起点。
     public abstract int previous();
     
     /**
@@ -291,7 +291,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @see #next(int)
      */
-    // 返回当前索引所在的元素的下一个元素（字符/单词/行/句子）的左边界索引，且游标也要后移。如果已经在最后一个元素上或在终点上，则返回DONE，游标设置为终点。
+    // 返回当前索引所在的元素的下一个元素(字符/单词/行/句子)的左边界索引 且游标也要后移。如果已经在最后一个元素上或在终点上 则返回DONE 游标设置为终点。
     public abstract int next();
     
     /**
@@ -307,8 +307,8 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @return The character index of the nth boundary from the current position or BreakIterator.DONE if either first or last text boundary has been reached.
      */
-    // 返回游标前进/后退n个元素后的左边界索引，并将游标挪到相应的新位置。新位置的有效范围是[first(), last()]。超出范围时返回DONE，游标设到起点或终点。
-    // 注意n可以为负值，代表前移。
+    // 返回游标前进/后退n个元素后的左边界索引 并将游标挪到相应的新位置。新位置的有效范围是[first(), last()]。超出范围时返回DONE 游标设到起点或终点。
+    // 注意n可以为负值 代表前移。
     public abstract int next(int n);
     
     /**
@@ -323,7 +323,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @throws IllegalArgumentException if the specified offset is less than the first text boundary or greater than the last text boundary.
      */
-    // 返回offset索引所在的元素的下一个元素的左边界，游标也会跟着移动。如果offset不在有效范围内，或下一个元素不存在，则返回DONE
+    // 返回offset索引所在的元素的下一个元素的左边界 游标也会跟着移动。如果offset不在有效范围内 或下一个元素不存在 则返回DONE
     public abstract int following(int offset);
     
     /**
@@ -350,9 +350,9 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @param newText new text to scan.
      */
-    // 为分词器设置语料（待分析文本），实际操作时会先将语料包装到一个文本迭代器中以便接下来遍历
+    // 为分词器设置语料(待分析文本) 实际操作时会先将语料包装到一个文本迭代器中以便接下来遍历
     public void setText(String newText) {
-        // 设置文本迭代器，此处默认使用StringCharacterIterator
+        // 设置文本迭代器 此处默认使用StringCharacterIterator
         setText(new StringCharacterIterator(newText));
     }
     
@@ -397,7 +397,7 @@ public abstract class BreakIterator implements Cloneable {
      *                                  the first text boundary or greater than the last text boundary.
      * @since 1.2
      */
-    // 判断offset索引处是否是一个（左）边界。
+    // 判断offset索引处是否是一个(左)边界。
     public boolean isBoundary(int offset) {
         // NOTE: This implementation probably is wrong for most situations
         // because it fails to take into account the possibility that a
@@ -407,7 +407,7 @@ public abstract class BreakIterator implements Cloneable {
         // BreakIterator, copy the SimpleTextBoundary implementation of this
         // function into your subclass.  [This should have been abstract at
         // this level, but it's too late to fix that now.]
-        // 可能会导致BUG，只适用于非空串...
+        // 可能会导致BUG 只适用于非空串...
         if(offset == 0) {
             return true;
         }
@@ -428,22 +428,22 @@ public abstract class BreakIterator implements Cloneable {
         if(iterCache[type] != null) {
             // 取出该缓存
             BreakIteratorCache cache = iterCache[type].get();
-            // 判断缓存是否为空（因为该缓存被软引用包装，所以存在被清理掉的可能性）
+            // 判断缓存是否为空(因为该缓存被软引用包装 所以存在被清理掉的可能性)
             if(cache != null) {
-                // 分词器缓存存在，且语言类别也匹配
+                // 分词器缓存存在 且语言类别也匹配
                 if(cache.getLocale().equals(locale)) {
-                    // 返回该缓存的克隆对象。由于该对象被软引用包装，所以不直接返回它本身。
+                    // 返回该缓存的克隆对象。由于该对象被软引用包装 所以不直接返回它本身。
                     return cache.createBreakInstance();
                 }
             }
         }
         
-        // 由以上分析可知，缓存保存的是最近使用的分词器，而分词器受类型和语言环境的限制，所以缓存很可能用不上。
+        // 由以上分析可知 缓存保存的是最近使用的分词器 而分词器受类型和语言环境的限制 所以缓存很可能用不上。
         
-        // 未找到匹配的缓存时，新建一个分词器实例
+        // 未找到匹配的缓存时 新建一个分词器实例
         BreakIterator result = createBreakInstance(locale, type);
         
-        // 将分词器打包成分词器缓存对象，再用软引用包装好，存入软引用数组。
+        // 将分词器打包成分词器缓存对象 再用软引用包装好 存入软引用数组。
         BreakIteratorCache cache = new BreakIteratorCache(locale, result);
         iterCache[type] = new SoftReference<>(cache);
         
@@ -460,11 +460,11 @@ public abstract class BreakIterator implements Cloneable {
         return iterator;
     }
     
-    // 根据本地语言信息locale及指定的分词器类型type来创建分词器，
+    // 根据本地语言信息locale及指定的分词器类型type来创建分词器
     private static BreakIterator createBreakInstance(LocaleProviderAdapter adapter, Locale locale, int type) {
         BreakIteratorProvider breakIteratorProvider = adapter.getBreakIteratorProvider();
         BreakIterator iterator = null;
-        // 创建各种类型的分词器，会在底层加载不同的分词策略
+        // 创建各种类型的分词器 会在底层加载不同的分词策略
         switch(type) {
             case CHARACTER_INDEX:
                 iterator = breakIteratorProvider.getCharacterInstance(locale);
@@ -500,8 +500,8 @@ public abstract class BreakIterator implements Cloneable {
      * @throws NullPointerException if locale is null
      */
     /*
-     * 返回一个用于定位字符边界的BreakIterator，需要指定语言环境。
-     * 该字符准确地说应该是“符号”，可能是一字节、两字节、四字节
+     * 返回一个用于定位字符边界的BreakIterator 需要指定语言环境。
+     * 该字符准确地说应该是“符号” 可能是一字节、两字节、四字节
      */
     public static BreakIterator getCharacterInstance(Locale locale) {
         return getBreakInstance(locale, CHARACTER_INDEX);
@@ -514,7 +514,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @return A break iterator for character breaks
      */
-    // 返回一个用于定位字符边界的BreakIterator，使用默认的语言环境。
+    // 返回一个用于定位字符边界的BreakIterator 使用默认的语言环境。
     public static BreakIterator getCharacterInstance() {
         return getCharacterInstance(Locale.getDefault());
     }
@@ -534,14 +534,14 @@ public abstract class BreakIterator implements Cloneable {
      * @throws NullPointerException if locale is null
      */
     /*
-     * 返回一个用于定位单词边界的BreakIterator，需要指定语言环境。
+     * 返回一个用于定位单词边界的BreakIterator 需要指定语言环境。
      *
-     * 这在搜索和替换功能，以及“双击选择某个单词”或“查找所有的单词”这种操作中很有用。
-     * 此类型的BreakIterator确保每一个“合法”单词的开始和结束位置有一个边界（分别是首字母和尾字母）。
-     * 空白符和标点可用来分割"合法"单词（因为空白符和标点的边界就是自身）。
-     * 这里的“合法”单词含义广泛：
+     * 这在搜索和替换功能 以及“双击选择某个单词”或“查找所有的单词”这种操作中很有用。
+     * 此类型的BreakIterator确保每一个“合法”单词的开始和结束位置有一个边界(分别是首字母和尾字母)。
+     * 空白符和标点可用来分割"合法"单词(因为空白符和标点的边界就是自身)。
+     * 这里的“合法”单词含义广泛:
      * "123"、"012abc"、"a-b-c"、"obj.method"、"中国"等都算“合法”单词。
-     * 标点符号一般不会被独立提取的，它会被掺杂到单词中间。
+     * 标点符号一般不会被独立提取的 它会被掺杂到单词中间。
      */
     public static BreakIterator getWordInstance(Locale locale) {
         return getBreakInstance(locale, WORD_INDEX);
@@ -552,7 +552,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @return A break iterator for word breaks
      */
-    // 返回一个用于定位单词边界的BreakIterator，使用默认的语言环境。
+    // 返回一个用于定位单词边界的BreakIterator 使用默认的语言环境。
     public static BreakIterator getWordInstance() {
         return getWordInstance(Locale.getDefault());
     }
@@ -573,9 +573,9 @@ public abstract class BreakIterator implements Cloneable {
      * @throws NullPointerException if locale is null
      */
     /*
-     * 返回一个用于定位行边界的BreakIterator，需要指定语言环境。
+     * 返回一个用于定位行边界的BreakIterator 需要指定语言环境。
      *
-     * 确定哪些边界后面可以跟换行符（单词间不换行，标点一般会被分配到上一行）
+     * 确定哪些边界后面可以跟换行符(单词间不换行 标点一般会被分配到上一行)
      */
     public static BreakIterator getLineInstance(Locale locale) {
         return getBreakInstance(locale, LINE_INDEX);
@@ -588,7 +588,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @return A break iterator for line breaks
      */
-    // 返回一个用于定位行边界的BreakIterator，使用默认的语言环境。
+    // 返回一个用于定位行边界的BreakIterator 使用默认的语言环境。
     public static BreakIterator getLineInstance() {
         return getLineInstance(Locale.getDefault());
     }
@@ -610,7 +610,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @throws NullPointerException if locale is null
      */
-    // 返回一个用于定位句子边界的BreakIterator，需要指定语言环境。
+    // 返回一个用于定位句子边界的BreakIterator 需要指定语言环境。
     public static BreakIterator getSentenceInstance(Locale locale) {
         return getBreakInstance(locale, SENTENCE_INDEX);
     }
@@ -622,7 +622,7 @@ public abstract class BreakIterator implements Cloneable {
      *
      * @return A break iterator for sentence breaks
      */
-    // 返回一个用于定位句子边界的BreakIterator，使用默认的语言环境。
+    // 返回一个用于定位句子边界的BreakIterator 使用默认的语言环境。
     public static BreakIterator getSentenceInstance() {
         return getSentenceInstance(Locale.getDefault());
     }

@@ -38,11 +38,11 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：IntFunction<R>
+ * 函数式接口:IntFunction<R>
  *
- * 参数：int
- * 返回：R
- * 示例：将int型数据i转换为字符串
+ * 参数:int
+ * 返回:R
+ * 示例:将int型数据i转换为字符串
  * IntFunction<String> f = i->Integer.toString(i);
  */
 @FunctionalInterface

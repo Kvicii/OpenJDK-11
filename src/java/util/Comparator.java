@@ -106,11 +106,11 @@ import java.util.function.ToLongFunction;
  */
 
 /*
- * 比较器，支持以自定义的顺序来比较元素。
+ * 比较器 支持以自定义的顺序来比较元素。
  *
- * 区别于Comparable，这是一个外部比较器，即比较方法独立于对象本身。
+ * 区别于Comparable 这是一个外部比较器 即比较方法独立于对象本身。
  *
- * 该接口已函数化，如简写做：
+ * 该接口已函数化 如简写做:
  * Comparator<Integer> comparator = (a, b)->(a-b);
  */
 @FunctionalInterface
@@ -158,7 +158,7 @@ public interface Comparator<T> {
      * @throws ClassCastException   if the arguments' types prevent them from
      *                              being compared by this comparator.
      */
-    // 比较两个对象，返回负数、0、正数，分别代表o1<o2、o1==o2、o1>o2
+    // 比较两个对象 返回负数、0、正数 分别代表o1<o2、o1==o2、o1>o2
     int compare(T o1, T o2);
     
     /**
@@ -201,7 +201,7 @@ public interface Comparator<T> {
      * @see Comparable
      * @since 1.8
      */
-    // 返回“自然顺序”比较器，用于比较实现了Comparable的对象
+    // 返回“自然顺序”比较器 用于比较实现了Comparable的对象
     @SuppressWarnings("unchecked")
     static <T extends Comparable<? super T>> Comparator<T> naturalOrder() {
         return (Comparator<T>) Comparators.NaturalOrderComparator.INSTANCE;
@@ -221,7 +221,7 @@ public interface Comparator<T> {
      * @see Comparable
      * @since 1.8
      */
-    // 返回“逆自然顺序”比较器，用于比较实现了Comparable的对象
+    // 返回“逆自然顺序”比较器 用于比较实现了Comparable的对象
     static <T extends Comparable<? super T>> Comparator<T> reverseOrder() {
         return Collections.reverseOrder();
     }
@@ -234,7 +234,7 @@ public interface Comparator<T> {
      *
      * @since 1.8
      */
-    // 返回一个比较器，它强制执行与该比较器相反的顺序。
+    // 返回一个比较器 它强制执行与该比较器相反的顺序。
     default Comparator<T> reversed() {
         return Collections.reverseOrder(this);
     }
@@ -258,7 +258,7 @@ public interface Comparator<T> {
      *
      * @since 1.8
      */
-    // 返回nullFirst比较器，且nullFirst==true，即null被认为是序列中第一个元素
+    // 返回nullFirst比较器 且nullFirst==true 即null被认为是序列中第一个元素
     static <T> Comparator<T> nullsFirst(Comparator<? super T> comparator) {
         return new Comparators.NullComparator<>(true, comparator);
     }
@@ -282,7 +282,7 @@ public interface Comparator<T> {
      *
      * @since 1.8
      */
-    // 返回nullFirst比较器，且nullFirst==false，即null被认为是序列中最后一个元素
+    // 返回nullFirst比较器 且nullFirst==false 即null被认为是序列中最后一个元素
     static <T> Comparator<T> nullsLast(Comparator<? super T> comparator) {
         return new Comparators.NullComparator<>(false, comparator);
     }
@@ -351,7 +351,7 @@ public interface Comparator<T> {
     /*
      * 1.使用keyExtractor处理待比较元素
      * 2.使用compareTo()方法比较两个处理后的元素
-     * -->注：要求处理后的元素实现Comparable接口
+     * -->注:要求处理后的元素实现Comparable接口
      */
     static <T, U extends Comparable<? super U>> Comparator<T> comparing(Function<? super T, ? extends U> keyExtractor) {
         Objects.requireNonNull(keyExtractor);
@@ -378,7 +378,7 @@ public interface Comparator<T> {
     /*
      * 1.使用keyExtractor处理待比较元素
      * 2.使用Integer.compare()方法比较两个处理后的元素
-     * -->注：要求处理后的元素兼容int类型
+     * -->注:要求处理后的元素兼容int类型
      */
     static <T> Comparator<T> comparingInt(ToIntFunction<? super T> keyExtractor) {
         Objects.requireNonNull(keyExtractor);
@@ -405,7 +405,7 @@ public interface Comparator<T> {
     /*
      * 1.使用keyExtractor处理待比较元素
      * 2.使用Long.compare()方法比较两个处理后的元素
-     * -->注：要求处理后的元素兼容long类型
+     * -->注:要求处理后的元素兼容long类型
      */
     static <T> Comparator<T> comparingLong(ToLongFunction<? super T> keyExtractor) {
         Objects.requireNonNull(keyExtractor);
@@ -432,7 +432,7 @@ public interface Comparator<T> {
     /*
      * 1.使用keyExtractor处理待比较元素
      * 2.使用Double.compare()方法比较两个处理后的元素
-     * -->注：要求处理后的元素兼容double类型
+     * -->注:要求处理后的元素兼容double类型
      */
     static <T> Comparator<T> comparingDouble(ToDoubleFunction<? super T> keyExtractor) {
         Objects.requireNonNull(keyExtractor);
@@ -468,7 +468,7 @@ public interface Comparator<T> {
      * comparator.thenComparing(other)
      *
      * 1.使用comparator比较两个元素
-     * 2.如果元素相同：
+     * 2.如果元素相同:
      *   2.1.使用other进一步比较两个元素
      */
     default Comparator<T> thenComparing(Comparator<? super T> other) {
@@ -502,7 +502,7 @@ public interface Comparator<T> {
      * comparator.thenComparing(keyExtractor, keyComparator)
      *
      * 1.使用comparator比较两个元素
-     * 2.如果元素相同：
+     * 2.如果元素相同:
      *   2.1.使用keyExtractor处理待比较元素
      *   2.2.使用keyComparator比较处理后的元素
      */
@@ -532,10 +532,10 @@ public interface Comparator<T> {
      * comparator.thenComparing(keyExtractor)
      *
      * 1.使用comparator比较两个元素
-     * 2.如果元素相同：
+     * 2.如果元素相同:
      *   2.1.使用keyExtractor处理待比较元素
      *   2.2.使用compareTo()方法比较两个处理后的元素
-     *   -->注：要求处理后的元素实现Comparable接口
+     *   -->注:要求处理后的元素实现Comparable接口
      */
     default <U extends Comparable<? super U>> Comparator<T> thenComparing(Function<? super T, ? extends U> keyExtractor) {
         return thenComparing(comparing(keyExtractor));
@@ -561,10 +561,10 @@ public interface Comparator<T> {
      * comparator.thenComparingInt(keyExtractor)
      *
      * 1.使用comparator比较两个元素
-     * 2.如果元素相同：
+     * 2.如果元素相同:
      *   2.1.使用keyExtractor处理待比较元素
      *   2.2.使用Integer.compare()方法比较两个处理后的元素
-     *   -->注：要求处理后的元素兼容int类型
+     *   -->注:要求处理后的元素兼容int类型
      */
     default Comparator<T> thenComparingInt(ToIntFunction<? super T> keyExtractor) {
         return thenComparing(comparingInt(keyExtractor));
@@ -590,10 +590,10 @@ public interface Comparator<T> {
      * comparator.thenComparingLong(keyExtractor)
      *
      * 1.使用comparator比较两个元素
-     * 2.如果元素相同：
+     * 2.如果元素相同:
      *   2.1.使用keyExtractor处理待比较元素
      *   2.2.使用Long.compare()方法比较两个处理后的元素
-     *   -->注：要求处理后的元素兼容long类型
+     *   -->注:要求处理后的元素兼容long类型
      */
     default Comparator<T> thenComparingLong(ToLongFunction<? super T> keyExtractor) {
         return thenComparing(comparingLong(keyExtractor));
@@ -619,10 +619,10 @@ public interface Comparator<T> {
      * comparator.thenComparingDouble(keyExtractor)
      *
      * 1.使用comparator比较两个元素
-     * 2.如果元素相同：
+     * 2.如果元素相同:
      *   2.1.使用keyExtractor处理待比较元素
      *   2.2.使用Double.compare()方法比较两个处理后的元素
-     *   -->注：要求处理后的元素兼容double类型
+     *   -->注:要求处理后的元素兼容double类型
      */
     default Comparator<T> thenComparingDouble(ToDoubleFunction<? super T> keyExtractor) {
         return thenComparing(comparingDouble(keyExtractor));

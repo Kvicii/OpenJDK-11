@@ -41,10 +41,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：BiFunction<T, U, R>
+ * 函数式接口:BiFunction<T, U, R>
  *
- * 参数：T, U
- * 返回：R
+ * 参数:T, U
+ * 返回:R
  */
 @FunctionalInterface
 public interface BiFunction<T, U, R> {
@@ -74,7 +74,7 @@ public interface BiFunction<T, U, R> {
      *
      * @throws NullPointerException if after is null
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
         Objects.requireNonNull(after);
         return (T t, U u) -> after.apply(apply(t, u));

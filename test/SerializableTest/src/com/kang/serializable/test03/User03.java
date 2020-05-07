@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class User03 implements Serializable {
     private String name;
     
-    // 使用transient关键字修饰属性后，该属性不会被序列化
+    // 使用transient关键字修饰属性后 该属性不会被序列化
     private transient int age;
     
     public User03(String name, int age) {

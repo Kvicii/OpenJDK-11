@@ -24,7 +24,7 @@ public class StreamTest13 {
         Integer lengthSum = stream3.reduce(
             0,  // (1) 初始值
             (sum, str) -> sum + str.length(),   // (2) 累加器
-            (a, b) -> a + b // (3) 部分和拼接器，并行执行时才会用到
+            (a, b) -> a + b // (3) 部分和拼接器 并行执行时才会用到
         );
         System.out.println(lengthSum);
     

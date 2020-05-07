@@ -66,11 +66,11 @@ import java.util.Iterator;
  */
 
 /*
- * 抽象"字符集"提供商，规定了检索字符集的接口方法。
+ * 抽象"字符集"提供商 规定了检索字符集的接口方法。
  *
- * 在子类的实现中，可以封装多种字符集备用。
+ * 在子类的实现中 可以封装多种字符集备用。
  *
- * 此外，使用字符集提供商时，需要在资源目录src/META-INF/services/java.nio.charset.spi.CharsetProvider中配置。
+ * 此外 使用字符集提供商时 需要在资源目录src/META-INF/services/java.nio.charset.spi.CharsetProvider中配置。
  */
 public abstract class CharsetProvider {
     
@@ -79,7 +79,7 @@ public abstract class CharsetProvider {
      *
      * @throws SecurityException If a security manager has been installed and it denies {@link RuntimePermission}{@code ("charsetProvider")}
      */
-    // 初始化一个字符集提供商，可能需要通过安全检查
+    // 初始化一个字符集提供商 可能需要通过安全检查
     protected CharsetProvider() {
         this(checkPermission());
     }
@@ -105,7 +105,7 @@ public abstract class CharsetProvider {
      *
      * @return A charset object for the named charset, or {@code null} if the named charset is not supported by this provider
      */
-    // 通过字符集名称检索相应的字符集，如果该提供商不支持此字符集，返回null
+    // 通过字符集名称检索相应的字符集 如果该提供商不支持此字符集 返回null
     public abstract Charset charsetForName(String charsetName);
     
     // 检查该字符集是否有权限被加载

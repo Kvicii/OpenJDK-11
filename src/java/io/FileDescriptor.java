@@ -49,15 +49,15 @@ import java.util.Objects;
 /*
  * 文件描述符用来保存操作系统中的标准流id和对文件的引用handle
  *
- * FileDescriptor实例会被FileInputStream/FileOutputStream/RandomAccessFile持有，
- * 这三个类在打开文件时，在JNI代码中使用open执行系统调用打开文件，得到文件描述符在JNI代码中设置到FileDescriptor的fd成员变量上
+ * FileDescriptor实例会被FileInputStream/FileOutputStream/RandomAccessFile持有 
+ * 这三个类在打开文件时 在JNI代码中使用open执行系统调用打开文件 得到文件描述符在JNI代码中设置到FileDescriptor的fd成员变量上
  *
- * 关闭FileInputStream/FileOutputStream/RandomAccessFile时，会关闭底层对应的文件描述符。
+ * 关闭FileInputStream/FileOutputStream/RandomAccessFile时 会关闭底层对应的文件描述符。
  * 关闭是文件底层是通过使用close执行系统调用实现的。
  *
- * 简单理解：文件描述符是"文件"的抽象表示。文件可以是：file、socket或其他IO连接
+ * 简单理解:文件描述符是"文件"的抽象表示。文件可以是:file、socket或其他IO连接
  *
- * 注：应用程序不应创建自己的文件描述符。
+ * 注:应用程序不应创建自己的文件描述符。
  */
 public final class FileDescriptor {
     /**
@@ -67,7 +67,7 @@ public final class FileDescriptor {
      *
      * @see java.lang.System#in
      */
-    // 标准输入流，被封装为System.in
+    // 标准输入流 被封装为System.in
     public static final FileDescriptor in = new FileDescriptor(0);
     /**
      * A handle to the standard output stream. Usually, this file
@@ -76,7 +76,7 @@ public final class FileDescriptor {
      *
      * @see java.lang.System#out
      */
-    // 标准输出流，被封装为System.out
+    // 标准输出流 被封装为System.out
     public static final FileDescriptor out = new FileDescriptor(1);
     /**
      * A handle to the standard error stream. Usually, this file
@@ -85,17 +85,17 @@ public final class FileDescriptor {
      *
      * @see java.lang.System#err
      */
-    // 标准错误流，被封装为System.err
+    // 标准错误流 被封装为System.err
     public static final FileDescriptor err = new FileDescriptor(2);
     
-    // 每个打开的文件都会为它分配一个fd值作为其唯一编号，通过该值可以找到对应的文件并进行相关操作
+    // 每个打开的文件都会为它分配一个fd值作为其唯一编号 通过该值可以找到对应的文件并进行相关操作
     private int fd;
-    // 文件句柄，即指向文件的引用。
+    // 文件句柄 即指向文件的引用。
     private long handle;
     
-    // 存放文件描述符关联的唯一流对象（绝大多数情况）
+    // 存放文件描述符关联的唯一流对象(绝大多数情况)
     private Closeable parent;
-    // 存放文件描述符的所有流对象（使用流的带有文件描述符参数的构造方法会用到此字段）
+    // 存放文件描述符的所有流对象(使用流的带有文件描述符参数的构造方法会用到此字段)
     private List<Closeable> otherParents;
     
     // 判断fd是否被释放
@@ -171,7 +171,7 @@ public final class FileDescriptor {
      * Constructs an (invalid) FileDescriptor object.
      * The fd or handle is set later.
      */
-    // 构造一个无效的文件描述符，后续设置其fd和handle
+    // 构造一个无效的文件描述符 后续设置其fd和handle
     public FileDescriptor() {
         fd = -1;
         handle = -1;
@@ -184,7 +184,7 @@ public final class FileDescriptor {
      *
      * @param fd the raw fd number (0, 1, 2)
      */
-    // 构造标准流（输入流、输出流、错误流）的文件描述符
+    // 构造标准流(输入流、输出流、错误流)的文件描述符
     private FileDescriptor(int fd) {
         this.fd = fd;
         this.handle = getHandle(fd);
@@ -194,7 +194,7 @@ public final class FileDescriptor {
     /*
      * On Windows return the handle for the standard streams.
      */
-    // 返回标准流（输入流、输出流、错误流）的引用
+    // 返回标准流(输入流、输出流、错误流)的引用
     private static native long getHandle(int d);
     
     /**
@@ -208,7 +208,7 @@ public final class FileDescriptor {
      *
      * @return {@code true} if the file descriptor object represents a valid, open file, socket, or other active I/O connection; {@code false} otherwise.
      */
-    // 判断文件描述符是否有效，判断依据是handle或fd
+    // 判断文件描述符是否有效 判断依据是handle或fd
     public boolean valid() {
         return (handle != -1) || (fd != -1);
     }
@@ -273,18 +273,18 @@ public final class FileDescriptor {
     /*
      * 将打开的流关联到文件描述符上
      *
-     * 如果FileDescriptor只和一个FileInputStream/FileOutputStream/RandomAccessFile有关联，则将流简单的保存到parent成员中。
-     * 如果FileDescriptor和多个FileInputStream/FileOutputStream/RandomAccessFile有关联，则所有关联的Closeable流都被保存到otherParents这个ArrayList中。
+     * 如果FileDescriptor只和一个FileInputStream/FileOutputStream/RandomAccessFile有关联 则将流简单的保存到parent成员中。
+     * 如果FileDescriptor和多个FileInputStream/FileOutputStream/RandomAccessFile有关联 则所有关联的Closeable流都被保存到otherParents这个ArrayList中。
      *
-     * 一般来说，一个FileDescriptor只会和一个FileInputStream/FileOutputStream/RandomAccessFile有关联。
-     * 但如果调用FileInputStream(FileDescriptor fdObj)这类构造函数时，会出现多个Closeable对象关联到一个FileDescriptor的情况。
+     * 一般来说 一个FileDescriptor只会和一个FileInputStream/FileOutputStream/RandomAccessFile有关联。
+     * 但如果调用FileInputStream(FileDescriptor fdObj)这类构造函数时 会出现多个Closeable对象关联到一个FileDescriptor的情况。
      *
-     * 这里既有parent又有otherParents，相当于做了一个小的优化。
+     * 这里既有parent又有otherParents 相当于做了一个小的优化。
      */
     synchronized void attach(Closeable c) {
         if(parent == null) {
             // first caller gets to do this
-            parent = c; // 首次调用，关联至此
+            parent = c; // 首次调用 关联至此
         } else if(otherParents == null) {
             otherParents = new ArrayList<>();
             otherParents.add(parent);
@@ -301,7 +301,7 @@ public final class FileDescriptor {
      *
      * @param cleanable a PhantomCleanable to register
      */
-    // 关联一个文件描述符（虚引用）清理器
+    // 关联一个文件描述符(虚引用)清理器
     @SuppressWarnings("unchecked")
     synchronized void registerCleanup(PhantomCleanable<FileDescriptor> cleanable) {
         Objects.requireNonNull(cleanable, "cleanable");
@@ -322,7 +322,7 @@ public final class FileDescriptor {
      * it possible for the fd to be reallocated to another use and later
      * the cleanup might be invoked.
      */
-    // 置空关联的文件描述符（虚引用）清理器
+    // 置空关联的文件描述符(虚引用)清理器
     synchronized void unregisterCleanup() {
         if(cleanup != null) {
             // 清理当前追踪的文件描述符对象
@@ -354,11 +354,11 @@ public final class FileDescriptor {
      */
     /*
      * 该方法会调用其所有关联的流的close方法。
-     * 在流的close方法中，辗转又调用了文件描述符的close方法。
+     * 在流的close方法中 辗转又调用了文件描述符的close方法。
      *
-     * 换句话说，closeAll方法会关闭其所有关联的流，并释放该文件描述符。
+     * 换句话说 closeAll方法会关闭其所有关联的流 并释放该文件描述符。
      *
-     * 反过来，调用一个流的close方法，往往也会引发关闭与其共享一个文件描述符的其他流以及这个文件描述符。
+     * 反过来 调用一个流的close方法 往往也会引发关闭与其共享一个文件描述符的其他流以及这个文件描述符。
      */
     @SuppressWarnings("try")
     synchronized void closeAll(Closeable releaser) throws IOException {
@@ -367,7 +367,7 @@ public final class FileDescriptor {
             IOException ioe = null;
             try(releaser) {
                 if(otherParents != null) {
-                    // 遍历所有流，并调用其close方法
+                    // 遍历所有流 并调用其close方法
                     for(Closeable referent : otherParents) {
                         try {
                             referent.close();

@@ -39,10 +39,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：LongConsumer
+ * 函数式接口:LongConsumer
  *
- * 参数：long
- * 返回：void
+ * 参数:long
+ * 返回:void
  */
 @FunctionalInterface
 public interface LongConsumer {
@@ -68,7 +68,7 @@ public interface LongConsumer {
      *
      * @throws NullPointerException if {@code after} is null
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default LongConsumer andThen(LongConsumer after) {
         Objects.requireNonNull(after);
         return (long t) -> {

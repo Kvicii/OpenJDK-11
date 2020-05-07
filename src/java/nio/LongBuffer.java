@@ -90,14 +90,14 @@ package java.nio;
  * HeapLongBufferR
  *
  *
- * 直接缓冲区（缓冲区字节序与本地相同）
+ * 直接缓冲区(缓冲区字节序与本地相同)
  * LongBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectLongBufferU     │
  *             ├────────────┘
  *    DirectLongBufferRU
  *
- * 直接缓冲区（缓冲区字节序与本地不同）
+ * 直接缓冲区(缓冲区字节序与本地不同)
  * LongBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectLongBufferS     │
@@ -222,7 +222,7 @@ public abstract class LongBuffer extends Buffer implements Comparable<LongBuffer
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a new long buffer whose content is a shared subsequence of
@@ -283,7 +283,7 @@ public abstract class LongBuffer extends Buffer implements Comparable<LongBuffer
      */
     public abstract LongBuffer asReadOnlyBuffer();
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

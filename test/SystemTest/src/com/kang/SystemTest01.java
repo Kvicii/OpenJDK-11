@@ -20,7 +20,7 @@ public class SystemTest01 {
         System.setIn(new FileInputStream(new File("res/in.txt")));                      // 改变输入流源头
         System.setOut(new PrintStream(new FileOutputStream(new File("res/out.txt"))));  // 改变输出流终点
         System.in.read(bytes);                  // 从in.txt读取输入
-        System.out.println(Math.random());      // 先输出一个随机数，目的是验证每次都是新的输出
+        System.out.println(Math.random());      // 先输出一个随机数 目的是验证每次都是新的输出
         System.out.println(new String(bytes));  // 输出读取到的内容到out.txt
     }
 }

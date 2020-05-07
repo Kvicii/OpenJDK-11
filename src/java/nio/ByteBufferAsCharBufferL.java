@@ -25,7 +25,7 @@
 
 package java.nio;
 
-// ByteBuffer转为CharBuffer，使用可读写的缓冲区。采用小端字节序，其他部分与ByteBufferAsCharBufferB相同
+// ByteBuffer转为CharBuffer 使用可读写的缓冲区。采用小端字节序 其他部分与ByteBufferAsCharBufferB相同
 class ByteBufferAsCharBufferL extends CharBuffer {
     
     protected final ByteBuffer bb;  // 待转换的ByteBuffer
@@ -69,7 +69,7 @@ class ByteBufferAsCharBufferL extends CharBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public CharBuffer slice() {
         int pos = this.position();
@@ -100,11 +100,11 @@ class ByteBufferAsCharBufferL extends CharBuffer {
         return new ByteBufferAsCharBufferL(bb, -1, pos + start, pos + end, capacity(), address);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /* getCharUnaligned和putCharUnaligned方法中，最后一个参数为false，代表以小端法存取字节 */
+    /* getCharUnaligned和putCharUnaligned方法中 最后一个参数为false 代表以小端法存取字节 */
     
     /*▼ get/读取 ████████████████████████████████████████████████████████████████████████████████┓ */
     

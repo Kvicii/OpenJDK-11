@@ -39,10 +39,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：IntConsumer
+ * 函数式接口:IntConsumer
  *
- * 参数：int
- * 返回：void
+ * 参数:int
+ * 返回:void
  */
 @FunctionalInterface
 public interface IntConsumer {
@@ -68,7 +68,7 @@ public interface IntConsumer {
      *
      * @throws NullPointerException if {@code after} is null
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default IntConsumer andThen(IntConsumer after) {
         Objects.requireNonNull(after);
         return (int t) -> {

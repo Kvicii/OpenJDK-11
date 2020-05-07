@@ -11,10 +11,10 @@ public class UnsafeTest03 {
         
         /* 内存的分配与释放 */
         
-        long address = unsafe.allocateMemory(GB / 2);   // 申请512MB的本地内存，并返回分配的内存地址
+        long address = unsafe.allocateMemory(GB / 2);   // 申请512MB的本地内存 并返回分配的内存地址
         unsafe.setMemory(address, GB / 2, (byte) 0);     // 将申请的内存块填充为0
         
-        // 扩容到1GB，如果扩容成功，原来的address就作废了
+        // 扩容到1GB 如果扩容成功 原来的address就作废了
         long newAddress = unsafe.reallocateMemory(address, GB);
         unsafe.setMemory(newAddress, GB, (byte) 0);    // 将申请的内存块填充为0
         

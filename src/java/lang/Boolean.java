@@ -157,7 +157,7 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
      *
      * @return the {@code Boolean} value represented by the string.
      */
-    // 将字符串s解析为boolean值，随后再装箱
+    // 将字符串s解析为boolean值 随后再装箱
     public static Boolean valueOf(String s) {
         return parseBoolean(s) ? TRUE : FALSE;
     }
@@ -205,12 +205,12 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
      * @see java.lang.System#getProperty(java.lang.String, java.lang.String)
      */
     /*
-     * 从系统属性中获取值，其中，nm为某个系统属性
+     * 从系统属性中获取值 其中 nm为某个系统属性
      *
-     * 比如：
+     * 比如:
      * System.setProperty("isVIP", "true");
      * Boolean boo = Boolean.getBoolean("isVIP");
-     * 如果属性isVIP存在，返回设置的值。否则，返回false。
+     * 如果属性isVIP存在 返回设置的值。否则 返回false。
      */
     public static boolean getBoolean(String name) {
         boolean result = false;
@@ -305,7 +305,7 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
      *
      * @since 1.7
      */
-    // 比较两个boolean（可以把true看做1，false看做0，然后再比较）
+    // 比较两个boolean(可以把true看做1 false看做0 然后再比较)
     public static int compare(boolean x, boolean y) {
         return (x == y) ? 0 : (x ? 1 : -1);
     }
@@ -324,7 +324,7 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
      * @see Comparable
      * @since 1.5
      */
-    // 比较两个Boolean（可以把true看做1，false看做0，然后再比较）
+    // 比较两个Boolean(可以把true看做1 false看做0 然后再比较)
     public int compareTo(Boolean b) {
         return compare(this.value, b.value);
     }
@@ -347,7 +347,7 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
      * @see java.util.function.BinaryOperator
      * @since 1.8
      */
-    // 逻辑与，一假为假
+    // 逻辑与 一假为假
     public static boolean logicalAnd(boolean a, boolean b) {
         return a && b;
     }
@@ -364,7 +364,7 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
      * @see java.util.function.BinaryOperator
      * @since 1.8
      */
-    // 逻辑或，一真为真
+    // 逻辑或 一真为真
     public static boolean logicalOr(boolean a, boolean b) {
         return a || b;
     }
@@ -381,7 +381,7 @@ public final class Boolean implements Serializable, Comparable<Boolean> {
      * @see java.util.function.BinaryOperator
      * @since 1.8
      */
-    // 逻辑异或，相同为假，不同为真
+    // 逻辑异或 相同为假 不同为真
     public static boolean logicalXor(boolean a, boolean b) {
         return a ^ b;
     }

@@ -49,8 +49,8 @@ import java.util.Arrays;
  * rather than holding the thread group locked while we work on the children.
  */
 /*
- * ThreadGroup用来管理一组线程和子线程组，每个ThreadGroup在进程中以树形方式存在。
- * 通常情况下根线程组是system线程组，system线程组下是main线程组，接下来是经由main线程组创建出来的自定义线程组。
+ * ThreadGroup用来管理一组线程和子线程组 每个ThreadGroup在进程中以树形方式存在。
+ * 通常情况下根线程组是system线程组 system线程组下是main线程组 接下来是经由main线程组创建出来的自定义线程组。
  */
 public class ThreadGroup implements Thread.UncaughtExceptionHandler {
     
@@ -133,7 +133,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      * Creates an empty Thread group that is not in any Thread group.
      * This method is used to create the system Thread group.
      */
-    // 由底层代码调用，创建根线程组
+    // 由底层代码调用 创建根线程组
     private ThreadGroup() {
         // called from C code
         this.name = "system";
@@ -323,7 +323,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
         
         synchronized(this) {
             checkAccess();
-            // 禁止重复销毁，禁止销毁仍然包含线程的线程组
+            // 禁止重复销毁 禁止销毁仍然包含线程的线程组
             if(destroyed || (nthreads>0)) {
                 throw new IllegalThreadStateException();
             }
@@ -568,7 +568,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      * counted so that daemon thread groups with unstarted threads in
      * them are not destroyed.
      */
-    // 计数，统计当前线程组内还未start()的线程数量
+    // 计数 统计当前线程组内还未start()的线程数量
     void addUnstarted() {
         synchronized(this) {
             if(destroyed) {
@@ -595,7 +595,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      *
      * @since 1.0
      */
-    // 活跃线程数量的快照。递归统计当前线程组及其子线程组内的线程数量。（线程数量会动态变化）
+    // 活跃线程数量的快照。递归统计当前线程组及其子线程组内的线程数量。(线程数量会动态变化)
     public int activeCount() {
         int result;
         // Snapshot sub-group data so we don't hold this lock while our children are computing.
@@ -634,7 +634,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      *
      * @since 1.0
      */
-    // 活跃线程组数量的快照。递归统计当前线程组的子线程组数量。（线程组数量会动态变化）
+    // 活跃线程组数量的快照。递归统计当前线程组的子线程组数量。(线程组数量会动态变化)
     public int activeGroupCount() {
         int ngroupsSnapshot;
         ThreadGroup[] groupsSnapshot;
@@ -785,9 +785,9 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
     
     /*
      * ▶ 1 将当前线程组存活的线程复制到数组list中。
-     * 参数n为list的下标，代表存入线程时用到的起始下标。
+     * 参数n为list的下标 代表存入线程时用到的起始下标。
      * 参数recurse表示是否递归存储。
-     * 如果需要递归存储，意味着子线程组中的线程也会被存入数组list
+     * 如果需要递归存储 意味着子线程组中的线程也会被存入数组list
      */
     private int enumerate(Thread[] list, int n, boolean recurse) {
         int ngroupsSnapshot = 0;
@@ -799,7 +799,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
             }
             
             int nt = nthreads;
-            // 如果提供的存储空间不足以存储所有存活线程，那就只存储一部分
+            // 如果提供的存储空间不足以存储所有存活线程 那就只存储一部分
             if(nt>list.length - n) {
                 nt = list.length - n;
             }
@@ -883,7 +883,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      *                           the current thread cannot access this thread group
      * @since 1.0
      */
-    // ▶ 1-2 将线程组中存活的线程存入数组list，参数recurse指示是否递归存入子线程组所有线程
+    // ▶ 1-2 将线程组中存活的线程存入数组list 参数recurse指示是否递归存入子线程组所有线程
     public int enumerate(Thread list[], boolean recurse) {
         checkAccess();
         return enumerate(list, 0, recurse);
@@ -891,9 +891,9 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
     
     /*
      * ▶ 2 将当前线程组包含的子线程复制到数组list中。
-     * 参数n为list的下标，代表存入线程组时用到的起始下标。
+     * 参数n为list的下标 代表存入线程组时用到的起始下标。
      * 参数recurse表示是否递归存储。
-     * 如果需要递归存储，意味着子线程组中的线程组也会被存入数组list
+     * 如果需要递归存储 意味着子线程组中的线程组也会被存入数组list
      */
     private int enumerate(ThreadGroup list[], int n, boolean recurse) {
         int ngroupsSnapshot = 0;
@@ -985,7 +985,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      *                           the current thread cannot access this thread group
      * @since 1.0
      */
-    // ▶ 2-2 将线程组中的子线程组存入数组list，参数recurse指示是否递归存入子线程组所有线程组
+    // ▶ 2-2 将线程组中的子线程组存入数组list 参数recurse指示是否递归存入子线程组所有线程组
     public int enumerate(ThreadGroup list[], boolean recurse) {
         checkAccess();
         return enumerate(list, 0, recurse);
@@ -1137,7 +1137,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      *
      * @param t the Thread whose start method was invoked
      */
-    // 线程启动失败，将其从线程组中删除，未启动线程数量重新加一
+    // 线程启动失败 将其从线程组中删除 未启动线程数量重新加一
     void threadStartFailed(Thread t) {
         synchronized(this) {
             remove(t);
@@ -1155,7 +1155,7 @@ public class ThreadGroup implements Thread.UncaughtExceptionHandler {
      *
      * @param t the Thread that has terminated
      */
-    // 线程结束，将其从线程组中移除
+    // 线程结束 将其从线程组中移除
     void threadTerminated(Thread t) {
         synchronized(this) {
             remove(t);

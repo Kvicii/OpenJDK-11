@@ -30,7 +30,7 @@ public class User implements Serializable {
         return "User{" + "name='" + name + '\'' + ", age=" + age + ", weight=" + weight + '}';
     }
     
-    /* 自定义序列化/反序列化的流程。如果没有自定义的流程，则按默认方式序列化指定的字段 */
+    /* 自定义序列化/反序列化的流程。如果没有自定义的流程 则按默认方式序列化指定的字段 */
     
     private void writeObject(ObjectOutputStream s) throws IOException {
         ObjectOutputStream.PutField fields = s.putFields();

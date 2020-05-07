@@ -49,7 +49,7 @@ final class StringLatin1 {
         return (char) (val[index] & 0xff);
     }
     
-    // 将LATIN1-String内部的字节转换为char后返回，加入范围检查
+    // 将LATIN1-String内部的字节转换为char后返回 加入范围检查
     public static char charAt(byte[] value, int index) {
         if(index < 0 || index >= value.length) {
             throw new StringIndexOutOfBoundsException(index);
@@ -84,23 +84,23 @@ final class StringLatin1 {
     
     /*▼ 获取byte/byte[] ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 将c的一个低字节转换为LATIN-String内部的字节，存入val
+    // 将c的一个低字节转换为LATIN-String内部的字节 存入val
     public static void putChar(byte[] val, int index, int c) {
         //assert (canEncode(c));
         val[index] = (byte) (c);
     }
     
-    // 将char转换为LATIN1-String内部的字节，并返回
+    // 将char转换为LATIN1-String内部的字节 并返回
     public static byte[] toBytes(char c) {
         return new byte[]{(byte) c};
     }
     
-    // 将val[off, off+len)中的一组Unicode值批量转换为LATIN1-String内部的字节，再返回
+    // 将val[off, off+len)中的一组Unicode值批量转换为LATIN1-String内部的字节 再返回
     public static byte[] toBytes(int[] val, int off, int len) {
         byte[] ret = new byte[len];
         for(int i = 0; i < len; i++) {
             int cp = val[off++];
-            // 如果当前序列不在Latin1编码范围内，转码失败
+            // 如果当前序列不在Latin1编码范围内 转码失败
             if(!canEncode(cp)) {
                 return null;
             }
@@ -124,7 +124,7 @@ final class StringLatin1 {
         return ret;
     }
     
-    // 将LATIN1-String内部的字节转换为LATIN1-String内部的字节，由于都是单字节，直接用了复制
+    // 将LATIN1-String内部的字节转换为LATIN1-String内部的字节 由于都是单字节 直接用了复制
     public static void getBytes(byte[] value, int srcBegin, int srcEnd, byte dst[], int dstBegin) {
         System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);
     }
@@ -135,7 +135,7 @@ final class StringLatin1 {
     
     /*▼ 大小写转换 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 小写转换，需要指定语言环境
+    // 小写转换 需要指定语言环境
     public static String toLowerCase(String str, byte[] value, Locale locale) {
         if(locale == null) {
             throw new NullPointerException();
@@ -169,7 +169,7 @@ final class StringLatin1 {
         return new String(result, LATIN1);
     }
     
-    // 大写转换，需要指定语言环境
+    // 大写转换 需要指定语言环境
     public static String toUpperCase(String str, byte[] value, Locale locale) {
         if(locale == null) {
             throw new NullPointerException();
@@ -205,7 +205,7 @@ final class StringLatin1 {
         return new String(result, LATIN1);
     }
     
-    // 小写转换，处理增补字符以及一些特殊语言的场景
+    // 小写转换 处理增补字符以及一些特殊语言的场景
     private static String toLowerCaseEx(String str, byte[] value, int first, Locale locale, boolean localeDependent) {
         // 创建长度为2*len的字节数组
         byte[] result = StringUTF16.newBytesFor(value.length);
@@ -228,7 +228,7 @@ final class StringLatin1 {
                 if(lowerChar == Character.ERROR) {
                     lowerCharArray = ConditionalSpecialCasing.toLowerCaseCharArray(str, i, locale);
                 } else {
-                    // 解码，Unicode码点值 ---> char，对于增补平面区码点值，需要拆分成高、低代理单元再存储
+                    // 解码 Unicode码点值 ---> char 对于增补平面区码点值 需要拆分成高、低代理单元再存储
                     lowerCharArray = Character.toChars(lowerChar);
                 }
                 /* Grow result if needed */
@@ -247,7 +247,7 @@ final class StringLatin1 {
         return StringUTF16.newString(result, 0, resultOffset);
     }
     
-    // 大写转换，处理增补字符以及一些特殊语言的场景
+    // 大写转换 处理增补字符以及一些特殊语言的场景
     private static String toUpperCaseEx(String str, byte[] value, int first, Locale locale, boolean localeDependent) {
         // 创建长度为2*len的字节数组
         byte[] result = StringUTF16.newBytesFor(value.length);
@@ -274,7 +274,7 @@ final class StringLatin1 {
                         upperCharArray = Character.toUpperCaseCharArray(srcChar);
                     }
                 } else {
-                    // 解码，Unicode码点值 ---> char，对于增补平面区码点值，需要拆分成高、低代理单元再存储
+                    // 解码 Unicode码点值 ---> char 对于增补平面区码点值 需要拆分成高、低代理单元再存储
                     upperCharArray = Character.toChars(upperChar);
                 }
                 /* Grow result if needed */
@@ -298,12 +298,12 @@ final class StringLatin1 {
     
     /*▼ 码点/码元 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 返回Latin1-String中某处符号（单字节）的Unicode编码
+    // 返回Latin1-String中某处符号(单字节)的Unicode编码
     public static int codePointAt(byte[] value, int index, int end) {
         return value[index] & 0xff;
     }
     
-    // 返回Latin1-String中某处(index-1)符号（单字节）的Unicode编码（从后往前试探）
+    // 返回Latin1-String中某处(index-1)符号(单字节)的Unicode编码(从后往前试探)
     public static int codePointBefore(byte[] value, int index) {
         return value[index - 1] & 0xff;
     }
@@ -338,11 +338,11 @@ final class StringLatin1 {
         return compareTo(value, other, len1, len2);
     }
     
-    // ▶ 2 比较Latin1-String的字节值(value)和UTF16-String的字节值(other)，需要先将它们同时转为char再比较
+    // ▶ 2 比较Latin1-String的字节值(value)和UTF16-String的字节值(other) 需要先将它们同时转为char再比较
     private static int compareToUTF16Values(byte[] value, byte[] other, int len1, int len2) {
         int lim = Math.min(len1, len2);
         for(int k = 0; k < lim; k++) {
-            // 解码，一个byte ---> 一个char
+            // 解码 一个byte ---> 一个char
             char c1 = getChar(value, k);
             // 将UTF16-String内部的字节转换为char后返回
             char c2 = StringUTF16.getChar(other, k);
@@ -353,7 +353,7 @@ final class StringLatin1 {
         return len1 - len2;
     }
     
-    // ▶ 2-1 比较Latin1-String的字节值(value)和UTF16-String的字节值(other)，需要先将它们同时转为char再比较，加入范围检查
+    // ▶ 2-1 比较Latin1-String的字节值(value)和UTF16-String的字节值(other) 需要先将它们同时转为char再比较 加入范围检查
     public static int compareToUTF16(byte[] value, byte[] other, int len1, int len2) {
         checkOffset(len1, length(value));
         checkOffset(len2, StringUTF16.length(other));
@@ -361,7 +361,7 @@ final class StringLatin1 {
         return compareToUTF16Values(value, other, len1, len2);
     }
     
-    // ▶ 2-2 比较Latin1-String的字节值(value)和UTF16-String的字节值(other)，需要先将它们同时转为char再比较
+    // ▶ 2-2 比较Latin1-String的字节值(value)和UTF16-String的字节值(other) 需要先将它们同时转为char再比较
     @HotSpotIntrinsicCandidate
     public static int compareToUTF16(byte[] value, byte[] other) {
         int len1 = length(value);
@@ -392,7 +392,7 @@ final class StringLatin1 {
         return len1 - len2;
     }
     
-    // 忽略大小写地比较Latin1-String的字节值(value)和UTF16-String的字节值(other)，需要先将它们同时转为char再比较
+    // 忽略大小写地比较Latin1-String的字节值(value)和UTF16-String的字节值(other) 需要先将它们同时转为char再比较
     public static int compareToCI_UTF16(byte[] value, byte[] other) {
         int len1 = length(value);
         int len2 = StringUTF16.length(other);
@@ -416,7 +416,7 @@ final class StringLatin1 {
         return len1 - len2;
     }
     
-    // 忽略大小写地比较两个Latin1-String的字节值，需要先将它们同时转为char再比较
+    // 忽略大小写地比较两个Latin1-String的字节值 需要先将它们同时转为char再比较
     public static boolean regionMatchesCI(byte[] value, int toffset, byte[] other, int ooffset, int len) {
         int last = toffset + len;
         while(toffset < last) {
@@ -438,7 +438,7 @@ final class StringLatin1 {
         return true;
     }
     
-    // 忽略大小写地比较Latin1-String的字节值(value)和UTF16-String的字节值(other)，需要先将它们同时转为char再比较
+    // 忽略大小写地比较Latin1-String的字节值(value)和UTF16-String的字节值(other) 需要先将它们同时转为char再比较
     public static boolean regionMatchesCI_UTF16(byte[] value, int toffset, byte[] other, int ooffset, int len) {
         int last = toffset + len;
         while(toffset < last) {
@@ -461,7 +461,7 @@ final class StringLatin1 {
         return true;
     }
     
-    // true：两个Latin1-String内容相等
+    // true:两个Latin1-String内容相等
     @HotSpotIntrinsicCandidate
     public static boolean equals(byte[] value, byte[] other) {
         if(value.length == other.length) {
@@ -522,7 +522,7 @@ final class StringLatin1 {
     
     /*▼ 查找子串位置 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 比对两个Latin1-String，返回子串str在主串value中第一次出现的位置
+    // 比对两个Latin1-String 返回子串str在主串value中第一次出现的位置
     @HotSpotIntrinsicCandidate
     public static int indexOf(byte[] value, byte[] str) {
         if(str.length == 0) {
@@ -537,8 +537,8 @@ final class StringLatin1 {
     }
     
     /*
-     * 比对两个Latin1-String，返回子串str在主串value中第一次出现的位置
-     * 搜索时只比对主串的前valueCount个字符和子串的前strCount个字符，且从主串的fromIndex索引处向后搜索
+     * 比对两个Latin1-String 返回子串str在主串value中第一次出现的位置
+     * 搜索时只比对主串的前valueCount个字符和子串的前strCount个字符 且从主串的fromIndex索引处向后搜索
      */
     @HotSpotIntrinsicCandidate
     public static int indexOf(byte[] value, int valueCount, byte[] str, int strCount, int fromIndex) {
@@ -566,8 +566,8 @@ final class StringLatin1 {
     }
     
     /*
-     * 比对两个Latin1-String，返回子串tgt在主串src中最后一次出现的位置
-     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符，且从主串的fromIndex索引处向前搜索
+     * 比对两个Latin1-String 返回子串tgt在主串src中最后一次出现的位置
+     * 搜索时只比对主串的前srcCount个字符和子串的前tgtCount个字符 且从主串的fromIndex索引处向前搜索
      */
     public static int lastIndexOf(byte[] src, int srcCount, byte[] tgt, int tgtCount, int fromIndex) {
         int min = tgtCount - 1;
@@ -602,7 +602,7 @@ startSearchForLastChar:
     
     /*▼ 替换 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 使用newChar替换Latin1-String中的oldChar，并返回替换后的String
+    // 使用newChar替换Latin1-String中的oldChar 并返回替换后的String
     public static String replace(byte[] value, char oldChar, char newChar) {
         if(canEncode(oldChar)) {
             int len = value.length;
@@ -726,7 +726,7 @@ startSearchForLastChar:
     
     /*▼ 流 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 将Latin1-String按行转为流序列，序列中每个元素都代表一行（遇到\n或\r才换行）
+    // 将Latin1-String按行转为流序列 序列中每个元素都代表一行(遇到\n或\r才换行)
     static Stream<String> lines(byte[] value) {
         return StreamSupport.stream(new LinesSpliterator(value), false);
     }
@@ -740,7 +740,7 @@ startSearchForLastChar:
         return value.length;
     }
     
-    // true：表示当前序列在Latin1编码范围内
+    // true:表示当前序列在Latin1编码范围内
     public static boolean canEncode(int cp) {
         return cp >>> 8 == 0;
     }
@@ -766,7 +766,7 @@ startSearchForLastChar:
     
     
     
-    // 按char分割元素的Spliterator，即CharsSpliterator的每个元素都是char
+    // 按char分割元素的Spliterator 即CharsSpliterator的每个元素都是char
     static class CharsSpliterator implements Spliterator.OfInt {
         private final byte[] array;
         private int index;          // current index, modified on advance/split
@@ -827,7 +827,7 @@ startSearchForLastChar:
         }
     }
     
-    // 按行分割元素的Spliterator，即LinesSpliterator的每个元素都是行
+    // 按行分割元素的Spliterator 即LinesSpliterator的每个元素都是行
     private final static class LinesSpliterator implements Spliterator<String> {
         private byte[] value;
         private int index;        // current index, modified on advance/split

@@ -47,11 +47,11 @@ package java.lang.ref;
  * @since 1.2
  */
 /*
- * 虚引用(Phantom Reference)：
+ * 虚引用(Phantom Reference):
  * 虚引用永远无法使用 get() 方法取得对象的强引用从而访问目标对象。
- * （JDK9之前：）虚引用进入ReferenceQueue时，其包裹的对象不会被回收。
- * （JDK9之后：）虚引用进入ReferenceQueue时，其包裹的对象同样会被回收，虚引用和弱引用行为一致了...
- * 注意：PhantomReference必须要和ReferenceQueue联合使用，SoftReference和WeakReference可以选择和ReferenceQueue联合使用也可以不选择，这使他们的区别之一。
+ * (JDK9之前:)虚引用进入ReferenceQueue时 其包裹的对象不会被回收。
+ * (JDK9之后:)虚引用进入ReferenceQueue时 其包裹的对象同样会被回收 虚引用和弱引用行为一致了...
+ * 注意:PhantomReference必须要和ReferenceQueue联合使用 SoftReference和WeakReference可以选择和ReferenceQueue联合使用也可以不选择 这使他们的区别之一。
  */
 public class PhantomReference<T> extends Reference<T> {
     

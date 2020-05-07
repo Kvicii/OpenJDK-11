@@ -40,11 +40,11 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：BiPredicate<T, U>
+ * 函数式接口:BiPredicate<T, U>
  *
- * 参数：T, U
- * 返回：boolean
- * 示例：x+y>10
+ * 参数:T, U
+ * 返回:boolean
+ * 示例:x+y>10
  *       BiPredicate<Integer, Integer> f = (x, y) -> (x+y)>10;
  */
 @FunctionalInterface

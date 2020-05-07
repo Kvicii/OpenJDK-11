@@ -42,7 +42,7 @@ import java.security.PrivilegedAction;
  * }</pre>
  * @since 1.8
  */
-// 工具类，系统内部使用。用于debug环境，检测是否无意中使用了装箱特性。生产环境下应关闭此检测。
+// 工具类 系统内部使用。用于debug环境 检测是否无意中使用了装箱特性。生产环境下应关闭此检测。
 final class Tripwire {
     private static final String TRIPWIRE_PROPERTY = "org.openjdk.java.util.stream.tripwire";
     

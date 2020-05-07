@@ -131,7 +131,7 @@ public final class Method extends Executable {
      * @throws InaccessibleObjectException {@inheritDoc}
      * @throws SecurityException           {@inheritDoc}
      */
-    // 禁用/启用安全检查。访问private的Method/Field/Constructor时必须禁用安全检查，即setAccessible(true)
+    // 禁用/启用安全检查。访问private的Method/Field/Constructor时必须禁用安全检查 即setAccessible(true)
     @Override
     @CallerSensitive
     public void setAccessible(boolean flag) {
@@ -199,7 +199,7 @@ public final class Method extends Executable {
      * @throws ExceptionInInitializerError if the initialization
      *                                     provoked by this method fails.
      */
-    // 调用对象obj中的参数为args的方法。如果是静态方法，obj为null
+    // 调用对象obj中的参数为args的方法。如果是静态方法 obj为null
     @CallerSensitive
     @ForceInline
     @HotSpotIntrinsicCandidate
@@ -312,7 +312,7 @@ public final class Method extends Executable {
      * Returns the name of the method represented by this {@code Method}
      * object, as a {@code String}.
      */
-    // 返回方法名称，这与字符串化不同
+    // 返回方法名称 这与字符串化不同
     @Override
     public String getName() {
         return name;
@@ -352,7 +352,7 @@ public final class Method extends Executable {
      * @jls 9.4   Method Declarations
      * @jls 9.6.1 Annotation Type Elements
      */
-    // 返回方法的描述，不带泛型信息
+    // 返回方法的描述 不带泛型信息
     public String toString() {
         return sharedToString(Modifier.methodModifiers(), isDefault(), parameterTypes, exceptionTypes);
     }
@@ -397,7 +397,7 @@ public final class Method extends Executable {
      * @jls 9.6.1 Annotation Type Elements
      * @since 1.5
      */
-    // 返回方法的描述，带着泛型信息
+    // 返回方法的描述 带着泛型信息
     @Override
     public String toGenericString() {
         return sharedToGenericString(Modifier.methodModifiers(), isDefault());
@@ -553,7 +553,7 @@ public final class Method extends Executable {
      * @jls 13.1 The Form of a Binary
      * @since 1.5
      */
-    // 是否由编译器引入（非人为定义）
+    // 是否由编译器引入(非人为定义)
     @Override
     public boolean isSynthetic() {
         return super.isSynthetic();
@@ -607,7 +607,7 @@ public final class Method extends Executable {
      *                                 default class value.
      * @since 1.5
      */
-    // 返回注解类中方法的默认值，其它情形下返回null
+    // 返回注解类中方法的默认值 其它情形下返回null
     public Object getDefaultValue() {
         if(annotationDefault == null)
             return null;

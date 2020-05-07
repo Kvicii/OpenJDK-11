@@ -39,11 +39,11 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：Consumer<T>
+ * 函数式接口:Consumer<T>
  *
- * 参数：T
- * 返回：void
- * 示例：打印字符串
+ * 参数:T
+ * 返回:void
+ * 示例:打印字符串
  *       Consumer<String> f = s->System.out.println(s);
  */
 @FunctionalInterface
@@ -70,7 +70,7 @@ public interface Consumer<T> {
      *
      * @throws NullPointerException if {@code after} is null
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default Consumer<T> andThen(Consumer<? super T> after) {
         Objects.requireNonNull(after);
         return (T t) -> {

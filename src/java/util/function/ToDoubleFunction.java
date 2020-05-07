@@ -37,10 +37,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：ToDoubleFunction<T>
+ * 函数式接口:ToDoubleFunction<T>
  *
- * 参数：T
- * 返回：double
+ * 参数:T
+ * 返回:double
  */
 @FunctionalInterface
 public interface ToDoubleFunction<T> {

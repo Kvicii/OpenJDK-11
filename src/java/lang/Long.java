@@ -211,7 +211,7 @@ public final class Long extends Number implements Comparable<Long> {
      * @throws NumberFormatException If the string cannot be parsed
      *                               as a {@code long}.
      */
-    // 按10进制形式将字符串s解析为long值，随后再装箱
+    // 按10进制形式将字符串s解析为long值 随后再装箱
     public static Long valueOf(String s) throws NumberFormatException {
         return Long.valueOf(parseLong(s, 10));
     }
@@ -244,7 +244,7 @@ public final class Long extends Number implements Comparable<Long> {
      * @throws NumberFormatException If the {@code String} does not
      *                               contain a parsable {@code long}.
      */
-    // 按radix进制形式将字符串s解析为long值，随后再装箱
+    // 按radix进制形式将字符串s解析为long值 随后再装箱
     public static Long valueOf(String s, int radix) throws NumberFormatException {
         return Long.valueOf(parseLong(s, radix));
     }
@@ -295,11 +295,11 @@ public final class Long extends Number implements Comparable<Long> {
      * @since 1.2
      */
     /*
-     * 将字符串nm解析为long，随后再装箱
+     * 将字符串nm解析为long 随后再装箱
      *
-     * 采用哪种进制解析nm取决于nm的格式：
-     * > 0x、0X、#开头，代表按16进制解析
-     * > 0开头，代表按8进制解析
+     * 采用哪种进制解析nm取决于nm的格式:
+     * > 0x、0X、#开头 代表按16进制解析
+     * > 0开头 代表按8进制解析
      * > 其他情形默认按10进制解析
      */
     public static Long decode(String nm) throws NumberFormatException {
@@ -470,14 +470,14 @@ public final class Long extends Number implements Comparable<Long> {
      * @see System#getProperty(java.lang.String, java.lang.String)
      */
     /*
-     * 从系统属性中获取值，然后再装箱
-     * 其中，nm为某个系统属性，val为备用值
+     * 从系统属性中获取值 然后再装箱
+     * 其中 nm为某个系统属性 val为备用值
      *
-     * 比如：
+     * 比如:
      * System.setProperty("age", "20");
      * Long x = getLong("age", 25);
-     * 如果属性age存在（被提前设置），x的值为20。
-     * 如果属性age不存在，则x的值为备用值25。
+     * 如果属性age存在(被提前设置) x的值为20。
+     * 如果属性age不存在 则x的值为备用值25。
      */
     public static Long getLong(String nm, Long val) {
         String v = null;
@@ -537,7 +537,7 @@ public final class Long extends Number implements Comparable<Long> {
      * @see java.lang.System#getProperty(java.lang.String)
      * @see java.lang.System#getProperty(java.lang.String, java.lang.String)
      */
-    // 从系统属性中获取值，然后再装箱。如果取不到值，选用val
+    // 从系统属性中获取值 然后再装箱。如果取不到值 选用val
     public static Long getLong(String nm, long val) {
         Long result = Long.getLong(nm, null);
         return (result == null) ? Long.valueOf(val) : result;
@@ -575,7 +575,7 @@ public final class Long extends Number implements Comparable<Long> {
      * @see java.lang.System#getProperty(java.lang.String)
      * @see java.lang.System#getProperty(java.lang.String, java.lang.String)
      */
-    // 从系统属性中获取值，然后再装箱。如果取不到值，返回null
+    // 从系统属性中获取值 然后再装箱。如果取不到值 返回null
     public static Long getLong(String nm) {
         return getLong(nm, null);
     }
@@ -1443,7 +1443,7 @@ public final class Long extends Number implements Comparable<Long> {
         }
     }
     
-    // 返回整型值i的radix形式，UTF16版本
+    // 返回整型值i的radix形式 UTF16版本
     private static String toStringUTF16(long i, int radix) {
         byte[] buf = new byte[65 * 2];
         int charPos = 64;
@@ -1463,7 +1463,7 @@ public final class Long extends Number implements Comparable<Long> {
     }
     
     /** byte[]/LATIN1 version */
-    // 将数字0到9分别存储为对应的ANSI码，'\0'存储为数字0。byte[]/LATIN1版本。参见Integer#formatUnsignedInt
+    // 将数字0到9分别存储为对应的ANSI码 '\0'存储为数字0。byte[]/LATIN1版本。参见Integer#formatUnsignedInt
     static void formatUnsignedLong0(long val, int shift, byte[] buf, int offset, int len) {
         int charPos = offset + len;
         int radix = 1 << shift;
@@ -1487,7 +1487,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * byte[]/UTF16 version
      */
-    // 将数字0到9分别存储为对应的ANSI码，'\0'存储为数字0。byte[]/UTF16版本。参见Integer#formatUnsignedInt
+    // 将数字0到9分别存储为对应的ANSI码 '\0'存储为数字0。byte[]/UTF16版本。参见Integer#formatUnsignedInt
     private static void formatUnsignedLong0UTF16(long val, int shift, byte[] buf, int offset, int len) {
         int charPos = offset + len;
         int radix = 1 << shift;
@@ -1510,7 +1510,7 @@ public final class Long extends Number implements Comparable<Long> {
      * wins. The iteration results are also routinely inlined in the generated
      * code after loop unrolling.
      */
-    // 统计整数i中包含的符号数量（包括负号），为转为字符串做准备
+    // 统计整数i中包含的符号数量(包括负号) 为转为字符串做准备
     static int stringSize(long x) {
         int d = 1;
         if(x >= 0) {
@@ -1601,7 +1601,7 @@ public final class Long extends Number implements Comparable<Long> {
      * Return a BigInteger equal to the unsigned value of the
      * argument.
      */
-    // 将当前long转换为无符号形式，用BigInteger存储
+    // 将当前long转换为无符号形式 用BigInteger存储
     private static BigInteger toUnsignedBigInteger(long i) {
         if(i >= 0L)
             return BigInteger.valueOf(i);
@@ -1637,7 +1637,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.7
      */
-    // 比较两个long（按自然顺序比较）
+    // 比较两个long(按自然顺序比较)
     public static int compare(long x, long y) {
         return (x<y) ? -1 : ((x == y) ? 0 : 1);
     }
@@ -1657,7 +1657,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.2
      */
-    // 比较两个Long（按自然顺序比较）
+    // 比较两个Long(按自然顺序比较)
     public int compareTo(Long anotherLong) {
         return compare(this.value, anotherLong.value);
     }
@@ -1676,7 +1676,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.8
      */
-    // 以无符号形式比较两个long（按自然顺序比较）
+    // 以无符号形式比较两个long(按自然顺序比较)
     public static int compareUnsigned(long x, long y) {
         return compare(x + MIN_VALUE, y + MIN_VALUE);
     }
@@ -1699,7 +1699,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.5
      */
-    // 返回二进制位中值为1的bit位的数量（把long值i表示为二进制形式）
+    // 返回二进制位中值为1的bit位的数量(把long值i表示为二进制形式)
     @HotSpotIntrinsicCandidate
     public static int bitCount(long i) {
         // HD, Figure 5-2
@@ -1799,7 +1799,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.5
      */
-    // 判断i的正负。遇到负数返回-1，正数返回1，0返回0。
+    // 判断i的正负。遇到负数返回-1 正数返回1 0返回0。
     public static int signum(long i) {
         // HD, Section 2-7
         return (int) ((i >> 63) | (-i >>> 63));
@@ -1846,7 +1846,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.5
      */
-    // 返回二进制位中开头连续的0的个数（把int值i表示为二进制形式）
+    // 返回二进制位中开头连续的0的个数(把int值i表示为二进制形式)
     @HotSpotIntrinsicCandidate
     public static int numberOfLeadingZeros(long i) {
         int x = (int) (i >>> 32);
@@ -1869,7 +1869,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.5
      */
-    // 返回二进制位中末尾连续的0的个数（把int值i表示为二进制形式）
+    // 返回二进制位中末尾连续的0的个数(把int值i表示为二进制形式)
     @HotSpotIntrinsicCandidate
     public static int numberOfTrailingZeros(long i) {
         // HD, Figure 5-14
@@ -1921,7 +1921,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.5
      */
-    // 返回二进制位中开头首次出现的1所占的数位，比如00110100，返回32
+    // 返回二进制位中开头首次出现的1所占的数位 比如00110100 返回32
     public static long highestOneBit(long i) {
         return i & (MIN_VALUE >>> numberOfLeadingZeros(i));
     }
@@ -1941,7 +1941,7 @@ public final class Long extends Number implements Comparable<Long> {
      *
      * @since 1.5
      */
-    // 返回二进制位中末尾最后出现的1所占的数位，比如00110100，返回4
+    // 返回二进制位中末尾最后出现的1所占的数位 比如00110100 返回4
     public static long lowestOneBit(long i) {
         // HD, Section 2-1
         return i & -i;
@@ -2161,9 +2161,9 @@ public final class Long extends Number implements Comparable<Long> {
     
     
     
-    // Long缓存，缓存了-128~127之间的Long对象
+    // Long缓存 缓存了-128~127之间的Long对象
     private static class LongCache {
-        // 256个Long对象缓存，依次表示-128~127
+        // 256个Long对象缓存 依次表示-128~127
         static final Long cache[] = new Long[-(-128) + 127 + 1];
         
         static {

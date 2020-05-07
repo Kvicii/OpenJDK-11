@@ -88,14 +88,14 @@ package java.nio;
  * HeapIntBufferR
  *
  *
- * 直接缓冲区（缓冲区字节序与本地相同）
+ * 直接缓冲区(缓冲区字节序与本地相同)
  * IntBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectIntBufferU      │
  *             ├────────────┘
  *    DirectIntBufferRU
  *
- * 直接缓冲区（缓冲区字节序与本地不同）
+ * 直接缓冲区(缓冲区字节序与本地不同)
  * IntBuffer        DirectBuffer
  *      └──────┬──────────┘ │
  *    DirectIntBufferS      │
@@ -221,7 +221,7 @@ public abstract class IntBuffer extends Buffer implements Comparable<IntBuffer> 
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Creates a new int buffer whose content is a shared subsequence of
@@ -281,7 +281,7 @@ public abstract class IntBuffer extends Buffer implements Comparable<IntBuffer> 
      */
     public abstract IntBuffer asReadOnlyBuffer();
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

@@ -29,7 +29,7 @@ package java.nio;
  * A read/write HeapIntBuffer.
  */
 
-// 可读写、非直接缓冲区，内部存储结构实现为int[]
+// 可读写、非直接缓冲区 内部存储结构实现为int[]
 class HeapIntBuffer extends IntBuffer {
     
     // Cached array base offset
@@ -73,7 +73,7 @@ class HeapIntBuffer extends IntBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public IntBuffer slice() {
         return new HeapIntBuffer(hb, -1, 0, this.remaining(), this.remaining(), this.position() + offset);
@@ -88,7 +88,7 @@ class HeapIntBuffer extends IntBuffer {
         return new HeapIntBufferR(hb, this.markValue(), this.position(), this.limit(), this.capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

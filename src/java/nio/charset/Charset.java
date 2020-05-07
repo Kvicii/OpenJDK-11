@@ -272,7 +272,7 @@ import java.util.TreeMap;
  * @since 1.4
  */
 
-// 字符集抽象基类，主要封装了查找、创建字符集实例，以及对字符序列进行编码与解码的操作
+// 字符集抽象基类 主要封装了查找、创建字符集实例 以及对字符序列进行编码与解码的操作
 public abstract class Charset implements Comparable<Charset> {
     // 标准字符集
     private static final CharsetProvider standardProvider = new sun.nio.cs.StandardCharsets();
@@ -334,7 +334,7 @@ public abstract class Charset implements Comparable<Charset> {
      */
     /*
      * 返回Java虚拟机的默认字符集。
-     * 默认字符集在虚拟机启动期间确定，通常取决于底层操作系统的区域设置和字符集。
+     * 默认字符集在虚拟机启动期间确定 通常取决于底层操作系统的区域设置和字符集。
      */
     public static Charset defaultCharset() {
         if(defaultCharset == null) {
@@ -365,7 +365,7 @@ public abstract class Charset implements Comparable<Charset> {
      * @throws UnsupportedCharsetException If no support for the named charset is available
      *                                     in this instance of the Java virtual machine
      */
-    // true：返回查找到的字符集（如果不存在则异常）
+    // true:返回查找到的字符集(如果不存在则异常)
     public static Charset forName(String charsetName) {
         // 返回查找到的字符集
         Charset cs = lookup(charsetName);
@@ -375,15 +375,15 @@ public abstract class Charset implements Comparable<Charset> {
     }
     
     /**
-     * 从此处开始字符集的查找，查找大致分两步：
-     *   第一步：查找Charset中的缓存（有一级缓存和二级缓存）；
+     * 从此处开始字符集的查找 查找大致分两步:
+     *   第一步:查找Charset中的缓存(有一级缓存和二级缓存)；
      *     1.1 先访问一级缓存cache1
      *     1.2 再访问二级缓存cache2
-     *   第二步：通过访问CharsetProvider（字符集提供商）来查找字符集：
-     *     2.1 在StandardCharsets（标准"字符集"提供商）中查找字符集；
-     *     2.2 在ExtendedCharsets（扩展"字符集"提供商）中查找字符集；
-     *     2.3 在自定义的字符集提供商（可注册给ServiceLoader）中查找字符集。
-     * 在字符集提供商中查找时，往往也要先查找其内部的缓存，其他流程差不多。
+     *   第二步:通过访问CharsetProvider(字符集提供商)来查找字符集:
+     *     2.1 在StandardCharsets(标准"字符集"提供商)中查找字符集；
+     *     2.2 在ExtendedCharsets(扩展"字符集"提供商)中查找字符集；
+     *     2.3 在自定义的字符集提供商(可注册给ServiceLoader)中查找字符集。
+     * 在字符集提供商中查找时 往往也要先查找其内部的缓存 其他流程差不多。
      *
      * @param charsetName 待查找的字符集名称
      * @return 返回查找结果
@@ -394,7 +394,7 @@ public abstract class Charset implements Comparable<Charset> {
             throw new IllegalArgumentException("Null charset name");
         Object[] a;
         if((a = cache1) != null && charsetName.equals(a[0])){
-            // 在一级缓存中找到了匹配的字符集，直接返回
+            // 在一级缓存中找到了匹配的字符集 直接返回
             return (Charset) a[1];
         }
         // We expect most programs to use one Charset repeatedly.
@@ -402,13 +402,13 @@ public abstract class Charset implements Comparable<Charset> {
         return lookup2(charsetName);
     }
     
-    // 返回查找到的字符集，在Charset的一级缓存中未找到时会执行到此步
+    // 返回查找到的字符集 在Charset的一级缓存中未找到时会执行到此步
     private static Charset lookup2(String charsetName) {
         Object[] a;
         
         // 在二级缓存中找到了匹配的字符集
         if((a = cache2) != null && charsetName.equals(a[0])) {
-            // 交换两个缓存中的字符集（包装一级缓存中存的是最近使用的字符集）
+            // 交换两个缓存中的字符集(包装一级缓存中存的是最近使用的字符集)
             cache2 = cache1;
             cache1 = a;
             return (Charset) a[1];
@@ -419,12 +419,12 @@ public abstract class Charset implements Comparable<Charset> {
         if((cs = standardProvider.charsetForName(charsetName)) != null  // 在StandardCharsets中查找
             || (cs = lookupExtendedCharset(charsetName)) != null        // 在ExtendedCharsets中查找
             || (cs = lookupViaProviders(charsetName)) != null) {        // 在自定义的字符集提供商中查找
-            // 如果找到了字符集，将其存储到Charset的内部缓存中
+            // 如果找到了字符集 将其存储到Charset的内部缓存中
             cache(charsetName, cs);
             return cs;
         }
         
-        // 只有在上面的查找过程中找不到字符集时，才会执行到此，检查给定的字符集名称是否符合命名规范
+        // 只有在上面的查找过程中找不到字符集时 才会执行到此 检查给定的字符集名称是否符合命名规范
         checkName(charsetName);
         
         return null;
@@ -516,23 +516,23 @@ public abstract class Charset implements Comparable<Charset> {
      * @return An immutable, case-insensitive map from canonical charset names
      * to charset objects
      */
-    // 返回一个有序映射，该映射中包含了所有可以找到的安全的字符集提供商
+    // 返回一个有序映射 该映射中包含了所有可以找到的安全的字符集提供商
     public static SortedMap<String, Charset> availableCharsets() {
         return AccessController.doPrivileged(new PrivilegedAction<>() {
             public SortedMap<String, Charset> run() {
                 TreeMap<String, Charset> m = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                 
-                // 在StandardCharsets中查找系统支持的字符集，并将其存入映射m，忽略映射中已经存在的字符集。
+                // 在StandardCharsets中查找系统支持的字符集 并将其存入映射m 忽略映射中已经存在的字符集。
                 put(standardProvider.charsets(), m);
                 
-                // 返回装载的ExtendedProvider，存入映射m
+                // 返回装载的ExtendedProvider 存入映射m
                 CharsetProvider[] ecps = ExtendedProviderHolder.extendedProviders;
                 for(CharsetProvider ecp : ecps) {
-                    // 将扩展支持的字符集存入m，忽略映射中已经存在的字符集。
+                    // 将扩展支持的字符集存入m 忽略映射中已经存在的字符集。
                     put(ecp.charsets(), m);
                 }
                 
-                // 返回装载的自定义数据集提供商，存入映射m
+                // 返回装载的自定义数据集提供商 存入映射m
                 for(Iterator<CharsetProvider> i = providers(); i.hasNext(); ) {
                     CharsetProvider cp = i.next();
                     
@@ -548,7 +548,7 @@ public abstract class Charset implements Comparable<Charset> {
      * Creates an iterator that walks over the available providers, ignoring those whose lookup or instantiation causes a security exception to be thrown.
      * Should be invoked with full privileges.
      */
-    // 创建一个遍历自定义数据集提供商的迭代器，忽略那些存在安全隐患的数据集提供商。
+    // 创建一个遍历自定义数据集提供商的迭代器 忽略那些存在安全隐患的数据集提供商。
     private static Iterator<CharsetProvider> providers() {
         return new Iterator<>() {
             ClassLoader cl = ClassLoader.getSystemClassLoader();
@@ -592,12 +592,12 @@ public abstract class Charset implements Comparable<Charset> {
         };
     }
     
-    // 将给定迭代器中包含的字符集存储到指定映射中，忽略映射中已经存在的字符集。
+    // 将给定迭代器中包含的字符集存储到指定映射中 忽略映射中已经存在的字符集。
     private static void put(Iterator<Charset> i, Map<String, Charset> m) {
         while(i.hasNext()) {
             // 返回迭代器中规范名对应的字符集实例[参见StandardCharsets]
             Charset cs = i.next();
-            if(!m.containsKey(cs.name()))   // 如果m中不包含此字符集名称，则存入该字符集实例
+            if(!m.containsKey(cs.name()))   // 如果m中不包含此字符集名称 则存入该字符集实例
                 m.put(cs.name(), cs);
         }
     }
@@ -642,7 +642,7 @@ public abstract class Charset implements Comparable<Charset> {
     /*
      * 表示这个字符集是否允许编码。
      * 几乎所有的字符集都支持编码。
-     * 主要的例外情况是带有解码器的字符集，它们可以检测字节序列是如何编码的，并且之后会选择一个合适的解码方案。
+     * 主要的例外情况是带有解码器的字符集 它们可以检测字节序列是如何编码的 并且之后会选择一个合适的解码方案。
      * 这些字符集通常只支持解码并且不创建自己的编码。
      */
     public boolean canEncode() {
@@ -674,7 +674,7 @@ public abstract class Charset implements Comparable<Charset> {
      *
      * @return A byte buffer containing the encoded characters
      */
-    // 编码字符序列cb，返回编码后的字节序列
+    // 编码字符序列cb 返回编码后的字节序列
     public final ByteBuffer encode(CharBuffer cb) {
         try {
             return ThreadLocalCoders.encoderFor(this)   // 生成编码器
@@ -699,7 +699,7 @@ public abstract class Charset implements Comparable<Charset> {
      *
      * @return A byte buffer containing the encoded characters
      */
-    // 编码字符序列str，返回编码后的字节序列
+    // 编码字符序列str 返回编码后的字节序列
     public final ByteBuffer encode(String str) {
         return encode(CharBuffer.wrap(str));
     }
@@ -728,7 +728,7 @@ public abstract class Charset implements Comparable<Charset> {
      *
      * @return A char buffer containing the decoded characters
      */
-    // 解码字节序列bb，返回解码后的字符序列
+    // 解码字节序列bb 返回解码后的字符序列
     public final CharBuffer decode(ByteBuffer bb) {
         try {
             return ThreadLocalCoders.decoderFor(this)   // 生成解码器
@@ -781,7 +781,7 @@ public abstract class Charset implements Comparable<Charset> {
      *
      * @return The display name of this charset in the default locale
      */
-    // 返回当前字符集规范名在默认语言环境中的可读名称，一般等同于规范名
+    // 返回当前字符集规范名在默认语言环境中的可读名称 一般等同于规范名
     public String displayName() {
         return name;
     }
@@ -797,7 +797,7 @@ public abstract class Charset implements Comparable<Charset> {
      *
      * @return The display name of this charset in the given locale
      */
-    // 返回当前字符集别名在默认语言环境中的可读名称，一般等同于别名
+    // 返回当前字符集别名在默认语言环境中的可读名称 一般等同于别名
     public String displayName(Locale locale) {
         return name;
     }
@@ -813,7 +813,7 @@ public abstract class Charset implements Comparable<Charset> {
      *
      * @throws IllegalCharsetNameException If the given name is not a legal charset name
      */
-    // 检查给定的字符集名称（可能是规范名或别名）是否满足命名规范
+    // 检查给定的字符集名称(可能是规范名或别名)是否满足命名规范
     private static void checkName(String s) {
         int n = s.length();
         if(n == 0) {
@@ -853,7 +853,7 @@ public abstract class Charset implements Comparable<Charset> {
      * @throws IllegalCharsetNameException If the given charset name is illegal
      * @throws IllegalArgumentException    If the given {@code charsetName} is null
      */
-    // true：系统是否支持此字符集
+    // true:系统是否支持此字符集
     public static boolean isSupported(String charsetName) {
         return (lookup(charsetName) != null);
     }
@@ -864,17 +864,17 @@ public abstract class Charset implements Comparable<Charset> {
      * @return {@code true} if, and only if, this charset is known by its implementor to be registered with the IANA
      */
     /*
-     * 返回true表示当前字符集已在IANA（互联网数字分配机构，管理域名、协议分配和其他数字资源）注册
+     * 返回true表示当前字符集已在IANA(互联网数字分配机构 管理域名、协议分配和其他数字资源)注册
      *
      * IANA是维护字符集名称的权威登记机构。
-     * 如果给出的Charset对象表示在IANA注册的字符集，那么isRegistered()方法将返回true。
-     * 如果是这样的话，那么Charset对象需要满足几个条件：
+     * 如果给出的Charset对象表示在IANA注册的字符集 那么isRegistered()方法将返回true。
+     * 如果是这样的话 那么Charset对象需要满足几个条件:
      *  字符集的规范名称应与在IANA注册的名称相符。
-     *  如果IANA用同一个字符集注册了多个名称，对象返回的规范名称应该与IANA注册中的MIME-首选名称相符。
-     *  如果字符集名称从注册中移除，那么当前的规范名称应保留为别名。
-     *  如果字符集没有在IANA注册，它的规范名称必须以“X-”或“x-”开头。
+     *  如果IANA用同一个字符集注册了多个名称 对象返回的规范名称应该与IANA注册中的MIME-首选名称相符。
+     *  如果字符集名称从注册中移除 那么当前的规范名称应保留为别名。
+     *  如果字符集没有在IANA注册 它的规范名称必须以“X-”或“x-”开头。
      *
-     * 如果是自定义字符集，那么应当让isRegistered()返回false，并以“X-”或“x-”开头命名字符集
+     * 如果是自定义字符集 那么应当让isRegistered()返回false 并以“X-”或“x-”开头命名字符集
      */
     public final boolean isRegistered() {
         return !name.startsWith("X-") && !name.startsWith("x-");
@@ -906,7 +906,7 @@ public abstract class Charset implements Comparable<Charset> {
      *
      * @return {@code true} if the given charset is contained in this charset
      */
-    // true：给定的字符集与当前的字符集实现类匹配
+    // true:给定的字符集与当前的字符集实现类匹配
     public abstract boolean contains(Charset cs);
     
     /**
@@ -964,7 +964,7 @@ public abstract class Charset implements Comparable<Charset> {
     
     
     
-    // 访问ExtendedCharsets[扩展字符集提供商]的工具（需要通过权限审核）
+    // 访问ExtendedCharsets[扩展字符集提供商]的工具(需要通过权限审核)
     private static class ExtendedProviderHolder {
         static final CharsetProvider[] extendedProviders = extendedProviders();
         
@@ -975,7 +975,7 @@ public abstract class Charset implements Comparable<Charset> {
                     CharsetProvider[] cps = new CharsetProvider[1];
                     int n = 0;
                     ServiceLoader<CharsetProvider> sl = ServiceLoader.loadInstalled(CharsetProvider.class);
-                    // 将加载到的字符集提供商保存起来，如果提供商过多，需要扩容
+                    // 将加载到的字符集提供商保存起来 如果提供商过多 需要扩容
                     for(CharsetProvider cp : sl) {
                         if(n + 1 > cps.length) {
                             cps = Arrays.copyOf(cps, cps.length << 1);

@@ -56,10 +56,10 @@ final class Streams {
     /*▼ Stream构建器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /*
-     * Stream构建器的抽象基类，用来构建单元素或多元素的流。
+     * Stream构建器的抽象基类 用来构建单元素或多元素的流。
      *
-     * 当元素个数为0个1个时，创建单元素流
-     * 当元素个数>=2时，创建多元素流
+     * 当元素个数为0个1个时 创建单元素流
+     * 当元素个数>=2时 创建多元素流
      *
      * 具体行为参见实现类StreamBuilderImpl
      */
@@ -102,16 +102,16 @@ final class Streams {
      *                          count = -1 ◁------- count = -2 ◀--- StreamBuilderImpl(t1)
      *                              ⑵                   ⑴
      *
-     * Stream构建器，兼具Spliterator属性，是个多面手
-     * Stream构建器对象有两种创建模式，参见上图。
+     * Stream构建器 兼具Spliterator属性 是个多面手
+     * Stream构建器对象有两种创建模式 参见上图。
      *
-     * Stream构建器可能构建出两种形态的流：
-     * 第一种：构建器内没有元素或只有一个元素，此时存储元素的容器是first。
+     * Stream构建器可能构建出两种形态的流:
+     * 第一种:构建器内没有元素或只有一个元素 此时存储元素的容器是first。
      *        (1) 构建器采用模式一创建。
-     *            需要通过build()方法将构建器从模式一切换到模式二，而且，将返回以构建器自身做Spliterator的流。
+     *            需要通过build()方法将构建器从模式一切换到模式二 而且 将返回以构建器自身做Spliterator的流。
      *        (2) 构建器采用模式二创建。
      *            需要通过Stream.of或Stream.ofNullable方法创建以构建器自身做Spliterator的流。
-     * 第二种：构建器内存在>=2个元素，此时存储元素的容器是buffer。
+     * 第二种:构建器内存在>=2个元素 此时存储元素的容器是buffer。
      *        该构建器必定使用模式一创建。
      *        返回的流以SpinedBuffer内部的Spliterator做Spliterator。
      */
@@ -144,32 +144,32 @@ final class Streams {
         
         // StreamBuilder implementation
         
-        // 使用模式一创建构建器后，可以调用此方法构建一个新的流
+        // 使用模式一创建构建器后 可以调用此方法构建一个新的流
         @Override
         public Stream<T> build() {
             int c = count;
             
             if(c >= 0) {
                 // Switch count to negative value signalling the builder is built
-                count = -count - 1; // 元素个数为0或1，则完成模式一到模式二的切换
+                count = -count - 1; // 元素个数为0或1 则完成模式一到模式二的切换
                 // Use this spliterator if 0 or 1 elements, otherwise use the spliterator of the spined buffer
                 return (c < 2)
-                    ? StreamSupport.stream(this, false) // 只有0或1个元素，创建单元素流，自身做Spliterator
-                    : StreamSupport.stream(buffer.spliterator(), false); // 元素个数>=2时，创建多元素流
+                    ? StreamSupport.stream(this, false) // 只有0或1个元素 创建单元素流 自身做Spliterator
+                    : StreamSupport.stream(buffer.spliterator(), false); // 元素个数>=2时 创建多元素流
             }
             
             throw new IllegalStateException();
         }
         
-        // 使用模式一创建构建器后，可以调用此方法添加元素
+        // 使用模式一创建构建器后 可以调用此方法添加元素
         @Override
         public void accept(T t) {
             // 处于模式一的⑴阶段
             if(count == 0) {
                 first = t;
                 count++;
-            } else if(count > 0) {  // 处于模式一⑵阶段（含）以后
-                // 如果添加2个以上的元素，需要启用buffer
+            } else if(count > 0) {  // 处于模式一⑵阶段(含)以后
+                // 如果添加2个以上的元素 需要启用buffer
                 if(buffer == null) {
                     buffer = new SpinedBuffer<>();
                     buffer.accept(first);   // 别忘了把第一个元素添加进来
@@ -182,7 +182,7 @@ final class Streams {
             }
         }
         
-        // 使用模式一创建构建器后，可以调用此方法添加元素
+        // 使用模式一创建构建器后 可以调用此方法添加元素
         public Stream.Builder<T> add(T t) {
             accept(t);
             return this;
@@ -192,7 +192,7 @@ final class Streams {
         // count == -1 for no elements
         // count == -2 for one element held by first
         
-        // 使用模式二创建构建器后，可以调用此方法消费元素
+        // 使用模式二创建构建器后 可以调用此方法消费元素
         @Override
         public boolean tryAdvance(Consumer<? super T> action) {
             Objects.requireNonNull(action);
@@ -206,12 +206,12 @@ final class Streams {
             }
         }
         
-        // 使用模式二创建构建器后，可以调用此方法消费元素
+        // 使用模式二创建构建器后 可以调用此方法消费元素
         @Override
         public void forEachRemaining(Consumer<? super T> action) {
             Objects.requireNonNull(action);
             
-            // 行为与tryAdvance一致，因为此时最多只有一个元素可供消费
+            // 行为与tryAdvance一致 因为此时最多只有一个元素可供消费
             if(count == -2) {
                 action.accept(first);
                 count = -1;
@@ -490,7 +490,7 @@ final class Streams {
     
     
     
-    /*▼ 专用Spliterator，参见Stream#concat ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 专用Spliterator 参见Stream#concat ████████████████████████████████████████████████████████████████████████████████┓ */
     
     abstract static class ConcatSpliterator<T, T_SPLITR extends Spliterator<T>>
         implements Spliterator<T> {
@@ -630,11 +630,11 @@ final class Streams {
         }
     }
     
-    /*▲ 专用Spliterator，参见Stream#concat ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 专用Spliterator 参见Stream#concat ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ 专用Spliterator，参见IntStream#range ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 专用Spliterator 参见IntStream#range ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * An {@code int} range spliterator.
@@ -752,11 +752,11 @@ final class Streams {
         }
     }
     
-    /*▲ 专用Spliterator，参见IntStream#range ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 专用Spliterator 参见IntStream#range ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ 专用Spliterator，参见LongStream#range ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 专用Spliterator 参见LongStream#range ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * A {@code long} range spliterator.
@@ -874,7 +874,7 @@ final class Streams {
         }
     }
     
-    /*▲ 专用Spliterator，参见LongStream#range ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 专用Spliterator 参见LongStream#range ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

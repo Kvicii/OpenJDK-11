@@ -29,7 +29,7 @@ package java.nio;
  * A read/write HeapLongBuffer.
  */
 
-// 可读写、非直接缓冲区，内部存储结构实现为long[]
+// 可读写、非直接缓冲区 内部存储结构实现为long[]
 class HeapLongBuffer extends LongBuffer {
     
     // Cached array base offset
@@ -73,7 +73,7 @@ class HeapLongBuffer extends LongBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public LongBuffer slice() {
         return new HeapLongBuffer(hb, -1, 0, this.remaining(), this.remaining(), this.position() + offset);
@@ -87,7 +87,7 @@ class HeapLongBuffer extends LongBuffer {
         return new HeapLongBufferR(hb, this.markValue(), this.position(), this.limit(), this.capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

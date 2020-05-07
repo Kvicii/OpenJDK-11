@@ -289,7 +289,7 @@ public final class StackTraceElement implements java.io.Serializable {
      * @return {@code true} if the method containing the execution point
      * represented by this stack trace element is a native method.
      */
-    // 是否为native方法（native方法的行号标记为-2）
+    // 是否为native方法(native方法的行号标记为-2)
     public boolean isNativeMethod() {
         return lineNumber == -2;
     }

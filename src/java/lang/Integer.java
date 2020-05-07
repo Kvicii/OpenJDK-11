@@ -251,7 +251,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @throws NumberFormatException if the string cannot be parsed
      *                               as an integer.
      */
-    // 按10进制形式将字符串s解析为int值，随后再装箱
+    // 按10进制形式将字符串s解析为int值 随后再装箱
     public static Integer valueOf(String s) throws NumberFormatException {
         return Integer.valueOf(parseInt(s, 10));
     }
@@ -283,7 +283,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @throws NumberFormatException if the {@code String}
      *                               does not contain a parsable {@code int}.
      */
-    // 按radix进制形式将字符串s解析为int值，随后再装箱
+    // 按radix进制形式将字符串s解析为int值 随后再装箱
     public static Integer valueOf(String s, int radix) throws NumberFormatException {
         return Integer.valueOf(parseInt(s, radix));
     }
@@ -333,11 +333,11 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @see java.lang.Integer#parseInt(java.lang.String, int)
      */
     /*
-     * 将字符串nm解析为int，随后再装箱
+     * 将字符串nm解析为int 随后再装箱
      *
-     * 采用哪种进制解析nm取决于nm的格式：
-     * > 0x、0X、#开头，代表按16进制解析
-     * > 0开头，代表按8进制解析
+     * 采用哪种进制解析nm取决于nm的格式:
+     * > 0x、0X、#开头 代表按16进制解析
+     * > 0开头 代表按8进制解析
      * > 其他情形默认按10进制解析
      */
     public static Integer decode(String nm) throws NumberFormatException {
@@ -503,14 +503,14 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @see System#getProperty(java.lang.String, java.lang.String)
      */
     /*
-     * 从系统属性中获取值，然后再装箱
-     * 其中，nm为某个系统属性，val为备用值
+     * 从系统属性中获取值 然后再装箱
+     * 其中 nm为某个系统属性 val为备用值
      *
-     * 比如：
+     * 比如:
      * System.setProperty("age", "20");
      * Integer x = getInteger("age", 25);
-     * 如果属性age存在（被提前设置），x的值为20。
-     * 如果属性age不存在，则x的值为备用值25。
+     * 如果属性age存在(被提前设置) x的值为20。
+     * 如果属性age不存在 则x的值为备用值25。
      */
     public static Integer getInteger(String nm, Integer val) {
         String v = null;
@@ -571,7 +571,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @see java.lang.System#getProperty(java.lang.String)
      * @see java.lang.System#getProperty(java.lang.String, java.lang.String)
      */
-    // 从系统属性中获取值，然后再装箱。如果取不到值，选用val
+    // 从系统属性中获取值 然后再装箱。如果取不到值 选用val
     public static Integer getInteger(String nm, int val) {
         Integer result = getInteger(nm, null);
         return (result == null) ? Integer.valueOf(val) : result;
@@ -609,7 +609,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @see java.lang.System#getProperty(java.lang.String)
      * @see java.lang.System#getProperty(java.lang.String, java.lang.String)
      */
-    // 从系统属性中获取值，然后再装箱。如果取不到值，返回null。
+    // 从系统属性中获取值 然后再装箱。如果取不到值 返回null。
     public static Integer getInteger(String nm) {
         return getInteger(nm, null);
     }
@@ -1030,7 +1030,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      */
     @HotSpotIntrinsicCandidate
     public static String toString(int i) {
-        // 统计整数i中包含的符号数量（包括负号），即计算整数i转为字符串后的长度
+        // 统计整数i中包含的符号数量(包括负号) 即计算整数i转为字符串后的长度
         int size = stringSize(i);
         
         if(COMPACT_STRINGS) {
@@ -1325,7 +1325,7 @@ public final class Integer extends Number implements Comparable<Integer> {
         }
     }
     
-    // 返回整型值i的radix形式，UTF16版本
+    // 返回整型值i的radix形式 UTF16版本
     private static String toStringUTF16(int i, int radix) {
         byte[] buf = new byte[33 * 2];
         boolean negative = (i<0);
@@ -1357,11 +1357,11 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @param len    the number of characters to write
      */
     /*
-     * 从buf的offset索引处开始，存入变量val在2^shift进制下的后len位
+     * 从buf的offset索引处开始 存入变量val在2^shift进制下的后len位
      * shift取1、3、4时分别代表二进制、八进制、16进制
-     * 如果len的长度超过该进制下的有效数位长度，则前面空白部分补0
+     * 如果len的长度超过该进制下的有效数位长度 则前面空白部分补0
      *
-     * 举例：
+     * 举例:
      * 十进制数12345的八进制形式为30071
      *
      * char[] buf = new char[10];
@@ -1386,7 +1386,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
     
     /** byte[]/LATIN1 version */
-    // formatUnsignedInt方法的byte[]/LATIN1版本，将数字0到9分别存储为对应的ANSI码，'\0'存储为数字0
+    // formatUnsignedInt方法的byte[]/LATIN1版本 将数字0到9分别存储为对应的ANSI码 '\0'存储为数字0
     static void formatUnsignedInt(int val, int shift, byte[] buf, int offset, int len) {
         int charPos = offset + len;
         int radix = 1 << shift;
@@ -1398,7 +1398,7 @@ public final class Integer extends Number implements Comparable<Integer> {
     }
     
     /** byte[]/UTF16 version */
-    // formatUnsignedInt方法的byte[]/UTF16版本，每个char存为两个byte
+    // formatUnsignedInt方法的byte[]/UTF16版本 每个char存为两个byte
     private static void formatUnsignedIntUTF16(int val, int shift, byte[] buf, int offset, int len) {
         int charPos = offset + len;
         int radix = 1 << shift;
@@ -1422,8 +1422,8 @@ public final class Integer extends Number implements Comparable<Integer> {
      * code after loop unrolling.
      */
     /*
-     * 统计整数i中包含的符号数量（包括负号），为转为字符串做准备
-     * 比如stringSize(12345)返回5，stringSize(-12345)返回6
+     * 统计整数i中包含的符号数量(包括负号) 为转为字符串做准备
+     * 比如stringSize(12345)返回5 stringSize(-12345)返回6
      */
     static int stringSize(int x) {
         int d = 1;
@@ -1519,7 +1519,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.8
      */
-    // 将当前int转换为无符号形式，用long存储
+    // 将当前int转换为无符号形式 用long存储
     public static long toUnsignedLong(int x) {
         return ((long) x) & 0xffffffffL;
     }
@@ -1546,7 +1546,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.7
      */
-    // 比较两个int（按自然顺序比较）
+    // 比较两个int(按自然顺序比较)
     public static int compare(int x, int y) {
         return (x<y) ? -1 : ((x == y) ? 0 : 1);
     }
@@ -1566,7 +1566,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.2
      */
-    // 比较两个Integer（按自然顺序比较）
+    // 比较两个Integer(按自然顺序比较)
     public int compareTo(Integer anotherInteger) {
         return compare(this.value, anotherInteger.value);
     }
@@ -1585,7 +1585,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.8
      */
-    // 以无符号形式比较两个int（按自然顺序比较）
+    // 以无符号形式比较两个int(按自然顺序比较)
     public static int compareUnsigned(int x, int y) {
         return compare(x + MIN_VALUE, y + MIN_VALUE);
     }
@@ -1608,7 +1608,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.5
      */
-    // 返回二进制位中值为1的bit位的数量（把int值i表示为二进制形式）
+    // 返回二进制位中值为1的bit位的数量(把int值i表示为二进制形式)
     @HotSpotIntrinsicCandidate
     public static int bitCount(int i) {
         // HD, Figure 5-2
@@ -1724,7 +1724,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.5
      */
-    // 判断i的正负。遇到负数返回-1，正数返回1，0返回0。
+    // 判断i的正负。遇到负数返回-1 正数返回1 0返回0。
     public static int signum(int i) {
         // HD, Section 2-7
         return (i >> 31) | (-i >>> 31);
@@ -1753,7 +1753,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.5
      */
-    // 返回二进制位中开头连续的0的个数（把int值i表示为二进制形式）
+    // 返回二进制位中开头连续的0的个数(把int值i表示为二进制形式)
     @HotSpotIntrinsicCandidate
     public static int numberOfLeadingZeros(int i) {
         // HD, Count leading 0's
@@ -1795,7 +1795,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.5
      */
-    // 返回二进制位中末尾连续的0的个数（把int值i表示为二进制形式）
+    // 返回二进制位中末尾连续的0的个数(把int值i表示为二进制形式)
     @HotSpotIntrinsicCandidate
     public static int numberOfTrailingZeros(int i) {
         // HD, Figure 5-14
@@ -1841,7 +1841,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.5
      */
-    // 返回二进制位中开头首次出现的1所占的数位，比如00110100，返回32
+    // 返回二进制位中开头首次出现的1所占的数位 比如00110100 返回32
     public static int highestOneBit(int i) {
         return i & (MIN_VALUE >>> numberOfLeadingZeros(i));
     }
@@ -1861,7 +1861,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      *
      * @since 1.5
      */
-    // 返回二进制位中末尾最后出现的1所占的数位，比如00110100，返回4
+    // 返回二进制位中末尾最后出现的1所占的数位 比如00110100 返回4
     public static int lowestOneBit(int i) {
         // HD, Section 2-1
         return i & -i;
@@ -1943,7 +1943,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @see #remainderUnsigned
      * @since 1.8
      */
-    // 除法运算，计算结果转为int后返回。计算前需要先将两个int值转换为无符号形式，并用long存储。
+    // 除法运算 计算结果转为int后返回。计算前需要先将两个int值转换为无符号形式 并用long存储。
     public static int divideUnsigned(int dividend, int divisor) {
         // In lieu of tricky code, for now just use long arithmetic.
         return (int) (toUnsignedLong(dividend) / toUnsignedLong(divisor));
@@ -1963,7 +1963,7 @@ public final class Integer extends Number implements Comparable<Integer> {
      * @see #divideUnsigned
      * @since 1.8
      */
-    // 取余运算，计算结果转为int后返回。计算前需要先将两个int值转换为无符号形式，并用long存储。
+    // 取余运算 计算结果转为int后返回。计算前需要先将两个int值转换为无符号形式 并用long存储。
     public static int remainderUnsigned(int dividend, int divisor) {
         // In lieu of tricky code, for now just use long arithmetic.
         return (int) (toUnsignedLong(dividend) % toUnsignedLong(divisor));
@@ -2030,9 +2030,9 @@ public final class Integer extends Number implements Comparable<Integer> {
      * jdk.internal.misc.VM class.
      */
     /*
-     * Integer缓存，默认缓存了-128~127之间的Integer对象
-     * 如果想增加缓存数字的上限，比如将缓存范围改为[-128, 200]，
-     * 则可以设置运行参数：
+     * Integer缓存 默认缓存了-128~127之间的Integer对象
+     * 如果想增加缓存数字的上限 比如将缓存范围改为[-128, 200]
+     * 则可以设置运行参数:
      * -XX:AutoBoxCacheMax=200
      * 或
      * -Djava.lang.Integer.IntegerCache.high=200

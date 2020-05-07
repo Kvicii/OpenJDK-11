@@ -38,11 +38,11 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：Function<T, R>
+ * 函数式接口:Function<T, R>
  *
- * 参数：T
- * 返回：R
- * 示例：将字符串s转换为整数
+ * 参数:T
+ * 返回:R
+ * 示例:将字符串s转换为整数
  *       Function<String, Integer> f = s->Integer.parseInt(s);
  */
 @FunctionalInterface
@@ -85,7 +85,7 @@ public interface Function<T, R> {
      * @throws NullPointerException if before is null
      * @see #andThen(Function)
      */
-	// f1.compose(f2)：先执行f2，再执行f1
+	// f1.compose(f2):先执行f2 再执行f1
     default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
         Objects.requireNonNull(before);
         return (V v) -> apply(before.apply(v));
@@ -107,7 +107,7 @@ public interface Function<T, R> {
      * @throws NullPointerException if after is null
      * @see #compose(Function)
      */
-	// f1.andThen(f2)：先执行f1，再执行f2
+	// f1.andThen(f2):先执行f1 再执行f2
     default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
         Objects.requireNonNull(after);
         return (T t) -> after.apply(apply(t));

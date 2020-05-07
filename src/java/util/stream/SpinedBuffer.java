@@ -54,7 +54,7 @@ import java.util.function.LongConsumer;
  * @since 1.8
  */
 
-// 容量可变的缓冲区，使用一维数组和二维数组做元素缓冲区，只能存取，不能修改，用在流的终端阶段收集数据
+// 容量可变的缓冲区 使用一维数组和二维数组做元素缓冲区 只能存取 不能修改 用在流的终端阶段收集数据
 class SpinedBuffer<E>
     extends AbstractSpinedBuffer
     implements Consumer<E>, Iterable<E> {
@@ -81,14 +81,14 @@ class SpinedBuffer<E>
      * Chunk that we're currently writing into; may or may not be aliased with
      * the first element of the spine.
      */
-    // 一维缓存，初始时为curChunk分配容量，之后将为spine分配容量，并让curChunk指向spine新分配的行
+    // 一维缓存 初始时为curChunk分配容量 之后将为spine分配容量 并让curChunk指向spine新分配的行
     protected E[] curChunk;
 
     /**
      * All chunks, or null if there is only one chunk.
      */
     /*
-     * 二维缓存，初始时不分配容量，只是让spine[0]指向curChunk，之后为spine的每一行分配容量
+     * 二维缓存 初始时不分配容量 只是让spine[0]指向curChunk 之后为spine的每一行分配容量
      * spine中的每一行称作一个chunk
      */
     protected E[][] spine;
@@ -118,7 +118,7 @@ class SpinedBuffer<E>
     // 向SpinedBuffer存入一个元素
     @Override
     public void accept(E e) {
-        // 如果一维缓存已满，需要扩容
+        // 如果一维缓存已满 需要扩容
         if (elementIndex == curChunk.length) {
             // 初始化二维缓存
             inflateSpine();
@@ -221,7 +221,7 @@ class SpinedBuffer<E>
         spineIndex = 0;
     }
     
-    // 遍历SpinedBuffer中的元素，并在其上应用consumer函数
+    // 遍历SpinedBuffer中的元素 并在其上应用consumer函数
     @Override
     public void forEach(Consumer<? super E> consumer) {
         // completed chunks, if any
@@ -247,17 +247,17 @@ class SpinedBuffer<E>
     /**
      * Ensure that the buffer has at least capacity to hold the target size
      */
-    // 传入需要的容量，确保SpinedBuffer容量充足，不够的话就分配
+    // 传入需要的容量 确保SpinedBuffer容量充足 不够的话就分配
     @SuppressWarnings("unchecked")
     protected final void ensureCapacity(long targetSize) {
         // 返回当前SpinedBuffer的容量
         long capacity = capacity();
-        // 需要的容量比当前容量大，则需要申请新的空间
+        // 需要的容量比当前容量大 则需要申请新的空间
         if (targetSize > capacity) {
             // 确保二维缓存已初始化
             inflateSpine();
             for (int i=spineIndex+1; targetSize > capacity; i++) {
-                // 如果二维缓存也不够用了，需要对二维缓存扩容
+                // 如果二维缓存也不够用了 需要对二维缓存扩容
                 if (i >= spine.length) {
                     int newSpineSize = spine.length * 2;
                     spine = Arrays.copyOf(spine, newSpineSize);
@@ -278,7 +278,7 @@ class SpinedBuffer<E>
     /**
      * Force the buffer to increase its capacity.
      */
-    // 扩容，比当前容量多一个元素，往往会分配更多的空间
+    // 扩容 比当前容量多一个元素 往往会分配更多的空间
     protected void increaseCapacity() {
         // 确保SpinedBuffer容量充足
         ensureCapacity(capacity() + 1);
@@ -297,7 +297,7 @@ class SpinedBuffer<E>
     // 返回适用于该SpinedBuffer的Iterator
     @Override
     public Iterator<E> iterator() {
-        // 返回(4)类Spliterator：将Spliterator适配到Iterator来使用
+        // 返回(4)类Spliterator:将Spliterator适配到Iterator来使用
         return Spliterators.iterator(spliterator());
     }
     
@@ -323,7 +323,7 @@ class SpinedBuffer<E>
              * tryAdvance can set splSpineIndex > spineIndex if the last spine is full
              */
             // The current spine array
-            E[] splChunk;   // 存储当前的chunk，内容会随着遍历而变化
+            E[] splChunk;   // 存储当前的chunk 内容会随着遍历而变化
         
             Splitr(int firstSpineIndex, int lastSpineIndex, int firstSpineElementIndex, int lastSpineElementFence) {
                 this.splSpineIndex = firstSpineIndex;
@@ -334,7 +334,7 @@ class SpinedBuffer<E>
                 splChunk = (spine == null) ? curChunk : spine[firstSpineIndex];
             }
     
-            // 返回当前情境中的元素数量（可能是估算值）
+            // 返回当前情境中的元素数量(可能是估算值)
             @Override
             public long estimateSize() {
                 return (splSpineIndex == lastSpineIndex)
@@ -367,7 +367,7 @@ class SpinedBuffer<E>
                 return false;
             }
     
-            // 遍历容器内每个元素，在其上执行相应的择取操作
+            // 遍历容器内每个元素 在其上执行相应的择取操作
             @Override
             public void forEachRemaining(Consumer<? super E> consumer) {
                 Objects.requireNonNull(consumer);
@@ -394,7 +394,7 @@ class SpinedBuffer<E>
                 }
             }
     
-            // 从容器的指定范围切割一段元素，将其打包到Spliterator后返回，特征值不变
+            // 从容器的指定范围切割一段元素 将其打包到Spliterator后返回 特征值不变
             @Override
             public Spliterator<E> trySplit() {
                 if(splSpineIndex < lastSpineIndex) {    // 丢弃未完成的那行chunk
@@ -499,7 +499,7 @@ class SpinedBuffer<E>
         @Override
         public abstract Iterator<E> iterator();
     
-        // 遍历SpinedBuffer中的元素，并在其上应用consumer函数
+        // 遍历SpinedBuffer中的元素 并在其上应用consumer函数
         @Override
         public abstract void forEach(Consumer<? super E> consumer);
         
@@ -516,10 +516,10 @@ class SpinedBuffer<E>
         protected abstract int arrayLength(T_ARR array);
         
         /** Iterate an array with the provided consumer */
-        // 遍历数组form到to范围的元素，在其上应用consumer函数
+        // 遍历数组form到to范围的元素 在其上应用consumer函数
         protected abstract void arrayForEach(T_ARR array, int from, int to, T_CONS consumer);
     
-        // 传入需要的容量，确保SpinedBuffer容量充足，不够的话就分配
+        // 传入需要的容量 确保SpinedBuffer容量充足 不够的话就分配
         protected final void ensureCapacity(long targetSize) {
             long capacity = capacity();
             if(targetSize > capacity) {
@@ -580,7 +580,7 @@ class SpinedBuffer<E>
             spineIndex = 0;
         }
     
-        // 遍历SpinedBuffer中的元素，并在其上应用consumer函数
+        // 遍历SpinedBuffer中的元素 并在其上应用consumer函数
         @SuppressWarnings("overloads")
         public void forEach(T_CONS consumer) {
             // completed chunks, if any
@@ -598,7 +598,7 @@ class SpinedBuffer<E>
                 : priorElementCount[spineIndex] + arrayLength(spine[spineIndex]);
         }
     
-        // 扩容，比当前容量多一个元素，往往会分配更多的空间
+        // 扩容 比当前容量多一个元素 往往会分配更多的空间
         protected void increaseCapacity() {
             ensureCapacity(capacity() + 1);
         }
@@ -622,7 +622,7 @@ class SpinedBuffer<E>
             throw new IndexOutOfBoundsException(Long.toString(index));
         }
         
-        // 预存，即判断当前容量是否充足，不充足的话需要扩容
+        // 预存 即判断当前容量是否充足 不充足的话需要扩容
         protected void preAccept() {
             if(elementIndex == arrayLength(curChunk)) {
                 inflateSpine();
@@ -643,7 +643,7 @@ class SpinedBuffer<E>
             }
         }
     
-        // Spliterator抽象基类，用来描述为基本类型特化的SpinedBuffer中的元素
+        // Spliterator抽象基类 用来描述为基本类型特化的SpinedBuffer中的元素
         abstract class BaseSpliterator<T_SPLITR extends Spliterator.OfPrimitive<E, T_CONS, T_SPLITR>>
             implements Spliterator.OfPrimitive<E, T_CONS, T_SPLITR> {
             // Last spine index
@@ -770,7 +770,7 @@ class SpinedBuffer<E>
             super(initialCapacity);
         }
         
-        // 遍历SpinedBuffer中的元素，并在其上应用consumer函数
+        // 遍历SpinedBuffer中的元素 并在其上应用consumer函数
         @Override
         public void forEach(Consumer<? super Integer> consumer) {
             if(consumer instanceof IntConsumer) {
@@ -817,7 +817,7 @@ class SpinedBuffer<E>
             return array.length;
         }
         
-        // 遍历数组form到to范围的元素，在其上应用consumer函数
+        // 遍历数组form到to范围的元素 在其上应用consumer函数
         @Override
         protected void arrayForEach(int[] array, int from, int to, IntConsumer consumer) {
             for(int i = from; i < to; i++) {
@@ -887,7 +887,7 @@ class SpinedBuffer<E>
             super(initialCapacity);
         }
     
-        // 遍历SpinedBuffer中的元素，并在其上应用consumer函数
+        // 遍历SpinedBuffer中的元素 并在其上应用consumer函数
         @Override
         public void forEach(Consumer<? super Long> consumer) {
             if(consumer instanceof LongConsumer) {
@@ -935,7 +935,7 @@ class SpinedBuffer<E>
             return array.length;
         }
     
-        // 遍历数组form到to范围的元素，在其上应用consumer函数
+        // 遍历数组form到to范围的元素 在其上应用consumer函数
         @Override
         protected void arrayForEach(long[] array, int from, int to, LongConsumer consumer) {
             for(int i = from; i < to; i++)
@@ -999,7 +999,7 @@ class SpinedBuffer<E>
             super(initialCapacity);
         }
     
-        // 遍历SpinedBuffer中的元素，并在其上应用consumer函数
+        // 遍历SpinedBuffer中的元素 并在其上应用consumer函数
         @Override
         public void forEach(Consumer<? super Double> consumer) {
             if(consumer instanceof DoubleConsumer) {
@@ -1047,7 +1047,7 @@ class SpinedBuffer<E>
             return array.length;
         }
         
-        // 遍历数组form到to范围的元素，在其上应用consumer函数
+        // 遍历数组form到to范围的元素 在其上应用consumer函数
         @Override
         protected void arrayForEach(double[] array, int from, int to, DoubleConsumer consumer) {
             for(int i = from; i < to; i++)

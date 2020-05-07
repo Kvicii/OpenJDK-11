@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * A thread that has no permissions, is not a member of any user-defined
  * ThreadGroup and supports the ability to erase ThreadLocals.
  */
-// "无害"线程，用在系统内部
+// "无害"线程 用在系统内部
 public final class InnocuousThread extends Thread {
     
     private static final long THREAD_LOCALS;                    // 获取Thread中threadLocals字段的地址
@@ -104,7 +104,7 @@ public final class InnocuousThread extends Thread {
     /*
      * Returns a new InnocuousThread with an auto-generated thread name and its context class loader is set to the system class loader.
      *
-     * 返回一个新的"无害"线程(InnocuousThread)。该线程的名称是自动生成的，其类加载器被设置为AppClassLoader。
+     * 返回一个新的"无害"线程(InnocuousThread)。该线程的名称是自动生成的 其类加载器被设置为AppClassLoader。
      */
     public static Thread newThread(Runnable target) {
         return newThread(newName(), target);
@@ -113,7 +113,7 @@ public final class InnocuousThread extends Thread {
     /*
      * Returns a new InnocuousThread with its context class loader set to the system class loader.
      *
-     * 返回一个新的"无害"线程(InnocuousThread)，其类加载器被设置为AppClassLoader。
+     * 返回一个新的"无害"线程(InnocuousThread) 其类加载器被设置为AppClassLoader。
      */
     public static Thread newThread(String name, Runnable target) {
         return AccessController.doPrivileged(new PrivilegedAction<Thread>() {
@@ -127,7 +127,7 @@ public final class InnocuousThread extends Thread {
     /**
      * Returns a new InnocuousThread with an auto-generated thread name. Its context class loader is set to null.
      *
-     * 返回一个新的"无害"线程(InnocuousThread)。该线程的名称是自动生成的，其类加载器被设置为null。
+     * 返回一个新的"无害"线程(InnocuousThread)。该线程的名称是自动生成的 其类加载器被设置为null。
      */
     public static Thread newSystemThread(Runnable target) {
         return newSystemThread(newName(), target);
@@ -136,7 +136,7 @@ public final class InnocuousThread extends Thread {
     /*
      * Returns a new InnocuousThread with null context class loader.
      *
-     * 返回一个新的"无害"线程(InnocuousThread)，其类加载器被设置为null。
+     * 返回一个新的"无害"线程(InnocuousThread) 其类加载器被设置为null。
      */
     public static Thread newSystemThread(String name, Runnable target) {
         return AccessController.doPrivileged(new PrivilegedAction<Thread>() {
@@ -177,7 +177,7 @@ public final class InnocuousThread extends Thread {
             throw new SecurityException("setContextClassLoader");
     }
     
-    // 执行线程的动作（只执行一次）
+    // 执行线程的动作(只执行一次)
     @Override
     public void run() {
         if(Thread.currentThread() == this && !hasRun) {

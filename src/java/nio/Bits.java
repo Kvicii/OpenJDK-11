@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Access to bits, native and otherwise.
  */
-// 工具类，用于存储本地内存管理参数和转换字节顺序
+// 工具类 用于存储本地内存管理参数和转换字节顺序
 class Bits {
     /**
      * These numbers represent the point at which we have empirically determined that the average cost of a JNI call exceeds the expense of an element by element copy.
@@ -50,12 +50,12 @@ class Bits {
     
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
     
-    // 记录已经用掉的总容量（初值为0）
+    // 记录已经用掉的总容量(初值为0)
     private static final AtomicLong TOTAL_CAPACITY = new AtomicLong();
     
-    // 本次成功分配的容量，记下此变量的目的是稍后还要释放此内存
+    // 本次成功分配的容量 记下此变量的目的是稍后还要释放此内存
     private static final AtomicLong RESERVED_MEMORY = new AtomicLong();
-    // 内存分配次数，分配内存时增1，释放内存时减1
+    // 内存分配次数 分配内存时增1 释放内存时减1
     private static final AtomicLong COUNT = new AtomicLong();
     
     static final JavaNioAccess.BufferPool BUFFER_POOL = new JavaNioAccess.BufferPool() {
@@ -94,7 +94,7 @@ class Bits {
     // This value may be changed during VM initialization if it is launched with "-XX:MaxDirectMemorySize=<size>".
     private static volatile long MAX_MEMORY = VM.maxDirectMemory();
     
-    // 是否获取到了直接内存分配上限（只获取一次）
+    // 是否获取到了直接内存分配上限(只获取一次)
     private static volatile boolean MEMORY_LIMIT_SET;
     
     private Bits() {
@@ -102,7 +102,7 @@ class Bits {
     
     
     
-    /*▼ 转换字节顺序（大小端转换） ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 转换字节顺序(大小端转换) ████████████████████████████████████████████████████████████████████████████████┓ */
     
     static short swap(short x) {
         return Short.reverseBytes(x);
@@ -120,7 +120,7 @@ class Bits {
         return Long.reverseBytes(x);
     }
     
-    /*▲ 转换字节顺序（大小端转换） ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 转换字节顺序(大小端转换) ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     // 返回分页大小
@@ -154,9 +154,9 @@ class Bits {
             MEMORY_LIMIT_SET = true;
         }
         
-        // 检查申请的内存是否超量，不超量的话，设置相应的内存参数
+        // 检查申请的内存是否超量 不超量的话 设置相应的内存参数
         if(tryReserveMemory(size, cap)) {
-            // 内存足够的话，直接返回
+            // 内存足够的话 直接返回
             return;
         }
         
@@ -218,7 +218,7 @@ class Bits {
         }
     }
     
-    // 内存不够，则取消之前设置的内容参数
+    // 内存不够 则取消之前设置的内容参数
     static void unreserveMemory(long size, int cap) {
         long cnt = COUNT.decrementAndGet();
         long reservedMem = RESERVED_MEMORY.addAndGet(-size);
@@ -226,7 +226,7 @@ class Bits {
         assert cnt >= 0 && reservedMem >= 0 && totalCap >= 0;
     }
 
-    // 检查申请的内存是否超量，不超量的话，设置相应的内存参数
+    // 检查申请的内存是否超量 不超量的话 设置相应的内存参数
     private static boolean tryReserveMemory(long size, int cap) {
         // -XX:MaxDirectMemorySize limits the total capacity rather than the actual memory usage, which will differ when buffers are page aligned.
         long totalCap;

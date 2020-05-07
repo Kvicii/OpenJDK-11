@@ -119,7 +119,7 @@ public class AbstractCharsetProvider extends CharsetProvider {
         };
     }
     
-    // 根据规范名，返回别名集合
+    // 根据规范名 返回别名集合
     public final String[] aliases(String charsetName) {
         synchronized(this) {
             init();
@@ -162,14 +162,14 @@ public class AbstractCharsetProvider extends CharsetProvider {
     protected void init() {
     }
     
-    // 从别名系统中查看给定的字符集名称是否存在，如果存在，返回其规范名
+    // 从别名系统中查看给定的字符集名称是否存在 如果存在 返回其规范名
     private String canonicalize(String charsetName) {
         String acn = aliasMap.get(charsetName);
         return (acn != null) ? acn : charsetName;
     }
     
     private Charset lookup(String csn) {
-        // 先检查缓存：[字符集规范名--字符集实例]映射
+        // 先检查缓存:[字符集规范名--字符集实例]映射
         SoftReference<Charset> sr = cache.get(csn);
         if(sr != null) {
             Charset cs = sr.get();
@@ -183,7 +183,7 @@ public class AbstractCharsetProvider extends CharsetProvider {
         if(cln == null)
             return null;
         
-        // 实例化该字符集，并缓存它
+        // 实例化该字符集 并缓存它
         try {
             Class<?> c = Class.forName(packagePrefix + "." + cln, true, this.getClass().getClassLoader());
             

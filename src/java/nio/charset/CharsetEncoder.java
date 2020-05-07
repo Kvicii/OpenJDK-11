@@ -130,7 +130,7 @@ import java.util.Arrays;
  * @since 1.4
  */
 
-// 字符编码器。字符进来，字节出去，完成对字符序列的编码操作
+// 字符编码器。字符进来 字节出去 完成对字符序列的编码操作
 public abstract class CharsetEncoder {
     private static final int ST_RESET = 0;
     private static final int ST_CODING = 1;
@@ -143,8 +143,8 @@ public abstract class CharsetEncoder {
     
     /*
      * 表示编码每个给定的字符所需的平均字节数量。
-     * 当编码字符时，编码运算法则可以选择调节字节边界，或者一些字符可以编码成大于其自身字节的字节（例如UTF-8编码）
-     * 该字段可用来确定ByteBuffer的近似尺寸，ByteBuffer包含了给定字符的编码字节
+     * 当编码字符时 编码运算法则可以选择调节字节边界 或者一些字符可以编码成大于其自身字节的字节(例如UTF-8编码)
+     * 该字段可用来确定ByteBuffer的近似尺寸 ByteBuffer包含了给定字符的编码字节
      */
     private final float averageBytesPerChar;
     
@@ -242,12 +242,12 @@ public abstract class CharsetEncoder {
      *                                      the current unmappable-character action is {@link
      *                                      CodingErrorAction#REPORT}
      */
-    // 编码字符序列，将编码结果写入到字节缓冲区返回
+    // 编码字符序列 将编码结果写入到字节缓冲区返回
     public final ByteBuffer encode(CharBuffer in) throws CharacterCodingException {
         // 编码所有字符需要的大概容量
         int n = (int) (in.remaining() * averageBytesPerChar());
         
-        // 输出缓冲区，用来存储编码后的字节序列
+        // 输出缓冲区 用来存储编码后的字节序列
         ByteBuffer out = ByteBuffer.allocate(n);
         
         if((n == 0) && (in.remaining() == 0)) {
@@ -258,21 +258,21 @@ public abstract class CharsetEncoder {
         
         for(; ; ) {
             CoderResult cr = in.hasRemaining()  // 判断是否还有未解析的输入
-                ? encode(in, out, true)         // 如果存在未解析的输入，则继续编码
+                ? encode(in, out, true)         // 如果存在未解析的输入 则继续编码
                 : CoderResult.UNDERFLOW;
             
-            // 发生下溢，输出缓冲区仍有空闲
+            // 发生下溢 输出缓冲区仍有空闲
             if(cr.isUnderflow()) {
-                // 刷新输出缓冲区，代表这次解析结束了
+                // 刷新输出缓冲区 代表这次解析结束了
                 cr = flush(out);
             }
             
-            // 发生下溢，输出缓冲区仍有空闲
+            // 发生下溢 输出缓冲区仍有空闲
             if(cr.isUnderflow()) {
                 break;
             }
             
-            // 输入太多，输出缓冲区不够用了，则需要扩容
+            // 输入太多 输出缓冲区不够用了 则需要扩容
             if(cr.isOverflow()) {
                 n = 2 * n + 1;    // Ensure progress; n might be 0!
                 ByteBuffer o = ByteBuffer.allocate(n);  // 创建新缓冲区
@@ -285,7 +285,7 @@ public abstract class CharsetEncoder {
             cr.throwException();
         }
         
-        // 编码完成后，将输出缓冲区从写模式切换到读模式
+        // 编码完成后 将输出缓冲区从写模式切换到读模式
         out.flip();
         
         // 返回编码结果
@@ -382,9 +382,9 @@ public abstract class CharsetEncoder {
      *                               an unexpected exception
      */
     /*
-     * 从给定的输入缓冲区中编码尽可能多的字符，将结果写入给定的输出缓冲区。
-     * endOfInput=true表示当发生下溢时，输入立即结束，即不会再提供更多输入
-     * endOfInput=false表示当发生下溢时，可能还会有后续的输入
+     * 从给定的输入缓冲区中编码尽可能多的字符 将结果写入给定的输出缓冲区。
+     * endOfInput=true表示当发生下溢时 输入立即结束 即不会再提供更多输入
+     * endOfInput=false表示当发生下溢时 可能还会有后续的输入
      */
     public final CoderResult encode(CharBuffer in, ByteBuffer out, boolean endOfInput) {
         int newState = endOfInput ? ST_END : ST_CODING;
@@ -407,14 +407,14 @@ public abstract class CharsetEncoder {
                 throw new CoderMalfunctionError(x);
             }
             
-            // 发生上溢，输出缓冲区已经满了
+            // 发生上溢 输出缓冲区已经满了
             if(cr.isOverflow()) {
                 return cr;
             }
             
-            // 发生下溢，输出缓冲区仍有空闲
+            // 发生下溢 输出缓冲区仍有空闲
             if(cr.isUnderflow()) {
-                // 如果endOfInput=true，即要求输入立即结束，但是仍有未解析的字符时，那些未解析字符被视为非法输入
+                // 如果endOfInput=true 即要求输入立即结束 但是仍有未解析的字符时 那些未解析字符被视为非法输入
                 if(endOfInput && in.hasRemaining()) {
                     cr = CoderResult.malformedForLength(in.remaining());
                     // Fall through to malformed-input case
@@ -430,7 +430,7 @@ public abstract class CharsetEncoder {
                 action = malformedInputAction;
             } else if(cr.isUnmappable()) {
                 action = unmappableCharacterAction;
-            } else {    // 抛异常：AssertionError
+            } else {    // 抛异常:AssertionError
                 assert false : cr.toString();
             }
             
@@ -571,8 +571,8 @@ public abstract class CharsetEncoder {
      * 检查字符序列是否能被正确编码。
      *
      * 该方法在一个临时的缓冲区内对输入的字符序列编码。
-     * 这将引起编码器内部状态的改变，所以当编码器正在进行时不应调用这些方法。
-     * 开始编码处理前，可以使用这些方法检测您的输入。
+     * 这将引起编码器内部状态的改变 所以当编码器正在进行时不应调用这些方法。
+     * 开始编码处理前 可以使用这些方法检测您的输入。
      */
     private boolean canEncode(CharBuffer cb) {
         if(state == ST_FLUSHED) {
@@ -763,7 +763,7 @@ public abstract class CharsetEncoder {
      *
      * @throws IllegalArgumentException If the precondition on the parameter does not hold
      */
-    // 注册回调：发生Malformed错误时如何处理
+    // 注册回调:发生Malformed错误时如何处理
     public final CharsetEncoder onMalformedInput(CodingErrorAction newAction) {
         if(newAction == null) {
             throw new IllegalArgumentException("Null action");
@@ -785,7 +785,7 @@ public abstract class CharsetEncoder {
      *
      * @throws IllegalArgumentException If the precondition on the parameter does not hold
      */
-    // 注册回调：发生Unmappable错误时如何处理
+    // 注册回调:发生Unmappable错误时如何处理
     public final CharsetEncoder onUnmappableCharacter(CodingErrorAction newAction) {
         if(newAction == null) {
             throw new IllegalArgumentException("Null action");
@@ -840,7 +840,7 @@ public abstract class CharsetEncoder {
         if(state == ST_END) {
             CoderResult cr = implFlush(out);
             
-            // 发生下溢，输出缓冲区仍有空闲
+            // 发生下溢 输出缓冲区仍有空闲
             if(cr.isUnderflow()) {
                 // 改为已刷新状态
                 state = ST_FLUSHED;

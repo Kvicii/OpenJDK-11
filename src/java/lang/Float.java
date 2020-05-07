@@ -89,7 +89,7 @@ public final class Float extends Number implements Comparable<Float> {
      * {@code 0x1.fffffeP+127f} and also equal to
      * {@code Float.intBitsToFloat(0x7f7fffff)}.
      */
-    public static final float MAX_VALUE = 0x1.fffffeP+127f; // float最大值：3.4028235e+38f
+    public static final float MAX_VALUE = 0x1.fffffeP+127f; // float最大值:3.4028235e+38f
     
     /**
      * A constant holding the smallest positive normal value of type
@@ -99,7 +99,7 @@ public final class Float extends Number implements Comparable<Float> {
      *
      * @since 1.6
      */
-    public static final float MIN_NORMAL = 0x1.0p-126f; // float最小正值：1.17549435E-38f，正规数
+    public static final float MIN_NORMAL = 0x1.0p-126f; // float最小正值:1.17549435E-38f 正规数
     
     /**
      * A constant holding the smallest positive nonzero value of type
@@ -107,7 +107,7 @@ public final class Float extends Number implements Comparable<Float> {
      * hexadecimal floating-point literal {@code 0x0.000002P-126f}
      * and also equal to {@code Float.intBitsToFloat(0x1)}.
      */
-    public static final float MIN_VALUE = 0x0.000002P-126f; // float最小正值：1.4e-45f，次正规数
+    public static final float MIN_VALUE = 0x0.000002P-126f; // float最小正值:1.4e-45f 次正规数
     
     /**
      * Maximum exponent a finite {@code float} variable may have.  It
@@ -347,7 +347,7 @@ public final class Float extends Number implements Comparable<Float> {
      * @throws NumberFormatException if the string does not contain a
      *                               parsable number.
      */
-    // 将字符串s解析为float值，然后再装箱
+    // 将字符串s解析为float值 然后再装箱
     public static Float valueOf(String s) throws NumberFormatException {
         return new Float(parseFloat(s));
     }
@@ -776,7 +776,7 @@ public final class Float extends Number implements Comparable<Float> {
      *
      * @return the bits that represent the floating-point number.
      */
-    // 先计算value的二进制格式，然后返回该二进制格式表示的int
+    // 先计算value的二进制格式 然后返回该二进制格式表示的int
     @HotSpotIntrinsicCandidate
     public static int floatToIntBits(float value) {
         if(!isNaN(value)) {
@@ -823,7 +823,7 @@ public final class Float extends Number implements Comparable<Float> {
      *
      * @since 1.3
      */
-    // 先计算value的二进制格式，然后返回该二进制格式表示的int
+    // 先计算value的二进制格式 然后返回该二进制格式表示的int
     @HotSpotIntrinsicCandidate
     public static native int floatToRawIntBits(float value);
     
@@ -887,7 +887,7 @@ public final class Float extends Number implements Comparable<Float> {
      * @return the {@code float} floating-point value with the same bit
      * pattern.
      */
-    // 先计算bits的二进制格式，然后返回该二进制格式表示的float
+    // 先计算bits的二进制格式 然后返回该二进制格式表示的float
     @HotSpotIntrinsicCandidate
     public static native float intBitsToFloat(int bits);
     

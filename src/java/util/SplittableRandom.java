@@ -97,7 +97,7 @@ import java.util.stream.StreamSupport;
  *
  * 支持使用内置种子计算的原始种子
  * 支持自定义原始种子
- * 支持使用安全种子（设置运行参数-Djava.util.secureRandomSeed=true）
+ * 支持使用安全种子(设置运行参数-Djava.util.secureRandomSeed=true)
  */
 public final class SplittableRandom {
 
@@ -178,7 +178,7 @@ public final class SplittableRandom {
     /**
      * The seed generator for default constructors.
      */
-    // 内置种子，用来生成原始种子
+    // 内置种子 用来生成原始种子
     private static final AtomicLong defaultGen = new AtomicLong(mix64(System.currentTimeMillis()) ^ mix64(System.nanoTime()));
     
     /*▲ 内置种子 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓┛ */
@@ -189,7 +189,7 @@ public final class SplittableRandom {
     /**
      * The seed. Updated only via method nextSeed.
      */
-    // 原始种子，用来生成随机数
+    // 原始种子 用来生成随机数
     private long seed;
     
     /**
@@ -311,7 +311,7 @@ public final class SplittableRandom {
      * @throws NullPointerException if bytes is null
      * @since 10
      */
-    // 随机填充一个byte数组，有正有负
+    // 随机填充一个byte数组 有正有负
     public void nextBytes(byte[] bytes) {
         int i = 0;
         int len = bytes.length;
@@ -332,7 +332,7 @@ public final class SplittableRandom {
      *
      * @return a pseudorandom {@code int} value
      */
-    // 随机生成一个int值，有正有负
+    // 随机生成一个int值 有正有负
     public int nextInt() {
         return mix32(nextSeed());
     }
@@ -378,7 +378,7 @@ public final class SplittableRandom {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 随机生成一个[origin, bound)之内的int值，有正有负
+    // 随机生成一个[origin, bound)之内的int值 有正有负
     public int nextInt(int origin, int bound) {
         if(origin >= bound) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -391,7 +391,7 @@ public final class SplittableRandom {
      *
      * @return a pseudorandom {@code long} value
      */
-    // 随机生成一个long值，有正有负
+    // 随机生成一个long值 有正有负
     public long nextLong() {
         return mix64(nextSeed());
     }
@@ -437,7 +437,7 @@ public final class SplittableRandom {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 随机生成一个[origin, bound)之内的long值，有正有负
+    // 随机生成一个[origin, bound)之内的long值 有正有负
     public long nextLong(long origin, long bound) {
         if(origin >= bound) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -492,7 +492,7 @@ public final class SplittableRandom {
      * @throws IllegalArgumentException if {@code origin} is greater than
      *                                  or equal to {@code bound}
      */
-    // 随机生成一个[origin, bound)之内的double值，有正有负
+    // 随机生成一个[origin, bound)之内的double值 有正有负
     public double nextDouble(double origin, double bound) {
         if(!(origin<bound)) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -566,7 +566,7 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * ints(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机int值 取值范围是[randomNumberOrigin, randomNumberBound)
     public IntStream ints(int randomNumberOrigin, int randomNumberBound) {
         if(randomNumberOrigin >= randomNumberBound) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -591,7 +591,7 @@ public final class SplittableRandom {
      *                                  less than zero, or {@code randomNumberOrigin}
      *                                  is greater than or equal to {@code randomNumberBound}
      */
-    // 返回的流可以生成streamSize个随机int值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机int值 取值范围是[randomNumberOrigin, randomNumberBound)
     public IntStream ints(long streamSize, int randomNumberOrigin, int randomNumberBound) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BAD_SIZE);
@@ -652,7 +652,7 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * longs(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机long值 取值范围是[randomNumberOrigin, randomNumberBound)
     public LongStream longs(long randomNumberOrigin, long randomNumberBound) {
         if(randomNumberOrigin >= randomNumberBound) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -677,7 +677,7 @@ public final class SplittableRandom {
      *                                  less than zero, or {@code randomNumberOrigin}
      *                                  is greater than or equal to {@code randomNumberBound}
      */
-    // 返回的流可以生成streamSize个随机long值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机long值 取值范围是[randomNumberOrigin, randomNumberBound)
     public LongStream longs(long streamSize, long randomNumberOrigin, long randomNumberBound) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BAD_SIZE);
@@ -698,7 +698,7 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * doubles(Long.MAX_VALUE)}.
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机double值，取值范围是[0, 1)
+    // 返回的流可以生成Long.MAX_VALUE个随机double值 取值范围是[0, 1)
     public DoubleStream doubles() {
         return StreamSupport.doubleStream(new RandomDoublesSpliterator(this, 0L, Long.MAX_VALUE, Double.MAX_VALUE, 0.0), false);
     }
@@ -715,7 +715,7 @@ public final class SplittableRandom {
      * @throws IllegalArgumentException if {@code streamSize} is
      *                                  less than zero
      */
-    // 返回的流可以生成streamSize个随机double值，取值范围是[0, 1)
+    // 返回的流可以生成streamSize个随机double值 取值范围是[0, 1)
     public DoubleStream doubles(long streamSize) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BAD_SIZE);
@@ -739,7 +739,7 @@ public final class SplittableRandom {
      * @implNote This method is implemented to be equivalent to {@code
      * doubles(Long.MAX_VALUE, randomNumberOrigin, randomNumberBound)}.
      */
-    // 返回的流可以生成Long.MAX_VALUE个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成Long.MAX_VALUE个随机double值 取值范围是[randomNumberOrigin, randomNumberBound)
     public DoubleStream doubles(double randomNumberOrigin, double randomNumberBound) {
         if(!(randomNumberOrigin<randomNumberBound)) {
             throw new IllegalArgumentException(BAD_RANGE);
@@ -764,7 +764,7 @@ public final class SplittableRandom {
      *                                  less than zero, or {@code randomNumberOrigin}
      *                                  is greater than or equal to {@code randomNumberBound}
      */
-    // 返回的流可以生成streamSize个随机double值，取值范围是[randomNumberOrigin, randomNumberBound)
+    // 返回的流可以生成streamSize个随机double值 取值范围是[randomNumberOrigin, randomNumberBound)
     public DoubleStream doubles(long streamSize, double randomNumberOrigin, double randomNumberBound) {
         if(streamSize<0L) {
             throw new IllegalArgumentException(BAD_SIZE);
@@ -934,10 +934,10 @@ public final class SplittableRandom {
     private static final class RandomIntsSpliterator implements Spliterator.OfInt {
         final SplittableRandom rng;
         
-        // 随机数数量：fence-index
+        // 随机数数量:fence-index
         long   index;
         final long   fence;
-        // 随机数取值范围：[origin, bound)
+        // 随机数取值范围:[origin, bound)
         final int    origin;
         final int    bound;
         
@@ -996,10 +996,10 @@ public final class SplittableRandom {
     private static final class RandomLongsSpliterator implements Spliterator.OfLong {
         final SplittableRandom rng;
         
-        // 随机数数量：fence-index
+        // 随机数数量:fence-index
         long index;
         final long fence;
-        // 随机数取值范围：[origin, bound)
+        // 随机数取值范围:[origin, bound)
         final long origin;
         final long bound;
         
@@ -1059,10 +1059,10 @@ public final class SplittableRandom {
     private static final class RandomDoublesSpliterator implements Spliterator.OfDouble {
         final SplittableRandom rng;
         
-        // 随机数数量：fence-index
+        // 随机数数量:fence-index
         long index;
         final long fence;
-        // 随机数取值范围：[origin, bound)
+        // 随机数取值范围:[origin, bound)
         final double origin;
         final double bound;
         

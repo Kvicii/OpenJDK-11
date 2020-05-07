@@ -30,7 +30,7 @@ import sun.nio.ch.DirectBuffer;
 
 import java.lang.ref.Reference;
 
-// 可读写、直接缓冲区，采用与平台字节顺序不同的字节序，其他部分与DirectDoubleBufferU相同
+// 可读写、直接缓冲区 采用与平台字节顺序不同的字节序 其他部分与DirectDoubleBufferU相同
 class DirectDoubleBufferS extends DoubleBuffer implements DirectBuffer {
     
     // Cached unaligned-access capability
@@ -74,7 +74,7 @@ class DirectDoubleBufferS extends DoubleBuffer implements DirectBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public DoubleBuffer slice() {
         int pos = this.position();
@@ -94,7 +94,7 @@ class DirectDoubleBufferS extends DoubleBuffer implements DirectBuffer {
         return new DirectDoubleBufferRS(this, this.markValue(), this.position(), this.limit(), this.capacity(), 0);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

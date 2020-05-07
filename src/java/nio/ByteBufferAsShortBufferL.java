@@ -25,7 +25,7 @@
 
 package java.nio;
 
-// ByteBuffer转为ShortBuffer，使用可读写的缓冲区。采用小端字节序，其他部分与ByteBufferAsShortBufferB相同
+// ByteBuffer转为ShortBuffer 使用可读写的缓冲区。采用小端字节序 其他部分与ByteBufferAsShortBufferB相同
 class ByteBufferAsShortBufferL extends ShortBuffer {
     
     protected final ByteBuffer bb;
@@ -69,7 +69,7 @@ class ByteBufferAsShortBufferL extends ShortBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public ShortBuffer slice() {
         int pos = this.position();
@@ -88,11 +88,11 @@ class ByteBufferAsShortBufferL extends ShortBuffer {
         return new ByteBufferAsShortBufferRL(bb, this.markValue(), this.position(), this.limit(), this.capacity(), address);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /* getShortUnaligned和putShortUnaligned方法中，最后一个参数为false，代表以小端法存取字节 */
+    /* getShortUnaligned和putShortUnaligned方法中 最后一个参数为false 代表以小端法存取字节 */
     
     /*▼ get/读取 ████████████████████████████████████████████████████████████████████████████████┓ */
     

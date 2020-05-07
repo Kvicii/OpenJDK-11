@@ -45,13 +45,13 @@ import java.util.Locale;
  *
  * http://www.unicode.org/Public/UNIDATA/SpecialCasing.txt处的文件是http://www.unicode.org/Public/UNIDATA/UnicodeData.txt处文件的补充
  *
- * SpecialCasing.txt中定义了一些特殊的编码转换规则，ConditionalSpecialCasin负责处理这些规则。
- * SpecialCasing.txt中没有定义任何属性，而是提供有关Unicode字符大小写的附加信息，适用于大小写导致字符串长度发生变化或依赖于上下文的语言环境情况。
+ * SpecialCasing.txt中定义了一些特殊的编码转换规则 ConditionalSpecialCasin负责处理这些规则。
+ * SpecialCasing.txt中没有定义任何属性 而是提供有关Unicode字符大小写的附加信息 适用于大小写导致字符串长度发生变化或依赖于上下文的语言环境情况。
  *
- * 为了兼容性，UnicodeData.txt文件仅包含字符的简单大小写映射，它们是一对一且独立于上下文和语言。
- * SpecialCasing.txt中的约束与UnicodeData.txt中的简单大小写映射约束相结合，定义了完整的大小写映射规则。
+ * 为了兼容性 UnicodeData.txt文件仅包含字符的简单大小写映射 它们是一对一且独立于上下文和语言。
+ * SpecialCasing.txt中的约束与UnicodeData.txt中的简单大小写映射约束相结合 定义了完整的大小写映射规则。
  *
- * 此特殊转换规则中的映射包含了一对一转换和一对多（单字节到多字节）转换
+ * 此特殊转换规则中的映射包含了一对一转换和一对多(单字节到多字节)转换
  */
 final class ConditionalSpecialCasing {
     // 不同的编码约束.
@@ -99,7 +99,7 @@ final class ConditionalSpecialCasing {
     // 包含上述实体的哈希表
     static Hashtable<Integer, HashSet<Entry>> entryTable = new Hashtable<>();
     
-    // 先把上述实体存入HashSet，再连同其Unicode编码构成键值对，并存入Hashtable
+    // 先把上述实体存入HashSet 再连同其Unicode编码构成键值对 并存入Hashtable
     static {
         // create hashtable from the entry
         for(Entry cur : entry) {
@@ -113,7 +113,7 @@ final class ConditionalSpecialCasing {
         }
     }
     
-    // 返回scr中index处的Unicode符号的小写形式的编码（一对一转换）
+    // 返回scr中index处的Unicode符号的小写形式的编码(一对一转换)
     static int toLowerCaseEx(String src, int index, Locale locale) {
         char[] result = lookUpTable(src, index, locale, true);
         
@@ -130,12 +130,12 @@ final class ConditionalSpecialCasing {
         }
     }
     
-    // 返回scr中index处的Unicode符号的小写形式的编码（一对多转换，可处理错误的形式）
+    // 返回scr中index处的Unicode符号的小写形式的编码(一对多转换 可处理错误的形式)
     static char[] toLowerCaseCharArray(String src, int index, Locale locale) {
         return lookUpTable(src, index, locale, true);
     }
     
-    // 返回scr中index处的Unicode符号的大写形式的编码（一对一转换）
+    // 返回scr中index处的Unicode符号的大写形式的编码(一对一转换)
     static int toUpperCaseEx(String src, int index, Locale locale) {
         char[] result = lookUpTable(src, index, locale, false);
     
@@ -152,7 +152,7 @@ final class ConditionalSpecialCasing {
         }
     }
     
-    // 返回scr中index处的Unicode符号的大写形式的编码（一对多转换，可处理错误的形式）
+    // 返回scr中index处的Unicode符号的大写形式的编码(一对多转换 可处理错误的形式)
     static char[] toUpperCaseCharArray(String src, int index, Locale locale) {
         char[] result = lookUpTable(src, index, locale, false);
         if(result != null) {
@@ -186,7 +186,7 @@ final class ConditionalSpecialCasing {
         return ret;
     }
     
-    // true：给定的文本满足某种特殊转换规则
+    // true:给定的文本满足某种特殊转换规则
     private static boolean isConditionMet(String src, int index, Locale locale, int condition) {
         switch(condition) {
             case FINAL_CASED:
@@ -218,9 +218,9 @@ final class ConditionalSpecialCasing {
      * Before C: [{cased==true}][{wordBoundary!=true}]*
      * After C: !([{wordBoundary!=true}]*[{cased}])
      */
-    // true：给定的文本满足FINAL_CASED约束
+    // true:给定的文本满足FINAL_CASED约束
     private static boolean isFinalCased(String src, int index, Locale locale) {
-        // 创建分词器，并设置待分析的文本
+        // 创建分词器 并设置待分析的文本
         BreakIterator wordBoundary = BreakIterator.getWordInstance(locale);
         wordBoundary.setText(src);
         
@@ -258,7 +258,7 @@ final class ConditionalSpecialCasing {
      * Regular Expression:
      * Before C: [{Soft_Dotted==true}]([{cc!=230}&{cc!=0}])*
      */
-    // true：给定的文本满足AFTER_SOFT_DOTTED约束
+    // true:给定的文本满足AFTER_SOFT_DOTTED约束
     private static boolean isAfterSoftDotted(String src, int index) {
         int ch;
         int cc;
@@ -290,7 +290,7 @@ final class ConditionalSpecialCasing {
      * Regular Expression:
      * After C: [{cc!=0}]*[{cc==230}]
      */
-    // true：给定的文本满足MORE_ABOVE约束
+    // true:给定的文本满足MORE_ABOVE约束
     private static boolean isMoreAbove(String src, int index) {
         int ch;
         int cc;
@@ -321,7 +321,7 @@ final class ConditionalSpecialCasing {
      * Regular Expression:
      * Before C: [I]([{cc!=230}&{cc!=0}])*
      */
-    // true：给定的文本满足AFTER_I约束
+    // true:给定的文本满足AFTER_I约束
     private static boolean isAfterI(String src, int index) {
         int ch;
         int cc;
@@ -355,7 +355,7 @@ final class ConditionalSpecialCasing {
      * Regular Expression:
      * After C: ([{cc!=230}&{cc!=0}])*[\u0307]
      */
-    // true：给定的文本满足NOT_BEFORE_DOT约束
+    // true:给定的文本满足NOT_BEFORE_DOT约束
     private static boolean isBeforeDot(String src, int index) {
         int ch;
         int cc;
@@ -447,18 +447,18 @@ final class ConditionalSpecialCasing {
      * An internal class that represents an entry in the Special Casing Properties.
      */
     /*
-     * 特殊转换规则实体类，其格式为：<code>; <lower>; <title>; <upper>; (<condition_list>;)?#<comment>
+     * 特殊转换规则实体类 其格式为:<code>; <lower>; <title>; <upper>; (<condition_list>;)?#<comment>
      *
-     * <code>, <lower>, <title>, <upper>提供了<code>的相应完整的大小写映射，表示为十六进制的字符值。
-     * 如果有多个字符，则用空格分隔。 除了用于分隔元素之外，空格应当被忽略。
-     * <condition_list>是可选的。 如果存在，它由一个或多个语言ID或转换上下文组成，用空格分隔。
+     * <code>, <lower>, <title>, <upper>提供了<code>的相应完整的大小写映射 表示为十六进制的字符值。
+     * 如果有多个字符 则用空格分隔。 除了用于分隔元素之外 空格应当被忽略。
+     * <condition_list>是可选的。 如果存在 它由一个或多个语言ID或转换上下文组成 用空格分隔。
      */
     static class Entry {
         int ch;         // 符号的Unicode编码
         char[] lower;   // 小写形式编码
         char[] upper;   // 大写形式编码
-        String lang;    // Unicode符号分类代号，参见Character类
-        int condition;  // 条件（约束类型）
+        String lang;    // Unicode符号分类代号 参见Character类
+        int condition;  // 条件(约束类型)
         
         Entry(int ch, char[] lower, char[] upper, String lang, int condition) {
             this.ch = ch;

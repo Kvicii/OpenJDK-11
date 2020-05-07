@@ -53,7 +53,7 @@ import java.util.function.IntFunction;
  * @since 1.8
  */
 
-// 定义了一组接口方法，这些方法用来串接流的各个阶段，并完成数据择取
+// 定义了一组接口方法 这些方法用来串接流的各个阶段 并完成数据择取
 abstract class PipelineHelper<P_OUT> {
 
     /**
@@ -92,7 +92,7 @@ abstract class PipelineHelper<P_OUT> {
      *        source data
      * @return the exact size if known, or -1 if infinite or unknown
      */
-    // 返回输出的元素数量，如果未知或无穷，则返回-1
+    // 返回输出的元素数量 如果未知或无穷 则返回-1
     abstract<P_IN> long exactOutputSizeIfKnown(Spliterator<P_IN> spliterator);
 
     /**
@@ -109,7 +109,7 @@ abstract class PipelineHelper<P_OUT> {
      * @param sink the {@code Sink} to receive the results
      * @param spliterator the spliterator describing the source input to process
      */
-    // 从后往前包装sink的同时，从前到后择取数据
+    // 从后往前包装sink的同时 从前到后择取数据
     abstract<P_IN, S extends Sink<P_OUT>> S wrapAndCopyInto(S sink, Spliterator<P_IN> spliterator);
     
     /**
@@ -124,7 +124,7 @@ abstract class PipelineHelper<P_OUT> {
      * @return a {@code Sink} that implements the pipeline stages and sends
      * results to the provided {@code Sink}
      */
-    // 从终端的Sink开始，逐段向前包装Sink形成一个单链表，然后将最靠前的sink返回
+    // 从终端的Sink开始 逐段向前包装Sink形成一个单链表 然后将最靠前的sink返回
     abstract <P_IN> Sink<P_IN> wrapSink(Sink<P_OUT> sink);
     
     /**
@@ -160,7 +160,7 @@ abstract class PipelineHelper<P_OUT> {
      * @param spliterator the source {@code Spliterator}
      * @return true if the cancellation was requested
      */
-    // 从HEAD阶段之后开始择取数据，存在短路操作（即满足某种条件就终止择取）
+    // 从HEAD阶段之后开始择取数据 存在短路操作(即满足某种条件就终止择取)
     abstract <P_IN> boolean copyIntoWithCancel(Sink<P_IN> wrappedSink, Spliterator<P_IN> spliterator);
     
     /**
@@ -176,7 +176,7 @@ abstract class PipelineHelper<P_OUT> {
      * @return a {@code Node.Builder} compatible with the output shape of this
      * {@code PipelineHelper}
      */
-    // 返回第(3)、(4)类Node（固定长度Node和可变长度Node）
+    // 返回第(3)、(4)类Node(固定长度Node和可变长度Node)
     abstract Node.Builder<P_OUT> makeNodeBuilder(long exactSizeIfKnown, IntFunction<P_OUT[]> generator);
     
     /**

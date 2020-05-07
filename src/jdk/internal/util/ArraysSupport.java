@@ -52,9 +52,9 @@ import jdk.internal.misc.Unsafe;
  */
 
 /**
- * 工具类，用于快速比较两个数组内容是否相同，并返回第一个失配元素的索引。
+ * 工具类 用于快速比较两个数组内容是否相同 并返回第一个失配元素的索引。
  *
- * 比较原理是将数组中的元素看成字节流，以long类型的长度为基准，使用位运算，一次性比较4个字节。
+ * 比较原理是将数组中的元素看成字节流 以long类型的长度为基准 使用位运算 一次性比较4个字节。
  * 用到了Unsafe类来获取数组元素。
  */
 public class ArraysSupport {
@@ -116,7 +116,7 @@ public class ArraysSupport {
         // assert 0 <= length <= sizeOf(b)
         // assert 0 <= log2ArrayIndexScale <= 3
         
-        // 每几个元素可以构成一个long的长度，比如每2个int元素可以等于一个long的宽度，相当于一个放大/缩小系数
+        // 每几个元素可以构成一个long的长度 比如每2个int元素可以等于一个long的宽度 相当于一个放大/缩小系数
         int log2ValuesPerWidth = LOG2_ARRAY_LONG_INDEX_SCALE - log2ArrayIndexScale;
         int wi = 0;
         for(; wi < length >> log2ValuesPerWidth; wi++) {
@@ -130,7 +130,7 @@ public class ArraysSupport {
             }
         }
         
-        /* 处理剩余部分，因为可能凑不够一个long的长度 */
+        /* 处理剩余部分 因为可能凑不够一个long的长度 */
         
         // Calculate the tail of remaining elements to check
         int tail = length - (wi << log2ValuesPerWidth);

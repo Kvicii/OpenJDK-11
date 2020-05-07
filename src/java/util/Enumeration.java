@@ -58,7 +58,7 @@ package java.util;
  * @see java.util.Vector#elements()
  * @since 1.0
  */
-// 枚举器接口，跟迭代器接口很像，只用于遍历，没有移除功能
+// 枚举器接口 跟迭代器接口很像 只用于遍历 没有移除功能
 public interface Enumeration<E> {
     /**
      * Tests if this enumeration contains more elements.

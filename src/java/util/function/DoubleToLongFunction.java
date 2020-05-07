@@ -36,10 +36,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：DoubleToLongFunction
+ * 函数式接口:DoubleToLongFunction
  *
- * 参数：double
- * 返回：long
+ * 参数:double
+ * 返回:long
  */
 @FunctionalInterface
 public interface DoubleToLongFunction {

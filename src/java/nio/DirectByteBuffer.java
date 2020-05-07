@@ -32,7 +32,7 @@ import sun.nio.ch.DirectBuffer;
 import java.io.FileDescriptor;
 import java.lang.ref.Reference;
 
-// 可读写、直接缓冲区，内部存储结构为本地内存块
+// 可读写、直接缓冲区 内部存储结构为本地内存块
 class DirectByteBuffer extends MappedByteBuffer implements DirectBuffer {
     
     // Cached unaligned-access capability
@@ -70,7 +70,7 @@ class DirectByteBuffer extends MappedByteBuffer implements DirectBuffer {
         boolean pa = VM.isDirectMemoryPageAligned();
         // 获取每页的大小
         int ps = Bits.pageSize();
-        // 如果是按页对齐的，多分配一页容量（因为后续可能需要按页对齐）
+        // 如果是按页对齐的 多分配一页容量(因为后续可能需要按页对齐)
         long size = Math.max(1L, (long) cap + (pa ? ps : 0));
         
         // 尽量保障有足够多内存可以使用
@@ -78,9 +78,9 @@ class DirectByteBuffer extends MappedByteBuffer implements DirectBuffer {
         
         long base = 0;
         try {
-            base = UNSAFE.allocateMemory(size); //分配本地（直接）内存，base表示直接内存的起始地址
+            base = UNSAFE.allocateMemory(size); //分配本地(直接)内存 base表示直接内存的起始地址
         } catch(OutOfMemoryError x) {
-            // 内存不够，则取消之前设置的内容参数
+            // 内存不够 则取消之前设置的内容参数
             Bits.unreserveMemory(size, cap);
             throw x;
         }
@@ -96,7 +96,7 @@ class DirectByteBuffer extends MappedByteBuffer implements DirectBuffer {
             address = base;
         }
         
-        // 用清理器追踪此对象，当引用失效时，需要回收内存
+        // 用清理器追踪此对象 当引用失效时 需要回收内存
         cleaner = Cleaner.create(this, new Deallocator(base, size, cap));
         
         att = null;
@@ -145,7 +145,7 @@ class DirectByteBuffer extends MappedByteBuffer implements DirectBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public ByteBuffer slice() {
         int pos = this.position();
@@ -172,7 +172,7 @@ class DirectByteBuffer extends MappedByteBuffer implements DirectBuffer {
         return new DirectByteBufferR(this, this.markValue(), this.position(), this.limit(), this.capacity(), 0);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -750,7 +750,7 @@ class DirectByteBuffer extends MappedByteBuffer implements DirectBuffer {
     
     
     
-    // 释放分配的本地内存，用于清理器的清理动作
+    // 释放分配的本地内存 用于清理器的清理动作
     private static class Deallocator implements Runnable {
         private long address;
         private long size;

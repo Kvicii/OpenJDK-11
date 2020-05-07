@@ -45,7 +45,7 @@ package java.util.stream;
  * @since 1.8
  */
 
-// 描述流的形状（存储的元素类型）：引用类型、int类型、long类型、double类型
+// 描述流的形状(存储的元素类型):引用类型、int类型、long类型、double类型
 enum StreamShape {
     /**
      * The shape specialization corresponding to {@code Stream} and elements

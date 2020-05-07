@@ -37,12 +37,12 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：DoubleBinaryOperator
+ * 函数式接口:DoubleBinaryOperator
  *
  * double二元操作
  *
- * 参数：double, double
- * 返回：double
+ * 参数:double, double
+ * 返回:double
  */
 @FunctionalInterface
 public interface DoubleBinaryOperator {

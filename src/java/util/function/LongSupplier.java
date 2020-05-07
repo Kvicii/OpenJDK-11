@@ -38,10 +38,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：LongSupplier
+ * 函数式接口:LongSupplier
  *
- * 参数：无参数
- * 返回：long
+ * 参数:无参数
+ * 返回:long
  */
 @FunctionalInterface
 public interface LongSupplier {

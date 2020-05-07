@@ -79,17 +79,17 @@ import java.util.Set;
  * @since 1.5
  */
 /*
- * 特制的Map工具类，专为标准字符集类StandardCharsets打造。
+ * 特制的Map工具类 专为标准字符集类StandardCharsets打造。
  *
- * 该Map中的数据按行排列，每一行可能包含多个键值对。
- * 同一行出现的键的哈希值是相同的，不在同一行的键的哈希值不同。
+ * 该Map中的数据按行排列 每一行可能包含多个键值对。
+ * 同一行出现的键的哈希值是相同的 不在同一行的键的哈希值不同。
  *
- * 例如：
+ * 例如:
  * 1  key1-value1
  * 2  key2-value2, key3-value3, key4-value4
  * 3  key5-value6, key5-value6
  *
- * 这6个键值对数据可以存储为：
+ * 这6个键值对数据可以存储为:
  * Object[] ht = new Object[4];
  * ht[1] = new Object{key1, value1};
  * ht[2] = new Object{key2, value2, new Object{key3, value3}, new Object{key4, value4}};
@@ -101,7 +101,7 @@ public abstract class PreHashedMap<V> extends AbstractMap<String, V> {
     private final int size; // 键值对数量
     private final int shift;
     private final int mask; // 映射到行数的掩码
-    private final Object[] ht;  // 包含了很多行的键值对数据，数组中每个元素是一行，每行可能包含多个键值对
+    private final Object[] ht;  // 包含了很多行的键值对数据 数组中每个元素是一行 每行可能包含多个键值对
     
     /**
      * Creates a new map.
@@ -131,7 +131,7 @@ public abstract class PreHashedMap<V> extends AbstractMap<String, V> {
      *
      * @param ht The row array to be initialized
      */
-    // 初始化Map，由子类实现
+    // 初始化Map 由子类实现
     protected abstract void init(Object[] ht);
     
     // 根据key返回value
@@ -146,7 +146,7 @@ public abstract class PreHashedMap<V> extends AbstractMap<String, V> {
             return null;
         
         for(; ; ) {
-            // key匹配，则返回value
+            // key匹配 则返回value
             if(a[0].equals(k))
                 return toV(a[1]);
             
@@ -161,7 +161,7 @@ public abstract class PreHashedMap<V> extends AbstractMap<String, V> {
     /**
      * @throws UnsupportedOperationException If the given key is not part of this map's initial key set
      */
-    // 设置键值对，并返回成功设置的value
+    // 设置键值对 并返回成功设置的value
     public V put(String k, V v) {
         // 先把key按照指定的规则哈希化
         int h = (k.hashCode() >> shift) & mask;

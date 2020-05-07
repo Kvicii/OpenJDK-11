@@ -38,10 +38,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：DoublePredicate
+ * 函数式接口:DoublePredicate
  *
- * 参数：double
- * 返回：boolean
+ * 参数:double
+ * 返回:boolean
  */
 @FunctionalInterface
 public interface DoublePredicate {

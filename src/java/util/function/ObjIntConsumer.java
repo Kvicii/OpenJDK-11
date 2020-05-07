@@ -40,10 +40,10 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：ObjIntConsumer<T>
+ * 函数式接口:ObjIntConsumer<T>
  *
- * 参数：T, int
- * 返回：void
+ * 参数:T, int
+ * 返回:void
  */
 @FunctionalInterface
 public interface ObjIntConsumer<T> {

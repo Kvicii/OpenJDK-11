@@ -144,7 +144,7 @@ public final class System {
      * corresponds to keyboard input or another input source specified by
      * the host environment or user.
      */
-    public static final InputStream in = null;  // 标准输入流，默认与控制台关联。
+    public static final InputStream in = null;  // 标准输入流 默认与控制台关联。
     /**
      * The "standard" output stream. This stream is already
      * open and ready to accept output data. Typically this stream
@@ -170,7 +170,7 @@ public final class System {
      * @see java.io.PrintStream#println(java.lang.Object)
      * @see java.io.PrintStream#println(java.lang.String)
      */
-    public static final PrintStream out = null; // 标准输出流，默认与控制台关联。
+    public static final PrintStream out = null; // 标准输出流 默认与控制台关联。
     /**
      * The "standard" error output stream. This stream is already
      * open and ready to accept output data.
@@ -183,7 +183,7 @@ public final class System {
      * variable {@code out}, has been redirected to a file or other
      * destination that is typically not continuously monitored.
      */
-    public static final PrintStream err = null; // 标准错误流，默认与控制台关联。
+    public static final PrintStream err = null; // 标准错误流 默认与控制台关联。
     
     
     /**
@@ -351,7 +351,7 @@ public final class System {
      * @throws NullPointerException      if either {@code src} or
      *                                   {@code dest} is {@code null}.
      */
-    // 数组复制，从src的srcPos索引处复制length个元素放入dest的destPos索引处
+    // 数组复制 从src的srcPos索引处复制length个元素放入dest的destPos索引处
     @HotSpotIntrinsicCandidate
     public static native void arraycopy(Object src, int srcPos, Object dest, int destPos, int length);
     
@@ -473,7 +473,7 @@ public final class System {
      * @see java.lang.SecurityManager#checkPropertyAccess(java.lang.String)
      * @see java.lang.System#getProperties()
      */
-    // 获取key对应的值。如果key不存在，返回null
+    // 获取key对应的值。如果key不存在 返回null
     public static String getProperty(String key) {
         checkKey(key);
         SecurityManager sm = getSecurityManager();
@@ -510,7 +510,7 @@ public final class System {
      * @see java.lang.SecurityManager#checkPropertyAccess(java.lang.String)
      * @see java.lang.System#getProperties()
      */
-    // 获取key对应的值。如果key不存在，返回默认值def
+    // 获取key对应的值。如果key不存在 返回默认值def
     public static String getProperty(String key, String def) {
         checkKey(key);
         SecurityManager sm = getSecurityManager();
@@ -546,7 +546,7 @@ public final class System {
      * @see java.lang.SecurityException
      * @see java.lang.SecurityManager#checkPropertiesAccess()
      */
-    // 设置属性集（会替换掉上次设置的属性值，初始时默认为系统属性集）
+    // 设置属性集(会替换掉上次设置的属性值 初始时默认为系统属性集)
     public static void setProperties(Properties props) {
         SecurityManager sm = getSecurityManager();
         if(sm != null) {
@@ -724,7 +724,7 @@ public final class System {
      *
      * @see java.util.Date
      */
-    // 返回以毫秒为单位的当前时间，其表现为当前时间与GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数（具体粒度由底层操作系统决定）
+    // 返回以毫秒为单位的当前时间 其表现为当前时间与GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数(具体粒度由底层操作系统决定)
     @HotSpotIntrinsicCandidate
     public static native long currentTimeMillis();
     
@@ -770,7 +770,7 @@ public final class System {
      *
      * @since 1.5
      */
-    // 返回一个纳秒级的时间，不与具体的日期挂钩，只反应某段流逝的时间，可用来计数
+    // 返回一个纳秒级的时间 不与具体的日期挂钩 只反应某段流逝的时间 可用来计数
     @HotSpotIntrinsicCandidate
     public static native long nanoTime();
     
@@ -780,7 +780,7 @@ public final class System {
     
     /*▼ 日志 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    /* 默认实现：LoggingProviderImpl$JULWrapper*/
+    /* 默认实现:LoggingProviderImpl$JULWrapper*/
     
     /**
      * Returns an instance of {@link Logger Logger} for the caller's
@@ -813,7 +813,7 @@ public final class System {
      * the system initialization time.
      * @since 9
      */
-    // 获取一个Logger实例，名称为name
+    // 获取一个Logger实例 名称为name
     @CallerSensitive
     public static Logger getLogger(String name) {
         Objects.requireNonNull(name);
@@ -1159,8 +1159,8 @@ public final class System {
      * @since 1.1
      */
     /*
-     * 返回当前对象的哈希码，具体行为由JVM实现
-     * 如果当前对象没有重写Object#hashCode方法，则Object#hashCode与identityHashCode的行为可看做一致。
+     * 返回当前对象的哈希码 具体行为由JVM实现
+     * 如果当前对象没有重写Object#hashCode方法 则Object#hashCode与identityHashCode的行为可看做一致。
      */
     @HotSpotIntrinsicCandidate
     public static native int identityHashCode(Object x);
@@ -1177,7 +1177,7 @@ public final class System {
      *
      * @since 1.7
      */
-    // 返回当前环境下的换行符，比如在windows下返回"\r\n"
+    // 返回当前环境下的换行符 比如在windows下返回"\r\n"
     public static String lineSeparator() {
         return lineSeparator;
     }
@@ -1202,7 +1202,7 @@ public final class System {
      *                           method doesn't allow exit with the specified status.
      * @see java.lang.Runtime#exit(int)
      */
-    // 结束当前正在运行中的java虚拟机，一般用status=0表示正常退出
+    // 结束当前正在运行中的java虚拟机 一般用status=0表示正常退出
     public static void exit(int status) {
         Runtime.getRuntime().exit(status);
     }
@@ -1215,7 +1215,7 @@ public final class System {
      *
      * @since 1.6
      */
-    // 返回当前JVM关联的控制台（在IDE中运行项目时，此处往往返回null）
+    // 返回当前JVM关联的控制台(在IDE中运行项目时 此处往往返回null)
     public static Console console() {
         Console c;
         if((c = cons) == null) {

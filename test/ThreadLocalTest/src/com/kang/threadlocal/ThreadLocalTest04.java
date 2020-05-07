@@ -2,7 +2,7 @@ package com.kang.threadlocal;
 
 /**
  * 测试SuppliedThreadLocal。
- * 该内部类位于ThreadLocal中，是ThreadLocal的子类，使用很简单。
+ * 该内部类位于ThreadLocal中 是ThreadLocal的子类 使用很简单。
  */
 public class ThreadLocalTest04 {
     public static void main(String[] args) {

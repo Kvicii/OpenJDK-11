@@ -19,7 +19,7 @@ public class SerializableTest03 {
         
         // 从本地反序列化user对象
         User03 u = (User03)SerializableUtil.deserializableUser(file);
-        // 由于禁止了age对象的序列化，因此此处反序列化的结果中，age=0，即没有获取到有效值，使用了int的默认值
+        // 由于禁止了age对象的序列化 因此此处反序列化的结果中 age=0 即没有获取到有效值 使用了int的默认值
         System.out.println(u);
     }
 }

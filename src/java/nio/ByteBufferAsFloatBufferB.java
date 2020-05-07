@@ -25,7 +25,7 @@
 
 package java.nio;
 
-// ByteBuffer转为FloatBuffer，使用可读写的缓冲区。采用大端字节序，其他部分与ByteBufferAsFloatBufferL相同
+// ByteBuffer转为FloatBuffer 使用可读写的缓冲区。采用大端字节序 其他部分与ByteBufferAsFloatBufferL相同
 class ByteBufferAsFloatBufferB extends FloatBuffer {
     
     protected final ByteBuffer bb;
@@ -69,7 +69,7 @@ class ByteBufferAsFloatBufferB extends FloatBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public FloatBuffer slice() {
         int pos = this.position();
@@ -88,11 +88,11 @@ class ByteBufferAsFloatBufferB extends FloatBuffer {
         return new ByteBufferAsFloatBufferRB(bb, this.markValue(), this.position(), this.limit(), this.capacity(), address);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /* getIntUnaligned和putIntUnaligned方法中，最后一个参数为true，代表以大端法存取字节 */
+    /* getIntUnaligned和putIntUnaligned方法中 最后一个参数为true 代表以大端法存取字节 */
     
     /*▼ get/读取 ████████████████████████████████████████████████████████████████████████████████┓ */
     

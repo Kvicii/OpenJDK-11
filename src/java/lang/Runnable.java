@@ -54,7 +54,7 @@ package java.lang;
  */
 
 /*
- * 常用作线程的动作（行为）。
+ * 常用作线程的动作(行为)。
  *
  * Thread thread = new Thread(new Runnable() {
  *     public void run() {
@@ -62,7 +62,7 @@ package java.lang;
  *     }
  * });
  *
- * 该接口已函数化，上面的声明可以简写做：
+ * 该接口已函数化 上面的声明可以简写做:
  * Thread thread = new Thread(() -> {
  *     // 线程执行的动作
  * });

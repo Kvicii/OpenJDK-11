@@ -96,7 +96,7 @@ public interface Appendable {
      *                                   {@code csq.length()}
      * @throws IOException               If an I/O error occurs
      */
-    // 向该对象添加一个字符序列，该字符序列是csq在[start, end)范围内的一个子序列
+    // 向该对象添加一个字符序列 该字符序列是csq在[start, end)范围内的一个子序列
     Appendable append(CharSequence csq, int start, int end) throws IOException;
     
     /**

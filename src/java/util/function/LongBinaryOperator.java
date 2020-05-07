@@ -37,12 +37,12 @@ package java.util.function;
  * @since 1.8
  */
 /*
- * 函数式接口：LongBinaryOperator
+ * 函数式接口:LongBinaryOperator
  *
  * long二元操作
  *
- * 参数：long, long
- * 返回：long
+ * 参数:long, long
+ * 返回:long
  */
 @FunctionalInterface
 public interface LongBinaryOperator {

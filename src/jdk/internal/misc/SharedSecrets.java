@@ -48,9 +48,9 @@ import java.util.jar.JarFile;
  * for this purpose, namely the loss of compile-time checking.
  */
 /*
- * 集合了众多“后门”接口，用来访问一些非公开的方法
- * 对于每个“后门”类来说，其原理就像使用setter和getter一样
- * 优点是不需要反射，缺点是权限开放过大
+ * 集合了众多“后门”接口 用来访问一些非公开的方法
+ * 对于每个“后门”类来说 其原理就像使用setter和getter一样
+ * 优点是不需要反射 缺点是权限开放过大
  */
 public class SharedSecrets {
     private static final Unsafe unsafe = Unsafe.getUnsafe();

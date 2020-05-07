@@ -24,7 +24,7 @@ public class SerializableTest07 {
         System.out.println("u1=" + u1);
         System.out.println("u2=" + u2);
         
-        // 此处应该输出true，因为User07中实现了readResolve方法
+        // 此处应该输出true 因为User07中实现了readResolve方法
         System.out.println("u1==u2? " + (u1 == u2));
     }
 }

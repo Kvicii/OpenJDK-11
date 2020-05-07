@@ -24,7 +24,7 @@ public class ExternalizableTest02 {
         System.out.println("u1=" + u1);
         System.out.println("u2=" + u2);
         
-        // 此处应该输出fasle，每次反序列化处的对象都不一样
+        // 此处应该输出fasle 每次反序列化处的对象都不一样
         System.out.println("u1==u2? " + (u1 == u2));
     }
 }

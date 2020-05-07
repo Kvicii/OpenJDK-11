@@ -29,12 +29,12 @@ package java.nio;
  * A read/write HeapByteBuffer.
  */
 
-// 可读写、非直接缓冲区，内部存储结构实现为byte[]
+// 可读写、非直接缓冲区 内部存储结构实现为byte[]
 class HeapByteBuffer extends ByteBuffer {
     
-    // 寻找byte[]类型数组中的元素时约定的起始偏移地址，与#arrayIndexScale配合使用
+    // 寻找byte[]类型数组中的元素时约定的起始偏移地址 与#arrayIndexScale配合使用
     private static final long ARRAY_BASE_OFFSET = UNSAFE.arrayBaseOffset(byte[].class);
-    // byte[]类型数组中每个元素所占字节大小，这里是byte[]，每个byte占1个字节
+    // byte[]类型数组中每个元素所占字节大小 这里是byte[] 每个byte占1个字节
     private static final long ARRAY_INDEX_SCALE = UNSAFE.arrayIndexScale(byte[].class);
     
     
@@ -75,7 +75,7 @@ class HeapByteBuffer extends ByteBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public ByteBuffer slice() {
         return new HeapByteBuffer(hb, -1, 0, this.remaining(), this.remaining(), this.position() + offset);
@@ -96,18 +96,18 @@ class HeapByteBuffer extends ByteBuffer {
         return new HeapByteBufferR(hb, this.markValue(), this.position(), this.limit(), this.capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
     /*▼ get/读取 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 读取position+offset处的byte，然后递增position。
+    // 读取position+offset处的byte 然后递增position。
     public byte get() {
         return hb[ix(nextGetIndex())];
     }
     
-    // 读取i+offset处的byte（有越界检查）
+    // 读取i+offset处的byte(有越界检查)
     public byte get(int i) {
         return hb[ix(checkIndex(i))];
     }
@@ -123,65 +123,65 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 一次读2个字节，按char解析，将position增加2个单位
+    // 一次读2个字节 按char解析 将position增加2个单位
     public char getChar() {
         return UNSAFE.getCharUnaligned(hb, byteOffset(nextGetIndex(2)), bigEndian);
     }
     
-    // 读取i处2个字节解析为char（有越界检查）
+    // 读取i处2个字节解析为char(有越界检查)
     public char getChar(int i) {
         return UNSAFE.getCharUnaligned(hb, byteOffset(checkIndex(i, 2)), bigEndian);
     }
     
-    // 一次读2个字节，按short解析，将position增加2个单位
+    // 一次读2个字节 按short解析 将position增加2个单位
     public short getShort() {
         return UNSAFE.getShortUnaligned(hb, byteOffset(nextGetIndex(2)), bigEndian);
     }
     
-    // 读取i处2个字节解析为short（有越界检查）
+    // 读取i处2个字节解析为short(有越界检查)
     public short getShort(int i) {
         return UNSAFE.getShortUnaligned(hb, byteOffset(checkIndex(i, 2)), bigEndian);
     }
     
-    // 一次读4个字节，按int解析，将position增加4个单位
+    // 一次读4个字节 按int解析 将position增加4个单位
     public int getInt() {
         return UNSAFE.getIntUnaligned(hb, byteOffset(nextGetIndex(4)), bigEndian);
     }
     
-    // 读取i处4个字节解析为int（有越界检查）
+    // 读取i处4个字节解析为int(有越界检查)
     public int getInt(int i) {
         return UNSAFE.getIntUnaligned(hb, byteOffset(checkIndex(i, 4)), bigEndian);
     }
     
-    // 一次读8个字节，按long解析，将position增加8个单位
+    // 一次读8个字节 按long解析 将position增加8个单位
     public long getLong() {
         return UNSAFE.getLongUnaligned(hb, byteOffset(nextGetIndex(8)), bigEndian);
     }
     
-    // 读取i处8个字节解析为long（有越界检查）
+    // 读取i处8个字节解析为long(有越界检查)
     public long getLong(int i) {
         return UNSAFE.getLongUnaligned(hb, byteOffset(checkIndex(i, 8)), bigEndian);
     }
     
-    // 一次读4个字节，按float解析，将position增加4个单位
+    // 一次读4个字节 按float解析 将position增加4个单位
     public float getFloat() {
         int x = UNSAFE.getIntUnaligned(hb, byteOffset(nextGetIndex(4)), bigEndian);
         return Float.intBitsToFloat(x);
     }
     
-    // 读取i处4个字节解析为float（有越界检查）
+    // 读取i处4个字节解析为float(有越界检查)
     public float getFloat(int i) {
         int x = UNSAFE.getIntUnaligned(hb, byteOffset(checkIndex(i, 4)), bigEndian);
         return Float.intBitsToFloat(x);
     }
     
-    // 一次读8个字节，按double解析，将position增加8个单位
+    // 一次读8个字节 按double解析 将position增加8个单位
     public double getDouble() {
         long x = UNSAFE.getLongUnaligned(hb, byteOffset(nextGetIndex(8)), bigEndian);
         return Double.longBitsToDouble(x);
     }
     
-    // 读取i处8个字节解析为double（有越界检查）
+    // 读取i处8个字节解析为double(有越界检查)
     public double getDouble(int i) {
         long x = UNSAFE.getLongUnaligned(hb, byteOffset(checkIndex(i, 8)), bigEndian);
         return Double.longBitsToDouble(x);
@@ -193,7 +193,7 @@ class HeapByteBuffer extends ByteBuffer {
     
     /*▼ put/写入 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 向position+offset处写入byte，并将position递增
+    // 向position+offset处写入byte 并将position递增
     public ByteBuffer put(byte x) {
         hb[ix(nextPutIndex())] = x;
         return this;
@@ -205,7 +205,7 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 从源字节数组src的offset处开始，复制length个元素，写入到当前缓冲区【活跃区域】内（考虑偏移量）
+    // 从源字节数组src的offset处开始 复制length个元素 写入到当前缓冲区【活跃区域】内(考虑偏移量)
     public ByteBuffer put(byte[] src, int offset, int length) {
         checkBounds(offset, length, src.length);
         if(length > remaining())
@@ -239,7 +239,7 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 将char转为byte存入缓冲区，将position增加2个单位
+    // 将char转为byte存入缓冲区 将position增加2个单位
     public ByteBuffer putChar(char x) {
         UNSAFE.putCharUnaligned(hb, byteOffset(nextPutIndex(2)), x, bigEndian);
         return this;
@@ -251,7 +251,7 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 将short转为byte存入缓冲区，将position增加2个单位
+    // 将short转为byte存入缓冲区 将position增加2个单位
     public ByteBuffer putShort(short x) {
         UNSAFE.putShortUnaligned(hb, byteOffset(nextPutIndex(2)), x, bigEndian);
         return this;
@@ -263,7 +263,7 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 将int转为byte存入缓冲区，将position增加4个单位
+    // 将int转为byte存入缓冲区 将position增加4个单位
     public ByteBuffer putInt(int x) {
         UNSAFE.putIntUnaligned(hb, byteOffset(nextPutIndex(4)), x, bigEndian);
         return this;
@@ -275,7 +275,7 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 将long转为byte存入缓冲区，将position增加8个单位
+    // 将long转为byte存入缓冲区 将position增加8个单位
     public ByteBuffer putLong(long x) {
         UNSAFE.putLongUnaligned(hb, byteOffset(nextPutIndex(8)), x, bigEndian);
         return this;
@@ -287,7 +287,7 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 将float转为byte存入缓冲区，将position增加4个单位
+    // 将float转为byte存入缓冲区 将position增加4个单位
     public ByteBuffer putFloat(float x) {
         int y = Float.floatToRawIntBits(x);
         UNSAFE.putIntUnaligned(hb, byteOffset(nextPutIndex(4)), y, bigEndian);
@@ -301,7 +301,7 @@ class HeapByteBuffer extends ByteBuffer {
         return this;
     }
     
-    // 将double转为byte存入缓冲区，将position增加8个单位
+    // 将double转为byte存入缓冲区 将position增加8个单位
     public ByteBuffer putDouble(double x) {
         long y = Double.doubleToRawLongBits(x);
         UNSAFE.putLongUnaligned(hb, byteOffset(nextPutIndex(8)), y, bigEndian);
@@ -321,7 +321,7 @@ class HeapByteBuffer extends ByteBuffer {
     
     /*▼ 压缩 ████████████████████████████████████████████████████████████████████████████████┓ */
     
-    // 压缩缓冲区，将当前未读完的数据挪到容器起始处，可用于读模式到写模式的切换，但又不丢失之前读入的数据。
+    // 压缩缓冲区 将当前未读完的数据挪到容器起始处 可用于读模式到写模式的切换 但又不丢失之前读入的数据。
     public ByteBuffer compact() {
         System.arraycopy(hb, ix(position()), hb, ix(0), remaining());
         position(remaining());
@@ -400,7 +400,7 @@ class HeapByteBuffer extends ByteBuffer {
     
     // 获取当前缓冲区索引i处的元素的<地址>
     private long byteOffset(long i) {
-        // 一个byte是1个字节，这里直接加上i
+        // 一个byte是1个字节 这里直接加上i
         return address + i;
     }
     

@@ -39,10 +39,10 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：DoubleConsumer
+ * 函数式接口:DoubleConsumer
  *
- * 参数：double
- * 返回：void
+ * 参数:double
+ * 返回:void
  */
 @FunctionalInterface
 public interface DoubleConsumer {
@@ -68,7 +68,7 @@ public interface DoubleConsumer {
      *
      * @throws NullPointerException if {@code after} is null
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default DoubleConsumer andThen(DoubleConsumer after) {
         Objects.requireNonNull(after);
         return (double t) -> {

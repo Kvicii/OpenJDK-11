@@ -53,7 +53,7 @@ import java.util.function.Consumer;
  * @see Iterable
  * @since 1.2
  */
-// 迭代器接口，跟枚举器接口很像，可以遍历元素，也可以移除元素。关键是，支持foreach遍历方式
+// 迭代器接口 跟枚举器接口很像 可以遍历元素 也可以移除元素。关键是 支持foreach遍历方式
 public interface Iterator<E> {
     /**
      * Returns {@code true} if the iteration has more elements.
@@ -126,7 +126,7 @@ public interface Iterator<E> {
      * }</pre>
      * @since 1.8
      */
-    // 遍历每个元素，并对其执行相应的择取操作
+    // 遍历每个元素 并对其执行相应的择取操作
     default void forEachRemaining(Consumer<? super E> action) {
         Objects.requireNonNull(action);
         while(hasNext()) {

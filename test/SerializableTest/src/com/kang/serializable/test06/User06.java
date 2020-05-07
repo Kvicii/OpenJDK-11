@@ -8,7 +8,7 @@ import java.io.Serializable;
 // 实现Serializable接口的才可以被序列化
 public class User06 implements Serializable {
     private String name;
-    private transient int age;  // 此处的transient关键字失效，因为使用了自定义的序列化逻辑
+    private transient int age;  // 此处的transient关键字失效 因为使用了自定义的序列化逻辑
     private char[] sex; // 数组
     
     public User06(String name, int age, char[] sex) {

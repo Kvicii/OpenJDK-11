@@ -61,9 +61,9 @@ package java.lang.ref;
  * @since 1.2
  */
 /*
- * 软引用(Soft Reference)：
- * 当一个对象只剩软引用，且堆内存不足时，垃圾回收器才会回收对应引用
- * JVM会在抛出OOME前清理所有弱引用指向的对象，如果清理完还是内存不足，才会抛出OOME。
+ * 软引用(Soft Reference):
+ * 当一个对象只剩软引用 且堆内存不足时 垃圾回收器才会回收对应引用
+ * JVM会在抛出OOME前清理所有弱引用指向的对象 如果清理完还是内存不足 才会抛出OOME。
  * 所以软引用一般用于实现内存敏感缓存。
  */
 public class SoftReference<T> extends Reference<T> {

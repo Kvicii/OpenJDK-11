@@ -128,7 +128,7 @@ import java.nio.CharBuffer;
  * @since 1.4
  */
 
-// 字节解码器。字节进来，字符出去，完成对字节序列的解码操作
+// 字节解码器。字节进来 字符出去 完成对字节序列的解码操作
 public abstract class CharsetDecoder {
     
     private static final int ST_RESET = 0;
@@ -229,7 +229,7 @@ public abstract class CharsetDecoder {
      *                                      the current unmappable-character action is {@link
      *                                      CodingErrorAction#REPORT}
      */
-    // 解码字节序列，将解码结果写入到字符缓冲区返回
+    // 解码字节序列 将解码结果写入到字符缓冲区返回
     public final CharBuffer decode(ByteBuffer in) throws CharacterCodingException {
         int n = (int) (in.remaining() * averageCharsPerByte());
         
@@ -352,7 +352,7 @@ public abstract class CharsetDecoder {
      * @throws CoderMalfunctionError If an invocation of the decodeLoop method threw
      *                               an unexpected exception
      */
-    // 从给定的输入缓冲区中解码尽可能多的字节，将结果写入给定的输出缓冲区。
+    // 从给定的输入缓冲区中解码尽可能多的字节 将结果写入给定的输出缓冲区。
     public final CoderResult decode(ByteBuffer in, CharBuffer out, boolean endOfInput) {
         int newState = endOfInput ? ST_END : ST_CODING;
         
@@ -569,7 +569,7 @@ public abstract class CharsetDecoder {
      *
      * @throws IllegalArgumentException If the precondition on the parameter does not hold
      */
-    // 注册回调：发生Malformed错误时如何处理
+    // 注册回调:发生Malformed错误时如何处理
     public final CharsetDecoder onMalformedInput(CodingErrorAction newAction) {
         if(newAction == null)
             throw new IllegalArgumentException("Null action");
@@ -590,7 +590,7 @@ public abstract class CharsetDecoder {
      *
      * @throws IllegalArgumentException If the precondition on the parameter does not hold
      */
-    // 注册回调：发生Unmappable错误时如何处理
+    // 注册回调:发生Unmappable错误时如何处理
     public final CharsetDecoder onUnmappableCharacter(CodingErrorAction newAction) {
         if(newAction == null)
             throw new IllegalArgumentException("Null action");
@@ -747,7 +747,7 @@ public abstract class CharsetDecoder {
      * @return {@code true} if, and only if, this decoder implements an
      * auto-detecting charset
      */
-    // 是否属于auto-detect字符集（自带解码器，不允许编码）
+    // 是否属于auto-detect字符集(自带解码器 不允许编码)
     public boolean isAutoDetecting() {
         return false;
     }

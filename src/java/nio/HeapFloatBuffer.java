@@ -29,7 +29,7 @@ package java.nio;
  * A read/write HeapFloatBuffer.
  */
 
-// 可读写、非直接缓冲区，内部存储结构实现为float[]
+// 可读写、非直接缓冲区 内部存储结构实现为float[]
 class HeapFloatBuffer extends FloatBuffer {
     
     // Cached array base offset
@@ -73,7 +73,7 @@ class HeapFloatBuffer extends FloatBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public FloatBuffer slice() {
         return new HeapFloatBuffer(hb, -1, 0, this.remaining(), this.remaining(), this.position() + offset);
@@ -87,7 +87,7 @@ class HeapFloatBuffer extends FloatBuffer {
         return new HeapFloatBufferR(hb, this.markValue(), this.position(), this.limit(), this.capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     

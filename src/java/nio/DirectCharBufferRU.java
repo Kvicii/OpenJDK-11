@@ -27,7 +27,7 @@ package java.nio;
 
 import sun.nio.ch.DirectBuffer;
 
-// 只读、直接缓冲区，是DirectCharBufferU的只读版本
+// 只读、直接缓冲区 是DirectCharBufferU的只读版本
 class DirectCharBufferRU extends DirectCharBufferU implements DirectBuffer {
     
     /*▼ 构造方法 ████████████████████████████████████████████████████████████████████████████████┓ */
@@ -56,7 +56,7 @@ class DirectCharBufferRU extends DirectCharBufferU implements DirectBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public CharBuffer slice() {
         int pos = this.position();
@@ -88,11 +88,11 @@ class DirectCharBufferRU extends DirectCharBufferU implements DirectBuffer {
         return new DirectCharBufferRU(this, -1, pos + start, pos + end, capacity(), offset);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ 只读缓冲区，禁止写入 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 只读缓冲区 禁止写入 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public CharBuffer put(char x) {
         throw new ReadOnlyBufferException();
@@ -110,17 +110,17 @@ class DirectCharBufferRU extends DirectCharBufferU implements DirectBuffer {
         throw new ReadOnlyBufferException();
     }
     
-    /*▲ 只读缓冲区，禁止写入 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 只读缓冲区 禁止写入 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /*▼ 禁止压缩，因为禁止写入，压缩没意义 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 禁止压缩 因为禁止写入 压缩没意义 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public CharBuffer compact() {
         throw new ReadOnlyBufferException();
     }
     
-    /*▲ 禁止压缩，因为禁止写入，压缩没意义 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 禁止压缩 因为禁止写入 压缩没意义 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -131,7 +131,7 @@ class DirectCharBufferRU extends DirectCharBufferU implements DirectBuffer {
         return ((ByteOrder.nativeOrder() != ByteOrder.BIG_ENDIAN) ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN);
     }
     
-    // 返回‘char’的字节序（此类中与平台字节序相同）
+    // 返回‘char’的字节序(此类中与平台字节序相同)
     ByteOrder charRegionOrder() {
         return order();
     }
@@ -141,7 +141,7 @@ class DirectCharBufferRU extends DirectCharBufferU implements DirectBuffer {
     
     
     
-    // 返回内部存储结构的引用（一般用于非直接缓存区）
+    // 返回内部存储结构的引用(一般用于非直接缓存区)
     @Override
     Object base() {
         return null;

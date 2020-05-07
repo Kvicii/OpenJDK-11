@@ -54,14 +54,14 @@ import java.io.Serializable;
  * @since 1.5
  */
 /*
- * 可以看作是所有enum的包装类，不过Enum类是禁止直接继承的
+ * 可以看作是所有enum的包装类 不过Enum类是禁止直接继承的
  *
- * 示例：
+ * 示例:
  * public enum Color {
  *     WHITE, BLACK
  * }
  *
- * 等价于：
+ * 等价于:
  * public final class Color extends Enum<Color> {
  *   public static final Color WHITE = new Color("WHITE", 0);
  *   public static final Color BLACK = new Color("BLACK", 1);
@@ -219,7 +219,7 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
      * @since 1.5
      */
     /*
-     * 获取枚举类enumType中名称为name的枚举实例，其他实例不受影响
+     * 获取枚举类enumType中名称为name的枚举实例 其他实例不受影响
      * Color c = Enum.valueOf(Color.class, "WHITE");
      */
     public static <T extends Enum<T>> T valueOf(Class<T> enumType, String name) {

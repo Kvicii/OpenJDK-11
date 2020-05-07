@@ -117,7 +117,7 @@ public final class Optional<T> {
     }
     
     
-    /*▼ 静态工厂，创建Optional ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 静态工厂 创建Optional ████████████████████████████████████████████████████████████████████████████████┓ */
     
     /**
      * Returns an empty {@code Optional} instance.  No value is present for this
@@ -167,7 +167,7 @@ public final class Optional<T> {
         return value == null ? empty() : of(value);
     }
     
-    /*▲ 静态工厂，创建Optional ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 静态工厂 创建Optional ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
@@ -182,7 +182,7 @@ public final class Optional<T> {
      * @throws NoSuchElementException if no value is present
      * @apiNote The preferred alternative to this method is {@link #orElseThrow()}.
      */
-    // 获取Optional中元素（如果没有元素将抛出异常）
+    // 获取Optional中元素(如果没有元素将抛出异常)
     public T get() {
         if(value == null) {
             throw new NoSuchElementException("No value present");
@@ -205,7 +205,7 @@ public final class Optional<T> {
      *                              produces a {@code null} result
      * @since 9
      */
-    // 如果元素存在，则返回Optional。否则，从supplier中获取元素。
+    // 如果元素存在 则返回Optional。否则 从supplier中获取元素。
     public Optional<T> or(Supplier<? extends Optional<? extends T>> supplier) {
         Objects.requireNonNull(supplier);
         if(isPresent()) {
@@ -226,7 +226,7 @@ public final class Optional<T> {
      *
      * @return the value, if present, otherwise {@code other}
      */
-    // 如果元素存在，返回它。否则，返回other
+    // 如果元素存在 返回它。否则 返回other
     public T orElse(T other) {
         return value != null ? value : other;
     }
@@ -243,7 +243,7 @@ public final class Optional<T> {
      * @throws NullPointerException if no value is present and the supplying
      *                              function is {@code null}
      */
-    // 如果元素存在，返回它。否则，从supplier中获取
+    // 如果元素存在 返回它。否则 从supplier中获取
     public T orElseGet(Supplier<? extends T> supplier) {
         return value != null ? value : supplier.get();
     }
@@ -257,7 +257,7 @@ public final class Optional<T> {
      * @throws NoSuchElementException if no value is present
      * @since 10
      */
-    // 如果元素存在，返回它。否则，抛出异常
+    // 如果元素存在 返回它。否则 抛出异常
     public T orElseThrow() {
         if(value == null) {
             throw new NoSuchElementException("No value present");
@@ -282,7 +282,7 @@ public final class Optional<T> {
      * list can be used as the supplier. For example,
      * {@code IllegalStateException::new}
      */
-    // 如果元素存在，返回它。否则，从exceptionSupplier中取出异常并抛出
+    // 如果元素存在 返回它。否则 从exceptionSupplier中取出异常并抛出
     public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
         if(value != null) {
             return value;
@@ -329,7 +329,7 @@ public final class Optional<T> {
      * @throws NullPointerException if value is present and the given action is
      *                              {@code null}
      */
-    // 如果元素存在，执行action动作
+    // 如果元素存在 执行action动作
     public void ifPresent(Consumer<? super T> action) {
         if(value != null) {
             action.accept(value);
@@ -349,7 +349,7 @@ public final class Optional<T> {
      *                              action is {@code null}.
      * @since 9
      */
-    // 如果元素存在，执行actin动作。否则，执行emptyAction动作。
+    // 如果元素存在 执行actin动作。否则 执行emptyAction动作。
     public void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction) {
         if(value != null) {
             action.accept(value);

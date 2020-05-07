@@ -38,12 +38,12 @@ import java.util.Objects;
  * @since 1.8
  */
 /*
- * 函数式接口：IntUnaryOperator
+ * 函数式接口:IntUnaryOperator
  *
  * int一元操作
  *
- * 参数：int
- * 返回：int
+ * 参数:int
+ * 返回:int
  */
 @FunctionalInterface
 public interface IntUnaryOperator {
@@ -81,7 +81,7 @@ public interface IntUnaryOperator {
      * @throws NullPointerException if before is null
      * @see #andThen(IntUnaryOperator)
      */
-    // f1.compose(f2)：先执行f2，再执行f1
+    // f1.compose(f2):先执行f2 再执行f1
     default IntUnaryOperator compose(IntUnaryOperator before) {
         Objects.requireNonNull(before);
         return (int v) -> applyAsInt(before.applyAsInt(v));
@@ -101,7 +101,7 @@ public interface IntUnaryOperator {
      * @throws NullPointerException if after is null
      * @see #compose(IntUnaryOperator)
      */
-    // f1.andThen(f2)：先执行f1，再执行f2
+    // f1.andThen(f2):先执行f1 再执行f2
     default IntUnaryOperator andThen(IntUnaryOperator after) {
         Objects.requireNonNull(after);
         return (int t) -> after.applyAsInt(applyAsInt(t));

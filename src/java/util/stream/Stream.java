@@ -166,17 +166,17 @@ import java.util.function.UnaryOperator;
  * @since 1.8
  */
 /*
- * 流水线接口，封装用来操作流的各个阶段（源头阶段、中间阶段、终端阶段）的方法
+ * 流水线接口 封装用来操作流的各个阶段(源头阶段、中间阶段、终端阶段)的方法
  *
- * 流水线的执行过程：
+ * 流水线的执行过程:
  * 1.从前到后生成流的各个阶段
  * 2.从后往前包装Sink
- * 3.从前到后激活流（Sink#begin()）
- * 4.从前到后择取数据（Sink#accept()）
- * 5.从前到后关闭流（Sink#end()）
+ * 3.从前到后激活流(Sink#begin())
+ * 4.从前到后择取数据(Sink#accept())
+ * 5.从前到后关闭流(Sink#end())
  *
- * 待处理数据开始时将打包在Spliterator内，然后传给流的源头阶段
- * 输出结果最后打包到某个容器（比如Node）内，以方便顺序或并行处理
+ * 待处理数据开始时将打包在Spliterator内 然后传给流的源头阶段
+ * 输出结果最后打包到某个容器(比如Node)内 以方便顺序或并行处理
  */
 public interface Stream<T>
     extends BaseStream<T, Stream<T>> {
@@ -193,7 +193,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 从数组（或类似数组）中创建一个Stream（使用Spliterators.ArraySpliterator）
+    // 从数组(或类似数组)中创建一个Stream(使用Spliterators.ArraySpliterator)
     @SafeVarargs
     @SuppressWarnings("varargs")
     static <T> Stream<T> of(T... values) {
@@ -207,7 +207,7 @@ public interface Stream<T>
      *
      * @return an empty sequential stream
      */
-    // 返回空的流水线，不包含任何待处理元素
+    // 返回空的流水线 不包含任何待处理元素
     static <T> Stream<T> empty() {
         return StreamSupport.stream(Spliterators.emptySpliterator(), false);
     }
@@ -220,7 +220,7 @@ public interface Stream<T>
      *
      * @return a singleton sequential stream
      */
-    // 返回只包含一个元素的流水线。当然，该元素可能是多维度的，比如数组。
+    // 返回只包含一个元素的流水线。当然 该元素可能是多维度的 比如数组。
     static <T> Stream<T> of(T t) {
         return StreamSupport.stream(new Streams.StreamBuilderImpl<>(t), false);
     }
@@ -268,18 +268,18 @@ public interface Stream<T>
      *
      * @return a new sequential {@code Stream}
      */
-    // 包装了第5类Spliterator，参见Spliterators类
+    // 包装了第5类Spliterator 参见Spliterators类
     static <T> Stream<T> iterate(final T seed, final UnaryOperator<T> f) {
         Objects.requireNonNull(f);
         
-        // 没有重写forEachRemaining，tryAdvance也不会返回false，所以调用forEachRemaining的话将陷入死循环
+        // 没有重写forEachRemaining tryAdvance也不会返回false 所以调用forEachRemaining的话将陷入死循环
         Spliterator<T> spliterator = new Spliterators.AbstractSpliterator<>(Long.MAX_VALUE, Spliterator.ORDERED | Spliterator.IMMUTABLE) {
             T prev;
             boolean started;
             
             /**
-             * 第一次调用后，让prev=seed，并将started置为true，代表进入启动状态。
-             * 之后每次调用tryAdvance，都会借助f生成新的prev值并缓存起来。
+             * 第一次调用后 让prev=seed 并将started置为true 代表进入启动状态。
+             * 之后每次调用tryAdvance 都会借助f生成新的prev值并缓存起来。
              */
             @Override
             public boolean tryAdvance(Consumer<? super T> action) {
@@ -339,7 +339,7 @@ public interface Stream<T>
      *
      * @since 9
      */
-    // 包装了第5类Spliterator，参见Spliterators类
+    // 包装了第5类Spliterator 参见Spliterators类
     static <T> Stream<T> iterate(T seed, Predicate<? super T> hasNext, UnaryOperator<T> next) {
         Objects.requireNonNull(next);
         Objects.requireNonNull(hasNext);
@@ -594,7 +594,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 筛选数据。参数举例：x->x%2==0，筛选出所有偶数
+    // 筛选数据。参数举例:x->x%2==0 筛选出所有偶数
     Stream<T> filter(Predicate<? super T> predicate);
     
     /**
@@ -611,7 +611,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 映射数据。参数举例：x->x*x，求平方后返回
+    // 映射数据。参数举例:x->x*x 求平方后返回
     <R> Stream<R> map(Function<? super T, ? extends R> mapper);
     
     /**
@@ -627,7 +627,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 映射数据，返回一个IntStream。参数举例：s->s.length()（要求返回值为int），计算字符串长度
+    // 映射数据 返回一个IntStream。参数举例:s->s.length()(要求返回值为int) 计算字符串长度
     IntStream mapToInt(ToIntFunction<? super T> mapper);
     
     /**
@@ -643,7 +643,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 映射数据，返回一个LongStream。参考#mapToInt
+    // 映射数据 返回一个LongStream。参考#mapToInt
     LongStream mapToLong(ToLongFunction<? super T> mapper);
     
     /**
@@ -659,7 +659,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 映射数据，返回一个DoubleStream。参考#mapToInt
+    // 映射数据 返回一个DoubleStream。参考#mapToInt
     DoubleStream mapToDouble(ToDoubleFunction<? super T> mapper);
     
     /**
@@ -705,9 +705,9 @@ public interface Stream<T>
      * creates a stream of words from that array.
      */
     /*
-     * 数据降维。参数举例：l->l.stream()。
-     * 比如int[][] a = new int[]{new int[]{1,2,3}, new int[]{4,5}. new int[]{6}};，降维成一维数组：[1,2,3,4,5,6]
-     * 注：一次只能降低一个维度，比如遇到三维数组，那么如果想要得到一维的数据，需要连续调用两次。
+     * 数据降维。参数举例:l->l.stream()。
+     * 比如int[][] a = new int[]{new int[]{1,2,3}, new int[]{4,5}. new int[]{6}}; 降维成一维数组:[1,2,3,4,5,6]
+     * 注:一次只能降低一个维度 比如遇到三维数组 那么如果想要得到一维的数据 需要连续调用两次。
      */
     <R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper);
     
@@ -816,10 +816,10 @@ public interface Stream<T>
      * {@link #count}), the action will not be invoked for those elements.
      */
     /*
-     * 用于查看流的内部结构，不会对流的结构产生影响
+     * 用于查看流的内部结构 不会对流的结构产生影响
      *
-     * peek的实现跟map类似，但区别在于map会把当前处理结果传给下一个Sink，但peek不会传递处理结果。
-     * peek常用来查看当前流的结构，比如输出其中的元素。
+     * peek的实现跟map类似 但区别在于map会把当前处理结果传给下一个Sink 但peek不会传递处理结果。
+     * peek常用来查看当前流的结构 比如输出其中的元素。
      */
     Stream<T> peek(Consumer<? super T> action);
     
@@ -872,7 +872,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 排序（默认升序）
+    // 排序(默认升序)
     Stream<T> sorted();
     
     /**
@@ -891,7 +891,7 @@ public interface Stream<T>
      *
      * @return the new stream
      */
-    // 排序（使用Comparator改变排序规则）
+    // 排序(使用Comparator改变排序规则)
     Stream<T> sorted(Comparator<? super T> comparator);
     
     /**
@@ -1041,7 +1041,7 @@ public interface Stream<T>
      *
      * @throws NullPointerException if the element selected is null
      */
-    // 找出第一个元素，返回一个可选的操作
+    // 找出第一个元素 返回一个可选的操作
     Optional<T> findFirst();
     
     /**
@@ -1063,7 +1063,7 @@ public interface Stream<T>
      * @throws NullPointerException if the element selected is null
      * @see #findFirst()
      */
-    // 找到一个元素就返回，往往是第一个元素
+    // 找到一个元素就返回 往往是第一个元素
     Optional<T> findAny();
     
     /*▲ 终端操作-短路操作 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -1131,7 +1131,7 @@ public interface Stream<T>
      * @param action a <a href="package-summary.html#NonInterference">
      *               non-interfering</a> action to perform on the elements
      */
-    // 遍历，并执行action操作
+    // 遍历 并执行action操作
     void forEach(Consumer<? super T> action);
     
     /**
@@ -1152,7 +1152,7 @@ public interface Stream<T>
      *
      * @see #forEach(Consumer)
      */
-    // 按遭遇顺序遍历，并执行action操作
+    // 按遭遇顺序遍历 并执行action操作
     void forEachOrdered(Consumer<? super T> action);
     
     /**
@@ -1195,7 +1195,7 @@ public interface Stream<T>
      * @see #min(Comparator)
      * @see #max(Comparator)
      */
-    // 收纳汇总，两两比对，完成指定动作
+    // 收纳汇总 两两比对 完成指定动作
     Optional<T> reduce(BinaryOperator<T> accumulator);
     
     /**
@@ -1248,7 +1248,7 @@ public interface Stream<T>
      * operations parallelize more gracefully, without needing additional
      * synchronization and with greatly reduced risk of data races.
      */
-    // 收纳汇总，两两比对，完成accumulator动作。identity是初值，accumulator中的输入类型应当一致。
+    // 收纳汇总 两两比对 完成accumulator动作。identity是初值 accumulator中的输入类型应当一致。
     T reduce(T identity, BinaryOperator<T> accumulator);
     
     /**
@@ -1299,7 +1299,7 @@ public interface Stream<T>
      * @see #reduce(BinaryOperator)
      * @see #reduce(Object, BinaryOperator)
      */
-    // 收纳汇总，两两比对，完成combiner动作。identity是初值，accumulator中的输入类型可以不一致。combiner用在并行操作。
+    // 收纳汇总 两两比对 完成combiner动作。identity是初值 accumulator中的输入类型可以不一致。combiner用在并行操作。
     <U> U reduce(U identity, BiFunction<U, ? super T, U> accumulator, BinaryOperator<U> combiner);
     
     /**
@@ -1362,7 +1362,7 @@ public interface Stream<T>
      * 收集输出的元素到某个容器
      * supplier用于构造容器
      * accumulator用于向容器添加元素
-     * combiner用于拼接容器（用在并行处理中）
+     * combiner用于拼接容器(用在并行处理中)
      */
     <R> R collect(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner);
     
@@ -1418,7 +1418,7 @@ public interface Stream<T>
      * @see #collect(Supplier, BiConsumer, BiConsumer)
      * @see Collectors
      */
-    // 收纳汇总，具体行为取决于Collector
+    // 收纳汇总 具体行为取决于Collector
     <R, A> R collect(Collector<? super T, A, R> collector);
     
     /**
@@ -1470,7 +1470,7 @@ public interface Stream<T>
      *
      * @throws NullPointerException if the minimum element is null
      */
-    // 求最小值，元素的“大小”判断取决于comparator
+    // 求最小值 元素的“大小”判断取决于comparator
     Optional<T> min(Comparator<? super T> comparator);
     
     /**
@@ -1490,7 +1490,7 @@ public interface Stream<T>
      *
      * @throws NullPointerException if the maximum element is null
      */
-    // 求最大值，元素的“大小”判断取决于comparator
+    // 求最大值 元素的“大小”判断取决于comparator
     Optional<T> max(Comparator<? super T> comparator);
     
     /*▲ 终端操作-非短路操作 ████████████████████████████████████████████████████████████████████████████████┛ */
@@ -1527,11 +1527,11 @@ public interface Stream<T>
      * @since 1.8
      */
     /*
-     * Stream构建器接口，允许创建单元素流或多元素流。
+     * Stream构建器接口 允许创建单元素流或多元素流。
      *
-     * 该构建器允许通过单独生成元素并将它们添加到Builder来创建Stream（避开使用ArrayList作为临时缓冲区的复制开销）。
-     * 流构建器具有生命周期，该生命周期从【构建】阶段开始，在此期间可以添加元素，然后转换为【已构建】阶段，之后可能不会添加元素。
-     * 【已构建】阶段从调用build()方法开始，该方法创建一个有序的Stream，其元素是按照添加顺序添加到流构建器的元素。
+     * 该构建器允许通过单独生成元素并将它们添加到Builder来创建Stream(避开使用ArrayList作为临时缓冲区的复制开销)。
+     * 流构建器具有生命周期 该生命周期从【构建】阶段开始 在此期间可以添加元素 然后转换为【已构建】阶段 之后可能不会添加元素。
+     * 【已构建】阶段从调用build()方法开始 该方法创建一个有序的Stream 其元素是按照添加顺序添加到流构建器的元素。
      *
      * 具体行为参见StreamBuilderImpl实现类
      */
@@ -1547,7 +1547,7 @@ public interface Stream<T>
          * @throws IllegalStateException if the builder has already transitioned to
          *                               the built state
          */
-        // 使用模式一创建构建器后，可以调用此方法构建一个新的流
+        // 使用模式一创建构建器后 可以调用此方法构建一个新的流
         Stream<T> build();
     
         /**
@@ -1574,7 +1574,7 @@ public interface Stream<T>
          *     return this;
          * }</pre>
          */
-        // 使用模式一创建构建器后，可以调用此方法添加元素
+        // 使用模式一创建构建器后 可以调用此方法添加元素
         default Builder<T> add(T t) {
             accept(t);
             return this;

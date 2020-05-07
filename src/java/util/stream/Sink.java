@@ -116,23 +116,23 @@ import java.util.function.LongConsumer;
  */
 
 /*
- * Sink定义了开启(begin)、关闭(end)流水线的方式，并完成对数据的择取(accept)操作
+ * Sink定义了开启(begin)、关闭(end)流水线的方式 并完成对数据的择取(accept)操作
  *
- * 在流水线的非源头阶段都包含各自的Sink，这些Sink往往形成一个单链表，以便从头到尾择取元素。
+ * 在流水线的非源头阶段都包含各自的Sink 这些Sink往往形成一个单链表 以便从头到尾择取元素。
  *
- * Sink是Consumer的子类，可译作水槽（带滤网的水槽，择取数据）。
- * Sink可以看做一个特殊的函数，使用此函数来择取出自己想要的数据
+ * Sink是Consumer的子类 可译作水槽(带滤网的水槽 择取数据)。
+ * Sink可以看做一个特殊的函数 使用此函数来择取出自己想要的数据
  *
- * 在第一次调用Sink上的accept()方法之前，必须首先调用begin()方法以通知它数据即将到来（可选地通知Sink将要传输多少数据），以及发送完所有数据后，必须调用end()方法。
- * 在调用end()之后，如果不再调用begin()，则不应调用accept()。
+ * 在第一次调用Sink上的accept()方法之前 必须首先调用begin()方法以通知它数据即将到来(可选地通知Sink将要传输多少数据) 以及发送完所有数据后 必须调用end()方法。
+ * 在调用end()之后 如果不再调用begin() 则不应调用accept()。
  *
- * Sink还提供了一种机制，通过该机制，Sink可以协作地发信号通知它不希望再接收任何数据（cancellationRequested()方法），源可以在向Sink发送更多数据之前进行轮询。
+ * Sink还提供了一种机制 通过该机制 Sink可以协作地发信号通知它不希望再接收任何数据(cancellationRequested()方法) 源可以在向Sink发送更多数据之前进行轮询。
  *
- * Sink可以处于两种状态之一：初始状态和活动状态。
- * begin()方法将其从初始状态转换为活动状态，end()方法将其转换回初始状态，可以重新使用它。
- * 数据择取方法（例如accept()）仅在活动状态下有效。
+ * Sink可以处于两种状态之一:初始状态和活动状态。
+ * begin()方法将其从初始状态转换为活动状态 end()方法将其转换回初始状态 可以重新使用它。
+ * 数据择取方法(例如accept())仅在活动状态下有效。
  *
- * 流水线由源头阶段，零个或多个中间阶段（例如filter或map）以及终端阶段（例如reduction或foreach）组成。
+ * 流水线由源头阶段 零个或多个中间阶段(例如filter或map)以及终端阶段(例如reduction或foreach)组成。
  */
 interface Sink<T> extends Consumer<T> {
     
@@ -145,14 +145,14 @@ interface Sink<T> extends Consumer<T> {
      *             Prior to this call, the sink must be in the initial state, and after this call it is in the active state.
      */
     /*
-     * 重置Sink的状态以接收新数据集，必须在将任何数据发送到Sink之前调用。
-     * 在调用end()之后，可以调用此方法重置Sink以进行另一次计算。
-     * size代表向下游发送的数据量。如果数据量未知或无限，则设size==-1
+     * 重置Sink的状态以接收新数据集 必须在将任何数据发送到Sink之前调用。
+     * 在调用end()之后 可以调用此方法重置Sink以进行另一次计算。
+     * size代表向下游发送的数据量。如果数据量未知或无限 则设size==-1
      */
     default void begin(long size) {
     }
     
-    /* 在父类Consumer中，有接收对象值的接口方法 */
+    /* 在父类Consumer中 有接收对象值的接口方法 */
     
     /**
      * Accepts an int value.
@@ -160,7 +160,7 @@ interface Sink<T> extends Consumer<T> {
      * @throws IllegalStateException if this sink does not accept int values
      * @implSpec The default implementation throws IllegalStateException.
      */
-    // 接收int值，并进行相应的择取操作
+    // 接收int值 并进行相应的择取操作
     default void accept(int value) {
         throw new IllegalStateException("called wrong accept method");
     }
@@ -171,7 +171,7 @@ interface Sink<T> extends Consumer<T> {
      * @throws IllegalStateException if this sink does not accept long values
      * @implSpec The default implementation throws IllegalStateException.
      */
-    // 接收long值，并进行相应的择取操作
+    // 接收long值 并进行相应的择取操作
     default void accept(long value) {
         throw new IllegalStateException("called wrong accept method");
     }
@@ -182,7 +182,7 @@ interface Sink<T> extends Consumer<T> {
      * @throws IllegalStateException if this sink does not accept double values
      * @implSpec The default implementation throws IllegalStateException.
      */
-    // 接收double值，并进行相应的择取操作
+    // 接收double值 并进行相应的择取操作
     default void accept(double value) {
         throw new IllegalStateException("called wrong accept method");
     }
@@ -196,8 +196,8 @@ interface Sink<T> extends Consumer<T> {
      * this call it is returned to the initial state.
      */
     /*
-     * 表示已推送所有元素。如果Sink是有状态的，它应该在此时向下游发送任何存储状态，并且应该清除任何累积状态（和相关资源）。
-     * 在此调用之前，接收器必须处于活动状态，并且在此调用之后它将返回到初始状态。
+     * 表示已推送所有元素。如果Sink是有状态的 它应该在此时向下游发送任何存储状态 并且应该清除任何累积状态(和相关资源)。
+     * 在此调用之前 接收器必须处于活动状态 并且在此调用之后它将返回到初始状态。
      */
     default void end() {
     }
@@ -219,7 +219,7 @@ interface Sink<T> extends Consumer<T> {
      * {@code accept(int)}, and wires {@code accept(Integer)} to bridge to
      * {@code accept(int)}.
      */
-    // 为基本类型int特化的Sink，可以处理int和Integer
+    // 为基本类型int特化的Sink 可以处理int和Integer
     interface OfInt extends Sink<Integer>, IntConsumer {
         @Override
         void accept(int value);
@@ -238,7 +238,7 @@ interface Sink<T> extends Consumer<T> {
      * {@code accept(long)}, and wires {@code accept(Long)} to bridge to
      * {@code accept(long)}.
      */
-    // 为基本类型long特化的Sink，可以处理long和Long
+    // 为基本类型long特化的Sink 可以处理long和Long
     interface OfLong extends Sink<Long>, LongConsumer {
         @Override
         void accept(long value);
@@ -257,7 +257,7 @@ interface Sink<T> extends Consumer<T> {
      * {@code accept(double)}, and wires {@code accept(Double)} to bridge to
      * {@code accept(double)}.
      */
-    // 为基本类型double特化的Sink，可以处理double和Double
+    // 为基本类型double特化的Sink 可以处理double和Double
     interface OfDouble extends Sink<Double>, DoubleConsumer {
         @Override
         void accept(double value);
@@ -282,20 +282,20 @@ interface Sink<T> extends Consumer<T> {
      */
     // 为链式操作特化的Sink
     abstract class ChainedReference<T, E_OUT> implements Sink<T> {
-        // 保存了下游的Sink，以方便链式调用
+        // 保存了下游的Sink 以方便链式调用
         protected final Sink<? super E_OUT> downstream;
         
         public ChainedReference(Sink<? super E_OUT> downstream) {
             this.downstream = Objects.requireNonNull(downstream);
         }
         
-        // 逐个激活下游的Sink，参数代表传给下一个Sink的元素个数
+        // 逐个激活下游的Sink 参数代表传给下一个Sink的元素个数
         @Override
         public void begin(long size) {
             downstream.begin(size);
         }
     
-        // 逐个关闭下游的Sink，这里可用容器接收最终的值
+        // 逐个关闭下游的Sink 这里可用容器接收最终的值
         @Override
         public void end() {
             downstream.end();
@@ -320,20 +320,20 @@ interface Sink<T> extends Consumer<T> {
      */
     // 为IntStream链式操作特化的Sink
     abstract class ChainedInt<E_OUT> implements Sink.OfInt {
-        // 保存了下游的Sink，以方便链式调用
+        // 保存了下游的Sink 以方便链式调用
         protected final Sink<? super E_OUT> downstream;
         
         public ChainedInt(Sink<? super E_OUT> downstream) {
             this.downstream = Objects.requireNonNull(downstream);
         }
     
-        // 逐个激活下游的Sink，这里可初始化容器
+        // 逐个激活下游的Sink 这里可初始化容器
         @Override
         public void begin(long size) {
             downstream.begin(size);
         }
     
-        // 逐个关闭下游的Sink，这里可用容器接收最终的值
+        // 逐个关闭下游的Sink 这里可用容器接收最终的值
         @Override
         public void end() {
             downstream.end();
@@ -357,20 +357,20 @@ interface Sink<T> extends Consumer<T> {
      */
     // 为LongStream链式操作特化的Sink
     abstract class ChainedLong<E_OUT> implements Sink.OfLong {
-        // 保存了下游的Sink，以方便链式调用
+        // 保存了下游的Sink 以方便链式调用
         protected final Sink<? super E_OUT> downstream;
         
         public ChainedLong(Sink<? super E_OUT> downstream) {
             this.downstream = Objects.requireNonNull(downstream);
         }
     
-        // 逐个激活下游的Sink，这里可初始化容器
+        // 逐个激活下游的Sink 这里可初始化容器
         @Override
         public void begin(long size) {
             downstream.begin(size);
         }
     
-        // 逐个关闭下游的Sink，这里可用容器接收最终的值
+        // 逐个关闭下游的Sink 这里可用容器接收最终的值
         @Override
         public void end() {
             downstream.end();
@@ -394,20 +394,20 @@ interface Sink<T> extends Consumer<T> {
      */
     // 为DoubleStream链式操作特化的Sink
     abstract class ChainedDouble<E_OUT> implements Sink.OfDouble {
-        // 保存了下游的Sink，以方便链式调用
+        // 保存了下游的Sink 以方便链式调用
         protected final Sink<? super E_OUT> downstream;
         
         public ChainedDouble(Sink<? super E_OUT> downstream) {
             this.downstream = Objects.requireNonNull(downstream);
         }
     
-        // 逐个激活下游的Sink，这里可初始化容器
+        // 逐个激活下游的Sink 这里可初始化容器
         @Override
         public void begin(long size) {
             downstream.begin(size);
         }
     
-        // 逐个关闭下游的Sink，这里可用容器接收最终的值
+        // 逐个关闭下游的Sink 这里可用容器接收最终的值
         @Override
         public void end() {
             downstream.end();

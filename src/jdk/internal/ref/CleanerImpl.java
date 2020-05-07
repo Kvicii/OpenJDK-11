@@ -40,13 +40,13 @@ import java.util.function.Function;
  * CleanerImpl manages a set of object references and corresponding cleaning actions.
  * CleanerImpl provides the functionality of {@link java.lang.ref.Cleaner}.
  */
-// 为清理器（Cleaner）提供清理服务，与Cleaner是一对一关系
+// 为清理器(Cleaner)提供清理服务 与Cleaner是一对一关系
 public final class CleanerImpl implements Runnable {
     
     /**
      * An object to access the CleanerImpl from a Cleaner; set by Cleaner init.
      */
-    // cleaner -> cleaner.impl，给定Cleaner对象，返回其内部的CleanerImpl
+    // cleaner -> cleaner.impl 给定Cleaner对象 返回其内部的CleanerImpl
     private static Function<Cleaner, CleanerImpl> cleanerImplAccess = null;
     
     /**
@@ -54,12 +54,12 @@ public final class CleanerImpl implements Runnable {
      */
     final SoftCleanable<?> softCleanableList;   // 软引用清理器列表
     final WeakCleanable<?> weakCleanableList;   // 弱引用清理器列表
-    final PhantomCleanable<?> phantomCleanableList; // 虚引用清理器列表，是清理器Cleaner的默认实现
+    final PhantomCleanable<?> phantomCleanableList; // 虚引用清理器列表 是清理器Cleaner的默认实现
     
     /*
      * The ReferenceQueue of pending cleaning actions
      *
-     * 存放报废的Reference，在这里存放的是报废的引用清理器，因为引用清理器本身也是Reference。
+     * 存放报废的Reference 在这里存放的是报废的引用清理器 因为引用清理器本身也是Reference。
      */
     final ReferenceQueue<Object> queue;
     
@@ -79,7 +79,7 @@ public final class CleanerImpl implements Runnable {
      *
      * @param access a function to map from Cleaner to CleanerImpl
      */
-    // 提供函数式接口，跟普通的set方法作用一样
+    // 提供函数式接口 跟普通的set方法作用一样
     public static void setCleanerImplAccess(Function<Cleaner, CleanerImpl> access) {
         if(cleanerImplAccess == null) {
             cleanerImplAccess = access;
@@ -95,7 +95,7 @@ public final class CleanerImpl implements Runnable {
      *
      * @return the corresponding CleanerImpl
      */
-    // 给定Cleaner对象，返回其内部的CleanerImpl
+    // 给定Cleaner对象 返回其内部的CleanerImpl
     static CleanerImpl getCleanerImpl(Cleaner cleaner) {
         return cleanerImplAccess.apply(cleaner);
     }
@@ -108,7 +108,7 @@ public final class CleanerImpl implements Runnable {
      * @param cleaner       the cleaner
      * @param threadFactory the thread factory
      */
-    // 将清理服务放入守护线程，并启动它，主要作用是轮询ReferenceQueue，取出其中报废的Reference，执行其清理动作action
+    // 将清理服务放入守护线程 并启动它 主要作用是轮询ReferenceQueue 取出其中报废的Reference 执行其清理动作action
     public void start(Cleaner cleaner, ThreadFactory threadFactory) {
         // Cleaner和CleanerImpl是一对一关系
         if(getCleanerImpl(cleaner) != this) {
@@ -134,7 +134,7 @@ public final class CleanerImpl implements Runnable {
         Thread thread = threadFactory.newThread(this);
         thread.setDaemon(true);
     
-        // 调用下面的run()方法，提供清理服务
+        // 调用下面的run()方法 提供清理服务
         thread.start();
     }
     
@@ -145,11 +145,11 @@ public final class CleanerImpl implements Runnable {
      * <p>
      * If the thread is a ManagedLocalsThread, the threadlocals are erased before each cleanup
      */
-    // 提供清理服务，最终调用清理器的clean方法
+    // 提供清理服务 最终调用清理器的clean方法
     @Override
     public void run() {
         Thread t = Thread.currentThread();
-        // "无害"线程，如果外界不指定自定义的线程，那么清理器内部默认使用此类型线程做守护线程
+        // "无害"线程 如果外界不指定自定义的线程 那么清理器内部默认使用此类型线程做守护线程
         InnocuousThread mlThread = (t instanceof InnocuousThread) ? (InnocuousThread) t : null;
         
         // 轮询清理器列表
@@ -162,10 +162,10 @@ public final class CleanerImpl implements Runnable {
                 mlThread.eraseThreadLocals();
             }
             
-            // 清理服务的核心：轮询"报废引用"队列，取出被回收引用对应的虚引用（清理器），执行其清理动作
+            // 清理服务的核心:轮询"报废引用"队列 取出被回收引用对应的虚引用(清理器) 执行其清理动作
             try {
                 // Wait for a Ref, with a timeout to avoid getting hung due to a race with clear/clean
-                Cleanable ref = (Cleanable) queue.remove(60 * 1000L);   // 设置轮询时间阙值，超时则陷入阻塞
+                Cleanable ref = (Cleanable) queue.remove(60 * 1000L);   // 设置轮询时间阙值 超时则陷入阻塞
                 if(ref != null) {
                     ref.clean();    // 执行清理动作
                 }
@@ -187,7 +187,7 @@ public final class CleanerImpl implements Runnable {
      *               │
      *        SoftCleanableRef
      *
-     * 软引用清理器，此类的属性既是虚引用，又是清理器
+     * 软引用清理器 此类的属性既是虚引用 又是清理器
      */
     public static final class SoftCleanableRef extends SoftCleanable<Object> {
         private final Runnable action;
@@ -252,7 +252,7 @@ public final class CleanerImpl implements Runnable {
      *               │
      *         WeakCleanableRef
      *
-     *  虚引用清理器，此类的属性既是虚引用，又是清理器
+     *  虚引用清理器 此类的属性既是虚引用 又是清理器
      */
     public static final class WeakCleanableRef extends WeakCleanable<Object> {
         private final Runnable action;
@@ -317,7 +317,7 @@ public final class CleanerImpl implements Runnable {
      *               │
      *        PhantomCleanableRef
      *
-     * 虚引用清理器，此类的属性既是虚引用，又是清理器
+     * 虚引用清理器 此类的属性既是虚引用 又是清理器
      */
     public static final class PhantomCleanableRef extends PhantomCleanable<Object> {
         private final Runnable action;
@@ -358,7 +358,7 @@ public final class CleanerImpl implements Runnable {
          *
          * @throws UnsupportedOperationException always
          */
-        // 清理虚引用追踪的对象的引用，由父类实现
+        // 清理虚引用追踪的对象的引用 由父类实现
         @Override
         public void clear() {
             throw new UnsupportedOperationException("clear");
@@ -374,7 +374,7 @@ public final class CleanerImpl implements Runnable {
     /**
      * A ThreadFactory for InnocuousThreads. The factory is a singleton.
      */
-    // 清理器内部默认实现的"无害"线程工厂，用于创建"无害"线程，并将清理服务绑定到此线程
+    // 清理器内部默认实现的"无害"线程工厂 用于创建"无害"线程 并将清理服务绑定到此线程
     static final class InnocuousThreadFactory implements ThreadFactory {
         final static ThreadFactory factory = new InnocuousThreadFactory();
         final AtomicInteger cleanerThreadNumber = new AtomicInteger();  // 实现原子计数
@@ -400,13 +400,13 @@ public final class CleanerImpl implements Runnable {
     /**
      * A PhantomCleanable implementation for tracking the Cleaner itself.
      */
-    // 创建清理的时候，在启动清理服务前，将清理器自身对象加入到追踪列表
+    // 创建清理的时候 在启动清理服务前 将清理器自身对象加入到追踪列表
     static final class CleanerCleanable extends PhantomCleanable<Cleaner> {
         CleanerCleanable(Cleaner cleaner) {
             super(cleaner, cleaner);
         }
         
-        // 默认情形下，清理器对象自身被回收时不执行回到动作
+        // 默认情形下 清理器对象自身被回收时不执行回到动作
         @Override
         protected void performCleanup() {
             // no action

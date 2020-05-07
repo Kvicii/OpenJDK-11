@@ -62,18 +62,18 @@ import java.util.stream.DoubleStream;
  * @since 1.8
  */
 
-// 对double类型的元素统计相关信息：计数、求和、均值、最小值、最大值
+// 对double类型的元素统计相关信息:计数、求和、均值、最小值、最大值
 public class DoubleSummaryStatistics implements DoubleConsumer {
     private double min = Double.POSITIVE_INFINITY;  // 最小值
     private double max = Double.NEGATIVE_INFINITY;  // 最大值
     
     private long count; // 计数
-    private double sum; // 求和，考虑了误差
+    private double sum; // 求和 考虑了误差
     
     // Low order bits of sum
     private double sumCompensation; // 上一次计算产生的误差
     // Used to compute right sum for non-finite inputs
-    private double simpleSum;       // 简单求和，不考虑误差，只是累加
+    private double simpleSum;       // 简单求和 不考虑误差 只是累加
     
     /**
      * Constructs an empty instance with zero count, zero sum,
@@ -140,7 +140,7 @@ public class DoubleSummaryStatistics implements DoubleConsumer {
      *
      * @param value the input value
      */
-    // 每遇到一个新的value，需要更新计数、计数、最小值、最大值的数据
+    // 每遇到一个新的value 需要更新计数、计数、最小值、最大值的数据
     @Override
     public void accept(double value) {
         ++count;
@@ -158,7 +158,7 @@ public class DoubleSummaryStatistics implements DoubleConsumer {
      *
      * @throws NullPointerException if {@code other} is null
      */
-    // 合并两个数据源的统计信息（计数与求和相加，最小值取最小的，最大值取最大的）
+    // 合并两个数据源的统计信息(计数与求和相加 最小值取最小的 最大值取最大的)
     public void combine(DoubleSummaryStatistics other) {
         count += other.count;
         simpleSum += other.simpleSum;
@@ -314,11 +314,11 @@ public class DoubleSummaryStatistics implements DoubleConsumer {
      * Incorporate a new double value using Kahan summation /
      * compensated summation.
      */
-    // Kahan求和精度补偿算法，弥补浮点运算中的精度损失
+    // Kahan求和精度补偿算法 弥补浮点运算中的精度损失
     private void sumWithCompensation(double value) {
         double tmp = value - sumCompensation;   // 当前的值补上上一次的误差
         // Little wolf of rounding error
-        double velvel = sum + tmp;  // 本次的求和结果，已补上上次的误差
+        double velvel = sum + tmp;  // 本次的求和结果 已补上上次的误差
         sumCompensation = (velvel - sum) - tmp; // 本次运算产生的新误差
         sum = velvel;   // 记下本次的求和结果
     }

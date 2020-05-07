@@ -5,7 +5,7 @@ import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
-// 获取字段地址，获取字段地址处的值，为某地址处的字段赋值
+// 获取字段地址 获取字段地址处的值 为某地址处的字段赋值
 public class UnsafeTest01 {
     public static void main(String[] args) throws NoSuchFieldException, InstantiationException, IllegalAccessException {
         // 非静态字段
@@ -24,7 +24,7 @@ public class UnsafeTest01 {
         long charArrayOffset = unsafe.objectFieldOffset(charArrayField);
         long intVarOffset    = unsafe.objectFieldOffset(intVarField);
         long doubleVarOffset = unsafe.objectFieldOffset(doubleVarField);
-        // 静态字段内存地址偏移量，与普通字段获取地址的方式不同
+        // 静态字段内存地址偏移量 与普通字段获取地址的方式不同
         long booConstOffset  = unsafe.staticFieldOffset(booConstField);
         
         // 打印各字段在所属类的JVM内存中的偏移量

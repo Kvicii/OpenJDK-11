@@ -63,7 +63,7 @@ import java.util.stream.Collector;
  * @since 1.8
  */
 
-// 对int类型的元素统计相关信息：计数、求和、均值、最小值、最大值
+// 对int类型的元素统计相关信息:计数、求和、均值、最小值、最大值
 public class IntSummaryStatistics implements IntConsumer {
     private int min = Integer.MAX_VALUE;    // 最小值
     private int max = Integer.MIN_VALUE;    // 最大值
@@ -129,7 +129,7 @@ public class IntSummaryStatistics implements IntConsumer {
      *
      * @param value the input value
      */
-    // 每遇到一个新的value，需要更新计数、计数、最小值、最大值的数据
+    // 每遇到一个新的value 需要更新计数、计数、最小值、最大值的数据
     @Override
     public void accept(int value) {
         ++count;
@@ -145,7 +145,7 @@ public class IntSummaryStatistics implements IntConsumer {
      *
      * @throws NullPointerException if {@code other} is null
      */
-    // 合并两个数据源的统计信息（计数与求和相加，最小值取最小的，最大值取最大的）
+    // 合并两个数据源的统计信息(计数与求和相加 最小值取最小的 最大值取最大的)
     public void combine(IntSummaryStatistics other) {
         count += other.count;
         sum += other.sum;

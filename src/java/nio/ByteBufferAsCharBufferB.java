@@ -25,7 +25,7 @@
 
 package java.nio;
 
-// ByteBuffer转为CharBuffer，使用可读写的缓冲区。采用大端字节序，其他部分与ByteBufferAsCharBufferL相同
+// ByteBuffer转为CharBuffer 使用可读写的缓冲区。采用大端字节序 其他部分与ByteBufferAsCharBufferL相同
 class ByteBufferAsCharBufferB extends CharBuffer {
     
     protected final ByteBuffer bb;  // 待转换的ByteBuffer
@@ -34,7 +34,7 @@ class ByteBufferAsCharBufferB extends CharBuffer {
     /*▼ 构造方法 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     ByteBufferAsCharBufferB(ByteBuffer bb) {
-        // 从byte到char转换，容量要减半
+        // 从byte到char转换 容量要减半
         super(-1, 0, bb.remaining() >> 1, bb.remaining() >> 1);
         this.bb = bb;
         // enforce limit == capacity
@@ -62,7 +62,7 @@ class ByteBufferAsCharBufferB extends CharBuffer {
         return false;
     }
     
-    // 是直接缓冲区还是非直接缓冲区，取决于传入的ByteBuffer
+    // 是直接缓冲区还是非直接缓冲区 取决于传入的ByteBuffer
     public boolean isDirect() {
         return bb.isDirect();
     }
@@ -71,7 +71,7 @@ class ByteBufferAsCharBufferB extends CharBuffer {
     
     
     
-    /*▼ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
+    /*▼ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┓ */
     
     public CharBuffer slice() {
         int pos = this.position();
@@ -102,11 +102,11 @@ class ByteBufferAsCharBufferB extends CharBuffer {
         return new ByteBufferAsCharBufferB(bb, -1, pos + start, pos + end, capacity(), address);
     }
     
-    /*▲ 创建新缓冲区，新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
+    /*▲ 创建新缓冲区 新旧缓冲区共享内部的存储容器 ████████████████████████████████████████████████████████████████████████████████┛ */
     
     
     
-    /* getCharUnaligned和putCharUnaligned方法中，最后一个参数为true，代表以大端法存取字节 */
+    /* getCharUnaligned和putCharUnaligned方法中 最后一个参数为true 代表以大端法存取字节 */
     
     /*▼ get/读取 ████████████████████████████████████████████████████████████████████████████████┓ */
     
@@ -197,7 +197,7 @@ class ByteBufferAsCharBufferB extends CharBuffer {
     
     // 获取当前缓冲区索引i处的元素的<地址>
     protected long byteOffset(long i) {
-        // 一个char是2个字节，这里将i乘以2
+        // 一个char是2个字节 这里将i乘以2
         return address + (i << 1);
     }
     

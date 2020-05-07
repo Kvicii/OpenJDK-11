@@ -10,7 +10,7 @@ public class StackTraceElementTest02 {
             @Override
             public void run() {
                 for(int i=0; i<1000; i++){
-                    // 空循环，让线程t1保持活跃
+                    // 空循环 让线程t1保持活跃
                 }
             }
         }, "子线程1");
@@ -19,7 +19,7 @@ public class StackTraceElementTest02 {
             @Override
             public void run() {
                 for(int i=0; i<1000; i++){
-                    // 空循环，让线程t2保持活跃
+                    // 空循环 让线程t2保持活跃
                 }
             }
         }, "子线程2");

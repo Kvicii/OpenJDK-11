@@ -4,7 +4,7 @@ import com.kang.externalizable.SerializableUtil;
 
 import java.io.File;
 
-// 使用Externalizable序列化接口时，需要完全自主实现序列化/反序列化逻辑
+// 使用Externalizable序列化接口时 需要完全自主实现序列化/反序列化逻辑
 public class ExternalizableTest01 {
     
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class ExternalizableTest01 {
         System.out.println("u1=" + u1);
         System.out.println("u2=" + u2);
         
-        // 此处应该输出fasle，每次反序列化处的对象都不一样
+        // 此处应该输出fasle 每次反序列化处的对象都不一样
         System.out.println("u1==u2? " + (u1 == u2));
     }
 }

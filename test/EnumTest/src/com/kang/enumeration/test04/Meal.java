@@ -20,13 +20,13 @@ public enum Meal {
         
         switch(this) {
             case BREAKFAST:
-                System.out.println("早餐是：" + s);
+                System.out.println("早餐是:" + s);
                 break;
             case LUNCH:
-                System.out.println("午餐是：" + s);
+                System.out.println("午餐是:" + s);
                 break;
             case DINNER:
-                System.out.println("晚餐是：" + s);
+                System.out.println("晚餐是:" + s);
                 break;
         }
     }

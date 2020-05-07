@@ -52,7 +52,7 @@ import java.lang.ref.Cleaner;
  *               │
  *        FileCleanable
  *
- * 文件描述符（虚引用）清理器，此类的属性既是虚引用，又是清理器
+ * 文件描述符(虚引用)清理器 此类的属性既是虚引用 又是清理器
  */
 final class FileCleanable extends PhantomCleanable<FileDescriptor> {
     // Access to FileDescriptor private fields; avoids making fd and handle package private
@@ -89,8 +89,8 @@ final class FileCleanable extends PhantomCleanable<FileDescriptor> {
             int fd = fdAccess.get(fdo);
             long handle = fdAccess.getHandle(fdo);
             /*
-             * 向文件描述符（虚引用）清理器注册一个追踪对象：文件描述符对象
-             * 当文件描述符对象被回收，可以在ReferenceQueue中收到通知
+             * 向文件描述符(虚引用)清理器注册一个追踪对象:文件描述符对象
+             * 当文件描述符对象被回收 可以在ReferenceQueue中收到通知
              */
             PhantomCleanable<FileDescriptor> cleanable = new FileCleanable(fdo, CleanerFactory.cleaner(), fd, handle);
             
@@ -107,7 +107,7 @@ final class FileCleanable extends PhantomCleanable<FileDescriptor> {
     // 取消注册
     static void unregister(FileDescriptor fdo) {
         if(fdo != null) {
-            // 置空关联的文件描述符（虚引用）清理器
+            // 置空关联的文件描述符(虚引用)清理器
             fdo.unregisterCleanup();
         }
     }

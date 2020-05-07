@@ -34,11 +34,11 @@ import java.util.function.IntConsumer;
  * @implNote The implementation is based on the code for the Array-based spliterators.
  */
 
-// 专用Spliterator，应用于字符序列的流中
+// 专用Spliterator 应用于字符序列的流中
 class CharBufferSpliterator implements Spliterator.OfInt {
     private final CharBuffer buffer;    // 字符缓冲区
     private final int limit;
-    private int index;                  // 当前元素索引，会被advance/split改变
+    private int index;                  // 当前元素索引 会被advance/split改变
     
     CharBufferSpliterator(CharBuffer buffer) {
         this(buffer, buffer.position(), buffer.limit());
@@ -60,7 +60,7 @@ class CharBufferSpliterator implements Spliterator.OfInt {
             : new CharBufferSpliterator(buffer, lo, index = mid);
     }
     
-    // 遍历元素，执行择取操作
+    // 遍历元素 执行择取操作
     @Override
     public void forEachRemaining(IntConsumer action) {
         if(action == null)
