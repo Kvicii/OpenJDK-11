@@ -449,6 +449,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * The number of key-value mappings contained in this map.
+     * HashMap中实际存在的键值对数量
      */
     transient int size;
 
@@ -458,6 +459,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * the HashMap or otherwise modify its internal structure (e.g.,
      * rehash).  This field is used to make iterators on Collection-views of
      * the HashMap fail-fast.  (See ConcurrentModificationException).
+     *
+     * 记录HashMap内部结构发生变化的次数 主要用于迭代器的快速失败
+     * 内部结构发生变化指的是结构发生变化(例如put新键值对) 但是某个key对应的value值被覆盖不属于结构变化
      */
     transient int modCount;
 
@@ -474,6 +478,9 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * The load factor for the hash table.
+     * 默认的负载因子0.75是对空间和时间效率的一个平衡选择 建议不要修改 除非在时间和空间比较特殊的情况下
+     * 如果内存空间很多而又对时间效率要求很高 可以降低负载因子loadFactor的值 相反如果内存空间紧张而对时间效率要求不高 可以增加负载因子loadFactor的值
+     * 该值可以大于1
      *
      * @serial
      */
