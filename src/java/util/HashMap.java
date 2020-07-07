@@ -386,7 +386,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * Returns x's Class if it is of the form "class C implements
-     * Comparable<C>", else null.
+     * Comparable", else null.
      */
     static Class<?> comparableClassFor(Object x) {
         if (x instanceof Comparable) {
@@ -423,7 +423,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * Returns a power of two size for the given target capacity.
      * 返回 >= cap 的最小的2的幂次方
      * 为什么一定要是2的幂次方:
-     * 1.计算table数组对应的位置时 使用了(n - 1) & hash 该方式 (n - 1) % hash的效果是一致的 出于性能考虑最终选择了& 这样就要求数组容量n一定要做到2的幂次方
+     * 1.计算table数组对应的位置时 使用了(n - 1) & hash 该方式 hash % n 的效果是一致的 出于性能考虑最终选择了& 这样就要求数组容量n一定要做到2的幂次方
      * 2.resize扩容时 HashMap的容量一直是2的幂次方
      */
     static final int tableSizeFor(int cap) {
@@ -459,7 +459,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      * the HashMap or otherwise modify its internal structure (e.g.,
      * rehash).  This field is used to make iterators on Collection-views of
      * the HashMap fail-fast.  (See ConcurrentModificationException).
-     *
+     * <p>
      * 记录HashMap内部结构发生变化的次数 主要用于迭代器的快速失败
      * 内部结构发生变化指的是结构发生变化(例如put新键值对) 但是某个key对应的value值被覆盖不属于结构变化
      */
@@ -684,18 +684,18 @@ public class HashMap<K, V> extends AbstractMap<K, V>
      */
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
-        Node<K, V>[] tab;   // tables 数组
+        Node<K, V>[] tab;   // table 数组
         Node<K, V> p;   // 对应位置的 Node 节点
-        int n, i;   // 数组大小, 对应的 table 的位置
+        int n, i;   // 数组大小 | Node在table中的位置
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;    // 延迟初始化思想 如果当前的桶是空的就需要进行初始化 resize方法会判断是否进行初始化
-        if ((p = tab[i = (n - 1) & hash]) == null)  // 根据key的hashcode定位到具体的桶并判断是否为空 为空表明没有发生hash冲突 直接构造node放入 (n - 1) & hash定位到桶
+        if ((p = tab[i = (n - 1) & hash]) == null)  // 根据key的hashcode定位到具体的桶并判断是否为空 为空表明没有发生hash冲突 直接构造node放入 (n - 1) & hash 定位到桶
             tab[i] = newNode(hash, key, value, null);
         else {  // 以下是存在hash冲突的情况
             Node<K, V> e;   // key 在 HashMap 对应的老节点
             K k;
             if (p.hash == hash &&
-                    ((k = p.key) == key || (key != null && key.equals(k)))) // 比较桶中首个元素的与写入的值的hashcode和key 相等进行赋值
+                    ((k = p.key) == key || (key != null && key.equals(k)))) // 比较桶中首个元素的与待写入值的hashcode和key 相等进行赋值
                 e = p;
             else if (p instanceof TreeNode) // 按照红黑树的方式进行赋值
                 e = ((TreeNode<K, V>) p).putTreeVal(this, tab, hash, key, value);
