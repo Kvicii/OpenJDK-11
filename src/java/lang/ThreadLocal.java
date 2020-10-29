@@ -85,7 +85,7 @@ import java.util.function.Supplier;
  *    如果从“理想位置”到实际存储位置是连续的 这里称该序列是“紧凑”的
  * 3. map里存储的key是一个弱引用 其包装了当前线程中构造的ThreadLocal对象
  *    这意味着 只要ThreadLocal对象丢掉了强引用 那么在下次GC后 map中的ThreadLocal对象也会被清除
- *    对于那些ThreadLocal对象为空的map元素 这里称其为【垃圾值】 稍后会被主动清理
+ *    对于那些ThreadLocal对象为空的map元素 这里称其为[垃圾值] 稍后会被主动清理
  * 4. map里存储的value就是缓存到当前线程的值 这个value没有弱引用去包装 需要专门的释放策略
  * 5. 一个线程对应多个ThreadLocal 一个ThreadLocal只对应一个值
  *
@@ -95,7 +95,7 @@ import java.util.function.Supplier;
  *
  * ThreadLocal不能解决线程同步问题。
  *
- * 每个线程有一个ThreadLocalMap(作为map)。但可以有多个ThreadLocal(作为map中的key)。
+ * 每个线程有一个ThreadLocalMap(作为map) 但可以有多个ThreadLocal(作为map中的key)。
  *
  * ThreadLocal<T> sThreadLocal = new ThreadLocal<>();
  * <ThreadLocal, T>形成map的键值对 ThreadLocal作为ThreadLocalMap中的键 用它来查找匹配的值。
@@ -976,7 +976,7 @@ public class ThreadLocal<T> {
     /**
      * An extension of ThreadLocal that obtains its initial value from the specified {@code Supplier}.
      */
-    // ThreadLocal的一个扩展。其ThreadLocal关联的初值由字段supplier给出
+    // ThreadLocal的一个扩展 其ThreadLocal关联的初值由字段supplier给出
     static final class SuppliedThreadLocal<T> extends ThreadLocal<T> {
 
         private final Supplier<? extends T> supplier;
