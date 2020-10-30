@@ -78,7 +78,7 @@ import java.util.function.Supplier;
  * 为线程缓存数据 将数据本地化(脱离共享)
  *
  * 原理:
- * 1. 每个线程由一个ThreadLocalMap属性 本质就是一个map
+ * 1. 每个线程有一个ThreadLocalMap属性 本质就是一个map
  * 2. map里面存储的<key, value>称为键值对 存储键值对时需要先求取哈希值
  *    由于哈希值会出现冲突 所以会造成“错位”元素的出现(元素“理想位置”和实际存储位置不一样) --  开放寻址法
  *    “理想位置”是指该ThreadLocal对象初次计算出的哈希值
@@ -98,7 +98,7 @@ import java.util.function.Supplier;
  * 每个线程有一个ThreadLocalMap(作为map) 但可以有多个ThreadLocal(作为map中的key)。
  *
  * ThreadLocal<T> sThreadLocal = new ThreadLocal<>();
- * <ThreadLocal, T>形成map的键值对 ThreadLocal作为ThreadLocalMap中的键 用它来查找匹配的值。
+ * <ThreadLocal, T>形成map的键值对 ThreadLocal作为ThreadLocalMap中的键 用它来查找匹配的值
  */
 public class ThreadLocal<T> {
     /**
@@ -218,7 +218,7 @@ public class ThreadLocal<T> {
         // 返回当前线程t持有的map
         ThreadLocalMap map = getMap(t);
 
-        // 如果map不为null 返回其键值对中保存的calue
+        // 如果map不为null 返回其键值对中保存的value
         if (map != null) {
             ThreadLocalMap.Entry e = map.getEntry(this);
             if (e != null) {
@@ -403,7 +403,7 @@ public class ThreadLocal<T> {
      * used, stale entries are guaranteed to be removed only when
      * the table starts running out of space.
      */
-    // 类似HashMap。进行元素存取时 要清理遇到的垃圾值 且合并原先紧密相邻的元素(除去垃圾值会造成新空槽)
+    // 类似HashMap 进行元素存取时 要清理遇到的垃圾值 且合并原先紧密相邻的元素(除去垃圾值会造成新空槽)
     static class ThreadLocalMap {
 
         /**
@@ -445,7 +445,7 @@ public class ThreadLocal<T> {
          *
          * @param parentMap the map associated with parent thread.
          */
-        // 构造一个新的map 其包含给定的parentMap中当前所有可继承ThreadLocals 且允许修改parentMap中的值。仅由createInheritedMap调用
+        // 构造一个新的map 其包含给定的parentMap中当前所有可继承ThreadLocals 且允许修改parentMap中的值 仅由createInheritedMap调用
         private ThreadLocalMap(ThreadLocalMap parentMap) {
             Entry[] parentTable = parentMap.table;
 
