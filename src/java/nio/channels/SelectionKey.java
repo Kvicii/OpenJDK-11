@@ -90,6 +90,7 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
  * selection operation will always use the interest-set value that was current
  * at the moment that the operation began.  </p>
  *
+ * 把核心组件与SelectionKey关联 后续通过SelectionKey进行网络请求和响应时 就可以从SelectionKey中获取attach过的核心组件(SocketChannel) 辅助请求和响应的处理
  *
  * @author Mark Reinhold
  * @author JSR-51 Expert Group
