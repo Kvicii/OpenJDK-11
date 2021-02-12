@@ -2730,11 +2730,15 @@ public final class Unsafe {
         
         do {
             // 获取对象o中offset地址处对应的int型字段的值 支持volatile语义
+            // 以AtomicInteger为例 此处是获取AtomicInteger中偏移量为offset的value字段的值
             v = getIntVolatile(o, offset);
             
             // 拿期望值v与对象o的offset地址处的当前值比较 如果两个值相等 将当前值更新为v + delta 并返回true 否则返回false
+            // 获取到AtomicInteger中的value字段的值 与 AtomicInteger中偏移量为offset的value字段的值 比较
+            // 相等 直接v + delta
+            // CAS变更AtomicInteger中偏移量为offset的value值
         } while (!weakCompareAndSetInt(o, offset, v, v + delta));
-        
+        // 返回变更之前的值
         return v;
     }
     

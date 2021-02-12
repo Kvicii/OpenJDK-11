@@ -59,6 +59,8 @@ public class AtomicInteger extends Number implements java.io.Serializable {
      * are unresolved cyclic startup dependencies.
      */
     private static final jdk.internal.misc.Unsafe U = jdk.internal.misc.Unsafe.getUnsafe();
+    // 获取AtomicInteger类中value变量的值 表示的是value这个字段在AtomicInteger这个类中的偏移量
+    // 刚刚在类初始化的时候 会完成这个操作 final的表示一旦初始化完毕就不会再变更了
     private static final long VALUE = U.objectFieldOffset(AtomicInteger.class, "value");
 
     private volatile int value;
@@ -213,6 +215,7 @@ public class AtomicInteger extends Number implements java.io.Serializable {
      * @return the updated value
      */
     public final int incrementAndGet() {
+        // 由于返回的值是变更之前的值 保存操作已由Unsafe完成 所以 + 1后直接返回
         return U.getAndAddInt(this, VALUE, 1) + 1;
     }
 
