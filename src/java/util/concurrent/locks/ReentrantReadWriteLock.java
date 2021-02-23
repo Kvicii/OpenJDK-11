@@ -368,15 +368,15 @@ public class ReentrantReadWriteLock
          */
         @ReservedStackAccess
         protected final boolean tryRelease(int releases) {
-            if (!isHeldExclusively()) {
+            if (!isHeldExclusively()) { // 释放写锁的线程不是持有写锁的线程
                 throw new IllegalMonitorStateException();
             }
             int nextc = getState() - releases;
             boolean free = exclusiveCount(nextc) == 0;
-            if (free) {
+            if (free) { // 写锁低16位是0 设置持有写锁的线程为null
                 setExclusiveOwnerThread(null);
             }
-            setState(nextc);
+            setState(nextc);    // 重新设置state字段
             return free;
         }
 
@@ -406,8 +406,8 @@ public class ReentrantReadWriteLock
             int w = exclusiveCount(c);
             if (c != 0) {   // 说明其他线程已经加过了写锁 || 重入锁处理逻辑
                 // (Note: if c != 0 and w == 0 then shared count != 0)
-                // 1. c != 0 w == 0 说明其他线程加了读锁 没有线程加写锁 此时当前线程还不是加读锁的那个线程 直接返回false  --  读写互斥
-                // 2. c != 0 w != 0 说明其他线程加了写锁
+                // 1. c != 0 && w == 0 说明其他线程加了读锁 没有线程加写锁 此时当前线程还不是加读锁的那个线程 直接返回false  --  读写互斥
+                // 2. c != 0 && w != 0 说明其他线程加了写锁
                 // 2.1. -- 当前线程还不是加写锁的那个线程 直接返回false  --  写写互斥
                 // 2.2. -- 当前线程是加写锁的那个线程  --  可重入
                 if (w == 0 || current != getExclusiveOwnerThread()) {
@@ -431,14 +431,14 @@ public class ReentrantReadWriteLock
         @ReservedStackAccess
         protected final boolean tryReleaseShared(int unused) {
             Thread current = Thread.currentThread();
-            if (firstReader == current) {
+            if (firstReader == current) {   // 重入锁释放读锁相关变量维护
                 // assert firstReaderHoldCount > 0;
                 if (firstReaderHoldCount == 1) {
                     firstReader = null;
                 } else {
                     firstReaderHoldCount--;
                 }
-            } else {
+            } else {    // 非重入锁释放读锁相关变量维护
                 HoldCounter rh = cachedHoldCounter;
                 if (rh == null ||
                     rh.tid != LockSupport.getThreadId(current)) {
@@ -453,7 +453,7 @@ public class ReentrantReadWriteLock
                 }
                 --rh.count;
             }
-            for (;;) {
+            for (;;) {  // 读锁释放
                 int c = getState();
                 int nextc = c - SHARED_UNIT;
                 if (compareAndSetState(c, nextc)) {
@@ -489,17 +489,19 @@ public class ReentrantReadWriteLock
              */
             Thread current = Thread.currentThread();
             int c = getState();
-            if (exclusiveCount(c) != 0 &&
-                getExclusiveOwnerThread() != current)
+            // 已经被其他线程加过写锁 && 加锁线程并不是当前线程 直接返回
+            if (exclusiveCount(c) != 0 && getExclusiveOwnerThread() != current) {
                 return -1;
+            }
+            // 获取读锁的高16位标志位
             int r = sharedCount(c);
             if (!readerShouldBlock() &&
                 r < MAX_COUNT &&
-                compareAndSetState(c, c + SHARED_UNIT)) {
+                compareAndSetState(c, c + SHARED_UNIT)) {   // CAS将读锁高16位标志位递增 由于多线程并发获取的c值可能不同 但是所以处理的分支逻辑大致是一致的
                 if (r == 0) {
-                    firstReader = current;
-                    firstReaderHoldCount = 1;
-                } else if (firstReader == current) {
+                    firstReader = current;  // 第一个加读锁的线程
+                    firstReaderHoldCount = 1;   // 第一个加读锁的线程重入的次数
+                } else if (firstReader == current) {    // 重入锁逻辑
                     firstReaderHoldCount++;
                 } else {
                     HoldCounter rh = cachedHoldCounter;
@@ -513,6 +515,7 @@ public class ReentrantReadWriteLock
                 }
                 return 1;
             }
+            // 并发加读锁 线程1可能直接成功 线程2通过CAS未成功加锁则调用该方法尝试重新加读锁
             return fullTryAcquireShared(current);
         }
 

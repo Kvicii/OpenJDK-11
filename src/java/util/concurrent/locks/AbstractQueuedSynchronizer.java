@@ -759,7 +759,7 @@ public abstract class AbstractQueuedSynchronizer
          */
         for (;;) {
             Node h = head;
-            if (h != null && h != tail) {
+            if (h != null && h != tail) {   // 读锁释放逻辑 会调用unparkSuccessor唤醒挂起的线程
                 int ws = h.waitStatus;
                 if (ws == Node.SIGNAL) {
                     if (!h.compareAndSetWaitStatus(Node.SIGNAL, 0)) {
@@ -953,8 +953,8 @@ public abstract class AbstractQueuedSynchronizer
                 final Node p = node.predecessor();
                 // 再次尝试加锁 如果加锁成功 就会将该线程对应的Node从双向链表中移除
                 if (p == head && tryAcquire(arg)) { // 如果链表只有一个空Node和一个节点 尝试加锁
-                    setHead(node);
-                    p.next = null; // help GC.移除链表节点
+                    setHead(node);  // 断开链表的prev指针
+                    p.next = null; // help GC.断开链表的next指针
                     return interrupted;
                 }
                 // 对于放入等待队列的逻辑 会循环执行 首次会将 waitStatus 设置为SIGNAL 第二轮循环才会返回true 挂起当前线程
@@ -1044,21 +1044,22 @@ public abstract class AbstractQueuedSynchronizer
      * @param arg the acquire argument
      */
     private void doAcquireShared(int arg) {
+        // 封装一个Node 加入双向链表
         final Node node = addWaiter(Node.SHARED);
         boolean interrupted = false;
         try {
             for (;;) {
                 final Node p = node.predecessor();
                 if (p == head) {
-                    int r = tryAcquireShared(arg);
+                    int r = tryAcquireShared(arg);  // 加读锁
                     if (r >= 0) {
                         setHeadAndPropagate(node, r);
                         p.next = null; // help GC
                         return;
                     }
                 }
-                if (shouldParkAfterFailedAcquire(p, node)) {
-                    interrupted |= parkAndCheckInterrupt();
+                if (shouldParkAfterFailedAcquire(p, node)) {    // 将node的前一个节点设置为SIGNAL
+                    interrupted |= parkAndCheckInterrupt(); // 挂起当前线程
                 }
             }
         } catch (Throwable t) {
@@ -1364,7 +1365,7 @@ public abstract class AbstractQueuedSynchronizer
     public final boolean release(int arg) {
         if (tryRelease(arg)) {  // 尝试释放锁
             Node h = head;
-            if (h != null && h.waitStatus != 0) {
+            if (h != null && h.waitStatus != 0) {   // 判断队头节点
                 unparkSuccessor(h); // 尝试唤醒队头的元线程
             }
             return true;
@@ -1384,7 +1385,7 @@ public abstract class AbstractQueuedSynchronizer
      *        and can represent anything you like.
      */
     public final void acquireShared(int arg) {
-        if (tryAcquireShared(arg) < 0) {
+        if (tryAcquireShared(arg) < 0) {    // 读锁与写锁互斥
             doAcquireShared(arg);
         }
     }
@@ -1798,8 +1799,9 @@ public abstract class AbstractQueuedSynchronizer
         /*
          * If cannot change waitStatus, the node has been cancelled.
          */
-        if (!node.compareAndSetWaitStatus(Node.CONDITION, 0))
+        if (!node.compareAndSetWaitStatus(Node.CONDITION, 0)) {
             return false;
+        }
 
         /*
          * Splice onto queue and try to set waitStatus of predecessor to
@@ -1807,10 +1809,12 @@ public abstract class AbstractQueuedSynchronizer
          * attempt to set waitStatus fails, wake up to resync (in which
          * case the waitStatus can be transiently and harmlessly wrong).
          */
+        // 将Node从Condition队列移到加锁队列 返回前一个节点
         Node p = enq(node);
         int ws = p.waitStatus;
-        if (ws > 0 || !p.compareAndSetWaitStatus(ws, Node.SIGNAL))
+        if (ws > 0 || !p.compareAndSetWaitStatus(ws, Node.SIGNAL)) {
             LockSupport.unpark(node.thread);
+        }
         return true;
     }
 
@@ -1847,7 +1851,7 @@ public abstract class AbstractQueuedSynchronizer
     final int fullyRelease(Node node) {
         try {
             int savedState = getState();
-            if (release(savedState)) {
+            if (release(savedState)) {  //
                 return savedState;
             }
             throw new IllegalMonitorStateException();
@@ -2001,7 +2005,7 @@ public abstract class AbstractQueuedSynchronizer
          */
         private void doSignal(Node first) {
             do {
-                if ( (firstWaiter = first.nextWaiter) == null) {
+                if ( (firstWaiter = first.nextWaiter) == null) {    // 从Condition队列中移除头结点
                     lastWaiter = null;
                 }
                 first.nextWaiter = null;
@@ -2070,7 +2074,7 @@ public abstract class AbstractQueuedSynchronizer
          *         returns {@code false}
          */
         public final void signal() {
-            if (!isHeldExclusively()) {
+            if (!isHeldExclusively()) { // 确保是加锁之后调用的signal方法
                 throw new IllegalMonitorStateException();
             }
             Node first = firstWaiter;
@@ -2172,12 +2176,16 @@ public abstract class AbstractQueuedSynchronizer
          * </ol>
          */
         public final void await() throws InterruptedException {
-            if (Thread.interrupted())
+            if (Thread.interrupted()) {
                 throw new InterruptedException();
+            }
+            // 封装一个CONDITION的Node节点 加入等待队列
             Node node = addConditionWaiter();
+            // 释放锁
             int savedState = fullyRelease(node);
             int interruptMode = 0;
             while (!isOnSyncQueue(node)) {
+                //  挂起当前线程
                 LockSupport.park(this);
                 if ((interruptMode = checkInterruptWhileWaiting(node)) != 0) {
                     break;
